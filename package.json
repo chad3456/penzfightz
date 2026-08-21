@@ -1,0 +1,39 @@
+{
+  "name": "penfight",
+  "version": "1.0.0",
+  "description": "Pen Fight — the 90s Indian classroom pen-flicking game, in 3D.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "gen:pens": "node scripts/gen-pen-seed.mjs > supabase/migrations/0002_seed_pens.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chad3456/penzfightz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chad3456/penzfightz/issues"
+  },
+  "homepage": "https://github.com/chad3456/penzfightz#readme",
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@react-three/rapier": "^2.2.0",
+    "@supabase/supabase-js": "^2.112.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1",
+    "zustand": "^5.0.15"
+  },
+  "private": true,
+  "type": "module"
+}
