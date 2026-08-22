@@ -43,7 +43,7 @@ export function MatchSheet({
 
   return (
     <Sheet seed={11}>
-      <SheetHeader subtitle={seriesNote ?? `Best of ${format}`} />
+      <SheetHeader title="Pen Fight" subtitle={seriesNote ?? `Best of ${format}`} />
 
       <div className="versus">
         <div>

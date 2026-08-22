@@ -3,7 +3,7 @@ import { Sheet, SheetHeader } from './Sheet';
 export function HowToPlay({ onBack }: { onBack: () => void }) {
   return (
     <Sheet seed={31}>
-      <SheetHeader subtitle="Rules of the desk" />
+      <SheetHeader title="Pen Fight" subtitle="Rules of the desk" />
 
       <h2 className="title center">How to play</h2>
 

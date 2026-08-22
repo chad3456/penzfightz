@@ -56,7 +56,7 @@ export function FriendDesk({
   if (mode === 'hosting' && code) {
     return (
       <Sheet seed={17}>
-        <SheetHeader subtitle={challengeName ? `Challenge · ${challengeName}` : 'Two players'} />
+        <SheetHeader title="Pen Fight" subtitle={challengeName ? `Challenge · ${challengeName}` : 'Two players'} />
         <h2 className="title center">
           {challengeName ? `Send this to ${challengeName}` : 'Your desk is ready'}
         </h2>
@@ -109,7 +109,7 @@ export function FriendDesk({
 
   return (
     <Sheet seed={17}>
-      <SheetHeader subtitle="Two players, one desk" />
+      <SheetHeader title="Pen Fight" subtitle="Two players, one desk" />
       <h2 className="title center">Play with a friend</h2>
       <p className="lede">
         Winner keeps the pen. Make a desk and send the code, or type in theirs.

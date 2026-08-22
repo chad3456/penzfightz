@@ -17,8 +17,8 @@ let ambienceTimer: number | null = null;
 
 const state = {
   muted: false,
-  ambienceLevel: 0.5,
-  sfxLevel: 0.85,
+  ambienceLevel: 0.85,
+  sfxLevel: 1.0,
 };
 
 function ac(): AudioContext | null {
@@ -101,7 +101,7 @@ function shout(when: number, opts?: { close?: boolean }) {
   f2.Q.value = 8;
 
   const g = c.createGain();
-  const peak = (close ? 0.055 : 0.016) * rand(0.6, 1.3);
+  const peak = (close ? 0.12 : 0.04) * rand(0.6, 1.3);
   g.gain.setValueAtTime(0.0001, when);
   g.gain.exponentialRampToValueAtTime(peak, when + dur * 0.18);
   g.gain.exponentialRampToValueAtTime(0.0001, when + dur);
@@ -141,13 +141,13 @@ function startBed() {
   hp.type = 'highpass';
   hp.frequency.value = 140;
   const g = c.createGain();
-  g.gain.value = 0.035;
+  g.gain.value = 0.075;
 
   // slow swell so it never sits still
   const lfo = c.createOscillator();
   lfo.frequency.value = 0.06;
   const lfoGain = c.createGain();
-  lfoGain.gain.value = 0.018;
+  lfoGain.gain.value = 0.035;
   lfo.connect(lfoGain).connect(g.gain);
 
   src.connect(hp).connect(lp).connect(g).connect(ambienceGain);
@@ -161,12 +161,12 @@ function startBed() {
   fanBp.frequency.value = 190;
   fanBp.Q.value = 1.6;
   const fanG = c.createGain();
-  fanG.gain.value = 0.02;
+  fanG.gain.value = 0.045;
   const chop = c.createOscillator();
   chop.type = 'sine';
   chop.frequency.value = 4.6;
   const chopG = c.createGain();
-  chopG.gain.value = 0.012;
+  chopG.gain.value = 0.024;
   chop.connect(chopG).connect(fanG.gain);
   fan.connect(fanBp).connect(fanG).connect(ambienceGain);
   fan.start();
@@ -237,19 +237,19 @@ export const sfx = {
     lastClack = now;
     const v = Math.min(1, speed / 2.4);
     if (v < 0.04) return;
-    burst({ freq: 1500 + v * 2200, q: 3.5, dur: 0.05 + v * 0.05, gain: 0.05 + v * 0.28 });
-    ping(320 + v * 260, 0.07, 0.03 + v * 0.09, 'triangle');
+    burst({ freq: 1500 + v * 2200, q: 3.5, dur: 0.05 + v * 0.05, gain: 0.12 + v * 0.5 });
+    ping(320 + v * 260, 0.07, 0.07 + v * 0.16, 'triangle');
   },
 
   /** The flick itself: nail on plastic, then a scrape across the desk. */
   flick(power: number) {
-    burst({ freq: 2600, q: 2, dur: 0.035, gain: 0.1 + power * 0.2 });
-    burst({ freq: 420 + power * 500, q: 1.1, dur: 0.16 + power * 0.22, gain: 0.03 + power * 0.06, type: 'lowpass' });
+    burst({ freq: 2600, q: 2, dur: 0.035, gain: 0.2 + power * 0.34 });
+    burst({ freq: 420 + power * 500, q: 1.1, dur: 0.16 + power * 0.22, gain: 0.07 + power * 0.12, type: 'lowpass' });
   },
 
   /** Fingertip settling on the barrel before a shot. */
   pickup() {
-    burst({ freq: 1800, q: 1.4, dur: 0.02, gain: 0.05 });
+    burst({ freq: 1800, q: 1.4, dur: 0.02, gain: 0.1 });
   },
 
   /** A pen going over the edge and hitting a mosaic floor. */
@@ -257,8 +257,8 @@ export const sfx = {
     const bounces = 3 + Math.floor(Math.random() * 3);
     for (let i = 0; i < bounces; i++) {
       const when = 0.12 + i * rand(0.055, 0.13);
-      burst({ freq: 2000 + Math.random() * 2600, q: 4, dur: 0.05, gain: 0.16 / (1 + i * 0.7), when });
-      ping(180 + Math.random() * 200, 0.06, 0.05 / (1 + i), 'triangle', when);
+      burst({ freq: 2000 + Math.random() * 2600, q: 4, dur: 0.05, gain: 0.3 / (1 + i * 0.7), when });
+      ping(180 + Math.random() * 200, 0.06, 0.1 / (1 + i), 'triangle', when);
     }
   },
 
@@ -266,10 +266,10 @@ export const sfx = {
   point(mine: boolean) {
     crowdSwell(mine ? 1 : 0.5);
     if (mine) {
-      ping(660, 0.14, 0.1, 'triangle');
-      ping(880, 0.2, 0.09, 'triangle', 0.09);
+      ping(660, 0.14, 0.18, 'triangle');
+      ping(880, 0.2, 0.16, 'triangle', 0.09);
     } else {
-      ping(330, 0.2, 0.07, 'sine');
+      ping(330, 0.2, 0.13, 'sine');
     }
   },
 
@@ -277,7 +277,7 @@ export const sfx = {
   matchEnd(won: boolean) {
     crowdSwell(1.4);
     const notes = won ? [523, 659, 784, 1047] : [494, 440, 392];
-    notes.forEach((n, i) => ping(n, 0.3, 0.09, 'triangle', i * 0.11));
+    notes.forEach((n, i) => ping(n, 0.3, 0.17, 'triangle', i * 0.11));
   },
 
   /** The period bell. Used on the home screen and when a match starts. */
@@ -294,7 +294,7 @@ export const sfx = {
       osc.frequency.value = f * (1 + i * 0.002);
       const g = c.createGain();
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.09 / (i + 1), t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.16 / (i + 1), t + 0.008);
       g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6 + i * 0.3);
       osc.connect(g).connect(out);
       osc.start(t);
@@ -304,7 +304,66 @@ export const sfx = {
 
   /** UI: chalk tick on a slate. */
   chalk() {
-    burst({ freq: 3200, q: 1.2, dur: 0.045, gain: 0.05 });
+    burst({ freq: 3200, q: 1.2, dur: 0.045, gain: 0.11 });
+  },
+
+  /** A card leaving a hand and landing on the pile. */
+  cardPlay() {
+    burst({ freq: 2200, q: 1.1, dur: 0.06, gain: 0.16, type: 'bandpass' });
+    burst({ freq: 700, q: 0.9, dur: 0.09, gain: 0.1, when: 0.03, type: 'lowpass' });
+  },
+
+  /** Dragging one off the deck. */
+  cardDraw() {
+    burst({ freq: 3000, q: 0.8, dur: 0.11, gain: 0.11, type: 'bandpass' });
+  },
+
+  /** The whole deck riffled. */
+  shuffle() {
+    for (let i = 0; i < 14; i++) {
+      burst({ freq: 1800 + Math.random() * 2400, q: 1.6, dur: 0.03, gain: 0.07, when: i * 0.028 });
+    }
+  },
+
+  /** Folding a chit of paper, for Raja Rani. */
+  paper() {
+    for (let i = 0; i < 5; i++) {
+      burst({ freq: 2600 + Math.random() * 1800, q: 1.2, dur: 0.045, gain: 0.09, when: i * 0.05 });
+    }
+  },
+
+  /** Something good happened to you. */
+  good() {
+    [523, 659, 784].forEach((f, i) => ping(f, 0.22, 0.15, 'triangle', i * 0.075));
+  },
+
+  /** Something did not. */
+  bad() {
+    ping(392, 0.18, 0.14, 'sine');
+    ping(294, 0.3, 0.12, 'sine', 0.1);
+  },
+
+  /** Night falls in Mafia — the room goes quiet and low. */
+  nightfall() {
+    ping(180, 1.1, 0.1, 'sine');
+    ping(120, 1.4, 0.08, 'sine', 0.12);
+    burst({ freq: 240, q: 0.7, dur: 0.9, gain: 0.06, type: 'lowpass' });
+  },
+
+  /** Morning, and everyone finds out what happened. */
+  daybreak() {
+    [440, 554, 659, 880].forEach((f, i) => ping(f, 0.4, 0.11, 'triangle', i * 0.09));
+  },
+
+  /** A vote landing on the board. */
+  vote() {
+    burst({ freq: 900, q: 3, dur: 0.05, gain: 0.14 });
+    ping(520, 0.09, 0.09, 'square');
+  },
+
+  /** A plain UI tick, for buttons that deserve feedback. */
+  tick() {
+    burst({ freq: 2400, q: 2.4, dur: 0.018, gain: 0.07 });
   },
 };
 

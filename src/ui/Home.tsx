@@ -57,6 +57,7 @@ export function Home({
   onRanking,
   onHowTo,
   onRename,
+  onBack,
 }: {
   playerName: string;
   penId: string;
@@ -70,6 +71,7 @@ export function Home({
   onRanking: () => void;
   onHowTo: () => void;
   onRename: () => void;
+  onBack: () => void;
 }) {
   const [counters, setCounters] = useState<Counters | null>(null);
   const [rival, setRival] = useState<Rival | null>(null);
@@ -92,7 +94,7 @@ export function Home({
 
   return (
     <Sheet seed={4}>
-      <SheetHeader />
+      <SheetHeader title="Pen Fight" />
 
       <h1 className="title center">The back-bench classic</h1>
       <p className="lede">
@@ -207,6 +209,9 @@ export function Home({
           How to play
         </button>
       </div>
+      <button className="btn btn--ghost" onClick={onBack}>
+        Back to the shelf
+      </button>
     </Sheet>
   );
 }

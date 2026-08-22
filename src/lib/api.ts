@@ -255,6 +255,51 @@ export const api = {
     }, null);
   },
 
+  /**
+   * Book a finished game of any shape.
+   *
+   * `participants` is in finishing order. Computer players carry a null id, so
+   * they occupy a place without collecting anything.
+   */
+  async recordGame(g: {
+    game: string;
+    mode: 'practice' | 'friend' | 'ranked';
+    rounds: number;
+    participants: { id: string | null; name: string; score: number; place: number }[];
+  }): Promise<{ match_id: string } | null> {
+    const sb = db;
+    if (!sb) return null;
+    return safe('record_game', async () => {
+      const { data, error } = await sb.rpc('record_game', {
+        p_game: g.game,
+        p_mode: g.mode,
+        p_rounds: g.rounds,
+        p_participants: g.participants,
+      });
+      if (error) {
+        console.warn('[penfight] record_game rejected', error.message);
+        return null;
+      }
+      return data as { match_id: string };
+    }, null);
+  },
+
+  /** Top ten for one game rather than the whole site. */
+  async topFor(game: string, limit = 10): Promise<RankRow[]> {
+    const sb = db;
+    if (!sb) return [];
+    return safe('top_players_for', async () => {
+      const { data, error } = await sb.rpc('top_players_for', {
+        p_game: game,
+        p_limit: limit,
+      });
+      if (error || !data) return [];
+      return (data as (Omit<RankRow, 'matches_played' | 'pens_won'> & { played: number })[]).map(
+        (r) => ({ ...r, matches_played: r.played, pens_won: 0 }),
+      );
+    }, []);
+  },
+
   async logShots(
     matchId: string,
     shots: { turn: number; side: string; power: number; angle: number; outcome: string }[],
@@ -273,6 +318,8 @@ export const api = {
     pen: string;
     format: number;
     challenge?: boolean;
+    game?: string;
+    maxSeats?: number;
   }): Promise<RoomRow | null> {
     const sb = db;
     if (!sb) return null;
@@ -283,6 +330,8 @@ export const api = {
         p_host_pen: opts.pen,
         p_format: opts.format,
         p_challenge: opts.challenge ?? false,
+        p_game: opts.game ?? 'penfight',
+        p_max_seats: opts.maxSeats ?? 2,
       });
       if (error) return null;
       return data as RoomRow;
@@ -292,6 +341,7 @@ export const api = {
   async joinRoom(
     code: string,
     pen: string,
+    game?: string,
   ): Promise<{ room: RoomRow | null; error: string | null }> {
     const sb = db;
     if (!sb) return { room: null, error: 'No connection to the classroom.' };
@@ -303,6 +353,7 @@ export const api = {
           p_guest_id: playerId(),
           p_guest_name: playerName(),
           p_guest_pen: pen,
+          p_game: game ?? null,
         });
         if (error) {
           const msg =
@@ -311,8 +362,10 @@ export const api = {
               : error.code === 'P0003'
                 ? 'That link has gone cold.'
                 : error.code === 'P0004'
-                  ? 'Somebody else already took that desk.'
-                  : error.message;
+                  ? 'That room is already full.'
+                  : error.code === 'P0005'
+                    ? 'That code belongs to a different game.'
+                    : error.message;
           return { room: null, error: msg };
         }
         return { room: data as RoomRow, error: null };

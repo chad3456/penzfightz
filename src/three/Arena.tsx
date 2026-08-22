@@ -11,7 +11,7 @@ import {
   HALF_D,
   START_Z,
   MAX_IMPULSE_PER_KG,
-  MAX_DRAW,
+  DRAW_SCREEN_FRACTION,
   SETTLE_LINEAR,
   SETTLE_ANGULAR,
   SETTLE_FRAMES,
@@ -221,8 +221,17 @@ export function Arena({ onRally, onShotFired, netStateRef, onNetSync }: ArenaPro
   const aiming = useRef<{
     side: Side;
     strike: number;
+    /** Pen position when the finger landed. */
     from: THREE.Vector3;
-    to: THREE.Vector3;
+    /** Pointer position when the finger landed, in client pixels. */
+    startX: number;
+    startY: number;
+    /**
+     * Inverse of the screen-space table basis at `from`: multiply a pixel
+     * delta by this to get a delta in desk metres. Captured once per drag,
+     * which is also what keeps the aim from swimming as the camera drifts.
+     */
+    inv: [number, number, number, number];
   } | null>(null);
   const [guide, setGuide] = useState<{
     origin: THREE.Vector3;
@@ -235,6 +244,41 @@ export function Arena({ onRally, onShotFired, netStateRef, onNetSync }: ArenaPro
   const plane = useMemo(
     () => new THREE.Plane(UP.clone(), -(TABLE.surfaceY + 0.005)),
     [],
+  );
+
+  /**
+   * How the desk's X and Z axes appear on screen at a given point, inverted.
+   *
+   * Projecting the point and two unit steps away from it gives a 2x2 matrix
+   * from desk metres to pixels; the inverse turns a drag in pixels back into a
+   * direction on the desk. It is an affine approximation of a perspective
+   * projection, which is exact enough over the length of one flick and has
+   * none of the horizon blow-up a ray cast has.
+   */
+  const tableBasisInverse = useCallback(
+    (origin: THREE.Vector3): [number, number, number, number] | null => {
+      const rect = gl.domElement.getBoundingClientRect();
+      const toPx = (v: THREE.Vector3) => {
+        const p = v.clone().project(camera);
+        return { x: ((p.x + 1) / 2) * rect.width, y: ((1 - p.y) / 2) * rect.height };
+      };
+      const step = 0.05; // 5cm: small enough to stay linear, big enough to be exact
+      const o = toPx(origin);
+      const ax = toPx(new THREE.Vector3(origin.x + step, origin.y, origin.z));
+      const az = toPx(new THREE.Vector3(origin.x, origin.y, origin.z + step));
+
+      // columns of the metres -> pixels matrix
+      const a = (ax.x - o.x) / step;
+      const c = (ax.y - o.y) / step;
+      const b = (az.x - o.x) / step;
+      const d = (az.y - o.y) / step;
+
+      const det = a * d - b * c;
+      // Degenerate only if the desk is edge-on, which the camera never allows.
+      if (!Number.isFinite(det) || Math.abs(det) < 1e-6) return null;
+      return [d / det, -b / det, -c / det, a / det];
+    },
+    [camera, gl],
   );
 
   const pointerToTable = useCallback(
@@ -290,67 +334,103 @@ export function Arena({ onRally, onShotFired, netStateRef, onNetSync }: ArenaPro
       const body = refs[mySide].current;
       if (!body) return;
       const t = body.translation();
+      const from = new THREE.Vector3(t.x, TABLE.surfaceY, t.z);
+      const inv = tableBasisInverse(from);
+      if (!inv) return;
+
       aiming.current = {
         side: mySide,
         strike,
-        from: new THREE.Vector3(t.x, TABLE.surfaceY, t.z),
-        to: p.clone(),
+        from,
+        startX: ev.clientX,
+        startY: ev.clientY,
+        inv,
       };
       el.setPointerCapture(ev.pointerId);
       useMatch.getState().setPhase('aiming');
       sfx.pickup();
     };
 
+    /** Longest useful drag, in pixels of whichever screen this is. */
+    const maxDrawPx = () => {
+      const rect = el.getBoundingClientRect();
+      return Math.max(60, Math.min(rect.width, rect.height) * DRAW_SCREEN_FRACTION);
+    };
+
+    /** Resolve a pointer position into an aimed shot. */
+    const solve = (a: NonNullable<typeof aiming.current>, clientX: number, clientY: number) => {
+      const dx = clientX - a.startX;
+      const dy = clientY - a.startY;
+
+      // Power is pure screen distance, so it means the same thing whichever
+      // way you drag.
+      const px = Math.hypot(dx, dy);
+      const power = Math.min(1, px / maxDrawPx());
+
+      // Direction comes back through the desk basis, so the arrow still points
+      // where the desk says it should. Pull back, shoot forward.
+      const [i0, i1, i2, i3] = a.inv;
+      const wx = i0 * dx + i1 * dy;
+      const wz = i2 * dx + i3 * dy;
+      const len = Math.hypot(wx, wz);
+      if (len < 1e-6) return null;
+
+      return { power, dir: new THREE.Vector3(-wx / len, 0, -wz / len) };
+    };
+
     const move = (ev: PointerEvent) => {
       const a = aiming.current;
       if (!a) return;
-      const p = pointerToTable(ev);
-      if (!p) return;
-      a.to.copy(p);
-      // Pull back from the pen; it launches the other way. Carrom logic.
-      const pull = new THREE.Vector3(a.from.x - p.x, 0, a.from.z - p.z);
-      const dist = pull.length();
-      const power = THREE.MathUtils.clamp(dist / MAX_DRAW, 0, 1);
-      if (dist < 1e-4) return;
-      const dir = pull.normalize();
-      setGuide({ origin: a.from.clone(), dir, power, strike: a.strike });
+      const shot = solve(a, ev.clientX, ev.clientY);
+      if (!shot) return;
+      setGuide({ origin: a.from.clone(), dir: shot.dir, power: shot.power, strike: a.strike });
       useMatch.getState().setAim({
-        power,
-        angleDeg: (Math.atan2(dir.x, -dir.z) * 180) / Math.PI,
+        power: shot.power,
+        angleDeg: (Math.atan2(shot.dir.x, -shot.dir.z) * 180) / Math.PI,
         strike: a.strike,
       });
     };
 
-    const up = () => {
+    const up = (ev: PointerEvent) => {
       const a = aiming.current;
       aiming.current = null;
       setGuide(null);
       if (!a) return;
-      const pull = new THREE.Vector3(a.from.x - a.to.x, 0, a.from.z - a.to.z);
-      const dist = pull.length();
-      const power = THREE.MathUtils.clamp(dist / MAX_DRAW, 0, 1);
-      if (power < 0.06) {
+      const shot = solve(a, ev.clientX, ev.clientY);
+      if (!shot || shot.power < 0.06) {
         useMatch.getState().setPhase('ready');
         useMatch.getState().setAim(null);
         return;
       }
-      const dir = pull.normalize();
-      const shot = { side: a.side, dx: dir.x, dz: dir.z, power, strike: a.strike };
-      onShotFired?.({ dx: dir.x, dz: dir.z, power, strike: a.strike });
-      useMatch.getState().fire(shot);
+      onShotFired?.({ dx: shot.dir.x, dz: shot.dir.z, power: shot.power, strike: a.strike });
+      useMatch.getState().fire({
+        side: a.side,
+        dx: shot.dir.x,
+        dz: shot.dir.z,
+        power: shot.power,
+        strike: a.strike,
+      });
+    };
+
+    const cancel = () => {
+      if (!aiming.current) return;
+      aiming.current = null;
+      setGuide(null);
+      useMatch.getState().setPhase('ready');
+      useMatch.getState().setAim(null);
     };
 
     el.addEventListener('pointerdown', down);
     el.addEventListener('pointermove', move);
     el.addEventListener('pointerup', up);
-    el.addEventListener('pointercancel', up);
+    el.addEventListener('pointercancel', cancel);
     return () => {
       el.removeEventListener('pointerdown', down);
       el.removeEventListener('pointermove', move);
       el.removeEventListener('pointerup', up);
-      el.removeEventListener('pointercancel', up);
+      el.removeEventListener('pointercancel', cancel);
     };
-  }, [gl, mySide, pointerToTable, strikeOffsetAt, refs, onShotFired]);
+  }, [gl, mySide, pointerToTable, strikeOffsetAt, tableBasisInverse, refs, onShotFired]);
 
   // ---- rack the pens at the start of every rally ----
   useEffect(() => {

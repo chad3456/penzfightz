@@ -54,7 +54,7 @@ export function ResultSheet({
 
   return (
     <Sheet seed={23}>
-      <SheetHeader />
+      <SheetHeader title="Pen Fight" />
 
       {pen && (
         <div style={{ height: 34, margin: '4px 0 14px' }}>

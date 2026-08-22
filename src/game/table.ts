@@ -65,8 +65,17 @@ export const MAX_IMPULSE_PER_KG = 4.0;
  */
 export const FULL_POWER_TRAVEL = 1.25;
 
-/** Longest drag that still counts, in metres of table. */
-export const MAX_DRAW = 0.3;
+/**
+ * Longest drag that still counts, as a fraction of the smaller viewport edge.
+ *
+ * Deliberately measured in pixels rather than metres of desk. The desk recedes
+ * under a pitched camera, so a drag "up" the screen covers several times more
+ * table than the same drag sideways — measuring power in world space made an
+ * upward flick read full strength almost immediately. Pixels are what the hand
+ * actually controls, so the meter now says the same thing in every direction.
+ * Aim direction is still solved in table space, so pointing is unaffected.
+ */
+export const DRAW_SCREEN_FRACTION = 0.22;
 
 /** Rally is dead once both pens are under these for SETTLE_FRAMES in a row. */
 export const SETTLE_LINEAR = 0.045;

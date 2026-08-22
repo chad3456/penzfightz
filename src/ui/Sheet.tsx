@@ -66,12 +66,19 @@ export function Sheet({
   );
 }
 
-export function SheetHeader({ subtitle }: { subtitle?: string }) {
+export function SheetHeader({
+  subtitle,
+  title = 'The Back Bench',
+}: {
+  subtitle?: string;
+  /** Whichever game owns this sheet. Defaults to the site itself. */
+  title?: string;
+}) {
   return (
     <>
       <div className="brand">
         <BrandMark className="brand__mark" />
-        <span className="brand__word">Pen Fight</span>
+        <span className="brand__word">{title}</span>
       </div>
       <div className="rule" />
       {subtitle && <div className="eyebrow">{subtitle}</div>}
