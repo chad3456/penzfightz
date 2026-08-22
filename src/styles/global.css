@@ -1641,6 +1641,14 @@ h2.title {
   opacity: 0.85;
 }
 
+.shelf__aka {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--hand);
+  font-size: 13px;
+  opacity: 0.62;
+}
+
 .shelf__foot {
   display: flex;
   align-items: center;

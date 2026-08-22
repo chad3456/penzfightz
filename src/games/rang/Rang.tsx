@@ -264,7 +264,7 @@ export function Rang({ onExit }: { onExit: () => void }) {
         if (!after || after.pub.phase !== 'playing') return;
         if (currentSeat(after.pub).id !== active.id) return;
         const hand = after.hands[active.id] ?? [];
-        const drawn = hand.find((c) => c.id === after.drewThisTurn);
+        const drawn = hand.find((c) => c.id === after.pub.drewThisTurn);
         if (drawn && playable(drawn, after.pub.top, after.pub.active, after.pub.pending)) {
           onAction(active.id, botMove(after, active.id));
         } else {
@@ -366,7 +366,6 @@ export function Rang({ onExit }: { onExit: () => void }) {
   const hand = priv?.hand ?? [];
   const myTurn = currentSeat(pub)?.id === me && pub.phase === 'playing';
   const canPlayAny = hand.some((c) => playable(c, pub.top, pub.active, pub.pending));
-  const drewCard = myTurn && !canPlayAny;
 
   if (pub.phase === 'over') {
     const ranked = [...pub.seats].sort(
@@ -443,7 +442,7 @@ export function Rang({ onExit }: { onExit: () => void }) {
         <button
           className="pile__deck"
           onClick={() => act({ type: 'draw' })}
-          disabled={!myTurn || (!!game.current?.drewThisTurn && pub.pending === 0)}
+          disabled={!myTurn || (!!pub.drewThisTurn && pub.pending === 0)}
           title="Draw"
         >
           <CardFace faceDown />
@@ -476,8 +475,10 @@ export function Rang({ onExit }: { onExit: () => void }) {
 
       <div className="hand">
         {hand.map((c) => {
-          const ok = myTurn && playable(c, pub.top, pub.active, pub.pending)
-            && (!game.current?.drewThisTurn || c.id === game.current.drewThisTurn);
+          const ok =
+            myTurn &&
+            playable(c, pub.top, pub.active, pub.pending) &&
+            (!pub.drewThisTurn || c.id === pub.drewThisTurn);
           return (
             <CardFace
               key={c.id}
@@ -498,7 +499,7 @@ export function Rang({ onExit }: { onExit: () => void }) {
         >
           One card!
         </button>
-        {drewCard && game.current?.drewThisTurn && (
+        {myTurn && pub.drewThisTurn && (
           <button className="btn btn--small" style={{ flex: 1 }} onClick={() => act({ type: 'pass' })}>
             Pass
           </button>

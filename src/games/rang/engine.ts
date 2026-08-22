@@ -132,6 +132,15 @@ export interface RangPublic {
   winnerId: string | null;
   phase: 'playing' | 'over';
   round: number;
+  /**
+   * The card the player to move just drew, if any — they may play that one and
+   * nothing else, or pass.
+   *
+   * Public, because everyone at the table watched them take it, and because a
+   * guest needs it to render their own turn. It used to live only in the host's
+   * private state, which left a guest who drew unable to play the card or pass.
+   */
+  drewThisTurn: string | null;
 }
 
 /** Your cards, and nobody else's. */
@@ -151,8 +160,6 @@ export interface RangState {
   hands: Record<string, Card[]>;
   draw: Card[];
   discard: Card[];
-  /** Set after a draw so the drawn card, and only that one, may still be played. */
-  drewThisTurn: string | null;
 }
 
 // ---------------------------------------------------------------- rules
@@ -221,10 +228,10 @@ export function startRound(
     hands,
     draw,
     discard: [first],
-    drewThisTurn: null,
     pub: {
       seats,
-      turn: 0,
+      // Whoever shuffled does not get to start every round.
+      turn: Math.floor(Math.random() * seats.length),
       direction: 1,
       top: first,
       active,
@@ -237,6 +244,7 @@ export function startRound(
       winnerId: null,
       phase: 'playing',
       round,
+      drewThisTurn: null,
     },
   };
   return state;
@@ -300,15 +308,14 @@ export function apply(state: RangState, from: string, action: RangAction): RangS
     const card = hand[idx];
     if (!playable(card, pub.top, pub.active, pub.pending)) return null;
     // After drawing you may only play the card you just drew.
-    if (state.drewThisTurn && card.id !== state.drewThisTurn) return null;
+    if (pub.drewThisTurn && card.id !== pub.drewThisTurn) return null;
 
     const next: RangState = {
       ...state,
       hands: { ...state.hands, [from]: hand.filter((_, i) => i !== idx) },
       discard: [...state.discard, { ...card, colour: card.colour }],
       draw: [...state.draw],
-      drewThisTurn: null,
-      pub: { ...pub, called: [...pub.called] },
+      pub: { ...pub, called: [...pub.called], drewThisTurn: null },
     };
     const np = next.pub;
 
@@ -370,12 +377,12 @@ export function apply(state: RangState, from: string, action: RangAction): RangS
       np.lastEvent = `${nameOf(np, from)} eats ${np.pending}.`;
       np.pending = 0;
       np.turn = nextIndex(np, 1);
-      next.drewThisTurn = null;
+      np.drewThisTurn = null;
       sync(next);
       return next;
     }
 
-    if (state.drewThisTurn) return null; // one card per turn
+    if (pub.drewThisTurn) return null; // one card per turn
     const [card] = take(next, 1);
     if (!card) {
       np.turn = nextIndex(np, 1);
@@ -383,7 +390,7 @@ export function apply(state: RangState, from: string, action: RangAction): RangS
       return next;
     }
     next.hands[from] = [...(next.hands[from] ?? []), card];
-    next.drewThisTurn = card.id;
+    np.drewThisTurn = card.id;
     np.lastEvent = `${nameOf(np, from)} drew.`;
     np.called = np.called.filter((id) => id !== from);
     sync(next);
@@ -392,8 +399,8 @@ export function apply(state: RangState, from: string, action: RangAction): RangS
 
   // ---- pass, only legal right after a draw ----
   if (action.type === 'pass') {
-    if (!state.drewThisTurn) return null;
-    const next: RangState = { ...state, drewThisTurn: null, pub: { ...pub } };
+    if (!pub.drewThisTurn) return null;
+    const next: RangState = { ...state, pub: { ...pub, drewThisTurn: null } };
     next.pub.turn = nextIndex(next.pub, 1);
     next.pub.lastEvent = `${nameOf(next.pub, from)} passed.`;
     sync(next);

@@ -121,6 +121,9 @@ export function Arcade({
               </span>
             </span>
             <span className="shelf__tag">{g.tagline}</span>
+            {g.alsoKnownAs && (
+              <span className="shelf__aka">you probably call it {g.alsoKnownAs}</span>
+            )}
             <span className="shelf__foot">
               <span className="shelf__era">{g.era}</span>
               <span className="shelf__modes">

@@ -7,7 +7,7 @@ computer, or send someone a link and play them.
 | --- | --- | --- |
 | **Pen Fight** | Flick your pen, knock theirs off the desk, keep the pen. Full 3D with real physics. | 2 |
 | **Raja Rani Chor Police** | Four chits, four roles. The Police gets one guess at the Chor. | 2–4 |
-| **Rang** | The colour-and-number card game. Skips, reverses, draw-twos, wilds. | 2–6 |
+| **Rang** | The UNO game. Skips, reverses, draw-twos, wilds, stacked draws. | 2–6 |
 | **Mafia** | The village sleeps, somebody dies, everybody argues. | 4–12 |
 
 Every game has a practice mode against computer players and a room you can share
@@ -60,6 +60,22 @@ Draw **power** is measured in screen pixels, not metres of desk. The desk
 recedes under a pitched camera, so measuring in world space made an upward flick
 read full strength almost immediately; pixels are what the hand actually
 controls. Aim *direction* is still solved in table space, so pointing is exact.
+
+## Rang, and why it is not called UNO
+
+It is the UNO game — the same ruleset, including wild draw-fours, stacked draw
+cards, and the penalty for not calling your last card. The name is different
+because UNO is Mattel's trademark; the rules themselves are old and unowned.
+The shelf says so on the card, so nobody has to guess.
+
+The deck is shuffled fresh every round, seven cards each, and the first turn is
+picked at random rather than always starting with whoever dealt.
+
+`npm run test:rang` plays a few thousand games of it against itself and checks
+the rules hold — that all 108 cards are always accounted for, that no legal play
+is ever refused, that a stacked draw always resolves, that the pile reshuffles
+when it runs dry, and that every game finishes with a winner holding no cards.
+A browser run proves the screen works; this proves the deck does.
 
 ## Running it
 

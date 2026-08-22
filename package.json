@@ -7,7 +7,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "gen:pens": "node scripts/gen-pen-seed.mjs > supabase/migrations/0002_seed_pens.sql"
+    "gen:pens": "node scripts/gen-pen-seed.mjs > supabase/migrations/0002_seed_pens.sql",
+    "test:rang": "node scripts/rang-sim.mjs"
   },
   "repository": {
     "type": "git",

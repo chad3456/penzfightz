@@ -13,6 +13,8 @@ export interface GameDef {
   name: string;
   /** The one line that tells you whether you remember this game. */
   tagline: string;
+  /** What people actually call it, when that is not the name on the card. */
+  alsoKnownAs?: string;
   /** Where and when it was played. */
   era: string;
   blurb: string;
@@ -60,9 +62,10 @@ export const GAMES: GameDef[] = [
     id: 'rang',
     name: 'Rang',
     tagline: 'Match the colour, match the number, go out first.',
+    alsoKnownAs: 'the UNO game',
     era: 'rainy day · the back of the bus',
     blurb:
-      'The colour-and-number card game everybody has played under some name or other. Skips, reverses, draw-twos and wilds. Shout when you are down to one card, or the table makes you take two.',
+      'This is the UNO game — same rules, different name, because UNO belongs to Mattel. Skips, reverses, draw-twos, wilds and wild draw-fours, stacked draws, and the bit where you shout when you are down to one card or the table makes you take two. The deal is shuffled fresh every round and the first turn is random.',
     seats: { min: 2, max: 6 },
     practice: true,
     online: true,
