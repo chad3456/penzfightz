@@ -6,6 +6,7 @@ import { PenFightGame } from './games/penfight/PenFightGame';
 import { RajaRani } from './games/rajarani/RajaRani';
 import { Rang } from './games/rang/Rang';
 import { Mafia } from './games/mafia/Mafia';
+import { BookStall } from './games/bookstall/BookStall';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
 import { api, type PlayerRow } from './lib/api';
@@ -117,6 +118,7 @@ export default function App() {
     if (shell === 'game' && game === 'rajarani') return <RajaRani onExit={toShelf} />;
     if (shell === 'game' && game === 'rang') return <Rang onExit={toShelf} />;
     if (shell === 'game' && game === 'mafia') return <Mafia onExit={toShelf} />;
+    if (shell === 'game' && game === 'bookstall') return <BookStall onExit={toShelf} />;
     return (
       <Arcade
         playerName={name}

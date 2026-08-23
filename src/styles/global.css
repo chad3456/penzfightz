@@ -2389,3 +2389,352 @@ button.card:hover:not(:disabled) {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+/* ==========================================================================
+   THE BOOK STALL — thermal paper
+   --------------------------------------------------------------------------
+   A till receipt is a very specific object: near-white paper with a grey-blue
+   cast, ink that is never quite black, a fixed-width font that cannot kern,
+   and a torn top and bottom where it came off the roll. Everything below is
+   in service of those four facts.
+   ========================================================================== */
+
+.stall {
+  width: min(430px, 94vw);
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.stall__sign {
+  text-align: center;
+  color: #f0e6cc;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.stall__signname {
+  font-family: var(--narrow);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: clamp(17px, 3.6vw, 22px);
+}
+
+.stall__signsub {
+  font-family: var(--hand);
+  font-size: 13.5px;
+  opacity: 0.7;
+  margin-top: 3px;
+}
+
+/* ---- the slot the paper comes out of ---- */
+
+.rcpt-slot {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  min-height: 130px;
+}
+
+.rcpt-empty {
+  width: min(330px, 88vw);
+  text-align: center;
+  padding: 22px 18px;
+  color: rgba(240, 230, 204, 0.66);
+  font-family: var(--hand);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.rcpt-empty__mouth {
+  width: 74%;
+  height: 9px;
+  margin: 0 auto 16px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #0a0a0c 0%, #1c1c22 60%, #2a2a32 100%);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.95), 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.rcpt-empty--busy .rcpt-empty__mouth {
+  animation: feed 0.28s linear infinite;
+}
+
+@keyframes feed {
+  0%,
+  100% {
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.95), 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  50% {
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.95), 0 3px 0 rgba(245, 245, 240, 0.5);
+  }
+}
+
+/* ---- the receipt ---- */
+
+.rcpt {
+  width: min(330px, 88vw);
+  background: #f6f5f1;
+  color: #3a3d44;
+  font-family: 'Courier New', Courier, 'Liberation Mono', monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  padding: 20px 18px 16px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
+  /* torn off the roll at both ends */
+  clip-path: polygon(
+    0% 6px, 5% 0px, 10% 5px, 15% 1px, 20% 6px, 25% 2px, 30% 6px, 35% 0px,
+    40% 5px, 45% 1px, 50% 6px, 55% 2px, 60% 5px, 65% 0px, 70% 6px, 75% 2px,
+    80% 5px, 85% 1px, 90% 6px, 95% 2px, 100% 5px,
+    100% calc(100% - 5px), 95% calc(100% - 1px), 90% calc(100% - 6px),
+    85% calc(100% - 2px), 80% calc(100% - 5px), 75% calc(100% - 1px),
+    70% calc(100% - 6px), 65% calc(100% - 2px), 60% calc(100% - 5px),
+    55% calc(100% - 0px), 50% calc(100% - 6px), 45% calc(100% - 2px),
+    40% calc(100% - 5px), 35% calc(100% - 1px), 30% calc(100% - 6px),
+    25% calc(100% - 2px), 20% calc(100% - 5px), 15% calc(100% - 0px),
+    10% calc(100% - 6px), 5% calc(100% - 2px), 0% calc(100% - 5px)
+  );
+  animation: print 0.55s var(--ease) both;
+  position: relative;
+}
+
+/* thermal paper is never evenly inked */
+.rcpt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    linear-gradient(96deg, rgba(120, 130, 150, 0.09) 0%, transparent 22%, transparent 78%, rgba(120, 130, 150, 0.11) 100%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.018) 0 1px, transparent 1px 3px);
+}
+
+@keyframes print {
+  from {
+    transform: translateY(-14px);
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.rcpt__head {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.rcpt__shop {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 12.5px;
+  margin-bottom: 3px;
+}
+
+.rcpt__sub {
+  font-size: 10px;
+  opacity: 0.66;
+  letter-spacing: 0.02em;
+}
+
+.rcpt__rule {
+  border-top: 1px solid rgba(58, 61, 68, 0.42);
+  margin: 7px 0;
+}
+
+.rcpt__rule--dash {
+  border-top-style: dashed;
+  border-top-color: rgba(58, 61, 68, 0.34);
+}
+
+.rcpt__line {
+  margin: 0;
+  font: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.rcpt__line--faint {
+  opacity: 0.62;
+}
+
+.rcpt__line--total {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* the line you came for, given room to breathe */
+.rcpt__quote {
+  margin: 12px 2px 8px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14.5px;
+  line-height: 1.62;
+  color: #2c2f36;
+  text-align: left;
+  hyphens: auto;
+}
+
+.rcpt__mark {
+  opacity: 0.4;
+}
+
+.rcpt__attr {
+  text-align: right;
+  font-size: 10.5px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+
+.rcpt__speaker {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* ---- barcode ---- */
+
+.rcpt__barcode {
+  margin: 14px 0 8px;
+  text-align: center;
+}
+
+.rcpt__bars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2px;
+  height: 34px;
+}
+
+.rcpt__bars i {
+  display: block;
+  height: 100%;
+  background: #33363c;
+}
+
+.rcpt__barnum {
+  margin-top: 4px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  opacity: 0.7;
+}
+
+/* ---- footer ---- */
+
+.rcpt__foot {
+  text-align: center;
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
+  opacity: 0.72;
+  line-height: 1.85;
+}
+
+.rcpt__thanks {
+  margin-top: 5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.rcpt__reset {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.95;
+}
+
+.rcpt__fineprint {
+  margin-top: 9px;
+  font-size: 8.5px;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  opacity: 0.6;
+  text-transform: none;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+/* ---- the counter ---- */
+
+.stall__counter {
+  width: min(330px, 88vw);
+  display: grid;
+  gap: 11px;
+}
+
+.stall__start {
+  font-family: var(--narrow);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 16px;
+  padding: 17px;
+  border-radius: 3px;
+  color: #f6f2e4;
+  background: linear-gradient(180deg, #3f4750 0%, #262c33 100%);
+  box-shadow: 0 4px 0 #14181d, inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: transform 0.09s var(--ease), box-shadow 0.09s var(--ease);
+}
+
+.stall__start:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #14181d, inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.stall__start:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #14181d, inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.stall__start:disabled {
+  opacity: 0.62;
+  cursor: wait;
+}
+
+.stall__meter-track {
+  height: 5px;
+  background: rgba(0, 0, 0, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(240, 230, 204, 0.28);
+  overflow: hidden;
+}
+
+.stall__meter-track span {
+  display: block;
+  height: 100%;
+  background: #d8cfae;
+  transition: width 0.4s var(--ease);
+}
+
+.stall__meter-read {
+  margin-top: 6px;
+  text-align: center;
+  font-family: var(--narrow);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 10px;
+  color: rgba(240, 230, 204, 0.68);
+}
+
+.stall .btn,
+.stall .btn--ghost {
+  color: #ede3c8;
+  border-color: rgba(237, 227, 200, 0.5);
+  box-shadow: none;
+}
+
+.stall .btn:hover:not(:disabled) {
+  background: rgba(237, 227, 200, 0.1);
+}
+
+@media (max-width: 560px) {
+  .rcpt {
+    font-size: 11px;
+    padding: 18px 14px 14px;
+  }
+
+  .rcpt__quote {
+    font-size: 13.5px;
+  }
+}

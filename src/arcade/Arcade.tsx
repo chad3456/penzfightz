@@ -71,8 +71,8 @@ export function Arcade({
 
       <h1 className="title center">The back bench</h1>
       <p className="lede">
-        Four games from the last row of an Indian classroom, and the bus home.
-        Play the computer, or send someone a link and play them.
+        Games from the last row of an Indian classroom, the bus home, and the
+        pavement outside. Play the computer, or send someone a link.
       </p>
 
       <div className="rule--thin" />
@@ -116,7 +116,7 @@ export function Arcade({
               <span className="shelf__name">{g.name}</span>
               <span className="shelf__seats">
                 {g.seats.min === g.seats.max
-                  ? `${g.seats.max} players`
+                  ? `${g.seats.max} player${g.seats.max === 1 ? '' : 's'}`
                   : `${g.seats.min}–${g.seats.max} players`}
               </span>
             </span>
@@ -127,6 +127,7 @@ export function Arcade({
             <span className="shelf__foot">
               <span className="shelf__era">{g.era}</span>
               <span className="shelf__modes">
+                {g.solo && <span className="shelf__pill">just you</span>}
                 {g.practice && <span className="shelf__pill">vs computer</span>}
                 {g.online && <span className="shelf__pill">with friends</span>}
               </span>

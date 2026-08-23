@@ -1,7 +1,7 @@
 # The Back Bench
 
-Four games from the last row of an Indian classroom, and the bus home. Play the
-computer, or send someone a link and play them.
+Five games from the last row of an Indian classroom, the bus home, and the
+pavement outside. Play the computer, or send someone a link and play them.
 
 | Game | What it is | Seats |
 | --- | --- | --- |
@@ -9,10 +9,12 @@ computer, or send someone a link and play them.
 | **Raja Rani Chor Police** | Four chits, four roles. The Police gets one guess at the Chor. | 2–4 |
 | **Rang** | The UNO game. Skips, reverses, draw-twos, wilds, stacked draws. | 2–6 |
 | **Mafia** | The village sleeps, somebody dies, everybody argues. | 4–12 |
+| **The Book Stall** | Press the button, the till prints you a line of Dostoevsky. | 1 |
 
-Every game has a practice mode against computer players and a room you can share
-by link. Rooms use a five-letter code, because that is what you can shout across
-a classroom.
+Every game except The Book Stall has a practice mode against computer players
+and a room you can share by link. Rooms use a five-letter code, because that is
+what you can shout across a classroom. The Book Stall is for one person and a
+quiet minute.
 
 ## Pen Fight
 
@@ -77,6 +79,24 @@ is ever refused, that a stacked draw always resolves, that the pile reshuffles
 when it runs dry, and that every game finishes with a winner holding no cards.
 A browser run proves the screen works; this proves the deck does.
 
+## The Book Stall
+
+Cheap Soviet-printed Russian classics were sold off pavement tables outside
+every Indian bus stand in the eighties and nineties, next to the exam guides.
+This is that table, reduced to its last act: press the button and the till
+prints you one line.
+
+The receipt is the whole interface — thermal paper with a torn edge, a till
+font, a barcode nobody will ever scan, and forty lines of stock. Draws come from
+a bag rather than a die roll: every line comes out once before any line comes
+out twice, and the line you just read is held back across the reset, so you can
+never be handed the same one twice running. Four hundred thousand simulated
+draws found zero repeats and a perfectly even spread.
+
+What you have collected is kept in `localStorage`, so the bag survives a
+refresh. There is no account and nothing goes to the server; this one is between
+you and the man behind the table.
+
 ## Running it
 
 ```sh
@@ -138,6 +158,7 @@ src/
     rajarani/  chits and one guess
     rang/      the card game
     mafia/     roles, nights, votes
+    bookstall/ the quote stock, and the receipt it prints
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera
   ui/       paper sheets, the Camlin box, chalkboard ranking, HUD
@@ -155,5 +176,7 @@ test run.
 **Rang** is the colour-and-number card game everyone has played under some name
 or other; the rules are old and unowned, and this is not anybody's branded deck.
 **Mafia** and **Raja Rani Chor Police** are traditional games with no owner at
-all. The pen brands are named because they were real pens, the way you would
+all. The lines in **The Book Stall** are Dostoevsky's, each printed with the
+book it came from; the English wording depends on the translator, which is why
+the receipt says so in its small print rather than pretending otherwise. The pen brands are named because they were real pens, the way you would
 name a real football.

@@ -6,7 +6,7 @@
  * game means adding a row here and a screen — nothing else.
  */
 
-export type GameId = 'penfight' | 'rajarani' | 'rang' | 'mafia';
+export type GameId = 'penfight' | 'rajarani' | 'rang' | 'mafia' | 'bookstall';
 
 export interface GameDef {
   id: GameId;
@@ -23,6 +23,8 @@ export interface GameDef {
   practice: boolean;
   /** Can you send someone a link? */
   online: boolean;
+  /** No opponent at all — it is just you and the machine. */
+  solo?: boolean;
   /** Two accent colours for the shelf card. */
   ink: string;
   wash: string;
@@ -85,6 +87,21 @@ export const GAMES: GameDef[] = [
     online: true,
     ink: '#3d2b6b',
     wash: 'rgba(61, 43, 107, 0.1)',
+    ready: true,
+  },
+  {
+    id: 'bookstall',
+    name: 'The Book Stall',
+    tagline: 'Press the button. It prints you a line of Dostoevsky.',
+    era: 'sunday pavement · sold by weight',
+    blurb:
+      'Cheap Soviet-printed Russian classics were everywhere in Indian bookshops in the eighties and nineties — Progress and Raduga editions on a pavement table beside the exam guides. This is that table, reduced to its last act: hand over a coin and the till prints you one line on a thermal receipt. Forty lines in stock, and you get every one of them before you get any of them twice.',
+    seats: { min: 1, max: 1 },
+    practice: false,
+    online: false,
+    solo: true,
+    ink: '#4a4a52',
+    wash: 'rgba(74, 74, 82, 0.08)',
     ready: true,
   },
 ];

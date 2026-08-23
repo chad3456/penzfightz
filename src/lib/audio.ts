@@ -365,6 +365,53 @@ export const sfx = {
   tick() {
     burst({ freq: 2400, q: 2.4, dur: 0.018, gain: 0.07 });
   },
+
+  /**
+   * A till printing a receipt.
+   *
+   * A thermal head is a rattle of tiny impacts under a steady motor whine, and
+   * it ends with the paper being torn off — so that is what this is: a stepper
+   * buzz, a burst of head chatter, and a rip.
+   */
+  printer() {
+    const c = ac();
+    if (!c || !sfxGain) return;
+    const out = sfxGain;
+    const t0 = c.currentTime;
+    const run = 0.85;
+
+    // the feed motor
+    const motor = c.createOscillator();
+    motor.type = 'sawtooth';
+    motor.frequency.setValueAtTime(78, t0);
+    motor.frequency.linearRampToValueAtTime(84, t0 + run);
+    const mf = c.createBiquadFilter();
+    mf.type = 'lowpass';
+    mf.frequency.value = 900;
+    const mg = c.createGain();
+    mg.gain.setValueAtTime(0.0001, t0);
+    mg.gain.exponentialRampToValueAtTime(0.05, t0 + 0.05);
+    mg.gain.setValueAtTime(0.05, t0 + run - 0.1);
+    mg.gain.exponentialRampToValueAtTime(0.0001, t0 + run);
+    motor.connect(mf).connect(mg).connect(out);
+    motor.start(t0);
+    motor.stop(t0 + run + 0.05);
+
+    // the print head, one line at a time
+    for (let i = 0; i < 26; i++) {
+      burst({
+        freq: 2600 + Math.random() * 1800,
+        q: 5,
+        dur: 0.012,
+        gain: 0.05 + Math.random() * 0.04,
+        when: 0.06 + i * (run - 0.14) / 26,
+      });
+    }
+
+    // tearing it off the roll
+    burst({ freq: 3400, q: 0.9, dur: 0.16, gain: 0.13, when: run });
+    burst({ freq: 1400, q: 1.4, dur: 0.1, gain: 0.08, when: run + 0.03 });
+  },
 };
 
 // ------------------------------------------------------------------ control
