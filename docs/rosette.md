@@ -19,10 +19,18 @@ One leaf, repeated around a circle:
   and meeting at both ends. The inner edge stops a little short, leaving the
   leaf open at the top the way the reference is
 - a **volute** continuing from the outer edge: a logarithmic spiral of about
-  1.3 turns, its eye set square to the leaf so it sits beside the tip rather
-  than beyond it
+  1.5 turns, its eye set square to the leaf so it sits beside the tip rather
+  than beyond it. How fast it tightens is the difference between an ornament
+  and a mess — a gentle taper winds a doughnut, too steep a one collapses into
+  a blunt scoop after a quarter turn, and only a narrow band between them
+  closes on a visible eye. It was settled by rendering the candidates side by
+  side rather than by argument
 - a **knot** of short overlapping strokes in the middle, where the block was
   cut deepest and held the most ink
+
+Leaves also carry a small per-leaf wobble in angle, length, width and coil, so
+the ring is not perfectly regular. Without it the thing reads as a machined
+daisy rather than something somebody cut.
 
 Leaf width and spiral diameter are both fractions of the **gap between one leaf
 and the next at the rim**, not of the flower. That is the one decision that
@@ -52,13 +60,19 @@ geometry bug and was not one.
 
 ## Checks
 
-`specFor` is deterministic, so the whole set can be rendered and measured. Over
-all forty quote ids at 120px, drawn at device ratio 2:
+`specFor` is deterministic, so the whole set can be rendered and measured. Over all forty
+quote ids, at the size the bill prints them and again half as large again:
 
-- ink coverage 4,482–9,542 px, no blanks and nothing washed out
-- bounding box 204–222px inside a 240px canvas — nothing clipped, and after
-  normalising the size the spread is about ±2% rather than ±7%
-- 40 distinct signatures from 40 ids
-- petal counts spread across 9, 10, 11, 12, 13
+| | at 104px | at 160px |
+| --- | --- | --- |
+| ink coverage | 2,833–4,718 px | 6,444–10,534 px |
+| bounding box | 178–192 × 170–189 | 275–296 × 261–291 |
+| blank or washed out | 0 | 0 |
+| clipped by the canvas | 0 | 0 |
+| distinct signatures | 40/40 | 40/40 |
+
+Petal counts spread across 10, 11, 12 and 13. Normalising each flower to what
+it actually spans, rather than to the unit circle, holds the printed size to
+about ±4% across the set instead of ±7%.
 
 About 12ms to stamp one at 130px, drawn once when the bill prints.

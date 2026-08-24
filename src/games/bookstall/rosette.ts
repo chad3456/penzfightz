@@ -47,6 +47,14 @@ function noise1(seed: number) {
 
 type Pt = [number, number];
 
+/** Sweep knobs, so the shape can be compared side by side while tuning. */
+/**
+ * How fast the tip spiral tightens. A gentle taper winds a doughnut; this is
+ * steep enough that the coil closes on a visible eye, which is what makes it
+ * read as a volute rather than a loop.
+ */
+const COIL_DECAY = 2.15;
+
 export interface RosetteSpec {
   /** Leaves in the ring. */
   petals: number;
@@ -78,15 +86,15 @@ export function specFor(seed: string): RosetteSpec {
   const r = rng(seed);
   const pick = <T,>(xs: T[]) => xs[Math.floor(r() * xs.length)];
   return {
-    petals: pick([9, 10, 10, 11, 11, 12, 12, 13]),
-    sweep: 0.18 + r() * 0.22,
-    belly: 0.29 + r() * 0.09,
-    coil: 1.2 + r() * 0.32,
-    coilFit: 0.62 + r() * 0.16,
-    reach: 0.66 + r() * 0.07,
+    petals: pick([10, 11, 11, 11, 12, 12, 13]),
+    sweep: 0.1 + r() * 0.09,
+    belly: 0.23 + r() * 0.06,
+    coil: 1.4 + r() * 0.25,
+    coilFit: 0.5 + r() * 0.08,
+    reach: 0.78 + r() * 0.07,
     rotate: r() * Math.PI * 2,
-    starve: 0.26 + r() * 0.26,
-    weight: 0.0036 + r() * 0.0020,
+    starve: 0.18 + r() * 0.18,
+    weight: 0.0028 + r() * 0.0011,
   };
 }
 
@@ -138,7 +146,7 @@ function volute(from: Pt, tangent: Pt, side: number, s: RosetteSpec, n: number):
   for (let i = 0; i <= n; i++) {
     const u = i / n;
     const ang = a0 + turns * u * side;
-    const rad = r0 * Math.exp(-1.15 * u);
+    const rad = r0 * Math.exp(-COIL_DECAY * u);
     out.push([cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad]);
   }
   return out;
@@ -148,15 +156,26 @@ function volute(from: Pt, tangent: Pt, side: number, s: RosetteSpec, n: number):
 function strokes(s: RosetteSpec): Pt[][] {
   const out: Pt[][] = [];
   const N = 66;
+  // Somebody cut this by hand, so no two leaves are quite the same length or
+  // sit quite where the arithmetic says they should.
+  const wob = rng(`wobble${s.petals}:${s.rotate.toFixed(4)}`);
   for (let i = 0; i < s.petals; i++) {
-    const a = s.rotate + (i / s.petals) * Math.PI * 2;
-    const sp = spine(a, s, N);
+    const step = (Math.PI * 2) / s.petals;
+    const a = s.rotate + i * step + (wob() - 0.5) * step * 0.09;
+    const leaf: RosetteSpec = {
+      ...s,
+      reach: s.reach * (0.955 + wob() * 0.09),
+      belly: s.belly * (0.9 + wob() * 0.2),
+      coilFit: s.coilFit * (0.9 + wob() * 0.2),
+      coil: s.coil * (0.92 + wob() * 0.16),
+    };
+    const sp = spine(a, leaf, N);
 
     const left: Pt[] = [];
     const right: Pt[] = [];
     sp.forEach(({ p, t }, k) => {
       const u = k / N;
-      const w = belly(u, s);
+      const w = belly(u, leaf);
       left.push([p[0] - t[1] * w, p[1] + t[0] * w]);
       // The inner edge stops a little short, leaving the leaf open at the top.
       if (u < 0.93) right.push([p[0] + t[1] * w, p[1] - t[0] * w]);
@@ -164,16 +183,16 @@ function strokes(s: RosetteSpec): Pt[][] {
 
     // The outer edge runs on past the tip and coils; the inner one stops there.
     const tip = sp[N];
-    out.push([...left, ...volute(tip.p, tip.t, 1, s, 64)]);
+    out.push([...left, ...volute(tip.p, tip.t, 1, leaf, 64)]);
     out.push(right);
   }
 
   // The eye: short strokes packed round the middle, where the leaves meet.
   const eye = rng(`eye${s.petals}${s.rotate.toFixed(3)}`);
-  for (let i = 0; i < s.petals * 2; i++) {
+  for (let i = 0; i < Math.round(s.petals * 1.3); i++) {
     const a = eye() * Math.PI * 2;
-    const r1 = 0.01 + eye() * 0.014;
-    const r2 = r1 + 0.018 + eye() * 0.03;
+    const r1 = 0.008 + eye() * 0.012;
+    const r2 = r1 + 0.016 + eye() * 0.026;
     // Short overlapping strokes rather than a clean star, so the middle reads
     // as the knot where the block was cut deepest and holds the most ink.
     out.push([
