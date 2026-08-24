@@ -216,6 +216,12 @@ export function BookStall({ onExit }: { onExit: () => void }) {
             </blockquote>
             <div className="rcpt__attr">
               — {bill.quote.work}, {bill.quote.year}
+              {bill.quote.ref && (
+                <>
+                  <br />
+                  <span className="rcpt__ref">{bill.quote.ref}</span>
+                </>
+              )}
               {bill.quote.speaker && (
                 <>
                   <br />

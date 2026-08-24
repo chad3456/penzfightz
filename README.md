@@ -93,6 +93,20 @@ out twice, and the line you just read is held back across the reset, so you can
 never be handed the same one twice running. Four hundred thousand simulated
 draws found zero repeats and a perfectly even spread.
 
+Sixty-seven lines are in stock. Thirty-eight of them carry a chapter
+reference, which means they were located in the book itself — Constance
+Garnett's translation, Project Gutenberg #2554 — by `scripts/cite-quotes.mjs`,
+which refuses to emit anything it cannot find. Point that script at any other
+Gutenberg text and it works the same way; the format is the constraint, not the
+book. The rest are lines in common circulation whose source text this build
+could not reach, and they are marked apart by having no reference rather than
+by being trusted.
+
+Checking the earlier set against the real text was worth doing: of eleven lines
+this file had attributed to *Crime and Punishment*, four were verbatim, two
+were other translators' wordings of real passages, and five could not be placed
+at all. The five are gone and the two are now what the book actually says.
+
 Every bill carries a rosette at its foot — the sort of woodblock printer's
 flower a job press kept on a stick of type and stamped into anything that
 needed filling. There is no image file: the shape is built from the quote's own

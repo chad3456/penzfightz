@@ -2925,3 +2925,11 @@ button.card:hover:not(:disabled) {
   opacity: 0.94;
   mix-blend-mode: multiply;
 }
+
+/* Where in the book, when the line was checked against the book. */
+.rcpt__ref {
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
