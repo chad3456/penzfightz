@@ -1,6 +1,6 @@
 # The Back Bench
 
-Five games from the last row of an Indian classroom, the bus home, and the
+Six games from the last row of an Indian classroom, the bus home, and the
 pavement outside. Play the computer, or send someone a link and play them.
 
 | Game | What it is | Seats |
@@ -10,6 +10,7 @@ pavement outside. Play the computer, or send someone a link and play them.
 | **Rang** | The UNO game. Skips, reverses, draw-twos, wilds, stacked draws. | 2–6 |
 | **Mafia** | The village sleeps, somebody dies, everybody argues. | 4–12 |
 | **The Book Stall** | Press the button, the till prints you a line of Dostoevsky. | 1 |
+| **The Back of the Bill** | Walk the maze, pick up the word cut out of the line. | 1 |
 
 Every game except The Book Stall has a practice mode against computer players
 and a room you can share by link. Rooms use a five-letter code, because that is
@@ -138,6 +139,23 @@ including the two things the fitting turned up that were not obvious from
 watching it, and the verification that renders the engine back at the
 reference's viewport and re-derives the force law from its own output.
 
+## The back of the bill
+
+Job presses printed a maze on the reverse of a handbill to keep a child quiet
+while the adults talked. This one has a word cut out of a line of Dostoevsky
+and the letters of that word dropped along the single true route through, so
+the only way to collect them in order is to walk it. Reach the end and the
+stall prints the line with the word put back, and the chapter it came from.
+
+The maze is carved by recursive backtracking from a seed, which gives a perfect
+maze — exactly one route between any two cells — so the route is found rather
+than chosen, and the letters can only sit on it. Over 200 generated mazes every
+letter lands on the true route, in order, with the exit always reachable and
+routes running 17 to 65 cells.
+
+Walls are stamped, not stroked: the same ink routine that prints the flower,
+exported from `rosette.ts` so there is one hand on the site rather than two.
+
 ## Running it
 
 ```sh
@@ -200,6 +218,7 @@ src/
     rang/      the card game
     mafia/     roles, nights, votes
     bookstall/ the quote stock, the receipt, and the flower it stamps
+    maze/      the handbill maze and the word cut out of the line
   effects/  the effects tab: the dot field and its measured constants
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera

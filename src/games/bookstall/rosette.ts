@@ -211,6 +211,73 @@ function strokes(s: RosetteSpec): Pt[][] {
  * `size` is the drawn box in CSS px; the caller has already scaled the context
  * for device pixels. The flower fills about 88% of it.
  */
+/**
+ * Print a path as a stamped line.
+ *
+ * The outline is never stroked. It is walked in half-pixel steps and laid down
+ * as small discs, each nudged off the line, with the odd speck thrown clear —
+ * and three scales of smooth noise deciding what inks and what comes out dry.
+ * Keeping the longest of those scales well under the length of a stroke is
+ * what stops a whole stroke landing in one dry trough and vanishing.
+ *
+ * Exported because the flower is not the only thing on this site that should
+ * look stamped rather than drawn.
+ */
+export function stampPath(
+  ctx: CanvasRenderingContext2D,
+  points: [number, number][],
+  opts: { weight: number; starve: number; seed: string; travelled?: number },
+): number {
+  const r = rng(`ink:${opts.seed}`);
+  const grain = noise1(Math.floor(r() * 1e9));
+  let travelled = opts.travelled ?? 0;
+  let carried = 0;
+  const w = opts.weight;
+
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1];
+    const b = points[i];
+    const dx = b[0] - a[0];
+    const dy = b[1] - a[1];
+    const len = Math.hypot(dx, dy);
+    if (len === 0) continue;
+    const ux = dx / len;
+    const uy = dy / len;
+
+    const step = 0.5;
+    for (let d = carried; d < len; d += step) {
+      travelled += step;
+      const wet =
+        grain(travelled * 0.09) * 0.34 +
+        grain(travelled * 0.5) * 0.41 +
+        grain(travelled * 1.8) * 0.25;
+      if (wet < opts.starve * 0.62) continue;
+
+      const j = (r() - 0.5) * w * 1.6;
+      const rad = w * (0.34 + r() * 0.46) * (0.62 + wet * 0.5);
+      ctx.beginPath();
+      ctx.arc(a[0] + ux * d - uy * j, a[1] + uy * d + ux * j, rad, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (r() < 0.01) {
+        const k = (r() - 0.5) * w * 8;
+        ctx.beginPath();
+        ctx.arc(
+          a[0] + ux * d - uy * k,
+          a[1] + uy * d + ux * k,
+          w * (0.12 + r() * 0.2),
+          0,
+          Math.PI * 2,
+        );
+        ctx.fill();
+      }
+    }
+    carried = (carried - len) % step;
+    if (carried < 0) carried += step;
+  }
+  return travelled;
+}
+
 export function drawRosette(
   ctx: CanvasRenderingContext2D,
   size: number,

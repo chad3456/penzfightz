@@ -2933,3 +2933,71 @@ button.card:hover:not(:disabled) {
   text-transform: uppercase;
   opacity: 0.8;
 }
+
+/* ==========================================================================
+   THE BACK OF THE BILL — the maze
+   ========================================================================== */
+
+.maze__riddle {
+  max-width: 360px;
+  margin: 0 auto 14px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  color: rgba(240, 230, 204, 0.82);
+}
+
+.maze__board {
+  position: relative;
+  margin: 0 auto;
+  background: #efe7d2;
+  border-radius: 2px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35), 0 10px 24px rgba(0, 0, 0, 0.4);
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.maze__board canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.maze__slots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin: 16px 0 6px;
+}
+
+.maze__slot {
+  width: 22px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-bottom: 2px solid rgba(240, 230, 204, 0.3);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  color: rgba(240, 230, 204, 0.9);
+}
+
+.maze__slot--on {
+  border-bottom-color: rgba(240, 230, 204, 0.75);
+}
+
+.maze__hint {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(240, 230, 204, 0.45);
+  margin-bottom: 10px;
+}
+
+@media (max-width: 420px) {
+  .maze__slot {
+    width: 18px;
+    font-size: 13px;
+  }
+}

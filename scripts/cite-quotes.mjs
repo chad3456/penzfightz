@@ -38,6 +38,13 @@ for (const block of body.split(/\n\s*\n/)) {
     chapter = '';
   } else if ((m = line.match(/^CHAPTER ([IVX]+)$/))) {
     chapter = m[1];
+  } else if ((m = line.match(/^(first|second|third|fourth|fifth|sixth|seventh) night$/i))) {
+    // White Nights is told over nights rather than chapters.
+    part = m[1].replace(/^./, (c) => c.toUpperCase()) + ' night';
+    chapter = '';
+  } else if (/^morning$/i.test(line)) {
+    part = 'Morning';
+    chapter = '';
   }
   marks.push({ at: offset, part, chapter, text: line });
   offset += block.length + 2;

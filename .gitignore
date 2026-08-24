@@ -11,3 +11,7 @@ npm-debug.log*
 coverage/
 .playwright/
 test-results/
+
+# Source ebooks used only to verify quotes locally. Modern translations are
+# under copyright and must not be redistributed with the site.
+sources/

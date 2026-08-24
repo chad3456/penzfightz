@@ -6,7 +6,7 @@
  * game means adding a row here and a screen — nothing else.
  */
 
-export type GameId = 'penfight' | 'rajarani' | 'rang' | 'mafia' | 'bookstall';
+export type GameId = 'penfight' | 'rajarani' | 'rang' | 'mafia' | 'bookstall' | 'maze';
 
 export interface GameDef {
   id: GameId;
@@ -96,6 +96,21 @@ export const GAMES: GameDef[] = [
     era: 'sunday pavement · sold by weight',
     blurb:
       'Cheap Soviet-printed Russian classics were everywhere in Indian bookshops in the eighties and nineties — Progress and Raduga editions on a pavement table beside the exam guides. This is that table, reduced to its last act: hand over a coin and the till prints you one line on a thermal receipt. Forty lines in stock, and you get every one of them before you get any of them twice.',
+    seats: { min: 1, max: 1 },
+    practice: false,
+    online: false,
+    solo: true,
+    ink: '#4a4a52',
+    wash: 'rgba(74, 74, 82, 0.08)',
+    ready: true,
+  },
+  {
+    id: 'maze',
+    name: 'The Back of the Bill',
+    tagline: 'Walk the only road through and pick up the missing word.',
+    era: 'reverse of a handbill · pencil provided',
+    blurb:
+      'Job presses printed a maze on the back of a handbill to keep a child quiet while the adults talked. This one has a word cut out of a line of Dostoevsky and its letters dropped along the single true route, so the only way to collect them in order is to walk it. Reach the end and the stall prints the line with the word put back, and tells you which chapter it came from.',
     seats: { min: 1, max: 1 },
     practice: false,
     online: false,
