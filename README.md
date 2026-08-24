@@ -97,6 +97,24 @@ What you have collected is kept in `localStorage`, so the bag survives a
 refresh. There is no account and nothing goes to the server; this one is between
 you and the man behind the table.
 
+## Effects
+
+There is a second tab on the shelf. It is not games — it is the moving parts,
+one idea each, with the numbers on the card.
+
+**Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
+lets the pointer push them out of the way: straight outwards, hardest at the
+centre, nothing beyond a hundred and sixty-six pixels. Nothing rotates, fades
+or blurs; a straight row of squares simply bends into an arc as it gets out of
+the way. Scrolling leans the whole field and then moves to the next line, dots
+travelling to their nearest new home rather than cutting.
+
+Every constant in it was measured off a reference recording rather than
+guessed, and [`docs/dot-field.md`](docs/dot-field.md) is the record of how —
+including the two things the fitting turned up that were not obvious from
+watching it, and the verification that renders the engine back at the
+reference's viewport and re-derives the force law from its own output.
+
 ## Running it
 
 ```sh
@@ -159,6 +177,7 @@ src/
     rang/      the card game
     mafia/     roles, nights, votes
     bookstall/ the quote stock, and the receipt it prints
+  effects/  the effects tab: the dot field and its measured constants
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera
   ui/       paper sheets, the Camlin box, chalkboard ranking, HUD

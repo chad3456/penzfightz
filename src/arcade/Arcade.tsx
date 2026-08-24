@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Sheet, SheetHeader } from '../ui/Sheet';
 import { GAMES, type GameId } from './games';
+import { EFFECTS, type EffectId } from '../effects/effects';
 import { api, type Counters } from '../lib/api';
 import { sfx } from '../lib/audio';
 
@@ -40,9 +41,12 @@ function Counter({ value, label }: { value: number; label: string }) {
   );
 }
 
+type Tab = 'games' | 'effects';
+
 export function Arcade({
   playerName,
   onPick,
+  onEffect,
   onRename,
   onRanking,
   soundOn,
@@ -50,12 +54,14 @@ export function Arcade({
 }: {
   playerName: string;
   onPick: (id: GameId) => void;
+  onEffect: (id: EffectId) => void;
   onRename: () => void;
   onRanking: () => void;
   soundOn: boolean;
   onToggleSound: () => void;
 }) {
   const [counters, setCounters] = useState<Counters | null>(null);
+  const [tab, setTab] = useState<Tab>('games');
 
   useEffect(() => {
     let alive = true;
@@ -71,8 +77,9 @@ export function Arcade({
 
       <h1 className="title center">The back bench</h1>
       <p className="lede">
-        Games from the last row of an Indian classroom, the bus home, and the
-        pavement outside. Play the computer, or send someone a link.
+        {tab === 'games'
+          ? 'Games from the last row of an Indian classroom, the bus home, and the pavement outside. Play the computer, or send someone a link.'
+          : 'Not games — the moving parts. Each one is a single idea, measured off a reference and written down, with its numbers on the card.'}
       </p>
 
       <div className="rule--thin" />
@@ -101,7 +108,55 @@ export function Arcade({
         </div>
       </div>
 
-      <div className="shelf">
+      <div className="tabs" role="tablist">
+        {(['games', 'effects'] as Tab[]).map((t) => (
+          <button
+            key={t}
+            role="tab"
+            aria-selected={tab === t}
+            className={`tabs__tab${tab === t ? ' tabs__tab--on' : ''}`}
+            onClick={() => {
+              sfx.tick();
+              setTab(t);
+            }}
+          >
+            {t === 'games' ? 'Games' : 'Effects'}
+          </button>
+        ))}
+      </div>
+
+      {tab === 'effects' && (
+        <div className="shelf">
+          {EFFECTS.map((e) => (
+            <button
+              key={e.id}
+              className="shelf__card"
+              style={{ ['--card-ink' as string]: e.ink, ['--card-wash' as string]: e.wash }}
+              onClick={() => {
+                sfx.tick();
+                onEffect(e.id);
+              }}
+            >
+              <span className="shelf__head">
+                <span className="shelf__name">{e.name}</span>
+                <span className="shelf__seats">canvas</span>
+              </span>
+              <span className="shelf__tag">{e.tagline}</span>
+              <span className="shelf__foot">
+                <span className="shelf__modes">
+                  {e.spec.map((sp) => (
+                    <span className="shelf__pill" key={sp}>
+                      {sp}
+                    </span>
+                  ))}
+                </span>
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="shelf" style={{ display: tab === 'games' ? undefined : 'none' }}>
         {GAMES.map((g) => (
           <button
             key={g.id}

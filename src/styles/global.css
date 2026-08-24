@@ -2738,3 +2738,176 @@ button.card:hover:not(:disabled) {
     font-size: 13.5px;
   }
 }
+
+/* ==========================================================================
+   TABS — games / effects on the shelf
+   ========================================================================== */
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin: 14px 0 10px;
+  border-bottom: 1px solid rgba(30, 40, 80, 0.18);
+}
+
+.tabs__tab {
+  appearance: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 7px 16px 6px;
+  border-radius: 3px 3px 0 0;
+  color: rgba(24, 34, 68, 0.5);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 12px;
+  position: relative;
+  bottom: -1px;
+}
+
+.tabs__tab:hover {
+  color: rgba(24, 34, 68, 0.78);
+}
+
+.tabs__tab--on {
+  color: #1b3a8f;
+  border-color: rgba(30, 40, 80, 0.18);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   THE STAGE — an effect running full screen
+   ========================================================================== */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  background: #171717;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.stage__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Sits over the canvas purely to provide something to scroll. */
+.stage__scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.stage__panel {
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+}
+
+.stage__chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  pointer-events: none;
+}
+
+.stage__back,
+.stage__spec {
+  pointer-events: auto;
+  appearance: none;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7b7b7b;
+  background: rgba(23, 23, 23, 0.7);
+  border: 1px solid #2e2e2e;
+  border-radius: 2px;
+  padding: 7px 12px;
+  transition: color 0.16s, border-color 0.16s;
+}
+
+.stage__back:hover,
+.stage__spec:hover,
+.stage__spec--on {
+  color: #d8d8d8;
+  border-color: #565656;
+}
+
+.stage__rail {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stage__tick {
+  appearance: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 3px;
+  height: 22px;
+  background: #303030;
+  transition: background 0.25s, height 0.25s;
+}
+
+.stage__tick--on {
+  background: #8d8d8d;
+  height: 34px;
+}
+
+.stage__panelnums {
+  position: absolute;
+  left: 18px;
+  bottom: 46px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  color: #5e5e5e;
+  pointer-events: none;
+}
+
+.stage__panelnums b {
+  color: #a9a9a9;
+  font-weight: 500;
+}
+
+.stage__hint {
+  position: absolute;
+  left: 18px;
+  bottom: 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  .stage__rail {
+    right: 10px;
+  }
+  .stage__panelnums {
+    font-size: 10px;
+    bottom: 42px;
+  }
+}

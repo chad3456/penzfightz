@@ -7,6 +7,8 @@ import { RajaRani } from './games/rajarani/RajaRani';
 import { Rang } from './games/rang/Rang';
 import { Mafia } from './games/mafia/Mafia';
 import { BookStall } from './games/bookstall/BookStall';
+import { DotFieldStage } from './effects/DotFieldStage';
+import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
 import { api, type PlayerRow } from './lib/api';
@@ -21,11 +23,12 @@ import { audio } from './lib/audio';
  * right game with the room code already in hand.
  */
 
-type Shell = 'boot' | 'shelf' | 'game' | 'ranking' | 'name';
+type Shell = 'boot' | 'shelf' | 'game' | 'effect' | 'ranking' | 'name';
 
 export default function App() {
   const [shell, setShell] = useState<Shell>('boot');
   const [game, setGame] = useState<GameId | null>(null);
+  const [effect, setEffect] = useState<EffectId | null>(null);
   const [player, setPlayer] = useState<PlayerRow | null>(null);
   const [name, setName] = useState(playerName());
   const [soundOn, setSoundOn] = useState(true);
@@ -70,6 +73,7 @@ export default function App() {
 
   const toShelf = useCallback(() => {
     setGame(null);
+    setEffect(null);
     setShell('shelf');
   }, []);
 
@@ -101,6 +105,11 @@ export default function App() {
     return <PenFightGame onExit={toShelf} onRename={() => setShell('name')} />;
   }
 
+  // Effects take the whole screen too — no notebook paper behind them.
+  if (shell === 'effect' && effect === 'dotfield') {
+    return <DotFieldStage onExit={toShelf} />;
+  }
+
   const inner = () => {
     if (shell === 'ranking') return <Leaderboard onBack={toShelf} />;
     if (shell === 'name') {
@@ -125,6 +134,10 @@ export default function App() {
         onPick={(id) => {
           setGame(id);
           setShell('game');
+        }}
+        onEffect={(id) => {
+          setEffect(id);
+          setShell('effect');
         }}
         onRename={() => setShell('name')}
         onRanking={() => setShell('ranking')}
