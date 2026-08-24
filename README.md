@@ -94,14 +94,25 @@ out twice, and the line you just read is held back across the reset, so you can
 never be handed the same one twice running. Four hundred thousand simulated
 draws found zero repeats and a perfectly even spread.
 
-Sixty-seven lines are in stock. Thirty-eight of them carry a chapter
-reference, which means they were located in the book itself — Constance
-Garnett's translation, Project Gutenberg #2554 — by `scripts/cite-quotes.mjs`,
-which refuses to emit anything it cannot find. Point that script at any other
-Gutenberg text and it works the same way; the format is the constraint, not the
-book. The rest are lines in common circulation whose source text this build
-could not reach, and they are marked apart by having no reference rather than
-by being trusted.
+**239 lines from fourteen works.** 194 of them carry the part and chapter they
+sit in, because they were located in a source text rather than recalled.
+`scripts/epub-text.mjs` flattens an ebook in spine order, `scripts/harvest.mjs`
+scores half a million words down to something a person can read, and
+`scripts/cite-quotes.mjs` refuses to emit any line it cannot find. The reading
+and the choosing are still done by hand — the scorer narrows, it does not
+select.
+
+The remaining lines are in common circulation and have no reference, which is
+how you can tell them apart: a reference means somebody checked.
+
+**On translators.** Dostoevsky's Russian is public domain; an English
+translation is its own copyrighted work. Four of the five source ebooks are
+modern translations still in copyright — McDuff, Pevear & Volokhonsky,
+Magarshack, and an unnamed *Double*. Every line records whose English it is, so
+provenance travels with the line and swapping to a public-domain rendering is a
+data change rather than an excavation. Where the same passage existed in two
+translations, the public-domain one was kept. The ebooks themselves are
+gitignored and never shipped.
 
 Checking the earlier set against the real text was worth doing: of eleven lines
 this file had attributed to *Crime and Punishment*, four were verbatim, two

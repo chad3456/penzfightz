@@ -258,8 +258,9 @@ export function BookStall({ onExit }: { onExit: () => void }) {
               {bill.bagReset && <div className="rcpt__reset">** NEW STOCK ARRIVED **</div>}
               <div className="rcpt__thanks">THANK YOU — COME AGAIN</div>
               <div className="rcpt__fineprint">
-                Translated from the Russian. Wording varies by translator; the
-                stall does not vouch for any one of them.
+                {bill.quote.translator
+                  ? `Translated from the Russian by ${bill.quote.translator}. Another translator would give you different words for the same line.`
+                  : 'Translated from the Russian. Wording varies by translator; the stall does not vouch for any one of them.'}
               </div>
             </div>
           </div>

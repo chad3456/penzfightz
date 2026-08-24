@@ -95,7 +95,7 @@ export const GAMES: GameDef[] = [
     tagline: 'Press the button. It prints you a line of Dostoevsky.',
     era: 'sunday pavement · sold by weight',
     blurb:
-      'Cheap Soviet-printed Russian classics were everywhere in Indian bookshops in the eighties and nineties — Progress and Raduga editions on a pavement table beside the exam guides. This is that table, reduced to its last act: hand over a coin and the till prints you one line on a thermal receipt. Forty lines in stock, and you get every one of them before you get any of them twice.',
+      'Cheap Soviet-printed Russian classics were everywhere in Indian bookshops in the eighties and nineties — Progress and Raduga editions on a pavement table beside the exam guides. This is that table, reduced to its last act: hand over a coin and the till prints you one line on a thermal receipt. Two hundred and thirty-nine lines in stock, from fourteen works, and you get every one of them before you get any of them twice.',
     seats: { min: 1, max: 1 },
     practice: false,
     online: false,
