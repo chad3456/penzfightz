@@ -93,6 +93,15 @@ out twice, and the line you just read is held back across the reset, so you can
 never be handed the same one twice running. Four hundred thousand simulated
 draws found zero repeats and a perfectly even spread.
 
+Every bill carries a rosette at its foot — the sort of woodblock printer's
+flower a job press kept on a stick of type and stamped into anything that
+needed filling. There is no image file: the shape is built from the quote's own
+id, so a line always prints the same flower and no two lines print the same
+one, and the broken-ink look comes from stamping the outline as several
+thousand small dots rather than drawing it as a line.
+[`docs/rosette.md`](docs/rosette.md) has the construction, and the one mistake
+in it that looked like a geometry bug and was not.
+
 What you have collected is kept in `localStorage`, so the bag survives a
 refresh. There is no account and nothing goes to the server; this one is between
 you and the man behind the table.
@@ -176,7 +185,7 @@ src/
     rajarani/  chits and one guess
     rang/      the card game
     mafia/     roles, nights, votes
-    bookstall/ the quote stock, and the receipt it prints
+    bookstall/ the quote stock, the receipt, and the flower it stamps
   effects/  the effects tab: the dot field and its measured constants
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera

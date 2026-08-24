@@ -2911,3 +2911,17 @@ button.card:hover:not(:disabled) {
     bottom: 42px;
   }
 }
+
+/* The printer's flower on a bill. */
+.rcpt__stamp {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 4px;
+}
+
+.rcpt__flower {
+  display: block;
+  /* Thermal paper never took a stamp cleanly. */
+  opacity: 0.94;
+  mix-blend-mode: multiply;
+}

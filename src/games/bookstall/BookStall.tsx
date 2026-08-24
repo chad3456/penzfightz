@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { QUOTES, STALL, TOTAL_QUOTES, drawNext, type Quote } from './quotes';
 import { sfx } from '../../lib/audio';
+import { Rosette } from './Rosette';
 
 /**
  * The book stall.
@@ -221,6 +222,11 @@ export function BookStall({ onExit }: { onExit: () => void }) {
                   <span className="rcpt__speaker">{bill.quote.speaker}</span>
                 </>
               )}
+            </div>
+
+            {/* The stall's flower, cut for this line and no other. */}
+            <div className="rcpt__stamp">
+              <Rosette seed={bill.quote.id} size={104} />
             </div>
 
             <div className="rcpt__rule rcpt__rule--dash" />
