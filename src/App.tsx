@@ -9,6 +9,7 @@ import { Mafia } from './games/mafia/Mafia';
 import { BookStall } from './games/bookstall/BookStall';
 import { Maze } from './games/maze/Maze';
 import { DotFieldStage } from './effects/DotFieldStage';
+import { RollCall } from './effects/rollcall/RollCall';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -109,6 +110,9 @@ export default function App() {
   // Effects take the whole screen too — no notebook paper behind them.
   if (shell === 'effect' && effect === 'dotfield') {
     return <DotFieldStage onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'rollcall') {
+    return <RollCall onExit={toShelf} />;
   }
 
   const inner = () => {

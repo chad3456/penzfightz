@@ -6,7 +6,7 @@
  * render both from a list.
  */
 
-export type EffectId = 'dotfield';
+export type EffectId = 'dotfield' | 'rollcall';
 
 export interface EffectDef {
   id: EffectId;
@@ -34,6 +34,16 @@ export const EFFECTS: EffectDef[] = [
     ],
     ink: '#8d8d8d',
     wash: 'rgba(140, 140, 140, 0.08)',
+  },
+  {
+    id: 'rollcall',
+    name: 'Roll Call',
+    tagline: 'A hundred faces, none of them drawn.',
+    blurb:
+      'Every face on the register is thirty-nine numbers, and the drawing code is a pure function of them. The numbers are not sampled — each new face is found by proposing candidates, scoring each on how far it sits from everyone already seated, and hill-climbing the winner away from its nearest neighbour. The persona is read off the same genes, so the note under a name always describes the face above it.',
+    spec: ['39 genes · 95-dim feature space', 'novelty search, not sampling', 'p5.js, one pure function'],
+    ink: '#7a6a55',
+    wash: 'rgba(122, 106, 85, 0.09)',
   },
 ];
 

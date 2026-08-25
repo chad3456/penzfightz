@@ -167,6 +167,21 @@ routes running 17 to 65 cells.
 Walls are stamped, not stroked: the same ink routine that prints the flower,
 exported from `rosette.ts` so there is one hand on the site rather than two.
 
+## Roll Call
+
+A hundred faces on the effects shelf, none of them drawn. Each is thirty-nine
+numbers, and the drawing code is a pure function of them — a superellipse
+silhouette, a hand that wanders rather than jitters, a colour wash deliberately
+printed off the line, and no symmetry anywhere. The persona is read off the same
+genes, so the note under a name always describes the face above it.
+
+The faces are found rather than sampled: each new one is proposed in a batch,
+scored on how far it sits from everyone already seated, and hill-climbed away
+from its nearest neighbour. The closest pair on the register ends up **62%
+further apart** than the closest pair you would get by drawing a hundred at
+random. [`docs/roll-call.md`](docs/roll-call.md) has the method, the numbers,
+and three bugs worth keeping a note of.
+
 ## Running it
 
 ```sh
@@ -230,7 +245,7 @@ src/
     mafia/     roles, nights, votes
     bookstall/ the quote stock, the receipt, and the flower it stamps
     maze/      the handbill maze and the word cut out of the line
-  effects/  the effects tab: the dot field and its measured constants
+  effects/  the effects tab: the dot field, and Roll Call's hundred faces
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera
   ui/       paper sheets, the Camlin box, chalkboard ranking, HUD
