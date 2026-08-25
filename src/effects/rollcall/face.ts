@@ -130,6 +130,9 @@ const SKIN = [
   '#cfd6d2', '#d8dcc9', '#e9c9c9', '#cdd5df', '#e3d9c4',
 ];
 const HAIR_INK = ['#161616', '#2b2118', '#5a4632', '#7d6a52', '#9a9a9a'];
+/** Dyed. Reached only when a set turns the `hairLoud` dial up. */
+const HAIR_LOUD = ['#c2392b', '#1f6fb2', '#2f8f5b', '#b8358f', '#d98a1f', '#7a3fc2', '#d8d2c4'];
+const CLOTH = ['#3a4657', '#5a4335', '#2f5148', '#6b2f38', '#43406b', '#7a6a4a', '#2b2b2b'];
 const LINE = '#141414';
 
 /**
@@ -141,6 +144,12 @@ const LINE = '#141414';
  * black blobs with the features drawn invisibly on top.
  */
 const pick = <T,>(arr: T[], t: number): T => arr[Math.min(arr.length - 1, Math.floor(t * arr.length))];
+
+/** Natural, unless the set has turned the dye up. */
+const hairColour = (gn: Genome): string =>
+  dial(gn, 'hairLoud') > 0.6
+    ? pick(HAIR_LOUD, dial(gn, 'hairInk'))
+    : pick(HAIR_INK, dial(gn, 'hairInk'));
 
 // --------------------------------------------------------------------- parts
 
@@ -503,7 +512,7 @@ function beard(c: Ctx, gn: Genome, chin: number) {
   if (kind === 0) return;
   const amount = dial(gn, 'beardAmount');
   const p = c.p;
-  const ink = pick(HAIR_INK, dial(gn, 'hairInk'));
+  const ink = hairColour(gn);
   const y = 0.3 * c.hh;
   const w = c.hw * 0.5;
 
@@ -612,6 +621,32 @@ function extras(c: Ctx, gn: Genome) {
       p.noStroke();
       p.circle(c.hw * 0.62, -c.hh * 0.3, 0.05);
       p.stroke(LINE);
+      break;
+    }
+    case 5: { // a nose stud
+      p.fill(LINE);
+      p.noStroke();
+      p.circle(c.turn * 1.4 - 0.055, y - c.hh * 0.16, 0.026);
+      p.stroke(LINE);
+      break;
+    }
+    case 6: { // a mole
+      p.fill(LINE);
+      p.noStroke();
+      p.circle(c.hw * 0.42, y - c.hh * 0.06, 0.028);
+      p.stroke(LINE);
+      break;
+    }
+    case 7: { // a bindi
+      p.fill('#8a2b2b');
+      p.noStroke();
+      p.circle(c.turn * 1.2, -c.hh * 0.5, 0.055);
+      p.stroke(LINE);
+      break;
+    }
+    case 8: { // an old scar through one brow
+      p.stroke(LINE);
+      stroke(p, [[c.hw * 0.34, -c.hh * 0.52], [c.hw * 0.46, -c.hh * 0.28]], c.ink, { passes: 1 });
       break;
     }
     default:
@@ -740,6 +775,7 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
   stroke(p, outline, ink, { close: true });
 
   hair(c, gn, outline);
+  headwear(c, gn, outline);
   const e = eyes(c, gn);
   brows(c, gn, e);
   nose(c, gn, e.y);
@@ -762,12 +798,14 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
     p.stroke(LINE);
   }
 
+  neckwear(c, gn);
+
   // --- neck: two short lines that do not quite meet the chin
-  if (dial(gn, 'neck') > 0.42) {
+  if (dial(gn, 'neckLen') > 0.42) {
     p.noFill();
     p.stroke(LINE);
     const y0 = hh * 0.94;
-    const w = hw * (0.13 + dial(gn, 'neck') * 0.12);
+    const w = hw * (0.13 + dial(gn, 'neckLen') * 0.12);
     stroke(p, [[-w, y0], [-w * 0.95, y0 + hh * 0.22]], ink, { passes: 1 });
     stroke(p, [[w, y0], [w * 0.95, y0 + hh * 0.22]], ink, { passes: 1 });
   }
@@ -776,3 +814,216 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
 }
 
 export { PAPER };
+
+/**
+ * Worn on the head.
+ *
+ * Drawn after the hair and before the features, because a cap sits over a
+ * fringe and under a pair of spectacles, and getting that order wrong is the
+ * difference between a hat and a sticker.
+ */
+function headwear(c: Ctx, gn: Genome, crown: [number, number][]) {
+  const kind = cat(gn, 'wear');
+  if (kind === 0) return;
+  const p = c.p;
+  const cloth = pick(CLOTH, dial(gn, 'washSeed'));
+  const top = longestRun(crown, ([, y]) => y < -c.hh * 0.3);
+  if (top.length < 3) return;
+  const brimY = -c.hh * 0.34;
+
+  const dome = (lift: number, colour: string) => {
+    p.fill(colour);
+    p.noStroke();
+    p.beginShape();
+    for (const [x, y] of top) p.vertex(x * 1.04, y * 1.04 - lift);
+    for (let i = top.length - 1; i >= 0; i--) p.vertex(top[i][0] * 1.0, brimY);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, [...top.map(([x, y]) => [x * 1.04, y * 1.04 - lift] as [number, number])], c.ink, {
+      passes: 1,
+    });
+  };
+
+  switch (kind) {
+    case 1: // cap, peak forward
+    case 7: { // visor: the peak without the dome
+      if (kind === 1) dome(0.02, cloth);
+      p.fill(cloth);
+      p.noStroke();
+      // A visor has no dome, so without a strap the peak reads as a plank
+      // driven through the forehead.
+      if (kind === 7) p.rect(-c.hw * 0.98, brimY - c.hh * 0.01, c.hw * 1.96, c.hh * 0.075, 0.02);
+      const dir = c.turn >= 0 ? 1 : -1;
+      // A curved peak reaching a little past the brow. The first version ran a
+      // straight spar out to 1.45x the head width, which read as a plank.
+      p.beginShape();
+      for (let i = 0; i <= 10; i++) {
+        const t = i / 10;
+        const x = (-0.5 + 1.62 * t) * c.hw * dir;
+        p.vertex(x, brimY - c.hh * 0.02 + Math.sin(Math.PI * t) * c.hh * 0.05);
+      }
+      for (let i = 10; i >= 0; i--) {
+        const t = i / 10;
+        const x = (-0.5 + 1.62 * t) * c.hw * dir;
+        p.vertex(x, brimY + c.hh * 0.11 - t * c.hh * 0.035);
+      }
+      p.endShape('close');
+      p.stroke(LINE);
+      break;
+    }
+    case 2: { // cap, peak back
+      dome(0.02, cloth);
+      p.fill(cloth);
+      p.noStroke();
+      p.beginShape();
+      p.vertex(c.hw * 0.6, brimY);
+      p.vertex(-c.hw * 1.32, brimY + c.hh * 0.02);
+      p.vertex(-c.hw * 1.24, brimY + c.hh * 0.12);
+      p.vertex(c.hw * 0.6, brimY + c.hh * 0.08);
+      p.endShape('close');
+      p.stroke(LINE);
+      break;
+    }
+    case 3: { // headphones: a band over, a cup at each ear
+      p.noFill();
+      p.stroke(LINE);
+      const band = top.map(([x, y]) => [x * 1.13, y * 1.13] as [number, number]);
+      stroke(p, band, c.ink, { weightScale: 1.5, passes: 1 });
+      p.fill(cloth);
+      p.noStroke();
+      for (const side of [-1, 1]) {
+        p.push();
+        p.translate(side * c.hw * 1.06, c.hh * 0.02);
+        p.rect(-0.075, -0.115, 0.15, 0.23, 0.05);
+        p.pop();
+      }
+      p.stroke(LINE);
+      p.noFill();
+      for (const side of [-1, 1]) {
+        p.push();
+        p.translate(side * c.hw * 1.06, c.hh * 0.02);
+        p.rect(-0.075, -0.115, 0.15, 0.23, 0.05);
+        p.pop();
+      }
+      break;
+    }
+    case 4: { // hood: close over the crown, open below the jaw
+      // A shell only slightly larger than the head, cut off at the cheekbone
+      // and closed back along the head itself so the gap reads as the opening.
+      // Ringing the entire outline turns a hood into a picture frame.
+      const shell = c.jaw.map(([x, y]) => [x * 1.15, y * 1.13 - c.hh * 0.05] as [number, number]);
+      const upper = longestRun(shell, ([, y]) => y < c.hh * 0.4);
+      const inner = longestRun(c.jaw, ([, y]) => y < c.hh * 0.4);
+      if (upper.length < 3 || inner.length < 3) break;
+      p.fill(cloth);
+      p.noStroke();
+      p.beginShape();
+      for (const [x, y] of upper) p.vertex(x, y);
+      for (let i = inner.length - 1; i >= 0; i--) p.vertex(inner[i][0] * 1.01, inner[i][1] * 1.01);
+      p.endShape('close');
+      p.stroke(LINE);
+      p.noFill();
+      stroke(p, upper, c.ink, { passes: 1 });
+      break;
+    }
+    case 5: { // a band across the brow
+      p.fill(cloth);
+      p.noStroke();
+      p.beginShape();
+      for (const [x, y] of top) p.vertex(x * 1.03, y * 1.03);
+      for (let i = top.length - 1; i >= 0; i--) p.vertex(top[i][0], brimY + c.hh * 0.08);
+      p.endShape('close');
+      p.stroke(LINE);
+      break;
+    }
+    default: { // beanie, with a turn-up
+      dome(0.06, cloth);
+      p.fill(cloth);
+      p.noStroke();
+      p.rect(-c.hw * 0.98, brimY - 0.01, c.hw * 1.96, c.hh * 0.13, 0.02);
+      p.stroke(LINE);
+      p.noFill();
+      p.rect(-c.hw * 0.98, brimY - 0.01, c.hw * 1.96, c.hh * 0.13, 0.02);
+      break;
+    }
+  }
+}
+
+/** Worn at the neck. Only drawn when there is a neck to hang it on. */
+function neckwear(c: Ctx, gn: Genome) {
+  const kind = cat(gn, 'neck');
+  if (kind === 0) return;
+  const p = c.p;
+  const y0 = c.hh * 0.95;
+  const y1 = y0 + c.hh * 0.3;
+  const cloth = pick(CLOTH, dial(gn, 'washOffX'));
+  const w = c.hw * (0.13 + dial(gn, 'neckLen') * 0.12);
+
+  p.noFill();
+  p.stroke(LINE);
+  switch (kind) {
+    case 1: { // collar and tie
+      stroke(p, [[-w * 2.2, y1], [-w * 0.45, y0 + c.hh * 0.05], [0, y1 * 0.96]], c.ink, { passes: 1 });
+      stroke(p, [[w * 2.2, y1], [w * 0.45, y0 + c.hh * 0.05], [0, y1 * 0.96]], c.ink, { passes: 1 });
+      p.fill(cloth);
+      p.noStroke();
+      // A knot, then a blade that narrows as it falls. One wide rectangle under
+      // the chin reads as a bow tie resting on a table.
+      p.beginShape();
+      p.vertex(-w * 0.3, y0 + c.hh * 0.08);
+      p.vertex(w * 0.3, y0 + c.hh * 0.08);
+      p.vertex(w * 0.24, y0 + c.hh * 0.2);
+      p.vertex(-w * 0.24, y0 + c.hh * 0.2);
+      p.endShape('close');
+      p.beginShape();
+      p.vertex(-w * 0.22, y0 + c.hh * 0.2);
+      p.vertex(w * 0.22, y0 + c.hh * 0.2);
+      p.vertex(w * 0.28, y1 + c.hh * 0.26);
+      p.vertex(0, y1 + c.hh * 0.36);
+      p.vertex(-w * 0.28, y1 + c.hh * 0.26);
+      p.endShape('close');
+      p.stroke(LINE);
+      break;
+    }
+    case 2: { // a lanyard, hanging a card
+      stroke(p, [[-w * 1.1, y0], [-w * 0.35, y1 + c.hh * 0.1]], c.ink, { passes: 1 });
+      stroke(p, [[w * 1.1, y0], [w * 0.35, y1 + c.hh * 0.1]], c.ink, { passes: 1 });
+      p.fill('#f0ece0');
+      p.stroke(LINE);
+      p.rect(-w * 0.42, y1 + c.hh * 0.1, w * 0.84, c.hh * 0.19, 0.012);
+      p.noFill();
+      break;
+    }
+    case 3: { // a scarf, wound
+      p.fill(cloth);
+      p.noStroke();
+      p.rect(-c.hw * 0.62, y0 + c.hh * 0.02, c.hw * 1.24, c.hh * 0.17, 0.04);
+      p.rect(-c.hw * 0.22, y0 + c.hh * 0.14, c.hw * 0.3, c.hh * 0.3, 0.02);
+      p.stroke(LINE);
+      break;
+    }
+    case 4: { // hoodie strings
+      stroke(p, [[-w * 0.7, y0 + c.hh * 0.04], [-w * 0.8, y1 + c.hh * 0.12]], c.ink, { passes: 1 });
+      stroke(p, [[w * 0.55, y0 + c.hh * 0.04], [w * 0.72, y1 + c.hh * 0.16]], c.ink, { passes: 1 });
+      p.fill(LINE);
+      p.noStroke();
+      p.circle(-w * 0.8, y1 + c.hh * 0.13, 0.03);
+      p.circle(w * 0.72, y1 + c.hh * 0.17, 0.03);
+      p.stroke(LINE);
+      p.noFill();
+      break;
+    }
+    case 5: { // a chain
+      p.noFill();
+      p.stroke(LINE);
+      stroke(p, arc(0, y0 - c.hh * 0.02, c.hw * 1.5, 0.15, Math.PI - 0.15), c.ink, { passes: 1 });
+      break;
+    }
+    default: { // an open collar
+      stroke(p, [[-w * 2.2, y1], [-w * 0.4, y0 + c.hh * 0.07]], c.ink, { passes: 1 });
+      stroke(p, [[w * 2.2, y1], [w * 0.4, y0 + c.hh * 0.07]], c.ink, { passes: 1 });
+      break;
+    }
+  }
+}

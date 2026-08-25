@@ -3192,3 +3192,152 @@ button.card:hover:not(:disabled) {
     place-items: center;
   }
 }
+
+/* Roll Call: the wall */
+.roll--wall {
+  display: flex;
+  flex-direction: column;
+  padding: 14px clamp(10px, 2.5vw, 26px) 10px;
+  overflow: hidden;
+}
+
+.roll__bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.roll__tabs {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 12px 0 10px;
+}
+
+.roll__tab {
+  appearance: none;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid #cfc7b1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #6f6a5e;
+}
+
+.roll__tab:hover {
+  color: #23211c;
+}
+
+.roll__tab--on {
+  background: var(--tab-ink, #3a3a3a);
+  border-color: var(--tab-ink, #3a3a3a);
+  color: #f6f2e7;
+}
+
+.roll__stage {
+  flex: 1 1 auto;
+  min-height: 320px;
+  border: 1px solid #ded6c2;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  background: #e9e4d6;
+}
+
+.roll__stage canvas {
+  display: block;
+  touch-action: none;
+}
+
+.roll__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  justify-items: center;
+}
+
+.roll__loadbar {
+  width: min(420px, 60vw);
+  height: 3px;
+  background: #d5cdb8;
+  overflow: hidden;
+}
+
+.roll__loadbar span {
+  display: block;
+  height: 100%;
+  background: #5a5348;
+  transition: width 0.2s linear;
+}
+
+.roll__loadtext {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #7d7768;
+}
+
+.roll__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: #857f70;
+}
+
+.roll__foot b {
+  color: #2f2c25;
+  font-weight: 600;
+}
+
+.roll__hint {
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+@media (max-width: 720px) {
+  .roll__stats2 {
+    display: none;
+  }
+}
+
+.roll__genes {
+  margin: -6px 0 16px;
+  font-size: 11px;
+  color: #7d7768;
+}
+
+.roll__genes summary {
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.05em;
+}
+
+.roll__genes code {
+  display: block;
+  margin: 8px 0 6px;
+  font-size: 9.5px;
+  line-height: 1.6;
+  color: #4a463d;
+  word-spacing: 2px;
+  max-height: 88px;
+  overflow-y: auto;
+}
+
+.roll__genes span {
+  display: block;
+  font-style: italic;
+  line-height: 1.5;
+}

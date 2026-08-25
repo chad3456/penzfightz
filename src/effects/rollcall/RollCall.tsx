@@ -1,160 +1,116 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import p5 from 'p5';
-import { buildRegister, type Genome } from './genome';
+import { buildCensus, type CensusReport, type Seat } from './census';
+import { bakeAtlases, type Atlas } from './atlas';
 import { drawFace, PAPER } from './face';
+import { FaceWall } from './FaceWall';
 import { personaFor, type Persona } from './persona';
+import { SETS } from './sets';
 import { sfx } from '../../lib/audio';
 
 /**
  * Roll Call.
  *
- * A hundred faces, none of them drawn. Each is a point in a 39-dimensional
- * cube found by novelty search — proposed, scored on how far it sits from
- * everyone already on the register, and then hill-climbed away from its
- * nearest neighbour until it stops improving. The drawing code is a pure
- * function of those numbers, and so is the persona, which is why the note
- * under a name always describes the face above it.
+ * A thousand and twenty-four faces across eight sets, standing in a wall you
+ * can orbit, and pick up, and leave where you dropped them.
+ *
+ * Nothing here is a picture. Every face is forty-one numbers found by novelty
+ * search, drawn by one pure function in p5, baked into texture atlases and put
+ * on instanced cards. The persona is read off the same numbers, which is why
+ * the note under a name always describes the face above it.
  */
 
-const COLS = 10;
-const ROWS = 10;
+const PER_SET = 128;
+const COLUMNS = 34;
 
 export function RollCall({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(20260824);
-  const [colour, setColour] = useState(true);
+  const [seats, setSeats] = useState<Seat[]>([]);
+  const [report, setReport] = useState<CensusReport | null>(null);
+  const [atlases, setAtlases] = useState<Atlas[]>([]);
+  const [progress, setProgress] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
+  const [focusSet, setFocusSet] = useState<string | null>(null);
 
-  // Derived, not stored: calling setState during render made React run the
-  // render twice, which mounted the sketch twice and left two canvases stacked
-  // in the grid.
-  const { faces, report } = useMemo(() => buildRegister(COLS * ROWS, seed), [seed]);
-
-  const people = useMemo(() => faces.map((g, i) => personaFor(g, i)), [faces]);
-
-  const gridHost = useRef<HTMLDivElement | null>(null);
-  const cardHost = useRef<HTMLDivElement | null>(null);
-
-  // ------------------------------------------------------------- the register
+  // ------------------------------------------------------- build and bake
   useEffect(() => {
-    const host = gridHost.current;
-    if (!host) return;
-    // p5 v2 attaches its canvas asynchronously, so a cleanup that only calls
-    // remove() runs before the canvas exists and StrictMode's double mount
-    // leaves two stacked in the grid. Each sketch gets its own node instead:
-    // detach the node and a late canvas lands in something already unhooked.
-    const mount = document.createElement('div');
-    host.appendChild(mount);
-    let sketch: p5 | null = null;
+    const signal = { cancelled: false };
+    setAtlases([]);
+    setProgress(0);
+    setPicked(null);
 
-    const make = (q: p5) => {
-      let cell = 0;
-      const layout = () => {
-        const w = Math.max(320, host.clientWidth);
-        cell = Math.floor(w / COLS);
-        q.resizeCanvas(cell * COLS, cell * ROWS);
-        q.redraw();
-      };
-
-      q.setup = () => {
-        const w = Math.max(320, host.clientWidth);
-        cell = Math.floor(w / COLS);
-        q.createCanvas(cell * COLS, cell * ROWS);
-        q.noLoop();
-        q.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
-      };
-
-      q.draw = () => {
-        q.background(PAPER[0]);
-        faces.forEach((g, i) => {
-          const cx = (i % COLS) * cell + cell / 2;
-          const cy = Math.floor(i / COLS) * cell + cell / 2;
-          q.push();
-          q.translate(cx, cy);
-          drawFace(q, g, cell * 0.82, { colour });
-          q.pop();
-        });
-      };
-
-      // Deliberately not q.mousePressed: p5 hangs that off the window, so a
-      // click on the toolbar counted as a click on whichever cell the pointer
-      // happened to be over and opened a card behind the button.
-      q.windowResized = layout;
-    };
-
-    sketch = new p5(make, mount);
-
-    const onClick = (ev: MouseEvent) => {
-      const canvas = mount.querySelector('canvas');
-      if (!canvas) return;
-      const box = canvas.getBoundingClientRect();
-      // The canvas is laid out at 100% width, so screen pixels are not sketch
-      // pixels; go through the box rather than through q.mouseX.
-      const col = Math.floor(((ev.clientX - box.left) / box.width) * COLS);
-      const row = Math.floor(((ev.clientY - box.top) / box.height) * ROWS);
-      const i = row * COLS + col;
-      if (col >= 0 && col < COLS && row >= 0 && row < ROWS && i < faces.length) {
-        sfx.tick();
-        setPicked(i);
-      }
-    };
-    mount.addEventListener('click', onClick);
+    // Off the paint path, so the loading state gets a chance to show.
+    const t = setTimeout(() => {
+      const built = buildCensus(PER_SET, seed);
+      if (signal.cancelled) return;
+      setSeats(built.seats);
+      setReport(built.report);
+      void bakeAtlases(built.seats, {
+        onProgress: (done, total) => !signal.cancelled && setProgress(done / total),
+        signal,
+      })
+        .then((a) => !signal.cancelled && setAtlases(a))
+        .catch(() => undefined);
+    }, 30);
 
     return () => {
-      mount.removeEventListener('click', onClick);
-      sketch?.remove();
-      mount.remove();
+      signal.cancelled = true;
+      clearTimeout(t);
     };
-  }, [faces, colour]);
+  }, [seed]);
 
-  // ---------------------------------------------------------------- the card
+  const people = useMemo(
+    () => seats.map((s, i) => personaFor(s.genome, i, s.set)),
+    [seats],
+  );
+
+  // ------------------------------------------------------------- the card
+  const portrait = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const host = cardHost.current;
-    if (!host || picked === null) return;
+    const host = portrait.current;
+    if (!host || picked === null || !seats[picked]) return;
     const mount = document.createElement('div');
     host.appendChild(mount);
-    let sketch: p5 | null = null;
-    const g: Genome = faces[picked];
-    sketch = new p5((q: p5) => {
+    const g = seats[picked].genome;
+    const sketch = new p5((q: p5) => {
       q.setup = () => {
-        q.createCanvas(260, 260);
+        q.createCanvas(230, 230);
         q.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
         q.noLoop();
       };
       q.draw = () => {
         q.background(PAPER[0]);
         q.push();
-        q.translate(130, 132);
-        drawFace(q, g, 232, { colour });
+        q.translate(115, 118);
+        drawFace(q, g, 206, { colour: true });
         q.pop();
       };
     }, mount);
     return () => {
-      sketch?.remove();
+      sketch.remove();
       mount.remove();
     };
-  }, [picked, faces, colour]);
+  }, [picked, seats]);
 
-  const reroll = useCallback(() => {
+  const who: Persona | null = picked === null ? null : people[picked] ?? null;
+  const whoSet = picked === null ? null : seats[picked]?.set ?? null;
+  const ready = atlases.length > 0;
+
+  const reseed = useCallback(() => {
     sfx.paper();
-    setPicked(null);
     setSeed((s) => s + 1 + Math.floor(Math.random() * 900));
   }, []);
 
-  const who: Persona | null = picked === null ? null : people[picked];
-
   return (
-    <div className="roll">
-      <div className="roll__head">
+    <div className="roll roll--wall">
+      <div className="roll__bar">
         <div>
-          <div className="roll__eyebrow">attendance register · section B</div>
+          <div className="roll__eyebrow">the census · {PER_SET * SETS.length} faces · none of them drawn</div>
           <h1 className="roll__title">Roll Call</h1>
         </div>
         <div className="roll__actions">
-          <button className="stage__spec" onClick={() => setColour((c) => !c)}>
-            {colour ? 'Ink only' : 'Colour'}
-          </button>
-          <button className="stage__spec" onClick={reroll}>
-            New class
+          <button className="stage__spec" onClick={reseed}>
+            New census
           </button>
           <button className="stage__back" onClick={onExit}>
             ← Shelf
@@ -162,48 +118,100 @@ export function RollCall({ onExit }: { onExit: () => void }) {
         </div>
       </div>
 
-      <p className="roll__lede">
-        A hundred faces, none of them drawn. Each is thirty-nine numbers found by
-        searching for the face least like everyone already on the register — then
-        the same numbers are read back as a name and a note, which is why the
-        description always matches the drawing. Click a face.
-      </p>
+      <div className="roll__tabs">
+        <button
+          className={`roll__tab${focusSet === null ? ' roll__tab--on' : ''}`}
+          onClick={() => {
+            sfx.tick();
+            setFocusSet(null);
+          }}
+        >
+          Everyone
+        </button>
+        {SETS.map((s) => (
+          <button
+            key={s.id}
+            className={`roll__tab${focusSet === s.id ? ' roll__tab--on' : ''}`}
+            style={{ ['--tab-ink' as string]: s.ink }}
+            onClick={() => {
+              sfx.tick();
+              setFocusSet(focusSet === s.id ? null : s.id);
+            }}
+            title={s.tagline}
+          >
+            {s.name}
+          </button>
+        ))}
+      </div>
 
-      <div className="roll__grid" ref={gridHost} />
+      <div className="roll__stage">
+        {ready ? (
+          <FaceWall
+            seats={seats}
+            atlases={atlases}
+            columns={COLUMNS}
+            focusSet={focusSet}
+            onPick={(i) => {
+              sfx.tick();
+              setPicked(i);
+            }}
+            picked={picked}
+          />
+        ) : (
+          <div className="roll__loading">
+            <div className="roll__loadbar">
+              <span style={{ width: `${Math.round(progress * 100)}%` }} />
+            </div>
+            <div className="roll__loadtext">
+              {seats.length
+                ? `drawing face ${Math.round(progress * seats.length)} of ${seats.length}`
+                : 'searching for a thousand faces that are not each other'}
+            </div>
+          </div>
+        )}
+      </div>
 
-      {report && (
-        <div className="roll__stats">
-          <span>
-            nearest-neighbour spread <b>{report.meanNearest.toFixed(2)}</b> against{' '}
-            <b>{report.baselineMean.toFixed(2)}</b> for the same hundred drawn at random
+      <div className="roll__foot">
+        <span className="roll__hint">drag to orbit · scroll to zoom · drag a face to move it</span>
+        {report && (
+          <span className="roll__stats2">
+            nearest neighbour within a set <b>{report.withinMin.toFixed(2)}</b> against{' '}
+            <b>{report.baselineWithinMin.toFixed(2)}</b> unsearched —{' '}
+            <b>{Math.round((report.withinMin / report.baselineWithinMin - 1) * 100)}%</b> further
+            apart · {report.proposals.toLocaleString('en-IN')} candidates rejected ·{' '}
+            {report.ms}ms
           </span>
-          <span>
-            closest pair on the register <b>{report.minNearest.toFixed(2)}</b> against{' '}
-            <b>{report.baselineMin.toFixed(2)}</b> — the worst duplicate is{' '}
-            <b>{Math.round((report.minNearest / report.baselineMin - 1) * 100)}%</b> further apart
-          </span>
-          <span>
-            {report.proposals.toLocaleString('en-IN')} candidates proposed and rejected to seat 100
-          </span>
-        </div>
-      )}
+        )}
+      </div>
 
       {who && (
         <div className="roll__card" onClick={() => setPicked(null)}>
           <div className="roll__cardinner" onClick={(e) => e.stopPropagation()}>
-            <div className="roll__portrait" ref={cardHost} />
+            <div className="roll__portrait" ref={portrait} />
             <div className="roll__who">
-              <div className="roll__roll">Roll no. {String(who.roll).padStart(3, '0')}</div>
+              <div className="roll__roll" style={{ color: whoSet?.ink }}>
+                {whoSet?.name} · no. {String(who.roll).padStart(4, '0')}
+              </div>
               <div className="roll__name">{who.name}</div>
-              <div className="roll__handle">known to the class as “{who.handle}”</div>
+              <div className="roll__handle">known to the room as “{who.handle}”</div>
               <ul className="roll__traits">
                 {who.traits.map((t) => (
                   <li key={t}>{t}</li>
                 ))}
               </ul>
               <p className="roll__note">{who.note}</p>
+              <details className="roll__genes">
+                <summary>the {seats[picked!].genome.g.length} numbers this face is</summary>
+                <code>
+                  {seats[picked!].genome.g.map((v) => v.toFixed(3)).join('  ')}
+                </code>
+                <span>
+                  Nothing else exists. No image is stored, loaded or copied anywhere in this
+                  project — change one of these and the drawing changes with it.
+                </span>
+              </details>
               <button className="btn btn--small" onClick={() => setPicked(null)}>
-                Back to the register
+                Back to the wall
               </button>
             </div>
           </div>

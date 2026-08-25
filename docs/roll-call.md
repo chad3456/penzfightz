@@ -1,4 +1,4 @@
-# Roll Call: a hundred faces, none of them drawn
+# Roll Call: a thousand faces, none of them drawn
 
 Every face on the register is thirty-nine numbers. There is no sprite sheet, no
 set of presets and no picture anywhere in the repository — the drawing code is
@@ -60,7 +60,7 @@ sorts they were, and the weights are not uniform: silhouette, hair, spectacles
 and beard count for more than the exact gap between the eyes, because that is
 the order in which a person notices them.
 
-## Three bugs worth keeping a note of
+## Bugs worth keeping a note of
 
 **Four faces came out as solid black blobs.** `mutate` clamps genes with
 `Math.min(1, ...)`, so a gene can be exactly 1.0, and `palette[Math.floor(1.0 *
@@ -75,11 +75,71 @@ includes points from both sides, and sorting interleaves left and right into a
 zigzag. Filling it painted over the whole face. The crown is now the longest
 contiguous run of the outline, which keeps the winding intact.
 
+**The search was making the census worse.** At a thousand faces, scoring a
+candidate against every seated face is quadratic, so novelty was estimated from
+a bounded sample — capped at the ninety most recent of the same set. That left
+the earliest faces in each set invisible to every later candidate, and
+hill-climbing promptly found the blind spot and drove into it. Measured
+exhaustively the search produced a *worse* spread than no search at all: a
+closest pair of 0.26 against 2.11 for faces drawn straight from the prior. The
+same-set comparison is complete now, and the report is computed over every pair
+rather than with the shortcut the optimiser used — a figure produced by the same
+approximation would be marking its own homework.
+
+**The entire wall was unclickable.** `InstancedMesh` raycasting culls against a
+bounding sphere, and the first one is built while every instance is still at the
+origin. It is recomputed every frame now, which is also what keeps it honest
+once cards have been dragged somewhere else.
+
+**One block unmounting wiped the picker.** The block registry was a list that
+was pushed to on mount and emptied on unmount, so React's double mount had one
+of the four blocks clear the registry for all of them. Keyed by offset now.
+
+**Every click was a one-pixel drag.** Click-versus-drag was decided on world
+distance, which depends on how far the camera is and on floating-point noise in
+the plane intersection. It is measured in screen pixels now.
+
 **Clicking a toolbar button opened a card.** p5 hangs `mousePressed` off the
 window, not off its canvas, so any click anywhere counted as a click on
 whichever cell the pointer happened to be over. Selection is a DOM listener on
 the canvas now, going through the bounding box because the canvas is laid out at
 100% width and screen pixels are not sketch pixels.
+
+## Eight sets from one generator
+
+A set is not a second generator. It is a *prior*: a list of which families may
+appear and which range each dial is held to. The corporate floor gets neat hair
+and lanyards, the group chat gets caps and dyed fringes, and neither is
+special-cased anywhere in the drawing code.
+
+That distinction is the whole point. Eight hard-coded sets would be eight things
+to maintain and eight chances for one to look bolted on; eight narrowings of one
+distribution means anything added to the drawing shows up in all of them at once.
+Repeats in an allow-list act as weights, so `hair: [bald, bald, hatch]` gives
+twice as many bald heads as hatched ones.
+
+**On the Cameo set.** It contains archetypes — the rockstar, the anchor, the
+founder — and no real people. Generating recognisable likenesses of actual
+public figures is somebody's right of publicity and not something to put on a
+public site; and a system whose whole vocabulary is forty-one doodle genes could
+not resolve to a specific person if it tried. What it can do is a type, which is
+what is here.
+
+## Three thousand cards, four draw calls
+
+A thousand canvas textures is a thousand GPU uploads and about sixty megabytes
+of mostly-cream paper. Faces are baked in blocks into 2048px atlases of 16×16
+cells, and the wall is one `InstancedMesh` per atlas with a per-instance cell
+attribute and three lines of injected GLSL — so the material keeps its own
+lighting and fog and the whole census costs four draw calls.
+
+Cells are baked with **transparent** backgrounds. Filling them with paper turns
+the wall into a grid of tiles; with alpha the faces stand on the room's own
+background. `alphaTest` rather than blending, so overlapping cards need no depth
+sorting when they are dragged about.
+
+Baking yields to the browser every 32 faces. A progress bar that never paints is
+worse than a slow one.
 
 ## Verification
 

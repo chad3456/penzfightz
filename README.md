@@ -169,18 +169,31 @@ exported from `rosette.ts` so there is one hand on the site rather than two.
 
 ## Roll Call
 
-A hundred faces on the effects shelf, none of them drawn. Each is thirty-nine
+A thousand and twenty-four faces on the effects shelf, none of them drawn. Each is thirty-nine
 numbers, and the drawing code is a pure function of them — a superellipse
 silhouette, a hand that wanders rather than jitters, a colour wash deliberately
 printed off the line, and no symmetry anywhere. The persona is read off the same
 genes, so the note under a name always describes the face above it.
 
+Eight sets — a back bench, a staffroom, a corporate floor, a group chat, a night
+bus, a committee, a field trip and a set of archetypes — all from one generator
+narrowed eight ways rather than eight generators. They stand in a wall you can
+orbit, pick up and leave where you drop them: p5 draws them into texture
+atlases, three.js puts them on instanced cards, and the whole census is four
+draw calls.
+
 The faces are found rather than sampled: each new one is proposed in a batch,
 scored on how far it sits from everyone already seated, and hill-climbed away
-from its nearest neighbour. The closest pair on the register ends up **62%
-further apart** than the closest pair you would get by drawing a hundred at
-random. [`docs/roll-call.md`](docs/roll-call.md) has the method, the numbers,
-and three bugs worth keeping a note of.
+from its nearest neighbour. The closest pair inside a set ends up **70% further
+apart** than the closest pair you would get by drawing the same census straight
+from its prior. [`docs/roll-call.md`](docs/roll-call.md) has the method, the
+numbers, and the bugs — including the one where the search was quietly making
+the census *worse* than no search at all.
+
+No image is stored, loaded or copied anywhere in this project: there are no
+raster or vector assets in the repository, no data URIs in the source, and the
+face code never calls an image API. Open any face's card and it will show you
+the forty-one numbers it is.
 
 ## Running it
 

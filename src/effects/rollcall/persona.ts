@@ -1,4 +1,5 @@
 import { cat, dial, mulberry, type Genome } from './genome';
+import type { FaceSet } from './sets';
 
 /**
  * Who this is.
@@ -92,7 +93,15 @@ const TRAIT_WORDS: Record<string, string[]> = {
   brow: ['browless', 'level', 'cross', 'surprised', 'knitted'],
 };
 
-export function personaFor(gn: Genome, index: number): Persona {
+/**
+ * Read a person off a genome.
+ *
+ * The set supplies the vocabulary — a committee member and a member of the
+ * group chat are described in different registers — but the *trait* that gets
+ * described is found in the genes, so the note always lands on something the
+ * drawing actually shows.
+ */
+export function personaFor(gn: Genome, index: number, set?: FaceSet): Persona {
   const r = mulberry((index + 1) * 2654435761);
   const first = pick(FIRST, dial(gn, 'skin'));
   const last = pick(LAST, dial(gn, 'headLump'));
@@ -107,11 +116,16 @@ export function personaFor(gn: Genome, index: number): Persona {
   if (h.trait !== 'unremarkable') traits[2] = h.trait;
   void r;
 
+  // Prefer a line the set has written for this trait, then its general lines,
+  // then the trait's own.
+  const pool = set?.notes[h.trait] ?? set?.notes.default;
+  const note = pool && pool.length ? pool[index % pool.length] : h.note;
+
   return {
     roll: index + 1,
     name: `${first} ${last}`,
     handle,
-    note: h.note,
+    note,
     traits,
   };
 }

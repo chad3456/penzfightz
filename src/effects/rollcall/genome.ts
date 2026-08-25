@@ -29,8 +29,12 @@ export const FAMILIES = {
   hair: 7,
   beard: 6,
   ears: 4,
-  extra: 6,
+  extra: 10,
   paper: 3,
+  /** Worn on the head: caps, headphones, hoods. */
+  wear: 8,
+  /** Worn at the neck: a tie, a lanyard, a chain, hoodie strings. */
+  neck: 7,
 } as const;
 
 export type Categorical = keyof typeof FAMILIES;
@@ -58,12 +62,13 @@ export const DIALS = [
   'mouthCurve',
   'hairAmount',
   'hairInk',
+  'hairLoud',
   'beardAmount',
   'earSize',
   'freckles',
   'tremor',
   'weight',
-  'neck',
+  'neckLen',
 ] as const;
 
 export type Dial = (typeof DIALS)[number];
@@ -136,6 +141,8 @@ export function mutate(gn: Genome, r: () => number, amount = 0.18): Genome {
  * for more than the exact gap between the eyes.
  */
 const WEIGHT: Record<Categorical, number> = {
+  wear: 1.4,
+  neck: 1.0,
   head: 1.5,
   view: 1.2,
   eye: 1.1,
