@@ -6,13 +6,27 @@ import type { Atlas } from './atlas';
 import type { Seat } from './census';
 
 /**
- * The wall.
+ * The globe.
  *
- * A thousand cards standing in a shallow arc, one instanced mesh per atlas, so
- * the whole census is four draw calls rather than a thousand. Each instance
- * gets a cell of its atlas through an instanced attribute and a small patch to
- * the standard material — three lines of injected GLSL rather than a bespoke
- * shader, so the material keeps its own lighting and fog.
+ * Fifteen hundred cards on the surface of a sphere, one instanced mesh per
+ * atlas, so the whole census is four draw calls rather than fifteen hundred.
+ * Each instance gets a cell of its atlas through an instanced attribute and a
+ * small patch to the standard material — three lines of injected GLSL rather
+ * than a bespoke shader, so the material keeps its own lighting and fog.
+ *
+ * The seats are laid out by the **Fibonacci sphere**: walk down the y axis in
+ * equal steps and turn by the golden angle each time. Equal steps in y give
+ * equal steps in *area* on a sphere — that is Archimedes' theorem — so every
+ * card gets the same patch of surface, and the golden angle is the one
+ * rotation that never lets those patches settle into visible spokes. The
+ * alternative, latitude-longitude, crowds the poles until the cards are on top
+ * of each other there and stranded at the equator.
+ *
+ * It also does something the flat wall could not. Seat indices run through the
+ * sets in order and y falls monotonically with the index, so **each set comes
+ * out as a latitude band**: the back bench is the north cap, the waxworks are
+ * the south pole, and the whole census reads as a globe with visible strata
+ * before you have clicked anything.
  *
  * Cards can be picked up and left where you drop them. Dragging happens on a
  * plane through the card that faces the camera, which is what makes a drag feel
@@ -21,51 +35,88 @@ import type { Seat } from './census';
 
 const CARD_W = 1;
 const CARD_H = 1;
-const GAP = 0.06;
+/** Centre-to-centre spacing aimed for on the surface. */
+const SPACING = 1.28;
+/** The golden angle, in radians. */
+const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 
-/** Where a focused set stands: a tidy grid, in front of everyone else. */
-function focusPlace(n: number, total: number): THREE.Vector3 {
-  const cols = Math.max(1, Math.ceil(Math.sqrt(total * 1.6)));
-  const rows = Math.ceil(total / cols);
-  const col = n % cols;
-  const row = Math.floor(n / cols);
-  return new THREE.Vector3(
-    (col - (cols - 1) / 2) * 1.35,
-    ((rows - 1) / 2 - row) * 1.45,
-    7.5,
-  );
+/**
+ * The radius that gives `count` cards that spacing.
+ *
+ * Nearest-neighbour distance on a Fibonacci sphere is about `sqrt(4π/N)·R`, so
+ * solving for R keeps the gap between faces constant however many there are —
+ * a census of two hundred and a census of two thousand look equally dense.
+ */
+export function sphereRadius(count: number): number {
+  return SPACING * Math.sqrt(Math.max(1, count) / (4 * Math.PI));
 }
+
+/** The i-th of `count` points spread evenly over a sphere of radius `radius`. */
+function fibonacci(i: number, count: number, radius: number, out: THREE.Vector3): THREE.Vector3 {
+  const n = Math.max(2, count);
+  const y = 1 - (i / (n - 1)) * 2;
+  const ring = Math.sqrt(Math.max(0, 1 - y * y));
+  const theta = GOLDEN * i;
+  return out.set(Math.cos(theta) * ring * radius, y * radius, Math.sin(theta) * ring * radius);
+}
+
+/** Where a seat stands when nothing has been moved and nothing is focused. */
+export function restingPlace(i: number, count: number, out = new THREE.Vector3()): THREE.Vector3 {
+  return fibonacci(i, count, sphereRadius(count), out);
+}
+
+/**
+ * Where a focused set stands.
+ *
+ * The focused faces keep the *full* radius and spread over the whole globe, so
+ * the camera never has to move: a set of eleven that was one card in fifteen
+ * hundred becomes eleven cards alone on a sphere. Everybody else contracts to a
+ * small dense core at the centre, which reads as the rest of the census still
+ * being there rather than having been deleted.
+ */
+function focusPlace(n: number, total: number, count: number, out: THREE.Vector3): THREE.Vector3 {
+  return fibonacci(n, total, sphereRadius(count), out);
+}
+
+/** Scale factor applied to a seat's resting place when it is not in focus. */
+const CORE = 0.24;
 
 export interface WallProps {
   seats: Seat[];
   atlases: Atlas[];
-  columns: number;
   /** Which set to bring forward, or null for all of them. */
   focusSet: string | null;
   onPick: (index: number) => void;
+  onHover: (index: number | null, x: number, y: number) => void;
   picked: number | null;
+  hovered: number | null;
 }
 
-/** Where a seat stands when nothing has been moved. */
-function restingPlace(i: number, columns: number, count: number): THREE.Vector3 {
-  const rows = Math.ceil(count / columns);
-  const col = i % columns;
-  const row = Math.floor(i / columns);
-  const x = (col - (columns - 1) / 2) * (CARD_W + GAP);
-  const y = ((rows - 1) / 2 - row) * (CARD_H + GAP);
-  // A shallow barrel, so the far ends turn towards the viewer.
-  const bend = 0.0055;
-  const z = -(x * x) * bend * 12;
-  return new THREE.Vector3(x, y, z);
+/** Resolve where one seat currently belongs. Shared by the drawing and the picker. */
+function placeOf(
+  i: number,
+  count: number,
+  moved: Map<number, THREE.Vector3>,
+  focusOrder: Map<number, number>,
+  out: THREE.Vector3,
+): THREE.Vector3 {
+  const already = moved.get(i);
+  if (already) return out.copy(already);
+  const spot = focusOrder.get(i);
+  if (spot !== undefined) return focusPlace(spot, focusOrder.size, count, out);
+  restingPlace(i, count, out);
+  // Not in the focused set: fall back to the core.
+  if (focusOrder.size) out.multiplyScalar(CORE);
+  return out;
 }
 
 function Block({
   atlas,
   offset,
   seats,
-  columns,
   count,
   picked,
+  hovered,
   focusSet,
   moved,
   focusOrder,
@@ -74,9 +125,9 @@ function Block({
   atlas: Atlas;
   offset: number;
   seats: Seat[];
-  columns: number;
   count: number;
   picked: number | null;
+  hovered: number | null;
   focusSet: string | null;
   moved: Map<number, THREE.Vector3>;
   /** Seat index to its place within the focused set, when one is focused. */
@@ -144,6 +195,8 @@ function Block({
 
   // Place every instance.
   const dummy = useMemo(() => new THREE.Object3D(), []);
+  const home = useMemo(() => new THREE.Vector3(), []);
+  const look = useMemo(() => new THREE.Vector3(), []);
   useFrame(() => {
     const m = mesh.current;
     if (!m) return;
@@ -151,16 +204,19 @@ function Block({
       const i = offset + k;
       const seat = seats[i];
       const inFocus = !focusSet || seat.set.id === focusSet;
-      const spot = focusOrder.get(i);
-      const home =
-        moved.get(i) ??
-        (spot !== undefined
-          ? focusPlace(spot, focusOrder.size)
-          : restingPlace(i, columns, count));
-      const lift = picked === i ? 1.2 : 0;
-      dummy.position.set(home.x, home.y, home.z + lift);
-      dummy.rotation.set(0, -home.x * 0.06, 0);
-      const s = !inFocus ? 0.5 : picked === i ? 1.5 : spot !== undefined ? 1.25 : 1;
+      placeOf(i, count, moved, focusOrder, home);
+      const lift = picked === i ? 1.6 : hovered === i ? 0.5 : 0;
+      // Cards stand on the shell facing outwards, so a lift is a step further
+      // out along the radius rather than a step towards a fixed camera.
+      const len = home.length() || 1;
+      const grow = (len + lift) / len;
+      dummy.position.copy(home).multiplyScalar(grow);
+      // Face away from the centre. A card at the origin has no outward to face,
+      // so fall back to facing the viewer's default direction.
+      look.copy(dummy.position).multiplyScalar(2);
+      if (look.lengthSq() < 1e-6) look.set(0, 0, 1);
+      dummy.lookAt(look);
+      const s = !inFocus ? 0.34 : picked === i ? 2.4 : hovered === i ? 1.9 : focusOrder.size ? 2.2 : 1;
       dummy.scale.setScalar(s);
       dummy.updateMatrix();
       m.setMatrixAt(k, dummy.matrix);
@@ -186,7 +242,7 @@ function Block({
 }
 
 /**
- * Picking and dragging, done by hand.
+ * Picking, hovering and dragging, done by hand.
  *
  * The declarative pointer handlers on an instanced mesh did not resolve an
  * instance here, and rather than keep guessing at why, this raycasts the blocks
@@ -196,21 +252,24 @@ function Block({
 function Picker({
   blocks,
   moved,
-  columns,
   count,
   focusOrder,
   onPick,
+  onHover,
 }: {
   blocks: React.MutableRefObject<Map<number, THREE.InstancedMesh>>;
   moved: Map<number, THREE.Vector3>;
-  columns: number;
   count: number;
   focusOrder: Map<number, number>;
   onPick: (i: number) => void;
+  onHover: (i: number | null, x: number, y: number) => void;
 }) {
   const { camera, gl, controls } = useThree();
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const ndc = useMemo(() => new THREE.Vector2(), []);
+  const scratch = useMemo(() => new THREE.Vector3(), []);
+  /** The seat the pointer is currently over, so hover only fires on a change. */
+  const over = useRef<number | null>(null);
   const drag = useRef<{
     index: number;
     plane: THREE.Plane;
@@ -243,10 +302,7 @@ function Picker({
     const down = (ev: PointerEvent) => {
       const h = hit(ev);
       if (!h) return;
-      const spot = focusOrder.get(h.index);
-      const home =
-        moved.get(h.index) ??
-        (spot !== undefined ? focusPlace(spot, focusOrder.size) : restingPlace(h.index, columns, count));
+      const home = placeOf(h.index, count, moved, focusOrder, scratch).clone();
       const normal = camera.getWorldDirection(new THREE.Vector3()).negate();
       drag.current = {
         index: h.index,
@@ -261,7 +317,18 @@ function Picker({
 
     const move = (ev: PointerEvent) => {
       const d = drag.current;
-      if (!d) return;
+      if (!d) {
+        // Not dragging: this is a hover. Only report a *change*, or every
+        // pointer move would re-render the detail panel.
+        const h = hit(ev);
+        const next = h ? h.index : null;
+        if (next !== over.current) {
+          over.current = next;
+          el.style.cursor = next === null ? '' : 'pointer';
+          onHover(next, ev.clientX, ev.clientY);
+        }
+        return;
+      }
       const r = el.getBoundingClientRect();
       ndc.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
       ray.setFromCamera(ndc, camera);
@@ -290,27 +357,36 @@ function Picker({
       if (d && !d.moved) onPick(d.index);
     };
 
+    const leave = () => {
+      if (over.current === null) return;
+      over.current = null;
+      el.style.cursor = '';
+      onHover(null, 0, 0);
+    };
+
     el.addEventListener('pointerdown', down);
     el.addEventListener('pointermove', move);
     el.addEventListener('pointerup', up);
+    el.addEventListener('pointerleave', leave);
     return () => {
       el.removeEventListener('pointerdown', down);
       el.removeEventListener('pointermove', move);
       el.removeEventListener('pointerup', up);
+      el.removeEventListener('pointerleave', leave);
     };
-  }, [blocks, camera, columns, controls, count, focusOrder, gl, moved, ndc, onPick, ray]);
+  }, [blocks, camera, controls, count, focusOrder, gl, moved, ndc, onHover, onPick, ray, scratch]);
 
   return null;
 }
 
 export function FaceWall(props: WallProps) {
-  const { seats, atlases, columns } = props;
+  const { seats, atlases } = props;
   // Cards the viewer has moved. Kept outside React state so a drag does not
   // re-render a thousand instances sixty times a second.
   const [moved] = useState(() => new Map<number, THREE.Vector3>());
-  // Focusing a set brings it to the front in a tidy grid. Dimming the rest and
-  // leaving the focused faces scattered through a wall of fifteen hundred made
-  // the tabs decorative — a set of eleven was simply impossible to find.
+  // Focusing a set spreads it over the whole globe and contracts everyone else
+  // into the core. Dimming in place made the tabs decorative — a set of eleven
+  // was simply impossible to find among fifteen hundred.
   const focusOrder = useMemo(() => {
     const m = new Map<number, number>();
     if (!props.focusSet) return m;
@@ -329,9 +405,13 @@ export function FaceWall(props: WallProps) {
     else blocks.current.delete(offset);
   }, []);
 
+  // Framed once, from the census size, so the globe fills the view whether it
+  // holds two hundred faces or two thousand.
+  const radius = useMemo(() => sphereRadius(seats.length), [seats.length]);
+
   return (
     <Canvas
-      camera={{ position: [0, 0, 15], fov: 45, near: 0.1, far: 400 }}
+      camera={{ position: [0, 0, radius * 2.6], fov: 45, near: 0.1, far: radius * 20 }}
       dpr={[1, 2]}
       gl={{ antialias: true }}
       style={{ background: '#e9e4d6' }}
@@ -343,9 +423,9 @@ export function FaceWall(props: WallProps) {
           atlas={a}
           offset={n * a.grid * a.grid}
           seats={seats}
-          columns={columns}
           count={seats.length}
           picked={props.picked}
+          hovered={props.hovered}
           focusSet={props.focusSet}
           moved={moved}
           focusOrder={focusOrder}
@@ -355,23 +435,22 @@ export function FaceWall(props: WallProps) {
       <Picker
         blocks={blocks}
         moved={moved}
-        columns={columns}
         count={seats.length}
         focusOrder={focusOrder}
         onPick={props.onPick}
+        onHover={props.onHover}
       />
       <OrbitControls
         makeDefault
         enablePan
         enableDamping
         dampingFactor={0.08}
-        minDistance={3}
-        maxDistance={70}
-        maxPolarAngle={Math.PI * 0.86}
-        minPolarAngle={Math.PI * 0.14}
+        rotateSpeed={0.55}
+        // No minimum worth speaking of: flying inside the shell and looking
+        // back out at fifteen hundred faces is the best thing this view does.
+        minDistance={0.4}
+        maxDistance={radius * 6}
       />
     </Canvas>
   );
 }
-
-export { restingPlace };

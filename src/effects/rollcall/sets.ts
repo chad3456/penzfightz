@@ -54,7 +54,8 @@ const SPECS = { none: 0, round: 1, square: 2, half: 3, oval: 4, monocle: 5 };
 const WEAR = { none: 0, cap: 1, capBack: 2, cans: 3, hood: 4, band: 5, beanie: 6, visor: 7 };
 const NECK = { none: 0, tie: 1, lanyard: 2, scarf: 3, strings: 4, chain: 5, collar: 6, roll: 7 };
 const EARS = { both: 0, left: 1, right: 2, none: 3, pointed: 4, floppy: 5, round: 6, tufted: 7 };
-const MUZZLE = { none: 0, short: 1, long: 2, beak: 3, broad: 4 };
+const MUZZLE = { none: 0, short: 1, long: 2, beak: 3, broad: 4, croc: 5, fish: 6, gape: 7 };
+const FIN = { none: 0, dorsal: 1, gills: 2, pectoral: 3, frill: 4 };
 const EXTRA = {
   none: 0, cigarette: 1, plaster: 2, earring: 3, sweat: 4,
   stud: 5, mole: 6, bindi: 7, scar: 8, freck: 9,
@@ -266,12 +267,15 @@ export const SETS: FaceSet[] = [
   {
     id: 'menagerie',
     name: 'The Menagerie',
-    tagline: 'Same forty-four genes. Ears on top of the head.',
+    tagline: 'Same forty-six genes. Ears on top of the head.',
     ink: '#7a5a2f',
     allow: {
       kingdom: [1],
       ears: [EARS.pointed, EARS.floppy, EARS.round, EARS.tufted],
       muzzle: [MUZZLE.short, MUZZLE.short, MUZZLE.long, MUZZLE.beak, MUZZLE.broad],
+      // Warm-blooded only. The fins live one set along, and a retriever with a
+      // dorsal crest is exactly the leak the `kingdom` switch exists to stop.
+      fin: [FIN.none],
       whisker: [0, 1, 2, 2],
       hair: [HAIR.bald, HAIR.bald, HAIR.tufts, HAIR.scribble, HAIR.coils],
       beard: [BEARD.none],
@@ -372,6 +376,56 @@ export const SETS: FaceSet[] = [
         'Bought the neck pillow at the gate and regrets nothing.',
         'Is being paged. Has heard the page. Is not moving.',
         'Speaks to the desk in the third language they tried.',
+      ],
+    },
+  },
+  {
+    id: 'deepend',
+    name: 'The Deep End',
+    tagline: 'Gills, crests and a jaw longer than the skull it is on.',
+    ink: '#2f6f8a',
+    allow: {
+      kingdom: [1],
+      fin: [FIN.dorsal, FIN.gills, FIN.gills, FIN.pectoral, FIN.pectoral, FIN.frill],
+      // No beak: the bird's orange wedge is unmistakably a bird's, and one of
+      // those among the fish read as a duck that had wandered in.
+      muzzle: [MUZZLE.croc, MUZZLE.croc, MUZZLE.fish, MUZZLE.fish, MUZZLE.fish, MUZZLE.gape],
+      // Nothing down here has an ear on the outside of its head.
+      ears: [EARS.none],
+      whisker: [0, 0, 1, 2],
+      hair: [HAIR.bald],
+      beard: [BEARD.none],
+      brow: [0],
+      specs: [SPECS.none, SPECS.none, SPECS.none, SPECS.round],
+      wear: [WEAR.none],
+      neck: [NECK.none, NECK.none, NECK.collar],
+      eye: [0, 1, 1, 2, 6],
+      head: [0, 3, 4, 5, 6],
+      // Mostly the illustrative wash, which is the only cold half of the palette.
+      paper: [3, 3, 3, 0],
+      extra: [EXTRA.none, EXTRA.none, EXTRA.mole, EXTRA.scar],
+    },
+    dials: {
+      earSize: [0.3, 1],
+      // High and wide-set, which is where a jaw this long puts them.
+      eyeHeight: [0, 0.35],
+      eyeGap: [0.45, 1],
+      hairAmount: [0, 0.1],
+      hairLoud: [0, 0.1],
+      mouthWidth: [0.2, 1],
+      noseSize: [0.2, 1],
+      neckLen: [0, 0.4],
+    },
+    notes: {
+      default: [
+        'Has been in the tank since before any of you and intends to outlast you.',
+        'Opens and closes its mouth at you and considers that a full exchange.',
+        'Spent the entire morning holding still in eleven centimetres of water.',
+        'Surfaced once, judged the room, and went back down.',
+        'Was described in the brochure as “placid”, which was optimistic.',
+        'Sixty-eight teeth and no particular plan for any of them.',
+        'Filters the same four litres over and over and finds it restful.',
+        'Basks on the warm rock and will not be discussing it further.',
       ],
     },
   },

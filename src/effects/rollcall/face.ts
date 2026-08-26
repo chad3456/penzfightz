@@ -160,6 +160,12 @@ export const HAIR_INK = [
 /** Dyed. Reached only when a set turns the `hairLoud` dial up. */
 const HAIR_LOUD = ['#c2392b', '#1f6fb2', '#2f8f5b', '#b8358f', '#d98a1f', '#7a3fc2', '#d8d2c4'];
 const CLOTH = ['#3a4657', '#5a4335', '#2f5148', '#6b2f38', '#43406b', '#7a6a4a', '#2b2b2b'];
+/**
+ * Fins, crests and gill plates. Deliberately cold and slightly desaturated
+ * against the hair ramp, which runs warm all the way from black to blonde — a
+ * dorsal fin in any of those browns reads as a hairstyle rather than a fish.
+ */
+const SCALE = ['#3f7f74', '#2f6f8a', '#5a8f6a', '#6f7f4a', '#4a5f8a', '#7a6a8a', '#8a7a4a'];
 const LINE = '#141414';
 
 /**
@@ -173,6 +179,9 @@ const LINE = '#141414';
 const pick = <T,>(arr: T[], t: number): T => arr[Math.min(arr.length - 1, Math.floor(t * arr.length))];
 
 /** Natural, unless the set has turned the dye up. */
+/** The cold-blooded counterpart to `hairColour`. */
+const scaleColour = (gn: Genome): string => pick(SCALE, dial(gn, 'washSeed'));
+
 const hairColour = (gn: Genome): string =>
   dial(gn, 'hairLoud') > 0.6
     ? pick(HAIR_LOUD, dial(gn, 'hairInk'))
@@ -893,6 +902,10 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
   }
 
   const c: Ctx = { p, r, ink, hw, hh, turn, jaw: outline };
+  const beast = cat(gn, 'kingdom') === 1;
+
+  // --- fins and crests, under the outline so their bases are hidden by it
+  if (beast) fins(c, gn, outline);
 
   // --- the head itself
   p.stroke(LINE);
@@ -904,10 +917,12 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
   const e = eyes(c, gn);
   brows(c, gn, e);
   // A creature gets a snout instead of a nose, and the mouth lands on it.
-  const beast = cat(gn, 'kingdom') === 1;
   const snout = beast ? muzzle(c, gn) : null;
   if (!snout) nose(c, gn, e.y);
-  mouth(c, gn);
+  // A crocodile's tooth line, a fish's pursed ring and a shark's gape are all
+  // already mouths. Drawing the generic one over them put a human smile inside
+  // the jaw, which is the sort of thing you only see once.
+  if (!snout?.ownMouth) mouth(c, gn);
   if (beast) whiskers(c, gn, snout);
   if (!beast) beard(c, gn, hh);
   spectacles(c, gn, e);
@@ -1229,10 +1244,16 @@ function animalEars(c: Ctx, gn: Genome, kind: number) {
  * Drawn over the lower face and *before* the mouth, so the mouth lands on the
  * muzzle rather than behind it. The nose is a wedge or a heart depending on the
  * family, and a beak replaces both.
+ *
+ * A snout reports back where it ended and how wide it was, so the whiskers know
+ * where to start. The cold-blooded jaws also report `ownMouth`, because a
+ * crocodile's tooth line and a fish's pursed ring *are* the mouth, and letting
+ * the generic mouth draw on top of them puts a human smile inside a shark.
  */
-function muzzle(c: Ctx, gn: Genome) {
+function muzzle(c: Ctx, gn: Genome): Snout | null {
   const kind = cat(gn, 'muzzle');
   if (kind === 0) return null;
+  if (kind >= 5) return coldJaw(c, gn, kind);
   const p = c.p;
   const y = c.hh * 0.24;
   const long = kind === 2 ? 1.5 : kind === 4 ? 0.85 : 1;
@@ -1288,6 +1309,322 @@ function muzzle(c: Ctx, gn: Genome) {
   // The philtrum, down from the nose.
   stroke(p, [[nx, ny + nw * 0.6], [nx, ny + h * 0.55]], c.ink, { passes: 1 });
   return { y: ny + h * 0.55, w };
+}
+
+/** What a snout reports back to the rest of the face. */
+interface Snout {
+  /** Where the snout ended, so whiskers and beards know to start below it. */
+  y: number;
+  w: number;
+  /** The jaw already drew its own mouth; do not draw another one over it. */
+  ownMouth?: boolean;
+}
+
+/**
+ * The cold-blooded jaws: a crocodile, a fish and a gape.
+ *
+ * These are the same idea as the mammal snout — a shape over the lower face
+ * that the whiskers hang off — but they carry their own mouth. A crocodile is
+ * mostly a *proportion*: the snout is longer than the skull it is attached to,
+ * and once that ratio is right the teeth are only confirming it. A fish is the
+ * opposite, all mouth and no jaw at all.
+ */
+function coldJaw(c: Ctx, gn: Genome, kind: number): Snout {
+  const p = c.p;
+  const hide = scaleColour(gn);
+
+  // ---------------------------------------------------------- the crocodile
+  if (kind === 5) {
+    // Below the eye line, not through it. The first pass put the snout at the
+    // brow and it covered the eyes on every long-headed croc in the tank.
+    const y0 = c.hh * 0.1;
+    const len = c.hh * (0.6 + dial(gn, 'earSize') * 0.26);
+    const w = c.hw * (0.4 + dial(gn, 'noseSize') * 0.16);
+    const tip = w * 0.68;
+    const nose = y0 + len;
+    const outline: [number, number][] = [
+      [-w, y0],
+      [-w * 0.86, y0 + len * 0.5],
+      [-tip, nose - len * 0.06],
+      [-tip * 0.55, nose + len * 0.04],
+      [tip * 0.55, nose + len * 0.04],
+      [tip, nose - len * 0.06],
+      [w * 0.86, y0 + len * 0.5],
+      [w, y0],
+    ];
+    p.noStroke();
+    p.fill(hide);
+    p.beginShape();
+    for (const [x, y] of outline) p.vertex(x + c.turn, y);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, outline.map(([x, y]) => [x + c.turn, y] as [number, number]), c.ink, { passes: 1 });
+
+    /*
+     * The teeth run down the *sides*, not across.
+     *
+     * The first version drew one zigzag straight across the snout, which is
+     * where the jaw line goes on a face seen from the side — head on it read as
+     * the bottom seam of a paper bag. On a crocodile looked at from the front
+     * you are seeing the top plate of the snout with both jaw lines running
+     * away from you down its edges, so that is where the teeth belong.
+     */
+    p.noStroke();
+    const nT = 6;
+    for (const side of [-1, 1]) {
+      const ax = side * w + c.turn;
+      const ay = y0;
+      const bx = side * tip + c.turn;
+      const by = nose - len * 0.06;
+      const dx = bx - ax;
+      const dy = by - ay;
+      const d = Math.hypot(dx, dy) || 1;
+      // Outward normal of the edge, so a tooth points away from the snout.
+      const nx = (dy / d) * side * -1;
+      const ny = (-dx / d) * side * -1;
+      const th = w * 0.24;
+      for (let i = 0; i < nT; i++) {
+        const t0 = 0.1 + (i / nT) * 0.86;
+        const t1 = t0 + 0.42 / nT;
+        const x0 = ax + dx * t0;
+        const y0t = ay + dy * t0;
+        const x1 = ax + dx * t1;
+        const y1t = ay + dy * t1;
+        p.fill('#f4f0e6');
+        p.triangle(x0, y0t, x1, y1t, (x0 + x1) / 2 + nx * th, (y0t + y1t) / 2 + ny * th);
+        p.stroke(LINE);
+        p.noFill();
+        stroke(
+          p,
+          [
+            [x0, y0t],
+            [(x0 + x1) / 2 + nx * th, (y0t + y1t) / 2 + ny * th],
+            [x1, y1t],
+          ],
+          c.ink,
+          { passes: 1, weightScale: 0.45 },
+        );
+        p.noStroke();
+      }
+    }
+    p.stroke(LINE);
+    p.noFill();
+
+    // The ridge down the middle, and two plates across it.
+    stroke(p, [[c.turn, y0 + len * 0.08], [c.turn, nose - len * 0.14]], c.ink, {
+      passes: 1,
+      weightScale: 0.5,
+    });
+    for (let i = 0; i < 2; i++) {
+      const ry = y0 + len * (0.24 + i * 0.24);
+      const rw = w * (0.6 - i * 0.12);
+      stroke(
+        p,
+        [
+          [c.turn - rw, ry + rw * 0.3],
+          [c.turn, ry],
+          [c.turn + rw, ry + rw * 0.3],
+        ],
+        c.ink,
+        { passes: 1, weightScale: 0.5 },
+      );
+    }
+
+    // Nostrils on the very end.
+    p.noStroke();
+    p.fill(LINE);
+    p.circle(c.turn - tip * 0.42, nose - len * 0.02, w * 0.15);
+    p.circle(c.turn + tip * 0.42, nose - len * 0.02, w * 0.15);
+    p.stroke(LINE);
+    return { y: nose, w, ownMouth: true };
+  }
+
+  // ---------------------------------------------------------------- the fish
+  if (kind === 6) {
+    const y = c.hh * (0.34 + dial(gn, 'mouthCurve') * 0.14);
+    const rr = c.hw * (0.19 + dial(gn, 'mouthWidth') * 0.13);
+    const squash = 1.15;
+    p.noStroke();
+    p.fill(hide);
+    p.beginShape();
+    for (const [x, yy] of ring(c.turn, y, rr * 2.4, squash)) p.vertex(x, yy);
+    p.endShape('close');
+    p.fill('#3a2422');
+    p.beginShape();
+    for (const [x, yy] of ring(c.turn, y, rr * 1.3, squash)) p.vertex(x, yy);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, ring(c.turn, y, rr * 2.4, squash), c.ink, { close: true, passes: 1 });
+    stroke(p, ring(c.turn, y, rr * 1.3, squash), c.ink, { close: true, passes: 1 });
+    return { y: y + rr * 1.2, w: rr * 1.2, ownMouth: true };
+  }
+
+  // --------------------------------------------------------------- the gape
+  const y = c.hh * 0.34;
+  const w = c.hw * (0.5 + dial(gn, 'mouthWidth') * 0.22);
+  const h = c.hh * (0.16 + dial(gn, 'mouthCurve') * 0.13);
+  const lens: [number, number][] = [];
+  for (let i = 0; i <= 18; i++) {
+    const t = -1 + (i / 18) * 2;
+    lens.push([c.turn + t * w, y - Math.cos((t * Math.PI) / 2) * h]);
+  }
+  for (let i = 18; i >= 0; i--) {
+    const t = -1 + (i / 18) * 2;
+    lens.push([c.turn + t * w, y + Math.cos((t * Math.PI) / 2) * h * 1.15]);
+  }
+  p.noStroke();
+  p.fill('#2b1a1a');
+  p.beginShape();
+  for (const [x, yy] of lens) p.vertex(x, yy);
+  p.endShape('close');
+
+  // Teeth, hanging from the upper jaw and standing on the lower.
+  p.fill('#f4f0e6');
+  const nT = 7;
+  for (let i = 0; i < nT; i++) {
+    const t = -0.86 + (i / (nT - 1)) * 1.72;
+    const upY = y - Math.cos((t * Math.PI) / 2) * h;
+    const dnY = y + Math.cos((t * Math.PI) / 2) * h * 1.15;
+    const tw = w * 0.075;
+    p.triangle(c.turn + t * w - tw, upY, c.turn + t * w + tw, upY, c.turn + t * w, upY + h * 0.5);
+    if (i % 2 === 0) {
+      p.triangle(c.turn + t * w - tw, dnY, c.turn + t * w + tw, dnY, c.turn + t * w, dnY - h * 0.42);
+    }
+  }
+  p.stroke(LINE);
+  p.noFill();
+  stroke(p, lens, c.ink, { close: true, passes: 1 });
+  return { y: y + h * 1.15, w, ownMouth: true };
+}
+
+/**
+ * Fins, gills and crests.
+ *
+ * Drawn before the silhouette is inked, so the head line lands on top of every
+ * base and a fin reads as attached rather than stuck on. Like the animal ears
+ * this is gated on `kingdom` at the call site — the one rule this file has is
+ * that no creature part is ever reachable from a human set.
+ */
+function fins(c: Ctx, gn: Genome, outline: [number, number][]) {
+  const kind = cat(gn, 'fin');
+  if (kind === 0) return;
+  const p = c.p;
+  const hide = scaleColour(gn);
+  const amp = 0.16 + dial(gn, 'earSize') * 0.3;
+
+  // A sawtooth raised radially off a run of the outline.
+  const crest = (run: [number, number][], height: number, stride: number) => {
+    if (run.length < 4) return;
+    const saw: [number, number][] = [];
+    for (let i = 0; i < run.length; i += stride) {
+      const [x, y] = run[i];
+      saw.push([x, y]);
+      const j = Math.min(run.length - 1, i + Math.floor(stride / 2));
+      const [mx, my] = run[j];
+      const len = Math.hypot(mx, my) || 1;
+      saw.push([mx * (1 + height / len), my * (1 + height / len)]);
+    }
+    saw.push(run[run.length - 1]);
+    p.noStroke();
+    p.fill(hide);
+    p.beginShape();
+    for (const [x, y] of saw) p.vertex(x, y);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, saw, c.ink, { passes: 1, weightScale: 0.8 });
+  };
+
+  if (kind === 1) {
+    // A dorsal crest over the crown.
+    crest(longestRun(outline, ([, y]) => y < -c.hh * 0.34), c.hh * amp * 1.6, 4);
+    return;
+  }
+
+  if (kind === 2) {
+    // Gill slits: three curved lines on each cheek, the far side shortened when
+    // the head has turned.
+    p.noFill();
+    p.stroke(LINE);
+    for (const side of [-1, 1]) {
+      const shrink = c.turn !== 0 && Math.sign(c.turn) !== side ? 0.55 : 1;
+      for (let i = 0; i < 3; i++) {
+        const x = side * c.hw * (0.72 - i * 0.11);
+        const h = c.hh * 0.24 * shrink;
+        stroke(
+          p,
+          [
+            [x, -h],
+            [x + side * c.hw * 0.05, 0],
+            [x, h],
+          ],
+          c.ink,
+          { passes: 1, weightScale: 0.8 },
+        );
+      }
+    }
+    return;
+  }
+
+  if (kind === 3) {
+    // Pectoral fins, where the ears would have been.
+    const s = c.hh * (0.34 + dial(gn, 'earSize') * 0.34);
+    for (const side of [-1, 1]) {
+      const bx = side * c.hw * 0.9;
+      const shape: [number, number][] = [
+        [bx, -s * 0.34],
+        [bx + side * s * 1.15, -s * 0.1],
+        [bx + side * s * 1.3, s * 0.42],
+        [bx + side * s * 0.8, s * 0.68],
+        [bx, s * 0.5],
+      ];
+      p.noStroke();
+      p.fill(hide);
+      p.beginShape();
+      for (const [x, y] of shape) p.vertex(x, y);
+      p.endShape('close');
+      p.stroke(LINE);
+      p.noFill();
+      stroke(p, shape, c.ink, { close: true, passes: 1 });
+      // Ribs, which is what makes it a fin and not a leaf.
+      for (let i = 1; i <= 3; i++) {
+        const t = i / 4;
+        stroke(
+          p,
+          [
+            [bx, -s * 0.34 + t * s * 0.84],
+            [bx + side * s * (1.05 - t * 0.22), -s * 0.1 + t * s * 0.7],
+          ],
+          c.ink,
+          { passes: 1, weightScale: 0.55 },
+        );
+      }
+    }
+    return;
+  }
+
+  // A frill: spines the whole way round, thinning at the jaw.
+  p.noStroke();
+  const step = 5;
+  for (let i = 0; i < outline.length; i += step) {
+    const [x, y] = outline[i];
+    const len = Math.hypot(x, y) || 1;
+    const shorten = y > c.hh * 0.4 ? 0.35 : 1;
+    const out = 1 + (c.hh * amp * shorten) / len;
+    const [px, py] = outline[(i + step) % outline.length];
+    p.fill(hide);
+    p.triangle(x, y, px, py, ((x + px) / 2) * out, ((y + py) / 2) * out);
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, [[x, y], [((x + px) / 2) * out, ((y + py) / 2) * out], [px, py]], c.ink, {
+      passes: 1,
+      weightScale: 0.5,
+    });
+    p.noStroke();
+  }
+  p.stroke(LINE);
 }
 
 /** Whiskers, either side of the snout. */

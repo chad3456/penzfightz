@@ -1,6 +1,6 @@
-# Roll Call: fifteen hundred faces, none of them drawn
+# Roll Call: sixteen hundred faces, none of them drawn
 
-Every face on the register is thirty-nine numbers. There is no sprite sheet, no
+Every face on the register is forty-six numbers. There is no sprite sheet, no
 set of presets and no picture anywhere in the repository — the drawing code is
 a pure function from a genome to ink on paper, and so is the persona, which is
 why the note under a name always describes the face above it.
@@ -105,23 +105,24 @@ whichever cell the pointer happened to be over. Selection is a DOM listener on
 the canvas now, going through the bounding box because the canvas is laid out at
 100% width and screen pixels are not sketch pixels.
 
-## Eight sets from one generator
+## Fifteen sets from one generator
 
 A set is not a second generator. It is a *prior*: a list of which families may
 appear and which range each dial is held to. The corporate floor gets neat hair
 and lanyards, the group chat gets caps and dyed fringes, and neither is
 special-cased anywhere in the drawing code.
 
-That distinction is the whole point. Eight hard-coded sets would be eight things
-to maintain and eight chances for one to look bolted on; eight narrowings of one
-distribution means anything added to the drawing shows up in all of them at once.
+That distinction is the whole point. Fifteen hard-coded sets would be fifteen
+things to maintain and fifteen chances for one to look bolted on; fifteen
+narrowings of one distribution means anything added to the drawing shows up in
+all of them at once.
 Repeats in an allow-list act as weights, so `hair: [bald, bald, hatch]` gives
 twice as many bald heads as hatched ones.
 
 **On the Cameo set.** It contains archetypes — the rockstar, the anchor, the
 founder — and no real people. Generating recognisable likenesses of actual
 public figures is somebody's right of publicity and not something to put on a
-public site; and a system whose whole vocabulary is forty-one doodle genes could
+public site; and a system whose whole vocabulary is forty-six doodle genes could
 not resolve to a specific person if it tried. What it can do is a type, which is
 what is here.
 
@@ -157,6 +158,41 @@ staffroom and everybody else, because the human sets were still sampling the
 whole family. `kingdom` is the single switch now, and the ear family is read
 modulo four when it is off.
 
+## The Deep End
+
+The tank is the menagerie's argument run a second time. Nothing about a
+crocodile needed a second generator either: three more entries in the `muzzle`
+family — a snout, a pursed ring, a gape — one new family for fins, gills and
+crests, and a set prior that pins the ears off and the eyes high and wide.
+
+`fin` is gated on `kingdom` at the call site, and the menagerie pins it to
+*none* on top of that, because a retriever with a dorsal crest is exactly the
+leak the switch exists to stop. It draws under the silhouette, so the head line
+lands on every fin base and a fin reads as attached rather than stuck on.
+
+Three things had to be redrawn before the tank read:
+
+- **The crocodile's teeth were in the wrong place.** The first version ran one
+  zigzag straight across the snout — which is where the jaw line goes on a face
+  seen from the *side*. Head on, it read as the bottom seam of a paper bag.
+  Front-on you are looking at the top plate of the snout with both jaw lines
+  running away from you down its edges, so that is where the teeth belong now.
+- **The snout was drawn through the eyes.** It started at the brow, and the
+  drawing order puts the muzzle over the eyes, so every long-headed croc came
+  out blind. It starts below the eye line, and the set holds `eyeHeight` in the
+  top third.
+- **A beak among the fish read as a duck.** The bird's orange wedge is
+  unmistakably a bird's. It is out of the tank's allow-list.
+
+The cold jaws also report `ownMouth`, because a tooth line, a pursed ring and a
+gape *are* mouths, and letting the generic mouth draw on top of one put a human
+smile inside a shark.
+
+The persona had to learn the same lesson. `hair: bald` is a true reading of a
+fish's genes and a completely useless thing to say about one; without a
+creature branch in front of the human rules, the entire tank came back described
+as recently shaved.
+
 ## The Waxworks, and the law around it
 
 Eleven public figures, hand-authored rather than searched for. Everything else
@@ -166,7 +202,7 @@ distance metric knows that. Rimless circles and a black roll-neck. A side
 parting and large square frames. A full white beard.
 
 What is encoded is a **visual signature**, not a likeness — the medium cannot do
-likeness, and anything claiming otherwise from forty-four doodle genes would be
+likeness, and anything claiming otherwise from forty-six doodle genes would be
 lying. If one reads, it reads for the same reason a four-stroke newspaper
 cartoon reads.
 
@@ -195,7 +231,7 @@ Pick a picture, drag three markers onto both eyes and the chin, and the studio
 measures what a photograph can honestly tell it: tone from both cheeks, hair
 from how much darker the crown is, beard from how much darker the jaw is, and
 proportion from the marker geometry. Nine genes come from the picture; the other
-thirty-five come from the seed, and the card lists which is which.
+thirty-seven come from the seed, and the card lists which is which.
 
 It is not a likeness and does not claim to be. It is also entirely local — the
 file is read with FileReader, drawn to a canvas, sampled and dropped. A test
@@ -210,23 +246,70 @@ the seed, which produced a portrait wearing a cap — covering the hair it had
 just measured — and a monocle. Anything that would hide or contradict a
 measurement is pinned off.
 
+## The globe
+
+The census stands on the surface of a sphere, laid out by the **Fibonacci
+sphere**: walk down the y axis in equal steps and turn by the golden angle each
+time. Equal steps in y give equal steps in *area* on a sphere — Archimedes'
+theorem — so every card gets the same patch of surface, and the golden angle is
+the one rotation that never lets those patches settle into visible spokes.
+Latitude-longitude, the obvious alternative, crowds the poles until the cards
+are stacked on each other there and stranded at the equator.
+
+Nearest-neighbour spacing on that layout is about `sqrt(4π/N)·R`, so the radius
+is solved from the count rather than fixed. A census of two hundred and a census
+of two thousand are equally dense, and the camera framing is derived from the
+same number.
+
+It also does something the flat wall could not. Seat indices run through the
+sets in order and y falls monotonically with the index, so **each set comes out
+as a latitude band** — the back bench is the north cap, the waxworks are the
+south pole, and the census reads as a globe with visible strata before you have
+clicked anything.
+
+Cards face outward along the radius, so a lift is a step further out rather than
+a step towards a camera that has since orbited elsewhere. There is no minimum
+orbit distance worth speaking of: flying inside the shell and looking back out
+is the best thing this view does.
+
 ## Focusing a set
 
-Picking a set brings it forward into a tidy grid and shrinks everyone else.
+Picking a set keeps it at the **full** radius and contracts everybody else into
+a dense core at a quarter of it. A set of eleven becomes eleven cards alone on
+a globe, and the camera never has to move.
+
 Dimming the rest in place made the tabs decorative: a set of eleven scattered
-through a wall of fifteen hundred is not findable, however faded its neighbours
-are.
+through fifteen hundred is not findable, however faded its neighbours are. An
+earlier version brought the focused set forward into a flat grid at a fixed
+depth, which worked on a flat wall and stopped working the moment the camera
+could orbit behind it.
+
+## Hovering a face
+
+The atlas cell is 128px, which is enough to recognise a face on a globe and not
+enough to read one. Hovering re-inks the hovered genome at 264px in a panel
+beside the pointer, with its set, roll number, name, nickname, traits and note —
+the same drawing function, called again at a size where the tremor in the line
+is visible.
+
+Two details that matter. The p5 instance is created **once** and kept: the
+hovered face changes every time the pointer crosses a card, and standing up a
+fresh sketch each time — p5 v2 attaches its canvas asynchronously — flickered
+and leaked canvases. The genome lives in a ref that `draw` reads, and an update
+is a `redraw()`. And hover fires only on a *change* of card, not on every
+pointer move, or the whole page would re-render sixty times a second while the
+pointer sat still on one face.
 
 ## Three thousand cards, four draw calls
 
 A thousand canvas textures is a thousand GPU uploads and about sixty megabytes
 of mostly-cream paper. Faces are baked in blocks into 2048px atlases of 16×16
-cells, and the wall is one `InstancedMesh` per atlas with a per-instance cell
+cells, and the globe is one `InstancedMesh` per atlas with a per-instance cell
 attribute and three lines of injected GLSL — so the material keeps its own
 lighting and fog and the whole census costs four draw calls.
 
 Cells are baked with **transparent** backgrounds. Filling them with paper turns
-the wall into a grid of tiles; with alpha the faces stand on the room's own
+the globe into a ball of tiles; with alpha the faces stand on the room's own
 background. `alphaTest` rather than blending, so overlapping cards need no depth
 sorting when they are dragged about.
 

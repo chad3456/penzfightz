@@ -55,6 +55,34 @@ function headline(gn: Genome): { trait: string; note: string } {
   const mouth = cat(gn, 'mouth');
   const view = cat(gn, 'view');
 
+  // A creature is read off its creature parts first. `hair: bald` is a true
+  // reading of a fish's genes and a completely useless thing to say about one,
+  // and without this the whole tank came back described as recently shaved.
+  if (cat(gn, 'kingdom') === 1) {
+    const snout = cat(gn, 'muzzle');
+    const fin = cat(gn, 'fin');
+    if (snout === 5)
+      return { trait: 'all snout', note: 'More jaw than skull, and every centimetre of it in use.' };
+    if (snout === 6)
+      return { trait: 'pursed', note: 'Opens and closes its mouth at you and considers that a full exchange.' };
+    if (snout === 7)
+      return { trait: 'toothy gape', note: 'Sixty-eight teeth and no particular plan for any of them.' };
+    if (fin === 1)
+      return { trait: 'crested', note: 'Raises the crest at anything that moves, including the light.' };
+    if (fin === 2)
+      return { trait: 'gilled', note: 'Filters the same four litres over and over and finds it restful.' };
+    if (fin === 3)
+      return { trait: 'finned', note: 'Holds station against the current without appearing to try.' };
+    if (fin === 4)
+      return { trait: 'frilled', note: 'Puts the whole frill up over a disagreement about a rock.' };
+    if (snout === 3)
+      return { trait: 'beaked', note: 'Taps the glass twice every morning. Nobody knows why.' };
+    if (snout === 2)
+      return { trait: 'long-snouted', note: 'Gets into places the rest of the enclosure cannot.' };
+    if (cat(gn, 'whisker') !== 0)
+      return { trait: 'whiskered', note: 'Feels its way along the bottom and misses nothing.' };
+  }
+
   if (extra === 1)
     return { trait: 'smoker', note: 'Caught behind the science block twice. Denies both.' };
   if (extra === 2)

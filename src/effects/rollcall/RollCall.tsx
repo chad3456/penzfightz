@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import p5 from 'p5';
 import { buildCensus, type CensusReport, type Seat } from './census';
+import type { Genome } from './genome';
 import { bakeAtlases, type Atlas } from './atlas';
 import { drawFace, PAPER } from './face';
 import { FaceWall } from './FaceWall';
@@ -12,17 +13,73 @@ import { sfx } from '../../lib/audio';
 /**
  * Roll Call.
  *
- * A thousand and twenty-four faces across eight sets, standing in a wall you
- * can orbit, and pick up, and leave where you dropped them.
+ * Fifteen hundred faces across fifteen sets, standing on the surface of a
+ * globe you can orbit, fly inside, and pick cards off. Hovering one enlarges it
+ * where it stands and opens the reading of it beside the pointer; clicking one
+ * opens the full card.
  *
- * Nothing here is a picture. Every face is forty-one numbers found by novelty
+ * Nothing here is a picture. Every face is forty-six numbers found by novelty
  * search, drawn by one pure function in p5, baked into texture atlases and put
  * on instanced cards. The persona is read off the same numbers, which is why
  * the note under a name always describes the face above it.
  */
 
 const PER_SET = 128;
-const COLUMNS = 40;
+
+/**
+ * One face, inked at whatever size is asked for.
+ *
+ * The p5 instance is created once and kept: the hovered face changes every time
+ * the pointer crosses a card, and standing up a fresh sketch each time — p5 v2
+ * attaches its canvas asynchronously — flickered and leaked canvases. Instead
+ * the genome lives in a ref that `draw` reads, and an update is a `redraw()`.
+ */
+function InkFace({ genome, size, className }: { genome: Genome; size: number; className?: string }) {
+  const host = useRef<HTMLDivElement | null>(null);
+  const sketch = useRef<p5 | null>(null);
+  const live = useRef(genome);
+  const ready = useRef(false);
+  live.current = genome;
+
+  useEffect(() => {
+    const h = host.current;
+    if (!h) return;
+    // Its own child div, detached on teardown. p5 v2 attaches the canvas after
+    // `new p5()` returns, so a cleanup that ran against the host directly could
+    // leave a second canvas behind.
+    const mount = document.createElement('div');
+    h.appendChild(mount);
+    ready.current = false;
+    const s = new p5((q: p5) => {
+      q.setup = () => {
+        q.createCanvas(size, size);
+        q.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
+        q.noLoop();
+        ready.current = true;
+      };
+      q.draw = () => {
+        q.background(PAPER[0]);
+        q.push();
+        q.translate(size / 2, size * 0.513);
+        drawFace(q, live.current, size * 0.82, { colour: true });
+        q.pop();
+      };
+    }, mount);
+    sketch.current = s;
+    return () => {
+      ready.current = false;
+      sketch.current = null;
+      s.remove();
+      mount.remove();
+    };
+  }, [size]);
+
+  useEffect(() => {
+    if (ready.current) sketch.current?.redraw();
+  }, [genome]);
+
+  return <div className={className} ref={host} />;
+}
 
 export function RollCall({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(20260824);
@@ -33,6 +90,10 @@ export function RollCall({ onExit }: { onExit: () => void }) {
   const [picked, setPicked] = useState<number | null>(null);
   const [focusSet, setFocusSet] = useState<string | null>(null);
   const [studio, setStudio] = useState(false);
+  // Where the pointer was when it arrived on this card. Set once per card
+  // rather than on every move, so the panel does not chase the cursor and the
+  // whole page does not re-render sixty times a second.
+  const [hover, setHover] = useState<{ i: number; x: number; y: number } | null>(null);
 
   // ------------------------------------------------------- build and bake
   useEffect(() => {
@@ -75,36 +136,13 @@ export function RollCall({ onExit }: { onExit: () => void }) {
   );
 
   // ------------------------------------------------------------- the card
-  const portrait = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const host = portrait.current;
-    if (!host || picked === null || !seats[picked]) return;
-    const mount = document.createElement('div');
-    host.appendChild(mount);
-    const g = seats[picked].genome;
-    const sketch = new p5((q: p5) => {
-      q.setup = () => {
-        q.createCanvas(230, 230);
-        q.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
-        q.noLoop();
-      };
-      q.draw = () => {
-        q.background(PAPER[0]);
-        q.push();
-        q.translate(115, 118);
-        drawFace(q, g, 206, { colour: true });
-        q.pop();
-      };
-    }, mount);
-    return () => {
-      sketch.remove();
-      mount.remove();
-    };
-  }, [picked, seats]);
-
   const who: Persona | null = picked === null ? null : people[picked] ?? null;
   const whoSet = picked === null ? null : seats[picked]?.set ?? null;
   const ready = atlases.length > 0;
+
+  const onHover = useCallback((i: number | null, x: number, y: number) => {
+    setHover(i === null ? null : { i, x, y });
+  }, []);
 
   const reseed = useCallback(() => {
     sfx.paper();
@@ -166,13 +204,15 @@ export function RollCall({ onExit }: { onExit: () => void }) {
           <FaceWall
             seats={seats}
             atlases={atlases}
-            columns={COLUMNS}
             focusSet={focusSet}
             onPick={(i) => {
               sfx.tick();
+              setHover(null);
               setPicked(i);
             }}
+            onHover={onHover}
             picked={picked}
+            hovered={hover?.i ?? null}
           />
         ) : (
           <div className="roll__loading">
@@ -189,7 +229,7 @@ export function RollCall({ onExit }: { onExit: () => void }) {
       </div>
 
       <div className="roll__foot">
-        <span className="roll__hint">drag to orbit · scroll to zoom · drag a face to move it</span>
+        <span className="roll__hint">drag to orbit · scroll to fly inside · hover to read a face · drag one to move it</span>
         {report && (
           <span className="roll__stats2">
             nearest neighbour within a set <b>{report.withinMin.toFixed(2)}</b> against{' '}
@@ -201,10 +241,45 @@ export function RollCall({ onExit }: { onExit: () => void }) {
         )}
       </div>
 
+      {hover && seats[hover.i] && !who && (
+        <div
+          className="roll__peek"
+          style={{
+            // Clamped to the viewport, because a card near the right edge would
+            // otherwise open the panel off the side of the screen.
+            left: Math.min(hover.x + 20, window.innerWidth - 286),
+            top: Math.min(Math.max(12, hover.y - 130), Math.max(12, window.innerHeight - 320)),
+            ['--peek-ink' as string]: seats[hover.i].set.ink,
+          }}
+        >
+          <InkFace genome={seats[hover.i].genome} size={264} className="roll__peekink" />
+          <div className="roll__peekbody">
+            <div className="roll__peekset">
+              {seats[hover.i].set.name} · no. {String(people[hover.i].roll).padStart(4, '0')}
+            </div>
+            <div className="roll__peekname">{people[hover.i].name}</div>
+            <div className="roll__peekhandle">
+              {seats[hover.i].likeness
+                ? 'a caricature — not a likeness'
+                : `known to the room as “${people[hover.i].handle}”`}
+            </div>
+            <ul className="roll__traits">
+              {/* Two of the three trait words can coincide — a wide head on a
+                  wide-eyed face — so the position is the identity, not the word. */}
+              {people[hover.i].traits.map((t, n) => (
+                <li key={n}>{t}</li>
+              ))}
+            </ul>
+            <p className="roll__peeknote">{people[hover.i].note}</p>
+            <div className="roll__peekmore">click for the genome</div>
+          </div>
+        </div>
+      )}
+
       {who && (
         <div className="roll__card" onClick={() => setPicked(null)}>
           <div className="roll__cardinner" onClick={(e) => e.stopPropagation()}>
-            <div className="roll__portrait" ref={portrait} />
+            <InkFace genome={seats[picked!].genome} size={230} className="roll__portrait" />
             <div className="roll__who">
               <div className="roll__roll" style={{ color: whoSet?.ink }}>
                 {whoSet?.name} · no. {String(who.roll).padStart(4, '0')}
@@ -214,8 +289,8 @@ export function RollCall({ onExit }: { onExit: () => void }) {
                 {seats[picked!]?.likeness ? 'a caricature — not a likeness' : `known to the room as “${who.handle}”`}
               </div>
               <ul className="roll__traits">
-                {who.traits.map((t) => (
-                  <li key={t}>{t}</li>
+                {who.traits.map((t, n) => (
+                  <li key={n}>{t}</li>
                 ))}
               </ul>
               <p className="roll__note">{who.note}</p>
@@ -230,7 +305,7 @@ export function RollCall({ onExit }: { onExit: () => void }) {
                 </span>
               </details>
               <button className="btn btn--small" onClick={() => setPicked(null)}>
-                Back to the wall
+                Back to the globe
               </button>
             </div>
           </div>

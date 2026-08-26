@@ -1,7 +1,7 @@
 /**
- * A face, as thirty-nine numbers.
+ * A face, as forty-six numbers.
  *
- * Every face on the register is a point in a 39-dimensional cube. Nothing about
+ * Every face on the register is a point in a 46-dimensional cube. Nothing about
  * a face is stored as a picture, a sprite or a chosen preset — the genome is
  * the whole of it, and the drawing code is a pure function from these numbers
  * to ink on paper.
@@ -41,10 +41,20 @@ export const FAMILIES = {
    * opens it, so a committee member cannot sprout a beak by accident.
    */
   kingdom: 2,
-  /** A snout, when there is one: short, long, beak, broad, or none. */
-  muzzle: 5,
-  /** Whiskers, and how many. */
+  /**
+   * A snout, when there is one. 0-4 are the mammal and bird jaws: none, short,
+   * long, beak, broad. 5-7 are the cold-blooded ones — a crocodile's flat
+   * tooth-lined snout, a fish's pursed ring of a mouth, and a shark's gape.
+   */
+  muzzle: 8,
+  /** Whiskers, and how many. Doubles as a catfish's barbels. */
   whisker: 3,
+  /**
+   * Fins, gills and crests. Gated on `kingdom` exactly as the animal ears are:
+   * widening a family without a switch in front of it is how the committee
+   * ended up in cat ears the first time.
+   */
+  fin: 5,
 } as const;
 
 export type Categorical = keyof typeof FAMILIES;
@@ -151,6 +161,7 @@ export function mutate(gn: Genome, r: () => number, amount = 0.18): Genome {
  * for more than the exact gap between the eyes.
  */
 const WEIGHT: Record<Categorical, number> = {
+  fin: 1.4,
   wear: 1.4,
   neck: 1.0,
   kingdom: 2.2,
