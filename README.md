@@ -169,15 +169,25 @@ exported from `rosette.ts` so there is one hand on the site rather than two.
 
 ## Roll Call
 
-A thousand and twenty-four faces on the effects shelf, none of them drawn. Each is thirty-nine
+Fifteen hundred and thirty-six faces on the effects shelf, none of them drawn. Each is thirty-nine
 numbers, and the drawing code is a pure function of them — a superellipse
 silhouette, a hand that wanders rather than jitters, a colour wash deliberately
 printed off the line, and no symmetry anywhere. The persona is read off the same
 genes, so the note under a name always describes the face above it.
 
-Eight sets — a back bench, a staffroom, a corporate floor, a group chat, a night
-bus, a committee, a field trip and a set of archetypes — all from one generator
-narrowed eight ways rather than eight generators. They stand in a wall you can
+Twelve sets — a back bench, a staffroom, a corporate floor, a group chat, a
+night bus, a committee, a field trip, a nineties sitcom, a comment section, a
+departure lounge, a menagerie of animals, and a set of archetypes — all from one
+generator narrowed twelve ways rather than twelve generators. Animals are one
+gene, not a separate pipeline. Skin runs a full twelve-step ramp and hair
+includes coils, locs, buns and long hair; place is context and dress rather than
+face shape, because nationality is not a facial measurement.
+
+**From a photograph:** pick a picture, drag three markers onto the eyes and
+chin, and it measures tone, proportion, hair and beard and sets those nine
+genes. The other thirty-five stay random, and the card tells you which were
+which. It is not a likeness. The file never leaves the browser — a test asserts
+zero off-origin requests while one is loaded. They stand in a wall you can
 orbit, pick up and leave where you drop them: p5 draws them into texture
 atlases, three.js puts them on instanced cards, and the whole census is four
 draw calls.

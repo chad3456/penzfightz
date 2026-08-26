@@ -39,11 +39,16 @@ export interface FaceSet {
 }
 
 // Family indices, named so the sets read as intent rather than as numbers.
-const HAIR = { bald: 0, tufts: 1, cap: 2, hatch: 3, curls: 4, fringe: 5, scribble: 6 };
+const HAIR = {
+  bald: 0, tufts: 1, cap: 2, hatch: 3, curls: 4, fringe: 5, scribble: 6,
+  coils: 7, locs: 8, bun: 9, long: 10,
+};
 const BEARD = { none: 0, tash: 1, curled: 2, goatee: 3, full: 4, stubble: 5 };
 const SPECS = { none: 0, round: 1, square: 2, half: 3, oval: 4, monocle: 5 };
 const WEAR = { none: 0, cap: 1, capBack: 2, cans: 3, hood: 4, band: 5, beanie: 6, visor: 7 };
 const NECK = { none: 0, tie: 1, lanyard: 2, scarf: 3, strings: 4, chain: 5, collar: 6 };
+const EARS = { both: 0, left: 1, right: 2, none: 3, pointed: 4, floppy: 5, round: 6, tufted: 7 };
+const MUZZLE = { none: 0, short: 1, long: 2, beak: 3, broad: 4 };
 const EXTRA = {
   none: 0, cigarette: 1, plaster: 2, earring: 3, sweat: 4,
   stud: 5, mole: 6, bindi: 7, scar: 8, freck: 9,
@@ -55,7 +60,11 @@ export const SETS: FaceSet[] = [
     name: 'The Back Bench',
     tagline: 'Section B, and whoever is sitting at the back of it.',
     ink: '#1b3a8f',
-    allow: { wear: [WEAR.none, WEAR.none, WEAR.band, WEAR.cap], neck: [NECK.none, NECK.none, NECK.collar] },
+    allow: {
+      kingdom: [0],
+      wear: [WEAR.none, WEAR.none, WEAR.band, WEAR.cap],
+      neck: [NECK.none, NECK.none, NECK.collar],
+    },
     dials: { hairLoud: [0, 0.2] },
     notes: {
       shaved: ['Lost a bet in the second week and never grew it back.'],
@@ -76,6 +85,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Chalk on the sleeve, opinions on everything.',
     ink: '#6b4a2b',
     allow: {
+      kingdom: [0],
       hair: [HAIR.bald, HAIR.bald, HAIR.hatch, HAIR.fringe, HAIR.curls],
       beard: [BEARD.tash, BEARD.tash, BEARD.curled, BEARD.goatee, BEARD.full, BEARD.stubble],
       specs: [SPECS.round, SPECS.square, SPECS.half, SPECS.half, SPECS.oval, SPECS.monocle],
@@ -102,6 +112,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Lanyards, standups, and a meeting that could have been a note.',
     ink: '#2f6f6f',
     allow: {
+      kingdom: [0],
       hair: [HAIR.cap, HAIR.hatch, HAIR.fringe, HAIR.bald, HAIR.curls],
       beard: [BEARD.none, BEARD.none, BEARD.stubble, BEARD.goatee],
       wear: [WEAR.none, WEAR.none, WEAR.none, WEAR.cans],
@@ -126,6 +137,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Caps indoors, cans on, replying in three words or fewer.',
     ink: '#8a2f7a',
     allow: {
+      kingdom: [0],
       hair: [HAIR.fringe, HAIR.scribble, HAIR.tufts, HAIR.curls, HAIR.cap],
       beard: [BEARD.none, BEARD.none, BEARD.none, BEARD.stubble],
       wear: [WEAR.cap, WEAR.capBack, WEAR.cans, WEAR.hood, WEAR.beanie, WEAR.none],
@@ -150,6 +162,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Recognisable as a type. Not as anybody.',
     ink: '#8a2b2b',
     allow: {
+      kingdom: [0],
       hair: [HAIR.scribble, HAIR.curls, HAIR.cap, HAIR.tufts, HAIR.bald, HAIR.fringe],
       beard: [BEARD.none, BEARD.full, BEARD.tash, BEARD.goatee, BEARD.stubble],
       wear: [WEAR.none, WEAR.none, WEAR.band, WEAR.cap, WEAR.visor],
@@ -175,6 +188,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Last one out, forty minutes of nobody speaking.',
     ink: '#3d4a6b',
     allow: {
+      kingdom: [0],
       hair: [HAIR.scribble, HAIR.bald, HAIR.fringe, HAIR.tufts],
       wear: [WEAR.hood, WEAR.hood, WEAR.beanie, WEAR.cans, WEAR.none],
       neck: [NECK.strings, NECK.scarf, NECK.none],
@@ -198,6 +212,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Nine people, one microphone, no decision.',
     ink: '#5a4a1f',
     allow: {
+      kingdom: [0],
       hair: [HAIR.bald, HAIR.bald, HAIR.hatch, HAIR.fringe],
       beard: [BEARD.tash, BEARD.curled, BEARD.full, BEARD.none],
       specs: [SPECS.square, SPECS.half, SPECS.round, SPECS.none],
@@ -223,6 +238,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Two coaches, one head count, somebody already lost a cap.',
     ink: '#2f7a3f',
     allow: {
+      kingdom: [0],
       head: [0, 3, 4, 6, 6],
       hair: [HAIR.tufts, HAIR.curls, HAIR.fringe, HAIR.scribble, HAIR.cap],
       beard: [BEARD.none],
@@ -238,6 +254,118 @@ export const SETS: FaceSet[] = [
         'Has eaten the packed lunch. It is nine fifteen.',
         'Lost the cap at the first stop and found somebody else’s.',
         'Holds the worksheet the entire day and fills in nothing.',
+      ],
+    },
+  },
+  {
+    id: 'menagerie',
+    name: 'The Menagerie',
+    tagline: 'Same forty-four genes. Ears on top of the head.',
+    ink: '#7a5a2f',
+    allow: {
+      kingdom: [1],
+      ears: [EARS.pointed, EARS.floppy, EARS.round, EARS.tufted],
+      muzzle: [MUZZLE.short, MUZZLE.short, MUZZLE.long, MUZZLE.beak, MUZZLE.broad],
+      whisker: [0, 1, 2, 2],
+      hair: [HAIR.bald, HAIR.bald, HAIR.tufts, HAIR.scribble, HAIR.coils],
+      beard: [BEARD.none],
+      specs: [SPECS.none, SPECS.none, SPECS.none, SPECS.round],
+      wear: [WEAR.none, WEAR.none, WEAR.none, WEAR.cap],
+      neck: [NECK.none, NECK.none, NECK.collar, NECK.chain],
+      eye: [0, 1, 1, 2, 6],
+      mouth: [0, 1, 2, 4],
+    },
+    dials: { earSize: [0.3, 1], hairLoud: [0, 0.25], eyeSize: [0.4, 1] },
+    notes: {
+      default: [
+        'Sat on the wall for an hour and then left without a word.',
+        'Answers to three names and comes for none of them.',
+        'Has never once been where it was supposed to be.',
+        'Considers the sofa to have been a gift.',
+        'Barks at the postman and at nobody else, ever.',
+        'Knows exactly what time the tin opens.',
+      ],
+    },
+  },
+  {
+    id: 'mustsee',
+    name: 'Must-See TV',
+    tagline: 'Big hair, bigger jumpers, a laugh track you cannot see.',
+    ink: '#b06a2f',
+    allow: {
+      kingdom: [0],
+      hair: [HAIR.curls, HAIR.fringe, HAIR.scribble, HAIR.bun, HAIR.long, HAIR.cap, HAIR.coils],
+      beard: [BEARD.none, BEARD.none, BEARD.stubble, BEARD.tash],
+      specs: [SPECS.none, SPECS.none, SPECS.round, SPECS.oval],
+      wear: [WEAR.none, WEAR.none, WEAR.band],
+      neck: [NECK.collar, NECK.scarf, NECK.none, NECK.chain],
+      mouth: [1, 3, 3, 2, 7],
+      eye: [1, 1, 6, 2],
+      brow: [3, 3, 1, 4],
+    },
+    dials: { hairAmount: [0.5, 1], hairLoud: [0, 0.35], mouthCurve: [0.5, 1], eyeSize: [0.4, 0.95] },
+    notes: {
+      default: [
+        'Walks into the room and waits for the applause that always comes.',
+        'Owns one apartment nobody on that salary could afford.',
+        'Has a catchphrase and will not be retiring it.',
+        'The friend everyone agrees is the difficult one.',
+        'Orders coffee in a place with no visible staff.',
+        'Learned a lesson in the last four minutes and will not retain it.',
+      ],
+    },
+  },
+  {
+    id: 'discourse',
+    name: 'The Discourse',
+    tagline: 'Everyone here is right, and will tell you at length.',
+    ink: '#8a3a3a',
+    allow: {
+      kingdom: [0],
+      hair: [HAIR.scribble, HAIR.bald, HAIR.fringe, HAIR.bun, HAIR.tufts, HAIR.locs],
+      beard: [BEARD.full, BEARD.goatee, BEARD.tash, BEARD.stubble, BEARD.none, BEARD.curled],
+      specs: [SPECS.round, SPECS.square, SPECS.none, SPECS.half, SPECS.oval],
+      wear: [WEAR.none, WEAR.beanie, WEAR.cans, WEAR.cap, WEAR.band],
+      neck: [NECK.scarf, NECK.tie, NECK.lanyard, NECK.chain, NECK.none],
+      brow: [2, 2, 4, 1, 3],
+      mouth: [0, 4, 5, 7, 1],
+    },
+    dials: { browLift: [0, 0.45], hairLoud: [0, 0.55], mouthCurve: [0, 0.4] },
+    notes: {
+      default: [
+        'Owns the beret unironically and the moustache on purpose.',
+        'Absolutist about speech right up until it is about him.',
+        'Has read one economist and will be applying him to everything.',
+        'Believes the answer is markets. The question was the bins.',
+        'Calls himself a centrist and holds four incompatible positions.',
+        'Started a podcast so the argument could continue without you.',
+        'Would abolish the thing entirely, and has not thought past that.',
+        'Is against the development, the alternative, and being asked.',
+        'Says he is just asking questions. There is only ever one question.',
+        'Wants to go back to a decade he has read about.',
+      ],
+    },
+  },
+  {
+    id: 'departures',
+    name: 'The Departure Lounge',
+    tagline: 'Gate forty-one. Everybody from everywhere, waiting.',
+    ink: '#2f5a7a',
+    allow: {
+      kingdom: [0],
+      wear: [WEAR.none, WEAR.none, WEAR.cap, WEAR.beanie, WEAR.hood, WEAR.band, WEAR.cans],
+      neck: [NECK.scarf, NECK.collar, NECK.lanyard, NECK.none, NECK.chain, NECK.strings],
+      // Every hair texture and every skin tone, unrestricted on purpose.
+    },
+    dials: { hairLoud: [0, 0.5] },
+    notes: {
+      default: [
+        'Four hours early and still checking the board every ninety seconds.',
+        'Asleep across three seats with a boarding pass in one hand.',
+        'Has eaten in this terminal more often than at home.',
+        'Bought the neck pillow at the gate and regrets nothing.',
+        'Is being paged. Has heard the page. Is not moving.',
+        'Speaks to the desk in the third language they tried.',
       ],
     },
   },

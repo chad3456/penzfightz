@@ -1,4 +1,4 @@
-# Roll Call: a thousand faces, none of them drawn
+# Roll Call: fifteen hundred faces, none of them drawn
 
 Every face on the register is thirty-nine numbers. There is no sprite sheet, no
 set of presets and no picture anywhere in the repository — the drawing code is
@@ -124,6 +124,59 @@ public figures is somebody's right of publicity and not something to put on a
 public site; and a system whose whole vocabulary is forty-one doodle genes could
 not resolve to a specific person if it tried. What it can do is a type, which is
 what is here.
+
+## Skin, and what a set is allowed to encode
+
+The tone ramp is a real range, twelve steps from very fair to very deep, spaced
+roughly evenly rather than crowded at the light end — which is the failure mode
+of most generators and was the failure mode of the first version here, which
+stopped at medium brown. Hair gained tight coils, locs, a gathered bun and long
+hair falling past the jaw. Every set draws from all of it.
+
+**Place is context, not physiognomy.** There is a Departure Lounge set, and what
+makes it a departure lounge is neck pillows, lanyards and hoods — not face
+shape. Nationality is not a facial measurement, encoding it as one is caricature,
+and it would also simply be wrong. The same reasoning governs the Discourse set,
+which satirises how people present themselves — the beret, the podcast mic, the
+flag pin — and is even-handed across the spectrum rather than aimed at one part
+of it.
+
+**Cameo and Must-See TV hold archetypes and no real people.** A likeness of an
+actual public figure is their right of publicity, and forty-four doodle genes
+could not resolve to a specific person anyway. A type is what this can do.
+
+## The menagerie
+
+Animals are not a second generator either. `kingdom` is one gene; when it is set
+the face draws a muzzle instead of a nose, ears from the animal half of the ear
+family, and whiskers. Every human set pins `kingdom` to 0.
+
+That pinning is load-bearing and was learned the hard way: widening the ear
+family from four to eight without gating it put cat ears on the committee, the
+staffroom and everybody else, because the human sets were still sampling the
+whole family. `kingdom` is the single switch now, and the ear family is read
+modulo four when it is off.
+
+## From a photograph
+
+Pick a picture, drag three markers onto both eyes and the chin, and the studio
+measures what a photograph can honestly tell it: tone from both cheeks, hair
+from how much darker the crown is, beard from how much darker the jaw is, and
+proportion from the marker geometry. Nine genes come from the picture; the other
+thirty-five come from the seed, and the card lists which is which.
+
+It is not a likeness and does not claim to be. It is also entirely local — the
+file is read with FileReader, drawn to a canvas, sampled and dropped. A test
+asserts zero off-origin requests while a photograph is loaded.
+
+Two things it got wrong first. The crown was probed once, at a fixed height
+above the eye line, which on a short face lands above the head — so a person
+with black hair read as 9% cover because the probe was sampling the wall behind
+them. It takes three probes up the forehead now and rejects any that match the
+background, sampled from the four corners. And every unmeasured gene was left to
+the seed, which produced a portrait wearing a cap — covering the hair it had
+just measured — and a monocle. Anything that would hide or contradict a
+measurement is pinned off.
 
 ## Three thousand cards, four draw calls
 

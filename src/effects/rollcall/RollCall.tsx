@@ -6,6 +6,7 @@ import { drawFace, PAPER } from './face';
 import { FaceWall } from './FaceWall';
 import { personaFor, type Persona } from './persona';
 import { SETS } from './sets';
+import { Portrait } from './Portrait';
 import { sfx } from '../../lib/audio';
 
 /**
@@ -21,7 +22,7 @@ import { sfx } from '../../lib/audio';
  */
 
 const PER_SET = 128;
-const COLUMNS = 34;
+const COLUMNS = 40;
 
 export function RollCall({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(20260824);
@@ -31,6 +32,7 @@ export function RollCall({ onExit }: { onExit: () => void }) {
   const [progress, setProgress] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [focusSet, setFocusSet] = useState<string | null>(null);
+  const [studio, setStudio] = useState(false);
 
   // ------------------------------------------------------- build and bake
   useEffect(() => {
@@ -101,6 +103,8 @@ export function RollCall({ onExit }: { onExit: () => void }) {
     setSeed((s) => s + 1 + Math.floor(Math.random() * 900));
   }, []);
 
+  if (studio) return <Portrait onExit={() => setStudio(false)} />;
+
   return (
     <div className="roll roll--wall">
       <div className="roll__bar">
@@ -109,6 +113,9 @@ export function RollCall({ onExit }: { onExit: () => void }) {
           <h1 className="roll__title">Roll Call</h1>
         </div>
         <div className="roll__actions">
+          <button className="stage__spec" onClick={() => setStudio(true)}>
+            From a photo
+          </button>
           <button className="stage__spec" onClick={reseed}>
             New census
           </button>

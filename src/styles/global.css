@@ -3341,3 +3341,121 @@ button.card:hover:not(:disabled) {
   font-style: italic;
   line-height: 1.5;
 }
+
+/* Roll Call: the portrait studio */
+.roll--portrait {
+  overflow-y: auto;
+}
+
+.port {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.port__side {
+  flex: 1 1 320px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.port__drop {
+  display: inline-block;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border: 1px dashed #b9b09a;
+  background: rgba(255, 255, 255, 0.5);
+  color: #5c574c;
+}
+
+.port__drop:hover {
+  border-color: #6f6a5e;
+  color: #23211c;
+}
+
+.port__photo {
+  display: block;
+  max-width: 100%;
+  border: 1px solid #ded6c2;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.port__legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a8578;
+}
+
+.port__out canvas {
+  display: block;
+  border: 1px solid #ded6c2;
+}
+
+.port__empty {
+  width: 100%;
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed #ded6c2;
+  color: #a09a8a;
+  font-style: italic;
+}
+
+.port__table {
+  border-collapse: collapse;
+  font-size: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.port__table th {
+  text-align: left;
+  font-weight: 400;
+  color: #8a8578;
+  padding: 3px 12px 3px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.port__table td {
+  color: #3a362e;
+  padding: 3px 0;
+}
+
+.port__table i {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  vertical-align: -1px;
+  margin-right: 5px;
+}
+
+.port__measured {
+  margin: 8px 0;
+  padding-left: 16px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.port__measured b {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #3a362e;
+}

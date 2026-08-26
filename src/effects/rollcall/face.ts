@@ -125,11 +125,28 @@ function silhouette(
 // ------------------------------------------------------------------ palettes
 
 const PAPER = ['#f3efe3', '#f2eee6', '#efe9db'];
-const SKIN = [
-  '#f0cfc2', '#e8c7a8', '#dbb894', '#c99b74', '#a97a55',
-  '#cfd6d2', '#d8dcc9', '#e9c9c9', '#cdd5df', '#e3d9c4',
+/**
+ * Skin, in two registers.
+ *
+ * TONES is a real range, from very fair to very deep, spaced roughly evenly
+ * rather than crowded at the light end — which is the failure mode of most
+ * generators and the reason the first version of this only reached medium
+ * brown. WASH is the illustrative option: the greens and pinks and greys that
+ * make a page read as printed rather than as a set of portraits.
+ *
+ * A face draws from one or the other, never a blend, because mixing them gives
+ * you neither.
+ */
+export const TONES = [
+  '#f6ddcf', '#f0cfc2', '#ecc4a8', '#e0b48f', '#d3a179',
+  '#c08b62', '#ab754e', '#96613f', '#7d4e32', '#653d27',
+  '#4f2f1e', '#3b2317',
 ];
-const HAIR_INK = ['#161616', '#2b2118', '#5a4632', '#7d6a52', '#9a9a9a'];
+const WASH = [
+  '#cfd6d2', '#d8dcc9', '#e9c9c9', '#cdd5df', '#e3d9c4', '#dcd0e0', '#c9dad6',
+];
+
+export const HAIR_INK = ['#0f0f0f', '#161616', '#241a12', '#2b2118', '#4a3527', '#5a4632', '#7d6a52', '#9a9a9a', '#c9c2b4'];
 /** Dyed. Reached only when a set turns the `hairLoud` dial up. */
 const HAIR_LOUD = ['#c2392b', '#1f6fb2', '#2f8f5b', '#b8358f', '#d98a1f', '#7a3fc2', '#d8d2c4'];
 const CLOTH = ['#3a4657', '#5a4335', '#2f5148', '#6b2f38', '#43406b', '#7a6a4a', '#2b2b2b'];
@@ -337,7 +354,13 @@ function mouth(c: Ctx, gn: Genome) {
 }
 
 function ears(c: Ctx, gn: Genome) {
-  const which = cat(gn, 'ears');
+  const raw = cat(gn, 'ears');
+  // `kingdom` is the single switch for whether a face is a creature. Reading
+  // the ear family on its own put cat ears on the committee, the staffroom and
+  // everyone else, because widening that family to eight left the human sets
+  // sampling the animal half.
+  if (cat(gn, 'kingdom') === 1 && raw >= 4) return animalEars(c, gn, raw - 4);
+  const which = raw % 4;
   if (which === 3) return;
   const s = (0.08 + dial(gn, 'earSize') * 0.1) * c.hh;
   const y = 0;
@@ -471,6 +494,85 @@ function hair(c: Ctx, gn: Genome, crown: [number, number][]) {
     for (let i = top.length - 1; i >= 0; i--) p.vertex(top[i][0] * 0.99, cut);
     p.endShape('close');
     p.stroke(LINE);
+    return;
+  }
+  if (kind === 7) {
+    // Tight coils: the crown packed with small overlapping rings, dense enough
+    // that the shape reads before any single ring does.
+    p.fill(ink);
+    p.noStroke();
+    const n = Math.round(26 + amount * 40);
+    for (let i = 0; i < n; i++) {
+      const t = top[Math.floor((i / n) * top.length)];
+      const out = 1 + c.r() * (0.06 + amount * 0.16);
+      p.circle(t[0] * out, t[1] * out - c.hh * 0.02, 0.055 + c.r() * 0.045);
+    }
+    p.stroke(LINE);
+    return;
+  }
+
+  if (kind === 8) {
+    // Locs: strands leaving the crown and hanging past the jaw.
+    p.stroke(ink);
+    p.noFill();
+    const n = Math.round(7 + amount * 9);
+    for (let i = 0; i < n; i++) {
+      const t = top[Math.floor(((i + 0.5) / n) * top.length)];
+      const drop = c.hh * (0.5 + c.r() * 1.0);
+      const sway = (c.r() - 0.5) * 0.16;
+      stroke(
+        p,
+        [
+          [t[0], t[1]],
+          [t[0] * 1.08 + sway, t[1] + drop * 0.5],
+          [t[0] * 1.12 + sway * 2, t[1] + drop],
+        ],
+        c.ink,
+        { passes: 1, weightScale: 2.4 },
+      );
+    }
+    p.stroke(LINE);
+    return;
+  }
+
+  if (kind === 9) {
+    // Gathered up, with a knot above the crown.
+    p.fill(ink);
+    p.noStroke();
+    p.beginShape();
+    for (const [x, y] of top) p.vertex(x * 1.02, y * 1.02);
+    for (let i = top.length - 1; i >= 0; i--) p.vertex(top[i][0] * 0.96, top[i][1] * 0.96 + c.hh * 0.16);
+    p.endShape('close');
+    const knot = 0.11 + amount * 0.1;
+    p.circle(c.turn * 0.5, -c.hh * (1.02 + knot * 0.5), knot * 2);
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, ring(c.turn * 0.5, -c.hh * (1.02 + knot * 0.5), knot * 2), c.ink, {
+      close: true,
+      passes: 1,
+    });
+    return;
+  }
+
+  if (kind === 10) {
+    // Long, falling either side of the face and past the jaw.
+    p.fill(ink);
+    p.noStroke();
+    const fall = c.hh * (0.7 + amount * 0.9);
+    p.beginShape();
+    for (const [x, y] of top) p.vertex(x * 1.05, y * 1.05);
+    // Down the far side, across below the jaw, and back up the near side.
+    p.vertex(c.hw * 1.12, c.hh * 0.2);
+    p.vertex(c.hw * 1.04, c.hh * 0.2 + fall);
+    p.vertex(c.hw * 0.66, c.hh * 0.2 + fall);
+    p.vertex(c.hw * 0.72, -c.hh * 0.1);
+    p.vertex(-c.hw * 0.72, -c.hh * 0.1);
+    p.vertex(-c.hw * 0.66, c.hh * 0.2 + fall);
+    p.vertex(-c.hw * 1.04, c.hh * 0.2 + fall);
+    p.vertex(-c.hw * 1.12, c.hh * 0.2);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
     return;
   }
 
@@ -748,7 +850,9 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
   // that contrast.
   const washed = cat(gn, 'paper') !== 0;
   if (style.colour !== false && washed) {
-    const skin = pick(SKIN, dial(gn, 'skin'));
+    // paper 1..2 is a real skin tone, 3 is an illustrative wash.
+    const skin =
+      cat(gn, 'paper') === 3 ? pick(WASH, dial(gn, 'skin')) : pick(TONES, dial(gn, 'skin'));
     const wash = silhouette(
       fam.n * (0.8 + dial(gn, 'washScale') * 0.5),
       aspect * (0.92 + dial(gn, 'washSeed') * 0.2),
@@ -778,9 +882,13 @@ export function drawFace(p: p5, gn: Genome, size: number, style: FaceStyle = {})
   headwear(c, gn, outline);
   const e = eyes(c, gn);
   brows(c, gn, e);
-  nose(c, gn, e.y);
+  // A creature gets a snout instead of a nose, and the mouth lands on it.
+  const beast = cat(gn, 'kingdom') === 1;
+  const snout = beast ? muzzle(c, gn) : null;
+  if (!snout) nose(c, gn, e.y);
   mouth(c, gn);
-  beard(c, gn, hh);
+  if (beast) whiskers(c, gn, snout);
+  if (!beast) beard(c, gn, hh);
   spectacles(c, gn, e);
   ears(c, gn);
   extras(c, gn);
@@ -1024,6 +1132,152 @@ function neckwear(c: Ctx, gn: Genome) {
       stroke(p, [[-w * 2.2, y1], [-w * 0.4, y0 + c.hh * 0.07]], c.ink, { passes: 1 });
       stroke(p, [[w * 2.2, y1], [w * 0.4, y0 + c.hh * 0.07]], c.ink, { passes: 1 });
       break;
+    }
+  }
+}
+
+/**
+ * Ears that are not human.
+ *
+ * Four shapes — pointed, floppy, round, tufted — placed on the skull rather
+ * than at the temples, because an animal's ears sit on top of the head and
+ * that placement is most of what makes the silhouette read as a creature.
+ */
+function animalEars(c: Ctx, gn: Genome, kind: number) {
+  const p = c.p;
+  const s = (0.3 + dial(gn, 'earSize') * 0.4) * c.hh;
+  const ink = hairColour(gn);
+  const inner = '#e0b4a8';
+
+  const one = (side: number) => {
+    const bx = side * c.hw * 0.62;
+    const by = -c.hh * 0.78;
+    p.push();
+    p.translate(bx, by);
+    p.rotate(side * 0.28);
+
+    let shape: [number, number][];
+    if (kind === 0) shape = [[-s * 0.42, s * 0.18], [0, -s], [s * 0.42, s * 0.18]];
+    else if (kind === 1)
+      shape = [
+        [-s * 0.34, -s * 0.1], [-s * 0.5, s * 0.5], [-s * 0.2, s * 0.95],
+        [s * 0.18, s * 0.8], [s * 0.34, -s * 0.05],
+      ];
+    else if (kind === 2) shape = ring(0, -s * 0.35, s * 1.05);
+    else
+      shape = [
+        [-s * 0.4, s * 0.2], [-s * 0.24, -s * 0.55], [-s * 0.34, -s * 1.05],
+        [0, -s * 0.72], [s * 0.3, -s * 1.1], [s * 0.22, -s * 0.5], [s * 0.4, s * 0.2],
+      ];
+
+    p.fill(ink);
+    p.noStroke();
+    p.beginShape();
+    for (const [x, y] of shape) p.vertex(x, y);
+    p.endShape('close');
+    // A lighter inner ear, inset.
+    p.fill(inner);
+    p.beginShape();
+    for (const [x, y] of shape) p.vertex(x * 0.5, y * 0.5 - s * 0.06);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, shape, c.ink, { close: true, passes: 1 });
+    p.pop();
+  };
+
+  one(-1);
+  one(1);
+}
+
+/**
+ * A snout.
+ *
+ * Drawn over the lower face and *before* the mouth, so the mouth lands on the
+ * muzzle rather than behind it. The nose is a wedge or a heart depending on the
+ * family, and a beak replaces both.
+ */
+function muzzle(c: Ctx, gn: Genome) {
+  const kind = cat(gn, 'muzzle');
+  if (kind === 0) return null;
+  const p = c.p;
+  const y = c.hh * 0.24;
+  const long = kind === 2 ? 1.5 : kind === 4 ? 0.85 : 1;
+  const w = c.hw * (kind === 4 ? 0.86 : 0.6) * (0.85 + dial(gn, 'noseSize') * 0.4);
+  const h = c.hh * 0.42 * long;
+
+  if (kind === 3) {
+    // A beak: two triangles meeting at a line.
+    const bx = c.turn * 1.2;
+    p.fill('#d8a03c');
+    p.noStroke();
+    p.beginShape();
+    p.vertex(bx - w * 0.5, y - h * 0.1);
+    p.vertex(bx + w * 0.95, y + h * 0.18);
+    p.vertex(bx - w * 0.5, y + h * 0.42);
+    p.endShape('close');
+    p.stroke(LINE);
+    p.noFill();
+    stroke(p, [[bx - w * 0.5, y - h * 0.1], [bx + w * 0.95, y + h * 0.18], [bx - w * 0.5, y + h * 0.42]], c.ink, {
+      close: true,
+      passes: 1,
+    });
+    stroke(p, [[bx - w * 0.5, y + h * 0.16], [bx + w * 0.9, y + h * 0.19]], c.ink, { passes: 1 });
+    return { y: y + h * 0.5, w };
+  }
+
+  // A pale snout patch, then a nose on the end of it.
+  p.fill('#efe0d2');
+  p.noStroke();
+  p.beginShape();
+  for (const [x, yy] of ring(c.turn, y + h * 0.36, w * 2, (h * 1.5) / (w * 2) * 1.4)) p.vertex(x, yy);
+  p.endShape('close');
+  p.stroke(LINE);
+  p.noFill();
+  stroke(p, ring(c.turn, y + h * 0.36, w * 2, (h * 1.5) / (w * 2) * 1.4), c.ink, {
+    close: true,
+    passes: 1,
+  });
+
+  // Nose: a rounded triangle sitting at the top of the snout.
+  const nx = c.turn;
+  const ny = y + h * 0.02;
+  const nw = w * 0.5;
+  p.fill(LINE);
+  p.noStroke();
+  p.beginShape();
+  p.vertex(nx - nw, ny - nw * 0.42);
+  p.vertex(nx + nw, ny - nw * 0.42);
+  p.vertex(nx, ny + nw * 0.6);
+  p.endShape('close');
+  p.stroke(LINE);
+  p.noFill();
+  // The philtrum, down from the nose.
+  stroke(p, [[nx, ny + nw * 0.6], [nx, ny + h * 0.55]], c.ink, { passes: 1 });
+  return { y: ny + h * 0.55, w };
+}
+
+/** Whiskers, either side of the snout. */
+function whiskers(c: Ctx, gn: Genome, at: { y: number; w: number } | null) {
+  const kind = cat(gn, 'whisker');
+  if (kind === 0 || !at) return;
+  const p = c.p;
+  const n = kind === 1 ? 2 : 3;
+  p.noFill();
+  p.stroke(LINE);
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < n; i++) {
+      const t = (i - (n - 1) / 2) / Math.max(1, n);
+      const y0 = at.y - c.hh * 0.12 + t * c.hh * 0.1;
+      stroke(
+        p,
+        [
+          [side * at.w * 0.5, y0],
+          [side * (c.hw * 1.25 + at.w * 0.2), y0 + t * c.hh * 0.3 - c.hh * 0.05],
+        ],
+        c.ink,
+        { passes: 1, weightScale: 0.7 },
+      );
     }
   }
 }

@@ -26,15 +26,25 @@ export const FAMILIES = {
   specs: 6,
   nose: 6,
   mouth: 8,
-  hair: 7,
+  hair: 11,
   beard: 6,
-  ears: 4,
+  /** 0-3 are human ears; 4-7 are pointed, floppy, round and tufted. */
+  ears: 8,
   extra: 10,
-  paper: 3,
+  paper: 4,
   /** Worn on the head: caps, headphones, hoods. */
   wear: 8,
   /** Worn at the neck: a tie, a lanyard, a chain, hoodie strings. */
   neck: 7,
+  /**
+   * Human or creature. Every human set pins this to 0; only the menagerie
+   * opens it, so a committee member cannot sprout a beak by accident.
+   */
+  kingdom: 2,
+  /** A snout, when there is one: short, long, beak, broad, or none. */
+  muzzle: 5,
+  /** Whiskers, and how many. */
+  whisker: 3,
 } as const;
 
 export type Categorical = keyof typeof FAMILIES;
@@ -143,6 +153,9 @@ export function mutate(gn: Genome, r: () => number, amount = 0.18): Genome {
 const WEIGHT: Record<Categorical, number> = {
   wear: 1.4,
   neck: 1.0,
+  kingdom: 2.2,
+  muzzle: 1.5,
+  whisker: 0.7,
   head: 1.5,
   view: 1.2,
   eye: 1.1,
