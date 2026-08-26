@@ -146,7 +146,17 @@ const WASH = [
   '#cfd6d2', '#d8dcc9', '#e9c9c9', '#cdd5df', '#e3d9c4', '#dcd0e0', '#c9dad6',
 ];
 
-export const HAIR_INK = ['#0f0f0f', '#161616', '#241a12', '#2b2118', '#4a3527', '#5a4632', '#7d6a52', '#9a9a9a', '#c9c2b4'];
+/**
+ * Hair, dark to fair and then grey to white.
+ *
+ * The first version ran black through brown straight to grey with no fair hair
+ * anywhere in it, which made every blonde head come out the colour of a filing
+ * cabinet. Order matters: the dial reads as a position along this ramp.
+ */
+export const HAIR_INK = [
+  '#0f0f0f', '#1a1410', '#241a12', '#3a2a1c', '#4a3527', '#5a4632',
+  '#7d6a52', '#a8834a', '#c9a45f', '#ddc68a', '#9a9a9a', '#cfcabc',
+];
 /** Dyed. Reached only when a set turns the `hairLoud` dial up. */
 const HAIR_LOUD = ['#c2392b', '#1f6fb2', '#2f8f5b', '#b8358f', '#d98a1f', '#7a3fc2', '#d8d2c4'];
 const CLOTH = ['#3a4657', '#5a4335', '#2f5148', '#6b2f38', '#43406b', '#7a6a4a', '#2b2b2b'];
@@ -555,21 +565,26 @@ function hair(c: Ctx, gn: Genome, crown: [number, number][]) {
   }
 
   if (kind === 10) {
-    // Long, falling either side of the face and past the jaw.
+    // Long: down both sides and past the jaw, closing across the *hairline*
+    // rather than across the middle of the face. Closing it low is what made
+    // the first version a curtain hanging to the eyebrows.
     p.fill(ink);
     p.noStroke();
-    const fall = c.hh * (0.7 + amount * 0.9);
+    const fall = c.hh * (0.4 + amount * 0.55);
+    const hairline = -c.hh * (0.34 + amount * 0.16);
+    const outer = c.hw * 1.04;
+    const innerX = c.hw * 0.68;
+    const bottom = c.hh * 0.25 + fall;
     p.beginShape();
     for (const [x, y] of top) p.vertex(x * 1.05, y * 1.05);
-    // Down the far side, across below the jaw, and back up the near side.
-    p.vertex(c.hw * 1.12, c.hh * 0.2);
-    p.vertex(c.hw * 1.04, c.hh * 0.2 + fall);
-    p.vertex(c.hw * 0.66, c.hh * 0.2 + fall);
-    p.vertex(c.hw * 0.72, -c.hh * 0.1);
-    p.vertex(-c.hw * 0.72, -c.hh * 0.1);
-    p.vertex(-c.hw * 0.66, c.hh * 0.2 + fall);
-    p.vertex(-c.hw * 1.04, c.hh * 0.2 + fall);
-    p.vertex(-c.hw * 1.12, c.hh * 0.2);
+    p.vertex(outer, c.hh * 0.1);
+    p.vertex(outer * 0.95, bottom);
+    p.vertex(innerX * 0.92, bottom);
+    p.vertex(innerX, hairline);
+    p.vertex(-innerX, hairline);
+    p.vertex(-innerX * 0.92, bottom);
+    p.vertex(-outer * 0.95, bottom);
+    p.vertex(-outer, c.hh * 0.1);
     p.endShape('close');
     p.stroke(LINE);
     p.noFill();
@@ -638,18 +653,24 @@ function beard(c: Ctx, gn: Genome, chin: number) {
     return;
   }
   if (kind === 3) {
-    // Goatee: a dark wedge on the chin.
+    // Goatee: a narrow strip under the lip down to the chin, with a moustache
+    // over it. A wedge from the mouth to the jaw is not a goatee, it is a bib.
     p.fill(ink);
     p.noStroke();
+    const top0 = y + c.hh * 0.06;
+    const bot = chin * (0.6 + amount * 0.22);
     p.beginShape();
-    p.vertex(-w * 0.4, y + 0.03);
-    p.vertex(w * 0.4, y + 0.03);
-    p.vertex(w * 0.18, chin * (0.72 + amount * 0.2));
-    p.vertex(-w * 0.18, chin * (0.72 + amount * 0.2));
+    p.vertex(-w * 0.26, top0);
+    p.vertex(w * 0.26, top0);
+    p.vertex(w * 0.3, bot * 0.78);
+    p.vertex(0, bot);
+    p.vertex(-w * 0.3, bot * 0.78);
     p.endShape('close');
+    p.ellipse(c.turn * 1.2, y - c.hh * 0.13, w * 0.95, 0.04 + amount * 0.02);
     p.stroke(LINE);
     return;
   }
+
   if (kind === 4) {
     // A full beard: the lower face, filled, closed along a line that rises at
     // the sides the way a beard actually meets the ears. Closing it straight
@@ -1126,6 +1147,18 @@ function neckwear(c: Ctx, gn: Genome) {
       p.noFill();
       p.stroke(LINE);
       stroke(p, arc(0, y0 - c.hh * 0.02, c.hw * 1.5, 0.15, Math.PI - 0.15), c.ink, { passes: 1 });
+      break;
+    }
+    case 7: { // a rolled neck, which is a whole personality on its own
+      p.fill(cloth);
+      p.noStroke();
+      p.rect(-c.hw * 0.44, y0 + c.hh * 0.01, c.hw * 0.88, c.hh * 0.2, 0.03);
+      p.stroke(LINE);
+      p.noFill();
+      p.rect(-c.hw * 0.44, y0 + c.hh * 0.01, c.hw * 0.88, c.hh * 0.2, 0.03);
+      stroke(p, [[-c.hw * 0.44, y0 + c.hh * 0.11], [c.hw * 0.44, y0 + c.hh * 0.11]], c.ink, {
+        passes: 1,
+      });
       break;
     }
     default: { // an open collar

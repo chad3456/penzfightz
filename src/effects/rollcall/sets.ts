@@ -36,6 +36,12 @@ export interface FaceSet {
   notes: Record<string, string[]>;
   /** Accent used by the tab and the card. */
   ink: string;
+  /**
+   * A set whose faces are hand-authored rather than found. The search skips it
+   * entirely — there is nothing to optimise when every seat is already spoken
+   * for.
+   */
+  fixed?: boolean;
 }
 
 // Family indices, named so the sets read as intent rather than as numbers.
@@ -46,7 +52,7 @@ const HAIR = {
 const BEARD = { none: 0, tash: 1, curled: 2, goatee: 3, full: 4, stubble: 5 };
 const SPECS = { none: 0, round: 1, square: 2, half: 3, oval: 4, monocle: 5 };
 const WEAR = { none: 0, cap: 1, capBack: 2, cans: 3, hood: 4, band: 5, beanie: 6, visor: 7 };
-const NECK = { none: 0, tie: 1, lanyard: 2, scarf: 3, strings: 4, chain: 5, collar: 6 };
+const NECK = { none: 0, tie: 1, lanyard: 2, scarf: 3, strings: 4, chain: 5, collar: 6, roll: 7 };
 const EARS = { both: 0, left: 1, right: 2, none: 3, pointed: 4, floppy: 5, round: 6, tufted: 7 };
 const MUZZLE = { none: 0, short: 1, long: 2, beak: 3, broad: 4 };
 const EXTRA = {
@@ -368,6 +374,15 @@ export const SETS: FaceSet[] = [
         'Speaks to the desk in the third language they tried.',
       ],
     },
+  },
+  {
+    id: 'waxworks',
+    name: 'The Waxworks',
+    tagline: 'Caricatures. Hand-set, not searched for, and not likenesses.',
+    ink: '#8a6a2f',
+    fixed: true,
+    allow: { kingdom: [0] },
+    notes: { default: ['A caricature, built from two or three props and a proportion.'] },
   },
 ];
 

@@ -23,6 +23,19 @@ const CARD_W = 1;
 const CARD_H = 1;
 const GAP = 0.06;
 
+/** Where a focused set stands: a tidy grid, in front of everyone else. */
+function focusPlace(n: number, total: number): THREE.Vector3 {
+  const cols = Math.max(1, Math.ceil(Math.sqrt(total * 1.6)));
+  const rows = Math.ceil(total / cols);
+  const col = n % cols;
+  const row = Math.floor(n / cols);
+  return new THREE.Vector3(
+    (col - (cols - 1) / 2) * 1.35,
+    ((rows - 1) / 2 - row) * 1.45,
+    7.5,
+  );
+}
+
 export interface WallProps {
   seats: Seat[];
   atlases: Atlas[];
@@ -55,6 +68,7 @@ function Block({
   picked,
   focusSet,
   moved,
+  focusOrder,
   register,
 }: {
   atlas: Atlas;
@@ -65,6 +79,8 @@ function Block({
   picked: number | null;
   focusSet: string | null;
   moved: Map<number, THREE.Vector3>;
+  /** Seat index to its place within the focused set, when one is focused. */
+  focusOrder: Map<number, number>;
   register: (offset: number, mesh: THREE.InstancedMesh | null) => void;
 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
@@ -134,12 +150,17 @@ function Block({
     for (let k = 0; k < atlas.used; k++) {
       const i = offset + k;
       const seat = seats[i];
-      const home = moved.get(i) ?? restingPlace(i, columns, count);
-      const dim = focusSet && seat.set.id !== focusSet;
+      const inFocus = !focusSet || seat.set.id === focusSet;
+      const spot = focusOrder.get(i);
+      const home =
+        moved.get(i) ??
+        (spot !== undefined
+          ? focusPlace(spot, focusOrder.size)
+          : restingPlace(i, columns, count));
       const lift = picked === i ? 1.2 : 0;
       dummy.position.set(home.x, home.y, home.z + lift);
       dummy.rotation.set(0, -home.x * 0.06, 0);
-      const s = dim ? 0.55 : picked === i ? 1.5 : 1;
+      const s = !inFocus ? 0.5 : picked === i ? 1.5 : spot !== undefined ? 1.25 : 1;
       dummy.scale.setScalar(s);
       dummy.updateMatrix();
       m.setMatrixAt(k, dummy.matrix);
@@ -177,12 +198,14 @@ function Picker({
   moved,
   columns,
   count,
+  focusOrder,
   onPick,
 }: {
   blocks: React.MutableRefObject<Map<number, THREE.InstancedMesh>>;
   moved: Map<number, THREE.Vector3>;
   columns: number;
   count: number;
+  focusOrder: Map<number, number>;
   onPick: (i: number) => void;
 }) {
   const { camera, gl, controls } = useThree();
@@ -220,7 +243,10 @@ function Picker({
     const down = (ev: PointerEvent) => {
       const h = hit(ev);
       if (!h) return;
-      const home = moved.get(h.index) ?? restingPlace(h.index, columns, count);
+      const spot = focusOrder.get(h.index);
+      const home =
+        moved.get(h.index) ??
+        (spot !== undefined ? focusPlace(spot, focusOrder.size) : restingPlace(h.index, columns, count));
       const normal = camera.getWorldDirection(new THREE.Vector3()).negate();
       drag.current = {
         index: h.index,
@@ -272,7 +298,7 @@ function Picker({
       el.removeEventListener('pointermove', move);
       el.removeEventListener('pointerup', up);
     };
-  }, [blocks, camera, columns, controls, count, gl, moved, ndc, onPick, ray]);
+  }, [blocks, camera, columns, controls, count, focusOrder, gl, moved, ndc, onPick, ray]);
 
   return null;
 }
@@ -282,6 +308,18 @@ export function FaceWall(props: WallProps) {
   // Cards the viewer has moved. Kept outside React state so a drag does not
   // re-render a thousand instances sixty times a second.
   const [moved] = useState(() => new Map<number, THREE.Vector3>());
+  // Focusing a set brings it to the front in a tidy grid. Dimming the rest and
+  // leaving the focused faces scattered through a wall of fifteen hundred made
+  // the tabs decorative — a set of eleven was simply impossible to find.
+  const focusOrder = useMemo(() => {
+    const m = new Map<number, number>();
+    if (!props.focusSet) return m;
+    let n = 0;
+    seats.forEach((s, i) => {
+      if (s.set.id === props.focusSet) m.set(i, n++);
+    });
+    return m;
+  }, [seats, props.focusSet]);
   // Keyed by offset, not a list. Pushing on mount and emptying on unmount let
   // one block's StrictMode teardown wipe the registry for all four, which left
   // the picker raycasting against nothing.
@@ -310,6 +348,7 @@ export function FaceWall(props: WallProps) {
           picked={props.picked}
           focusSet={props.focusSet}
           moved={moved}
+          focusOrder={focusOrder}
           register={register}
         />
       ))}
@@ -318,6 +357,7 @@ export function FaceWall(props: WallProps) {
         moved={moved}
         columns={columns}
         count={seats.length}
+        focusOrder={focusOrder}
         onPick={props.onPick}
       />
       <OrbitControls

@@ -62,7 +62,15 @@ export function RollCall({ onExit }: { onExit: () => void }) {
   }, [seed]);
 
   const people = useMemo(
-    () => seats.map((s, i) => personaFor(s.genome, i, s.set)),
+    () =>
+      seats.map((s, i) => {
+        const p = personaFor(s.genome, i, s.set);
+        // A caricature carries its own name and its own note; the generated
+        // ones would be nonsense over a face that was set by hand.
+        return s.likeness
+          ? { ...p, name: s.likeness.name, handle: 'a caricature', note: s.likeness.signature }
+          : p;
+      }),
     [seats],
   );
 
@@ -109,7 +117,9 @@ export function RollCall({ onExit }: { onExit: () => void }) {
     <div className="roll roll--wall">
       <div className="roll__bar">
         <div>
-          <div className="roll__eyebrow">the census · {PER_SET * SETS.length} faces · none of them drawn</div>
+          <div className="roll__eyebrow">
+            the census · {seats.length || PER_SET * SETS.length} faces · none of them drawn
+          </div>
           <h1 className="roll__title">Roll Call</h1>
         </div>
         <div className="roll__actions">
@@ -200,7 +210,9 @@ export function RollCall({ onExit }: { onExit: () => void }) {
                 {whoSet?.name} · no. {String(who.roll).padStart(4, '0')}
               </div>
               <div className="roll__name">{who.name}</div>
-              <div className="roll__handle">known to the room as “{who.handle}”</div>
+              <div className="roll__handle">
+                {seats[picked!]?.likeness ? 'a caricature — not a likeness' : `known to the room as “${who.handle}”`}
+              </div>
               <ul className="roll__traits">
                 {who.traits.map((t) => (
                   <li key={t}>{t}</li>

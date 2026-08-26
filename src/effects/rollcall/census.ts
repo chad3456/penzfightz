@@ -1,5 +1,6 @@
 import { distance, features, mulberry, type Genome } from './genome';
 import { SETS, mutateWithin, sampleGenome, type FaceSet } from './sets';
+import { LIKENESSES } from './likeness';
 
 /**
  * Building a census of a thousand.
@@ -25,6 +26,8 @@ export interface Seat {
   set: FaceSet;
   /** Index within the whole census. */
   index: number;
+  /** Set only for the hand-authored caricatures. */
+  likeness?: { id: string; name: string; signature: string };
 }
 
 export interface CensusReport {
@@ -89,7 +92,20 @@ export function buildCensus(
     return best;
   };
 
-  for (const set of SETS) {
+  // Searched sets first, hand-authored ones last, whatever order SETS is in.
+  // `feats` runs parallel to `seats` only for searched faces, and processing a
+  // fixed set in the middle would silently misalign every index after it.
+  const ordered = [...SETS.filter((x) => !x.fixed), ...SETS.filter((x) => x.fixed)];
+  for (const set of ordered) {
+    if (set.fixed) {
+      // Hand-authored seats. Nothing to search for, and nothing to measure
+      // against — including them in the spread figures would compare a made
+      // thing to a found one.
+      for (const l of LIKENESSES) {
+        seats.push({ genome: l.genome, set, index: seats.length, likeness: l });
+      }
+      continue;
+    }
     for (let n = 0; n < perSet; n++) {
       let best: Genome | null = null;
       let bestF: number[] = [];
@@ -171,15 +187,18 @@ function measure(
   // The same census drawn straight from each set's prior, no search at all.
   const rr = mulberry(seed ^ 0x9e3779b9);
   const base: number[][] = [];
-  const perSet = seats.length / SETS.length;
-  for (const set of SETS) for (let i = 0; i < perSet; i++) base.push(features(sampleGenome(set, rr)));
+  const searched = SETS.filter((x) => !x.fixed);
+  const perSet = Math.round(feats.length / Math.max(1, searched.length));
+  for (const set of searched)
+    for (let i = 0; i < perSet; i++) base.push(features(sampleGenome(set, rr)));
   const bn = nearest(base);
 
   // Nearest neighbour restricted to the same set.
   const withinNearest = (fs: number[][]) => {
     const out = new Array(fs.length).fill(Infinity);
-    const per = fs.length / SETS.length;
-    for (let s = 0; s < SETS.length; s++) {
+    const nSets = SETS.filter((x) => !x.fixed).length;
+    const per = fs.length / Math.max(1, nSets);
+    for (let s = 0; s < nSets; s++) {
       const a = s * per;
       const b = a + per;
       for (let i = a; i < b; i++)

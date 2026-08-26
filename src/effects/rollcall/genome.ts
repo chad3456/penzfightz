@@ -35,7 +35,7 @@ export const FAMILIES = {
   /** Worn on the head: caps, headphones, hoods. */
   wear: 8,
   /** Worn at the neck: a tie, a lanyard, a chain, hoodie strings. */
-  neck: 7,
+  neck: 8,
   /**
    * Human or creature. Every human set pins this to 0; only the menagerie
    * opens it, so a committee member cannot sprout a beak by accident.

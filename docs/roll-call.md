@@ -157,6 +157,38 @@ staffroom and everybody else, because the human sets were still sampling the
 whole family. `kingdom` is the single switch now, and the ear family is read
 modulo four when it is off.
 
+## The Waxworks, and the law around it
+
+Eleven public figures, hand-authored rather than searched for. Everything else
+here is found by an optimiser; these are set by hand, because a caricature is an
+argument about which two or three things a face is carried around by, and no
+distance metric knows that. Rimless circles and a black roll-neck. A side
+parting and large square frames. A full white beard.
+
+What is encoded is a **visual signature**, not a likeness — the medium cannot do
+likeness, and anything claiming otherwise from forty-four doodle genes would be
+lying. If one reads, it reads for the same reason a four-stroke newspaper
+cartoon reads.
+
+On the legal shape of it, because it is a fair question and the usual framing is
+slightly wrong. A fictional *character* is copyright. A real person's face is
+not copyrightable — but real people are protected by **personality rights**,
+which is a separate body of law and one that is actively enforced, in India
+especially, where the courts have granted protection to several film
+personalities in recent years. Those rights are aimed at unauthorised commercial
+use and false endorsement. They are not aimed at caricature, which is why
+editorial cartoonists draw heads of government every morning.
+
+So: non-commercial, plainly stylised, labelled as caricature on the card itself,
+no suggestion that anybody endorses anything, and notes that stay on visual
+signature rather than on commentary — particularly for the sitting head of
+government, where the line between caricature and editorialising is worth not
+crossing by accident.
+
+The set is marked `fixed`, which makes the search skip it entirely and keeps it
+out of the spread figures. Comparing a hand-made thing to a found one would make
+both numbers meaningless.
+
 ## From a photograph
 
 Pick a picture, drag three markers onto both eyes and the chin, and the studio
@@ -177,6 +209,13 @@ background, sampled from the four corners. And every unmeasured gene was left to
 the seed, which produced a portrait wearing a cap — covering the hair it had
 just measured — and a monocle. Anything that would hide or contradict a
 measurement is pinned off.
+
+## Focusing a set
+
+Picking a set brings it forward into a tidy grid and shrinks everyone else.
+Dimming the rest in place made the tabs decorative: a set of eleven scattered
+through a wall of fifteen hundred is not findable, however faded its neighbours
+are.
 
 ## Three thousand cards, four draw calls
 

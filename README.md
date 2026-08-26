@@ -169,7 +169,7 @@ exported from `rosette.ts` so there is one hand on the site rather than two.
 
 ## Roll Call
 
-Fifteen hundred and thirty-six faces on the effects shelf, none of them drawn. Each is thirty-nine
+Fifteen hundred and forty-seven faces on the effects shelf, none of them drawn. Each is thirty-nine
 numbers, and the drawing code is a pure function of them — a superellipse
 silhouette, a hand that wanders rather than jitters, a colour wash deliberately
 printed off the line, and no symmetry anywhere. The persona is read off the same
@@ -182,6 +182,13 @@ generator narrowed twelve ways rather than twelve generators. Animals are one
 gene, not a separate pipeline. Skin runs a full twelve-step ramp and hair
 includes coils, locs, buns and long hair; place is context and dress rather than
 face shape, because nationality is not a facial measurement.
+
+**The Waxworks** is eleven public figures, hand-authored rather than searched
+for, and labelled on the card as caricature rather than likeness — the medium
+cannot do likeness. A fictional character is copyright; a real face is not, but
+real people are protected by personality rights, which target commercial use and
+false endorsement rather than caricature. Non-commercial, plainly stylised, no
+endorsement implied, notes on visual signature rather than commentary.
 
 **From a photograph:** pick a picture, drag three markers onto the eyes and
 chin, and it measures tone, proportion, hair and beard and sets those nine
