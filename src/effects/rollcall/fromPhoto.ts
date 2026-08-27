@@ -1,4 +1,6 @@
-import { DIALS, FAMILIES, GENE_COUNT, mulberry, type Categorical, type Dial, type Genome } from './genome';
+import { DIALS, FAMILIES, GENE_COUNT,
+  PINNED,
+  SPECIES_MASK, mulberry, type Categorical, type Dial, type Genome } from './genome';
 import { HAIR_INK, TONES } from './face';
 
 /**
@@ -209,10 +211,15 @@ const setDial = (g: number[], k: Dial, v: number) => {
  */
 export function genomeFromReading(reading: Reading, seed: number): Genome {
   const r = mulberry(seed);
-  const g: number[] = Array.from({ length: GENE_COUNT }, () => r());
+  // Genes a person does not draw — petal counts, which piece of stationery —
+  // are held at the same constant every other person is held at, so they cannot
+  // drift and cannot show.
+  const mask = SPECIES_MASK[0];
+  const g: number[] = Array.from({ length: GENE_COUNT }, (_, i) => (mask[i] ? r() : PINNED));
 
   // Always a person, never a creature, and always with a wash so the measured
   // tone is actually visible.
+  setCat(g, 'species', 0);
   setCat(g, 'kingdom', 0);
   setCat(g, 'paper', 1);
   setDial(g, 'skin', reading.tone);

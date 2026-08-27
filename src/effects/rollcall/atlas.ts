@@ -1,5 +1,5 @@
 import p5 from 'p5';
-import { drawFace } from './face';
+import { drawItem } from './item';
 import type { Seat } from './census';
 
 /**
@@ -36,8 +36,8 @@ export interface BakeOptions {
 const idle = () => new Promise<void>((r) => setTimeout(r, 0));
 
 export async function bakeAtlases(seats: Seat[], opts: BakeOptions = {}): Promise<Atlas[]> {
-  const cell = opts.cell ?? 128;
-  const grid = opts.grid ?? 16;
+  const cell = opts.cell ?? 100;
+  const grid = opts.grid ?? 20;
   const perAtlas = grid * grid;
   const atlasCount = Math.ceil(seats.length / perAtlas);
   const out: Atlas[] = [];
@@ -77,7 +77,7 @@ export async function bakeAtlases(seats: Seat[], opts: BakeOptions = {}): Promis
         const cy = Math.floor(k / grid) * cell + cell / 2;
         g.push();
         g.translate(cx, cy);
-        drawFace(g as unknown as p5, seats[i].genome, cell * 0.86, { colour: true });
+        drawItem(g as unknown as p5, seats[i].genome, cell * 0.86, { colour: true });
         g.pop();
         done++;
         // Yield often enough that the progress bar actually moves.

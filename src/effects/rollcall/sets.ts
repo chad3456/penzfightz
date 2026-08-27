@@ -2,6 +2,8 @@ import {
   DIALS,
   FAMILIES,
   GENE_COUNT,
+  PINNED,
+  SPECIES_MASK,
   type Categorical,
   type Dial,
   type Genome,
@@ -56,6 +58,15 @@ const NECK = { none: 0, tie: 1, lanyard: 2, scarf: 3, strings: 4, chain: 5, coll
 const EARS = { both: 0, left: 1, right: 2, none: 3, pointed: 4, floppy: 5, round: 6, tufted: 7 };
 const MUZZLE = { none: 0, short: 1, long: 2, beak: 3, broad: 4, croc: 5, fish: 6, gape: 7 };
 const FIN = { none: 0, dorsal: 1, gills: 2, pectoral: 3, frill: 4 };
+const PETAL = { round: 0, lance: 1, heart: 2, spoon: 3, ragged: 4, spike: 5, trumpet: 6, quill: 7 };
+const CENTRE = { disc: 0, spiral: 1, button: 2, stamens: 3, seeds: 4, open: 5 };
+const STEM = { straight: 0, curved: 1, crooked: 2, cut: 3 };
+const LEAF = { none: 0, pair: 1, single: 2, whorl: 3, sheath: 4 };
+const TOOL = {
+  pencil: 0, ballpoint: 1, fountain: 2, ruler: 3, eraser: 4, sharpener: 5,
+  compass: 6, protractor: 7, scissors: 8, glue: 9, chalk: 10, brush: 11,
+};
+const LIVERY = { plain: 0, banded: 1, striped: 2, dotted: 3, twoTone: 4, chewed: 5 };
 const EXTRA = {
   none: 0, cigarette: 1, plaster: 2, earring: 3, sweat: 4,
   stud: 5, mole: 6, bindi: 7, scar: 8, freck: 9,
@@ -68,6 +79,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Section B, and whoever is sitting at the back of it.',
     ink: '#1b3a8f',
     allow: {
+      species: [0],
       kingdom: [0],
       wear: [WEAR.none, WEAR.none, WEAR.band, WEAR.cap],
       neck: [NECK.none, NECK.none, NECK.collar],
@@ -92,6 +104,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Chalk on the sleeve, opinions on everything.',
     ink: '#6b4a2b',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.bald, HAIR.bald, HAIR.hatch, HAIR.fringe, HAIR.curls],
       beard: [BEARD.tash, BEARD.tash, BEARD.curled, BEARD.goatee, BEARD.full, BEARD.stubble],
@@ -119,6 +132,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Lanyards, standups, and a meeting that could have been a note.',
     ink: '#2f6f6f',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.cap, HAIR.hatch, HAIR.fringe, HAIR.bald, HAIR.curls],
       beard: [BEARD.none, BEARD.none, BEARD.stubble, BEARD.goatee],
@@ -144,6 +158,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Caps indoors, cans on, replying in three words or fewer.',
     ink: '#8a2f7a',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.fringe, HAIR.scribble, HAIR.tufts, HAIR.curls, HAIR.cap],
       beard: [BEARD.none, BEARD.none, BEARD.none, BEARD.stubble],
@@ -169,6 +184,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Recognisable as a type. Not as anybody.',
     ink: '#8a2b2b',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.scribble, HAIR.curls, HAIR.cap, HAIR.tufts, HAIR.bald, HAIR.fringe],
       beard: [BEARD.none, BEARD.full, BEARD.tash, BEARD.goatee, BEARD.stubble],
@@ -195,6 +211,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Last one out, forty minutes of nobody speaking.',
     ink: '#3d4a6b',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.scribble, HAIR.bald, HAIR.fringe, HAIR.tufts],
       wear: [WEAR.hood, WEAR.hood, WEAR.beanie, WEAR.cans, WEAR.none],
@@ -219,6 +236,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Nine people, one microphone, no decision.',
     ink: '#5a4a1f',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.bald, HAIR.bald, HAIR.hatch, HAIR.fringe],
       beard: [BEARD.tash, BEARD.curled, BEARD.full, BEARD.none],
@@ -245,6 +263,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Two coaches, one head count, somebody already lost a cap.',
     ink: '#2f7a3f',
     allow: {
+      species: [0],
       kingdom: [0],
       head: [0, 3, 4, 6, 6],
       hair: [HAIR.tufts, HAIR.curls, HAIR.fringe, HAIR.scribble, HAIR.cap],
@@ -270,6 +289,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Same forty-six genes. Ears on top of the head.',
     ink: '#7a5a2f',
     allow: {
+      species: [0],
       kingdom: [1],
       ears: [EARS.pointed, EARS.floppy, EARS.round, EARS.tufted],
       muzzle: [MUZZLE.short, MUZZLE.short, MUZZLE.long, MUZZLE.beak, MUZZLE.broad],
@@ -303,6 +323,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Big hair, bigger jumpers, a laugh track you cannot see.',
     ink: '#b06a2f',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.curls, HAIR.fringe, HAIR.scribble, HAIR.bun, HAIR.long, HAIR.cap, HAIR.coils],
       beard: [BEARD.none, BEARD.none, BEARD.stubble, BEARD.tash],
@@ -331,6 +352,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Everyone here is right, and will tell you at length.',
     ink: '#8a3a3a',
     allow: {
+      species: [0],
       kingdom: [0],
       hair: [HAIR.scribble, HAIR.bald, HAIR.fringe, HAIR.bun, HAIR.tufts, HAIR.locs],
       beard: [BEARD.full, BEARD.goatee, BEARD.tash, BEARD.stubble, BEARD.none, BEARD.curled],
@@ -362,6 +384,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Gate forty-one. Everybody from everywhere, waiting.',
     ink: '#2f5a7a',
     allow: {
+      species: [0],
       kingdom: [0],
       wear: [WEAR.none, WEAR.none, WEAR.cap, WEAR.beanie, WEAR.hood, WEAR.band, WEAR.cans],
       neck: [NECK.scarf, NECK.collar, NECK.lanyard, NECK.none, NECK.chain, NECK.strings],
@@ -385,6 +408,7 @@ export const SETS: FaceSet[] = [
     tagline: 'Gills, crests and a jaw longer than the skull it is on.',
     ink: '#2f6f8a',
     allow: {
+      species: [0],
       kingdom: [1],
       fin: [FIN.dorsal, FIN.gills, FIN.gills, FIN.pectoral, FIN.pectoral, FIN.frill],
       // No beak: the bird's orange wedge is unmistakably a bird's, and one of
@@ -430,12 +454,77 @@ export const SETS: FaceSet[] = [
     },
   },
   {
+    id: 'press',
+    name: 'The Flower Press',
+    tagline: 'Everything that ended up between the pages of a heavy book.',
+    ink: '#8a3f6a',
+    allow: {
+      species: [1],
+      // The whole family, weighted towards the ones a child would draw.
+      petal: [
+        PETAL.round, PETAL.round, PETAL.lance, PETAL.heart, PETAL.spoon,
+        PETAL.ragged, PETAL.spike, PETAL.trumpet, PETAL.quill,
+      ],
+      centre: [CENTRE.disc, CENTRE.disc, CENTRE.spiral, CENTRE.button, CENTRE.stamens, CENTRE.seeds, CENTRE.open],
+      stem: [STEM.straight, STEM.curved, STEM.curved, STEM.crooked, STEM.cut],
+      leaf: [LEAF.none, LEAF.pair, LEAF.pair, LEAF.single, LEAF.whorl, LEAF.sheath],
+      paper: [1, 2, 3, 0],
+    },
+    dials: { petals: [0, 1], petalLen: [0.2, 1], stemLen: [0.2, 1] },
+    notes: {
+      default: [
+        'Picked on the walk back from school and flat by Thursday.',
+        'Went in at page four hundred and has not been looked at since.',
+        'Kept because of who handed it over, not because of what it was.',
+        'Came out of the book the colour of weak tea and was kept anyway.',
+        'Grew in the crack between the wall and the drain and did very well there.',
+        'One of nine identical ones. This is the one that got pressed.',
+        'Taped to the inside cover of a project on the water cycle.',
+        'Still smells faintly of the book.',
+      ],
+    },
+  },
+  {
+    id: 'geometrybox',
+    name: 'The Geometry Box',
+    tagline: 'What was actually in the tin, as opposed to what was meant to be.',
+    ink: '#2f5a3f',
+    allow: {
+      species: [2],
+      tool: [
+        TOOL.pencil, TOOL.pencil, TOOL.ballpoint, TOOL.ballpoint, TOOL.fountain,
+        TOOL.ruler, TOOL.eraser, TOOL.sharpener, TOOL.compass, TOOL.protractor,
+        TOOL.scissors, TOOL.glue, TOOL.chalk, TOOL.brush,
+      ],
+      livery: [
+        LIVERY.plain, LIVERY.banded, LIVERY.banded, LIVERY.striped,
+        LIVERY.dotted, LIVERY.twoTone, LIVERY.chewed,
+      ],
+      paper: [1, 2, 3, 0],
+    },
+    dials: { toolLen: [0.1, 1], toolWear: [0, 1] },
+    notes: {
+      default: [
+        'Borrowed in the second week of term and never seen again.',
+        'Has somebody else’s name scratched off the side of it.',
+        'Chewed at one end by a person who denies chewing it.',
+        'Works, but only if you hold it at exactly the wrong angle.',
+        'Bought new in June, destroyed by August.',
+        'Lives at the bottom of the bag with the pencil shavings.',
+        'The good one. Not to be lent to anybody, for any reason.',
+        'Came free with something and has outlasted the something.',
+        'Sharpened down to a stub and still in service.',
+        'Nobody has ever used this for its stated purpose.',
+      ],
+    },
+  },
+  {
     id: 'waxworks',
     name: 'The Waxworks',
     tagline: 'Caricatures. Hand-set, not searched for, and not likenesses.',
     ink: '#8a6a2f',
     fixed: true,
-    allow: { kingdom: [0] },
+    allow: { species: [0], kingdom: [0] },
     notes: { default: ['A caricature, built from two or three props and a proportion.'] },
   },
 ];
@@ -443,6 +532,9 @@ export const SETS: FaceSet[] = [
 export const SET_BY_ID = Object.fromEntries(SETS.map((s) => [s.id, s])) as Record<string, FaceSet>;
 
 const CATS = Object.keys(FAMILIES) as Categorical[];
+
+/** What a set draws. Taken from its own pin, because every set pins `species`. */
+export const speciesOf = (set: FaceSet): number => set.allow?.species?.[0] ?? 0;
 
 /**
  * Draw a genome from a set's prior.
@@ -455,7 +547,14 @@ const CATS = Object.keys(FAMILIES) as Categorical[];
  */
 export function sampleGenome(set: FaceSet, r: () => number): Genome {
   const g: number[] = new Array(GENE_COUNT);
+  const mask = SPECIES_MASK[speciesOf(set)];
   CATS.forEach((k, i) => {
+    // A gene this species never draws is held at a constant, so it contributes
+    // nothing to the distance metric and the search cannot bank it as novelty.
+    if (!mask[i]) {
+      g[i] = PINNED;
+      return;
+    }
     const allow = set.allow?.[k];
     if (allow && allow.length) {
       const choice = allow[Math.floor(r() * allow.length)];
@@ -466,8 +565,13 @@ export function sampleGenome(set: FaceSet, r: () => number): Genome {
     }
   });
   DIALS.forEach((d, i) => {
+    const at = CATS.length + i;
+    if (!mask[at]) {
+      g[at] = PINNED;
+      return;
+    }
     const range = set.dials?.[d];
-    g[CATS.length + i] = range ? range[0] + r() * (range[1] - range[0]) : r();
+    g[at] = range ? range[0] + r() * (range[1] - range[0]) : r();
   });
   return { g };
 }

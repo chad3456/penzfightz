@@ -3,7 +3,8 @@ import p5 from 'p5';
 import { buildCensus, type CensusReport, type Seat } from './census';
 import type { Genome } from './genome';
 import { bakeAtlases, type Atlas } from './atlas';
-import { drawFace, PAPER } from './face';
+import { PAPER } from './face';
+import { drawItem } from './item';
 import { FaceWall } from './FaceWall';
 import { personaFor, type Persona } from './persona';
 import { SETS } from './sets';
@@ -13,14 +14,15 @@ import { sfx } from '../../lib/audio';
 /**
  * Roll Call.
  *
- * Fifteen hundred faces across fifteen sets, standing on the surface of a
- * globe you can orbit, fly inside, and pick cards off. Hovering one enlarges it
+ * Two thousand things across seventeen sets — people, creatures, pressed
+ * flowers and the contents of a geometry box — standing on the surface of a
+ * globe you can turn, fly inside, and pick cards off. Hovering one enlarges it
  * where it stands and opens the reading of it beside the pointer; clicking one
  * opens the full card.
  *
- * Nothing here is a picture. Every face is forty-six numbers found by novelty
- * search, drawn by one pure function in p5, baked into texture atlases and put
- * on instanced cards. The persona is read off the same numbers, which is why
+ * Nothing here is a picture. Every one of them is sixty-four numbers found by
+ * novelty search, drawn by one pure function in p5, baked into texture atlases
+ * and put on instanced cards. The persona is read off the same numbers, which is why
  * the note under a name always describes the face above it.
  */
 
@@ -61,7 +63,7 @@ function InkFace({ genome, size, className }: { genome: Genome; size: number; cl
         q.background(PAPER[0]);
         q.push();
         q.translate(size / 2, size * 0.513);
-        drawFace(q, live.current, size * 0.82, { colour: true });
+        drawItem(q, live.current, size * 0.82, { colour: true });
         q.pop();
       };
     }, mount);
@@ -156,7 +158,7 @@ export function RollCall({ onExit }: { onExit: () => void }) {
       <div className="roll__bar">
         <div>
           <div className="roll__eyebrow">
-            the census · {seats.length || PER_SET * SETS.length} faces · none of them drawn
+            the census · {seats.length || PER_SET * SETS.length} things · none of them drawn
           </div>
           <h1 className="roll__title">Roll Call</h1>
         </div>
@@ -221,15 +223,15 @@ export function RollCall({ onExit }: { onExit: () => void }) {
             </div>
             <div className="roll__loadtext">
               {seats.length
-                ? `drawing face ${Math.round(progress * seats.length)} of ${seats.length}`
-                : 'searching for a thousand faces that are not each other'}
+                ? `inking ${Math.round(progress * seats.length)} of ${seats.length}`
+                : 'searching for two thousand things that are not each other'}
             </div>
           </div>
         )}
       </div>
 
       <div className="roll__foot">
-        <span className="roll__hint">drag to orbit · scroll to fly inside · hover to read a face · drag one to move it</span>
+        <span className="roll__hint">drag to turn · scroll to fly inside · hover to read one · click for the detail · shift-drag to pull one off</span>
         {report && (
           <span className="roll__stats2">
             nearest neighbour within a set <b>{report.withinMin.toFixed(2)}</b> against{' '}
@@ -295,7 +297,7 @@ export function RollCall({ onExit }: { onExit: () => void }) {
               </ul>
               <p className="roll__note">{who.note}</p>
               <details className="roll__genes">
-                <summary>the {seats[picked!].genome.g.length} numbers this face is</summary>
+                <summary>the {seats[picked!].genome.g.length} numbers this is</summary>
                 <code>
                   {seats[picked!].genome.g.map((v) => v.toFixed(3)).join('  ')}
                 </code>

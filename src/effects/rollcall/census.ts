@@ -1,4 +1,4 @@
-import { distance, features, mulberry, type Genome } from './genome';
+import { dist2, mulberry, traits, type Genome, type Traits } from './genome';
 import { SETS, mutateWithin, sampleGenome, type FaceSet } from './sets';
 import { LIKENESSES } from './likeness';
 
@@ -71,22 +71,31 @@ export function buildCensus(
   const t0 = Date.now();
 
   const seats: Seat[] = [];
-  const feats: number[][] = [];
-  /** Feature rows grouped by set, so the sample can be drawn where it matters. */
+  const feats: Traits[] = [];
+  /** Trait rows grouped by set, so the sample can be drawn where it matters. */
   const bySet = new Map<string, number[]>();
   let proposalCount = 0;
 
-  const novelty = (f: number[], setId: string) => {
+  /**
+   * Distance to the nearest seated neighbour, squared.
+   *
+   * Squared throughout: every use of this is a comparison against another
+   * novelty score, and squaring is monotonic, so the root is never taken. The
+   * running best doubles as the cutoff handed to `dist2`, which lets a pair
+   * that is already further away than the current winner stop being measured
+   * partway through.
+   */
+  const novelty = (f: Traits, setId: string) => {
     let best = Infinity;
     const mine = bySet.get(setId) ?? [];
     for (let i = 0; i < mine.length; i++) {
-      const d = distance(f, feats[mine[i]]);
+      const d = dist2(f, feats[mine[i]], best);
       if (d < best) best = d;
     }
     // A thin spread across everyone else, so two sets cannot converge unnoticed.
     const step = Math.max(1, Math.floor(feats.length / OTHER_CAP));
     for (let i = 0; i < feats.length; i += step) {
-      const d = distance(f, feats[i]);
+      const d = dist2(f, feats[i], best);
       if (d < best) best = d;
     }
     return best;
@@ -108,7 +117,7 @@ export function buildCensus(
     }
     for (let n = 0; n < perSet; n++) {
       let best: Genome | null = null;
-      let bestF: number[] = [];
+      let bestF: Traits | null = null;
       let bestScore = -1;
       const mine = bySet.get(set.id) ?? [];
 
@@ -118,7 +127,7 @@ export function buildCensus(
           mine.length && k % 2 === 1
             ? mutateWithin(set, seats[mine[Math.floor(r() * mine.length)]].genome, r, 0.6)
             : sampleGenome(set, r);
-        const f = features(g);
+        const f = traits(g);
         const s = feats.length ? novelty(f, set.id) : 1;
         if (s > bestScore) {
           bestScore = s;
@@ -132,7 +141,7 @@ export function buildCensus(
         for (let k = 0; k < climbs && stale < 6; k++) {
           proposalCount++;
           const g = mutateWithin(set, best!, r, 0.35);
-          const f = features(g);
+          const f = traits(g);
           const s = novelty(f, set.id);
           if (s > bestScore) {
             bestScore = s;
@@ -145,7 +154,7 @@ export function buildCensus(
 
       const index = seats.length;
       seats.push({ genome: best!, set, index });
-      feats.push(bestF);
+      feats.push(bestF!);
       if (!bySet.has(set.id)) bySet.set(set.id, []);
       bySet.get(set.id)!.push(index);
     }
@@ -166,49 +175,67 @@ export function buildCensus(
  */
 function measure(
   seats: Seat[],
-  feats: number[][],
+  feats: Traits[],
   seed: number,
   proposals: number,
   ms: number,
 ): CensusReport {
-  const nearest = (fs: number[][]) => {
-    const out = new Array(fs.length).fill(Infinity);
+  /**
+   * Every pair, both ways, with each row's running minimum as its own cutoff.
+   *
+   * The cutoff is what makes the exhaustive sweep affordable at this size. It
+   * is not an approximation — the answer is bit-identical to measuring every
+   * pair in full — it just stops adding terms to a sum that has already lost.
+   * Rows are seeded left to right, so by the time a row is halfway across its
+   * cutoff is usually tight enough to reject a pair inside the first few genes.
+   */
+  const nearest = (fs: Traits[]) => {
+    const out = new Float64Array(fs.length).fill(Infinity);
     for (let i = 0; i < fs.length; i++) {
+      const a = fs[i];
+      let bi = out[i];
       for (let j = i + 1; j < fs.length; j++) {
-        const d = distance(fs[i], fs[j]);
-        if (d < out[i]) out[i] = d;
+        const cut = bi < out[j] ? out[j] : bi;
+        const d = dist2(a, fs[j], cut);
+        if (d < bi) bi = d;
         if (d < out[j]) out[j] = d;
       }
+      out[i] = bi;
     }
-    return out;
+    // Squared throughout; rooted once, here.
+    return Array.from(out, Math.sqrt);
   };
 
   const mine = nearest(feats);
   // The same census drawn straight from each set's prior, no search at all.
   const rr = mulberry(seed ^ 0x9e3779b9);
-  const base: number[][] = [];
+  const base: Traits[] = [];
   const searched = SETS.filter((x) => !x.fixed);
   const perSet = Math.round(feats.length / Math.max(1, searched.length));
   for (const set of searched)
-    for (let i = 0; i < perSet; i++) base.push(features(sampleGenome(set, rr)));
+    for (let i = 0; i < perSet; i++) base.push(traits(sampleGenome(set, rr)));
   const bn = nearest(base);
 
   // Nearest neighbour restricted to the same set.
-  const withinNearest = (fs: number[][]) => {
-    const out = new Array(fs.length).fill(Infinity);
+  const withinNearest = (fs: Traits[]) => {
+    const out = new Float64Array(fs.length).fill(Infinity);
     const nSets = SETS.filter((x) => !x.fixed).length;
     const per = fs.length / Math.max(1, nSets);
     for (let s = 0; s < nSets; s++) {
       const a = s * per;
       const b = a + per;
-      for (let i = a; i < b; i++)
+      for (let i = a; i < b; i++) {
+        let bi = out[i];
         for (let j = i + 1; j < b; j++) {
-          const d = distance(fs[i], fs[j]);
-          if (d < out[i]) out[i] = d;
+          const cut = bi < out[j] ? out[j] : bi;
+          const d = dist2(fs[i], fs[j], cut);
+          if (d < bi) bi = d;
           if (d < out[j]) out[j] = d;
         }
+        out[i] = bi;
+      }
     }
-    return out;
+    return Array.from(out, Math.sqrt);
   };
   const win = withinNearest(feats);
   const bwin = withinNearest(base);

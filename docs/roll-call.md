@@ -1,6 +1,6 @@
-# Roll Call: sixteen hundred faces, none of them drawn
+# Roll Call: two thousand things, none of them drawn
 
-Every face on the register is forty-six numbers. There is no sprite sheet, no
+Every entry on the register is sixty-four numbers. There is no sprite sheet, no
 set of presets and no picture anywhere in the repository — the drawing code is
 a pure function from a genome to ink on paper, and so is the persona, which is
 why the note under a name always describes the face above it.
@@ -105,24 +105,24 @@ whichever cell the pointer happened to be over. Selection is a DOM listener on
 the canvas now, going through the bounding box because the canvas is laid out at
 100% width and screen pixels are not sketch pixels.
 
-## Fifteen sets from one generator
+## Seventeen sets from one generator
 
 A set is not a second generator. It is a *prior*: a list of which families may
 appear and which range each dial is held to. The corporate floor gets neat hair
 and lanyards, the group chat gets caps and dyed fringes, and neither is
 special-cased anywhere in the drawing code.
 
-That distinction is the whole point. Fifteen hard-coded sets would be fifteen
-things to maintain and fifteen chances for one to look bolted on; fifteen
-narrowings of one distribution means anything added to the drawing shows up in
-all of them at once.
+That distinction is the whole point. Seventeen hard-coded sets would be
+seventeen things to maintain and seventeen chances for one to look bolted on;
+seventeen narrowings of one distribution means anything added to the drawing
+shows up in all of them at once.
 Repeats in an allow-list act as weights, so `hair: [bald, bald, hatch]` gives
 twice as many bald heads as hatched ones.
 
 **On the Cameo set.** It contains archetypes — the rockstar, the anchor, the
 founder — and no real people. Generating recognisable likenesses of actual
 public figures is somebody's right of publicity and not something to put on a
-public site; and a system whose whole vocabulary is forty-six doodle genes could
+public site; and a system whose whole vocabulary is sixty-four doodle genes could
 not resolve to a specific person if it tried. What it can do is a type, which is
 what is here.
 
@@ -193,6 +193,53 @@ fish's genes and a completely useless thing to say about one; without a
 creature branch in front of the human rules, the entire tank came back described
 as recently shaved.
 
+## Things that are not people
+
+A flower is not a second generator, and neither is a ruler. `species` is one
+gene — somebody, a bloom, a piece of kit — and it decides which handful of the
+sixty-four the renderer reads. Everything upstream is indifferent: the same
+novelty search, the same distance metric, the same atlas bake, the same
+instanced card, the same persona layer. `item.ts` is nine lines and it is the
+only place in the project that knows there is more than one kind of thing.
+
+**The Flower Press.** Eight petal families, six centres, four stems, five leaf
+arrangements. What stops a generated flower reading as a symmetry exercise is
+that *no two petals are the same petal* — laying one shape around a circle at
+equal angles gives you a rosette, which is a pattern, not a flower, so every
+petal gets its own length, width and angular nudge, and the back ones are drawn
+first and overlapped. The other half of it is that a flower is mostly not the
+flower: the stem, the bend in it and the leaves carry more of the character than
+the petals do, which the first pass proved by hiding all three behind the bloom
+and producing a page of stickers.
+
+**The Geometry Box.** Twelve pieces of equipment, drawn rather than looked up.
+The thing that separates an object from an icon is that an icon is a silhouette
+and an object is a *stack of parts*: a pencil is a wood cone, a graphite tip, a
+painted barrel with two seam lines that tell you it is hexagonal, a crimped
+ferrule and a rubber. Get those five right and it is unmistakable at forty
+pixels; draw the outline alone and it is a stick. Wear is not decoration either
+— chips, scuffs, a chewed end and a barrel sharpened down to a stub are what
+make the tin read as somebody's rather than as a catalogue.
+
+Three things had to be redrawn. The scissors were two stroked lines and read as
+a wishbone; the blades are wedges now and the finger loops are big enough to be
+loops. The compass was a hairline A. And the chalk's dust was two shades off the
+paper, so there may as well not have been any.
+
+### Pinning the genes a thing does not draw
+
+Novelty search rewards difference, and an **unrendered gene is free
+difference**. Two identical bank managers whose invisible petal counts happen to
+disagree score as far apart, and the optimiser will happily bank that instead of
+doing its job. So `sampleGenome` pins every family and dial the chosen species
+does not read to one constant, and the whole search budget goes on things you
+can see.
+
+That is why the spread figures dropped when the flowers arrived — from 3.29
+against 1.88 to 0.90 against 0.35. The absolute distances are smaller because
+the metric stopped counting genes nobody can see. The *ratio* went up, from 75%
+further apart to 153%, which is the number that was ever worth quoting.
+
 ## The Waxworks, and the law around it
 
 Eleven public figures, hand-authored rather than searched for. Everything else
@@ -202,7 +249,7 @@ distance metric knows that. Rimless circles and a black roll-neck. A side
 parting and large square frames. A full white beard.
 
 What is encoded is a **visual signature**, not a likeness — the medium cannot do
-likeness, and anything claiming otherwise from forty-six doodle genes would be
+likeness, and anything claiming otherwise from sixty-four doodle genes would be
 lying. If one reads, it reads for the same reason a four-stroke newspaper
 cartoon reads.
 
@@ -231,7 +278,7 @@ Pick a picture, drag three markers onto both eyes and the chin, and the studio
 measures what a photograph can honestly tell it: tone from both cheeks, hair
 from how much darker the crown is, beard from how much darker the jaw is, and
 proportion from the marker geometry. Nine genes come from the picture; the other
-thirty-seven come from the seed, and the card lists which is which.
+fifty-five come from the seed, and the card lists which is which.
 
 It is not a likeness and does not claim to be. It is also entirely local — the
 file is read with FileReader, drawn to a canvas, sampled and dropped. A test
@@ -272,6 +319,15 @@ a step towards a camera that has since orbited elsewhere. There is no minimum
 orbit distance worth speaking of: flying inside the shell and looking back out
 is the best thing this view does.
 
+## Turning it, and picking things up
+
+A bare drag belongs to the camera. The first version started a card drag from
+any press that landed on a card and switched the orbit controls off for the
+duration — and since the globe is made *entirely* of cards, that meant the globe
+could not be turned at all. Pressing and dragging now always orbits; a press
+that goes nowhere is a click and opens the card; **shift**-drag is what pulls
+one off the shell.
+
 ## Focusing a set
 
 Picking a set keeps it at the **full** radius and contracts everybody else into
@@ -300,6 +356,49 @@ is a `redraw()`. And hover fires only on a *change* of card, not on every
 pointer move, or the whole page would re-render sixty times a second while the
 pointer sat still on one face.
 
+## Making it fast
+
+Three things were slow, and each was measured before and after rather than
+reasoned about.
+
+**The frame loop rewrote everything, every frame.** Two thousand `lookAt`s, two
+thousand quaternion compositions, two thousand matrix composes, a
+`computeBoundingSphere()` per block and a full re-upload of half a megabyte of
+instance data — sixty times a second, to draw a thing that had not moved.
+Nothing moves now unless something asked it to: the layout is written only when
+it is dirty, a focus change eases over half a second and then stops dead, and a
+hover touches exactly two matrices — the card being left and the card being
+entered. Idle, the loop does one comparison and returns.
+
+Measured over five seconds of idle in headless Chromium, main-thread script
+time went from **2.92 ms per frame to 0.73 ms** — a quarter of the work, to
+render the identical picture. (The frame *rate* in that container is meaningless;
+it is software rasterisation. Script time is the part this change controls.)
+
+The bounding sphere is not measured any more either. Every card lives on a shell
+of known radius centred on the origin, so it is arithmetic instead of a pass
+over two thousand instances; only a dragged card can grow it, and that is
+tracked as it happens.
+
+**Hover raycast every pointer move.** A pointer move fires well over a hundred
+times a second and each raycast walks every instance of every block. It is
+throttled to one per animation frame, and skipped entirely while a button is
+down, because that is an orbit and there is nothing to hover.
+
+**The distance metric multiplied by zero.** Categoricals were expanded into
+one-hot blocks and compared as a hundred-and-sixty-dimensional Euclidean
+distance, of which about twenty-five entries were ever non-zero — and the census
+measures every pair exhaustively, so that was being paid two and a half million
+times. A one-hot block contributes nothing when two entries share a family and
+exactly `2·w²` when they do not; there is no third case, so the block collapses
+to one comparison and one add. Add a cutoff — every caller wants a *minimum*, so
+a pair that has already lost stops being measured partway through, and the
+square root is taken once at the end instead of a million times in the middle.
+
+The answer is bit-identical. `buildCensus` went from **2,747 ms for 1,675
+entries to 1,711 ms for 1,931** — forty percent less time for fifteen percent
+more work, over forty percent more genes.
+
 ## Three thousand cards, four draw calls
 
 A thousand canvas textures is a thousand GPU uploads and about sixty megabytes
@@ -322,6 +421,10 @@ Rendered in headless Chromium and measured off the canvas, not by eye:
 
 - **100 of 100 cells visually distinct** by pixel hash
 - **1 cell** more than 55% ink, **0** effectively blank
+- idle main-thread script **0.73 ms/frame**, against 2.92 ms for the
+  every-frame rewrite it replaced
+- drag orbits the globe, hover opens the panel, click opens the card — all
+  asserted against the running app, not by eye
 - new seed redraws, ink-only toggles, exactly one canvas throughout — p5 v2
   attaches its canvas asynchronously, so each sketch gets its own mount node
   that is detached on teardown, or React's double mount leaves two stacked

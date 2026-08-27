@@ -1,4 +1,5 @@
 import { cat, dial, mulberry, type Genome } from './genome';
+import { TOOL_NAMES } from './kit';
 import type { FaceSet } from './sets';
 
 /**
@@ -114,6 +115,64 @@ function headline(gn: Genome): { trait: string; note: string } {
   return { trait: 'unremarkable', note: 'Sits in the middle row and gets away with everything.' };
 }
 
+// -------------------------------------------------------- blooms and kit
+
+/**
+ * Names for the things that are not people.
+ *
+ * Deliberately common names rather than binomials. This is a flower somebody
+ * put in a book, not a specimen, and "Cosmos bipinnatus" on a card next to a
+ * drawing with eleven petals would be claiming an identification the drawing
+ * cannot support.
+ */
+const BLOOMS = [
+  'Marigold', 'Cosmos', 'Hibiscus', 'Bougainvillea', 'Jasmine', 'Frangipani',
+  'Zinnia', 'Dahlia', 'Periwinkle', 'Oleander', 'Lantana', 'Ixora',
+  'Chrysanthemum', 'Balsam', 'Portulaca', 'Gerbera', 'Tuberose', 'Champa',
+  'Gulmohar', 'Kaner', 'Harsingar', 'Kachnar',
+];
+
+const PETAL_WORDS = ['round', 'lance', 'heart-shaped', 'spooned', 'ragged', 'spiked', 'trumpeted', 'quilled'];
+const CENTRE_WORDS = ['discked', 'spiralled', 'buttoned', 'stamened', 'seeded', 'open-centred'];
+const STEM_WORDS = ['straight-stemmed', 'bowed', 'crooked', 'cut short'];
+const LIVERY_WORDS = ['plain', 'banded', 'striped', 'dotted', 'two-tone', 'chewed'];
+
+/** A bloom or a piece of kit, read off the same genes that drew it. */
+function otherPersona(gn: Genome, index: number, set?: FaceSet): Persona {
+  const species = cat(gn, 'species');
+  const pool = set?.notes.default;
+  const note = pool && pool.length ? pool[index % pool.length] : '';
+
+  if (species === 1) {
+    const petal = cat(gn, 'petal');
+    const traits = [
+      PETAL_WORDS[petal],
+      CENTRE_WORDS[cat(gn, 'centre')],
+      STEM_WORDS[cat(gn, 'stem')],
+    ];
+    return {
+      roll: index + 1,
+      name: pick(BLOOMS, dial(gn, 'petalInk')),
+      handle: `${['none', 'a pair', 'one leaf', 'a whorl', 'a sheath'][cat(gn, 'leaf')]}`,
+      note,
+      traits,
+    };
+  }
+
+  const wear = dial(gn, 'toolWear');
+  return {
+    roll: index + 1,
+    name: TOOL_NAMES[cat(gn, 'tool')],
+    handle: LIVERY_WORDS[cat(gn, 'livery')],
+    traits: [
+      LIVERY_WORDS[cat(gn, 'livery')],
+      wear > 0.72 ? 'nearly gone' : wear > 0.4 ? 'well used' : 'barely touched',
+      dial(gn, 'toolLen') > 0.6 ? 'full length' : 'a stub',
+    ],
+    note,
+  };
+}
+
 const TRAIT_WORDS: Record<string, string[]> = {
   head: ['long-headed', 'heavy-jawed', 'top-heavy', 'sharp-faced', 'square', 'tall', 'wide'],
   eye: ['beady', 'round-eyed', 'wide', 'boxy', 'sleepy', 'hooded', 'staring'],
@@ -130,6 +189,10 @@ const TRAIT_WORDS: Record<string, string[]> = {
  * drawing actually shows.
  */
 export function personaFor(gn: Genome, index: number, set?: FaceSet): Persona {
+  // A flower has no nickname and a ruler has no eyebrows. The human vocabulary
+  // below reads face genes that a bloom pins to a constant, so it would happily
+  // describe every flower in the press as level-browed and tight-lipped.
+  if (cat(gn, 'species') !== 0) return otherPersona(gn, index, set);
   const r = mulberry((index + 1) * 2654435761);
   const first = pick(FIRST, dial(gn, 'skin'));
   const last = pick(LAST, dial(gn, 'headLump'));

@@ -38,10 +38,10 @@ export const EFFECTS: EffectDef[] = [
   {
     id: 'rollcall',
     name: 'Roll Call',
-    tagline: 'Sixteen hundred faces, none of them drawn.',
+    tagline: 'Two thousand things, none of them drawn.',
     blurb:
-      'Sixteen hundred and seventy-five faces across fifteen sets — a back bench, a staffroom, a corporate floor, a group chat, a night bus, a menagerie and a tank of crocodiles and fish — standing on a globe you can orbit, fly inside, pick up and leave where you drop them. Hover one and it is re-inked at full size beside the pointer. Every face is forty-six numbers found by novelty search and drawn by one pure p5 function; no picture exists anywhere in the repository. The persona is read off the same genes, so the note under a name always describes the face above it.',
-    spec: ['1,675 faces · 15 sets', 'novelty search, not sampling', 'p5 into atlases, three.js instancing'],
+      'Nineteen hundred and thirty-one things across seventeen sets — a back bench, a staffroom, a night bus, a menagerie, a tank of crocodiles and fish, a press full of flattened flowers and the entire contents of a geometry box — standing on a globe you can turn, fly inside and pick things off. Hover one and it is re-inked at full size beside the pointer. Every one of them is sixty-four numbers found by novelty search and drawn by one pure p5 function; no picture exists anywhere in the repository. The note under a name is read off the same genes, so it always describes the thing above it.',
+    spec: ['1,931 things · 17 sets', 'novelty search, not sampling', 'p5 into atlases, three.js instancing'],
     ink: '#7a6a55',
     wash: 'rgba(122, 106, 85, 0.09)',
   },

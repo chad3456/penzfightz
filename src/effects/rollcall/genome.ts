@@ -55,6 +55,42 @@ export const FAMILIES = {
    * ended up in cat ears the first time.
    */
   fin: 5,
+
+  // ------------------------------------------------- what is being drawn
+
+  /**
+   * What this genome *is*: 0 somebody, 1 a bloom, 2 a piece of kit.
+   *
+   * The same argument as `kingdom`, one level up. A flower is not a second
+   * generator — it is the same forty-numbers-to-ink pipeline, the same novelty
+   * search, the same atlas and the same instanced card, reading a different
+   * handful of the genes. Every set pins this, and `sampleGenome` pins every
+   * family the chosen species does not draw, so the search never spends its
+   * budget optimising a petal count on a bank manager.
+   */
+  species: 3,
+
+  // --------------------------------------------------------- blooms only
+
+  /** Petal outline: round, lance, heart, spoon, ragged, spike, trumpet, quill. */
+  petal: 8,
+  /** What sits in the middle: disc, spiral, button, stamens, seed grid, open. */
+  centre: 6,
+  /** Stem: straight, curved, crooked, cut short. */
+  stem: 4,
+  /** Leaves: none, a pair, one, a whorl, a sheath. */
+  leaf: 5,
+
+  // ------------------------------------------------------------ kit only
+
+  /**
+   * Which piece of equipment. Twelve, and every one of them drawn rather than
+   * looked up: pencil, ballpoint, fountain pen, ruler, eraser, sharpener,
+   * compass, protractor, scissors, glue stick, chalk, brush.
+   */
+  tool: 12,
+  /** How it is finished: plain, banded, striped, dotted, two-tone, chewed. */
+  livery: 6,
 } as const;
 
 export type Categorical = keyof typeof FAMILIES;
@@ -89,6 +125,21 @@ export const DIALS = [
   'tremor',
   'weight',
   'neckLen',
+
+  // Blooms.
+  'petals',
+  'petalLen',
+  'petalInk',
+  'centreSize',
+  'bloomTilt',
+  'stemLen',
+  'stemBend',
+  'leafSize',
+
+  // Kit.
+  'toolLen',
+  'toolInk',
+  'toolWear',
 ] as const;
 
 export type Dial = (typeof DIALS)[number];
@@ -107,6 +158,59 @@ export const cat = (gn: Genome, k: Categorical): number => {
 };
 
 export const dial = (gn: Genome, k: Dial): number => gn.g[CATS.length + DIALS.indexOf(k)];
+
+// -------------------------------------------------------------- what draws what
+
+/**
+ * Which genes each species actually reads.
+ *
+ * Everything not listed here is pinned to a constant when a genome is sampled.
+ * That matters for more than tidiness: novelty search rewards *difference*, and
+ * an unpinned gene is free difference. Two identical bank managers whose
+ * unrendered petal counts happen to disagree would score as far apart, and the
+ * optimiser would happily bank that instead of doing its job. Pinning them all
+ * to one value makes invisible genes contribute exactly nothing to the metric,
+ * so the whole search budget goes on things you can see.
+ */
+export const SPECIES_CATS: Categorical[][] = [
+  [
+    'species', 'head', 'view', 'eye', 'brow', 'specs', 'nose', 'mouth', 'hair',
+    'beard', 'ears', 'extra', 'paper', 'wear', 'neck', 'kingdom', 'muzzle',
+    'whisker', 'fin',
+  ],
+  ['species', 'petal', 'centre', 'stem', 'leaf', 'paper'],
+  ['species', 'tool', 'livery', 'paper'],
+];
+
+export const SPECIES_DIALS: Dial[][] = [
+  [
+    'headWidth', 'headHeight', 'headLump', 'headTilt', 'skin', 'washOffX',
+    'washOffY', 'washScale', 'washSeed', 'eyeSize', 'eyeSkew', 'eyeGap',
+    'eyeHeight', 'pupil', 'browLift', 'specSize', 'noseSize', 'mouthWidth',
+    'mouthCurve', 'hairAmount', 'hairInk', 'hairLoud', 'beardAmount', 'earSize',
+    'freckles', 'tremor', 'weight', 'neckLen',
+  ],
+  [
+    'petals', 'petalLen', 'petalInk', 'centreSize', 'bloomTilt', 'stemLen',
+    'stemBend', 'leafSize', 'headWidth', 'headHeight', 'skin', 'washOffX',
+    'washOffY', 'washScale', 'washSeed', 'tremor', 'weight',
+  ],
+  [
+    'toolLen', 'toolInk', 'toolWear', 'headWidth', 'headTilt', 'skin',
+    'washOffX', 'washOffY', 'washScale', 'washSeed', 'tremor', 'weight',
+  ],
+];
+
+/** The value every unread gene is held at. Any constant would do; this one is mid-range. */
+export const PINNED = 0.5;
+
+/** Gene indices this species reads. Built once, not per sample. */
+export const SPECIES_MASK: boolean[][] = SPECIES_CATS.map((cats, i) => {
+  const mask = new Array<boolean>(GENE_COUNT).fill(false);
+  for (const k of cats) mask[CATS.indexOf(k)] = true;
+  for (const d of SPECIES_DIALS[i]) mask[CATS.length + DIALS.indexOf(d)] = true;
+  return mask;
+});
 
 // ------------------------------------------------------------------ randomness
 
@@ -161,6 +265,14 @@ export function mutate(gn: Genome, r: () => number, amount = 0.18): Genome {
  * for more than the exact gap between the eyes.
  */
 const WEIGHT: Record<Categorical, number> = {
+  // Nothing separates two genomes like being different sorts of thing.
+  species: 3.0,
+  petal: 1.7,
+  centre: 1.3,
+  stem: 0.7,
+  leaf: 0.9,
+  tool: 2.2,
+  livery: 1.0,
   fin: 1.4,
   wear: 1.4,
   neck: 1.0,
@@ -183,148 +295,69 @@ const WEIGHT: Record<Categorical, number> = {
 
 const DIAL_WEIGHT = 0.45;
 
-export function features(gn: Genome): number[] {
-  const f: number[] = [];
-  for (const k of CATS) {
-    const n = FAMILIES[k];
-    const v = cat(gn, k);
-    for (let i = 0; i < n; i++) f.push(i === v ? WEIGHT[k] : 0);
-  }
-  for (const d of DIALS) f.push(dial(gn, d) * DIAL_WEIGHT);
-  return f;
+/**
+ * A genome, in the form the distance metric actually wants.
+ *
+ * The first version of this expanded every categorical into a one-hot block and
+ * measured Euclidean distance over the lot — a hundred and sixty numbers, of
+ * which about twenty-five were ever non-zero. That is a lot of multiplying by
+ * zero, and the census measures every pair exhaustively, so it was being paid
+ * two and a half million times.
+ *
+ * It is also unnecessary. A one-hot block contributes nothing when the two
+ * faces share a family and exactly `2·w²` when they do not — there is no third
+ * case — so the whole block collapses to one comparison and one add. Sixty-four
+ * numbers replace a hundred and sixty, the arithmetic is identical to the last
+ * bit, and the categorical half of the metric stops touching floating point at
+ * all.
+ */
+export interface Traits {
+  /** One family index per categorical gene. */
+  c: Uint8Array;
+  /** Dials, pre-multiplied by their weight so the metric is a plain difference. */
+  d: Float32Array;
 }
 
-export function distance(a: number[], b: number[]): number {
-  let s = 0;
-  for (let i = 0; i < a.length; i++) {
-    const d = a[i] - b[i];
-    s += d * d;
-  }
-  return Math.sqrt(s);
-}
+/** `2·w²` per categorical: what a family disagreement costs, squared. */
+const CAT_COST = new Float32Array(CATS.map((k) => 2 * WEIGHT[k] * WEIGHT[k]));
 
-// ------------------------------------------------------------- novelty search
-
-export interface SearchReport {
-  /** Mean distance from each face to its nearest neighbour. Higher is better. */
-  meanNearest: number;
-  minNearest: number;
-  /** The same figure for faces drawn at random, for comparison. */
-  baselineMean: number;
-  baselineMin: number;
-  proposals: number;
+export function traits(gn: Genome): Traits {
+  const c = new Uint8Array(CATS.length);
+  for (let i = 0; i < CATS.length; i++) c[i] = cat(gn, CATS[i]);
+  const d = new Float32Array(DIALS.length);
+  for (let i = 0; i < DIALS.length; i++) d[i] = gn.g[CATS.length + i] * DIAL_WEIGHT;
+  return { c, d };
 }
 
 /**
- * Fill a register by novelty search rather than by sampling.
+ * Squared distance, with a cutoff.
  *
- * Sampling a hundred faces at random gives you a hundred faces, several of
- * which are near enough to each other that a person reading the page would
- * call them the same face twice. So each new face is not drawn, it is *found*:
- * a batch of candidates is proposed, each is scored by how far it sits from the
- * faces already on the register, the most distant one is kept, and that one is
- * then hill-climbed — mutated repeatedly, keeping any mutation that pushes it
- * further from its neighbours — until it stops improving.
- *
- * This is a plain novelty search. There is no reward model and nothing is
- * learned between runs; calling it anything grander would be dressing it up.
- * What it does do is measurable, and `report` measures it.
+ * Squared, because every caller is looking for a *minimum* and the square root
+ * is monotonic — it can be taken once at the end rather than a million times in
+ * the middle. The cutoff is the current best: once the running total passes it
+ * this pair cannot win, and the remaining terms are not worth adding. On a
+ * nearest-neighbour sweep most pairs are eliminated inside the categorical
+ * loop, several genes in.
  */
-export function buildRegister(
-  count: number,
-  seed: number,
-  opts: { proposals?: number; climbs?: number } = {},
-): { faces: Genome[]; report: SearchReport } {
-  const proposals = opts.proposals ?? 48;
-  const climbs = opts.climbs ?? 24;
-  const r = mulberry(seed);
-
-  const faces: Genome[] = [];
-  const feats: number[][] = [];
-  let proposalCount = 0;
-
-  const novelty = (f: number[]) => {
-    let best = Infinity;
-    for (const other of feats) {
-      const d = distance(f, other);
-      if (d < best) best = d;
+export function dist2(a: Traits, b: Traits, cutoff = Infinity): number {
+  const ac = a.c;
+  const bc = b.c;
+  let s = 0;
+  for (let i = 0; i < ac.length; i++) {
+    if (ac[i] !== bc[i]) {
+      s += CAT_COST[i];
+      if (s >= cutoff) return s;
     }
-    return best;
-  };
-
-  for (let i = 0; i < count; i++) {
-    let best: Genome | null = null;
-    let bestF: number[] = [];
-    let bestScore = -1;
-
-    for (let k = 0; k < proposals; k++) {
-      proposalCount++;
-      // Half the proposals are fresh, half are mutations of something already
-      // on the register — fresh ones explore, mutations refine an outlier.
-      const g =
-        faces.length && k % 2 === 1
-          ? mutate(faces[Math.floor(r() * faces.length)], r, 0.5)
-          : randomGenome(r);
-      const f = features(g);
-      const s = faces.length ? novelty(f) : 1;
-      if (s > bestScore) {
-        bestScore = s;
-        best = g;
-        bestF = f;
-      }
-    }
-
-    // Hill-climb the winner: keep any nudge that moves it further from its
-    // nearest neighbour, and stop early once nothing helps.
-    if (faces.length) {
-      let stale = 0;
-      for (let k = 0; k < climbs && stale < 8; k++) {
-        proposalCount++;
-        const g = mutate(best!, r, 0.3);
-        const f = features(g);
-        const s = novelty(f);
-        if (s > bestScore) {
-          bestScore = s;
-          best = g;
-          bestF = f;
-          stale = 0;
-        } else stale++;
-      }
-    }
-
-    faces.push(best!);
-    feats.push(bestF);
   }
-
-  return { faces, report: measure(faces, count, seed, proposalCount) };
+  const ad = a.d;
+  const bd = b.d;
+  const n = ad.length;
+  for (let i = 0; i < n; i++) {
+    const t = ad[i] - bd[i];
+    s += t * t;
+  }
+  return s;
 }
 
-/** Nearest-neighbour spread, against a same-sized random register. */
-function measure(faces: Genome[], count: number, seed: number, proposals: number): SearchReport {
-  const nn = (fs: number[][]) => {
-    const out: number[] = [];
-    for (let i = 0; i < fs.length; i++) {
-      let best = Infinity;
-      for (let j = 0; j < fs.length; j++) {
-        if (i === j) continue;
-        const d = distance(fs[i], fs[j]);
-        if (d < best) best = d;
-      }
-      out.push(best);
-    }
-    return out;
-  };
-
-  const mine = nn(faces.map(features));
-  const rr = mulberry(seed ^ 0x9e3779b9);
-  const base = nn(Array.from({ length: count }, () => features(randomGenome(rr))));
-  const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
-
-  return {
-    meanNearest: mean(mine),
-    minNearest: Math.min(...mine),
-    baselineMean: mean(base),
-    baselineMin: Math.min(...base),
-    proposals,
-  };
-}
+/** The same thing, unsquared, for anything that is going to be read by a person. */
+export const distance = (a: Traits, b: Traits): number => Math.sqrt(dist2(a, b));

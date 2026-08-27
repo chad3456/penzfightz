@@ -2,6 +2,8 @@ import {
   DIALS,
   FAMILIES,
   GENE_COUNT,
+  PINNED,
+  SPECIES_MASK,
   mulberry,
   type Categorical,
   type Dial,
@@ -44,7 +46,12 @@ const isCat = (k: string): k is Categorical => (CATS as string[]).includes(k);
 /** Build a genome: named genes as given, everything else from the seed. */
 function make(seed: number, genes: Gene): Genome {
   const r = mulberry(seed);
-  const g: number[] = Array.from({ length: GENE_COUNT }, () => r());
+  // Everything a person does not draw is pinned, exactly as `sampleGenome`
+  // pins it — otherwise a caricature would carry a random petal count into the
+  // distance metric and read as further from everyone than it is.
+  const mask = SPECIES_MASK[0];
+  const g: number[] = Array.from({ length: GENE_COUNT }, (_, i) => (mask[i] ? r() : PINNED));
+  g[CATS.indexOf('species')] = 0.5 / FAMILIES.species;
   for (const [k, v] of Object.entries(genes)) {
     if (v === undefined) continue;
     if (isCat(k)) g[CATS.indexOf(k)] = (v + 0.5) / FAMILIES[k];
