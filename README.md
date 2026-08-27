@@ -6,14 +6,16 @@ pavement outside. Play the computer, or send someone a link and play them.
 | Game | What it is | Seats |
 | --- | --- | --- |
 | **Pen Fight** | Flick your pen, knock theirs off the desk, keep the pen. Full 3D with real physics. | 2 |
+| **Lattu** | The spinning-top duel. Throw theirs out of the dish, take the beast off their back. | 1–2 |
 | **Raja Rani Chor Police** | Four chits, four roles. The Police gets one guess at the Chor. | 2–4 |
 | **Rang** | The UNO game. Skips, reverses, draw-twos, wilds, stacked draws. | 2–6 |
 | **Mafia** | The village sleeps, somebody dies, everybody argues. | 4–12 |
 | **The Book Stall** | Press the button, the till prints you a line of Dostoevsky. | 1 |
 | **The Back of the Bill** | Walk the maze, pick up the word cut out of the line. | 1 |
 
-Every game except The Book Stall has a practice mode against computer players
-and a room you can share by link. Rooms use a five-letter code, because that is
+Every game except The Book Stall and Lattu has a practice mode against computer
+players and a room you can share by link — Lattu has the computer and a second
+player on the same keyboard, but no link yet. Rooms use a five-letter code, because that is
 what you can shout across a classroom. The Book Stall is for one person and a
 quiet minute.
 
@@ -63,6 +65,27 @@ Draw **power** is measured in screen pixels, not metres of desk. The desk
 recedes under a pitched camera, so measuring in world space made an upward flick
 read full strength almost immediately; pixels are what the hand actually
 controls. Aim *direction* is still solved in table space, so pointing is exact.
+
+## Lattu
+
+Two tops in a dish. Throw theirs over the rim for two points, outlast it for
+one, first to five, and the beast off the back of whoever you beat goes in your
+case. Eight to collect, and four more that only turn up once you have cleared
+the ladder.
+
+The physics is written by hand rather than handed to an engine, because the
+whole character of the game is gyroscopic: the spin drives a tangential speed,
+Cartesian integration of that throws the top outward as fast as the bowl pulls
+it in, and the two balance at a radius that shrinks as the spin runs down. That
+one equilibrium gives you the racing, the spiral and the collapse at the end for
+free. Collisions resolve twice — a shove along the normal and a *grind* along
+the tangent — which is why meeting a left-spin top head on costs you half your
+spin, without that being a special case anywhere.
+
+Every constant in it was set by running the whole roster against itself, 864
+rounds a pass. [`docs/lattu.md`](docs/lattu.md) has the passes, the three models
+that did not work and why, and the four things measurement caught that playing
+it never would have.
 
 ## Rang, and why it is not called UNO
 
@@ -292,6 +315,12 @@ test run.
 
 **Rang** is the colour-and-number card game everyone has played under some name
 or other; the rules are old and unowned, and this is not anybody's branded deck.
+**Lattu** is the same trade one step further. The duel — two spinning tops in a
+bowl, last one turning wins — is beigoma, and lattu, and older than anybody's
+trademark. The bladers and spirit beasts everybody pictures when they hear the
+word are a different matter, because a fictional character is copyright in a way
+a folk game is not; so the eight bladers, the twelve beasts and the marks on the
+tops here are ours, and the shelf card says as much.
 **Mafia** and **Raja Rani Chor Police** are traditional games with no owner at
 all. The lines in **The Book Stall** are Dostoevsky's, each printed with the
 book it came from; the English wording depends on the translator, which is why

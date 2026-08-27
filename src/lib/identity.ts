@@ -92,3 +92,44 @@ export function setLocalOwned(pens: string[]) {
 export function suggestName(): string {
   return CLASS_NAMES[Math.floor(Math.random() * CLASS_NAMES.length)];
 }
+
+// ------------------------------------------------------------------ the case
+
+/**
+ * The beasts you have taken off people.
+ *
+ * Same trade as everything else here: it lives in this browser and nowhere
+ * else. Clearing your storage empties the case, which is exactly what happened
+ * when somebody else's brother borrowed the tin.
+ */
+const CASE_KEY = 'lattu.beasts';
+const BLADER_KEY = 'lattu.blader';
+const BEAST_KEY = 'lattu.beast';
+const BEATEN_KEY = 'lattu.beaten';
+
+function readList(key: string): string[] {
+  const raw = read(key);
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((x) => typeof x === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+
+export const ownedBeasts = (): string[] => readList(CASE_KEY);
+export const beatenBladers = (): string[] => readList(BEATEN_KEY);
+
+export function takeBeast(id: string) {
+  write(CASE_KEY, JSON.stringify([...new Set([...ownedBeasts(), id])]));
+}
+
+export function markBeaten(id: string) {
+  write(BEATEN_KEY, JSON.stringify([...new Set([...beatenBladers(), id])]));
+}
+
+export const chosenBlader = (): string | null => read(BLADER_KEY);
+export const chosenBeast = (): string | null => read(BEAST_KEY);
+export const setChosenBlader = (id: string) => write(BLADER_KEY, id);
+export const setChosenBeast = (id: string) => write(BEAST_KEY, id);

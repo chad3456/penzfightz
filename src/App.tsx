@@ -10,6 +10,7 @@ import { BookStall } from './games/bookstall/BookStall';
 import { Maze } from './games/maze/Maze';
 import { DotFieldStage } from './effects/DotFieldStage';
 import { RollCall } from './effects/rollcall/RollCall';
+import { Lattu } from './games/lattu/Lattu';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -105,6 +106,11 @@ export default function App() {
   // Pen Fight brings its own 3D classroom and full-screen chrome.
   if (shell === 'game' && game === 'penfight') {
     return <PenFightGame onExit={toShelf} onRename={() => setShell('name')} />;
+  }
+
+  // Lattu brings a dish and a desk, and wants the whole screen for them.
+  if (shell === 'game' && game === 'lattu') {
+    return <Lattu onExit={toShelf} />;
   }
 
   // Effects take the whole screen too — no notebook paper behind them.

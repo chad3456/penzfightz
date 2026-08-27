@@ -6,7 +6,7 @@
  * game means adding a row here and a screen — nothing else.
  */
 
-export type GameId = 'penfight' | 'rajarani' | 'rang' | 'mafia' | 'bookstall' | 'maze';
+export type GameId = 'penfight' | 'lattu' | 'rajarani' | 'rang' | 'mafia' | 'bookstall' | 'maze';
 
 export interface GameDef {
   id: GameId;
@@ -44,6 +44,21 @@ export const GAMES: GameDef[] = [
     online: true,
     ink: '#1b3a8f',
     wash: 'rgba(27, 58, 143, 0.1)',
+    ready: true,
+  },
+  {
+    id: 'lattu',
+    name: 'Lattu',
+    tagline: 'Two tops, one dish. Throw theirs over the rim.',
+    alsoKnownAs: 'the beyblade game',
+    era: 'the compound wall · after four o’clock',
+    blurb:
+      'This is the spinning-top duel — same fight, different name, because the bladers and beasts everyone actually pictures belong to somebody. The game itself does not: it is beigoma, and it is lattu, and it is older than anybody’s trademark. Pick a blader, pick a beast, choose your track and rip. Throw theirs out of the dish for two, outlast it for one, and take the beast off whoever you beat. Eight to collect and four more that only turn up once you have.',
+    seats: { min: 1, max: 2 },
+    practice: true,
+    online: false,
+    ink: '#b8342c',
+    wash: 'rgba(184, 52, 44, 0.1)',
     ready: true,
   },
   {
