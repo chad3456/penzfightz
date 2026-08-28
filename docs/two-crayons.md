@@ -1,8 +1,10 @@
-# Two Crayons: two hundred faces, one black stick and one coloured one
+# Two Crayons: eighteen hundred drawings, one black stick and one coloured one
 
 ## The constraint is the idea
 
-Two sticks, rough paper, and not many marks. Everything interesting about the
+Two hundred heads and sixteen hundred whole figures — cricket, football, games,
+work, everyday gestures and people moving. Two sticks, rough paper, and not many
+marks. Everything interesting about the
 style comes out of what that forbids: you cannot render, you cannot shade, you
 cannot correct. Every mark has to be the right one first time, and the drawing
 is carried by *gesture* rather than by accuracy.
@@ -96,6 +98,66 @@ cartoon.
 One accent per face and only one. Vermilion is weighted to about half the wall so
 the set reads as that drawing rather than as a paint chart.
 
+## Whole figures
+
+The heads are a grammar of parts. **A figure is not**, and treating it as one is
+exactly the mistake that produces a mannequin.
+
+### The line of action
+
+What makes a drawn figure read as *doing something* is the single arc that runs
+from the head, through the body, to whichever foot is carrying the weight. Every
+pose is built around that curve first and hung with limbs afterwards — which is
+why a figure with its arms in precisely the right places can still look like a
+shop dummy if the spine is straight. The `bend` number in each pose is that
+curve, and it is the most important number in the file.
+
+### Poses are absolute, not composed
+
+A pose is written as absolute bone directions in degrees. Ninety is straight
+down, zero is off to the right, minus ninety is straight up.
+
+That is entirely about being able to author fifty-six of these by hand. With
+composed joint rotations you have to hold the parent's angle in your head to
+know where a forearm ends up, and fifty-six poses written that way is fifty-six
+poses full of arithmetic mistakes. Absolute directions read off the page:
+`[-70, -85]` is an arm up and slightly back, and you can *see* that it is.
+
+### The figure is dropped, not placed
+
+Every joint is worked out first, then the whole thing is translated so its lowest
+point lands on the ground line. A crouch, a dive and a stand therefore all sit
+correctly without a word of inverse kinematics, and adjusting a knee can never
+put a foot through the floor.
+
+The same pass fits the figure to the page — and wide poses get more of it. A
+keeper at full stretch is three times as wide as it is tall; at a standing
+figure's margins it came out half the size and read as an insect.
+
+### The ground mark is not decoration
+
+Without a dash of shadow under the feet a figure **floats**, however good the
+pose is. It is the cheapest mark on the page and it does more than any of the
+others.
+
+### The heads are the same heads
+
+A figure's head is drawn by the heads grammar, at a twelfth of the height
+instead of a third, with the collar left off because the body has shoulders of
+its own. `drawHead` was split out of `drawFace` for it; nothing is duplicated.
+
+### What each pass fixed
+
+| pass | what was wrong |
+|---|---|
+| first figures | stick figures — hairline limbs, a balloon head, a torso of two straight lines |
+| second | limbs roughly doubled in weight, the head down a notch, and the trunk built from a real outline with a waist in it (a shoulder-to-hip trapezium comes out as a sliver with nothing in it) |
+| third | the bat was a *stroked quad*, and every path goes through Chaikin smoothing on its way to the paper, so it came out as a rounded loop floating next to the batsman. It is a scrubbed mass now. |
+
+Also on that last pass: the umpire's six and a HOWZAT appeal were the same
+gesture, a load appeared on the head of the figure carrying one, and the guitar
+stopped hovering two feet to the right of the person playing it.
+
 ## What this is not
 
 It is not trained and there is no model. Calling it that would be dressing it
@@ -106,7 +168,10 @@ up. What it is:
   of family choices has already been used, so two hundred faces are two hundred
   genuinely different drawings rather than two hundred rolls of a die that
   happen to repeat — which at these odds they would; the birthday problem does
-  not care how large a space is,
+  not care how large a space is. Figures sample the same way over a space of
+  about three million: fifty-six poses times four builds times six kinds of
+  dress times four grounds times a mirror times eight crowns times seventeen
+  accents,
 - and a **medium** that was studied properly, which is where all the character
   actually comes from.
 
@@ -122,10 +187,14 @@ up. What it is:
 
 ## Performance
 
-About ten milliseconds a face at thumbnail size. Drawing all two hundred up
-front is two seconds of locked tab for a wall you can see a dozen of at a time,
-so tiles render as they scroll into view, one animation frame apart, and a fast
-scroll pays for nothing it flies past.
+About ten milliseconds a head and sixteen a figure, at thumbnail size. Drawing
+all eighteen hundred up front is half a minute of locked tab for a wall you can
+see a dozen of at a time, so the laziness is doubled up: tiles exist in the DOM
+in **pages of a hundred and eighty** — sixteen hundred live buttons each with
+its own observer costs more than the drawing does, and one shared
+`IntersectionObserver` serves the lot — and a tile only inks when it comes into
+view, one animation frame late, so a fast scroll pays for nothing it flies
+past.
 
 The paper tooth is the expensive part — two octaves of value noise over every
 pixel — and at two hundred faces it was more than half the total, spent

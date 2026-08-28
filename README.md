@@ -239,7 +239,9 @@ the forty-one numbers it is.
 
 ## Two Crayons
 
-Two hundred faces in black and one colour, on paper. Nothing here asks the
+Two hundred heads and sixteen hundred whole figures in black and one colour, on
+paper — cricket, football, games, work, everyday gestures, people running and
+falling over. Nothing here asks the
 canvas for a line: every mark is pigment deposited a pixel at a time, and
 whether a pixel gets any comes down to one comparison — does the pressure of the
 stroke beat the tooth of the paper underneath it. That single line gives you
@@ -247,9 +249,14 @@ marks that break up where the hand goes light, taper at the end rather than the
 start, and — because the tooth belongs to the *page* and not to the stroke — skip
 over the same bumps where two strokes cross.
 
-The faces on top of it are a grammar of eight families with three rules taken off
+The heads on top of it are a grammar of eight families with three rules taken off
 the reference: the contour is open, the colour is laid first and deliberately out
-of register, and the two eyes are always drawn from different families.
+of register, and the two eyes are always drawn from different families. The
+figures are not a grammar of parts — that is what produces a mannequin. Each one
+is built on a **line of action** first, the single arc from the head through the
+body to the weight-bearing foot, and hung with limbs afterwards; then the whole
+thing is dropped so its lowest point lands on the ground, which is why a crouch,
+a dive and a stand all sit correctly with no inverse kinematics anywhere.
 [`docs/two-crayons.md`](docs/two-crayons.md) has the method and the passes it
 took. The same engine draws the eight bladers in Lattu.
 

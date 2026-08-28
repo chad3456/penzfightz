@@ -524,24 +524,46 @@ function air(h: Hand) {
  * contour, then the hat, then the features, then the body. Draw the colour last
  * and it covers the eyes; draw the hat before the head and it sits behind it.
  */
-export function drawFace(rec: Recipe, w: number, h: number): Sheet {
-  const sheet = new Sheet(w, h, rec.seed, rec.paper);
+/** Which parts of a head to put down. */
+export interface HeadParts {
+  /** The blush and the smear. Off for a small head, where they only muddy it. */
+  colour?: boolean;
+  /** The neck, jacket and buttons. Off when a body is going to supply them. */
+  collar?: boolean;
+  /** The ticks and flicks in the air around the head. */
+  air?: boolean;
+}
+
+/**
+ * Draw a head into an existing sheet, at a given place and size.
+ *
+ * Split out of `drawFace` so the figures can use the same faces the gallery
+ * does — a head on a body is the same head, at a twelfth of the height instead
+ * of a third, with the collar left off because the body has shoulders of its
+ * own. Nothing about the grammar is duplicated.
+ */
+export function drawHead(
+  sheet: Sheet,
+  rec: Recipe,
+  cx: number,
+  cy: number,
+  u: number,
+  parts: HeadParts = {},
+) {
   const r = mulberry(rec.seed ^ 0x2f1b);
   const hand: Hand = {
     sheet,
     r,
-    // The head is about a third of the sheet's height, which leaves the page
-    // as empty as the reference keeps it.
-    u: Math.min(w, h) * 0.34,
-    cx: w * (0.5 + (r() - 0.5) * 0.06),
-    cy: h * (0.44 + (r() - 0.5) * 0.05),
+    u,
+    cx,
+    cy,
     ink: hexToRgb(BLACK),
     col: hexToRgb(rec.accent),
     rec,
     n: rec.seed & 0xffff,
   };
 
-  colourMark(hand);
+  if (parts.colour !== false) colourMark(hand);
   head(hand);
   crown(hand);
 
@@ -557,8 +579,22 @@ export function drawFace(rec: Recipe, w: number, h: number): Sheet {
 
   nose(hand);
   mouth(hand);
-  collar(hand);
-  air(hand);
+  if (parts.collar !== false) collar(hand);
+  if (parts.air !== false) air(hand);
+}
+
+export function drawFace(rec: Recipe, w: number, h: number): Sheet {
+  const sheet = new Sheet(w, h, rec.seed, rec.paper);
+  const r = mulberry(rec.seed ^ 0x91c5);
+  drawHead(
+    sheet,
+    rec,
+    w * (0.5 + (r() - 0.5) * 0.06),
+    h * (0.44 + (r() - 0.5) * 0.05),
+    // The head is about a third of the sheet's height, which leaves the page as
+    // empty as the reference keeps it.
+    Math.min(w, h) * 0.34,
+  );
   return sheet;
 }
 

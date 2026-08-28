@@ -4137,3 +4137,53 @@ button.card:hover:not(:disabled) {
   .lattu__title { font-size: 26px; }
   .lattu__eyebrow { font-size: 9px; }
 }
+
+/* --------------------------------------------- Two Crayons: the tab strip */
+
+.crayon__tabs {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 14px 0 2px;
+}
+
+.crayon__tab {
+  appearance: none;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  border: 1px solid #4a463f;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #a49c8e;
+}
+
+.crayon__tab:hover { color: #ece7dc; }
+
+.crayon__tab--on {
+  background: #c2392b;
+  border-color: #c2392b;
+  color: #f6f2e7;
+}
+
+.crayon__split {
+  width: 1px;
+  align-self: stretch;
+  background: #4a463f;
+  margin: 0 5px;
+}
+
+.crayon__more {
+  margin: 20px 0 0;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #7d7669;
+  padding: 22px 0;
+}
