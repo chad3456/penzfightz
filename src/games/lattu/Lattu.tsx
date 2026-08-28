@@ -10,6 +10,7 @@ import {
 } from './physics';
 import { Arena } from './Arena';
 import { sigilCanvas } from './sigil';
+import { bladerPortrait } from './portrait';
 import {
   beatenBladers, chosenBeast, chosenBlader, markBeaten, ownedBeasts,
   setChosenBeast, setChosenBlader, takeBeast,
@@ -34,8 +35,20 @@ import { sfx } from '../../lib/audio';
  * two launches and a seed.
  */
 
-type Screen = 'home' | 'roster' | 'case' | 'opponent' | 'p2pick' | 'launch' | 'battle' | 'over';
+type Screen = 'home' | 'howto' | 'roster' | 'case' | 'opponent' | 'p2pick' | 'launch' | 'battle' | 'over';
 type Mode = 'ladder' | 'hotseat';
+
+/**
+ * Whether there is a keyboard worth mentioning.
+ *
+ * Every prompt in the game names a key, which is exactly the wrong thing to
+ * tell somebody holding a phone. The buttons have always been there; this just
+ * stops the labels lying about how to press them.
+ */
+const TOUCH =
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
 /**
  * Points needed to take the match.
@@ -61,6 +74,26 @@ function Sigil({ beast, size = 64 }: { beast: Beast; size?: number }) {
     return () => c.remove();
   }, [beast, size]);
   return <div ref={host} className="lattu__sigil" />;
+}
+
+/** A blader's face, in two crayons. */
+function Portrait({ blader, w = 96, h = 124 }: { blader: Blader; w?: number; h?: number }) {
+  const host = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = host.current;
+    if (!el) return;
+    // A frame's grace, so opening a screen of eight of these does not block the
+    // paint that shows the screen.
+    const id = requestAnimationFrame(() => {
+      const c = bladerPortrait(blader, w * 2, h * 2);
+      c.style.width = `${w}px`;
+      c.style.height = `${h}px`;
+      c.style.display = 'block';
+      el.replaceChildren(c);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [blader, w, h]);
+  return <div ref={host} className="lattu__portrait" style={{ width: w, height: h }} />;
 }
 
 function Bars({ beast }: { beast: Beast }) {
@@ -178,7 +211,8 @@ function Ripper({
           : 'More spin lasts longer and hits harder. Nobody stops it at the top every time.'}
       </div>
       <button className="btn btn--big" onClick={lock} style={{ background: ink }}>
-        {stage === 0 ? 'Set the track' : 'LET IT RIP'} <small>({keyName === 'Space' ? 'space' : 'enter'})</small>
+        {stage === 0 ? 'Set the track' : 'LET IT RIP'}
+        {!TOUCH && <small> ({keyName === 'Space' ? 'space' : 'enter'})</small>}
       </button>
     </div>
   );
@@ -421,6 +455,7 @@ export function Lattu({ onExit }: { onExit: () => void }) {
               the match — and the beast off the back of whoever you beat.
             </p>
             <div className="lattu__me">
+              <Portrait blader={myBladerObj} w={104} h={134} />
               <Sigil beast={myBeastObj} size={92} />
               <div>
                 <div className="lattu__meline" style={{ color: myBladerObj.ink }}>
@@ -442,6 +477,80 @@ export function Lattu({ onExit }: { onExit: () => void }) {
               <button className="btn" onClick={() => setScreen('case')}>
                 The case ({owned.length}/{BEASTS.length})
               </button>
+              <button className="btn" onClick={() => setScreen('howto')}>How to play</button>
+            </div>
+          </div>
+        )}
+
+        {screen === 'howto' && (
+          <div className="lattu__sheet lattu__sheet--wide">
+            <h2 className="lattu__h2">How to play</h2>
+            <ol className="lattu__how">
+              <li>
+                <b>Two tops go in the dish.</b> Once they are spinning you cannot steer
+                them. Everything you decide, you decide before the string is out of your
+                hand — which is what the game is.
+              </li>
+              <li>
+                <b>Pick your track.</b> A marker sweeps between <i>inside</i> and{' '}
+                <i>outside</i>. Stop it. Inside puts you in the middle of the dish where
+                the hitting happens; outside runs you round the wall, out of reach.
+                Attack beasts want inside. Stamina beasts want outside.
+              </li>
+              <li>
+                <b>Rip it.</b> The meter fills and falls. Stop it high for more spin —
+                more spin lasts longer and hits harder. Nobody catches the top of it
+                every time.
+              </li>
+              <li>
+                <b>Call your beast, once.</b> A few seconds in, the button lights. Your
+                top abandons its orbit, charges straight at theirs, hits twice as hard
+                and is braced while it does — then pays for it in spin. Timing is the
+                whole trick: call it while they are far away and you cross an empty dish
+                for nothing.
+              </li>
+              <li>
+                <b>Scoring.</b> Throw theirs over the rim: <b>2 points</b>. Simply
+                outlast it: <b>1 point</b>. Still both spinning at the bell? The one
+                turning harder takes it. First to <b>{TARGET}</b> wins the match.
+              </li>
+              <li>
+                <b>Beat somebody and you take their beast.</b> It goes in your case and
+                you can spin it yourself. Eight to collect on the ladder — and once you
+                have cleared it, somebody else turns up.
+              </li>
+            </ol>
+
+            <h2 className="lattu__h2">Controls</h2>
+            <div className="lattu__keys">
+              <div>
+                <div className="lattu__keyhead">On a phone or tablet</div>
+                <p>
+                  Tap the big button to set your track, tap it again to rip, and tap{' '}
+                  <b>CALL IT</b> during the round. In a two-player match each player has
+                  their own button on their own side of the screen. Nothing needs a
+                  keyboard.
+                </p>
+              </div>
+              <div>
+                <div className="lattu__keyhead">On a keyboard</div>
+                <p>
+                  <b>Space</b> is player one and <b>enter</b> is player two — the same
+                  key sets the track, rips, and calls the beast. The buttons do the same
+                  thing if you would rather click.
+                </p>
+              </div>
+            </div>
+
+            <h2 className="lattu__h2">Reading the dish</h2>
+            <p className="lattu__lede lattu__lede--left">
+              The painted rings on the floor are not decoration. A top holds the widest
+              orbit its spin can carry, so watching it cross ring after ring inward is
+              watching it run down. A top out at the wall is fast and in danger; a top in
+              the middle is tired and hard to miss.
+            </p>
+            <div className="lattu__choices">
+              <button className="btn btn--big" onClick={() => setScreen('home')}>Got it</button>
             </div>
           </div>
         )}
@@ -457,6 +566,7 @@ export function Lattu({ onExit }: { onExit: () => void }) {
                   style={{ ['--ink' as string]: b.ink }}
                   onClick={() => { sfx.tick(); setMyBlader(b.id); setChosenBlader(b.id); }}
                 >
+                  <Portrait blader={b} />
                   <div className="lattu__cardname">{b.name}</div>
                   <div className="lattu__cardhandle">“{b.handle}” · {b.home}</div>
                   <div className="lattu__cardline">{b.line}</div>
@@ -527,6 +637,7 @@ export function Lattu({ onExit }: { onExit: () => void }) {
                     style={{ ['--ink' as string]: b.ink }}
                     onClick={() => { sfx.tick(); begin(b, beast, false); }}
                   >
+                    <Portrait blader={b} />
                     <div className="lattu__cardname">
                       {b.name}{done ? ' ✓' : ''}
                     </div>
@@ -549,8 +660,9 @@ export function Lattu({ onExit }: { onExit: () => void }) {
           <div className="lattu__sheet lattu__sheet--wide">
             <h2 className="lattu__h2">Second player — pick yours</h2>
             <p className="lattu__lede">
-              You rip with <b>enter</b>; they rip with <b>space</b>. Same keys call the
-              beast once the round is running.
+              {TOUCH
+                ? 'You each get your own button, on your own side of the screen — for the rip and for the call.'
+                : 'You rip with enter; they rip with space. The same keys call the beast once the round is running.'}
             </p>
             <div className="lattu__grid">
               {BLADERS.map((b) => (
@@ -560,6 +672,7 @@ export function Lattu({ onExit }: { onExit: () => void }) {
                   style={{ ['--ink' as string]: b.ink }}
                   onClick={() => { sfx.tick(); begin(b, BEAST_BY_ID[b.beast], true); }}
                 >
+                  <Portrait blader={b} />
                   <div className="lattu__cardname">{b.name}</div>
                   <div className="lattu__cardhandle">“{b.handle}” · carries {BEAST_BY_ID[b.beast].name}</div>
                   <div className="lattu__cardquirk">{QUIRK_TEXT[b.quirk]}</div>
@@ -611,7 +724,9 @@ export function Lattu({ onExit }: { onExit: () => void }) {
                 style={{ borderColor: corners[0].beast.ink, color: corners[0].beast.ink }}
                 onClick={() => bout.current && callBeast(bout.current, 0) && sfx.bell()}
               >
-                {hud.callA ? 'CALL IT (space)' : bout.current?.tops[0].spent ? 'called' : 'not yet'}
+                {hud.callA
+                  ? TOUCH ? 'CALL IT' : 'CALL IT (space)'
+                  : bout.current?.tops[0].spent ? 'called' : 'not yet'}
               </button>
             </div>
 
@@ -641,7 +756,9 @@ export function Lattu({ onExit }: { onExit: () => void }) {
                   style={{ borderColor: corners[1].beast.ink, color: corners[1].beast.ink }}
                   onClick={() => bout.current && callBeast(bout.current, 1) && sfx.bell()}
                 >
-                  {hud.callB ? 'CALL IT (enter)' : bout.current?.tops[1].spent ? 'called' : 'not yet'}
+                  {hud.callB
+                    ? TOUCH ? 'CALL IT' : 'CALL IT (enter)'
+                    : bout.current?.tops[1].spent ? 'called' : 'not yet'}
                 </button>
               ) : (
                 <div className="lattu__cpu">{corners[1].blader.name}</div>

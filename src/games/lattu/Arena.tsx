@@ -26,6 +26,15 @@ const floorAt = (r: number) => DEPTH * Math.min(1.15, r / DISH.radius) ** 2;
 
 const TOP_H = 0.09;
 
+/**
+ * Half the horizontal field the camera must cover, in radians.
+ *
+ * The dish flange runs to 1.4 units and the camera sits about 3.7 away, so this
+ * is the angle that puts the far rim just inside the frame. Everything else
+ * about the framing is derived from it and the window's aspect.
+ */
+const HALF_WIDE = Math.atan(1.52 / 3.55);
+
 function bowlProfile(): THREE.Vector2[] {
   const pts: THREE.Vector2[] = [];
   const n = 26;
@@ -299,7 +308,7 @@ function Runner({
   onTick: (b: Bout) => void;
   onFinish: (b: Bout) => void;
   }) {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const done = useRef(false);
   /**
    * Which bout the "already reported" flag belongs to.
@@ -313,6 +322,7 @@ function Runner({
    */
   const seen = useRef<Bout | null>(null);
   const base = useMemo(() => new THREE.Vector3(0, 2.35, 2.85), []);
+  const eye = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((_, dt) => {
     const b = bout.current;
@@ -327,12 +337,38 @@ function Runner({
       done.current = true;
       onFinish(b);
     }
+    // Frame the dish for the shape of the window, not for a fixed field of view.
+    //
+    // A phone held upright is about 0.45 aspect; at a fixed vertical field that
+    // leaves a horizontal field a third the width and the dish is cropped at
+    // both sides. Solving the horizontal half-angle for the dish's own radius
+    // and converting back gives a view that fits on anything from a phone to an
+    // ultrawide.
+    const cam = camera as THREE.PerspectiveCamera;
+    const aspect = size.width / Math.max(1, size.height);
+    const want = Math.max(
+      34,
+      Math.min(80, (2 * Math.atan(Math.tan(HALF_WIDE) / aspect) * 180) / Math.PI),
+    );
+    if (Math.abs(cam.fov - want) > 0.25) {
+      cam.fov = want;
+      cam.updateProjectionMatrix();
+    }
+
+    // Where the camera stands also follows the shape of the window. A phone held
+    // upright gets a view from much closer to overhead: the dish projects almost
+    // round from up there, which fills a tall frame, where the low
+    // three-quarter view that suits a laptop leaves a shallow band with nothing
+    // above or below it.
+    const tall = Math.max(0, Math.min(1, (1.15 - aspect) / 0.6));
+    eye.set(0, base.y + tall * 1.15, base.z - tall * 1.25);
+
     // Shake, and a slow drift so the dish is never quite static.
     const k = b.shake * 0.05;
     camera.position.set(
-      base.x + (Math.random() - 0.5) * k,
-      base.y + (Math.random() - 0.5) * k,
-      base.z + (Math.random() - 0.5) * k,
+      eye.x + (Math.random() - 0.5) * k,
+      eye.y + (Math.random() - 0.5) * k,
+      eye.z + (Math.random() - 0.5) * k,
     );
     camera.lookAt(0, 0, 0);
   });

@@ -157,8 +157,9 @@ you and the man behind the table.
 
 ## Effects
 
-There is a second tab on the shelf. It is not games — it is the moving parts,
-one idea each, with the numbers on the card.
+There is a **second tab on the shelf**, next to Games — that is where Dot Field,
+Roll Call and Two Crayons live. It is not games; it is the moving parts, one
+idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
 lets the pointer push them out of the way: straight outwards, hardest at the
@@ -234,6 +235,23 @@ No image is stored, loaded or copied anywhere in this project: there are no
 raster or vector assets in the repository, no data URIs in the source, and the
 face code never calls an image API. Open any face's card and it will show you
 the forty-one numbers it is.
+
+
+## Two Crayons
+
+Two hundred faces in black and one colour, on paper. Nothing here asks the
+canvas for a line: every mark is pigment deposited a pixel at a time, and
+whether a pixel gets any comes down to one comparison — does the pressure of the
+stroke beat the tooth of the paper underneath it. That single line gives you
+marks that break up where the hand goes light, taper at the end rather than the
+start, and — because the tooth belongs to the *page* and not to the stroke — skip
+over the same bumps where two strokes cross.
+
+The faces on top of it are a grammar of eight families with three rules taken off
+the reference: the contour is open, the colour is laid first and deliberately out
+of register, and the two eyes are always drawn from different families.
+[`docs/two-crayons.md`](docs/two-crayons.md) has the method and the passes it
+took. The same engine draws the eight bladers in Lattu.
 
 ## Running it
 

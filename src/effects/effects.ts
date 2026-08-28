@@ -6,7 +6,7 @@
  * render both from a list.
  */
 
-export type EffectId = 'dotfield' | 'rollcall';
+export type EffectId = 'dotfield' | 'rollcall' | 'crayon';
 
 export interface EffectDef {
   id: EffectId;
@@ -44,6 +44,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['1,931 things · 17 sets', 'novelty search, not sampling', 'p5 into atlases, three.js instancing'],
     ink: '#7a6a55',
     wash: 'rgba(122, 106, 85, 0.09)',
+  },
+  {
+    id: 'crayon',
+    name: 'Two Crayons',
+    tagline: 'Two hundred faces in black and one colour.',
+    blurb:
+      'One black stick, one coloured one, and a sheet of rough paper. Every mark is pigment deposited a pixel at a time wherever the pressure of the stroke beats the tooth of the page — so the marks break up where the hand goes light, taper at the end, and two strokes crossing skip over the same bumps, because they are reading the same paper. The faces on top of that are a grammar of eight families: an open contour, a mismatched pair of eyes, and colour laid first and deliberately out of register.',
+    spec: ['200 faces · 8 families', 'grain from paper tooth, not a filter', 'pixels, no canvas strokes'],
+    ink: '#c2392b',
+    wash: 'rgba(194, 57, 43, 0.09)',
   },
 ];
 

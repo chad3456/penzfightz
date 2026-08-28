@@ -151,6 +151,37 @@ The blader and the beast are deliberately separable: the beast decides how the
 fight goes, the blader decides how the *launch* goes, which is the only part you
 control. Whose quirk is on which beast is most of the replay value.
 
+## Playing it on a phone
+
+Everything the game asks for is one press, and it was already a button — but
+every prompt named a key, which is exactly the wrong thing to tell somebody
+holding a phone. The labels now check for a coarse pointer and drop the key
+hints when there is no keyboard to press. Both players in a two-player match get
+their own button on their own side of the screen, so a hot-seat match works on
+one handset.
+
+The camera frames the dish from the **shape of the window** rather than from a
+fixed field of view. A phone held upright is about 0.45 aspect; at a fixed
+vertical field that leaves a horizontal field a third as wide and the dish is
+cropped at both sides. So the horizontal half-angle is solved for the dish's own
+radius and converted back through the aspect — and the camera also rises toward
+overhead as the window gets taller, because the dish projects almost round from
+up there and fills a tall frame, where the low three-quarter view that suits a
+laptop leaves a shallow band with nothing above or below it.
+
+The rest is small: `touch-action: manipulation` to kill the tap delay and
+double-tap zoom, 44px minimum on every control that gets thumbed, and a smaller
+masthead under 620px so the height goes to the dish.
+
+## How to play, in the game
+
+Six numbered steps and a controls panel, reachable from the home screen. It says
+what the two pre-launch decisions actually do — inside is where the hitting
+happens, outside is out of reach — what the call costs, how the two point values
+work, and that the painted rings on the floor of the dish are how you read a
+top's spin running down. That last one is the thing nobody would work out on
+their own.
+
 ## The computer
 
 The same two decisions, made the same way. It reads the matchup — more stamina
@@ -165,6 +196,16 @@ Grades are set from the measured win rate of the beast each blader carries, not
 from the order they got written in — the eight land between 44% and 53%, close
 enough that the player on the other side is what actually makes the sixth fight
 harder than the first.
+
+## The bladers' faces
+
+Each of the eight is drawn by the **Two Crayons** engine — see
+[`docs/two-crayons.md`](two-crayons.md) — seeded off the blader's id with the
+accent pinned to their own colour, so a card and its portrait always agree.
+Nothing is stored: the portrait is the id, and it comes out the same every time
+because the seed does. A text card told you a blader's name and nothing about
+them; this is the cheapest possible way to have eight people in the room instead
+of eight rows of a table.
 
 ## The marks
 
@@ -207,3 +248,6 @@ Driven in headless Chromium against the running app, not checked by eye:
 - two players on one keyboard: space cannot steal the second player's rip, both
   call buttons present, each bound to its own key
 - no horizontal overflow at 390px, no console errors anywhere in the above
+- a full round played **by tapping only**, on a 390x780 touch viewport with a
+  mobile user agent: track set, ripped, beast called, round won — and the key
+  hints correctly absent from every label

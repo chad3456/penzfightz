@@ -11,6 +11,7 @@ import { Maze } from './games/maze/Maze';
 import { DotFieldStage } from './effects/DotFieldStage';
 import { RollCall } from './effects/rollcall/RollCall';
 import { Lattu } from './games/lattu/Lattu';
+import { Crayon } from './effects/crayon/Crayon';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -119,6 +120,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'rollcall') {
     return <RollCall onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'crayon') {
+    return <Crayon onExit={toShelf} />;
   }
 
   const inner = () => {

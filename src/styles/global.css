@@ -3889,3 +3889,251 @@ button.card:hover:not(:disabled) {
   .lattu__middle { grid-column: 1 / -1; order: -1; }
   .lattu__spin { width: 100%; }
 }
+
+/* ============================================ Two Crayons: the paper wall */
+
+.crayon {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: #2a2926;
+  color: #ece7dc;
+  padding: 14px clamp(10px, 2.5vw, 26px) 40px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.crayon__bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.crayon__eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9a9184;
+}
+
+.crayon__title {
+  margin: 2px 0 0;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.crayon__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.crayon .stage__spec,
+.crayon .stage__back {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #4a463f;
+  color: #cfc8ba;
+}
+
+.crayon .stage__spec:hover,
+.crayon .stage__back:hover { color: #fff; border-color: #8a8377; }
+
+.crayon__lede {
+  max-width: 660px;
+  margin: 14px 0 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #a9a294;
+}
+
+.crayon__wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: clamp(6px, 1.2vw, 14px);
+}
+
+.crayon__tile {
+  appearance: none;
+  padding: 0;
+  border: 1px solid #3d3a34;
+  background: #eae7e1;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.crayon__tile:hover { transform: translateY(-2px); border-color: #8a8377; }
+
+.crayon__ink { width: 100%; line-height: 0; }
+
+.crayon__no {
+  position: absolute;
+  left: 5px;
+  bottom: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  color: rgba(30, 28, 24, 0.4);
+}
+
+/* ---------------------------------------------------------- one large print */
+
+.crayon__sheet {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 17, 15, 0.9);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  z-index: 30;
+}
+
+.crayon__sheetinner {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.crayon__print {
+  line-height: 0;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  background: #eae7e1;
+  flex: 0 1 auto;
+}
+
+.crayon__print canvas {
+  display: block;
+  max-width: min(520px, 92vw);
+  max-height: 74vh;
+  width: auto;
+  height: auto;
+}
+
+.crayon__caption { flex: 0 1 280px; min-width: 240px; }
+.crayon__name { font-size: 19px; margin-bottom: 6px; }
+
+.crayon__meta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  color: #a9a294;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.crayon__swatch {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.crayon__recipe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 12px 0 16px;
+}
+
+.crayon__recipe span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  border: 1px solid #4a463f;
+  padding: 3px 7px;
+  color: #8f8779;
+}
+
+.crayon__nav { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* The shared small button is a full-width block; in a row of three it has to
+   share. */
+.crayon__nav .btn { width: auto; flex: 1 1 auto; }
+
+@media (max-width: 620px) {
+  .crayon__sheetinner { gap: 12px; }
+  .crayon__print canvas { max-height: 56vh; }
+  .crayon__caption { flex: 1 1 100%; }
+}
+
+/* --------------------------------------------- Lattu: portraits and how-to */
+
+/* No tap-delay, no double-tap zoom, no text selection while thumbing buttons. */
+.lattu {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.lattu__portrait {
+  line-height: 0;
+  background: #eae7e1;
+  border: 1px solid #3a3630;
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.lattu__card .lattu__portrait { margin-bottom: 6px; }
+
+.lattu__how {
+  margin: 0;
+  padding-left: 22px;
+  max-width: 720px;
+  display: grid;
+  gap: 12px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #c4bdb0;
+}
+
+.lattu__how b { color: #ece7dc; font-weight: 500; }
+.lattu__how i { color: #ece7dc; font-style: italic; }
+
+.lattu__keys {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  max-width: 720px;
+}
+
+.lattu__keys > div {
+  border: 1px solid #3a3630;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px 14px;
+}
+
+.lattu__keys p { margin: 6px 0 0; font-size: 13.5px; line-height: 1.55; color: #a49c8e; }
+.lattu__keys b { color: #ece7dc; font-weight: 500; }
+
+.lattu__keyhead {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8f8779;
+}
+
+.lattu__lede--left { text-align: left; max-width: 720px; margin: 0; }
+
+/* The call buttons want to be thumb-sized on a phone, and on their own sides. */
+@media (hover: none) and (pointer: coarse) {
+  .lattu__call {
+    font-size: 12px;
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+  .lattu .btn--big { min-height: 52px; }
+}
+
+/* A phone has no room for a masthead; give the height to the dish. */
+@media (max-width: 620px) {
+  .lattu__bar { padding: 8px 12px 6px; }
+  .lattu__title { font-size: 26px; }
+  .lattu__eyebrow { font-size: 9px; }
+}
