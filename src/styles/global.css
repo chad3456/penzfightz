@@ -1667,6 +1667,13 @@ h2.title {
 .shelf__modes {
   display: flex;
   gap: 5px;
+  /* The pills are `white-space: nowrap`, so without this a row of them cannot
+     shrink and simply makes the card wider than the sheet it sits on. The games
+     get away with it because "vs computer" is short; the effects, whose pills
+     carry a whole spec line, were 580px wide inside a 492px page and had their
+     right-hand end clipped off by the paper. */
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .shelf__pill {
