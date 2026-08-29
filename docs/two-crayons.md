@@ -146,17 +146,41 @@ A figure's head is drawn by the heads grammar, at a twelfth of the height
 instead of a third, with the collar left off because the body has shoulders of
 its own. `drawHead` was split out of `drawFace` for it; nothing is duplicated.
 
+### A limb is a wedge, not a stroke
+
+The thing that turned these from armatures into people, and the one that took
+longest to see. A limb drawn at **constant width** reads as wire, and no amount
+of grain, pressure variation or boldness rescues it — because the problem is the
+*silhouette*, not the surface. Two rounds were spent thickening strokes and
+retuning pressure before it became obvious that thicker wire is still wire.
+
+A crayon held at an angle makes a wedge, and an arm *is* a wedge: thick at the
+shoulder, thin at the wrist. So the nib grew a width profile, interpolated along
+the stroke, and one call now draws a limb that narrows properly. The pressure
+envelope is turned right down on limbs at the same time — leave both on and a
+limb fades out before it reaches the hand.
+
+Two knock-on details. The scan across the nib has to step by the *widest* the
+stroke ever gets, or the fat end goes gappy. And the hips had to widen: at the
+old spacing a standing pose put the two legs near enough vertical and near
+enough together that the taper closed the gap, and the figure came out wearing a
+tube.
+
 ### What each pass fixed
 
 | pass | what was wrong |
 |---|---|
-| first figures | stick figures — hairline limbs, a balloon head, a torso of two straight lines |
-| second | limbs roughly doubled in weight, the head down a notch, and the trunk built from a real outline with a waist in it (a shoulder-to-hip trapezium comes out as a sliver with nothing in it) |
-| third | the bat was a *stroked quad*, and every path goes through Chaikin smoothing on its way to the paper, so it came out as a rounded loop floating next to the batsman. It is a scrubbed mass now. |
+| 1 | stick figures — hairline limbs, a balloon head, a torso of two straight lines |
+| 2 | limbs roughly doubled in weight, the trunk rebuilt from a real outline with a waist in it (a shoulder-to-hip trapezium comes out as a sliver with nothing in it) |
+| 3 | the bat was a *stroked quad*, and every path goes through Chaikin smoothing on its way to the paper, so it came out as a rounded loop floating next to the batsman. It is a scrubbed mass now. |
+| 4 | **still armatures.** The nib got a width profile; head down from a fifth of the height to a seventh; hips widened so two legs read as two; hand blobs dropped, because a tapering limb already ends itself and a blob on each of four is four marks on a page whose whole discipline is not making them |
+| 5 | four of the six kinds of dress are black, so two thirds of the wall was a black figure with a small coloured smudge under it. Every figure now gets one bold accent — a sash, a headband, cuffs, a belt, boots — and like the heads it is deliberately out of register |
 
-Also on that last pass: the umpire's six and a HOWZAT appeal were the same
-gesture, a load appeared on the head of the figure carrying one, and the guitar
-stopped hovering two feet to the right of the person playing it.
+Also along the way: the umpire's six and a HOWZAT appeal were the same gesture, a
+load appeared on the head of the figure carrying one, the guitar stopped hovering
+two feet to the right of the person playing it, and nothing sits dead centre any
+more — a page of perfectly centred drawings reads as a catalogue however good
+each one is.
 
 ## What this is not
 
@@ -187,7 +211,10 @@ up. What it is:
 
 ## Performance
 
-About ten milliseconds a head and sixteen a figure, at thumbnail size. Drawing
+About ten milliseconds a head and twenty-five a figure, at thumbnail size. The
+figures got slower when the nib grew a width profile, because the scan across it
+now steps by the widest the stroke ever gets rather than its current width —
+which is the price of the taper and worth paying. Drawing
 all eighteen hundred up front is half a minute of locked tab for a wall you can
 see a dozen of at a time, so the laziness is doubled up: tiles exist in the DOM
 in **pages of a hundred and eighty** — sixteen hundred live buttons each with

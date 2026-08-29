@@ -33,6 +33,16 @@ export interface Nib {
   hand: number;
   /** Extra ragged-edge wander, in pixels. */
   fray: number;
+  /**
+   * Width multiplier at the start and at the end of the stroke.
+   *
+   * A crayon held at an angle makes a **wedge**, and a limb is a wedge: thick
+   * at the shoulder, thin at the wrist. Without this every limb comes out the
+   * same width along its whole length, which is a wire armature rather than an
+   * arm — and no amount of grain or pressure variation rescues it, because the
+   * problem is the silhouette and not the surface.
+   */
+  taper?: [number, number];
 }
 
 /** Resample a polyline to even spacing, smoothing corners as a hand would. */
@@ -124,12 +134,18 @@ export function drag(sheet: Sheet, path: Pt[], nib: Nib, seed: number) {
     const ny = dx / len;
 
     const p = pressure(t, nib.hand, wob);
+    // The wedge. Interpolated along the stroke, so one call draws a limb that
+    // narrows from the shoulder to the wrist.
+    const wedge = nib.taper ? nib.taper[0] + (nib.taper[1] - nib.taper[0]) * t : 1;
     // The two edges wander independently, so the mark is never a ribbon of
     // constant width — one side skids while the other holds.
-    const w0 = nib.width * (1 + frayA(t * 7) * nib.fray);
-    const w1 = nib.width * (1 + frayB(t * 7) * nib.fray);
+    const w0 = nib.width * wedge * (1 + frayA(t * 7) * nib.fray);
+    const w1 = nib.width * wedge * (1 + frayB(t * 7) * nib.fray);
 
-    for (let s = -1; s <= 1; s += 1 / Math.max(2, nib.width * 1.6)) {
+    // Step across the widest the nib ever gets, not its current width, or a
+    // tapering stroke goes gappy at the fat end.
+    const span = Math.max(2, nib.width * Math.max(1, nib.taper?.[0] ?? 1, nib.taper?.[1] ?? 1) * 1.8);
+    for (let s = -1; s <= 1; s += 1 / span) {
       const half = s < 0 ? w0 : w1;
       const u = s;
       // Pigment thins toward the edge of the nib.

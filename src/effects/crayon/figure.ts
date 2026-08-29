@@ -38,17 +38,33 @@ const BLACK = '#141414';
 
 /** Proportions, in figure units. A standing figure is about 2 units tall. */
 const BONE = {
-  spine: 0.44,
-  neck: 0.09,
-  headR: 0.132,
-  shoulder: 0.17,
-  upperArm: 0.27,
-  foreArm: 0.25,
-  hand: 0.055,
-  hip: 0.1,
-  thigh: 0.35,
-  shin: 0.33,
-  foot: 0.13,
+  spine: 0.46,
+  neck: 0.08,
+  /**
+   * A seventh of the figure's height, not a fifth.
+   *
+  * The first pass had a head half again this size and every pose came out as a
+   * bobblehead on a wire. Head size is the proportion that decides whether a
+   * drawing reads as an adult, a child or a cartoon, and it does it before any
+   * of the marks are looked at — but go much under this and the face grammar
+   * has six marks to put inside twenty pixels and they turn to mush.
+   */
+  headR: 0.124,
+  shoulder: 0.215,
+  upperArm: 0.28,
+  foreArm: 0.26,
+  hand: 0.05,
+  /**
+   * Wide enough that two legs read as two legs.
+   *
+   * At 0.135 a standing pose put them near enough vertical and near enough
+   * together that the taper closed the gap, and the figure came out wearing a
+   * tube.
+   */
+  hip: 0.16,
+  thigh: 0.37,
+  shin: 0.35,
+  foot: 0.14,
 };
 
 const rad = (deg: number) => (deg * Math.PI) / 180;
@@ -156,7 +172,9 @@ export function makeFigure(seed: number, only?: Tag): FigureRecipe {
   const face = makeRecipe(seed ^ 0x5bd1);
   const build = Math.floor(r() * BUILDS);
   const dress = Math.floor(r() * DRESS);
-  const ground = Math.floor(r() * GROUND);
+  // Weighted: a plain dash reads best, and the coloured shadow is worth
+  // more than a one-in-four share of the wall.
+  const ground = [1, 1, 2, 3, 3, 0][Math.floor(r() * 6)];
   const flip = r() < 0.45;
   return {
     seed,
@@ -237,9 +255,24 @@ function nib(b: Body, colour: Rgb, width: number, o: Partial<Nib> = {}): Nib {
 
 const line = (b: Body, pts: Pt[], n: Nib) => drag(b.sheet, path(b, pts), n, b.n++);
 
-/** A limb: one stroke through the chain, thinning toward the end of it. */
-function limb(b: Body, chain: Pt[], w: number) {
-  line(b, chain, nib(b, b.ink, w, { fray: 0.3 }));
+/**
+ * A limb: one stroke through the chain, wedge-shaped along its length.
+ *
+ * `from` is the width at the shoulder or hip, `to` at the wrist or ankle. This
+ * is the difference between a limb and a piece of wire, and it is entirely a
+ * silhouette problem — a constant-width stroke reads as an armature no matter
+ * how good the grain on it is.
+ *
+ * The pressure envelope is turned right down here, because the *width* is doing
+ * the tapering now. Leave both on and a limb fades out before it reaches the
+ * hand.
+ */
+function limb(b: Body, chain: Pt[], from: number, to: number) {
+  line(b, chain, {
+    ...nib(b, b.ink, from, { fray: 0.2 }),
+    hand: 0.35,
+    taper: [1, to / from],
+  });
 }
 
 function blob(b: Body, at: Pt, r: number, colour = b.ink, bite = 1.1) {
@@ -280,8 +313,8 @@ function torso(b: Body, k: Skeleton) {
       (k.shoulder[1][1] + k.hip[1][1]) / 2,
     ];
     return [
-      [k.shoulder[0][0] * spread, k.shoulder[0][1]],
-      [k.shoulder[1][0] * spread, k.shoulder[1][1]],
+      [k.shoulder[0][0] * spread, k.shoulder[0][1] - 0.02],
+      [k.shoulder[1][0] * spread, k.shoulder[1][1] - 0.02],
       waistR,
       [k.hip[1][0] * 1.25 * spread, drop],
       [k.hip[0][0] * 1.25 * spread, drop],
@@ -547,6 +580,43 @@ function loose(b: Body, k: Skeleton, p: Pose) {
   drag(b.sheet, [[x - 0.09 * b.u, y], [x + 0.09 * b.u, y]], nib(b, b.ink, 0.008, { hand: 0.5 }), b.n++);
 }
 
+/**
+ * A flash of the accent, for the figures whose clothes are not already coloured.
+ *
+ * Four of the six kinds of dress are drawn in black, which left two thirds of
+ * the wall as black figures with a small coloured smudge under them. The
+ * reference is not shy with its one colour — it puts a whole blush on a cheek
+ * and a whole flame over a pan — so every figure gets one bold accent mark
+ * somewhere, and like the heads it is deliberately out of register.
+ */
+function flash(b: Body, k: Skeleton) {
+  if (b.rec.dress === 1 || b.rec.dress === 4) return;
+  const kind = b.rec.seed % 5;
+  const [, , chest] = k.spine;
+  const off = 0.03;
+
+  if (kind === 0) {
+    // A sash across the chest.
+    line(b, [[k.shoulder[0][0] * 1.1 + off, k.shoulder[0][1]], [k.hip[1][0] * 1.2 + off, 0.04]],
+      nib(b, b.col, 0.05, { bite: 1.0, fray: 0.3 }));
+  } else if (kind === 1) {
+    // A band round the head.
+    line(b, [[k.head[0] - 0.2 + off, k.head[1] - 0.06], [k.head[0] + 0.2 + off, k.head[1] - 0.09]],
+      nib(b, b.col, 0.042, { bite: 1.05 }));
+  } else if (kind === 2) {
+    // Cuffs, on both wrists.
+    for (const hand of k.hand) blob(b, [hand[0] + off, hand[1]], 0.055, b.col, 1.0);
+  } else if (kind === 3) {
+    // A belt.
+    line(b, [[k.hip[0][0] * 1.3 + off, 0.03], [k.hip[1][0] * 1.3 + off, 0.01]],
+      nib(b, b.col, 0.05, { bite: 1.05 }));
+  } else {
+    // Boots.
+    for (const toe of k.toe) blob(b, [toe[0] + off, toe[1] - 0.02], 0.07, b.col, 1.0);
+    void chest;
+  }
+}
+
 /** The mark the figure stands on. Without it, a figure floats. */
 function ground(b: Body, k: Skeleton, at: number) {
   const kind = b.rec.ground;
@@ -590,30 +660,35 @@ export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
   const p = rec.pose;
   const k = skeleton(p, rec.build / (BUILDS - 1));
 
-  // Fit: work out how tall the whole thing came out and scale it to the page,
+  // Fit: work out how big the whole thing came out and scale it to the page,
   // then drop it so the lowest point lands on the ground line. No inverse
   // kinematics anywhere, and a crouch cannot put a foot through the floor.
   const all: Pt[] = [
     k.head, k.neck, ...k.spine, ...k.shoulder, ...k.elbow, ...k.hand,
     ...k.hip, ...k.knee, ...k.foot, ...k.toe,
   ];
-  const top = Math.min(...all.map((q) => q[1])) - BONE.headR * 1.9;
-  const bottom = Math.max(...all.map((q) => q[1])) + BONE.headR * 0.4;
-  const left = Math.min(...all.map((q) => q[0])) - 0.3;
-  const right = Math.max(...all.map((q) => q[0])) + 0.3;
+  const top = Math.min(...all.map((q) => q[1])) - BONE.headR * 2.1;
+  const bottom = Math.max(...all.map((q) => q[1])) + BONE.headR * 0.5;
+  const left = Math.min(...all.map((q) => q[0])) - 0.34;
+  const right = Math.max(...all.map((q) => q[0])) + 0.34;
   // A dive is three times as wide as it is tall; at the same margins as a
   // standing figure it comes out half the size and reads as an insect. Wide
   // poses get more of the page.
   const wideness = (right - left) / (bottom - top);
-  const room = wideness > 1.3 ? 0.94 : 0.82;
-  const u = Math.min((h * 0.8) / (bottom - top), (w * room) / (right - left));
+  const room = wideness > 1.3 ? 0.94 : 0.86;
+  const u = Math.min((h * 0.84) / (bottom - top), (w * room) / (right - left));
+
+  // Nothing sits dead centre. The reference has the figure low and to one side
+  // with the interesting thing flying off the other way, and a page of
+  // perfectly centred drawings reads as a catalogue however good each one is.
+  const drift = (r() - 0.5) * 0.1;
 
   const body: Body = {
     sheet,
     r,
     u,
-    ox: w * 0.5 - ((left + right) / 2) * u * (rec.flip ? -1 : 1),
-    oy: h * (0.9 - (p.air ?? 0) * 0.16) - bottom * u,
+    ox: w * (0.5 + drift) - ((left + right) / 2) * u * (rec.flip ? -1 : 1),
+    oy: h * (0.92 - (p.air ?? 0) * 0.16) - bottom * u,
     mirror: rec.flip ? -1 : 1,
     spin: rad(p.spin ?? 0),
     ink: hexToRgb(BLACK),
@@ -625,31 +700,39 @@ export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
   ground(body, k, 0);
   loose(body, k, p);
 
-  // Far side first, so the near arm and leg overlap it.
-  limb(body, [k.hip[0], k.knee[0], k.foot[0]], 0.046);
-  limb(body, [k.foot[0], k.toe[0]], 0.034);
-  limb(body, [k.shoulder[0], k.elbow[0], k.hand[0]], 0.04);
-  blob(body, k.hand[0], BONE.hand * 1.05);
+  // Far side first, so the near arm and leg overlap it. Widths are the whole
+  // point: thick where the limb joins the body, thin where it leaves it.
+  limb(body, [k.hip[0], k.knee[0], k.foot[0]], 0.062, 0.03);
+  limb(body, [k.foot[0], k.toe[0]], 0.032, 0.022);
+  limb(body, [k.shoulder[0], k.elbow[0], k.hand[0]], 0.05, 0.024);
 
   torso(body, k);
-  limb(body, [k.spine[0], k.spine[1], k.spine[2]], 0.03);
+  flash(body, k);
 
   // The head, drawn by the same grammar the heads gallery uses. No collar: the
   // body has shoulders of its own, and no air marks at this size.
   const [hx, hy] = toPage(body, k.head);
-  drawHead(sheet, rec.face, hx, hy, BONE.headR * u * 2.1, {
+  drawHead(sheet, rec.face, hx, hy, BONE.headR * u * 2.0, {
     collar: false,
     air: false,
     colour: rec.dress !== 1,
   });
 
-  limb(body, [k.hip[1], k.knee[1], k.foot[1]], 0.05);
-  limb(body, [k.foot[1], k.toe[1]], 0.036);
-  limb(body, [k.shoulder[1], k.elbow[1], k.hand[1]], 0.044);
-  blob(body, k.hand[1], BONE.hand * 1.1);
+  limb(body, [k.hip[1], k.knee[1], k.foot[1]], 0.068, 0.032);
+  limb(body, [k.foot[1], k.toe[1]], 0.034, 0.024);
+  limb(body, [k.shoulder[1], k.elbow[1], k.hand[1]], 0.054, 0.026);
 
-  if (p.grip === 0 || p.grip === 2) prop(body, p.prop, k.hand[0], p.propAt ?? 90);
-  if (p.grip === 1) prop(body, p.prop, k.hand[1], p.propAt ?? 90);
+  // Hands only where one is holding something. A tapering limb already ends
+  // itself; a blob on the end of every one of them is four extra marks on a
+  // page whose whole discipline is not making them.
+  if (p.grip === 0 || p.grip === 2) {
+    blob(body, k.hand[0], BONE.hand * 0.9);
+    prop(body, p.prop, k.hand[0], p.propAt ?? 90);
+  }
+  if (p.grip === 1) {
+    blob(body, k.hand[1], BONE.hand * 0.9);
+    prop(body, p.prop, k.hand[1], p.propAt ?? 90);
+  }
 
   return sheet;
 }
