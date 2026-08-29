@@ -4187,3 +4187,73 @@ button.card:hover:not(:disabled) {
   color: #7d7669;
   padding: 22px 0;
 }
+
+/* ------------------------------------------ Two Crayons: the scene globe */
+
+.crayon__globe {
+  position: relative;
+  height: min(74vh, 760px);
+  border: 1px solid #3d3a34;
+  background: #2a2926;
+  margin-top: 4px;
+}
+
+.crayon__globe canvas { display: block; touch-action: none; }
+
+.crayon__baking {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  justify-items: center;
+}
+
+.crayon__bakebar {
+  width: min(420px, 60vw);
+  height: 3px;
+  background: #4a463f;
+  overflow: hidden;
+}
+
+.crayon__bakebar span {
+  display: block;
+  height: 100%;
+  background: #c2392b;
+  transition: width 0.2s linear;
+}
+
+.crayon__baketext {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #8f8779;
+}
+
+.crayon__peek {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  right: 12px;
+  pointer-events: none;
+  background: rgba(20, 19, 17, 0.82);
+  border-left: 2px solid #c2392b;
+  padding: 9px 13px;
+}
+
+.crayon__peekname { font-size: 16px; }
+
+.crayon__peeknote {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #a49c8e;
+  margin-top: 2px;
+}
+
+.crayon__printnote {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #a49c8e;
+  margin: -2px 0 8px;
+  font-style: italic;
+}

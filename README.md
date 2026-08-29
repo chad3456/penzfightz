@@ -239,9 +239,10 @@ the forty-one numbers it is.
 
 ## Two Crayons
 
-Two hundred heads and sixteen hundred whole figures in black and one colour, on
-paper — cricket, football, games, work, everyday gestures, people running and
-falling over. Nothing here asks the
+Two hundred heads, sixteen hundred whole figures and a thousand staged scenes in
+black and one colour, on paper — cricket, football, games, work, everyday
+gestures, people running and falling over, and people sitting alone on park
+benches. Nothing here asks the
 canvas for a line: every mark is pigment deposited a pixel at a time, and
 whether a pixel gets any comes down to one comparison — does the pressure of the
 stroke beat the tooth of the paper underneath it. That single line gives you
@@ -257,8 +258,19 @@ is built on a **line of action** first, the single arc from the head through the
 body to the weight-bearing foot, and hung with limbs afterwards; then the whole
 thing is dropped so its lowest point lands on the ground, which is why a crouch,
 a dive and a stand all sit correctly with no inverse kinematics anywhere.
+
+The scenes go one further and author the *composition*: a cast and a set placed
+in frame coordinates, across fifty-five stagings and twenty-two set pieces — a
+bench, a library, a doorway, a window, a park at night. The set is deliberately
+thin, because a piece of scenery detailed enough to look at stops giving the
+figure somewhere to be; two people are a relationship rather than two figures,
+decided entirely by the gap between them; and loneliness is drawn as one small
+figure low in a large empty frame, never as a face. They hang on a globe you can
+turn, hover for the title and click for the full print.
 [`docs/two-crayons.md`](docs/two-crayons.md) has the method and the passes it
-took. The same engine draws the eight bladers in Lattu.
+took — including the day every door came out as an archway because the smoothing
+that makes a hand-drawn line also rounds off anything a carpenter built. The same
+engine draws the eight bladers in Lattu.
 
 ## Running it
 

@@ -48,10 +48,10 @@ export const EFFECTS: EffectDef[] = [
   {
     id: 'crayon',
     name: 'Two Crayons',
-    tagline: 'Eighteen hundred drawings in black and one colour.',
+    tagline: 'Two thousand eight hundred drawings in black and one colour.',
     blurb:
-      'One black stick, one coloured one, and a sheet of rough paper. Every mark is pigment deposited a pixel at a time wherever the pressure of the stroke beats the tooth of the page — so the marks break up where the hand goes light, taper at the end, and two strokes crossing skip over the same bumps, because they are reading the same paper. Two hundred heads built from a grammar of eight families, and sixteen hundred whole figures — cricket, football, games, work, gestures, people running and falling over — each one built on a line of action before a single limb goes on it.',
-    spec: ['200 heads · 1,600 figures', '56 poses on a line of action', 'grain from paper tooth, not a filter'],
+      'One black stick, one coloured one, and a sheet of rough paper. Every mark is pigment deposited a pixel at a time wherever the pressure of the stroke beats the tooth of the page — so the marks break up where the hand goes light, taper at the end, and two strokes crossing skip over the same bumps, because they are reading the same paper. Two hundred heads built from a grammar of eight families; sixteen hundred whole figures — cricket, football, games, work, gestures, people running and falling over — each one built on a line of action before a single limb goes on it; and a thousand staged scenes on a globe you can turn, where a bench, a horizon and three quarters of an empty page do the work no face this size could.',
+    spec: ['200 heads · 1,600 figures · 1,000 scenes', '55 stagings, 72 poses', 'grain from paper tooth, not a filter'],
     ink: '#c2392b',
     wash: 'rgba(194, 57, 43, 0.09)',
   },

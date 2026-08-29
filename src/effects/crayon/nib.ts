@@ -45,12 +45,19 @@ export interface Nib {
   taper?: [number, number];
 }
 
-/** Resample a polyline to even spacing, smoothing corners as a hand would. */
-export function walk(path: Pt[], step: number): Pt[] {
+/**
+ * Resample a polyline to even spacing, smoothing corners as a hand would.
+ *
+ * `smooth` is not decoration. Chaikin rounds *every* corner, which is right for
+ * a limb or a scribble and catastrophic for anything with a right angle in it —
+ * a four-point door came out as an archway, a window as a circle with a cross
+ * in it, and a flight of stairs as a wobble. Architecture asks for `false`.
+ */
+export function walk(path: Pt[], step: number, smooth = true): Pt[] {
   if (path.length < 2) return path;
   // Chaikin twice: a hand rounds every corner it turns.
   let pts = path;
-  for (let pass = 0; pass < 2; pass++) {
+  for (let pass = 0; pass < (smooth ? 2 : 0); pass++) {
     const out: Pt[] = [pts[0]];
     for (let i = 0; i < pts.length - 1; i++) {
       const [ax, ay] = pts[i];
@@ -114,8 +121,14 @@ export function wander(seed: number) {
 }
 
 /** Drag the nib along a path. */
-export function drag(sheet: Sheet, path: Pt[], nib: Nib, seed: number) {
-  const pts = walk(path, 0.6);
+export function drag(
+  sheet: Sheet,
+  path: Pt[],
+  nib: Nib,
+  seed: number,
+  opts: { sharp?: boolean } = {},
+) {
+  const pts = walk(path, 0.6, !opts.sharp);
   if (pts.length < 2) return;
   const wob = wander(seed);
   const frayA = wander(seed ^ 0x1f3d);
@@ -144,7 +157,10 @@ export function drag(sheet: Sheet, path: Pt[], nib: Nib, seed: number) {
 
     // Step across the widest the nib ever gets, not its current width, or a
     // tapering stroke goes gappy at the fat end.
-    const span = Math.max(2, nib.width * Math.max(1, nib.taper?.[0] ?? 1, nib.taper?.[1] ?? 1) * 1.8);
+    const span = Math.max(
+      2,
+      nib.width * Math.max(1, nib.taper?.[0] ?? 1, nib.taper?.[1] ?? 1) * 1.8,
+    );
     for (let s = -1; s <= 1; s += 1 / span) {
       const half = s < 0 ? w0 : w1;
       const u = s;
@@ -229,14 +245,7 @@ export function scrub(
  * has a clean edge. Both together are what stop a scrubbed patch reading as a
  * filled shape.
  */
-export const inEllipse = (
-  cx: number,
-  cy: number,
-  rx: number,
-  ry: number,
-  rot = 0,
-  seed = 1,
-) => {
+export const inEllipse = (cx: number, cy: number, rx: number, ry: number, rot = 0, seed = 1) => {
   const edge = wander(seed ^ 0x5a3d);
   const soft = Math.max(2.5, Math.min(rx, ry) * 0.22);
   return (x: number, y: number) => {

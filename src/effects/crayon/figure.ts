@@ -43,7 +43,7 @@ const BONE = {
   /**
    * A seventh of the figure's height, not a fifth.
    *
-  * The first pass had a head half again this size and every pose came out as a
+   * The first pass had a head half again this size and every pose came out as a
    * bobblehead on a wire. Head size is the proportion that decides whether a
    * drawing reads as an adult, a child or a cartoon, and it does it before any
    * of the marks are looked at — but go much under this and the face grammar
@@ -114,8 +114,14 @@ export function skeleton(p: Pose, build: number): Skeleton {
 
   const across = lean + Math.PI / 2;
   const shoulder: [Pt, Pt] = [
-    [chest[0] - Math.cos(across) * BONE.shoulder * s, chest[1] - Math.sin(across) * BONE.shoulder * s],
-    [chest[0] + Math.cos(across) * BONE.shoulder * s, chest[1] + Math.sin(across) * BONE.shoulder * s],
+    [
+      chest[0] - Math.cos(across) * BONE.shoulder * s,
+      chest[1] - Math.sin(across) * BONE.shoulder * s,
+    ],
+    [
+      chest[0] + Math.cos(across) * BONE.shoulder * s,
+      chest[1] + Math.sin(across) * BONE.shoulder * s,
+    ],
   ];
   const elbow: [Pt, Pt] = [
     step(shoulder[0], p.armL[0], BONE.upperArm * s),
@@ -126,7 +132,10 @@ export function skeleton(p: Pose, build: number): Skeleton {
     step(elbow[1], p.armR[1], BONE.foreArm * s),
   ];
 
-  const hip: [Pt, Pt] = [[-BONE.hip * s, 0], [BONE.hip * s, 0]];
+  const hip: [Pt, Pt] = [
+    [-BONE.hip * s, 0],
+    [BONE.hip * s, 0],
+  ];
   const knee: [Pt, Pt] = [
     step(hip[0], p.legL[0], BONE.thigh * s),
     step(hip[1], p.legR[0], BONE.thigh * s),
@@ -141,7 +150,19 @@ export function skeleton(p: Pose, build: number): Skeleton {
     step(foot[1], p.legR[1] - 78, BONE.foot * s),
   ];
 
-  return { pelvis, spine: [pelvis, mid, chest], neck, head, shoulder, elbow, hand, hip, knee, foot, toe };
+  return {
+    pelvis,
+    spine: [pelvis, mid, chest],
+    neck,
+    head,
+    shoulder,
+    elbow,
+    hand,
+    hip,
+    knee,
+    foot,
+    toe,
+  };
 }
 
 // ------------------------------------------------------------------- recipes
@@ -377,8 +398,22 @@ function torso(b: Body, k: Skeleton) {
     line(b, [t[4], t[3]], nib(b, b.ink, 0.032));
     const cy = chest[1] * 0.52;
     const cx = chest[0] * 0.5;
-    line(b, [[cx - 0.07, cy - 0.11], [cx - 0.07, cy + 0.11]], nib(b, b.col, 0.036, { bite: 1.05 }));
-    line(b, [[cx + 0.07, cy - 0.11], [cx + 0.02, cy + 0.11]], nib(b, b.col, 0.036, { bite: 1.05 }));
+    line(
+      b,
+      [
+        [cx - 0.07, cy - 0.11],
+        [cx - 0.07, cy + 0.11],
+      ],
+      nib(b, b.col, 0.036, { bite: 1.05 }),
+    );
+    line(
+      b,
+      [
+        [cx + 0.07, cy - 0.11],
+        [cx + 0.02, cy + 0.11],
+      ],
+      nib(b, b.col, 0.036, { bite: 1.05 }),
+    );
   }
 }
 
@@ -432,8 +467,14 @@ function prop(b: Body, kind: Prop, at: Pt, angleDeg: number) {
       }
       line(b, ring, nib(b, b.ink, 0.026));
       for (let i = -1; i <= 1; i++) {
-        line(b, [[hx + i * 0.05, hy - rr * 0.85], [hx + i * 0.05, hy + rr * 0.85]],
-          nib(b, b.ink, 0.012, { hand: 0.5 }));
+        line(
+          b,
+          [
+            [hx + i * 0.05, hy - rr * 0.85],
+            [hx + i * 0.05, hy + rr * 0.85],
+          ],
+          nib(b, b.ink, 0.012, { hand: 0.5 }),
+        );
       }
       break;
     }
@@ -459,20 +500,52 @@ function prop(b: Body, kind: Prop, at: Pt, angleDeg: number) {
       line(b, [at, d], nib(b, b.ink, 0.022));
       const w = 0.13;
       const hgt = 0.17;
-      line(b, [[d[0] - w, d[1]], [d[0] + w, d[1]], [d[0] + w * 0.85, d[1] + hgt],
-        [d[0] - w * 0.85, d[1] + hgt], [d[0] - w, d[1]]], nib(b, b.ink, 0.032));
+      line(
+        b,
+        [
+          [d[0] - w, d[1]],
+          [d[0] + w, d[1]],
+          [d[0] + w * 0.85, d[1] + hgt],
+          [d[0] - w * 0.85, d[1] + hgt],
+          [d[0] - w, d[1]],
+        ],
+        nib(b, b.ink, 0.032),
+      );
       break;
     }
     case 'book': {
       const w = 0.17;
       const hgt = 0.13;
-      line(b, [[at[0] - w, at[1] - hgt], [at[0] + w, at[1] - hgt * 0.8],
-        [at[0] + w, at[1] + hgt], [at[0] - w, at[1] + hgt * 0.9], [at[0] - w, at[1] - hgt]], N);
-      line(b, [[at[0], at[1] - hgt * 0.9], [at[0], at[1] + hgt * 0.95]], nib(b, b.ink, 0.022));
+      line(
+        b,
+        [
+          [at[0] - w, at[1] - hgt],
+          [at[0] + w, at[1] - hgt * 0.8],
+          [at[0] + w, at[1] + hgt],
+          [at[0] - w, at[1] + hgt * 0.9],
+          [at[0] - w, at[1] - hgt],
+        ],
+        N,
+      );
+      line(
+        b,
+        [
+          [at[0], at[1] - hgt * 0.9],
+          [at[0], at[1] + hgt * 0.95],
+        ],
+        nib(b, b.ink, 0.022),
+      );
       break;
     }
     case 'phone':
-      line(b, [[at[0] - 0.03, at[1] - 0.06], [at[0] + 0.03, at[1] + 0.06]], nib(b, b.ink, 0.042));
+      line(
+        b,
+        [
+          [at[0] - 0.03, at[1] - 0.06],
+          [at[0] + 0.03, at[1] + 0.06],
+        ],
+        nib(b, b.ink, 0.042),
+      );
       break;
     case 'guitar': {
       const body: Pt = [at[0] + Math.cos(rad(a)) * 0.2, at[1] + Math.sin(rad(a)) * 0.2 + 0.06];
@@ -519,15 +592,27 @@ function prop(b: Body, kind: Prop, at: Pt, angleDeg: number) {
       break;
     }
     case 'camera':
-      line(b, [[at[0] - 0.1, at[1] - 0.07], [at[0] + 0.1, at[1] - 0.07],
-        [at[0] + 0.1, at[1] + 0.07], [at[0] - 0.1, at[1] + 0.07], [at[0] - 0.1, at[1] - 0.07]], N);
+      line(
+        b,
+        [
+          [at[0] - 0.1, at[1] - 0.07],
+          [at[0] + 0.1, at[1] - 0.07],
+          [at[0] + 0.1, at[1] + 0.07],
+          [at[0] - 0.1, at[1] + 0.07],
+          [at[0] - 0.1, at[1] - 0.07],
+        ],
+        N,
+      );
       blob(b, at, 0.055, b.ink, 1.0);
       break;
     case 'flag': {
       const top = along(0.52);
       line(b, [at, top], nib(b, b.ink, 0.022));
-      line(b, [top, step(top, a + 96, 0.2), step(top, a + 70, 0.28)],
-        nib(b, b.col, 0.044, { bite: 1.0 }));
+      line(
+        b,
+        [top, step(top, a + 96, 0.2), step(top, a + 70, 0.28)],
+        nib(b, b.col, 0.044, { bite: 1.0 }),
+      );
       break;
     }
     case 'rope': {
@@ -544,9 +629,17 @@ function prop(b: Body, kind: Prop, at: Pt, angleDeg: number) {
       blob(b, along(0.3), 0.04, b.col, 1.0);
       break;
     case 'cup':
-      line(b, [[at[0] - 0.055, at[1] - 0.05], [at[0] + 0.055, at[1] - 0.05],
-        [at[0] + 0.04, at[1] + 0.05], [at[0] - 0.04, at[1] + 0.05],
-        [at[0] - 0.055, at[1] - 0.05]], nib(b, b.ink, 0.026));
+      line(
+        b,
+        [
+          [at[0] - 0.055, at[1] - 0.05],
+          [at[0] + 0.055, at[1] - 0.05],
+          [at[0] + 0.04, at[1] + 0.05],
+          [at[0] - 0.04, at[1] + 0.05],
+          [at[0] - 0.055, at[1] - 0.05],
+        ],
+        nib(b, b.ink, 0.026),
+      );
       break;
   }
 }
@@ -566,7 +659,14 @@ function loose(b: Body, k: Skeleton, p: Pose) {
       b.n++,
       { passes: 3 },
     );
-    line(b, [[on[0] - 0.22, on[1] + 0.1], [on[0] + 0.22, on[1] + 0.09]], nib(b, b.ink, 0.026));
+    line(
+      b,
+      [
+        [on[0] - 0.22, on[1] + 0.1],
+        [on[0] + 0.22, on[1] + 0.09],
+      ],
+      nib(b, b.ink, 0.026),
+    );
     return;
   }
   if (p.prop !== 'football') return;
@@ -577,7 +677,15 @@ function loose(b: Body, k: Skeleton, p: Pose) {
       : [k.toe[0][0] + 0.24, k.toe[0][1] - 0.08];
   blob(b, at, 0.13, b.col, 1.05);
   const [x, y] = toPage(b, at);
-  drag(b.sheet, [[x - 0.09 * b.u, y], [x + 0.09 * b.u, y]], nib(b, b.ink, 0.008, { hand: 0.5 }), b.n++);
+  drag(
+    b.sheet,
+    [
+      [x - 0.09 * b.u, y],
+      [x + 0.09 * b.u, y],
+    ],
+    nib(b, b.ink, 0.008, { hand: 0.5 }),
+    b.n++,
+  );
 }
 
 /**
@@ -597,19 +705,37 @@ function flash(b: Body, k: Skeleton) {
 
   if (kind === 0) {
     // A sash across the chest.
-    line(b, [[k.shoulder[0][0] * 1.1 + off, k.shoulder[0][1]], [k.hip[1][0] * 1.2 + off, 0.04]],
-      nib(b, b.col, 0.05, { bite: 1.0, fray: 0.3 }));
+    line(
+      b,
+      [
+        [k.shoulder[0][0] * 1.1 + off, k.shoulder[0][1]],
+        [k.hip[1][0] * 1.2 + off, 0.04],
+      ],
+      nib(b, b.col, 0.05, { bite: 1.0, fray: 0.3 }),
+    );
   } else if (kind === 1) {
     // A band round the head.
-    line(b, [[k.head[0] - 0.2 + off, k.head[1] - 0.06], [k.head[0] + 0.2 + off, k.head[1] - 0.09]],
-      nib(b, b.col, 0.042, { bite: 1.05 }));
+    line(
+      b,
+      [
+        [k.head[0] - 0.2 + off, k.head[1] - 0.06],
+        [k.head[0] + 0.2 + off, k.head[1] - 0.09],
+      ],
+      nib(b, b.col, 0.042, { bite: 1.05 }),
+    );
   } else if (kind === 2) {
     // Cuffs, on both wrists.
     for (const hand of k.hand) blob(b, [hand[0] + off, hand[1]], 0.055, b.col, 1.0);
   } else if (kind === 3) {
     // A belt.
-    line(b, [[k.hip[0][0] * 1.3 + off, 0.03], [k.hip[1][0] * 1.3 + off, 0.01]],
-      nib(b, b.col, 0.05, { bite: 1.05 }));
+    line(
+      b,
+      [
+        [k.hip[0][0] * 1.3 + off, 0.03],
+        [k.hip[1][0] * 1.3 + off, 0.01],
+      ],
+      nib(b, b.col, 0.05, { bite: 1.05 }),
+    );
   } else {
     // Boots.
     for (const toe of k.toe) blob(b, [toe[0] + off, toe[1] - 0.02], 0.07, b.col, 1.0);
@@ -626,10 +752,31 @@ function ground(b: Body, k: Skeleton, at: number) {
   const y = lowest + 0.05;
   void at;
   if (kind === 1) {
-    line(b, [[mid - 0.4, y], [mid + 0.45, y - 0.01]], nib(b, b.ink, 0.03, { fray: 0.4 }));
+    line(
+      b,
+      [
+        [mid - 0.4, y],
+        [mid + 0.45, y - 0.01],
+      ],
+      nib(b, b.ink, 0.03, { fray: 0.4 }),
+    );
   } else if (kind === 2) {
-    line(b, [[mid - 0.62, y + 0.01], [mid + 0.66, y - 0.02]], nib(b, b.ink, 0.042, { fray: 0.45 }));
-    line(b, [[mid - 0.3, y + 0.07], [mid + 0.24, y + 0.06]], nib(b, b.ink, 0.022, { fray: 0.5 }));
+    line(
+      b,
+      [
+        [mid - 0.62, y + 0.01],
+        [mid + 0.66, y - 0.02],
+      ],
+      nib(b, b.ink, 0.042, { fray: 0.45 }),
+    );
+    line(
+      b,
+      [
+        [mid - 0.3, y + 0.07],
+        [mid + 0.24, y + 0.06],
+      ],
+      nib(b, b.ink, 0.022, { fray: 0.5 }),
+    );
   } else {
     // A cast shadow, in the accent, out of register with the feet.
     const [x, yy] = toPage(b, [mid + 0.08, y + 0.02]);
@@ -654,42 +801,39 @@ function ground(b: Body, k: Skeleton, at: number) {
  * head, and last the near arm and whatever it is holding — so the hand that
  * holds the bat is in front of the body rather than behind it.
  */
-export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
-  const sheet = new Sheet(w, h, rec.seed, rec.paper);
+/** Where a figure stands on a sheet somebody else owns. */
+export interface Placement {
+  /** Centre of the figure, in page pixels. */
+  cx: number;
+  /** Where the feet land, in page pixels. */
+  baseY: number;
+  /** Figure units to pixels. */
+  u: number;
+  flip?: boolean;
+  /** Draw the ground dash. Off when a scene supplies its own floor. */
+  ground?: boolean;
+}
+
+/**
+ * Paint a figure onto an existing sheet, at a given place and size.
+ *
+ * Split out of `drawFigure` so a scene can stage two or three of them against a
+ * bench with air between, which is the whole difference between a figure and a
+ * picture. Everything about how a body is drawn stays here; only the fitting
+ * moved out.
+ */
+export function paintFigure(sheet: Sheet, rec: FigureRecipe, at: Placement) {
   const r = mulberry(rec.seed ^ 0x3c7f);
   const p = rec.pose;
   const k = skeleton(p, rec.build / (BUILDS - 1));
 
-  // Fit: work out how big the whole thing came out and scale it to the page,
-  // then drop it so the lowest point lands on the ground line. No inverse
-  // kinematics anywhere, and a crouch cannot put a foot through the floor.
-  const all: Pt[] = [
-    k.head, k.neck, ...k.spine, ...k.shoulder, ...k.elbow, ...k.hand,
-    ...k.hip, ...k.knee, ...k.foot, ...k.toe,
-  ];
-  const top = Math.min(...all.map((q) => q[1])) - BONE.headR * 2.1;
-  const bottom = Math.max(...all.map((q) => q[1])) + BONE.headR * 0.5;
-  const left = Math.min(...all.map((q) => q[0])) - 0.34;
-  const right = Math.max(...all.map((q) => q[0])) + 0.34;
-  // A dive is three times as wide as it is tall; at the same margins as a
-  // standing figure it comes out half the size and reads as an insect. Wide
-  // poses get more of the page.
-  const wideness = (right - left) / (bottom - top);
-  const room = wideness > 1.3 ? 0.94 : 0.86;
-  const u = Math.min((h * 0.84) / (bottom - top), (w * room) / (right - left));
-
-  // Nothing sits dead centre. The reference has the figure low and to one side
-  // with the interesting thing flying off the other way, and a page of
-  // perfectly centred drawings reads as a catalogue however good each one is.
-  const drift = (r() - 0.5) * 0.1;
-
   const body: Body = {
     sheet,
     r,
-    u,
-    ox: w * (0.5 + drift) - ((left + right) / 2) * u * (rec.flip ? -1 : 1),
-    oy: h * (0.92 - (p.air ?? 0) * 0.16) - bottom * u,
-    mirror: rec.flip ? -1 : 1,
+    u: at.u,
+    ox: at.cx,
+    oy: at.baseY,
+    mirror: (at.flip ?? rec.flip) ? -1 : 1,
     spin: rad(p.spin ?? 0),
     ink: hexToRgb(BLACK),
     col: hexToRgb(rec.accent),
@@ -697,7 +841,7 @@ export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
     n: rec.seed & 0xffff,
   };
 
-  ground(body, k, 0);
+  if (at.ground !== false) ground(body, k, 0);
   loose(body, k, p);
 
   // Far side first, so the near arm and leg overlap it. Widths are the whole
@@ -712,7 +856,7 @@ export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
   // The head, drawn by the same grammar the heads gallery uses. No collar: the
   // body has shoulders of its own, and no air marks at this size.
   const [hx, hy] = toPage(body, k.head);
-  drawHead(sheet, rec.face, hx, hy, BONE.headR * u * 2.0, {
+  drawHead(sheet, rec.face, hx, hy, BONE.headR * at.u * 2.0, {
     collar: false,
     air: false,
     colour: rec.dress !== 1,
@@ -733,7 +877,60 @@ export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
     blob(body, k.hand[1], BONE.hand * 0.9);
     prop(body, p.prop, k.hand[1], p.propAt ?? 90);
   }
+}
 
+/** How tall and wide a pose comes out, in figure units. Used to fit it to a page. */
+export function extent(p: Pose, build: number) {
+  const k = skeleton(p, build);
+  const all: Pt[] = [
+    k.head,
+    k.neck,
+    ...k.spine,
+    ...k.shoulder,
+    ...k.elbow,
+    ...k.hand,
+    ...k.hip,
+    ...k.knee,
+    ...k.foot,
+    ...k.toe,
+  ];
+  const top = Math.min(...all.map((q) => q[1])) - BONE.headR * 2.1;
+  const bottom = Math.max(...all.map((q) => q[1])) + BONE.headR * 0.5;
+  const left = Math.min(...all.map((q) => q[0])) - 0.34;
+  const right = Math.max(...all.map((q) => q[0])) + 0.34;
+  return {
+    top,
+    bottom,
+    left,
+    right,
+    w: right - left,
+    h: bottom - top,
+    midX: (left + right) / 2,
+  };
+}
+
+export function drawFigure(rec: FigureRecipe, w: number, h: number): Sheet {
+  const sheet = new Sheet(w, h, rec.seed, rec.paper);
+  const r = mulberry(rec.seed ^ 0x91f3);
+  const p = rec.pose;
+  const e = extent(p, rec.build / (BUILDS - 1));
+
+  // A dive is three times as wide as it is tall; at the same margins as a
+  // standing figure it comes out half the size and reads as an insect. Wide
+  // poses get more of the page.
+  const room = e.w / e.h > 1.3 ? 0.94 : 0.86;
+  const u = Math.min((h * 0.84) / e.h, (w * room) / e.w);
+
+  // Nothing sits dead centre. The reference has the figure low and to one side
+  // with the interesting thing flying off the other way, and a page of
+  // perfectly centred drawings reads as a catalogue however good each one is.
+  const drift = (r() - 0.5) * 0.1;
+
+  paintFigure(sheet, rec, {
+    cx: w * (0.5 + drift) - e.midX * u * (rec.flip ? -1 : 1),
+    baseY: h * (0.92 - (p.air ?? 0) * 0.16) - e.bottom * u,
+    u,
+  });
   return sheet;
 }
 

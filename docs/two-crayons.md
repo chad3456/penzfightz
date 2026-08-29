@@ -1,9 +1,10 @@
-# Two Crayons: eighteen hundred drawings, one black stick and one coloured one
+# Two Crayons: two thousand eight hundred drawings, one black stick and one coloured one
 
 ## The constraint is the idea
 
-Two hundred heads and sixteen hundred whole figures — cricket, football, games,
-work, everyday gestures and people moving. Two sticks, rough paper, and not many
+Two hundred heads, sixteen hundred whole figures and a thousand scenes — cricket,
+football, games, work, everyday gestures, people moving, and people sitting
+alone on benches. Two sticks, rough paper, and not many
 marks. Everything interesting about the
 style comes out of what that forbids: you cannot render, you cannot shade, you
 cannot correct. Every mark has to be the right one first time, and the drawing
@@ -117,10 +118,10 @@ curve, and it is the most important number in the file.
 A pose is written as absolute bone directions in degrees. Ninety is straight
 down, zero is off to the right, minus ninety is straight up.
 
-That is entirely about being able to author fifty-six of these by hand. With
+That is entirely about being able to author seventy-two of these by hand. With
 composed joint rotations you have to hold the parent's angle in your head to
-know where a forearm ends up, and fifty-six poses written that way is fifty-six
-poses full of arithmetic mistakes. Absolute directions read off the page:
+know where a forearm ends up, and seventy-two poses written that way is
+seventy-two poses full of arithmetic mistakes. Absolute directions read off the page:
 `[-70, -85]` is an arm up and slightly back, and you can *see* that it is.
 
 ### The figure is dropped, not placed
@@ -182,6 +183,95 @@ two feet to the right of the person playing it, and nothing sits dead centre any
 more — a page of perfectly centred drawings reads as a catalogue however good
 each one is.
 
+## Scenes
+
+A figure doing something is a figure. A figure *somewhere* — with a bench under
+them, a horizon behind them and three quarters of the page left empty — is a
+picture. The whole difference is **staging**, and staging is not detail. The
+reference this project is drawn from has one chef at the bottom right and one
+pan flying off the top left, and what makes it work is the distance between
+them.
+
+So a scene is authored as a **cast** and a **set**, both placed in frame
+coordinates, and the thing being written is the composition. Fifty-five of them,
+across twenty-two kinds of set piece, tagged *alone*, *together*, *quiet* and
+*doing*. Three rules run through all of them.
+
+### The set is thin on purpose
+
+A bench is a slab, four legs and three slats. A library is a horizon line and two
+runs of shelving. The moment a piece of set is detailed enough to look at, it
+stops giving the figure somewhere to be and starts competing with them — and in a
+medium with no rendering and no shading, the competition is one the figure loses.
+
+### Two people are a relationship, not two figures
+
+Where they are put decides everything. A metre apart on a bench is company; three
+metres apart on the same bench, with the same two poses, is the opposite. None of
+that is drawn on either of them — it is the gap.
+
+The cast entries carry an `echo` flag for the other half of this: two people
+dressed from the same colour read as together before you have worked out what
+either is doing.
+
+### Loneliness is a composition, not an expression
+
+You cannot draw it on a face a dozen pixels across. You draw it by putting one
+small figure low in a large empty frame, or by putting a crowd behind them — the
+crowd is what turns *the only one drawn* into *alone*. Eighteen of the
+fifty-five are built that way, and not one of them has an unhappy face in it.
+
+One accent for the whole picture, too, never one per figure. Two colours in a
+two-colour drawing is three colours.
+
+### Chaikin is death to architecture
+
+The single worst bug in this half, and a genuinely instructive one. Every path
+in the medium goes through two rounds of Chaikin smoothing on its way to the
+paper, because that is what makes a *hand-drawn* line: no corner in a real
+crayon stroke is sharp.
+
+Which is exactly wrong for anything built by a carpenter. The first set came out
+with doors as archways, windows as circles with a cross through them, stairs as a
+gentle wobble and a bench with no corners at all. Every one of those was
+described correctly in code and then rounded off on the way out.
+
+So `walk` learned a `smooth` flag and `drag` a `sharp` option, and `stage.ts` has
+two helpers: `line()` for anything a hand drew and `built()` for anything a hand
+*made*. A crayon drawing of a door frame still wobbles — the tooth sees to that —
+but its corners are corners.
+
+Two smaller ones in the same pass. A tree canopy drawn as a smoothed spiral is a
+**bullseye**; it is a short random walk now. And shelves drawn at the natural
+spacing of the nib are a solid black hedge — they are sparse, wider apart and
+lighter on the paper, because a bookcase seen from across a room is mostly
+shadow between books.
+
+### The globe
+
+The scenes are landscape, and there are a thousand of them, so a wall was the
+wrong shape twice over. They sit on a sphere instead: a **Fibonacci lattice**,
+equal steps in *y* against the golden angle, which is the one arrangement that
+gets an even scatter with no spokes and no crowding at the poles. The radius is
+solved from the count — `SPACING · sqrt(N / 4π)` — so the gap between cards is
+the same whether you are looking at a hundred or a thousand.
+
+Spacing is sized for the **diagonal** of a landscape card. At the value that is
+right for Roll Call's square faces, thirteen-hundred wide cards packed edge to
+edge and the globe read as one dense texture instead of as a lot of small
+pictures.
+
+Everything is one `InstancedMesh` per texture atlas — a hundred and ninety-six
+scenes to a plate, picked out per instance by a cell index injected into the
+shader — and the frame loop writes a matrix only for the two cards whose state
+just changed. Pointer handling is the same lesson Roll Call learned: a drag
+always turns the globe, and a press that goes nowhere is a click. On a sphere
+made entirely of cards, any other rule means the sphere cannot be turned at all.
+
+And unlike the walls, there is no laziness to hide behind — a sphere shows you
+every side of itself the moment it appears — so all thousand are baked up front,
+in chunks with a yield every sixteen, behind a progress bar that actually moves.
+
 ## What this is not
 
 It is not trained and there is no model. Calling it that would be dressing it
@@ -193,9 +283,10 @@ up. What it is:
   genuinely different drawings rather than two hundred rolls of a die that
   happen to repeat — which at these odds they would; the birthday problem does
   not care how large a space is. Figures sample the same way over a space of
-  about three million: fifty-six poses times four builds times six kinds of
+  about three million: seventy-two poses times four builds times six kinds of
   dress times four grounds times a mirror times eight crowns times seventeen
-  accents,
+  accents. Scenes sample over the same kind of space, one accent and one paper
+  and one build per picture,
 - and a **medium** that was studied properly, which is where all the character
   actually comes from.
 
@@ -211,11 +302,13 @@ up. What it is:
 
 ## Performance
 
-About ten milliseconds a head and twenty-five a figure, at thumbnail size. The
+About ten milliseconds a head, twenty-five a figure and five a scene at plate
+size — a scene is cheaper than a figure because a card on a globe is small and
+the set is three or four strokes. The
 figures got slower when the nib grew a width profile, because the scan across it
 now steps by the widest the stroke ever gets rather than its current width —
 which is the price of the taper and worth paying. Drawing
-all eighteen hundred up front is half a minute of locked tab for a wall you can
+all eighteen hundred wall tiles up front is half a minute of locked tab for a wall you can
 see a dozen of at a time, so the laziness is doubled up: tiles exist in the DOM
 in **pages of a hundred and eighty** — sixteen hundred live buttons each with
 its own observer costs more than the drawing does, and one shared
