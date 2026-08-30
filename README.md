@@ -158,7 +158,7 @@ you and the man behind the table.
 ## Effects
 
 There is a **second tab on the shelf**, next to Games — that is where Dot Field,
-Roll Call, Two Crayons and Wet on Wet live. It is not games; it is the moving parts, one
+Roll Call, Two Crayons, Wet on Wet and Six Colours live. It is not games; it is the moving parts, one
 idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
@@ -309,6 +309,36 @@ intention and a different accident, which is what a second attempt at a
 watercolour is. [`docs/wet-on-wet.md`](docs/wet-on-wet.md) has the physics, the
 resolution-invariance arithmetic, and the two bugs that did not look like bugs.
 
+## Six Colours
+
+Two thousand drawings of things you could pick up — bottles, teapots, jars,
+glasses, a vase of flowers — and of the people who would pick them up. Every one
+is made under the rule printed in its own corner: **six inks, and not one line
+in the picture may be anything else.** With six colours and no mixing you cannot
+render, blend or correct; you can only choose, over and over, and the choosing
+is what the picture is made of.
+
+The colour of the marks has nothing to do with the colour of the object. Local
+colour goes down first, translucent and loose, and then the six go round the form
+two or three times — broken into arcs with gaps, each arc sitting a few pixels
+off the true edge, each one a different ink. A bottle outlined in lime and blue
+is a bottle you have to look at.
+
+Every object is a **profile turned about a vertical axis** plus four possible
+attachments, because that is what the subject actually is: a bottle and a jug
+and a vase are all things made on a wheel or in a two-part mould, and both of
+those are lathes. The attachments carry more identity than the profile — a
+handle makes a jug, a spout and a lid make a teapot, a crown cap and a waist
+make a Coke bottle and nothing else in the world.
+
+This is the one medium in the repository that is honestly a *screen* medium.
+There is no paper, no tooth, no water and nothing is simulated: a mark is a path
+with a round cap, which is what a brush in a drawing app really is. Pretending
+otherwise is what makes digital drawings look like bad photographs of paintings.
+[`docs/six-colours.md`](docs/six-colours.md) has the method — including the day
+every label came out as a circle, which is the second time this repository has
+learned that you smooth what grew and keep the corners on what was made.
+
 ## Running it
 
 ```sh
@@ -377,6 +407,7 @@ src/
     rollcall/  two thousand things, found by novelty search
     crayon/    heads, figures and staged scenes in two crayons
     wash/      watercolour: a paper model, a pigment model, a GPU wash solver
+    flat/      six inks, a lathe, and a broken contour that is the wrong colour
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera
   ui/       paper sheets, the Camlin box, chalkboard ranking, HUD

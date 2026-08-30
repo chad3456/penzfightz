@@ -3893,7 +3893,8 @@ button.card:hover:not(:disabled) {
 /* ============================================ Two Crayons: the paper wall */
 
 .crayon,
-.wash {
+.wash,
+.flat {
   position: fixed;
   inset: 0;
   overflow-y: auto;
@@ -3904,7 +3905,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__bar,
-.wash__bar {
+.wash__bar,
+.flat__bar {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -3913,7 +3915,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__eyebrow,
-.wash__eyebrow {
+.wash__eyebrow,
+.flat__eyebrow {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
@@ -3922,7 +3925,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__title,
-.wash__title {
+.wash__title,
+.flat__title {
   margin: 2px 0 0;
   font-size: clamp(28px, 5vw, 44px);
   line-height: 1;
@@ -3931,12 +3935,15 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__actions,
-.wash__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.wash__actions,
+.flat__actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .crayon .stage__spec,
 .crayon .stage__back,
 .wash .stage__spec,
-.wash .stage__back {
+.wash .stage__back,
+.flat .stage__spec,
+.flat .stage__back {
   background: rgba(255, 255, 255, 0.07);
   border-color: #4a463f;
   color: #cfc8ba;
@@ -3945,10 +3952,13 @@ button.card:hover:not(:disabled) {
 .crayon .stage__spec:hover,
 .crayon .stage__back:hover,
 .wash .stage__spec:hover,
-.wash .stage__back:hover { color: #fff; border-color: #8a8377; }
+.wash .stage__back:hover,
+.flat .stage__spec:hover,
+.flat .stage__back:hover { color: #fff; border-color: #8a8377; }
 
 .crayon__lede,
-.wash__lede {
+.wash__lede,
+.flat__lede {
   max-width: 660px;
   margin: 14px 0 18px;
   font-size: 14px;
@@ -3990,7 +4000,8 @@ button.card:hover:not(:disabled) {
 /* ---------------------------------------------------------- one large print */
 
 .crayon__sheet,
-.wash__sheet {
+.wash__sheet,
+.flat__sheet {
   position: fixed;
   inset: 0;
   background: rgba(18, 17, 15, 0.9);
@@ -4001,7 +4012,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__sheetinner,
-.wash__sheetinner {
+.wash__sheetinner,
+.flat__sheetinner {
   display: flex;
   gap: 18px;
   align-items: flex-start;
@@ -4012,7 +4024,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__print,
-.wash__print {
+.wash__print,
+.flat__print {
   line-height: 0;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
   background: #eae7e1;
@@ -4028,12 +4041,15 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__caption,
-.wash__caption { flex: 0 1 280px; min-width: 240px; }
+.wash__caption,
+.flat__caption { flex: 0 1 280px; min-width: 240px; }
 .crayon__name,
-.wash__name { font-size: 19px; margin-bottom: 6px; }
+.wash__name,
+.flat__name { font-size: 19px; margin-bottom: 6px; }
 
 .crayon__meta,
-.wash__meta {
+.wash__meta,
+.flat__meta {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10.5px;
   color: #a9a294;
@@ -4050,14 +4066,15 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__recipe,
-.wash__recipe {
+.wash__recipe,
+.flat__recipe {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   margin: 12px 0 16px;
 }
 
-.crayon__recipe span, .wash__recipe span {
+.crayon__recipe span, .wash__recipe span, .flat__recipe span {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 9px;
   letter-spacing: 0.09em;
@@ -4068,16 +4085,17 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__nav,
-.wash__nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.wash__nav,
+.flat__nav { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* The shared small button is a full-width block; in a row of three it has to
    share. */
-.crayon__nav .btn, .wash__nav .btn { width: auto; flex: 1 1 auto; }
+.crayon__nav .btn, .wash__nav .btn, .flat__nav .btn { width: auto; flex: 1 1 auto; }
 
 @media (max-width: 620px) {
-  .crayon__sheetinner, .wash__sheetinner { gap: 12px; }
-  .crayon__print canvas, .wash__print canvas { max-height: 56vh; }
-  .crayon__caption, .wash__caption { flex: 1 1 100%; }
+  .crayon__sheetinner, .wash__sheetinner, .flat__sheetinner { gap: 12px; }
+  .crayon__print canvas, .wash__print canvas, .flat__print canvas { max-height: 56vh; }
+  .crayon__caption, .wash__caption, .flat__caption { flex: 1 1 100%; }
 }
 
 /* --------------------------------------------- Lattu: portraits and how-to */
@@ -4159,7 +4177,8 @@ button.card:hover:not(:disabled) {
 /* --------------------------------------------- Two Crayons: the tab strip */
 
 .crayon__tabs,
-.wash__tabs {
+.wash__tabs,
+.flat__tabs {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
@@ -4168,7 +4187,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__tab,
-.wash__tab {
+.wash__tab,
+.flat__tab {
   appearance: none;
   cursor: pointer;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -4182,7 +4202,7 @@ button.card:hover:not(:disabled) {
   color: #a49c8e;
 }
 
-.crayon__tab:hover, .wash__tab:hover { color: #ece7dc; }
+.crayon__tab:hover, .wash__tab:hover, .flat__tab:hover { color: #ece7dc; }
 
 .crayon__tab--on {
   background: #c2392b;
@@ -4211,7 +4231,8 @@ button.card:hover:not(:disabled) {
 /* ------------------------------------------ Two Crayons: the scene globe */
 
 .crayon__globe,
-.wash__globe {
+.wash__globe,
+.flat__globe {
   position: relative;
   height: min(74vh, 760px);
   border: 1px solid #3d3a34;
@@ -4219,10 +4240,11 @@ button.card:hover:not(:disabled) {
   margin-top: 4px;
 }
 
-.crayon__globe canvas, .wash__globe canvas { display: block; touch-action: none; }
+.crayon__globe canvas, .wash__globe canvas, .flat__globe canvas { display: block; touch-action: none; }
 
 .crayon__baking,
-.wash__baking {
+.wash__baking,
+.flat__baking {
   position: absolute;
   inset: 0;
   display: grid;
@@ -4232,14 +4254,15 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__bakebar,
-.wash__bakebar {
+.wash__bakebar,
+.flat__bakebar {
   width: min(420px, 60vw);
   height: 3px;
   background: #4a463f;
   overflow: hidden;
 }
 
-.crayon__bakebar span, .wash__bakebar span {
+.crayon__bakebar span, .wash__bakebar span, .flat__bakebar span {
   display: block;
   height: 100%;
   background: #c2392b;
@@ -4247,7 +4270,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__baketext,
-.wash__baketext {
+.wash__baketext,
+.flat__baketext {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -4255,7 +4279,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__peek,
-.wash__peek {
+.wash__peek,
+.flat__peek {
   position: absolute;
   left: 12px;
   bottom: 12px;
@@ -4267,10 +4292,12 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__peekname,
-.wash__peekname { font-size: 16px; }
+.wash__peekname,
+.flat__peekname { font-size: 16px; }
 
 .crayon__peeknote,
-.wash__peeknote {
+.wash__peeknote,
+.flat__peeknote {
   font-size: 12.5px;
   line-height: 1.5;
   color: #a49c8e;
@@ -4278,7 +4305,8 @@ button.card:hover:not(:disabled) {
 }
 
 .crayon__printnote,
-.wash__printnote {
+.wash__printnote,
+.flat__printnote {
   font-size: 13px;
   line-height: 1.55;
   color: #a49c8e;
@@ -4309,7 +4337,8 @@ button.card:hover:not(:disabled) {
 }
 
 /* The bar sits over the globe while it fills, rather than in place of it. */
-.wash__painting {
+.wash__painting,
+.flat__drawing {
   position: absolute;
   left: 12px;
   right: 12px;
@@ -4318,4 +4347,36 @@ button.card:hover:not(:disabled) {
   gap: 7px;
   justify-items: center;
   pointer-events: none;
+}
+
+/* ============================================= Six Colours: the flat gallery */
+
+.flat { background: #20201d; }
+.flat__globe { background: #20201d; }
+.flat__bakebar span { background: #1668f0; }
+.flat__peek { border-left-color: #1668f0; }
+.flat__print { background: #ffffff; min-height: 120px; display: grid; place-items: center; }
+.flat__printhost { line-height: 0; }
+.flat__print canvas { max-width: min(560px, 92vw); }
+
+.flat__tab--on {
+  background: #1668f0;
+  border-color: #1668f0;
+  color: #eef4ff;
+}
+
+/* The six, as the drawing itself prints them. */
+.flat__strip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0 12px;
+  align-items: flex-start;
+}
+
+.flat__strip span {
+  display: block;
+  width: 54px;
+  height: 9px;
+  border-radius: 5px;
 }

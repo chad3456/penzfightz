@@ -6,7 +6,7 @@
  * render both from a list.
  */
 
-export type EffectId = 'dotfield' | 'rollcall' | 'crayon' | 'wash';
+export type EffectId = 'dotfield' | 'rollcall' | 'crayon' | 'wash' | 'flat';
 
 export interface EffectDef {
   id: EffectId;
@@ -64,6 +64,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['1,000 paintings · 70 poses', 'shallow water on the GPU', 'absorption, not colour'],
     ink: '#2f4f9b',
     wash: 'rgba(47, 79, 155, 0.09)',
+  },
+  {
+    id: 'flat',
+    name: 'Six Colours',
+    tagline: 'Two thousand drawings, six inks each.',
+    blurb:
+      'Bottles, teapots, jars, glasses, a vase of flowers and the people who would pick them up — two thousand of them, and every one made under the rule printed in its own corner: six inks, and not one line in the picture may be anything else. The colour of the marks has nothing to do with the colour of the thing. Local colour goes down first, translucent and loose, and then the six go round the form two or three times — broken, off-register, and disagreeing with it. Nothing here is simulated: this is the one medium in the study that really is a stamped round nib dragged along a path, and pretending otherwise is what makes digital drawings look like bad photographs of paintings.',
+    spec: ['2,000 drawings · 32 forms', '18 inks, six at a time', 'a lathe and four attachments'],
+    ink: '#1668f0',
+    wash: 'rgba(22, 104, 240, 0.09)',
   },
 ];
 

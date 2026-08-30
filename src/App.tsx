@@ -13,6 +13,7 @@ import { RollCall } from './effects/rollcall/RollCall';
 import { Lattu } from './games/lattu/Lattu';
 import { Crayon } from './effects/crayon/Crayon';
 import { Wash } from './effects/wash/Wash';
+import { Flat } from './effects/flat/Flat';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -127,6 +128,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'wash') {
     return <Wash onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'flat') {
+    return <Flat onExit={toShelf} />;
   }
 
   const inner = () => {
