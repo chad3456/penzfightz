@@ -311,10 +311,10 @@ resolution-invariance arithmetic, and the two bugs that did not look like bugs.
 
 ## Six Colours
 
-Two thousand drawings of things you could pick up — bottles, teapots, jars,
-glasses, a vase of flowers — and of the people who would pick them up. Every one
-is made under the rule printed in its own corner: **six inks, and not one line
-in the picture may be anything else.** With six colours and no mixing you cannot
+Two and a half thousand drawings of things you could pick up — bottles,
+teapots, jars, glasses, a vase of flowers — of the people who would pick them
+up, and of movie stars. Every one is made under the rule printed in its own
+corner: **six inks, and not one line in the picture may be anything else.** With six colours and no mixing you cannot
 render, blend or correct; you can only choose, over and over, and the choosing
 is what the picture is made of.
 
@@ -335,6 +335,19 @@ This is the one medium in the repository that is honestly a *screen* medium.
 There is no paper, no tooth, no water and nothing is simulated: a mark is a path
 with a round cap, which is what a brush in a drawing app really is. Pretending
 otherwise is what makes digital drawings look like bad photographs of paintings.
+The stars are the same face grammar plus the apparatus of publicity, because
+that is what stardom turns out to be made of: a plain portrait and a star
+portrait can be the same head, and what separates them is a backdrop, a light
+and a name in lettering underneath. Two idioms — black tie and a spotlight, or
+the hand-painted Bombay cinema hoarding, which is a close relative of this flat
+brush style and sits here without adaptation. They are **not portraits of real
+people and are not labelled as if they were**: a name and a face together are
+the thing publicity rights cover, and more to the point this engine draws from
+twenty haircuts and a flat fill, so a real name under an arbitrary output would
+be a false attribution of a face that does not resemble them. The titles are
+built from two halves and the caption is a billing — top billing, second lead,
+the villain's sister — never a name.
+
 [`docs/six-colours.md`](docs/six-colours.md) has the method — including the day
 every label came out as a circle, which is the second time this repository has
 learned that you smooth what grew and keep the corners on what was made.

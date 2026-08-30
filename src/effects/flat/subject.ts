@@ -2,7 +2,8 @@ import { Pad } from './pad';
 import { sixColours, BODIES, BODY_BY_ID, SKINS, LIPS, type Ink } from './palette';
 import { FORMS, TAGS as FORM_TAGS, bouquet, paintVessel, silhouette, type Form,
   type Tag as FormTag } from './vessel';
-import { CUTS, EXTRAS, paintFace, type FaceRecipe } from './face';
+import { BEARDS, CUTS, EXTRAS, paintFace, type FaceRecipe } from './face';
+import { ROLES, makeStar, paintStar, starFace, type StarRecipe } from './star';
 import { word } from './letters';
 
 /**
@@ -21,10 +22,14 @@ import { word } from './letters';
  * first, which is why it goes down first — everything after it is free.
  */
 
-export type Kind = 'vessel' | 'face';
-export type Tag = FormTag | 'face';
+export type Kind = 'vessel' | 'face' | 'star';
+export type Tag = FormTag | 'face' | 'star';
 
-export const TAGS: { id: Tag; name: string }[] = [...FORM_TAGS, { id: 'face', name: 'Faces' }];
+export const TAGS: { id: Tag; name: string }[] = [
+  ...FORM_TAGS,
+  { id: 'face', name: 'Faces' },
+  { id: 'star', name: 'Stars' },
+];
 
 export interface Subject {
   seed: number;
@@ -52,6 +57,8 @@ export interface Subject {
   /** Faces. */
   face?: FaceRecipe;
   hair?: string;
+  /** Stars: a face plus the apparatus of publicity. */
+  star?: StarRecipe;
 }
 
 const mulberry = (seed: number) => {
@@ -99,7 +106,8 @@ const NAMED: Record<string, string[]> = {
 export function makeSubject(seed: number, only?: Tag): Subject {
   const r = mulberry(seed);
   const inks = sixColours(r);
-  const wantFace = only === 'face' || (!only && r() < 0.26);
+  const wantStar = only === 'star' || (!only && r() < 0.3);
+  const wantFace = !wantStar && (only === 'face' || (!only && r() < 0.3));
 
   const shared = {
     seed,
@@ -115,11 +123,37 @@ export function makeSubject(seed: number, only?: Tag): Subject {
     }.`,
   };
 
+  if (wantStar) {
+    const star = makeStar(r);
+    const face = starFace(r, star.idiom, pick(SKINS, r), pick(LIPS, r), BEARDS);
+    return {
+      ...shared,
+      kind: 'star',
+      tag: 'star',
+      face,
+      star,
+      hair: pick(inks, r).hex,
+      // Tighter and higher than a plain portrait: a poster crops in, and the
+      // nameplate needs the bottom fifth of the card to itself.
+      height: 0.3 + r() * 0.07,
+      top: 0.17 + r() * 0.06,
+      strip: r() < 0.3,
+      name: `${ROLES[Math.floor(r() * ROLES.length) % ROLES.length]}`,
+      note: `“${star.title}” — ${star.idiom === 'bombay' ? 'a hoarding' : 'a title card'}, in ${
+        inks.map((i) => i.name.toLowerCase()).slice(0, 2).join(' and ')
+      }.`,
+      key: `star|${star.idiom}|${face.cut}|${face.extra}|${star.backdrop}|${star.title}`,
+    };
+  }
+
   if (wantFace) {
     const cut = pick(CUTS, r);
+    const build = r() < 0.45 ? 0.55 + r() * 0.45 : r() * 0.4;
     const face: FaceRecipe = {
       cut,
       extra: pick(EXTRAS, r),
+      beard: build > 0.5 ? pick(BEARDS, r) : 'none',
+      build,
       skin: pick(SKINS, r),
       lip: pick(LIPS, r),
       jaw: 0.72 + r() * 0.2,
@@ -223,18 +257,21 @@ export function drawSubject(g: CanvasRenderingContext2D, sub: Subject, w: number
   g.fillRect(0, 0, w, h);
   g.restore();
 
-  if (sub.kind === 'face' && sub.face && sub.hair) {
-    paintFace(pad, sub.face, {
+  if ((sub.kind === 'face' || sub.kind === 'star') && sub.face && sub.hair) {
+    const look = {
       inks: sub.inks, hair: sub.hair, strip: sub.strip, highlights: sub.highlights,
       laps: sub.laps,
-    }, {
+    };
+    const box = {
       cx: sub.cx,
       cy: sub.top + sub.height * 0.5,
       // A head is roughly seven tenths as wide as it is long, and the aspect
       // has to come back out because x is measured across the short side.
       w: (sub.height * 0.36) / aspect,
       h: sub.height * 0.5,
-    });
+    };
+    if (sub.kind === 'star' && sub.star) paintStar(pad, sub.star, sub.face, look, box);
+    else paintFace(pad, sub.face, look, box);
     return;
   }
 

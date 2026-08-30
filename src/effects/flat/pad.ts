@@ -212,6 +212,17 @@ export class Pad {
     });
   }
 
+  /** A hard rectangular clip, in unit coordinates. */
+  clipRect(x0: number, y0: number, x1: number, y1: number, fn: () => void) {
+    const g = this.g;
+    g.save();
+    g.beginPath();
+    g.rect(x0 * this.w, y0 * this.h, (x1 - x0) * this.w, (y1 - y0) * this.h);
+    g.clip();
+    fn();
+    g.restore();
+  }
+
   clip(path: Pt[], fn: () => void) {
     const g = this.g;
     const pts = path.map(this.px, this);

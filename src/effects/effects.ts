@@ -68,10 +68,10 @@ export const EFFECTS: EffectDef[] = [
   {
     id: 'flat',
     name: 'Six Colours',
-    tagline: 'Two thousand drawings, six inks each.',
+    tagline: 'Two and a half thousand drawings, six inks each.',
     blurb:
-      'Bottles, teapots, jars, glasses, a vase of flowers and the people who would pick them up — two thousand of them, and every one made under the rule printed in its own corner: six inks, and not one line in the picture may be anything else. The colour of the marks has nothing to do with the colour of the thing. Local colour goes down first, translucent and loose, and then the six go round the form two or three times — broken, off-register, and disagreeing with it. Nothing here is simulated: this is the one medium in the study that really is a stamped round nib dragged along a path, and pretending otherwise is what makes digital drawings look like bad photographs of paintings.',
-    spec: ['2,000 drawings · 32 forms', '18 inks, six at a time', 'a lathe and four attachments'],
+      'Bottles, teapots, jars, glasses, a vase of flowers, the people who would pick them up, and a globe of movie stars — every one made under the rule printed in its own corner: six inks, and not one line in the picture may be anything else. The colour of the marks has nothing to do with the colour of the thing. Local colour goes down first, translucent and loose, and then the six go round the form two or three times — broken, off-register, and disagreeing with it. The stars are that same face grammar plus the apparatus of publicity, because a plain portrait and a star portrait are the same head: what separates them is a backdrop, a light and a title in lettering underneath. Nothing here is simulated — this is the one medium in the study that really is a stamped round nib dragged along a path.',
+    spec: ['2,400 drawings · 32 forms', '18 inks, six at a time', 'stars: staging, not likeness'],
     ink: '#1668f0',
     wash: 'rgba(22, 104, 240, 0.09)',
   },

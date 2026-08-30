@@ -141,6 +141,73 @@ not a portrait of anybody. The shoulders are narrow and have a real corner in
 them: wide and rounded, they came out as a dome with a head on top, which is the
 shape of a chess piece.
 
+## Movie stars, and not using real people
+
+The obvious next ask for a face generator is celebrities, and the answer here is
+a deliberate one: **these are not portraits of anybody and are not labelled as
+if they were.** Two reasons, and the second is the one that decided it.
+
+A living public figure's name and face together are the exact thing publicity
+rights exist to cover, and a site that generates and publishes them is not
+commentary or parody — it is a use.
+
+But more simply: this engine draws faces out of twenty haircuts, five beards and
+a flat fill. It cannot produce a likeness of a specific person and does not try
+to. Putting a real name under an arbitrary output would be a false attribution
+of a face that does not resemble them, which is worse than useless — the whole
+appeal of a star portrait is *recognition*, and that would be recognition of
+nothing.
+
+### Stardom is staging
+
+What is here instead is the thing that actually reads as stardom, which turns
+out not to be the face at all. A plain portrait and a star portrait can be the
+same head. What separates them is **a backdrop, a light, and a name in lettering
+underneath** — the apparatus of publicity rather than anything about the person.
+Put a disc of flat colour behind an ordinary face and letter a film title under
+it and the face becomes a star. Take those away from an actual star and you have
+a passport photograph.
+
+So a star is a face plus three cheap marks: a backdrop (a spotlight disc, a
+halo, a block of colour, a sunburst, a marquee of bulbs, or bands), the same
+face grammar dressed out of the tradition's box, and a nameplate across the
+bottom. The nameplate has to sit **on** the picture rather than under it: a
+caption in a margin is a museum label, and a museum label is the opposite of a
+poster.
+
+### Two idioms
+
+The apparatus differs by tradition, so there are two boxes to dress from.
+
+The **silver screen** set is black tie, sunglasses, a spotlight and a title
+card — lapels drawn as two triangles and a V of skin, because black tie is a
+silhouette, which is why it survives being drawn in six colours none of which is
+black.
+
+The **Bombay** set is the hand-painted cinema hoarding: jhumkas, a bindi, a nose
+chain, a pallu over the crown, marigold, and lettering across the bottom. That
+tradition — enormous brush-made billboards in flat colour with hard edges and a
+title along the base — is a genuinely close relative of the flat-brush style
+this whole effect is drawn in, which is why it sits here without adaptation.
+
+### Titles are built in two halves
+
+`THE LAST` + `CROSSING`. `MONSOON` + `EXPRESS`. Joining two halves does two
+things: it gives a marquee the right *length* — real film titles are longer than
+one word and shorter than a sentence — and it puts the odds of landing on an
+actual film's title near nothing, because neither half is a title on its own.
+The card is captioned with a **billing** rather than a name: top billing, second
+lead, the villain's sister, wardrobe test.
+
+### The title may not run off the poster
+
+Fitted, and then clipped anyway. Every letter leans by a random fraction of its
+own width and the stroke has thickness, so the computed advance is a *floor* on
+the real extent rather than the extent — which is why the first two goes at this
+arithmetic both put the title off the side of the card. Making the bar full
+bleed and clipping the lettering to it turns the guarantee from arithmetical
+into structural, and the budget keeps the clip from ever biting.
+
 ## Nothing here is simulated
 
 This is the third medium in the repository and the first one that is honestly a
@@ -165,9 +232,10 @@ itself: there is nothing to simulate, so there is nothing to pay for.
 
 | | |
 |---|---|
-| drawings on the globe | 2,000 |
+| drawings on the globe | 2,400 |
 | turned forms | 32, across seven families |
 | inks | 18, six to a drawing |
 | bodies | 12 sets of local colour |
-| haircuts | 10, plus eight accessories |
-| a drawing | 1–2 ms; the whole gallery in ~15 s |
+| haircuts | 20, five beards, eighteen accessories |
+| star staging | 7 backdrops, 2 idioms, titles in halves |
+| a drawing | 1–2 ms; the whole gallery in ~20 s |

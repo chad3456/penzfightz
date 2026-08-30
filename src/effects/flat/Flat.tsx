@@ -19,7 +19,7 @@ import { sfx } from '../../lib/audio';
  * blue is a bottle you have to look at.
  */
 
-const COUNT = 2000;
+const COUNT = 2400;
 const CELL = 132;
 const GRID = 13;
 /** Portrait cards; see `globeRadius`. */
@@ -176,7 +176,12 @@ export function Flat({ onExit }: { onExit: () => void }) {
                 ))}
               </div>
               <div className="flat__meta">
-                {sub.kind === 'face' ? 'a face' : sub.form?.name} · seed {sub.seed}
+                {sub.kind === 'star'
+                  ? `${sub.star?.idiom === 'bombay' ? 'a hoarding' : 'a title card'} · not anybody`
+                  : sub.kind === 'face'
+                    ? 'a face'
+                    : sub.form?.name}{' '}
+                · seed {sub.seed}
               </div>
               <div className="flat__recipe">
                 {sub.inks.map((i) => (

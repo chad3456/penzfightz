@@ -27,21 +27,50 @@ import { LIPS, SKINS, type Ink } from './palette';
  */
 
 export type Cut =
-  | 'bob' | 'long' | 'up' | 'curls' | 'crop' | 'wrap' | 'fringe' | 'plait' | 'wave' | 'bun';
+  | 'bob' | 'long' | 'up' | 'curls' | 'crop' | 'wrap' | 'fringe' | 'plait' | 'wave' | 'bun'
+  | 'slick' | 'pompadour' | 'sidepart' | 'afro' | 'locs' | 'undercut' | 'veil' | 'turban'
+  | 'shaved' | 'topknot';
 
 export const CUTS: Cut[] = ['bob', 'long', 'up', 'curls', 'crop', 'wrap', 'fringe', 'plait',
-  'wave', 'bun'];
+  'wave', 'bun', 'slick', 'pompadour', 'sidepart', 'afro', 'locs', 'undercut', 'veil',
+  'turban', 'shaved', 'topknot'];
 
-export type Extra = 'none' | 'hoops' | 'studs' | 'glasses' | 'hat' | 'collar' | 'scarf' | 'flower';
+export type Extra =
+  | 'none' | 'hoops' | 'studs' | 'glasses' | 'hat' | 'collar' | 'scarf' | 'flower'
+  | 'shades' | 'jhumka' | 'bindi' | 'nosering' | 'necklace' | 'bowtie' | 'lapels' | 'tiara'
+  | 'pallu' | 'chain';
 
 export const EXTRAS: Extra[] = ['none', 'none', 'hoops', 'studs', 'glasses', 'hat', 'collar',
-  'scarf', 'flower'];
+  'scarf', 'flower', 'shades', 'jhumka', 'bindi', 'nosering', 'necklace', 'bowtie', 'lapels',
+  'tiara', 'pallu', 'chain'];
+
+/**
+ * Facial hair, which is a silhouette problem rather than a texture one.
+ *
+ * Drawn as a *shape under the jaw* and never as strokes. A beard rendered as
+ * hairs is a smudge at this size; a beard rendered as the mass it makes changes
+ * the outline of the head, which is the only thing the eye is reading.
+ */
+export type Beard = 'none' | 'stubble' | 'moustache' | 'goatee' | 'full';
+
+export const BEARDS: Beard[] = ['none', 'none', 'none', 'stubble', 'moustache', 'goatee',
+  'full', 'full'];
 
 export interface FaceRecipe {
   cut: Cut;
   extra: Extra;
+  beard: Beard;
   skin: string;
   lip: string;
+  /**
+   * Heavy or soft.
+   *
+   * One number, not a gender switch. It runs the jaw square, the brow forward
+   * and low, the lip thinner and the neck wider, all together — which is what
+   * actually varies between faces, and it varies continuously. Every value in
+   * between is a face somebody has.
+   */
+  build: number;
   /** Head proportions. */
   jaw: number;
   crown: number;
@@ -72,7 +101,10 @@ function headShape(cx: number, cy: number, w: number, h: number, rec: FaceRecipe
     // A head is an egg: wide at the temples, narrow at the jaw, and the widest
     // point is above the middle. A circle reads as a doll at any size.
     const down = Math.sin(a);
-    const taper = down > 0 ? 1 - down * (1 - rec.jaw) : 1 + -down * (rec.crown - 1) * 0.5;
+    // A heavy build squares the jaw off rather than narrowing it to a point.
+    const jaw = rec.jaw + rec.build * 0.16;
+    const square = down > 0 ? Math.pow(down, 1 + rec.build * 1.4) : down;
+    const taper = down > 0 ? 1 - square * (1 - jaw) : 1 + -down * (rec.crown - 1) * 0.5;
     pts.push([cx + Math.cos(a) * w * taper, cy + down * h * (down > 0 ? rec.long : 1)]);
   }
   const t = (rec.tilt * Math.PI) / 180;
@@ -143,9 +175,13 @@ export function paintFace(pad: Pad, rec: FaceRecipe, look: FaceLook, box: { cx: 
       pad.line([[e[0] - wide, e[1] - h * 0.02], [e[0], e[1] - h * 0.035],
         [e[0] + wide, e[1] - h * 0.018]], '#1d1d24', { width: 0.008, wobble: 0.002 });
     }
-    const b = on(side * eyeX + rec.turn * 0.14, eyeY - 0.19 - rec.brows * 0.06);
+    // A heavy brow sits lower and thicker, and it is doing more work than the
+    // eye under it: brow height is most of what reads as an expression.
+    const b = on(side * eyeX + rec.turn * 0.14,
+      eyeY - 0.19 - rec.brows * 0.06 + rec.build * 0.06);
     pad.line([[b[0] - wide * 1.1, b[1] + h * 0.02], [b[0], b[1] - h * 0.01],
-      [b[0] + wide * 1.05, b[1] + h * 0.03]], look.hair, { width: 0.013, wobble: 0.003 });
+      [b[0] + wide * 1.05, b[1] + h * 0.03]], look.hair,
+      { width: 0.011 + rec.build * 0.008, wobble: 0.003 });
   }
 
   // The nose is one stroke and it is the side of the nose, not the front.
@@ -154,16 +190,24 @@ export function paintFace(pad: Pad, rec: FaceRecipe, look: FaceLook, box: { cx: 
   pad.line([n0, [n1[0] + w * 0.1, n1[1]], [n1[0] - w * 0.06, n1[1] + h * 0.02]], ink(),
     { width: 0.009, wobble: 0.003 });
 
+  beardMass(pad, rec, on, w, h, t, look);
+
   // Mouth: one blob for the colour and one line for the join.
   const m = on(rec.turn * 0.24, 0.62);
-  pad.blob([m[0], m[1] + h * 0.02], w * 0.3, h * (0.06 + rec.smile * 0.03), t, rec.lip,
-    { alpha: 0.95 });
+  pad.blob([m[0], m[1] + h * 0.02], w * (0.3 - rec.build * 0.06),
+    h * (0.06 + rec.smile * 0.03) * (1 - rec.build * 0.35), t, rec.lip, { alpha: 0.95 });
   pad.line([[m[0] - w * 0.32, m[1] - h * rec.smile * 0.04], [m[0], m[1] + h * 0.02],
     [m[0] + w * 0.32, m[1] - h * rec.smile * 0.04]], '#7a2f38', { width: 0.008, wobble: 0.002 });
 
   // A cheek, flat, as one soft mark.
   pad.blob(on(-rec.turn * 0.2 - 0.5, 0.34), w * 0.3, h * 0.14, t, rec.lip,
     { alpha: 0.2, under: true });
+
+  if (rec.beard === 'moustache' || rec.beard === 'full') {
+    const mo = on(rec.turn * 0.24, 0.5);
+    pad.line([[mo[0] - w * 0.4, mo[1]], [mo[0], mo[1] + h * 0.05], [mo[0] + w * 0.4, mo[1]]],
+      look.hair, { width: 0.02 + rec.build * 0.008, wobble: 0.002 });
+  }
 
   hairFront(pad, rec, look, on, w, h);
   extras(pad, rec, on, w, h, t, ink);
@@ -179,6 +223,29 @@ export function paintFace(pad: Pad, rec: FaceRecipe, look: FaceLook, box: { cx: 
   }
 
   if (look.strip) swatches(pad, look.inks.map((i) => i.hex), [0.87, 0.2], 0.017);
+}
+
+/**
+ * A beard, as the shape it makes.
+ *
+ * Under the skin fill would hide it and over the mouth would smother it, so it
+ * goes between: the mass sits along the jaw and the moustache is added after
+ * the lips. Stubble is the same shape at a quarter of the opacity, which is
+ * exactly what stubble is.
+ */
+function beardMass(pad: Pad, rec: FaceRecipe, on: (dx: number, dy: number) => Pt,
+  w: number, h: number, t: number, look: FaceLook) {
+  if (rec.beard === 'none' || rec.beard === 'moustache') return;
+  const c = look.hair;
+  if (rec.beard === 'goatee') {
+    pad.blob(on(rec.turn * 0.2, 0.78), w * 0.34, h * 0.24, t, c, { alpha: 0.95 });
+    return;
+  }
+  const alpha = rec.beard === 'stubble' ? 0.3 : 1;
+  pad.shape([
+    on(-1.0, 0.16), on(-0.96, 0.62), on(-0.6, 1.02), on(0, 1.14), on(0.6, 1.02),
+    on(0.96, 0.62), on(1.0, 0.16), on(0.62, 0.42), on(0, 0.5), on(-0.62, 0.42),
+  ], c, { alpha });
 }
 
 /**
@@ -251,6 +318,59 @@ function hairBehind(pad: Pad, rec: FaceRecipe, look: FaceLook,
     case 'wrap':
       pad.shape(crown(1.38, 1.12), c, { alpha: 1 });
       break;
+
+    // ---------------------------------------------------------------- added
+    case 'slick':
+    case 'sidepart':
+      pad.shape(crown(1.1, 1.08), c, { alpha: 1 });
+      break;
+    case 'undercut':
+      // Shaved at the sides, mass on top: two shapes and the gap between them
+      // is the haircut.
+      pad.shape([on(-0.9, -0.55), on(-0.8, -1.2), on(0, -1.34), on(0.8, -1.2), on(0.9, -0.55)],
+        c, { alpha: 1 });
+      break;
+    case 'pompadour':
+      pad.shape([on(-1.05, -0.5), on(-1.0, -1.15), on(-0.3, -1.62), on(0.5, -1.5),
+        on(1.02, -1.05), on(1.06, -0.5)], c, { alpha: 1 });
+      break;
+    case 'afro':
+      for (let i = 0; i < 22; i++) {
+        const a = r() * Math.PI * 2;
+        const rad = 0.55 + r() * 0.95;
+        pad.blob(on(Math.cos(a) * rad * 1.5, -0.3 + Math.sin(a) * rad * 1.25),
+          w * (0.44 + r() * 0.22), h * (0.42 + r() * 0.2), r() * 3, c, { alpha: 1 });
+      }
+      break;
+    case 'locs': {
+      pad.shape([...crown(1.26, 1.2), on(1.2, 0.6), on(0, 0.66), on(-1.2, 0.6)], c,
+        { alpha: 1 });
+      for (let i = 0; i < 9; i++) {
+        const side = i % 2 ? 1 : -1;
+        const x = side * (0.85 + (i % 3) * 0.16);
+        pad.line([on(x, 0.2), on(x + side * 0.1, 0.9), on(x, 1.6 + (i % 4) * 0.15)], c,
+          { width: 0.017, wobble: 0.004 });
+      }
+      break;
+    }
+    case 'veil':
+      // Drapes past the shoulders, and that length is the whole silhouette.
+      pad.shape([on(-1.55, -0.3), on(-1.2, -1.15), on(0, -1.4), on(1.2, -1.15), on(1.55, -0.3),
+        on(1.7, 1.9), on(0.8, 1.6), on(0, 1.7), on(-0.8, 1.6), on(-1.7, 1.9)], c,
+        { alpha: 1 });
+      break;
+    case 'turban':
+      pad.shape([on(-1.2, -0.5), on(-1.15, -1.3), on(0, -1.75), on(1.15, -1.3), on(1.2, -0.5)],
+        c, { alpha: 1 });
+      break;
+    case 'topknot':
+      pad.shape(crown(1.14, 1.1), c, { alpha: 1 });
+      pad.blob(on(0.1, -1.4), w * 0.4, h * 0.34, 0, c, { alpha: 1 });
+      break;
+    case 'shaved':
+      // Nothing. A shaved head is the head, and pretending otherwise puts a
+      // grey cap on it.
+      break;
   }
 }
 
@@ -266,8 +386,35 @@ function hairFront(pad: Pad, rec: FaceRecipe, look: FaceLook,
     pad.blob(on(0.95, -0.95), w * 0.34, h * 0.3, 0.4, c, { alpha: 1 });
     return;
   }
+  if (rec.cut === 'shaved') return;
+  if (rec.cut === 'turban') {
+    // The wrap, and the one fold across it that says it was wound rather than
+    // put on.
+    pad.shape([on(-1.2, -0.52), on(-1.14, -1.3), on(0, -1.72), on(1.14, -1.3), on(1.2, -0.52),
+      on(0, -0.66)], c, { alpha: 1 });
+    pad.line([on(-1.1, -0.95), on(0, -1.3), on(1.05, -0.8)], c, { width: 0.016, wobble: 0.004 });
+    return;
+  }
+  if (rec.cut === 'veil') {
+    pad.shape([on(-1.5, -0.34), on(-1.16, -1.16), on(0, -1.38), on(1.16, -1.16), on(1.5, -0.34),
+      on(0.7, -0.78), on(0, -0.86), on(-0.7, -0.78)], c, { alpha: 1 });
+    return;
+  }
+  if (rec.cut === 'afro' || rec.cut === 'locs') {
+    pad.shape([on(-1.05, -0.55), on(-0.8, -1.1), on(0.2, -1.2), on(1.0, -0.95), on(1.0, -0.5),
+      on(0.2, -0.72), on(-0.5, -0.6)], c, { alpha: 1 });
+    return;
+  }
+  if (rec.cut === 'slick' || rec.cut === 'pompadour' || rec.cut === 'undercut') {
+    // Swept up and back off the forehead, so the front edge is a *diagonal*.
+    // A horizontal front edge is a fringe whatever is behind it.
+    pad.shape([on(-1.0, -0.52), on(-0.95, -1.1),
+      on(0.1, rec.cut === 'pompadour' ? -1.62 : -1.32), on(0.95, -1.05), on(1.0, -0.46),
+      on(0.4, -0.66), on(-0.6, -0.4)], c, { alpha: 1 });
+    return;
+  }
   const fringe = rec.cut === 'fringe' || rec.cut === 'bob' || rec.cut === 'up'
-    || rec.cut === 'bun' || rec.cut === 'plait';
+    || rec.cut === 'bun' || rec.cut === 'plait' || rec.cut === 'topknot';
   if (fringe) {
     pad.shape([on(-1.05, -0.5), on(-0.8, -1.12), on(0.2, -1.28), on(1.02, -0.95),
       on(1.05, -0.45), on(0.3, -0.62), on(-0.4, -0.5)], c, { alpha: 1 });
@@ -342,6 +489,100 @@ function extras(pad: Pad, rec: FaceRecipe, on: (dx: number, dy: number) => Pt,
         pad.blob([q[0] + Math.cos(a) * w * 0.22, q[1] + Math.sin(a) * h * 0.16], w * 0.16,
           h * 0.08, a, c, { alpha: 1 });
       }
+      break;
+    }
+    // -------------------------------------------------------------- added
+    case 'shades': {
+      // Wide, dark and flat. The one accessory that removes information from
+      // a face and makes it read as *more* of a person, not less.
+      const c = ink();
+      for (const side of [-1, 1]) {
+        const e = on(side * 0.5 + rec.turn * 0.14, 0.04);
+        pad.shape([[e[0] - w * 0.44, e[1] - h * 0.14], [e[0] + w * 0.42, e[1] - h * 0.16],
+          [e[0] + w * 0.4, e[1] + h * 0.14], [e[0] - w * 0.4, e[1] + h * 0.16]], c,
+          { alpha: 0.95, sharp: true });
+      }
+      const b = on(rec.turn * 0.14, 0.0);
+      pad.line([[b[0] - w * 0.14, b[1]], [b[0] + w * 0.14, b[1]]], c, { width: 0.014 });
+      break;
+    }
+    case 'jhumka':
+      for (const side of [-1, 1]) {
+        const e = on(side * 1.0, 0.42);
+        const c = ink();
+        pad.line([[e[0], e[1]], [e[0], e[1] + h * 0.16]], c, { width: 0.008 });
+        pad.blob([e[0], e[1] + h * 0.28], w * 0.24, h * 0.14, 0, c, { alpha: 1 });
+        for (let i = -2; i <= 2; i++) {
+          pad.blob([e[0] + i * w * 0.11, e[1] + h * 0.4], w * 0.05, h * 0.035, 0, c,
+            { alpha: 1 });
+        }
+      }
+      break;
+    case 'bindi':
+      pad.blob(on(rec.turn * 0.16, -0.42), w * 0.1, h * 0.05, t, ink(), { alpha: 1 });
+      break;
+    case 'nosering': {
+      const c = ink();
+      const q = on(rec.turn * 0.3 + 0.14, 0.42);
+      pad.line([[q[0], q[1]], [q[0] + w * 0.16, q[1] + h * 0.05], [q[0] + w * 0.1, q[1] - h * 0.05],
+        [q[0], q[1]]], c, { width: 0.008 });
+      pad.line([[q[0] + w * 0.14, q[1]], [q[0] + w * 0.7, q[1] - h * 0.2],
+        [q[0] + w * 1.05, q[1] + h * 0.05]], c, { width: 0.006 });
+      break;
+    }
+    case 'necklace':
+    case 'chain': {
+      const c = ink();
+      const q = on(rec.turn * 0.1, 1.5);
+      pad.line([[q[0] - w * 0.6, q[1] - h * 0.1], [q[0], q[1] + h * 0.22],
+        [q[0] + w * 0.6, q[1] - h * 0.1]], c, { width: rec.extra === 'chain' ? 0.008 : 0.014 });
+      if (rec.extra === 'necklace') {
+        pad.blob([q[0], q[1] + h * 0.3], w * 0.14, h * 0.09, 0, c, { alpha: 1 });
+      }
+      break;
+    }
+    case 'bowtie': {
+      const c = ink();
+      const q = on(rec.turn * 0.1, 1.72);
+      pad.shape([[q[0] - w * 0.5, q[1] - h * 0.14], [q[0] - w * 0.08, q[1]],
+        [q[0] - w * 0.5, q[1] + h * 0.14]], c, { alpha: 1, sharp: true });
+      pad.shape([[q[0] + w * 0.5, q[1] - h * 0.14], [q[0] + w * 0.08, q[1]],
+        [q[0] + w * 0.5, q[1] + h * 0.14]], c, { alpha: 1, sharp: true });
+      break;
+    }
+    case 'lapels': {
+      // Two triangles and a V of skin. Black tie is a silhouette, which is why
+      // it survives being drawn in six colours none of which is black.
+      const c = ink();
+      const q = on(rec.turn * 0.1, 1.6);
+      pad.shape([[q[0] - w * 0.26, q[1] - h * 0.2], [q[0] - w * 1.5, q[1] + h * 1.5],
+        [q[0] - w * 0.7, q[1] + h * 1.6]], c, { alpha: 1, sharp: true });
+      pad.shape([[q[0] + w * 0.26, q[1] - h * 0.2], [q[0] + w * 1.5, q[1] + h * 1.5],
+        [q[0] + w * 0.7, q[1] + h * 1.6]], c, { alpha: 1, sharp: true });
+      break;
+    }
+    case 'tiara': {
+      const c = ink();
+      const q = on(0, -1.12);
+      for (let i = -2; i <= 2; i++) {
+        pad.line([[q[0] + i * w * 0.34, q[1] + h * 0.12],
+          [q[0] + i * w * 0.34, q[1] - h * (0.12 + (2 - Math.abs(i)) * 0.06)]], c,
+          { width: 0.012 });
+      }
+      pad.line([[q[0] - w * 0.8, q[1] + h * 0.14], [q[0], q[1] + h * 0.04],
+        [q[0] + w * 0.8, q[1] + h * 0.14]], c, { width: 0.012 });
+      break;
+    }
+    case 'pallu': {
+      // A length of cloth over one shoulder and the crown. One shape, and it
+      // reframes the whole head.
+      const c = ink();
+      const side = rec.turn > 0 ? -1 : 1;
+      pad.shape([on(side * 1.35, -0.5), on(side * 1.05, -1.25), on(0, -1.45),
+        on(-side * 0.9, -1.15), on(-side * 1.0, -0.6), on(-side * 0.4, -0.9), on(0, -1.0),
+        on(side * 0.7, -0.85)], c, { alpha: 1 });
+      pad.line([on(side * 1.35, -0.5), on(side * 1.8, 0.9), on(side * 2.1, 2.2)], c,
+        { width: 0.05, wobble: 0.006 });
       break;
     }
     default:
