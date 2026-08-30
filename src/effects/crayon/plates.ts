@@ -1,5 +1,5 @@
 import { drawScene, type SceneRecipe } from './scene';
-import type { Plate } from './Globe';
+import type { Plate } from '../globe/Globe';
 
 /**
  * Baking scenes into texture plates.

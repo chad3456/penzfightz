@@ -4,7 +4,7 @@ import { drawFigure, figures, type FigureRecipe } from './figure';
 import { TAGS, type Tag } from './pose';
 import { SCENE_TAGS, drawScene, scenes, type SceneRecipe } from './scene';
 import { bakeScenes } from './plates';
-import { Globe, type Plate } from './Globe';
+import { Globe, type Plate } from '../globe/Globe';
 import type { Sheet } from './sheet';
 import { sfx } from '../../lib/audio';
 

@@ -3892,7 +3892,8 @@ button.card:hover:not(:disabled) {
 
 /* ============================================ Two Crayons: the paper wall */
 
-.crayon {
+.crayon,
+.wash {
   position: fixed;
   inset: 0;
   overflow-y: auto;
@@ -3902,7 +3903,8 @@ button.card:hover:not(:disabled) {
   -webkit-overflow-scrolling: touch;
 }
 
-.crayon__bar {
+.crayon__bar,
+.wash__bar {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -3910,7 +3912,8 @@ button.card:hover:not(:disabled) {
   flex-wrap: wrap;
 }
 
-.crayon__eyebrow {
+.crayon__eyebrow,
+.wash__eyebrow {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
@@ -3918,7 +3921,8 @@ button.card:hover:not(:disabled) {
   color: #9a9184;
 }
 
-.crayon__title {
+.crayon__title,
+.wash__title {
   margin: 2px 0 0;
   font-size: clamp(28px, 5vw, 44px);
   line-height: 1;
@@ -3926,19 +3930,25 @@ button.card:hover:not(:disabled) {
   letter-spacing: -0.01em;
 }
 
-.crayon__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.crayon__actions,
+.wash__actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .crayon .stage__spec,
-.crayon .stage__back {
+.crayon .stage__back,
+.wash .stage__spec,
+.wash .stage__back {
   background: rgba(255, 255, 255, 0.07);
   border-color: #4a463f;
   color: #cfc8ba;
 }
 
 .crayon .stage__spec:hover,
-.crayon .stage__back:hover { color: #fff; border-color: #8a8377; }
+.crayon .stage__back:hover,
+.wash .stage__spec:hover,
+.wash .stage__back:hover { color: #fff; border-color: #8a8377; }
 
-.crayon__lede {
+.crayon__lede,
+.wash__lede {
   max-width: 660px;
   margin: 14px 0 18px;
   font-size: 14px;
@@ -3979,7 +3989,8 @@ button.card:hover:not(:disabled) {
 
 /* ---------------------------------------------------------- one large print */
 
-.crayon__sheet {
+.crayon__sheet,
+.wash__sheet {
   position: fixed;
   inset: 0;
   background: rgba(18, 17, 15, 0.9);
@@ -3989,7 +4000,8 @@ button.card:hover:not(:disabled) {
   z-index: 30;
 }
 
-.crayon__sheetinner {
+.crayon__sheetinner,
+.wash__sheetinner {
   display: flex;
   gap: 18px;
   align-items: flex-start;
@@ -3999,7 +4011,8 @@ button.card:hover:not(:disabled) {
   overflow-y: auto;
 }
 
-.crayon__print {
+.crayon__print,
+.wash__print {
   line-height: 0;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
   background: #eae7e1;
@@ -4014,10 +4027,13 @@ button.card:hover:not(:disabled) {
   height: auto;
 }
 
-.crayon__caption { flex: 0 1 280px; min-width: 240px; }
-.crayon__name { font-size: 19px; margin-bottom: 6px; }
+.crayon__caption,
+.wash__caption { flex: 0 1 280px; min-width: 240px; }
+.crayon__name,
+.wash__name { font-size: 19px; margin-bottom: 6px; }
 
-.crayon__meta {
+.crayon__meta,
+.wash__meta {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10.5px;
   color: #a9a294;
@@ -4033,14 +4049,15 @@ button.card:hover:not(:disabled) {
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.crayon__recipe {
+.crayon__recipe,
+.wash__recipe {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   margin: 12px 0 16px;
 }
 
-.crayon__recipe span {
+.crayon__recipe span, .wash__recipe span {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 9px;
   letter-spacing: 0.09em;
@@ -4050,16 +4067,17 @@ button.card:hover:not(:disabled) {
   color: #8f8779;
 }
 
-.crayon__nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.crayon__nav,
+.wash__nav { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* The shared small button is a full-width block; in a row of three it has to
    share. */
-.crayon__nav .btn { width: auto; flex: 1 1 auto; }
+.crayon__nav .btn, .wash__nav .btn { width: auto; flex: 1 1 auto; }
 
 @media (max-width: 620px) {
-  .crayon__sheetinner { gap: 12px; }
-  .crayon__print canvas { max-height: 56vh; }
-  .crayon__caption { flex: 1 1 100%; }
+  .crayon__sheetinner, .wash__sheetinner { gap: 12px; }
+  .crayon__print canvas, .wash__print canvas { max-height: 56vh; }
+  .crayon__caption, .wash__caption { flex: 1 1 100%; }
 }
 
 /* --------------------------------------------- Lattu: portraits and how-to */
@@ -4140,7 +4158,8 @@ button.card:hover:not(:disabled) {
 
 /* --------------------------------------------- Two Crayons: the tab strip */
 
-.crayon__tabs {
+.crayon__tabs,
+.wash__tabs {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
@@ -4148,7 +4167,8 @@ button.card:hover:not(:disabled) {
   margin: 14px 0 2px;
 }
 
-.crayon__tab {
+.crayon__tab,
+.wash__tab {
   appearance: none;
   cursor: pointer;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -4162,7 +4182,7 @@ button.card:hover:not(:disabled) {
   color: #a49c8e;
 }
 
-.crayon__tab:hover { color: #ece7dc; }
+.crayon__tab:hover, .wash__tab:hover { color: #ece7dc; }
 
 .crayon__tab--on {
   background: #c2392b;
@@ -4190,7 +4210,8 @@ button.card:hover:not(:disabled) {
 
 /* ------------------------------------------ Two Crayons: the scene globe */
 
-.crayon__globe {
+.crayon__globe,
+.wash__globe {
   position: relative;
   height: min(74vh, 760px);
   border: 1px solid #3d3a34;
@@ -4198,9 +4219,10 @@ button.card:hover:not(:disabled) {
   margin-top: 4px;
 }
 
-.crayon__globe canvas { display: block; touch-action: none; }
+.crayon__globe canvas, .wash__globe canvas { display: block; touch-action: none; }
 
-.crayon__baking {
+.crayon__baking,
+.wash__baking {
   position: absolute;
   inset: 0;
   display: grid;
@@ -4209,28 +4231,31 @@ button.card:hover:not(:disabled) {
   justify-items: center;
 }
 
-.crayon__bakebar {
+.crayon__bakebar,
+.wash__bakebar {
   width: min(420px, 60vw);
   height: 3px;
   background: #4a463f;
   overflow: hidden;
 }
 
-.crayon__bakebar span {
+.crayon__bakebar span, .wash__bakebar span {
   display: block;
   height: 100%;
   background: #c2392b;
   transition: width 0.2s linear;
 }
 
-.crayon__baketext {
+.crayon__baketext,
+.wash__baketext {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
   letter-spacing: 0.1em;
   color: #8f8779;
 }
 
-.crayon__peek {
+.crayon__peek,
+.wash__peek {
   position: absolute;
   left: 12px;
   bottom: 12px;
@@ -4241,19 +4266,56 @@ button.card:hover:not(:disabled) {
   padding: 9px 13px;
 }
 
-.crayon__peekname { font-size: 16px; }
+.crayon__peekname,
+.wash__peekname { font-size: 16px; }
 
-.crayon__peeknote {
+.crayon__peeknote,
+.wash__peeknote {
   font-size: 12.5px;
   line-height: 1.5;
   color: #a49c8e;
   margin-top: 2px;
 }
 
-.crayon__printnote {
+.crayon__printnote,
+.wash__printnote {
   font-size: 13px;
   line-height: 1.55;
   color: #a49c8e;
   margin: -2px 0 8px;
   font-style: italic;
+}
+
+/* ============================================ Wet on Wet: the wet gallery */
+
+/* The chrome is Two Crayons' chrome — same shelf, same shape of gallery — and
+   is shared by adding these to those selectors rather than restating them.
+   What differs is the accent, because a watercolour study accented in the
+   crayon study's vermilion looks like the crayon study. */
+
+.wash { background: #23231f; }
+
+.wash__globe { background: #23231f; }
+.wash__bakebar span { background: #2f4f9b; }
+.wash__peek { border-left-color: #2f4f9b; }
+.wash__print { background: #f3f1ec; min-height: 120px; display: grid; place-items: center; }
+.wash__printhost { line-height: 0; }
+.wash__print canvas { max-width: min(560px, 92vw); }
+
+.wash__tab--on {
+  background: #2f4f9b;
+  border-color: #2f4f9b;
+  color: #f2f4fa;
+}
+
+/* The bar sits over the globe while it fills, rather than in place of it. */
+.wash__painting {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 12px;
+  display: grid;
+  gap: 7px;
+  justify-items: center;
+  pointer-events: none;
 }

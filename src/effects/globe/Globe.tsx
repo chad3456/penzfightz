@@ -4,7 +4,11 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 /**
- * A globe of drawings.
+ * A globe of pictures.
+ *
+ * Shared by Two Crayons and Wet on Wet: both have a thousand-odd landscape or
+ * portrait cards and no better shape to hang them on. It takes texture atlases
+ * and an index, and knows nothing about what is painted on them.
  *
  * The same Fibonacci-sphere layout Roll Call uses, and for the same reasons —
  * equal steps down the y axis are equal steps in *area* on a sphere, and the
@@ -39,9 +43,14 @@ export interface Plate {
   aspect: number;
 }
 
-/** Radius that gives `count` cards a constant gap, whatever the count. */
-export const globeRadius = (count: number) =>
-  SPACING * Math.sqrt(Math.max(1, count) / (4 * Math.PI));
+/**
+ * Radius that gives `count` cards a constant gap, whatever the count.
+ *
+ * Spacing has to suit the card: portrait cards have a shorter diagonal than
+ * landscape ones and pack closer before they touch, so the caller sets it.
+ */
+export const globeRadius = (count: number, spacing = SPACING) =>
+  spacing * Math.sqrt(Math.max(1, count) / (4 * Math.PI));
 
 function place(i: number, count: number, radius: number, out: THREE.Vector3) {
   const n = Math.max(2, count);
@@ -60,12 +69,14 @@ function Block({
   plate,
   offset,
   count,
+  radius,
   view,
   register,
 }: {
   plate: Plate;
   offset: number;
   count: number;
+  radius: number;
   view: React.MutableRefObject<View>;
   register: (offset: number, mesh: THREE.InstancedMesh | null) => void;
 }) {
@@ -138,7 +149,7 @@ function Block({
   const write = useCallback(
     (m: THREE.InstancedMesh, k: number, i: number) => {
       const v = view.current;
-      place(i, count, globeRadius(count), at);
+      place(i, count, radius, at);
       const lift = v.picked === i ? 1.6 : v.hovered === i ? 0.55 : 0;
       const len = at.length() || 1;
       dummy.position.copy(at).multiplyScalar((len + lift) / len);
@@ -150,7 +161,7 @@ function Block({
       dummy.updateMatrix();
       m.setMatrixAt(k, dummy.matrix);
     },
-    [at, count, dummy, look, plate.aspect, view],
+    [at, count, dummy, look, plate.aspect, radius, view],
   );
 
   // Written once, then only the two cards whose state changed. Rewriting every
@@ -167,7 +178,7 @@ function Block({
       s.hovered = v.hovered;
       s.picked = v.picked;
       m.instanceMatrix.needsUpdate = true;
-      m.boundingSphere = new THREE.Sphere(new THREE.Vector3(), globeRadius(count) + 4);
+      m.boundingSphere = new THREE.Sphere(new THREE.Vector3(), radius + 4);
       return;
     }
     if (s.hovered === v.hovered && s.picked === v.picked) return;
@@ -289,6 +300,8 @@ export function Globe({
   onPick,
   onHover,
   hovered,
+  spacing,
+  background = '#2a2926',
 }: {
   plates: Plate[];
   count: number;
@@ -296,6 +309,9 @@ export function Globe({
   hovered: number | null;
   onPick: (i: number) => void;
   onHover: (i: number | null, x: number, y: number) => void;
+  /** Centre-to-centre spacing on the shell; see `globeRadius`. */
+  spacing?: number;
+  background?: string;
 }) {
   const view = useRef<View>({ hovered: -1, picked: -1 });
   view.current.hovered = hovered ?? -1;
@@ -307,7 +323,7 @@ export function Globe({
     else blocks.current.delete(offset);
   }, []);
 
-  const radius = useMemo(() => globeRadius(count), [count]);
+  const radius = useMemo(() => globeRadius(count, spacing), [count, spacing]);
 
   return (
     <Canvas
@@ -320,13 +336,14 @@ export function Globe({
       dpr={[1, 1.75]}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
     >
-      <color attach="background" args={['#2a2926']} />
+      <color attach="background" args={[background]} />
       {plates.map((p, n) => (
         <Block
           key={n}
           plate={p}
           offset={n * p.grid * p.grid}
           count={count}
+          radius={radius}
           view={view}
           register={register}
         />

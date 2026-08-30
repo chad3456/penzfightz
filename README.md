@@ -158,7 +158,7 @@ you and the man behind the table.
 ## Effects
 
 There is a **second tab on the shelf**, next to Games — that is where Dot Field,
-Roll Call and Two Crayons live. It is not games; it is the moving parts, one
+Roll Call, Two Crayons and Wet on Wet live. It is not games; it is the moving parts, one
 idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
@@ -272,6 +272,43 @@ took — including the day every door came out as an archway because the smoothi
 that makes a hand-drawn line also rounds off anything a carpenter built. The same
 engine draws the eight bladers in Lattu.
 
+## Wet on Wet
+
+A thousand watercolours of women at leisure — reading, listening, stretching,
+waiting — in two tubes of paint and a lot of water. Where Two Crayons is a
+deposition model, this one is a **simulation**, and that is the whole point:
+in a dry medium the mark is where you put it, and in watercolour you put pigment
+down and then the sheet decides. So there is no code anywhere in here that draws
+a soft edge, a bleed, a dark rim or a bloom. Water depth, a wet mask, velocity
+and two pigments — in suspension and on the fibre — live in a pair of float
+textures, and a painting is forty-six ping-ponged steps of two fragment shaders
+over them.
+
+The detail worth knowing is that **edge darkening is emergent**. Velocity is
+driven by the gradient of the water surface, so inside a puddle the flow points
+outwards; pigment rides it to the boundary, cannot cross, and drops out of
+suspension as the film thins. Every wash paints its own dark rim and nothing
+draws an outline. Granulation is a pigment property — heavy particles settle
+into the tooth of the paper — and so is staining, which decides whether a second
+stroke through a first *moves* it or covers it. Nothing stores a colour: a
+pigment is three absorption coefficients and the sheet is tinted with
+Beer–Lambert, which is why two washes multiply and a blue over an orange goes to
+grey-brown rather than to something halfway.
+
+The figures are mass rather than line, painted in three stages because in
+watercolour the order *is* the technique: the biggest shape onto a soaked sheet
+with most of the drying still to come, the body while it is damp, and a handful
+of nearly dry darks at the end that stay sharp because there is no longer enough
+water to move them. Seventy poses are written by hand and every painting jitters
+them, because a position repeated is a hundred copies of one drawing however
+much the colour changes.
+
+They hang on a sphere that assembles itself a plate at a time as it paints, and
+clicking one paints it again at size rather than scaling the card up — the same
+intention and a different accident, which is what a second attempt at a
+watercolour is. [`docs/wet-on-wet.md`](docs/wet-on-wet.md) has the physics, the
+resolution-invariance arithmetic, and the two bugs that did not look like bugs.
+
 ## Running it
 
 ```sh
@@ -335,7 +372,11 @@ src/
     mafia/     roles, nights, votes
     bookstall/ the quote stock, the receipt, and the flower it stamps
     maze/      the handbill maze and the word cut out of the line
-  effects/  the effects tab: the dot field, and Roll Call's hundred faces
+  effects/  the effects tab
+    globe/     the Fibonacci sphere both galleries hang on
+    rollcall/  two thousand things, found by novelty search
+    crayon/    heads, figures and staged scenes in two crayons
+    wash/      watercolour: a paper model, a pigment model, a GPU wash solver
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera
   ui/       paper sheets, the Camlin box, chalkboard ranking, HUD
