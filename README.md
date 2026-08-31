@@ -359,13 +359,23 @@ where every knob is a term in an equation rather than a style preset. Film
 thickness is in nanometres; wave speed has a stability limit; nothing is called
 *intensity*.
 
-**Goopy iridescent droplets.** Nothing draws a bead — each one adds a field
-falling off as one over distance squared and the droplet is wherever the sum
-crosses a threshold, so they merge and neck with no code aware it happened. The
-colour is real thin-film interference: the path difference through the film is
-worked out and evaluated at 650, 545 and 470 nanometres, which is why it comes
-out soap-bubble magenta and gold rather than an even spectrum. The gradient is
-analytic, so it is one loop per pixel rather than five.
+**Gluey iridescent droplets, drawn rather than rendered.** Nothing puts down a
+bead — each one adds a field falling off as one over distance squared and the
+droplet is wherever the sum crosses a threshold, so they merge and neck with no
+code aware it happened. The gradient is analytic, so it is one loop per pixel
+rather than five.
+
+The colour is real thin-film interference — the path difference through the film
+evaluated at 650, 545 and 470 nanometres — but the answer *indexes a painted
+palette* rather than being emitted as a spectrum, so the physics still decides
+which colour a bead is and the answer is always a colour somebody chose.
+Everything on top of that is illustration, and it is about six specific moves:
+the light is posterised into a handful of steps, the body is one flat colour
+with the iridescence mixed in only at the rim where you would actually see it,
+the highlight is a dot with an edge, the shadow is flat and offset like a
+sticker on a page, there is grain at two scales over the lot, and the largest
+beads have eyes — because a thing with eyes is a character, and a character is
+something you watch rather than look at.
 
 **A swimming pool, entirely in three.js.** A height field running the wave
 equation — two states kept, not one, because waves need momentum through the

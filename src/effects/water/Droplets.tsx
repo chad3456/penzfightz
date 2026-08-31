@@ -71,11 +71,14 @@ varying vec2 vUv;
 
 uniform vec3 uDrops[${MAX}];
 uniform int uCount;
+uniform int uFaces;
 uniform float uAspect;
 uniform float uTime;
 uniform float uGoo;
 uniform float uFilm;
 uniform float uSpread;
+uniform float uBands;
+uniform float uGrain;
 
 const float PI = 3.14159265;
 
@@ -91,19 +94,87 @@ float noise(vec2 p) {
              mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
 }
 
-/** The backdrop, seen through the goo. Dark, with just enough in it to bend. */
+/**
+ * Posterise.
+ *
+ * The single move that separates a flat illustration from a render. A gradient
+ * says "this is a lit surface"; the same gradient cut into four steps says
+ * "somebody drew this", and the eye reads the steps as intent. Smoothed by a
+ * fraction of a band so the edges do not crawl.
+ */
+float band(float x, float n) {
+  float s = floor(x * n);
+  float f = fract(x * n);
+  return (s + smoothstep(0.35, 0.65, f)) / n;
+}
+
+/**
+ * The palette.
+ *
+ * Six stops, and none of them is a spectral colour. The interference maths
+ * underneath is unchanged — the path difference through the film is still
+ * computed properly — but instead of emitting the wavelength it *indexes* this
+ * ramp with it. So the physics still decides which colour a bead is and how the
+ * bands crowd at its rim, and the answer is always a colour somebody chose.
+ * Left as a raw spectrum it comes out convincing and slightly grubby; run
+ * through here it comes out as an illustration of the same thing.
+ */
+vec3 ramp(float t) {
+  t = fract(t);
+  vec3 c0 = vec3(0.898, 0.224, 0.478);
+  vec3 c1 = vec3(0.961, 0.475, 0.227);
+  vec3 c2 = vec3(1.000, 0.831, 0.278);
+  vec3 c3 = vec3(0.247, 0.851, 0.769);
+  vec3 c4 = vec3(0.247, 0.482, 0.878);
+  vec3 c5 = vec3(0.545, 0.294, 0.910);
+  float x = t * 6.0;
+  if (x < 1.0) return mix(c0, c1, x);
+  if (x < 2.0) return mix(c1, c2, x - 1.0);
+  if (x < 3.0) return mix(c2, c3, x - 2.0);
+  if (x < 4.0) return mix(c3, c4, x - 3.0);
+  if (x < 5.0) return mix(c4, c5, x - 4.0);
+  return mix(c5, c0, x - 5.0);
+}
+
+/**
+ * The set the beads sit on.
+ *
+ * Deep indigo, a scatter of stars, and two dashed rings. None of it is needed
+ * and all of it is the style: an illustrated thing is a thing *staged*, and a
+ * subject floating on black is a screenshot. The rings in particular do the
+ * whole job — three dashes of a circle behind an object and the object is now
+ * a diagram of something.
+ */
 vec3 backdrop(vec2 p) {
-  float g = smoothstep(1.3, -0.2, length(p * vec2(0.7, 1.0)));
-  vec3 base = mix(vec3(0.035, 0.04, 0.055), vec3(0.10, 0.12, 0.16), g);
-  vec2 q = p * 9.0;
-  float grid = min(abs(fract(q.x) - 0.5), abs(fract(q.y) - 0.5));
-  base += vec3(0.05, 0.06, 0.08) * smoothstep(0.06, 0.0, grid) * g;
-  return base;
+  float r = length(p * vec2(0.75, 1.0));
+  vec3 col = mix(vec3(0.106, 0.118, 0.243), vec3(0.043, 0.047, 0.114), smoothstep(0.1, 1.5, r));
+
+  // Stars. Sparse, two sizes, and never pure white.
+  vec2 g = floor(p * 11.0);
+  vec2 f = fract(p * 11.0) - 0.5;
+  float pick = hash(g);
+  if (pick > 0.87) {
+    vec2 jit = vec2(hash(g + 3.1), hash(g + 7.7)) - 0.5;
+    float d = length(f - jit * 0.6);
+    float size = 0.02 + 0.035 * step(0.965, pick);
+    float tw = 0.6 + 0.4 * sin(uTime * 1.4 + pick * 40.0);
+    col += vec3(0.72, 0.78, 0.95) * smoothstep(size, 0.0, d) * tw * 0.85;
+  }
+
+  // Two dashed orbits.
+  for (int k = 0; k < 2; k++) {
+    float rad = 0.62 + float(k) * 0.42;
+    float ring = abs(r - rad);
+    float a = atan(p.y, p.x * 0.75);
+    float dash = step(0.42, fract(a * (5.0 + float(k) * 3.0) / PI * 0.5 + uTime * 0.02));
+    col += vec3(0.24, 0.30, 0.52) * smoothstep(0.012, 0.0, ring) * dash;
+  }
+
+  return col;
 }
 
 /** Thin-film interference: a real path difference, evaluated at three lines. */
 vec3 film(float thickness, float cosTheta) {
-  // Nanometres. Index of the film is about that of soapy water.
   vec3 lambda = vec3(650.0, 545.0, 470.0);
   vec3 phase = 4.0 * PI * 1.35 * thickness * cosTheta / lambda;
   return 0.5 + 0.5 * cos(phase);
@@ -113,9 +184,12 @@ void main() {
   vec2 p = (vUv - 0.5) * 2.0;
   p.x *= uAspect;
 
-  // One pass for the field and its gradient. See the note at the top of the
-  // file for why this is not four passes of finite differences.
+  // One pass for the field, its gradient, and the field a little up and to the
+  // left — which is the drop shadow, and getting it out of the same loop is
+  // most of what keeps this affordable.
+  vec2 lift = vec2(0.045, 0.055);
   float f = 0.0;
+  float fs = 0.0;
   vec2 grad = vec2(0.0);
   for (int i = 0; i < ${MAX}; i++) {
     if (i >= uCount) break;
@@ -124,67 +198,120 @@ void main() {
     float r2 = uDrops[i].z * uDrops[i].z;
     f += r2 / q;
     grad -= 2.0 * r2 * d / (q * q);
+    vec2 ds = p + lift - uDrops[i].xy;
+    fs += r2 / (dot(ds, ds) + 1e-4);
   }
 
   vec3 col = backdrop(p);
 
-  float edge = smoothstep(uGoo * 0.92, uGoo * 1.35, f);
+  // Shadow first, under everything. Flat, offset, and slightly larger than the
+  // thing casting it — a soft correct shadow reads as a render, and a hard one
+  // offset by a fixed amount reads as a sticker on a page, which is the look.
+  col = mix(col, col * vec3(0.42, 0.44, 0.62), smoothstep(uGoo * 0.8, uGoo * 1.3, fs) * 0.75);
+
+  float edge = smoothstep(uGoo * 0.94, uGoo * 1.18, f);
+
+  // Glow, outside the bead. Kurzgesagt light does not fall off, it *halos*.
+  // The body colour is a slowly varying field, so it is very nearly constant
+  // across any one bead: an illustrated blob is *one colour* with a light side
+  // and a dark side. Driving the body from the interference instead — which is
+  // what the first pass did — bands it into concentric rings and every bead
+  // comes out a bullseye.
+  float baseT = fract(noise(p * 0.62 + uTime * 0.012) * 1.7 + 0.12);
+  vec3 body = ramp(band(baseT, 9.0));
+
+  float halo = smoothstep(uGoo * 0.25, uGoo * 1.05, f) * (1.0 - edge);
+  col += body * halo * 0.15;
+
   if (edge > 0.001) {
-    // The surface.
-    //
-    // Height as sqrt(1 - threshold/f), which is the profile a one-over-r squared
-    // field actually implies: zero at the level set, and approaching one only
-    // as the field runs away at a droplet's centre. The obvious version — a
-    // linear ramp between the threshold and some ceiling — clamps, and a
-    // clamped height is a *plateau*: the crown of every bead comes out dead
-    // flat, takes the whole specular lobe at once, and reads as a white sticker
-    // with a rainbow ring round it. This profile is curved everywhere, so the
-    // highlight is a point and the interference bands stay in step.
+    // Height as sqrt(1 - threshold/f): the profile a one-over-r-squared field
+    // implies, curved everywhere rather than clamping to a plateau.
     float hh = clamp(1.0 - uGoo / max(f, 1e-4), 0.0, 1.0);
     float h = sqrt(hh);
     float dhdf = uGoo / (2.0 * f * f * max(h, 0.05));
     vec3 n = normalize(vec3(-grad * dhdf * uSpread, 1.0));
     n = normalize(mix(vec3(0.0, 0.0, 1.0), n, edge));
 
-    vec3 view = vec3(0.0, 0.0, 1.0);
     float cosTheta = clamp(n.z, 0.05, 1.0);
-    float fres = pow(1.0 - cosTheta, 4.0);
 
-    // Thickness: thicker at the crown, thicker again where droplets have run
-    // together, and never perfectly even — a film with a constant thickness
-    // makes flat bands and reads as printed foil.
-    // Thickness varies over the *field*, not over the droplet, which is what
-    // gives each bead its own colour — a soap film is not the same thickness
-    // everywhere on the glass. Swing it too little and thirty droplets come out
-    // as thirty copies of one bead.
     float thick = uFilm * (0.4 + 0.6 * h)
       * (0.55 + 0.95 * noise(p * 1.7 + uTime * 0.03))
       * (1.0 + 0.3 * smoothstep(uGoo * 1.6, uGoo * 4.0, f));
     vec3 irid = film(thick, cosTheta);
 
-    // What is behind, bent by the surface. Real refraction through a bulge,
-    // which is why a droplet magnifies the grid under it.
-    vec3 through = backdrop(p + n.xy * 0.42 * h);
+    // The interference picks a place in the palette rather than being a colour
+    // itself: its hue angle in RGB is what the ramp is indexed by.
+    float pickT = fract(atan(irid.g - irid.b, irid.r - 0.5 * (irid.g + irid.b)) / (2.0 * PI)
+      + 0.5 + thick * 0.0009);
 
-    vec3 lit = mix(through * (0.55 + 0.45 * irid), irid, 0.34 + 0.5 * fres);
+    // Two-tone body. One light, quantised hard, and a second bounce from below
+    // in a complementary colour — the trick that makes a flat blob read as
+    // volume without a single soft gradient in it.
+    vec3 L = normalize(vec3(-0.42, 0.62, 0.66));
+    float lambert = band(clamp(dot(n, L) * 0.5 + 0.5, 0.0, 1.0), uBands);
+    vec3 lit = body * mix(0.38, 1.16, lambert);
+    float bounce = band(clamp(dot(n, normalize(vec3(0.5, -0.8, 0.4))) * 0.5 + 0.5, 0.0, 1.0),
+      max(2.0, uBands * 0.5));
+    lit = mix(lit, ramp(baseT + 0.42) * 0.9, bounce * 0.26);
 
-    // One hard light. Two specular lobes: a tight one for the wet highlight
-    // and a broad one so the whole crown lifts off the background.
-    vec3 L = normalize(vec3(-0.45, 0.6, 0.66));
-    vec3 hv = normalize(L + view);
-    float spec = pow(max(dot(n, hv), 0.0), 120.0);
-    float sheen = pow(max(dot(n, hv), 0.0), 6.0);
-    lit += vec3(1.0) * spec * 0.6 + irid * sheen * 0.2;
+    // And *this* is where the interference goes: a sheen on the turn of the
+    // rim, which is also the only place you see iridescence on a real bead —
+    // the middle of a droplet faces you and shows one colour, and all the
+    // banding is crowded into the last few degrees at its edge.
+    float sheen = smoothstep(0.66, 0.04, cosTheta);
+    lit = mix(lit, ramp(band(pickT, max(3.0, uBands))), sheen * 0.55);
 
-    // The contact line: every droplet is darkest exactly at its rim, where the
-    // film turns away hardest. Without it they read as stickers.
-    lit *= 1.0 - 0.24 * smoothstep(0.35, 0.0, h);
+    // Rim light: a hard crescent, not a fresnel falloff.
+    float rim = band(smoothstep(0.42, 0.0, cosTheta) * clamp(dot(n, L) + 0.35, 0.0, 1.0),
+      max(2.0, uBands * 0.6));
+    lit += vec3(1.0, 0.95, 0.88) * rim * 0.55;
+
+    // The highlight is a *dot*. Every illustration of a sphere ever drawn has
+    // one, it is the same size wherever it lands, and it has an edge.
+    // Tight, or it is not a highlight — it is a glowing core, which is what a
+    // wide smoothstep on a nearly flat normal gives you and which turns every
+    // bead into a lamp.
+    vec3 hv = normalize(L + vec3(0.0, 0.0, 1.0));
+    float sd = dot(n, hv);
+    lit += vec3(1.0) * smoothstep(0.9955, 0.9985, sd) * 0.95;
+    lit += vec3(1.0) * smoothstep(0.986, 0.991, sd) * 0.14;
+
+    // A darker contact where the film turns away hardest.
+    lit *= 1.0 - 0.28 * smoothstep(0.34, 0.0, h);
 
     col = mix(col, lit, edge);
   }
 
-  // A little grain, because a gradient this smooth bands on any real display.
-  col += (hash(vUv * 900.0 + uTime) - 0.5) * 0.012;
+  // Faces. Kurzgesagt puts eyes on things because a thing with eyes is a
+  // character and a character is something you watch rather than look at.
+  for (int i = 0; i < 8; i++) {
+    if (i >= uFaces || i >= uCount) break;
+    vec2 c = uDrops[i].xy;
+    float r = uDrops[i].z;
+    vec2 d = p - c;
+    if (dot(d, d) > r * r * 4.0) continue;
+    // They look where the whole cluster is drifting, roughly.
+    vec2 gaze = normalize(vec2(sin(uTime * 0.4 + float(i)), cos(uTime * 0.31 + float(i) * 2.0)));
+    float open = step(0.06, fract(uTime * 0.21 + float(i) * 0.37));
+    for (int e = 0; e < 2; e++) {
+      vec2 o = vec2((float(e) * 2.0 - 1.0) * r * 0.42, -r * 0.12);
+      vec2 q = d - o;
+      float white = smoothstep(r * 0.3, r * 0.26, length(q / vec2(1.0, mix(0.24, 1.0, open))));
+      col = mix(col, vec3(0.98, 0.98, 1.0), white);
+      float pupil = smoothstep(r * 0.15, r * 0.12,
+        length((q - gaze * r * 0.09) / vec2(1.0, mix(0.24, 1.0, open))));
+      col = mix(col, vec3(0.09, 0.10, 0.18), pupil * open);
+    }
+  }
+
+  // Grain, over everything, and the reason this looks printed rather than
+  // rendered. Two scales: a fine per-pixel one that moves, and a coarse static
+  // one that breaks up the flats so a posterised band is never actually flat.
+  float fine = hash(vUv * 1200.0 + fract(uTime) * 90.0) - 0.5;
+  float coarse = noise(vUv * 260.0) - 0.5;
+  col += (fine * 0.9 + coarse * 0.6) * uGrain;
+  col *= 1.0 - 0.1 * smoothstep(0.8, 1.9, length(p * vec2(0.72, 1.0)));
+
   gl_FragColor = vec4(col, 1.0);
 }
 `;
@@ -194,6 +321,11 @@ export interface DropletSettings {
   goo: number;
   film: number;
   speed: number;
+  /** Steps the shading is cut into. High is a render; four is an illustration. */
+  bands: number;
+  /** How many of them get eyes. */
+  faces: number;
+  grain: number;
 }
 
 interface Drop {
@@ -218,10 +350,13 @@ export function Droplets({ settings }: { settings: DropletSettings }) {
         p: new THREE.Vector2(Math.cos(a) * (0.3 + Math.random() * 0.7),
           Math.sin(a) * (0.3 + Math.random() * 0.7)),
         v: new THREE.Vector2((Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.2),
-        r: 0.042 + Math.random() * 0.055,
+        r: 0.058 + Math.random() * 0.075,
         wob: Math.random() * 100,
       });
     }
+    // Faces go to the first few in the array, so the array is sorted biggest
+    // first — eyes on a bead too small to hold them read as a smudge.
+    out.sort((x, y) => y.r - x.r);
     return out;
   }, []);
 
@@ -233,7 +368,10 @@ export function Droplets({ settings }: { settings: DropletSettings }) {
       uTime: { value: 0 },
       uGoo: { value: 1.0 },
       uFilm: { value: 320 },
-      uSpread: { value: 0.12 },
+      uSpread: { value: 0.32 },
+      uBands: { value: 4 },
+      uFaces: { value: 4 },
+      uGrain: { value: 0.07 },
     }),
     // Built once; the aspect is written every frame below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -303,8 +441,8 @@ export function Droplets({ settings }: { settings: DropletSettings }) {
         // the whole look: all pull and it is one amoeba, all push and nothing
         // ever touches, which is worse — the merging is the reason for using a
         // field in the first place.
-        const touch = (d.r + o.r) * 2.1;
-        if (dist < touch) f -= 2.0 * (1 - dist / touch);
+        const touch = (d.r + o.r) * 1.65;
+        if (dist < touch) f -= 1.5 * (1 - dist / touch);
         d.v.x += nx * f * dt;
         d.v.y += ny * f * dt;
         o.v.x -= nx * f * dt;
@@ -347,6 +485,9 @@ export function Droplets({ settings }: { settings: DropletSettings }) {
     m.uniforms.uTime.value = state.clock.elapsedTime;
     m.uniforms.uGoo.value = settings.goo;
     m.uniforms.uFilm.value = settings.film;
+    m.uniforms.uBands.value = settings.bands;
+    m.uniforms.uFaces.value = Math.min(8, Math.round(settings.faces));
+    m.uniforms.uGrain.value = settings.grain;
   });
 
   return (

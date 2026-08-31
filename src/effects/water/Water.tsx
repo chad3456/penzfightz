@@ -25,7 +25,15 @@ import { sfx } from '../../lib/audio';
 
 type Which = 'drops' | 'pool';
 
-const DEFAULT_DROPS: DropletSettings = { count: 30, goo: 1.0, film: 320, speed: 1 };
+const DEFAULT_DROPS: DropletSettings = {
+  count: 24,
+  goo: 1.0,
+  film: 320,
+  speed: 1,
+  bands: 4,
+  faces: 4,
+  grain: 0.07,
+};
 const DEFAULT_POOL: PoolSettings = {
   amp: 0.09,
   caustic: 85,
@@ -118,7 +126,7 @@ export function Water({ onExit }: { onExit: () => void }) {
 
       <p className="bench__lede">
         {which === 'drops'
-          ? 'Nothing here draws a droplet. Every bead adds a field that falls off as one over distance squared, and the droplet is wherever the sum crosses a threshold — so two of them near each other merge, neck and run together with no code aware that it happened. The colour is thin-film interference, not a rainbow ramp: the path difference through the film is worked out and evaluated at 650, 545 and 470 nanometres, which is why it comes out the magenta-and-gold of a soap bubble rather than an even spectrum. Move the pointer to push them about; hold to gather them.'
+          ? 'Nothing here draws a droplet. Every bead adds a field that falls off as one over distance squared, and the droplet is wherever the sum crosses a threshold — so two of them near each other merge, neck and run together with no code aware that it happened. The colour is real thin-film interference: the path difference through the film is worked out and evaluated at 650, 545 and 470 nanometres, and then used to index a painted palette rather than emitted as a spectrum, so the physics still decides which colour a bead is and the answer is always a colour somebody chose. Everything on top of that is illustration — the light is quantised into a handful of steps, the highlight is a dot with an edge, the shadow is offset and flat, and there is grain over the lot. Move the pointer to push them about; hold to gather them.'
           : 'A height field with the wave equation on it, a tiled box, and two draw passes a frame — you cannot refract what you have not drawn yet, so the pool is rendered without its water first and the surface reads that back, bent by its own normal. The bright net on the floor is not a texture: caustics are the reciprocal of how much a beam of sunlight spread out on the way down, which to first order is the Laplacian of the surface. Move over the water to trail ripples, tap for a splash, and drag to move round it.'}
       </p>
 
@@ -175,10 +183,37 @@ export function Water({ onExit }: { onExit: () => void }) {
               unit="×"
               onChange={(v) => setDrops((s) => ({ ...s, speed: v }))}
             />
+            <Knob
+              label="shading"
+              value={drops.bands}
+              min={2}
+              max={40}
+              step={1}
+              unit=" steps"
+              onChange={(v) => setDrops((s) => ({ ...s, bands: v }))}
+            />
+            <Knob
+              label="faces"
+              value={drops.faces}
+              min={0}
+              max={8}
+              step={1}
+              onChange={(v) => setDrops((s) => ({ ...s, faces: v }))}
+            />
+            <Knob
+              label="grain"
+              value={drops.grain}
+              min={0}
+              max={0.2}
+              step={0.005}
+              onChange={(v) => setDrops((s) => ({ ...s, grain: v }))}
+            />
             <div className="bench__note">
-              threshold is the level set the surface is drawn at — turn it down and the beads
-              swell until the whole field is one sheet. film is the thickness of the interference
-              layer, and every band you can count is one wavelength of path difference.
+              threshold is the level set the surface is drawn at — turn it down and the beads swell
+              until the whole field is one sheet. film is the thickness of the interference layer,
+              and every band you can count is one wavelength of path difference. shading is the
+              number of steps the light is cut into: at forty it is a render, at four it is a
+              drawing, and nothing else about the maths changes.
             </div>
           </>
         ) : (

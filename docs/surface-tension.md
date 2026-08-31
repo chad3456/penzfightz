@@ -57,6 +57,60 @@ bands crowd where the edge turns away. Where two droplets have run together the
 film is thicker and the bands tighten, which you can watch happen and which is
 not drawn anywhere.
 
+## Drawn, not rendered
+
+The physics above is unchanged, and everything below is a layer on top of it.
+The look is the flat, grainy, saturated illustration of an explainer video, and
+it turns out to be about six specific moves — none of them expensive, all of
+them structural rather than decorative.
+
+**Posterise.** The single move that separates an illustration from a render. A
+gradient says *this is a lit surface*; the same gradient cut into four steps
+says *somebody drew this*, and the eye reads the steps as intent. One `floor`,
+smoothed by a third of a band so the edges do not crawl. It is on a knob: at
+forty steps you are looking at a render, at four you are looking at a drawing,
+and nothing else about the maths changes between them.
+
+**The interference indexes a palette instead of emitting a spectrum.** This is
+the compromise the whole style rests on. The path difference through the film is
+still computed properly — it still decides which colour a bead is, and it still
+crowds the bands at the rim — but the answer is used as a *position in a
+six-stop ramp* rather than as light. Left as a raw spectrum it comes out
+convincing and slightly grubby; run through a palette somebody chose it comes
+out as an illustration of the same thing.
+
+**The body is one colour; the interference lives on the rim.** The first attempt
+drove the whole bead from the film and every one came out a bullseye of
+concentric rings. Body colour comes from a slowly varying field instead, so it
+is very nearly constant across any one bead — an illustrated blob is *one
+colour* with a light side and a dark side — and the iridescence is mixed in only
+where the surface turns away. Which is also where you see it on a real droplet:
+the middle faces you and shows one colour, and all the banding is in the last
+few degrees at the edge.
+
+**The highlight is a dot with an edge.** Every drawing of a sphere ever made has
+one. Two hard `smoothstep`s rather than a `pow` falloff — and it has to be
+*tight*, because a wide one on a nearly flat normal covers most of the bead and
+turns it into a lamp, which is what the first version did.
+
+**The shadow is offset and flat.** Not a correct soft shadow, which reads as a
+render, but a hard copy of the field displaced a fixed distance, which reads as
+a sticker on a page. It comes out of the same loop as the field itself, which is
+most of what keeps it affordable.
+
+**Grain, over everything.** Two scales: a fine per-pixel one that moves, and a
+coarse static one that breaks up the flats so a posterised band is never
+actually flat. It is the cheapest thing in the file and the reason the result
+looks printed rather than computed.
+
+And one that is not a technique. **Eyes.** A thing with eyes is a character, and
+a character is something you watch rather than look at. They go on the largest
+beads — the array is sorted by radius for exactly this — they blink, and they
+track a slow drift. The set they sit on is the other half of it: deep indigo, a
+scatter of stars, two dashed orbits. None of it is needed and all of it is the
+style, because an illustrated thing is a thing *staged*, and a subject floating
+on black is a screenshot.
+
 ## Three things that were wrong
 
 **The height profile was a ramp, and a ramp clamps.** Interpolating between the
@@ -197,6 +251,8 @@ on the floor and a single ring reflecting cleanly off a wall.
 |---|---|
 | droplet field | up to 40 beads, one loop, analytic gradient |
 | interference | 3 wavelengths, film 120–1200 nm |
+| shading | posterised, 2–40 steps, on a knob |
+| palette | six stops; the physics indexes it |
 | height field | 320 × 192, two states, 2 steps a frame |
 | wave speed | c² = 0.28 (limit 0.5) |
 | passes a frame | 2 sim, 1 refraction, 1 screen |
