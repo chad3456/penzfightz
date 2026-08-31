@@ -158,7 +158,7 @@ you and the man behind the table.
 ## Effects
 
 There is a **second tab on the shelf**, next to Games — that is where Dot Field,
-Roll Call, Two Crayons, Wet on Wet and Six Colours live. It is not games; it is the moving parts, one
+Roll Call, Two Crayons, Wet on Wet, Six Colours and Surface Tension live. It is not games; it is the moving parts, one
 idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
@@ -352,6 +352,35 @@ the villain's sister — never a name.
 every label came out as a circle, which is the second time this repository has
 learned that you smooth what grew and keep the corners on what was made.
 
+## Surface Tension
+
+A bench rather than a gallery: two shaders and the controls to take them apart,
+where every knob is a term in an equation rather than a style preset. Film
+thickness is in nanometres; wave speed has a stability limit; nothing is called
+*intensity*.
+
+**Goopy iridescent droplets.** Nothing draws a bead — each one adds a field
+falling off as one over distance squared and the droplet is wherever the sum
+crosses a threshold, so they merge and neck with no code aware it happened. The
+colour is real thin-film interference: the path difference through the film is
+worked out and evaluated at 650, 545 and 470 nanometres, which is why it comes
+out soap-bubble magenta and gold rather than an even spectrum. The gradient is
+analytic, so it is one loop per pixel rather than five.
+
+**A swimming pool, entirely in three.js.** A height field running the wave
+equation — two states kept, not one, because waves need momentum through the
+flat position and a single state only gives you diffusion. Two draw passes a
+frame, because you cannot refract what you have not drawn yet: the pool is
+rendered without its water and the surface reads that back, bent by its own
+normal. The caustics on the floor are not a texture; a caustic is the
+reciprocal of how much a beam spread out on the way down, which to first order
+is the Laplacian of the surface, so the floor takes ∇²h from the height field
+above it and brightens where the water is convex.
+
+[`docs/surface-tension.md`](docs/surface-tension.md) has the physics and the
+failures — including a pool with a sheet of black glass over it, caused by
+three quietly cloning a `uniforms` object that was passed as a prop.
+
 ## Running it
 
 ```sh
@@ -421,6 +450,7 @@ src/
     crayon/    heads, figures and staged scenes in two crayons
     wash/      watercolour: a paper model, a pigment model, a GPU wash solver
     flat/      six inks, a lathe, and a broken contour that is the wrong colour
+    water/     metaballs with thin-film colour, and a pool that solves its waves
   game/     pen specs, desk constants, Pen Fight's match engine and AI
   three/    classroom, pen model, physics arena, camera
   ui/       paper sheets, the Camlin box, chalkboard ranking, HUD

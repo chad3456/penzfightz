@@ -3894,7 +3894,8 @@ button.card:hover:not(:disabled) {
 
 .crayon,
 .wash,
-.flat {
+.flat,
+.bench {
   position: fixed;
   inset: 0;
   overflow-y: auto;
@@ -3906,7 +3907,8 @@ button.card:hover:not(:disabled) {
 
 .crayon__bar,
 .wash__bar,
-.flat__bar {
+.flat__bar,
+.bench__bar {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -3916,7 +3918,8 @@ button.card:hover:not(:disabled) {
 
 .crayon__eyebrow,
 .wash__eyebrow,
-.flat__eyebrow {
+.flat__eyebrow,
+.bench__eyebrow {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
@@ -3926,7 +3929,8 @@ button.card:hover:not(:disabled) {
 
 .crayon__title,
 .wash__title,
-.flat__title {
+.flat__title,
+.bench__title {
   margin: 2px 0 0;
   font-size: clamp(28px, 5vw, 44px);
   line-height: 1;
@@ -3936,14 +3940,17 @@ button.card:hover:not(:disabled) {
 
 .crayon__actions,
 .wash__actions,
-.flat__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.flat__actions,
+.bench__actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .crayon .stage__spec,
 .crayon .stage__back,
 .wash .stage__spec,
 .wash .stage__back,
 .flat .stage__spec,
-.flat .stage__back {
+.flat .stage__back,
+.bench .stage__spec,
+.bench .stage__back {
   background: rgba(255, 255, 255, 0.07);
   border-color: #4a463f;
   color: #cfc8ba;
@@ -3954,11 +3961,14 @@ button.card:hover:not(:disabled) {
 .wash .stage__spec:hover,
 .wash .stage__back:hover,
 .flat .stage__spec:hover,
-.flat .stage__back:hover { color: #fff; border-color: #8a8377; }
+.flat .stage__back:hover,
+.bench .stage__spec:hover,
+.bench .stage__back:hover { color: #fff; border-color: #8a8377; }
 
 .crayon__lede,
 .wash__lede,
-.flat__lede {
+.flat__lede,
+.bench__lede {
   max-width: 660px;
   margin: 14px 0 18px;
   font-size: 14px;
@@ -4178,7 +4188,8 @@ button.card:hover:not(:disabled) {
 
 .crayon__tabs,
 .wash__tabs,
-.flat__tabs {
+.flat__tabs,
+.bench__tabs {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
@@ -4188,7 +4199,8 @@ button.card:hover:not(:disabled) {
 
 .crayon__tab,
 .wash__tab,
-.flat__tab {
+.flat__tab,
+.bench__tab {
   appearance: none;
   cursor: pointer;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -4202,7 +4214,7 @@ button.card:hover:not(:disabled) {
   color: #a49c8e;
 }
 
-.crayon__tab:hover, .wash__tab:hover, .flat__tab:hover { color: #ece7dc; }
+.crayon__tab:hover, .wash__tab:hover, .flat__tab:hover, .bench__tab:hover { color: #ece7dc; }
 
 .crayon__tab--on {
   background: #c2392b;
@@ -4379,4 +4391,80 @@ button.card:hover:not(:disabled) {
   width: 54px;
   height: 9px;
   border-radius: 5px;
+}
+
+/* ============================================ Surface Tension: the bench */
+
+.bench { background: #16181a; }
+.bench__tab--on { background: #17a5b8; border-color: #17a5b8; color: #eafcff; }
+
+.bench__stage {
+  position: relative;
+  height: min(64vh, 680px);
+  border: 1px solid #333a3c;
+  background: #0d0f10;
+  margin-top: 4px;
+}
+
+.bench__stage canvas { display: block; touch-action: none; cursor: crosshair; }
+
+/* The desk under the experiment: the knobs, and a line saying what they are. */
+.bench__desk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  padding: 14px 0 4px;
+}
+
+.bench__knob {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #8f9a9c;
+}
+
+.bench__knobname { min-width: 82px; }
+
+.bench__knob input[type='range'] {
+  width: 130px;
+  accent-color: #17a5b8;
+  background: transparent;
+}
+
+.bench__knobval {
+  min-width: 62px;
+  color: #d8e4e6;
+  font-variant-numeric: tabular-nums;
+}
+
+.bench__toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #8f9a9c;
+}
+
+.bench__toggle input { accent-color: #17a5b8; }
+
+.bench__note {
+  flex: 1 1 320px;
+  min-width: 260px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #7f8a8c;
+}
+
+@media (max-width: 620px) {
+  .bench__stage { height: min(52vh, 460px); }
+  .bench__knob input[type='range'] { width: 100px; }
+  .bench__knobname { min-width: 70px; }
 }

@@ -6,7 +6,7 @@
  * render both from a list.
  */
 
-export type EffectId = 'dotfield' | 'rollcall' | 'crayon' | 'wash' | 'flat';
+export type EffectId = 'dotfield' | 'rollcall' | 'crayon' | 'wash' | 'flat' | 'water';
 
 export interface EffectDef {
   id: EffectId;
@@ -74,6 +74,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['2,400 drawings · 32 forms', '18 inks, six at a time', 'stars: staging, not likeness'],
     ink: '#1668f0',
     wash: 'rgba(22, 104, 240, 0.09)',
+  },
+  {
+    id: 'water',
+    name: 'Surface Tension',
+    tagline: 'Two experiments in water, with the numbers exposed.',
+    blurb:
+      'A bench rather than a gallery: two shaders and the controls to take them apart, where every knob is a term in an equation rather than a style preset. First, goopy iridescent droplets — nothing draws a bead, each one adds a field falling off as one over distance squared and the droplet is wherever the sum crosses a threshold, so they merge and neck with no code aware of it; the colour is real thin-film interference, the path difference through the film evaluated at 650, 545 and 470 nanometres, which is why it comes out soap-bubble magenta and gold rather than an even spectrum. Second, a swimming pool built entirely in three.js — a height field running the wave equation, a tiled box, and two draw passes a frame, because you cannot refract what you have not drawn yet. The caustics on the floor are not a texture: they are the Laplacian of the surface above them, which is what a caustic actually is.',
+    spec: ['metaballs · thin-film interference', 'wave equation on a height field', 'caustics from the Laplacian'],
+    ink: '#17a5b8',
+    wash: 'rgba(23, 165, 184, 0.09)',
   },
 ];
 
