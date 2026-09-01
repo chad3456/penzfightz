@@ -61,7 +61,7 @@ export const EFFECTS: EffectDef[] = [
     tagline: 'A thousand watercolours, none of them painted.',
     blurb:
       'A thousand women at leisure — reading, listening, stretching, waiting — in two tubes of paint and a lot of water. Nothing in here paints a soft edge. Pigment and water are laid on the sheet in the shape of a pose and then a fluid solver runs on it in a pair of fragment shaders: the colour runs downhill, piles against the rim of the wet patch where the film thins, drops into the pits of the paper if it is heavy enough to, and blooms into a cauliflower wherever clean water lands on a wash that has started to set. Every edge, every dark rim, every grain of granulation is a consequence rather than a mark. Turn the globe and click one and it is painted again, larger — the same intention and a different accident.',
-    spec: ['1,000 paintings · 70 poses', 'shallow water on the GPU', 'absorption, not colour'],
+    spec: ['1,000 paintings · 70 poses', 'shallow water on the GPU', 'the wash bleeds, she does not'],
     ink: '#2f4f9b',
     wash: 'rgba(47, 79, 155, 0.09)',
   },

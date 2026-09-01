@@ -1,5 +1,5 @@
 import { Load, type Mark, type Pt } from './brush';
-import type { Dress, Hair, Perch, Pose, Prop } from './pose';
+import type { Dress, Hair, Perch, Pose } from './pose';
 
 /**
  * A woman, in two pigments and a lot of water.
@@ -246,20 +246,6 @@ function mapper(look: Look) {
   ];
 }
 
-/** A tapered ribbon between two points, as a polygon. */
-function ribbon(a: Pt, b: Pt, wa: number, wb: number): Pt[] {
-  const dx = b[0] - a[0];
-  const dy = b[1] - a[1];
-  const len = Math.hypot(dx, dy) || 1;
-  const nx = -dy / len;
-  const ny = dx / len;
-  return [
-    [a[0] + nx * wa, a[1] + ny * wa],
-    [b[0] + nx * wb, b[1] + ny * wb],
-    [b[0] - nx * wb, b[1] - ny * wb],
-    [a[0] - nx * wa, a[1] - ny * wa],
-  ];
-}
 
 /** Where the cloth hangs from, and how far it reaches. */
 const HANG: Record<Dress, { from: 'hip' | 'chest'; reach: number; open: number }> = {
@@ -345,58 +331,73 @@ function cloth(k: Skeleton, p: Pose, look: Look, r: () => number) {
   return { spokes, anchor, rim: hem };
 }
 
-const PROP_WARM: Prop[] = ['guitar', 'cup', 'flowers', 'basket', 'letter', 'glass', 'cat'];
-
 function prop(load: Load, k: Skeleton, p: Pose, m: (q: Pt) => Pt, look: Look, r: () => number) {
   const what = p.prop;
   if (!what || what === 'none') return;
   const grip = p.grip ?? 1;
   const hands = grip === 2 ? [k.hand[0], k.hand[1]] : [k.hand[grip === 0 ? 0 : 1]];
   const at = hands.length === 2 ? lerp(hands[0], hands[1], 0.5) : hands[0];
-  const warm = PROP_WARM.includes(what);
+  /**
+   * The prop gets the *other* tube.
+   *
+   * It has to be darker than the figure holding it — at the first weights it
+   * was lighter and it vanished into her, which took the whole subject with it,
+   * because the object in the hand is the one mark that says what the picture
+   * is about. A woman with her arms up is a woman with her arms up; a woman
+   * with her arms up holding a book is reading.
+   *
+   * But value alone was not enough: a dark mark in the same pigment as the body
+   * still reads as one of the body's own shadows. Painting it in the warm while
+   * she is in the cool separates it by *hue* as well, which is the one thing a
+   * two-pigment palette can always do and costs nothing — and it is what the
+   * second tube is for.
+   */
   const ink: Mark = {
-    cool: warm ? look.cool * 0.3 : look.cool * 1.15,
-    warm: warm ? look.warm * 1.2 : look.warm * 0.28,
-    water: 0.24,
+    cool: look.cool * 0.22,
+    warm: look.warm * 2.4,
+    water: 0.14,
     width: 0.013,
-    dry: 0.28,
-    soft: 0.3,
+    dry: 0.1,
+    soft: 0.2,
   };
   const s = look.scale;
   const tilt = (r() - 0.5) * 0.5;
 
   switch (what) {
     case 'book': {
-      const a = m([at[0] - 0.055, at[1] - 0.012]);
-      const b = m([at[0] + 0.055, at[1] + 0.006]);
-      load.mass(ribbon(a, b, 0.028 * s, 0.03 * s), { ...ink, water: 0.2, dry: 0.35 });
-      load.stroke([a, b], { ...ink, width: 0.006, water: 0.16, dry: 0.1 });
+      // Two leaves and a spine, big enough to be a book rather than a smudge.
+      const a = m([at[0] - 0.085, at[1] - 0.03]);
+      const b = m([at[0] + 0.085, at[1] + 0.012]);
+      const low = m([at[0], at[1] + 0.032]);
+      const high = m([at[0], at[1] - 0.052]);
+      load.mass([a, low, b, high], { ...ink, width: 0.006 });
+      load.stroke([high, low], { ...ink, width: 0.009 });
       break;
     }
     case 'guitar': {
-      const body = m([at[0] + 0.02, at[1] + 0.045]);
-      load.dab(body[0], body[1], 0.085 * s, 0.11 * s, 0.35 + tilt, { ...ink, soft: 0.25 });
-      load.stroke([m([at[0] - 0.02, at[1] + 0.01]), m([at[0] - 0.2, at[1] - 0.09])], {
+      const body = m([at[0] + 0.02, at[1] + 0.05]);
+      load.dab(body[0], body[1], 0.11 * s, 0.14 * s, 0.35 + tilt, { ...ink, soft: 0.18 });
+      load.stroke([m([at[0] - 0.02, at[1] + 0.01]), m([at[0] - 0.26, at[1] - 0.12])], {
         ...ink,
-        width: 0.012,
+        width: 0.018,
         taper: 0.7,
       });
       break;
     }
     case 'umbrella': {
-      const top = m([at[0], at[1] - 0.17]);
+      const top = m([at[0], at[1] - 0.2]);
       const arc: Pt[] = [];
-      for (let i = 0; i <= 6; i++) {
-        const a = Math.PI + (i / 6) * Math.PI;
-        arc.push([top[0] + Math.cos(a) * 0.2 * s, top[1] - Math.sin(a) * 0.075 * s]);
+      for (let i = 0; i <= 8; i++) {
+        const a = Math.PI + (i / 8) * Math.PI;
+        arc.push([top[0] + Math.cos(a) * 0.3 * s, top[1] - Math.sin(a) * 0.115 * s]);
       }
-      load.mass([...arc, [top[0], top[1] + 0.02 * s]], {
+      load.mass([...arc, [top[0], top[1] + 0.05 * s]], {
         ...ink,
-        water: 0.5,
-        dry: 0.2,
-        width: 0.02,
+        water: 0.3,
+        dry: 0.12,
+        width: 0.012,
       });
-      load.stroke([m(at), top], { ...ink, width: 0.007, water: 0.14 });
+      load.stroke([m(at), top], { ...ink, width: 0.012, water: 0.12 });
       break;
     }
     case 'cat': {
@@ -437,8 +438,8 @@ function prop(load: Load, k: Skeleton, p: Pose, m: (q: Pt) => Pt, look: Look, r:
       break;
     }
     case 'basket': {
-      const c = m([at[0], at[1] + 0.05]);
-      load.dab(c[0], c[1], 0.055 * s, 0.05 * s, 0, { ...ink, soft: 0.3, water: 0.3 });
+      const c = m([at[0], at[1] + 0.055]);
+      load.dab(c[0], c[1], 0.07 * s, 0.062 * s, 0, { ...ink, soft: 0.22, water: 0.22 });
       break;
     }
     case 'brush': {
@@ -452,9 +453,9 @@ function prop(load: Load, k: Skeleton, p: Pose, m: (q: Pt) => Pt, look: Look, r:
       break;
     }
     default: {
-      const c = m([at[0], at[1] + 0.012]);
-      const size = what === 'cup' || what === 'glass' ? 0.03 : 0.024;
-      load.dab(c[0], c[1], size * s, size * s * 1.1, 0, { ...ink, soft: 0.3, water: 0.26 });
+      const c = m([at[0], at[1] + 0.016]);
+      const size = what === 'cup' || what === 'glass' ? 0.042 : 0.034;
+      load.dab(c[0], c[1], size * s, size * s * 1.15, 0, { ...ink, soft: 0.2, water: 0.2 });
     }
   }
 }
@@ -533,13 +534,18 @@ export function figureStages(p: Pose, look: Look): Stage[] {
     // ------------------------------------------------------- 1. the wet stage
     {
       water: 1.0,
-      after: 0.42,
+      // Most of the drying happens under the first stage and almost none under
+      // the last. That ratio *is* the picture: diffusion divides pigment by the
+      // area it spreads over, so anything laid on a soaked sheet with thirty
+      // steps to travel arrives as a pale tint however strongly it went down.
+      // The wash gets the bleeding; the figure does not.
+      after: 0.58,
       draw: (load) => {
         const r = rnd(look.seed ^ 0x51ab);
         const { spokes, rim } = cloth(k, p, look, r);
         const warm: Mark = {
-          cool: look.cool * 0.12,
-          warm: look.warm * 0.78,
+          cool: look.cool * 0.1,
+          warm: look.warm * 0.56,
           water: 0.85,
           width: 0.07,
           taper: 1.8,
@@ -565,8 +571,8 @@ export function figureStages(p: Pose, look: Look): Stage[] {
             // lines drawn on, which is what the first four passes all did.
             load.mass(hull, {
               ...warm,
-              cool: warm.cool * 0.7,
-              warm: warm.warm * 0.55,
+              cool: warm.cool * 0.6,
+              warm: warm.warm * 0.42,
               width: 0.022,
               dry: 0.5,
               tooth: 0.05,
@@ -598,84 +604,138 @@ export function figureStages(p: Pose, look: Look): Stage[] {
 
     // ----------------------------------------------------------- 2. the body
     {
-      water: 0.6,
-      after: 0.38,
+      water: 0.28,
+      after: 0.27,
       draw: (load) => {
         const r = rnd(look.seed ^ 0x77e3);
         const hidden = HANG[p.dress].reach > 0.34;
+        // Twice the load it had, and it does not skip or run out.
+        //
+        // The figure is the darkest thing on the sheet and everything else is
+        // weather round it. Painted at the same weight as the cloth — which is
+        // what the first pass did — the whole picture sits in a band of mid
+        // grey a fifth of a stop wide, and a woman reading becomes a smudge
+        // that could be anything. A loaded brush on damp paper does not skip
+        // either, so the dry-brush break-up is off: paper texture is the
+        // solver's job, through granulation, not the brush's.
         const body: Mark = {
-          cool: look.cool * 0.92,
-          warm: look.warm * 0.32,
-          water: 0.6,
+          cool: look.cool * 1.55,
+          warm: look.warm * 0.4,
+          water: 0.28,
           width: 0.04,
-          dry: 0.06,
+          dry: 0,
           tooth: 0.035,
-          runout: 0.86,
-          soft: 0.26,
+          runout: 1,
+          soft: 0.22,
         };
 
         load.group('max', () => {
-          // Torso, as a shape with a waist in it. A shoulder-to-hip trapezium is
-          // a sack; the pinch is what makes it a body.
+          // Torso: shoulders, a waist, hips. Wide enough at the top that the
+          // arms come *out of* it rather than being parked beside it.
           const trunk: Pt[] = [];
           const rightSide: Pt[] = [];
           for (let i = 0; i <= 6; i++) {
-            const t = i / 6;
-            const a = lerp(k.spine[0], k.spine[1], t);
-            const b = lerp(k.spine[1], k.spine[2], t);
-            const spine = lerp(a, b, t);
+            const tt = i / 6;
+            const a = lerp(k.spine[0], k.spine[1], tt);
+            const b = lerp(k.spine[1], k.spine[2], tt);
+            const spine = lerp(a, b, tt);
             const wide =
-              (BONE.hip * (1 - t) + BONE.shoulder * t) * (1 - 0.24 * Math.sin(t * Math.PI));
+              (BONE.hip * 1.14 * (1 - tt) + BONE.shoulder * 1.12 * tt)
+              * (1 - 0.16 * Math.sin(tt * Math.PI));
             const nx = k.spine[2][1] - k.spine[0][1];
             const ny = -(k.spine[2][0] - k.spine[0][0]);
             const len = Math.hypot(nx, ny) || 1;
             trunk.push(m([spine[0] + (nx / len) * wide, spine[1] + (ny / len) * wide]));
             rightSide.push(m([spine[0] - (nx / len) * wide, spine[1] - (ny / len) * wide]));
           }
-          load.mass([...trunk, ...rightSide.reverse()], { ...body, width: 0.012, tooth: 0.04 });
+          load.mass([...trunk, ...rightSide.reverse()], { ...body, width: 0.008, tooth: 0.04 });
 
-          // Limbs. Two segments each, tapering, and the far side lighter — the
-          // arm behind the body is behind the body.
-          const limb = (a: Pt, b: Pt, c: Pt, w: number, far: boolean) => {
+          /**
+           * A limb is a wedge, and a joint is a disc.
+           *
+           * The pass before this drew limbs as round-capped strokes of nearly
+           * even width, and every figure came out as an armature of sausages
+           * lying near a body rather than a person — the same failure the
+           * crayon study hit from the other direction, and the same fix. Two
+           * things are needed and neither works alone.
+           *
+           * **Taper.** A tapering quad narrows from shoulder to wrist the way
+           * an arm does. Constant width reads as tubing at any weight.
+           *
+           * **A disc at every joint.** Two wedges meeting at an angle leave a
+           * notch on the outside of the bend, and a notch at the elbow is the
+           * single loudest signal that a drawing was assembled from parts.
+           * Under `max` the disc costs nothing: it covers the paper once.
+           */
+          const seg = (a: Pt, b: Pt, wa: number, wb: number): Pt[] => {
+            const dx = b[0] - a[0];
+            const dy = b[1] - a[1];
+            const len = Math.hypot(dx, dy) || 1;
+            const nx = -dy / len;
+            const ny = dx / len;
+            return [
+              m([a[0] + nx * wa, a[1] + ny * wa]),
+              m([b[0] + nx * wb, b[1] + ny * wb]),
+              m([b[0] - nx * wb, b[1] - ny * wb]),
+              m([a[0] - nx * wa, a[1] - ny * wa]),
+            ];
+          };
+          const joint = (at: Pt, w: number, mk: Mark) => {
+            const q = m(at);
+            load.dab(q[0], q[1], w * s, w * s, 0, { ...mk, soft: 0.2 });
+          };
+
+          const limb = (
+            a: Pt, b: Pt, c: Pt, w0: number, w1: number, w2: number, far: boolean,
+          ) => {
             const mk: Mark = {
               ...body,
-              width: w,
-              taper: 0.74,
-              cool: body.cool * (far ? 0.8 : 1),
-              warm: body.warm * (far ? 0.8 : 1),
+              width: 0.006,
+              tooth: 0.05,
+              cool: body.cool * (far ? 0.88 : 1),
+              warm: body.warm * (far ? 0.88 : 1),
             };
-            load.stroke([m(a), m(b)], mk);
-            load.stroke([m(b), m(c)], { ...mk, width: w * 0.72, taper: 0.6 });
+            load.mass(seg(a, b, w0, w1), mk);
+            load.mass(seg(b, c, w1, w2), mk);
+            joint(a, w0, mk);
+            joint(b, w1, mk);
+            joint(c, w2 * 1.15, mk);
           };
-          limb(k.shoulder[0], k.elbow[0], k.hand[0], 0.047, true);
-          limb(k.shoulder[1], k.elbow[1], k.hand[1], 0.05, false);
+
+          limb(k.shoulder[0], k.elbow[0], k.hand[0], 0.03, 0.023, 0.015, true);
+          limb(k.shoulder[1], k.elbow[1], k.hand[1], 0.032, 0.024, 0.016, false);
           // Under a long dress the legs stop where the cloth starts. Painting a
           // whole leg *and* a whole skirt over the same paper gives a figure
           // with her legs outside her clothes, which is the quickest way to
           // make a picture look assembled rather than painted.
           const shin = hidden ? 0.35 : 1;
-          limb(k.hip[0], k.knee[0], lerp(k.knee[0], k.foot[0], shin), 0.058, true);
-          limb(k.hip[1], k.knee[1], lerp(k.knee[1], k.foot[1], shin), 0.062, false);
+          limb(k.hip[0], k.knee[0], lerp(k.knee[0], k.foot[0], shin), 0.048, 0.036, 0.023, true);
+          limb(k.hip[1], k.knee[1], lerp(k.knee[1], k.foot[1], shin), 0.051, 0.038, 0.024, false);
 
-          // Neck and head. One dab: at this size a face is a lie you cannot tell
-          // convincingly, and a blank head reads as a person looking away.
-          load.stroke([m(k.spine[2]), m(k.neck)], { ...body, width: 0.026, taper: 0.8 });
+          // Neck: a short wedge, and wide enough to be a neck rather than a
+          // stalk. A head on a wire is a lollipop.
+          load.mass(seg(k.spine[2], k.neck, 0.036, 0.028), { ...body, width: 0.005 });
+
+          // The head. One dab: at this size a face is a lie you cannot tell
+          // convincingly, and a blank head reads as a person looking away. It
+          // is also the darkest and hardest-edged mark on the figure, because
+          // it is the one the eye finds first.
           const hd = m(k.head);
-          load.dab(hd[0], hd[1], BONE.headR * s * 0.92, BONE.headR * s * 1.12, k.headTilt, {
+          load.dab(hd[0], hd[1], BONE.headR * s * 0.95, BONE.headR * s * 1.15, k.headTilt, {
             ...body,
-            cool: body.cool * 1.15,
-            soft: 0.35,
-            dry: 0.1,
+            cool: body.cool * 1.3,
+            soft: 0.15,
+            dry: 0,
           });
           hairMass(load, k, p, m, look, r);
 
           // Feet, and only where there are any showing.
           if (!hidden) {
-            for (const [f, t] of [
+            for (const [f, tp] of [
               [k.foot[0], k.toe[0]],
               [k.foot[1], k.toe[1]],
             ] as [Pt, Pt][]) {
-              load.stroke([m(f), m(t)], { ...body, width: 0.022, taper: 0.5 });
+              load.mass(seg(f, tp, 0.026, 0.014), { ...body, width: 0.005 });
             }
           }
         });
@@ -684,8 +744,8 @@ export function figureStages(p: Pose, look: Look): Stage[] {
 
     // ------------------------------------------------------------ 3. the darks
     {
-      water: 0.24,
-      after: 0.2,
+      water: 0.08,
+      after: 0.15,
       draw: (load) => {
         const r = rnd(look.seed ^ 0x2bd1);
         const dark: Mark = {
@@ -702,14 +762,17 @@ export function figureStages(p: Pose, look: Look): Stage[] {
         // nothing at the feet, and a figure painted at one weight from top to
         // bottom reads as a silhouette cut out of coloured paper however good
         // the edges are.
-        const crown = m(lerp(k.head, k.spine[2], 0.3));
-        load.dab(crown[0], crown[1], 0.1 * s, 0.13 * s, k.headTilt, {
+        // Across the shoulders, not over the head. At its first size and
+        // position this landed as a dark disc *on* the head — which read as a
+        // hole in it, and the head is the one mark the eye goes to first.
+        const crown = m(lerp(k.spine[2], k.neck, 0.35));
+        load.dab(crown[0], crown[1], 0.075 * s, 0.05 * s, k.headTilt, {
           ...dark,
-          cool: dark.cool * 0.66,
-          warm: look.warm * 0.3,
-          water: 0.34,
-          dry: 0.5,
-          soft: 0.9,
+          cool: dark.cool * 0.5,
+          warm: look.warm * 0.28,
+          water: 0.26,
+          dry: 0.45,
+          soft: 0.95,
         });
 
         // The turn of the shoulder and the shadow under the chin: the two

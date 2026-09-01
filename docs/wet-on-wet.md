@@ -240,7 +240,79 @@ leg *and* a whole skirt over the same paper gives a figure with her legs outside
 her clothes, which is the quickest way to make a picture look assembled rather
 than painted.
 
-### Two bugs worth keeping a note of
+### Making it legible
+
+The first version of all this produced convincing *watercolour* and unconvincing
+*pictures*: you could tell it was paint, and you could not tell it was a woman
+reading. The whole point of a figure gallery is that a person can look at a card
+and say what is happening in it, so this is the pass that fixed that, and every
+item in it is a value or a shape problem rather than a physics one.
+
+### Diffusion divides pigment, so the staging ratio *is* the picture
+
+The single biggest cause. A wash spread over four times the area is a quarter of
+the strength, so anything laid on a soaked sheet with thirty steps still to run
+arrives as a pale tint no matter how strongly it went down. The first staging
+gave the body eighteen steps of travel and the result was a figure the same
+weight as the sky.
+
+Now most of the drying happens under the first stage and almost none under the
+last: 58 per cent of the run after the wash, 27 after the body, 15 after the
+darks. **The wash gets the bleeding; the figure does not.** That one ratio moved
+the pictures further than any other change here.
+
+### The figure has to be the darkest thing on the sheet
+
+It was being painted at the same weight as the cloth, so the whole image sat in
+a band of mid grey about a fifth of a stop wide — and a picture with no value
+range is a smudge whatever is drawn in it. The body carries roughly twice the
+pigment it did, the head is darker and harder-edged than the body, and the cloth
+is lighter than both. Everything else is weather around her.
+
+### A limb is a wedge and a joint is a disc
+
+The same lesson the crayon study learned, arriving from the other direction and
+needing both halves this time. Limbs were round-capped strokes of nearly even
+width, and every figure came out as an armature of sausages lying near a body.
+
+**Taper**: a narrowing quad from shoulder to wrist reads as an arm; constant
+width reads as tubing at any weight. **A disc at every joint**: two wedges
+meeting at an angle leave a notch on the outside of the bend, and a notch at the
+elbow is the loudest possible signal that a drawing was assembled from parts.
+Under the coverage mode the disc is free — it covers the paper once.
+
+### The bones are not the drawing
+
+A skeleton fitted exactly to the frame still overflows it, because every bone is
+painted as a limb *with a width* — half a thigh either side of the outermost
+joint, plus a head that is a disc around its own point. Fitting the joints alone
+let the wide poses run off both edges while the arithmetic insisted they fitted,
+which is the most confusing kind of wrong: the numbers check out and the picture
+is cropped. The box is grown by the fattest half-limb before anything is divided
+by it, and by more again when she is holding something that reaches — an
+umbrella is a foot above the hand that holds it, and it lost its canopy to the
+top of the frame every time.
+
+### The prop gets the other tube
+
+This is the one that made captions true. A prop must be darker than the figure
+holding it — at the first weights it was *lighter* and vanished into her, taking
+the subject with it, because the object in the hand is the mark that says what
+the picture is about. A woman with her arms up is a woman with her arms up; a
+woman with her arms up holding a book is reading.
+
+But value alone was not enough: a dark mark in the same pigment still reads as
+one of the body's own shadows. Painting the prop in the **warm** while she is in
+the cool separates it by hue as well — which is the one thing a two-pigment
+palette can always do, it costs nothing, and it is what the second tube is for.
+
+### And one that simply looked broken
+
+The core dark meant to sit across the shoulders was too big and landed on the
+head, where it read as a hole in it. The head is the mark the eye finds first,
+so anything wrong there is wrong everywhere.
+
+## Two bugs worth keeping a note of
 
 **Everything was upside down.** The brush buffer is uploaded as a texture and
 read in UV space, where v = 0 is the *bottom* of the picture, while every

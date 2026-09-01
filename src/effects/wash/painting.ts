@@ -125,8 +125,8 @@ export function makePainting(seed: number, only?: Tag): Painting {
     dropAt: 0.3 + r() * 0.3,
     billow: r(),
     fill: 0.64 + r() * 0.14,
-    cx: 0.36 + r() * 0.26,
-    cy: 0.4 + r() * 0.1,
+    cx: 0.4 + r() * 0.2,
+    cy: 0.42 + r() * 0.08,
     weight: 0.95 + r() * 0.35,
     name: base.name,
     note: `${palette.name} — ${weather}.`,
@@ -184,6 +184,9 @@ export function washSettings(rec: Painting, steps: number): WashSettings {
  * whole picture jammed against the edges, which is the one composition none of
  * the references has.
  */
+/** Props that reach well past the hand, and so past the figure's own box. */
+const REACHY = new Set(['umbrella', 'guitar', 'scarf', 'flowers', 'basket']);
+
 export function lookFor(rec: Painting, aspect: number): Look {
   const k = skeleton(rec.pose, rec.build);
   const ext = extent(k);
@@ -192,8 +195,21 @@ export function lookFor(rec: Painting, aspect: number): Look {
   // alone scaled her up until the head filled the sheet and the legs were off
   // the side of it — which is what the first pass did, and it looks less like a
   // bug than like a very confident close-up.
-  const byHeight = rec.fill / Math.max(0.2, ext.h * aspect);
-  const byWidth = (rec.fill * 1.02) / Math.max(0.2, ext.w);
+  // The bones are not the drawing.
+  //
+  // A skeleton fitted exactly to the frame still overflows it, because every
+  // bone is painted as a limb with a *width* — half a thigh either side of the
+  // outermost joint, plus a head that is a disc round its own point. Fitting
+  // the joints alone let the wide poses run off both edges while the maths
+  // insisted they fitted, which is the most confusing kind of wrong. So the box
+  // is grown by the fattest half-limb before anything is divided by it.
+  // A held thing sticks out further than she does. An umbrella is a foot above
+  // the hand that holds it and got its canopy sliced off by the top of the
+  // frame every time — which is a shame, because the umbrella is the entire
+  // reason that picture reads as *out in the rain*.
+  const pad = 0.085 + (rec.pose.prop && REACHY.has(rec.pose.prop) ? 0.1 : 0);
+  const byHeight = rec.fill / Math.max(0.2, (ext.h + pad * 2) * aspect);
+  const byWidth = (rec.fill * 1.02) / Math.max(0.2, ext.w + pad * 2);
   const scale = Math.min(byHeight, byWidth);
   const bias = rec.palette.bias;
   return {
