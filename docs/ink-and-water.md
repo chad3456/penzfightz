@@ -150,6 +150,52 @@ it a thick stroke is a flat plastic shape.
 
 ---
 
+## Four and a half · Making it a liquid, and making it answer
+
+The first build was correct and read as smoke on a dark card. Three additions
+turned it into water, and none of them touched the solver.
+
+**The ground is seen *through* the ink, not behind it.** A film of ink lying on
+water is a lens: it is thicker in some places than others, so the silk weave
+underneath shifts where the film is steep. Refracting the ground by the slope of
+the ink costs one extra sample and is most of the difference between a picture
+of ink and a picture of a liquid.
+
+**The thickness field is a height field, so it has a normal.** A normal is all a
+specular term needs. The highlight lands on the *shoulders* of a stroke, where
+the film is steep, and is absent from the flats — which is exactly where the
+light sits on real spilled liquid. It is gated off the bare water, where there
+is no surface to catch it.
+
+**The pointer carries a light.** This one is interaction, not optics. Without it
+there is no evidence on screen that the water knows where your finger is until
+the ink arrives, and the ink arrives about half a second later — long enough to
+conclude that nothing happened.
+
+The interaction beyond that is four things: drag to draw (the stroke lays down a
+third ink, neither the dragon's blue nor the phoenix's orange, so what you drew
+stays yours as it comes apart); tap for a drop; double-tap for a heavy one; hold
+and the animals steer to your hand. Space drops one in the middle and C clears
+the water.
+
+A burst is a **ring** of twelve outward shoves rather than one vector, because a
+single splat at a point is a jet — it picks a direction and throws the water
+that way. Twelve of them round a small circle, all pointing out, is what a drop
+landing actually does, and the pressure solve turns the ring into a vortex a
+moment later.
+
+The chrome is glass laid over the water rather than a bar above it. Everything
+else in this case is a gallery of finished things; this is a body of water you
+are standing at the edge of, so the canvas is the page and the panels are
+dismissible and never cover the middle. Three things make a panel read as glass
+and all three are needed: the blur, which on its own is a smear; the hairline
+along the top edge, which is the light catching the lip of a real pane and is
+what gives the panel a thickness; and a ground you can still see the water
+through, because a panel you cannot see through is a card, and a card on a
+picture is just a card.
+
+---
+
 ## Five · Frame-rate independence, which is not a detail here
 
 Two quantities in this effect are quoted per sixtieth of a second and must be
@@ -182,6 +228,7 @@ difference between ink that curls and ink that sits there.
 | ink life | dye surviving each sixtieth of a second |
 | bloom | weight of the twelve-tap spiral halo |
 | phoenixes | how many |
+| sheen | the specular on the film: zero is a stain, 1.5 is spilled oil |
 | ink load | pigment on the brush, both passes |
 
 At **ink life 0.970** the creatures leave no trail at all and you are watching a

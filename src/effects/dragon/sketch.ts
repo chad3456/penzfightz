@@ -46,6 +46,8 @@ uniform float uGlow;
 uniform float uFlip;
 uniform float uAspect;
 uniform float uCrisp;
+uniform vec3 uTouch;   // xy in uv, z is how hard
+uniform float uSheen;
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(41.3, 289.1))) * 43758.5453); }
 
@@ -79,7 +81,6 @@ vec3 ground(vec2 p) {
 
 void main() {
   vec2 uv = vec2(vUv.x, mix(vUv.y, 1.0 - vUv.y, uFlip));
-  vec3 col = ground(vUv);
 
   // Chromatic dispersion, along the slope of the ink. Water bends the short
   // wavelengths hardest, so the fringe on a fold is always blue on one side
@@ -90,6 +91,15 @@ void main() {
   float dy = luma(inkAt(uv + vec2(0.0, uTexel.y))) - c;
   vec2 slope = vec2(dx, dy);
   float edge = length(slope);
+
+  // The ground, seen *through* the ink rather than behind it.
+  //
+  // This is the one change that stopped the piece reading as smoke on a dark
+  // card. A film of ink lying on water is a lens: it is thicker in some places
+  // than others, so the weave underneath it shifts where the film is steep.
+  // Refracting the ground by the slope of the ink costs one extra sample and
+  // is the difference between a picture of ink and a picture of a liquid.
+  vec3 col = ground(vUv - slope * 0.09 * vec2(1.0, mix(1.0, -1.0, uFlip)));
   // Clamped, and not out of caution. Unclamped, the slope at the hard edge of
   // a drawn shape is enormous and the three channels sample five texels apart,
   // which is not dispersion, it is a registration error — it looked like badly
@@ -131,12 +141,32 @@ void main() {
   col += ink * 3.2 * exp(-t * 2.4);
   col += halo * uGlow * exp(-t * 1.2);
 
+  // A surface, with a light on it.
+  //
+  // The thickness field is a height field, so it has a normal, and a normal is
+  // all a specular term needs. The highlight sits on the *shoulders* of a
+  // stroke — where the film is steep — and is absent from the flats, which is
+  // exactly where the light lives on real spilled liquid. The smoothstep
+  // keeps it off the bare water, where there is no surface to catch it.
+  vec3 nrm = normalize(vec3(-slope * uSheen * 26.0, 0.5));
+  vec3 lig = normalize(vec3(-0.42, 0.68, 0.62));
+  float spec = pow(max(0.0, dot(reflect(-lig, nrm), vec3(0.0, 0.0, 1.0))), 26.0);
+  col += vec3(1.0, 0.95, 0.86) * spec * uSheen * smoothstep(0.015, 0.16, t);
+
   // Gold along the wet edge, which is where a real ink line pools as it dries.
   col += vec3(1.0, 0.78, 0.36) * smoothstep(0.05, 0.34, edge) * smoothstep(0.62, 0.14, thick) * 0.75;
 
   // The water itself, very faintly, so the empty parts of the frame are moving.
   vec2 v = texture2D(uVel, uv).xy;
   col += vec3(0.16, 0.26, 0.34) * clamp(length(v) * 0.05, 0.0, 0.4);
+
+  // The pointer carries a light. It is not decoration: without it there is no
+  // evidence on screen that the water knows where your finger is until the ink
+  // arrives, which is half a second later, and half a second is long enough to
+  // conclude that nothing happened.
+  float td = length((vUv - uTouch.xy) * vec2(uAspect, 1.0));
+  col += vec3(0.42, 0.68, 0.95) * uTouch.z * exp(-td * td * 300.0);
+  col += vec3(0.9, 0.82, 0.6) * uTouch.z * 0.35 * exp(-td * td * 2600.0);
 
   col *= 1.0 - 0.42 * smoothstep(0.45, 1.15, length((vUv - 0.5) * vec2(uAspect, 1.0)));
 
@@ -158,11 +188,25 @@ export interface SceneSettings {
   phoenixes: number;
   /** Creature ink weight. */
   weight: number;
+  /** How much of a surface the ink film is: specular, and nothing else. */
+  sheen: number;
+}
+
+/** A tap, a double-tap, or a press of the space bar. */
+export interface Burst {
+  x: number;
+  y: number;
+  /** 1 for a tap, higher for a storm. */
+  force: number;
+  /** Whether it also releases a cloud of ink. */
+  ink: boolean;
 }
 
 export interface SceneHandle {
   settings: SceneSettings;
-  pointer: { x: number; y: number; on: boolean; px: number; py: number };
+  pointer: { x: number; y: number; on: boolean; px: number; py: number; held: number };
+  /** Filled by React, emptied by the sketch. Never read back. */
+  bursts: Burst[];
   reset: boolean;
 }
 
@@ -256,19 +300,44 @@ export function makeSketch(w: number, h: number, handle: SceneHandle) {
       }
 
       // A finger through the water.
+      const drawn: Burst[] = [];
       if (handle.pointer.on) {
         const dx = handle.pointer.x - handle.pointer.px;
         const dy = handle.pointer.y - handle.pointer.py;
-        if (Math.abs(dx) + Math.abs(dy) > 0.0005) {
+        const moved = Math.abs(dx) + Math.abs(dy);
+        if (moved > 0.0005) {
           splats.push({
             x: handle.pointer.x,
             y: handle.pointer.y,
             v: [dx * 16000, dy * 16000, 0],
             r: 0.0009,
           });
+          // A finger drawn through ink leaves ink. The stroke is put down at a
+          // rate rather than a fixed amount, so a slow careful line and a fast
+          // flick lay the same weight per centimetre of water.
+          drawn.push({ x: handle.pointer.x, y: handle.pointer.y, force: 0, ink: true });
         }
         handle.pointer.px = handle.pointer.x;
         handle.pointer.py = handle.pointer.y;
+      }
+
+      // Taps and storms. A burst is a ring of outward shoves rather than one
+      // vector, because a single splat at a point is a *jet* — it picks a
+      // direction and throws the water that way. Twelve of them around a small
+      // circle, all pointing out, is what a drop landing actually does, and
+      // the pressure solve turns the ring into a vortex a moment later.
+      const bursts = handle.bursts.splice(0, handle.bursts.length);
+      for (const b of bursts) {
+        for (let i = 0; i < 12; i++) {
+          const a = (i / 12) * Math.PI * 2;
+          const rr = 0.02;
+          splats.push({
+            x: b.x + Math.cos(a) * rr,
+            y: b.y + Math.sin(a) * rr,
+            v: [Math.cos(a) * 900 * b.force, Math.sin(a) * 900 * b.force, 0],
+            r: 0.0007,
+          });
+        }
       }
 
       fluid.pushVelocity(splats, dt * 60);
@@ -287,7 +356,21 @@ export function makeSketch(w: number, h: number, handle: SceneHandle) {
           [GOLD[0] * k, GOLD[1] * k, GOLD[2] * k]);
       };
 
-      fluid.paint(cast(s.weight * RATE * dt * 60, 0.62));
+      fluid.paint(() => {
+        cast(s.weight * RATE * dt * 60, 0.62)();
+        // Whatever the hand put down this frame, in the third ink. It is
+        // neither the dragon's blue nor the phoenix's orange, so a stroke you
+        // drew stays yours as it comes apart.
+        q.fill(58 * s.weight, 132 * s.weight, 118 * s.weight);
+        for (const b of drawn) {
+          q.ellipse(b.x * bounds.w, b.y * bounds.h, 26 * dt * 60, 26 * dt * 60);
+        }
+        for (const b of bursts) {
+          if (!b.ink) continue;
+          q.fill(90 * s.weight, 150 * s.weight, 130 * s.weight);
+          q.ellipse(b.x * bounds.w, b.y * bounds.h, 34 * b.force, 34 * b.force);
+        }
+      });
       // Far heavier than what goes into the water. The absorption in the
       // composite separates the creature from its wake *by thickness*, and it
       // can only do that if the two are actually at different thicknesses.
@@ -305,6 +388,12 @@ export function makeSketch(w: number, h: number, handle: SceneHandle) {
       composite.setUniform('uGlow', s.glow);
       composite.setUniform('uAspect', w / h);
       composite.setUniform('uCrisp', 1.6);
+      composite.setUniform('uSheen', s.sheen);
+      composite.setUniform('uTouch', [
+        handle.pointer.x,
+        handle.pointer.y,
+        handle.pointer.on ? 0.1 + 0.5 * Math.min(1, handle.pointer.held) : 0,
+      ]);
       // p5 hands back framebuffer textures the other way up from the space the
       // shapes were drawn in. One uniform, set once, rather than a flip
       // scattered through every pass.

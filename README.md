@@ -158,8 +158,8 @@ you and the man behind the table.
 ## Effects
 
 There is a **second tab on the shelf**, next to Games — that is where Dot Field,
-Roll Call, Two Crayons, Wet on Wet, Six Colours, Surface Tension and Ink and Water live. It is not games; it is the
-moving parts, one
+Roll Call, Two Crayons, Wet on Wet, Six Colours, Surface Tension, Ink and Water and Picture Book live. It is not
+games; it is the moving parts, one
 idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
@@ -428,6 +428,38 @@ exactly the reason the animal is not.
 failures — including the two seconds it took for the creatures to be buried
 inside their own wake, and the slow machine that silted up solid white because
 dissipation was applied per frame instead of per second.
+
+The chrome is glass laid over the water rather than a bar above it: the canvas
+is the page, and the panels are dismissible and never cover the middle. Drag to
+draw through it, tap for a drop, hold and the animals come to your hand.
+
+## Picture Book
+
+A hundred neighbours, none of them anybody, in canvas 2D.
+
+Every other gallery here makes a thousand of something and the number is the
+argument — how far one method goes before it repeats. This one is deliberately
+small, because the claim is different: whether a generator can hold a **single
+illustrator's hand** steady across a whole cast, so that a hundred faces read as
+a hundred spreads from one book rather than a hundred outputs from one program.
+
+So the mark never changes. Every card gets the same torn ground, the same warm
+charcoal line, the same pencil scuff over every fill and the same grain on top.
+What changes underneath is the head, the hair, the hat, the glasses and the
+shirt.
+
+Nothing is a photograph or a trace of one. A beard is nine hundred drawn strands
+with the width falling off towards the tip, so its silhouette is made of *ends*
+rather than of a curve; straw is two passes of short strokes crossing at a
+shallow angle; skin shadow is the base turned towards red rather than darkened,
+because what you see in a shadow on a face is the blood under it. And the
+caption is read off the same seed as the picture, from a list indexed by the
+hat, so the trade always matches what the person is wearing.
+
+[`docs/picture-book.md`](docs/picture-book.md) has the method and the
+screenshots that caught it — the neck that was a lightbulb, the cap peak that
+was a plank nailed to the side of the head, and the first cast that turned out
+to be a hundred variations on one man.
 
 ## Running it
 

@@ -13,7 +13,8 @@ export type EffectId =
   | 'wash'
   | 'flat'
   | 'water'
-  | 'dragon';
+  | 'dragon'
+  | 'book';
 
 export interface EffectDef {
   id: EffectId;
@@ -101,6 +102,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['Navier–Stokes in p5', 'the creature is the dye', 'dispersion, absorption, gold edge'],
     ink: '#c8952f',
     wash: 'rgba(200, 149, 47, 0.09)',
+  },
+  {
+    id: 'book',
+    name: 'Picture Book',
+    tagline: 'A hundred neighbours, none of them anybody.',
+    blurb:
+      'The other galleries here make a thousand of something and the number is the argument — how far one method goes before it repeats. This one is deliberately small, because the claim is different: whether a generator can hold a single illustrator’s hand steady across a whole cast, so a hundred faces read as a hundred spreads from one book rather than a hundred outputs from one program. So the mark never changes. Every card gets the same torn ground, the same warm charcoal line, the same pencil scuff over every fill and the same grain on top; what changes underneath is the head, the hair, the hat, the glasses and the shirt. Nothing is a photograph or a trace of one. A beard is nine hundred drawn strands with the width falling off towards the tip, so its silhouette is made of ends rather than of a curve; straw is two passes of short strokes crossing at a shallow angle; and the caption is read off the same seed as the picture, so the trade always matches the hat.',
+    spec: ['100 people · one hand', 'fibre drawn as fibre', 'the caption comes from the face'],
+    ink: '#d8a63c',
+    wash: 'rgba(216, 166, 60, 0.1)',
   },
 ];
 
