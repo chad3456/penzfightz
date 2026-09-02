@@ -4408,6 +4408,12 @@ button.card:hover:not(:disabled) {
 
 .bench__stage canvas { display: block; touch-action: none; cursor: crosshair; }
 
+/* p5 attaches its canvas into a child of the stage rather than the stage
+   itself, so the child has to be told to fill it. `overflow: hidden` matters:
+   the canvas is sized in rounded 16px steps and can overhang by a few pixels. */
+.dragon__stage { overflow: hidden; background: #05070a; }
+.dragon__stage .dragon__canvas { position: absolute; inset: 0; }
+
 /* The desk under the experiment: the knobs, and a line saying what they are. */
 .bench__desk {
   display: flex;

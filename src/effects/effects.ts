@@ -6,7 +6,14 @@
  * render both from a list.
  */
 
-export type EffectId = 'dotfield' | 'rollcall' | 'crayon' | 'wash' | 'flat' | 'water';
+export type EffectId =
+  | 'dotfield'
+  | 'rollcall'
+  | 'crayon'
+  | 'wash'
+  | 'flat'
+  | 'water'
+  | 'dragon';
 
 export interface EffectDef {
   id: EffectId;
@@ -84,6 +91,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['metaballs · thin-film interference', 'posterised, grained, drawn', 'caustics from the Laplacian'],
     ink: '#17a5b8',
     wash: 'rgba(23, 165, 184, 0.09)',
+  },
+  {
+    id: 'dragon',
+    name: 'Ink and Water',
+    tagline: 'A dragon that is made of the water it swims in.',
+    blurb:
+      'A Chinese dragon and its phoenixes, swimming through a real fluid. Nothing here is a sprite and nothing is drawn on top: every frame the creatures print themselves into the same dye texture the solver advects, and shove the velocity field sideways as they go — so a fold of the dragon’s own wake catches its tail a moment later and pulls it apart into filaments. Underneath is Stam’s solver in p5 framebuffers: advect, put back the curl the grid ate, measure divergence, and eighteen Jacobi passes to find the pressure that cancels it. That last step is the whole piece; without it the ink only spreads, and spreading is what smoke does. The composite pass decides what all this looks like — wet silk, dispersion along the slope of the ink so a fold fringes blue on one side and warm on the other, absorption so the thick folds go dark and only the thin edges glow, and gold pooled along the wet edge where a real line dries last. Draw through it.',
+    spec: ['Navier–Stokes in p5', 'the creature is the dye', 'dispersion, absorption, gold edge'],
+    ink: '#c8952f',
+    wash: 'rgba(200, 149, 47, 0.09)',
   },
 ];
 

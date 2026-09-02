@@ -158,7 +158,8 @@ you and the man behind the table.
 ## Effects
 
 There is a **second tab on the shelf**, next to Games — that is where Dot Field,
-Roll Call, Two Crayons, Wet on Wet, Six Colours and Surface Tension live. It is not games; it is the moving parts, one
+Roll Call, Two Crayons, Wet on Wet, Six Colours, Surface Tension and Ink and Water live. It is not games; it is the
+moving parts, one
 idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
@@ -390,6 +391,43 @@ above it and brightens where the water is convex.
 [`docs/surface-tension.md`](docs/surface-tension.md) has the physics and the
 failures — including a pool with a sheet of black glass over it, caused by
 three quietly cloning a `uniforms` object that was passed as a prop.
+
+## Ink and Water
+
+A Chinese dragon and its phoenixes, swimming through an incompressible fluid,
+in p5. There is no sprite, no texture and no image file: everything on the
+screen is either the water or something drawn into it.
+
+The whole effect rests on one decision. **The dragon is drawn into the dye the
+solver advects, not on top of it** — so the instant a fold of its own wake
+crosses its tail, the tail comes apart into that fold. Draw the animal as a
+layer over the fluid instead and you have a cartoon on a lava lamp: nothing it
+does affects the water and nothing the water does affects it.
+
+Underneath is Stam's solver — advect, put back the curl the grid ate, measure
+divergence, and eighteen Jacobi passes for the pressure that cancels it. That
+last step is the piece that is tempting to skip and the piece that produces the
+entire look: without pressure the ink only *spreads*, and spreading is what
+smoke does. With it, water that has nowhere to go shoves the ink sideways, and
+it sheets, folds and draws out into filaments.
+
+Neither creature is rigged. Both are chains that follow their own heads, so the
+undulation is a consequence of steering rather than a loop played over the top,
+and the tail whips because a chain whips. What makes each one readable is a very
+short list and it is not the body: a Chinese dragon is whiskers, horns and a
+serrated back, and a phoenix is a tail.
+
+The composite decides what ink on wet silk looks like. Absorption rather than
+colour — Beer–Lambert takes the ground away, and the ink's own light peaks at a
+thin film and dies as the film thickens, so a wash of it glows and a fold of it
+does not. That is why the dragon reads at all: it is the one dark shape in a
+frame of luminous water, and the wake it is dissolving into is bright for
+exactly the reason the animal is not.
+
+[`docs/ink-and-water.md`](docs/ink-and-water.md) has the derivations and the
+failures — including the two seconds it took for the creatures to be buried
+inside their own wake, and the slow machine that silted up solid white because
+dissipation was applied per frame instead of per second.
 
 ## Running it
 
