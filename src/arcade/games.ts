@@ -6,7 +6,15 @@
  * game means adding a row here and a screen — nothing else.
  */
 
-export type GameId = 'penfight' | 'lattu' | 'rajarani' | 'rang' | 'mafia' | 'bookstall' | 'maze';
+export type GameId =
+  | 'penfight'
+  | 'lattu'
+  | 'rajarani'
+  | 'rang'
+  | 'mafia'
+  | 'bookstall'
+  | 'maze'
+  | 'oncemore';
 
 export interface GameDef {
   id: GameId;
@@ -132,6 +140,21 @@ export const GAMES: GameDef[] = [
     solo: true,
     ink: '#4a4a52',
     wash: 'rgba(74, 74, 82, 0.08)',
+    ready: true,
+  },
+  {
+    id: 'oncemore',
+    name: 'Once More',
+    tagline: 'Ten situations out of Dostoevsky and Nietzsche, and no morality meter.',
+    era: 'a table with two arguing men at it',
+    blurb:
+      'A game about morality that refuses to have a morality bar, because the bar is the thing being argued about. You get a deck of eight cards and no character. Every choice spends one and puts back what the doing of it teaches, so after ten scenes the deck is a record of what you repeatedly did — and, because a choice is only offered if its card is in your hand, it is also the list of what you are still able to do. Guilt is the one card that cannot be played: it takes a slot and does nothing, so a guilty person is a person with fewer options. Confession clears it and costs every bit of standing those acts bought, which is Crime and Punishment as a rule and, at the same time, Nietzsche’s account of guilt as a debt paid in suffering. Both men comment on every choice, they agree more often than anyone expects, and at the end the game does not score you — it asks whether you would live it again, in the same order, innumerable times more.',
+    seats: { min: 1, max: 1 },
+    practice: false,
+    online: false,
+    solo: true,
+    ink: '#8c5a3c',
+    wash: 'rgba(140, 90, 60, 0.09)',
     ready: true,
   },
 ];

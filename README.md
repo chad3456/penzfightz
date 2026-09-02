@@ -523,6 +523,41 @@ fills in front of it.
 [`docs/loading.md`](docs/loading.md) has both, including the camera that React
 Three Fiber reads exactly once and the marble that came of it.
 
+## Once More
+
+A game about morality with no morality meter, because the meter is the thing
+being argued about. Ten situations out of Dostoevsky and Nietzsche — not the
+plots, the positions — and what you get instead of a bar is a **deck**.
+
+You start with twelve cards and no character. Every choice spends one and puts
+back what the doing of it teaches, so after ten scenes the deck is a record of
+what you repeatedly did; and because a choice is only offered if the card it
+costs is in your hand, it is simultaneously the list of what you are still able
+to do. That is the *Genealogy of Morals* as a rule rather than a summary: a
+morality is the residue of a history, and it closes doors as it opens them.
+
+**Guilt is the one card that cannot be played.** It occupies a slot and does
+nothing, so a guilty person is a person with fewer options — as a mechanic, not
+as an image. Confession clears it and costs every bit of standing those acts
+bought, plus one, so it is never merely a good trade. That single rule is *Crime
+and Punishment* compressed and, at the same time, Nietzsche's second essay, where
+guilt (*Schuld*) descends from debt (*Schulden*). The two men are describing the
+same machine and disagreeing about whether to be grateful for it.
+
+Both of them comment on every choice. Neither is ever simply pleased with you,
+and where they both object to the same one — usually the free option, which is
+nearly always the passive one — that is the choice worth thinking about.
+
+Nothing either says is a quotation. Both voices are the game's own rendering of
+the argument, written from the passage cited under each scene, because a
+paraphrase is something you can argue with and a quotation is something you can
+only admire. At the end nothing is scored: the game lays your life out as a list
+and asks the question from *The Gay Science* — this, in the same order,
+innumerable times more. Do you want it again?
+
+[`docs/once-more.md`](docs/once-more.md) has the design and the first playtest,
+including the opening hand that locked two of the three answers in scene one.
+
 ## Running it
 
 ```sh

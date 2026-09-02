@@ -4674,6 +4674,298 @@ button.card:hover:not(:disabled) {
 .book__nav { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
 .book__nav .glass--btn { padding: 7px 11px; font-size: 11px; }
 
+/* --------------------------------------------------------------- once more
+
+   A table, not an arcade cabinet. Warm paper, a serif for anything that is an
+   argument, and a monospace only for the bookkeeping — because the bookkeeping
+   is the joke: the game is about a morality that turns out to have been an
+   accounts ledger all along. */
+.once {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: #16151a;
+  color: #e7e2d8;
+  padding: 18px clamp(12px, 4vw, 42px) 56px;
+}
+
+.once__bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #2f2c33;
+}
+
+.once__eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9a8f80;
+}
+
+.once__title {
+  margin: 3px 0 0;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.once__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.once .stage__spec,
+.once .stage__back {
+  background: transparent;
+  border: 1px solid #4a4450;
+  color: #cdc4b6;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.once .stage__spec:hover,
+.once .stage__back:hover { color: #fff; border-color: #8a7f70; }
+
+.once__alarm {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid #a4463a;
+  color: #e8a99c;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+
+/* ------------------------------------------------------------------ intro */
+.once__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: clamp(18px, 4vw, 46px);
+  align-items: start;
+  margin-top: 22px;
+}
+
+.once__pair { display: flex; gap: 14px; flex-wrap: wrap; }
+.once__who { margin: 0; }
+.once__face canvas { display: block; border-radius: 8px; }
+
+.once__who figcaption {
+  margin-top: 7px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.once__who figcaption span { color: #9a8f80; font-size: 11px; }
+
+.once__rules { font-size: 15px; line-height: 1.65; max-width: 64ch; }
+.once__rules p { margin: 0 0 12px; }
+.once__rules ol { margin: 0 0 14px; padding-left: 20px; }
+.once__rules li { margin-bottom: 7px; }
+
+.once__note {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #a89d8d;
+  border-left: 2px solid #3d3944;
+  padding-left: 12px;
+}
+
+.once__go {
+  font: inherit;
+  font-size: 14px;
+  background: #cbb389;
+  color: #1a1720;
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 22px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.once__go:hover { background: #ddc79f; }
+.once__go--quiet { background: transparent; color: #cdc4b6; border: 1px solid #4a4450; }
+.once__go--quiet:hover { background: #241f2b; color: #fff; }
+.once__buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ------------------------------------------------------------------ table */
+.once__table {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+  gap: clamp(16px, 3vw, 34px);
+  margin-top: 22px;
+  align-items: start;
+}
+
+.once__scene h2 { margin: 0 0 10px; font-size: clamp(21px, 3vw, 28px); font-weight: 400; }
+
+.once__setting { margin: 0 0 12px; font-size: 15.5px; line-height: 1.68; max-width: 66ch; }
+
+.once__after {
+  margin: 0 0 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: #8d8375;
+}
+
+.once__choices { display: flex; flex-direction: column; gap: 9px; max-width: 70ch; }
+
+.once__choice {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: flex-start;
+  text-align: left;
+  font: inherit;
+  background: #1e1c24;
+  border: 1px solid #35313d;
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 130ms ease, background 130ms ease;
+}
+
+.once__choice:hover:not(:disabled) { border-color: #7a6c86; background: #262231; }
+.once__choice--out { opacity: 0.42; cursor: not-allowed; }
+.once__label { font-size: 15px; line-height: 1.5; }
+.once__cost { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; font-size: 12px; }
+.once__cost em { color: #8d8375; font-style: normal; }
+
+.once__notin {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #9a6a62;
+}
+
+/* ------------------------------------------------------------------- deck */
+.once__aside { display: flex; flex-direction: column; gap: 16px; }
+
+.once__handname {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8d8375;
+  margin-bottom: 9px;
+}
+
+.once__cards { display: grid; gap: 7px; }
+
+.once__card {
+  border: 1px solid #3a3543;
+  border-left-width: 3px;
+  border-radius: 8px;
+  padding: 8px 11px;
+  background: #1c1a22;
+}
+
+.once__card b { display: block; font-size: 13.5px; font-weight: 600; }
+.once__card span { display: block; margin-top: 2px; font-size: 11.5px; line-height: 1.45; color: #a89d8d; }
+
+.once__card--cross { border-left-color: #cbb389; }
+.once__card--hammer { border-left-color: #7e93ad; }
+.once__card--weight { border-left-color: #a4685c; }
+
+.once__confess {
+  margin-top: 10px;
+  width: 100%;
+  font: inherit;
+  font-size: 12px;
+  background: #33222a;
+  color: #e6c0b4;
+  border: 1px solid #6d3f42;
+  border-radius: 8px;
+  padding: 9px 10px;
+  cursor: pointer;
+}
+
+.once__confess:hover { background: #432b34; }
+
+.once__deck { border-top: 1px solid #2f2c33; padding-top: 14px; }
+.once__deck--wide { margin-top: 22px; max-width: 480px; }
+.once__row { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
+.once__bars { display: flex; gap: 3px; flex-wrap: wrap; }
+.once__pip { width: 7px; height: 12px; border-radius: 2px; display: block; }
+.once__pip--cross { background: #cbb389; }
+.once__pip--hammer { background: #7e93ad; }
+.once__pip--weight { background: #a4685c; }
+
+.once__chip {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid;
+  min-width: 82px;
+  text-align: center;
+}
+
+.once__chip--cross { color: #e0cba4; border-color: #6b5c40; background: rgba(203, 179, 137, 0.09); }
+.once__chip--hammer { color: #b4c6da; border-color: #4a5768; background: rgba(126, 147, 173, 0.09); }
+.once__chip--weight { color: #dfa899; border-color: #6d4740; background: rgba(164, 104, 92, 0.09); }
+.once__chip--dim { opacity: 0.6; }
+
+/* ------------------------------------------------------- outcome and voices */
+.once__after-panel,
+.once__recur,
+.once__reading {
+  margin-top: 24px;
+  max-width: 74ch;
+}
+
+.once__outcome {
+  font-size: 17px;
+  line-height: 1.66;
+  margin: 0 0 22px;
+  padding-left: 16px;
+  border-left: 3px solid #cbb389;
+}
+
+.once__voices { display: grid; gap: 16px; margin-bottom: 22px; }
+
+.once__voice { display: flex; gap: 14px; align-items: flex-start; }
+.once__voice p { margin: 3px 0 0; font-size: 14.5px; line-height: 1.62; }
+
+.once__voicename {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8d8375;
+}
+
+.once__recur h2,
+.once__reading h2 { margin: 4px 0 12px; font-size: clamp(23px, 3.4vw, 32px); font-weight: 400; }
+
+.once__ledger { margin: 0 0 20px; padding-left: 20px; font-size: 14px; line-height: 1.7; }
+.once__ledger li { margin-bottom: 4px; color: #cdc4b6; }
+.once__ledger b { color: #e7e2d8; }
+
+.once__pick { display: flex; flex-direction: column; gap: 7px; }
+.once__pick .once__choice { padding: 10px 14px; }
+.once__pick .once__label { font-size: 14px; }
+.once__pick .once__cost { color: #a89d8d; }
+
+@media (max-width: 860px) {
+  .once__intro,
+  .once__table { grid-template-columns: minmax(0, 1fr); }
+  .once__aside { order: -1; }
+  .once__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* ------------------------------------------------------------- the loader
 
    A workshop rather than an apology: the plotter on the left, the tray on the

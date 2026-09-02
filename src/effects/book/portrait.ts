@@ -25,7 +25,7 @@ import { LINE, PAPER, type Skin } from './tone';
 
 export type Hat = 'straw' | 'flatcap' | 'beanie' | 'cap' | 'scarf' | 'none';
 export type Glasses = 'round' | 'square' | 'half' | 'none';
-export type Beard = 'full' | 'chin' | 'goatee' | 'moustache' | 'stubble' | 'none';
+export type Beard = 'full' | 'chin' | 'goatee' | 'moustache' | 'walrus' | 'stubble' | 'none';
 export type Cut = 'crop' | 'mop' | 'long' | 'bald' | 'bun' | 'curls' | 'tuft';
 export type Mouth = 'smile' | 'flat' | 'open' | 'purse' | 'whistle';
 
@@ -333,6 +333,38 @@ export function beard(pad: Pad, p: Head, r: () => number) {
     bristle(pad, spine, (t) => [(t - 0.5) * 0.5, 1], c, p.seed ^ 0x51, {
       n: 150, len: 0.03, taper: 0.3, fan: 1.1, width: 0.0035, alpha: 0.45, curl: 0.1,
     });
+    return;
+  }
+
+  if (p.beard === 'walrus') {
+    // The one moustache that is a silhouette rather than a feature: it starts
+    // under the nose, covers the whole mouth, and hangs past the jaw. Drawn as
+    // a mass and then combed downward and outward, because at this size the
+    // ends are what the eye reads.
+    const my = EYE_Y + 0.07;
+    const mass: Pt[] = [
+      [0.5 - 0.02, my - 0.02],
+      [0.5 - 0.075, my - 0.012],
+      [0.5 - 0.125, my + 0.03],
+      [0.5 - 0.115, my + 0.085],
+      [0.5 - 0.05, my + 0.062],
+      [0.5, my + 0.052],
+      [0.5 + 0.05, my + 0.062],
+      [0.5 + 0.115, my + 0.085],
+      [0.5 + 0.125, my + 0.03],
+      [0.5 + 0.075, my - 0.012],
+      [0.5 + 0.02, my - 0.02],
+    ];
+    pad.shape(mass, c);
+    pad.clip(mass, () =>
+      scuff(pad, [0.34, my - 0.03, 0.66, my + 0.1], c, {
+        n: 90, angle: 1.5, len: 0.07, alpha: 0.3, spread: 0.24,
+      }),
+    );
+    bristle(pad, [[0.5 - 0.115, my + 0.03], [0.5, my + 0.02], [0.5 + 0.115, my + 0.03]],
+      (t) => [(t - 0.5) * 2.6, 1.1], c, p.seed ^ 0x1d, {
+        n: 140, len: 0.075, taper: 0.3, fan: 0.6, width: 0.0045, alpha: 0.9, curl: 0.3,
+      });
     return;
   }
 
