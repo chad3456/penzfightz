@@ -17,6 +17,7 @@ import { Flat } from './effects/flat/Flat';
 import { Water } from './effects/water/Water';
 import { Dragon } from './effects/dragon/Dragon';
 import { Book } from './effects/book/Book';
+import { Epic } from './effects/epic/Epic';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -143,6 +144,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'book') {
     return <Book onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'epic') {
+    return <Epic onExit={toShelf} />;
   }
 
   const inner = () => {

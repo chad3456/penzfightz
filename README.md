@@ -158,8 +158,8 @@ you and the man behind the table.
 ## Effects
 
 There is a **second tab on the shelf**, next to Games — that is where Dot Field,
-Roll Call, Two Crayons, Wet on Wet, Six Colours, Surface Tension, Ink and Water and Picture Book live. It is not
-games; it is the moving parts, one
+Roll Call, Two Crayons, Wet on Wet, Six Colours, Surface Tension, Ink and Water, Picture Book and Name and Form
+live. It is not games; it is the moving parts, one
 idea each, with the numbers on the card.
 
 **Dot Field** renders text onto a six-pixel lattice as three-pixel squares and
@@ -460,6 +460,43 @@ hat, so the trade always matches what the person is wearing.
 screenshots that caught it — the neck that was a lightbulb, the cap peak that
 was a plank nailed to the side of the head, and the first cast that turned out
 to be a hundred variations on one man.
+
+## Name and Form
+
+*Nāma-rūpa.* Two thousand figures out of the Mahābhārata, the Rāmāyaṇa and the
+asura literature, drawn by **the same hand as Picture Book** — the head, the
+ground, the scuff and the grain are imported from it rather than copied.
+
+That is the point of building it this way. The picture book claims a generator
+can hold one illustrator's hand steady across a cast; a hundred neighbours is a
+weak test, because they are all the same kind of subject. The honest test is to
+hand that hand crowns, matted locks, fangs and serpent hoods and see whether it
+still looks like one book. Everything new here is iconography, not style.
+
+**Nothing is a likeness and nothing could be.** These are not people who were
+photographed; they are people who were described. So the roster records only
+what the texts record — that this one is dark as a rain cloud, that one wears
+matted locks, that one has fangs, that one bound her own eyes on her wedding day
+and never unbound them — and the generator draws a face under it. Anything the
+texts do not specify comes from the seed.
+
+**268 of the two thousand are named.** The rest are the host, because the epics
+are full of thousands who are counted and never named: eighteen akshauhinis at
+Kurukshetra, the vanara army at the bridge, the night-rangers of Lanka, the
+gaṇas on the mountain. Those are generated, from the same compound morphemes the
+real names are built from, and every one of those cards says on its face which
+host it belongs to and that the verse does not name it.
+
+The iconographic grammar is not invented and not a matter of taste: a tall
+tapering crown is sovereignty, matted hair piled and tied is renunciation, three
+horizontal lines are Shiva and a vertical U is Vishnu, a fan of hoods is a nāga,
+tusks are a rākṣasa. Complexion is in the same category — in this material skin
+colour is information rather than a variable, so it is set by tag and never by
+seed for anyone the texts describe.
+
+[`docs/name-and-form.md`](docs/name-and-form.md) has the grammar and the
+failures — the armour that made everyone a yellow poncho, the nāga hood that
+came out as a jester's hat, and the day Jatayu was drawn as a man.
 
 ## Running it
 

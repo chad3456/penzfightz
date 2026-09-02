@@ -327,6 +327,16 @@ export function Globe({
 
   return (
     <Canvas
+      // Keyed on the radius, which is keyed on the count.
+      //
+      // React Three Fiber reads `camera` when it builds the camera and not
+      // again, so a gallery that changes size under a filter keeps the camera
+      // it was given for the size it used to be. Switching a two-thousand card
+      // globe to a two-hundred-and-sixty-eight card one left the camera forty
+      // units out from a sphere six across, and the gallery came up as a marble
+      // in the middle of the screen. Remounting on a change of size is the
+      // honest fix: a different gallery is a different view.
+      key={Math.round(radius * 100)}
       camera={{
         position: [0, 0, radius * 2.7],
         fov: 45,

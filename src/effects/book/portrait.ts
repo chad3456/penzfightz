@@ -29,18 +29,18 @@ export type Beard = 'full' | 'chin' | 'goatee' | 'moustache' | 'stubble' | 'none
 export type Cut = 'crop' | 'mop' | 'long' | 'bald' | 'bun' | 'curls' | 'tuft';
 export type Mouth = 'smile' | 'flat' | 'open' | 'purse' | 'whistle';
 
-export interface Person {
+/**
+ * Everything above the collar.
+ *
+ * Split out from `Person` so that a second gallery can borrow this face
+ * without borrowing the cardigan under it. The head, the ears, the features
+ * and the beard are the *hand* — they are what makes two pictures look like
+ * they came from the same book — and the hat and the shirt are the person.
+ */
+export interface Head {
   seed: number;
-  name: string;
-  note: string;
-  ground: [string, string];
   skin: Skin;
   hair: string;
-  cloth: string;
-  under: string;
-  hatColour: string;
-  hat: Hat;
-  glasses: Glasses;
   beard: Beard;
   cut: Cut;
   mouth: Mouth;
@@ -54,15 +54,26 @@ export interface Person {
   brow: number;
 }
 
-const CX = 0.5;
-const TOP = 0.245;
-const CHIN = 0.6;
-const HW = 0.15;
-const EYE_Y = 0.418;
-const EAR_Y = 0.435;
+export interface Person extends Head {
+  name: string;
+  note: string;
+  ground: [string, string];
+  cloth: string;
+  under: string;
+  hatColour: string;
+  hat: Hat;
+  glasses: Glasses;
+}
+
+export const CX = 0.5;
+export const TOP = 0.245;
+export const CHIN = 0.6;
+export const HW = 0.15;
+export const EYE_Y = 0.418;
+export const EAR_Y = 0.435;
 
 /** A smoothed ring of points. Everything organic here is one of these. */
-function oval(cx: number, cy: number, rx: number, ry: number, n = 14, wob = 0, r?: () => number): Pt[] {
+export function oval(cx: number, cy: number, rx: number, ry: number, n = 14, wob = 0, r?: () => number): Pt[] {
   const out: Pt[] = [];
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2;
@@ -72,7 +83,7 @@ function oval(cx: number, cy: number, rx: number, ry: number, n = 14, wob = 0, r
   return out;
 }
 
-function headPath(p: Person): Pt[] {
+export function headPath(p: Head): Pt[] {
   const hw = HW * p.wide;
   const chin = CHIN * p.long + (1 - p.long) * CHIN;
   const hh = chin - TOP;
@@ -94,7 +105,7 @@ function headPath(p: Person): Pt[] {
 
 // ------------------------------------------------------------------- pieces
 
-const COLLAR = 0.712;
+export const COLLAR = 0.712;
 
 function body(pad: Pad, p: Person, r: () => number) {
   const collar = COLLAR;
@@ -157,7 +168,7 @@ function body(pad: Pad, p: Person, r: () => number) {
   }
 }
 
-function neck(pad: Pad, p: Person) {
+export function neck(pad: Pad, p: Head) {
   const chin = CHIN;
   // Short and thick. The first version was a column: a long thin neck under a
   // large head is a lightbulb, and it made everyone look ill.
@@ -184,7 +195,7 @@ function neck(pad: Pad, p: Person) {
   );
 }
 
-function ears(pad: Pad, p: Person) {
+export function ears(pad: Pad, p: Head) {
   const hw = HW * p.wide;
   for (const side of [-1, 1]) {
     const x = 0.5 + side * hw * 1.02;
@@ -208,7 +219,7 @@ function ears(pad: Pad, p: Person) {
   }
 }
 
-function face(pad: Pad, p: Person) {
+export function face(pad: Pad, p: Head) {
   const path = headPath(p);
   pad.shape(path, p.skin.base);
   pad.clip(path, () => {
@@ -220,7 +231,7 @@ function face(pad: Pad, p: Person) {
   pad.line([...path, path[0]], LINE, { width: 0.0085, alpha: 0.9, wobble: 0.004 });
 }
 
-function features(pad: Pad, p: Person) {
+export function features(pad: Pad, p: Head) {
   const gap = 0.075;
   const gz = p.gaze * 0.012;
 
@@ -280,7 +291,7 @@ function features(pad: Pad, p: Person) {
   mouth(pad, p);
 }
 
-function mouth(pad: Pad, p: Person) {
+function mouth(pad: Pad, p: Head) {
   const y = EYE_Y + 0.115;
   const w = 0.05;
   if (p.mouth === 'open') {
@@ -306,7 +317,7 @@ function mouth(pad: Pad, p: Person) {
 
 // -------------------------------------------------------------------- fibre
 
-function beard(pad: Pad, p: Person, r: () => number) {
+export function beard(pad: Pad, p: Head, r: () => number) {
   if (p.beard === 'none') return;
   const hw = HW * p.wide;
   const c = p.hair;
@@ -439,7 +450,7 @@ function beard(pad: Pad, p: Person, r: () => number) {
   }
 }
 
-function hair(pad: Pad, p: Person, r: () => number, front: boolean) {
+export function hair(pad: Pad, p: Head, r: () => number, front: boolean) {
   const hw = HW * p.wide;
   const c = p.hair;
   const crown: Pt[] = [

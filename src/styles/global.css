@@ -4674,7 +4674,31 @@ button.card:hover:not(:disabled) {
 .book__nav { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
 .book__nav .glass--btn { padding: 7px 11px; font-size: 11px; }
 
+.epic { background: #14120f; }
+.epic .book__bakebar span { background: #d0762c; }
+.epic .book__peek { border-left-color: #d0762c; }
+
+/* The filter row sits under the header and scrolls sideways rather than
+   wrapping, because seven tabs wrapped over three lines cover the globe. */
+.epic__tabs {
+  position: absolute;
+  top: 96px;
+  left: 16px;
+  right: 16px;
+  z-index: 3;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.epic__tabs::-webkit-scrollbar { display: none; }
+.epic__tabs .glass--btn { flex: 0 0 auto; padding: 7px 12px; font-size: 11px; }
+.epic .book__peek { top: 150px; }
+
 @media (max-width: 720px) {
+  .epic__tabs { top: 118px; }
   .book__lede { display: none; }
   .book__peek { top: auto; bottom: 16px; left: 16px; right: 16px; width: auto; }
   .book__baking { bottom: 16px; left: 16px; right: 16px; width: auto; }

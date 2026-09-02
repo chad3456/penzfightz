@@ -14,7 +14,8 @@ export type EffectId =
   | 'flat'
   | 'water'
   | 'dragon'
-  | 'book';
+  | 'book'
+  | 'epic';
 
 export interface EffectDef {
   id: EffectId;
@@ -112,6 +113,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['100 people · one hand', 'fibre drawn as fibre', 'the caption comes from the face'],
     ink: '#d8a63c',
     wash: 'rgba(216, 166, 60, 0.1)',
+  },
+  {
+    id: 'epic',
+    name: 'Name and Form',
+    tagline: 'Two thousand out of the epics, in one hand.',
+    blurb:
+      'Nāma-rūpa — name and form. Two thousand figures out of the Mahābhārata, the Rāmāyaṇa and the asura literature, drawn by the same hand as Picture Book: the same head, the same torn ground, the same crayon scuff and grain. That is the point of doing it this way — the picture book claims that a generator can hold one illustrator’s hand steady across a cast, and the honest test of the claim is to hand that hand a completely different subject. Two hundred and sixty-eight of these are figures the texts name, each carrying only the attributes the texts give them: that this one is dark as a rain cloud, that one wears matted locks, that one has fangs, that one bound her own eyes for a lifetime. Everything else about the face comes from the seed. The rest are the host — the epics count thousands they never name, eighteen akshauhinis at Kurukshetra and a vanara army at the bridge, and every one of those cards says so on its face. Nothing here is a likeness and nothing here could be.',
+    spec: ['2,000 figures · 268 named', 'crowns, marks and fangs from the texts', 'the host is counted, not named'],
+    ink: '#d0762c',
+    wash: 'rgba(208, 118, 44, 0.1)',
   },
 ];
 
