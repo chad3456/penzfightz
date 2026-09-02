@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Globe, type Plate } from '../globe/Globe';
+import { Globe, type Layout, type Plate } from '../globe/Globe';
+import { LayoutToggle } from '../globe/LayoutToggle';
 import { bakeFlat, printFlat, ASPECT } from './plates';
 import { subjects, TAGS, type Subject, type Tag } from './subject';
 import { sfx } from '../../lib/audio';
+import { Loader } from '../loader/Loader';
+import type { Sheet } from '../loader/press';
 
 /**
  * Six Colours.
@@ -27,9 +30,11 @@ const SPACING = 1.22;
 
 export function Flat({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(11);
+  const [layout, setLayout] = useState<Layout>('grid');
   const [tag, setTag] = useState<Tag | null>(null);
   const [plates, setPlates] = useState<Plate[]>([]);
   const [baked, setBaked] = useState(0);
+  const [live, setLive] = useState<Sheet | null>(null);
   const [open, setOpen] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -39,6 +44,7 @@ export function Flat({ onExit }: { onExit: () => void }) {
     const signal = { cancelled: false };
     setPlates([]);
     setBaked(0);
+    setLive(null);
     setOpen(null);
     const t = setTimeout(() => {
       void bakeFlat(subs, {
@@ -46,6 +52,7 @@ export function Flat({ onExit }: { onExit: () => void }) {
         grid: GRID,
         onProgress: (d, total) => !signal.cancelled && setBaked(d / total),
         onPlate: (plate) => !signal.cancelled && setPlates((all) => [...all, plate]),
+        onSheet: (sh) => !signal.cancelled && setLive(sh),
         signal,
       }).catch(() => undefined);
     }, 20);
@@ -87,6 +94,7 @@ export function Flat({ onExit }: { onExit: () => void }) {
           <h1 className="flat__title">Six Colours</h1>
         </div>
         <div className="flat__actions">
+          <LayoutToggle layout={layout} onChange={setLayout} className="stage__spec" />
           <button
             className="stage__spec"
             onClick={() => {
@@ -143,17 +151,22 @@ export function Flat({ onExit }: { onExit: () => void }) {
           onPick={setOpen}
           onHover={(i) => setHover(i)}
           spacing={SPACING}
+              layout={layout}
           background="#20201d"
         />
         {baked < 1 && (
-          <div className="flat__drawing">
-            <div className="flat__bakebar">
-              <span style={{ width: `${Math.round(baked * 100)}%` }} />
-            </div>
-            <div className="flat__baketext">
-              drawing {Math.round(baked * subs.length)} of {subs.length.toLocaleString('en-IN')}
-            </div>
-          </div>
+          <Loader
+            title="Six Colours"
+            done={Math.round(baked * subs.length)}
+            total={subs.length}
+            plates={live ? [...plates, live] : plates}
+            accent="#1668f0"
+            facts={[
+              'Six inks, drawn from a pool of eighteen by a hue-spacing test, and not one line in a drawing may be anything else.',
+              'The colour of the marks has nothing to do with the colour of the thing. A bottle outlined in lime and blue is a bottle you have to look at.',
+              'Nothing here is simulated. This is the one medium in the case that really is a round nib dragged along a path.',
+            ]}
+          />
         )}
         {hover !== null && subs[hover] && (
           <div className="flat__peek">

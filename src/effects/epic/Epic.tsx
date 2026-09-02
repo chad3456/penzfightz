@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Globe, type Plate } from '../globe/Globe';
+import { Globe, type Layout, type Plate } from '../globe/Globe';
+import { LayoutToggle } from '../globe/LayoutToggle';
 import { bakeEpic, printEpic } from './plates';
 import { NAMED, beings } from './cast';
 import type { Being } from './figure';
 import { sfx } from '../../lib/audio';
+import { Loader } from '../loader/Loader';
+import type { Sheet } from '../loader/press';
 
 /**
  * Name and Form.
@@ -52,9 +55,11 @@ const TABS: { id: Filter; name: string }[] = [
 
 export function Epic({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(5);
+  const [layout, setLayout] = useState<Layout>('grid');
   const [filter, setFilter] = useState<Filter>('all');
   const [plates, setPlates] = useState<Plate[]>([]);
   const [baked, setBaked] = useState(0);
+  const [live, setLive] = useState<Sheet | null>(null);
   const [open, setOpen] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -67,6 +72,7 @@ export function Epic({ onExit }: { onExit: () => void }) {
     const signal = { cancelled: false };
     setPlates([]);
     setBaked(0);
+    setLive(null);
     setOpen(null);
     const t = setTimeout(() => {
       void bakeEpic(cast, {
@@ -74,6 +80,7 @@ export function Epic({ onExit }: { onExit: () => void }) {
         grid: GRID,
         onProgress: (d, total) => !signal.cancelled && setBaked(d / total),
         onPlate: (plate) => !signal.cancelled && setPlates((all) => [...all, plate]),
+        onSheet: (sh) => !signal.cancelled && setLive(sh),
         signal,
       }).catch(() => undefined);
     }, 20);
@@ -115,6 +122,7 @@ export function Epic({ onExit }: { onExit: () => void }) {
           onPick={setOpen}
           onHover={(i) => setHover(i)}
           spacing={SPACING}
+              layout={layout}
           background="#14120f"
         />
       </div>
@@ -127,6 +135,7 @@ export function Epic({ onExit }: { onExit: () => void }) {
           <h1 className="ink__title">Name and Form</h1>
         </div>
         <div className="ink__actions">
+          <LayoutToggle layout={layout} onChange={setLayout} className="glass glass--btn" />
           <button
             className="glass glass--btn"
             onClick={() => {
@@ -167,15 +176,18 @@ export function Epic({ onExit }: { onExit: () => void }) {
       </div>
 
       {baked < 1 && (
-        <div className="glass book__baking">
-          <div className="book__bakebar">
-            <span style={{ width: `${Math.round(baked * 100)}%` }} />
-          </div>
-          <div className="book__baketext">
-            drawing {Math.round(baked * cast.length).toLocaleString('en-IN')} of{' '}
-            {cast.length.toLocaleString('en-IN')}
-          </div>
-        </div>
+        <Loader
+          title="Name and Form"
+          done={Math.round(baked * cast.length)}
+          total={cast.length}
+          plates={live ? [...plates, live] : plates}
+          accent="#d0762c"
+          facts={[
+            'Nāma-rūpa — name and form. Nothing here is a likeness and nothing here could be; these are not people who were photographed, they are people who were described.',
+            'A tall tapering crown is sovereignty, matted hair piled and tied is renunciation, a fan of hoods is a nāga. None of it is invented here.',
+            'Two hundred and sixty-eight are named. The rest are the host: the epics count thousands they never name, and every one of those cards says so.',
+          ]}
+        />
       )}
 
       {hover !== null && cast[hover] && (

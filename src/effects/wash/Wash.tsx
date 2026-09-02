@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Globe, type Plate } from '../globe/Globe';
+import { Globe, type Layout, type Plate } from '../globe/Globe';
+import { LayoutToggle } from '../globe/LayoutToggle';
 import { Studio } from './studio';
 import { paintings, type Painting } from './painting';
 import { PIGMENT_BY_ID } from './pigment';
 import { TAGS, type Tag } from './pose';
 import { sfx } from '../../lib/audio';
+import { Loader } from '../loader/Loader';
 
 /**
  * Wet on Wet.
@@ -41,6 +43,7 @@ const SPACING = 1.22;
 
 export function Wash({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(19);
+  const [layout, setLayout] = useState<Layout>('grid');
   const [tag, setTag] = useState<Tag | null>(null);
   const [plates, setPlates] = useState<Plate[]>([]);
   const [baked, setBaked] = useState(0);
@@ -135,6 +138,7 @@ export function Wash({ onExit }: { onExit: () => void }) {
           <h1 className="wash__title">Wet on Wet</h1>
         </div>
         <div className="wash__actions">
+          <LayoutToggle layout={layout} onChange={setLayout} className="stage__spec" />
           <button
             className="stage__spec"
             onClick={() => {
@@ -198,18 +202,22 @@ export function Wash({ onExit }: { onExit: () => void }) {
               onPick={setOpen}
               onHover={(i) => setHover(i)}
               spacing={SPACING}
+              layout={layout}
               background="#23231f"
             />
             {baked < 1 && (
-              <div className="wash__painting">
-                <div className="wash__bakebar">
-                  <span style={{ width: `${Math.round(baked * 100)}%` }} />
-                </div>
-                <div className="wash__baketext">
-                  painting {Math.round(baked * recs.length)} of{' '}
-                  {recs.length.toLocaleString('en-IN')}
-                </div>
-              </div>
+              <Loader
+                title="Wet on Wet"
+                done={Math.round(baked * recs.length)}
+                total={recs.length}
+                plates={plates}
+                accent="#2f4f9b"
+                facts={[
+                  'Nothing here paints a soft edge. Pigment and water go down in the shape of a pose and a fluid solver runs on it in a pair of fragment shaders.',
+                  'The dark rim on a wash is not drawn. It is deposition rising as the film thins at the edge of the wet patch.',
+                  'A cauliflower is what happens when clean water lands on a wash that has already started to set.',
+                ]}
+              />
             )}
           </>
         )}

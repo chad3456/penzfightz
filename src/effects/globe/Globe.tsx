@@ -35,6 +35,30 @@ const SPACING = 1.85;
 const FIT = 0.9;
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 
+/**
+ * Which shape the cards are hung on.
+ *
+ * The sphere came first and is the better *object* — it has a far side, it
+ * turns, and a thousand cards on it read as one thing. It is the worse
+ * *catalogue*: half the set is always behind the other half, and there is no
+ * way to run your eye down a column. So the grid is the default and the sphere
+ * is a switch, which is the right way round for a gallery whose first question
+ * is "what is in it".
+ */
+export type Layout = 'grid' | 'sphere';
+
+/**
+ * Columns for `count` cards of a given shape, on a landscape screen.
+ *
+ * Solved rather than guessed. If the sheet is `cols` wide and `count/cols`
+ * tall, and a card is `aspect` wide for a unit of height, the sheet's own
+ * proportion is `cols²·aspect/count`; setting that to 1.7 and rearranging gives
+ * the line below. Portrait cards therefore get more columns, which is what
+ * anybody laying out contact prints would do without thinking about it.
+ */
+export const gridCols = (count: number, aspect = 1) =>
+  Math.max(1, Math.ceil(Math.sqrt((Math.max(1, count) * 1.7) / Math.max(0.2, aspect))));
+
 export interface Plate {
   canvas: HTMLCanvasElement;
   grid: number;
@@ -52,7 +76,29 @@ export interface Plate {
 export const globeRadius = (count: number, spacing = SPACING) =>
   spacing * Math.sqrt(Math.max(1, count) / (4 * Math.PI));
 
-function place(i: number, count: number, radius: number, out: THREE.Vector3) {
+function place(
+  i: number,
+  count: number,
+  radius: number,
+  layout: Layout,
+  spacing: number,
+  aspect: number,
+  out: THREE.Vector3,
+) {
+  if (layout === 'grid') {
+    const cols = gridCols(count, aspect);
+    const rows = Math.ceil(count / cols);
+    const row = Math.floor(i / cols);
+    // The last row is usually short. Centred on the full width it hangs off
+    // one side and the whole sheet reads as lopsided, so it is centred on
+    // itself instead — which is what anybody laying out contact prints does.
+    const wide = row === rows - 1 ? count - row * cols : cols;
+    const cx = (wide - 1) / 2;
+    const cy = (rows - 1) / 2;
+    // Pitch follows the card in each axis, or a wall of portrait cards has
+    // three times the gutter across that it has down.
+    return out.set(((i % cols) - cx) * spacing * aspect, -(row - cy) * spacing, 0);
+  }
   const n = Math.max(2, count);
   const y = 1 - (i / (n - 1)) * 2;
   const ring = Math.sqrt(Math.max(0, 1 - y * y));
@@ -70,6 +116,8 @@ function Block({
   offset,
   count,
   radius,
+  layout,
+  spacing,
   view,
   register,
 }: {
@@ -77,6 +125,8 @@ function Block({
   offset: number;
   count: number;
   radius: number;
+  layout: Layout;
+  spacing: number;
   view: React.MutableRefObject<View>;
   register: (offset: number, mesh: THREE.InstancedMesh | null) => void;
 }) {
@@ -145,23 +195,40 @@ function Block({
   const at = useMemo(() => new THREE.Vector3(), []);
   const look = useMemo(() => new THREE.Vector3(), []);
   const st = useRef({ done: false, hovered: -1, picked: -1 });
+  // Changing the layout invalidates every matrix, so the once-only write has
+  // to run again. Without this the cards keep the shape they were first given.
+  useEffect(() => {
+    st.current.done = false;
+  }, [layout, spacing]);
+
+  const cols = gridCols(count, plate.aspect);
+  const reach =
+    layout === 'grid' ? Math.hypot(cols, Math.ceil(count / cols)) * spacing * 0.6 : radius;
 
   const write = useCallback(
     (m: THREE.InstancedMesh, k: number, i: number) => {
       const v = view.current;
-      place(i, count, radius, at);
+      place(i, count, radius, layout, spacing, plate.aspect, at);
       const lift = v.picked === i ? 1.6 : v.hovered === i ? 0.55 : 0;
-      const len = at.length() || 1;
-      dummy.position.copy(at).multiplyScalar((len + lift) / len);
-      look.copy(dummy.position).multiplyScalar(2);
-      if (look.lengthSq() < 1e-6) look.set(0, 0, 1);
-      dummy.lookAt(look);
-      const s = (v.picked === i ? 2.2 : v.hovered === i ? 1.8 : 1) * FIT;
+      if (layout === 'grid') {
+        // On a plane, "out" is towards the camera and the card is already
+        // facing it. Lifting along the normal is the same gesture as on the
+        // sphere; it just happens to be a fixed direction here.
+        dummy.position.set(at.x, at.y, at.z + lift * spacing * 0.7);
+        dummy.rotation.set(0, 0, 0);
+      } else {
+        const len = at.length() || 1;
+        dummy.position.copy(at).multiplyScalar((len + lift) / len);
+        look.copy(dummy.position).multiplyScalar(2);
+        if (look.lengthSq() < 1e-6) look.set(0, 0, 1);
+        dummy.lookAt(look);
+      }
+      const s = (v.picked === i ? 2.2 : v.hovered === i ? 1.8 : 1) * FIT * (layout === 'grid' ? spacing : 1);
       dummy.scale.set(s * plate.aspect, s, s);
       dummy.updateMatrix();
       m.setMatrixAt(k, dummy.matrix);
     },
-    [at, count, dummy, look, plate.aspect, radius, view],
+    [at, count, dummy, layout, look, plate.aspect, radius, spacing, view],
   );
 
   // Written once, then only the two cards whose state changed. Rewriting every
@@ -178,7 +245,7 @@ function Block({
       s.hovered = v.hovered;
       s.picked = v.picked;
       m.instanceMatrix.needsUpdate = true;
-      m.boundingSphere = new THREE.Sphere(new THREE.Vector3(), radius + 4);
+      m.boundingSphere = new THREE.Sphere(new THREE.Vector3(), reach + 4);
       return;
     }
     if (s.hovered === v.hovered && s.picked === v.picked) return;
@@ -301,6 +368,7 @@ export function Globe({
   onHover,
   hovered,
   spacing,
+  layout = 'grid',
   background = '#2a2926',
 }: {
   plates: Plate[];
@@ -311,6 +379,8 @@ export function Globe({
   onHover: (i: number | null, x: number, y: number) => void;
   /** Centre-to-centre spacing on the shell; see `globeRadius`. */
   spacing?: number;
+  /** Grid by default; the sphere is a switch. */
+  layout?: Layout;
   background?: string;
 }) {
   const view = useRef<View>({ hovered: -1, picked: -1 });
@@ -324,6 +394,29 @@ export function Globe({
   }, []);
 
   const radius = useMemo(() => globeRadius(count, spacing), [count, spacing]);
+  const pitch = spacing ?? SPACING;
+
+  /**
+   * Where the camera starts.
+   *
+   * On the sphere it is 2.7 radii out, which puts a 45° frustum just around
+   * the silhouette. On the grid it is whatever distance fits the *whole sheet*
+   * — both the width and the height — because the reason to be in grid at all
+   * is to see what is in the set. Two and a half thousand cards come up as a
+   * wall of thumbnails, which is exactly what a contact sheet of two and a half
+   * thousand things is, and the wheel gets you in.
+   */
+  const card = plates[0]?.aspect ?? 1;
+  const camZ = useMemo(() => {
+    if (layout === 'sphere') return radius * 2.7;
+    const cols = gridCols(count, card);
+    const rows = Math.ceil(count / cols);
+    // 2·tan(fov/2) at 45° is 0.828: the visible height per unit of distance.
+    const screen = Math.max(0.5, window.innerWidth / Math.max(1, window.innerHeight));
+    const forRows = ((rows + 0.6) * pitch) / 0.828;
+    const forCols = ((cols + 0.6) * pitch * card) / (0.828 * screen);
+    return Math.max(forRows, forCols);
+  }, [card, count, layout, pitch, radius]);
 
   return (
     <Canvas
@@ -336,12 +429,12 @@ export function Globe({
       // units out from a sphere six across, and the gallery came up as a marble
       // in the middle of the screen. Remounting on a change of size is the
       // honest fix: a different gallery is a different view.
-      key={Math.round(radius * 100)}
+      key={`${layout}:${Math.round(radius * 100)}:${Math.round(card * 100)}`}
       camera={{
-        position: [0, 0, radius * 2.7],
+        position: [0, 0, camZ],
         fov: 45,
         near: 0.1,
-        far: radius * 20,
+        far: camZ * 8 + radius * 20,
       }}
       dpr={[1, 1.75]}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
@@ -354,19 +447,39 @@ export function Globe({
           offset={n * p.grid * p.grid}
           count={count}
           radius={radius}
+          layout={layout}
+          spacing={pitch}
           view={view}
           register={register}
         />
       ))}
       <Picker blocks={blocks} view={view} onPick={onPick} onHover={onHover} />
+      {/* A sphere is turned and a sheet is dragged; nothing else changes. */}
       <OrbitControls
         makeDefault
-        enablePan={false}
+        enableRotate={layout === 'sphere'}
+        enablePan={layout === 'grid'}
+        screenSpacePanning
         enableDamping
         dampingFactor={0.08}
         rotateSpeed={0.5}
-        minDistance={0.5}
-        maxDistance={radius * 6}
+        panSpeed={1.2}
+        minDistance={layout === 'grid' ? pitch * 1.2 : 0.5}
+        maxDistance={layout === 'grid' ? camZ * 1.6 : radius * 6}
+        mouseButtons={
+          layout === 'grid'
+            ? {
+                LEFT: THREE.MOUSE.PAN,
+                MIDDLE: THREE.MOUSE.DOLLY,
+                RIGHT: THREE.MOUSE.PAN,
+              }
+            : undefined
+        }
+        touches={
+          layout === 'grid'
+            ? { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_PAN }
+            : undefined
+        }
       />
     </Canvas>
   );

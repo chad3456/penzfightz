@@ -498,6 +498,31 @@ seed for anyone the texts describe.
 failures — the armour that made everyone a yellow poncho, the nāga hood that
 came out as a jester's hat, and the day Jatayu was drawn as a man.
 
+## How the galleries open
+
+**Grid first, sphere on a switch.** The globe is the better *object* — it has a
+far side, it turns, and a thousand cards on it read as one thing. It is the
+worse *catalogue*: half the set is always behind the other half. The first
+question anybody asks a gallery is what is in it, so the sheet is the default
+and the sphere is a button. Both are the same instanced mesh and the same
+picker; placement, orientation and the controls are all that differ.
+
+The column count is solved rather than guessed — `cols = √(1.7·count / aspect)`,
+so portrait cards get more columns — the pitch follows the card in each axis, and
+the last row is centred on itself, because it is nearly always short and looks
+lopsided otherwise.
+
+**The loading screen is a workshop.** A flatbed plotter whose pen speed is the
+real cells-per-second; an output tray that fills with specimens *blitted out of
+the atlas being baked*, which costs nothing because the pixels already exist;
+every number the bake knows; and if you hold the pointer down, you have the pen.
+It is a doodle pad with a progress bar attached. The panel sits over the gallery
+rather than covering it, so the sheet fills in behind the glass while the tray
+fills in front of it.
+
+[`docs/loading.md`](docs/loading.md) has both, including the camera that React
+Three Fiber reads exactly once and the marble that came of it.
+
 ## Running it
 
 ```sh

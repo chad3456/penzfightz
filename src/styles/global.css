@@ -4674,6 +4674,94 @@ button.card:hover:not(:disabled) {
 .book__nav { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
 .book__nav .glass--btn { padding: 7px 11px; font-size: 11px; }
 
+/* ------------------------------------------------------------- the loader
+
+   A workshop rather than an apology: the plotter on the left, the tray on the
+   right, and every number the bake knows underneath. Centred over whatever the
+   gallery's own ground is, so it does not look like a different page. */
+.load {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.load__panel {
+  width: min(560px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 16px 18px 18px;
+}
+
+.load__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.load__eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(200, 214, 230, 0.6);
+  order: 2;
+}
+
+.load__title { margin: 0; font-size: 22px; font-weight: 400; line-height: 1; }
+
+.load__bed {
+  display: block;
+  width: 100%;
+  height: 220px;
+  margin: 12px 0 10px;
+  border-radius: 10px;
+  background: rgba(8, 11, 15, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.load__bar {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.load__bar span { display: block; height: 100%; transition: width 160ms linear; }
+
+.load__readout {
+  margin: 12px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+
+.load__row dt {
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(190, 208, 226, 0.55);
+}
+
+.load__row dd { margin: 2px 0 0; color: #e9f0f7; font-variant-numeric: tabular-nums; }
+
+.load__fact {
+  margin-top: 13px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(214, 226, 238, 0.78);
+  min-height: 2.6em;
+}
+
+@media (max-width: 720px) {
+  .load__bed { height: 168px; }
+  .load__readout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .load__title { font-size: 19px; }
+}
+
 .epic { background: #14120f; }
 .epic .book__bakebar span { background: #d0762c; }
 .epic .book__peek { border-left-color: #d0762c; }
@@ -4698,7 +4786,12 @@ button.card:hover:not(:disabled) {
 .epic .book__peek { top: 150px; }
 
 @media (max-width: 720px) {
-  .epic__tabs { top: 118px; }
+  .epic .book__peek { top: auto; }
+}
+
+@media (max-width: 720px) {
+  /* Three actions stack on a phone; the tabs have to clear all of them. */
+  .epic__tabs { top: 156px; }
   .book__lede { display: none; }
   .book__peek { top: auto; bottom: 16px; left: 16px; right: 16px; width: auto; }
   .book__baking { bottom: 16px; left: 16px; right: 16px; width: auto; }

@@ -10,6 +10,7 @@ import { personaFor, type Persona } from './persona';
 import { SETS } from './sets';
 import { Portrait } from './Portrait';
 import { sfx } from '../../lib/audio';
+import { Loader } from '../loader/Loader';
 
 /**
  * Roll Call.
@@ -217,16 +218,20 @@ export function RollCall({ onExit }: { onExit: () => void }) {
             hovered={hover?.i ?? null}
           />
         ) : (
-          <div className="roll__loading">
-            <div className="roll__loadbar">
-              <span style={{ width: `${Math.round(progress * 100)}%` }} />
-            </div>
-            <div className="roll__loadtext">
-              {seats.length
-                ? `inking ${Math.round(progress * seats.length)} of ${seats.length}`
-                : 'searching for two thousand things that are not each other'}
-            </div>
-          </div>
+          <Loader
+            title="Roll Call"
+            done={Math.round(progress * seats.length)}
+            total={seats.length || 1}
+            plates={atlases}
+            accent="#7a6a55"
+            facts={[
+              seats.length
+                ? 'Nothing here is a picture. Every one of them is sixty-four numbers found by novelty search and drawn by one pure function.'
+                : 'Searching for two thousand things that are not each other. Novelty search keeps whatever is furthest from everything found so far.',
+              'The note under a name is read off the same genes as the face, which is why it always describes the thing above it.',
+              'Drawn in p5, baked into texture atlases, and put on instanced cards — one draw call a plate.',
+            ]}
+          />
         )}
       </div>
 

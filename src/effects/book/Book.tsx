@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Globe, type Plate } from '../globe/Globe';
+import { Globe, type Layout, type Plate } from '../globe/Globe';
+import { LayoutToggle } from '../globe/LayoutToggle';
 import { bakeBook, printBook } from './plates';
 import { cast } from './people';
 import type { Person } from './portrait';
 import { sfx } from '../../lib/audio';
+import { Loader } from '../loader/Loader';
+import type { Sheet } from '../loader/press';
 
 /**
  * Picture Book.
@@ -31,8 +34,10 @@ const SPACING = 1.42;
 
 export function Book({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(3);
+  const [layout, setLayout] = useState<Layout>('grid');
   const [plates, setPlates] = useState<Plate[]>([]);
   const [baked, setBaked] = useState(0);
+  const [live, setLive] = useState<Sheet | null>(null);
   const [open, setOpen] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -42,6 +47,7 @@ export function Book({ onExit }: { onExit: () => void }) {
     const signal = { cancelled: false };
     setPlates([]);
     setBaked(0);
+    setLive(null);
     setOpen(null);
     const t = setTimeout(() => {
       void bakeBook(people, {
@@ -49,6 +55,7 @@ export function Book({ onExit }: { onExit: () => void }) {
         grid: GRID,
         onProgress: (d, total) => !signal.cancelled && setBaked(d / total),
         onPlate: (plate) => !signal.cancelled && setPlates((all) => [...all, plate]),
+        onSheet: (sh) => !signal.cancelled && setLive(sh),
         signal,
       }).catch(() => undefined);
     }, 20);
@@ -90,6 +97,7 @@ export function Book({ onExit }: { onExit: () => void }) {
           onPick={setOpen}
           onHover={(i) => setHover(i)}
           spacing={SPACING}
+              layout={layout}
           background="#1b1a19"
         />
       </div>
@@ -102,6 +110,7 @@ export function Book({ onExit }: { onExit: () => void }) {
           <h1 className="ink__title">Picture Book</h1>
         </div>
         <div className="ink__actions">
+          <LayoutToggle layout={layout} onChange={setLayout} className="glass glass--btn" />
           <button
             className="glass glass--btn"
             onClick={() => {
@@ -128,14 +137,18 @@ export function Book({ onExit }: { onExit: () => void }) {
       </div>
 
       {baked < 1 && (
-        <div className="glass book__baking">
-          <div className="book__bakebar">
-            <span style={{ width: `${Math.round(baked * 100)}%` }} />
-          </div>
-          <div className="book__baketext">
-            drawing {Math.round(baked * people.length)} of {people.length}
-          </div>
-        </div>
+        <Loader
+          title="Picture Book"
+          done={Math.round(baked * people.length)}
+          total={people.length}
+          plates={live ? [...plates, live] : plates}
+          accent="#d8a63c"
+          facts={[
+            'The mark never changes and the person does. That is the whole design: a picture book has exactly one hand in it.',
+            'A beard is nine hundred strands with the width falling off towards the tip, so its silhouette is made of ends rather than of a curve.',
+            'Skin shadow is the base turned towards red, never darkened. Grey shadow on a warm face reads as illness every time.',
+          ]}
+        />
       )}
 
       {hover !== null && people[hover] && (

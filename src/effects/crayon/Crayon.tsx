@@ -4,9 +4,12 @@ import { drawFigure, figures, type FigureRecipe } from './figure';
 import { TAGS, type Tag } from './pose';
 import { SCENE_TAGS, drawScene, scenes, type SceneRecipe } from './scene';
 import { bakeScenes } from './plates';
-import { Globe, type Plate } from '../globe/Globe';
+import { Globe, type Layout, type Plate } from '../globe/Globe';
+import { LayoutToggle } from '../globe/LayoutToggle';
 import type { Sheet } from './sheet';
 import { sfx } from '../../lib/audio';
+import { Loader } from '../loader/Loader';
+import type { Sheet as Tray } from '../loader/press';
 
 /**
  * Two Crayons.
@@ -170,6 +173,8 @@ function Print({ item, size }: { item: Item; size: { w: number; h: number } }) {
 
 export function Crayon({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(20260828);
+  const [live, setLive] = useState<Tray | null>(null);
+  const [layout, setLayout] = useState<Layout>('grid');
   const [kind, setKind] = useState<Kind>('scenes');
   const [tag, setTag] = useState<Tag | null>(null);
   const [open, setOpen] = useState<number | null>(null);
@@ -203,9 +208,11 @@ export function Crayon({ onExit }: { onExit: () => void }) {
     const signal = { cancelled: false };
     setPlates(null);
     setBaked(0);
+    setLive(null);
     const t = setTimeout(() => {
       void bakeScenes(scen, {
         onProgress: (d, total) => !signal.cancelled && setBaked(d / total),
+        onSheet: (sh) => !signal.cancelled && setLive(sh),
         signal,
       })
         .then((p) => !signal.cancelled && setPlates(p))
@@ -297,6 +304,7 @@ export function Crayon({ onExit }: { onExit: () => void }) {
           <h1 className="crayon__title">Two Crayons</h1>
         </div>
         <div className="crayon__actions">
+          <LayoutToggle layout={layout} onChange={setLayout} className="stage__spec" />
           <button
             className="stage__spec"
             onClick={() => {
@@ -387,25 +395,28 @@ export function Crayon({ onExit }: { onExit: () => void }) {
 
       {kind === 'scenes' ? (
         <div className="crayon__globe">
-          {plates ? (
-            <Globe
-              plates={plates}
-              count={items.length}
-              picked={open}
-              hovered={hover}
-              onPick={setOpen}
-              onHover={(i) => setHover(i)}
+          <Globe
+            plates={plates ?? []}
+            count={items.length}
+            picked={open}
+            hovered={hover}
+            onPick={setOpen}
+            onHover={(i) => setHover(i)}
+            layout={layout}
+          />
+          {baked < 1 && (
+            <Loader
+              title="Two Crayons"
+              done={Math.round(baked * items.length)}
+              total={items.length}
+              plates={live ? [...(plates ?? []), live] : (plates ?? [])}
+              accent="#c2392b"
+              facts={[
+                'Every mark is pigment deposited a pixel at a time, wherever the pressure of the stroke beats the tooth of the paper underneath it.',
+                'Two strokes crossing skip over the same bumps, because they are reading the same sheet.',
+                'A scene is staged before it is drawn: a bench, a horizon, and three quarters of an empty page.',
+              ]}
             />
-          ) : (
-            <div className="crayon__baking">
-              <div className="crayon__bakebar">
-                <span style={{ width: `${Math.round(baked * 100)}%` }} />
-              </div>
-              <div className="crayon__baketext">
-                drawing scene {Math.round(baked * items.length)} of{' '}
-                {items.length.toLocaleString('en-IN')}
-              </div>
-            </div>
           )}
           {hover !== null && items[hover] && (
             <div className="crayon__peek">

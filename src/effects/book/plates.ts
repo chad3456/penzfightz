@@ -16,6 +16,15 @@ export interface BakeOptions {
   grid?: number;
   onProgress?: (done: number, total: number) => void;
   onPlate?: (plate: Plate, index: number) => void;
+  /**
+   * The plate as it is being filled, handed over at every yield.
+   *
+   * The loader's output tray blits specimens out of this, which costs nothing
+   * because the pixels already exist. Without it a gallery that fits on one
+   * plate — a hundred portraits, say — has an empty tray for the whole bake
+   * and then a full one for a tenth of a second.
+   */
+  onSheet?: (sheet: { canvas: HTMLCanvasElement; grid: number; used: number; aspect: number }) => void;
   signal?: { cancelled: boolean };
 }
 
@@ -52,6 +61,8 @@ export async function bakeBook(people: Person[], opts: BakeOptions = {}): Promis
       g.restore();
       done++;
       if (k % 8 === 7) {
+        opts.onSheet?.({ canvas, grid, used: k + 1, aspect: ASPECT });
+        opts.onSheet?.({ canvas, grid, used: k + 1, aspect: ASPECT });
         opts.onProgress?.(done, people.length);
         await idle();
       }
