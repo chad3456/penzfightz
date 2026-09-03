@@ -135,7 +135,7 @@ export class Sim {
     // Broke cities stop building and start losing people.
     const solvent = this.funds > 0;
     const best = Math.max(this.demand.res, this.demand.com, this.demand.ind, this.demand.off);
-    if (solvent) this.city.grow(this.demand, Math.min(5, Math.round(1 + best * 5)));
+    if (solvent) this.city.grow(this.demand, Math.min(9, Math.round(2 + best * 9)));
     for (const z of ZONES) {
       if (z !== 'park' && this.demand[z] < -0.45) this.city.abandon(z, 1);
     }

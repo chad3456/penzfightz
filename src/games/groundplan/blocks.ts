@@ -55,8 +55,16 @@ export interface Block {
 }
 
 const PAVEMENT = 4.5;
-const DEPTH = 26;
-const WIDTH = 21;
+/**
+ * Lot depth and frontage.
+ *
+ * Narrow frontages and deep plots, because that is what a dense city is: the
+ * value is in the street frontage, so everyone takes as little of it as they
+ * can and goes back instead. Widen these and the city thins out into a
+ * business park no matter what else is tuned.
+ */
+const DEPTH = 30;
+const WIDTH = 15;
 
 export function findBlocks(roads: Roads): Block[] {
   // Half-edges, keyed "seg:from".

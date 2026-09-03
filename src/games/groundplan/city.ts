@@ -84,7 +84,7 @@ export class City {
     this.zoneTex.magFilter = THREE.NearestFilter;
 
     this.overlay = this.buildOverlay();
-    this.group.add(this.ground.group, this.overlay, this.roadMesh.group, this.buildings.group, this.traffic.mesh);
+    this.group.add(this.ground.group, this.overlay, this.roadMesh.group, this.buildings.group, this.traffic.group);
   }
 
   // ------------------------------------------------------------------ zoning
@@ -300,6 +300,37 @@ void main() {
     }
   }
 
+  /**
+   * Is there a building here?
+   *
+   * A three-metre grid of everything the footprints cover, rebuilt with the
+   * mesh. Driving needs an answer to this sixty times a second and cannot pay
+   * for a proper broad phase; a hash lookup on a rounded coordinate is exact
+   * enough when the thing asking is two metres wide.
+   */
+  blocked(x: number, z: number): boolean {
+    return this.solid.has(cell3(x, z));
+  }
+
+  private solid = new Set<number>();
+
+  private rebuildSolid() {
+    this.solid.clear();
+    for (const b of this.built.values()) {
+      for (const box of b.m.boxes) {
+        const c = Math.cos(box.rot);
+        const s = Math.sin(box.rot);
+        const hw = box.w / 2;
+        const hd = box.d / 2;
+        for (let u = -hw; u <= hw; u += 2.4) {
+          for (let v = -hd; v <= hd; v += 2.4) {
+            this.solid.add(cell3(box.x + u * c - v * s, box.z + u * s + v * c));
+          }
+        }
+      }
+    }
+  }
+
   /** Rebuild the merged building mesh, if anything moved since last time. */
   flush() {
     if (this.groundDirty) {
@@ -311,6 +342,7 @@ void main() {
     }
     if (!this.meshDirty) return;
     this.meshDirty = false;
+    this.rebuildSolid();
     this.buildings.build([...this.built.values()].map((b) => ({ lot: b.lot, zone: b.zone, m: b.m })));
   }
 
@@ -342,6 +374,11 @@ void main() {
       }
     }
   }
+}
+
+/** Key for a three-metre cell, packed into one integer. */
+function cell3(x: number, z: number) {
+  return ((Math.round(x / 3) + 4096) << 13) | (Math.round(z / 3) + 4096);
 }
 
 function mid(ring: { x: number; z: number }[]) {

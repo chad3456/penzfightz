@@ -212,11 +212,130 @@ else is.
 
 ---
 
+## Seven · Getting into it
+
+A builder is a thing you look at. Three of these were added so it is also a
+thing you are inside.
+
+### The fleet is silhouettes, not boxes
+
+No model files. The container this was built in cannot reach a model CDN, and
+shipping third-party GLTF assets drags licensing into a repository that has
+none — so every vehicle is generated, and generated properly rather than as a
+stack of cuboids.
+
+The trick is that **a vehicle is its profile**. You know an auto rickshaw at two
+hundred metres because of the nose that drops to a single front wheel and the
+long fall of the hood to a flat back; you know a double-decker because it is a
+tall slab with two rows of windows. So the bodies are two-dimensional side
+profiles extruded across the vehicle with a bevel — you draw the silhouette once
+and get a solid — and the round parts are solids of revolution.
+
+Everything merges into one indexed geometry with a **role** per vertex, and one
+material resolves roles to colours in the shader: body from the instance colour,
+canopy from a second instanced attribute, and glass, tyre, chrome, lamps and
+seats from constants. That is why a rickshaw can be a black body with a yellow
+hood and a taxi a black body with a yellow roof without either needing a
+material of its own, and why a hundred of them is one draw call.
+
+One thing had to be learned the hard way: a canopy written as a single closed
+outline triangulates into a **solid dome** the moment corner-rounding pushes an
+inner point past an outer one. Offsetting a curve by its own normal cannot do
+that, because the two sides never meet. Hence `shell()`.
+
+### Driving is a bicycle model with a grip limit
+
+One steering angle, one speed, and a heading that changes at
+`speed / wheelbase × tan(steer)`. That formula alone is why a rickshaw turns
+tightly at walking pace and barely at all at speed, and it is most of what makes
+driving feel like driving.
+
+On its own it is also wrong, and measurably so. The first version cornered a
+nine-metre circle at sixty-four kilometres an hour, because nothing in the model
+knows about tyres. The missing term is a cap on **lateral acceleration** — at
+most about 8 m/s² on dry tarmac, less on a slope, much less in water — which
+turns into a cap on turn rate of `8.2 / speed`. Going in too fast now feels like
+going in too fast.
+
+Drag is derived from the top speed rather than guessed, so full throttle settles
+at exactly the number in the spec. An auto does 45 km/h and a car does 95,
+because that is what they do.
+
+### Flying is not driving with a height
+
+The helicopter has no "forward" control at all. It has an orientation, a lift
+force **along its own up vector**, gravity and drag. You tilt, and the tilt takes
+you somewhere.
+
+Two numbers matter and both were found by instrumenting the model rather than by
+feel:
+
+- Neutral collective has to hold altitude, or letting go of the stick is a
+  crash. Rotor speed settles at 0.87 in the cruise because 0.87² × the thrust
+  constant is one gravity, which is the entire reason that number is 0.87.
+- Thrust is split into what the disc makes at a given rpm and what pulling more
+  pitch into it adds, so spooling up gets you light on the skids and the
+  collective is what actually takes you off. That is the order it happens in,
+  and it is the only part of flying a helicopter a keyboard can convey.
+
+### Operations
+
+Three of them, and they exist to make you use all three ways of moving. Every
+objective is placed from the real city: rooftops from standing buildings, sweep
+points from junctions in the road graph, and the convoy's route from a
+double breadth-first search across that graph — the standard trick for the
+diameter of a tree, approximate on a graph with cycles, and approximate is
+exactly right because the convoy wants a long drive, not the longest one.
+
+Nothing counts while you are looking at the plan. The point of an operation is
+that somebody has to physically be there.
+
+---
+
+## Eight · Scalability
+
+Three changes, each of which fixes something that was fine at a hundred
+buildings and would not be at five thousand.
+
+**Buildings are chunked, at 260 m.** One merged mesh for a whole city is the
+wrong shape twice over: a single geometry spanning two kilometres is always
+partly on screen, so it can never be frustum-culled and every triangle in the
+city is submitted every frame even when you are looking at one street; and every
+addition rebuilds all of it, so placing one more building costs more the more
+there already are. Chunked, the renderer culls whole districts behind you and
+adding a building rebuilds one quarter-kilometre square. Chunks whose contents
+did not change are not touched at all, which is what the content signature is
+for.
+
+**Traffic is compacted, not culled by the GPU.** Each frame the visible members
+of each kind are packed into the front of their instanced pool, nearest first,
+up to a budget. Drawing every vehicle in the city and letting the GPU sort it out
+means a full-detail rickshaw's worth of vertex work for every one of a thousand
+vehicles including those behind the camera. Compaction costs a matrix and two
+colours per drawn instance and puts a hard ceiling on the frame.
+
+**Rooftop clutter has a range.** Tanks, dishes, hoardings and plant are per-chunk
+instanced meshes that switch off past a distance that follows the zoom.
+
+There is a readout in the corner — frames, draw calls, triangles, live chunks,
+vehicles drawn — because a claim about performance that you cannot see is a
+claim you should not make. One caveat on every number this document could
+quote: it was measured on a software rasteriser in a container, and says
+nothing about real hardware.
+
+
+---
+
 ## What is not there
 
-- **No pathfinding.** Cars pick the straightest available turn at each node.
-  At these distances what reads as traffic is density and direction, and a
-  car-following model would be invisible and would cost the frame.
+- **No pathfinding, and no queueing.** Vehicles pick the straightest available
+  turn at each node and do not see each other. At these distances what reads as
+  traffic is density and direction; a car-following model would be invisible and
+  would cost the frame.
+- **No collision between vehicles.** The one you drive collides with buildings,
+  through a three-metre occupancy grid rebuilt with the mesh, and with nothing
+  else.
+- **No model files.** Every vehicle is generated. See section seven for why.
 - **No services.** No power, water, police or fire. Upkeep charges for them in
   aggregate; nothing is placed.
 - **No terrain editing.** The ground is generated once and roads follow it.
@@ -237,7 +356,11 @@ else is.
 | `ribbon.ts` | road surfaces, kerbs, markings, junction hulls, lamps |
 | `buildings.ts` | massing, and the facade shader |
 | `yards.ts` | block interiors, parks, trees |
-| `traffic.ts` | agents on the graph, as one instanced mesh |
+| `traffic.ts` | agents on the graph, one instanced pool per kind |
+| `build.ts` | the parts kit: profiles, shells, lathes, tubes, wheels |
+| `vehicles.ts` | the fleet, and the one material that colours all of it |
+| `ride.ts` | the bicycle model, and the helicopter |
+| `ops.ts` | objectives, markers and the convoy |
 | `city.ts` | assembly, zoning, growth and demolition |
 | `sim.ts` | population, jobs, demand, money |
 | `cursor.ts` | ring, beam, cone, drag preview |

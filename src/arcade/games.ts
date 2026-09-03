@@ -161,10 +161,10 @@ export const GAMES: GameDef[] = [
   {
     id: 'groundplan',
     name: 'Ground Plan',
-    tagline: 'Draw the roads. The city grows on what you drew.',
+    tagline: 'Draw the roads. Then get down into them.',
     era: 'a bay, a headland, and nothing built yet',
     blurb:
-      'A city builder in three.js, on a coastline generated from one height field that everything else agrees with — the mesh you look at, the query the road tool makes, the depth the water reads to decide how blue it is, and the slope test that refuses to zone a cliff.',
+      'A city builder in three.js where the road graph is the only thing you author and everything else — blocks, lots, buildings, traffic — falls out of it. Then drop into the streets in a rickshaw, take the helicopter up over the roofs, and run an operation across the city you made.',
     seats: { min: 1, max: 1 },
     practice: false,
     online: false,

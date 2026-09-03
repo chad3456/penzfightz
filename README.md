@@ -600,8 +600,32 @@ numeric — job shares that could not add up to the workforce, so the city
 deadlocked at four thousand with every bar reading *enough*; and undamped demand,
 which oscillated between the rails and abandoned half the city every other day.
 
+**Then you get into it.** Press 2 and you are in an auto rickshaw on the nearest
+road; press 3 and you are in a helicopter. The rickshaw is a bicycle model — one
+steering angle and a heading that changes at `speed / wheelbase × tan(steer)`,
+which is why it turns tightly at walking pace and barely at all at speed — plus
+the term that model is missing, a cap on lateral acceleration, without which it
+cornered a nine-metre circle at sixty-four kilometres an hour. The helicopter has
+no forward control at all: it has an orientation, lift along its own up vector,
+gravity and drag. You tilt, and the tilt takes you somewhere.
+
+**Nothing here is a model file.** No CDN, no licensing, and boxes were not an
+acceptable answer — so every vehicle is a side profile extruded across itself
+with a bevel, because a vehicle *is* its silhouette. You know an auto rickshaw by
+the nose that drops to a single front wheel and the long fall of the hood to a
+flat back. Rickshaws, kaali-peeli taxis, red double-deckers, bonneted lorries,
+scooters with a rider on them and a light utility helicopter, all merged into one
+geometry with a role per vertex so a hundred of anything is one draw call.
+
+**And there are operations** — a monsoon lift off six cut-off roofs, a blackout
+sweep of every junction, a convoy to escort end to end. Every objective is placed
+from the real city: roofs from standing buildings, junctions from the road graph,
+the convoy's route from a double breadth-first search across it.
+
 [`docs/ground-plan.md`](docs/ground-plan.md) has the face-traversal sign that was
-worked out on a triangle, the junction geometry, and the rest.
+worked out on a triangle, the junction geometry, the canopy that kept
+triangulating into a solid dome, and the three things that were fine at a hundred
+buildings and would not have been at five thousand.
 
 ## Running it
 

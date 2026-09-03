@@ -4832,6 +4832,110 @@ button.card:hover:not(:disabled) {
 }
 .gp__badge--tall { border-color: rgba(255, 196, 92, 0.34); }
 
+.gp__stage--ride { cursor: default; }
+
+/* mode switch, top right */
+.gp__modes { display: flex; gap: 3px; padding: 4px; }
+.gp__mode {
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(226, 234, 244, 0.6);
+  font: 500 11.5px/1 var(--ui, system-ui, sans-serif);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+.gp__mode:hover { color: #eef3f9; }
+.gp__mode--on {
+  background: rgba(255, 205, 120, 0.14);
+  border-color: rgba(255, 205, 120, 0.5);
+  color: #ffd88c;
+}
+
+/* the driving readout */
+.gp__hud {
+  position: absolute;
+  right: 16px;
+  top: 86px;
+  z-index: 3;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+.gp__dial { display: grid; justify-items: center; gap: 1px; }
+.gp__dial b {
+  font: 600 30px/1 var(--mono, ui-monospace, monospace);
+  color: #f4f7fb;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.gp__dial--small b { font-size: 19px; color: rgba(230, 238, 247, 0.78); }
+.gp__dial span {
+  font: 400 9.5px/1 var(--ui, system-ui, sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(214, 226, 240, 0.42);
+}
+.gp__rotor { width: 66px; display: grid; gap: 4px; padding-bottom: 3px; }
+.gp__rotor i { display: block; height: 4px; border-radius: 2px; background: #7fd0ff; }
+.gp__rotor {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09));
+  background-size: 100% 4px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.gp__rotor span {
+  font: 400 9.5px/1 var(--ui, system-ui, sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(214, 226, 240, 0.42);
+}
+
+/* the operation card */
+.gp__op {
+  position: absolute;
+  left: 16px;
+  top: 116px;
+  z-index: 3;
+  width: 246px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 8px;
+}
+.gp__opHead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.gp__opHead b { font: 600 12.5px/1 var(--ui, system-ui, sans-serif); color: #f2f6fb; }
+.gp__opHead span {
+  font: 600 13px/1 var(--mono, ui-monospace, monospace);
+  color: #ffce7a;
+  font-variant-numeric: tabular-nums;
+}
+.gp__opBar { height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.gp__opBar i { display: block; height: 100%; background: #6fe39a; transition: width 0.3s; }
+.gp__op p {
+  margin: 0;
+  font: 400 11px/1.45 var(--ui, system-ui, sans-serif);
+  color: rgba(214, 226, 240, 0.6);
+}
+.gp__op--won { box-shadow: 0 0 0 1px rgba(111, 227, 154, 0.42) inset; }
+.gp__op--lost { box-shadow: 0 0 0 1px rgba(255, 122, 104, 0.42) inset; }
+.gp__op .glass--btn { justify-self: start; padding: 5px 10px; font-size: 10.5px; }
+
+.gp__perf {
+  position: absolute;
+  right: 16px;
+  bottom: 96px;
+  z-index: 3;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: rgba(10, 14, 20, 0.44);
+  color: rgba(200, 214, 230, 0.5);
+  font: 400 10px/1 var(--mono, ui-monospace, monospace);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
 .gp__notice {
   position: absolute;
   left: 50%;

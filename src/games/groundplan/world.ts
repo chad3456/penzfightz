@@ -12,6 +12,9 @@ import { City } from './city';
 import { Sim } from './sim';
 import { Cursor } from './cursor';
 import type { Zone } from './buildings';
+import { Chopper, Ride, controls, type Controls } from './ride';
+import type { VehicleKind } from './vehicles';
+import { Ops } from './ops';
 
 /**
  * The world, and the camera you look at it with.
@@ -43,6 +46,33 @@ export interface Quality {
 /** What the left mouse button does. */
 export type Tool = 'none' | 'street' | 'avenue' | 'bulldoze' | Zone;
 
+/**
+ * Where you are standing.
+ *
+ * `plan` is the builder: a point on the ground with a distance and two angles.
+ * `drive` and `fly` hand the camera to a vehicle, and the difference between
+ * them is not the camera — it is that one of them has a ground under it.
+ */
+export type Mode = 'plan' | 'drive' | 'fly';
+
+export interface Perf {
+  fps: number;
+  calls: number;
+  triangles: number;
+  chunks: number;
+  vehicles: number;
+}
+
+export interface Hud {
+  mode: Mode;
+  kmh: number;
+  altitude: number;
+  odo: number;
+  vehicle: VehicleKind;
+  rpm: number;
+  light: boolean;
+}
+
 export interface Label {
   id: string;
   x: number;
@@ -72,8 +102,16 @@ export class World {
   readonly sim: Sim;
   readonly cursor: Cursor;
 
+  readonly ride: Ride;
+  readonly chopper: Chopper;
+  readonly ops: Ops;
+  readonly input: Controls = controls();
+
+  mode: Mode = 'plan';
   tool: Tool = 'none';
   brush = 46;
+  /** Frames per second, smoothed, for the readout. */
+  fps = 0;
   /** Set when a road drag is refused, for the panel to show and clear. */
   notice = '';
 
@@ -107,6 +145,10 @@ export class World {
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.NoToneMapping; // the grade pass does it
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+    // The composer renders several passes and three resets its counters at the
+    // start of every one of them, so left alone the readout shows the last
+    // fullscreen quad and nothing else. Reset once a frame instead.
+    this.renderer.info.autoReset = false;
 
     this.camera = new THREE.PerspectiveCamera(42, 1, 4, 9000);
 
@@ -125,6 +167,14 @@ export class World {
     this.sim = new Sim(this.city);
     this.cursor = new Cursor(this.terrain);
     this.scene.add(this.cursor.group);
+
+    this.ride = new Ride(this.terrain, 'auto');
+    this.ride.mesh.visible = false;
+    this.chopper = new Chopper(this.terrain);
+    this.chopper.group.visible = false;
+    this.scene.add(this.ride.mesh, this.chopper.group);
+    this.ops = new Ops(this.terrain, this.city);
+    this.scene.add(this.ops.group);
 
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
@@ -182,23 +232,44 @@ export class World {
     this.applySun();
   }
 
-  private place() {
-    const p = this.polar;
-    const d = this.distance;
-    const x = this.target.x + Math.sin(this.azimuth) * Math.sin(p) * d;
-    const z = this.target.z + Math.cos(this.azimuth) * Math.sin(p) * d;
-    const y = this.target.y + Math.cos(p) * d;
-    this.camera.position.set(x, y, z);
-    this.camera.lookAt(this.target);
+  private camEye = new THREE.Vector3();
+  private camLook = new THREE.Vector3();
+  private want = { eye: new THREE.Vector3(), look: new THREE.Vector3() };
+  /** How far the chase camera sits back, so the wheel can pull it out. */
+  chase = 1;
+
+  private place(dt = 0.016) {
+    if (this.mode === 'plan') {
+      const p = this.polar;
+      const d = this.distance;
+      const x = this.target.x + Math.sin(this.azimuth) * Math.sin(p) * d;
+      const z = this.target.z + Math.cos(this.azimuth) * Math.sin(p) * d;
+      const y = this.target.y + Math.cos(p) * d;
+      this.camera.position.set(x, y, z);
+      this.camera.lookAt(this.target);
+    } else {
+      // A chase camera that snaps is unwatchable and one that lags is
+      // seasickness; the eye is eased harder than the look-at, which is what
+      // gives a turn its swing without losing the thing being followed.
+      if (this.mode === 'drive') this.ride.camera(this.want, 7.4 * this.chase, 3.1 * this.chase);
+      else this.chopper.camera(this.want, 21 * this.chase, 7.5 * this.chase);
+      // Do not put the camera underground when the vehicle is in a dip.
+      this.want.eye.y = Math.max(this.want.eye.y, this.terrain.height(this.want.eye.x, this.want.eye.z) + 1.6);
+      this.camEye.lerp(this.want.eye, Math.min(1, dt * 7));
+      this.camLook.lerp(this.want.look, Math.min(1, dt * 11));
+      this.camera.position.copy(this.camEye);
+      this.camera.lookAt(this.camLook);
+    }
+    const focus = this.focus();
     this.sky.mesh.position.copy(this.camera.position);
     // Keep the one shadow cascade centred on what is being looked at, and
     // shrink it as you zoom in. A fixed 1,800 m map is 0.9 m per texel, which
     // is fine from the air and unusable at street level; sized to the view it
     // is a tenth of that when you are close and identical when you are not.
-    this.sky.sun.position.copy(this.sky.dir).multiplyScalar(1800).add(this.target);
-    this.sky.sun.target.position.copy(this.target);
+    this.sky.sun.position.copy(this.sky.dir).multiplyScalar(1800).add(focus);
+    this.sky.sun.target.position.copy(focus);
     this.sky.sun.target.updateMatrixWorld();
-    const extent = THREE.MathUtils.clamp(this.distance * 0.8, 150, 900);
+    const extent = THREE.MathUtils.clamp((this.mode === 'plan' ? this.distance : 180) * 0.8, 110, 900);
     const cam = this.sky.sun.shadow.camera;
     if (Math.abs(cam.right - extent) > 1) {
       cam.left = -extent;
@@ -212,6 +283,7 @@ export class World {
   render() {
     const dt = Math.min(0.05, this.clock.getDelta());
     const t = this.clock.elapsedTime;
+    this.renderer.info.reset();
     this.water.update(t);
     this.grade.uniforms.uTime.value = t;
 
@@ -220,20 +292,114 @@ export class World {
     const night = THREE.MathUtils.clamp((0.10 - this.sky.dir.y) / 0.22, 0, 1);
     // Tilt-shift belongs at the zoom where a city looks like a model of one.
     // Pulled all the way out it is an aerial photograph and wants to be sharp;
-    // down among the streets there is no miniature to suggest.
-    const tilt = smoothstep(1500, 700, this.distance) * smoothstep(120, 300, this.distance);
+    // down among the streets there is no miniature to suggest, and behind a
+    // windscreen there is certainly none.
+    const tilt = this.mode === 'plan'
+      ? smoothstep(1500, 700, this.distance) * smoothstep(120, 300, this.distance)
+      : 0;
     this.blurH.uniforms.uAmount.value = tilt;
     this.blurV.uniforms.uAmount.value = tilt;
     this.city.setNight(night, t);
+    this.ride.setNight(night);
+    this.chopper.setNight(night);
+    this.ops.setNight(night);
     this.city.syncGraph();
     this.sim.update(dt);
     this.city.flush();
+
+    if (this.mode === 'drive') this.ride.update(dt, this.input, this.city);
+    if (this.mode === 'fly') this.chopper.update(dt, this.input);
+    this.ops.update(dt, this.mode === 'fly' ? this.chopper.pos : this.ride.pos, this.mode);
+
+    const at = this.focus();
+    const range = this.mode === 'plan' ? this.distance : 180;
+    this.city.traffic.setFocus(at, range);
+    this.city.buildings.setFocus(at, range);
     this.city.traffic.update(dt);
     this.cursor.update(t);
 
-    this.place();
+    this.place(dt);
     this.composer.render();
+    this.fps += (1 / Math.max(1e-3, dt) - this.fps) * 0.06;
     return dt;
+  }
+
+  // ------------------------------------------------------------------ modes
+
+  /** What the world should be drawn around: the plan target, or the vehicle. */
+  private focus(): THREE.Vector3 {
+    if (this.mode === 'drive') return this.ride.pos;
+    if (this.mode === 'fly') return this.chopper.pos;
+    return this.target;
+  }
+
+  setMode(m: Mode) {
+    if (m === this.mode) return;
+    const from = this.focus().clone();
+    this.mode = m;
+    this.ride.mesh.visible = m === 'drive';
+    this.chopper.group.visible = m === 'fly';
+    this.setTool('none');
+
+    if (m === 'drive') {
+      // Put it on the nearest road, pointing along it, rather than wherever the
+      // camera happened to be looking. Being dropped into the middle of a block
+      // is the fastest way to make a drive mode feel unfinished.
+      const near = this.city.roads.splitAt(from.x, from.z, 400);
+      if (near) {
+        const a = this.city.roads.nodes.get(near.seg.a);
+        const b = this.city.roads.nodes.get(near.seg.b);
+        const h = a && b ? Math.atan2(b.x - a.x, b.z - a.z) : 0;
+        this.ride.place(near.x, near.z, h);
+      } else {
+        this.ride.place(from.x, from.z, 0);
+      }
+      this.camEye.copy(this.camera.position);
+      this.camLook.copy(this.ride.pos);
+    }
+    if (m === 'fly') {
+      this.chopper.place(from.x, from.z, this.terrain.height(from.x, from.z) + 1.05);
+      this.camEye.copy(this.camera.position);
+      this.camLook.copy(this.chopper.pos);
+    }
+    if (m === 'plan') {
+      this.target.copy(from);
+      this.clampTarget();
+      this.distance = Math.max(this.distance, 420);
+    }
+    this.input.throttle = 0;
+    this.input.brake = 0;
+    this.input.steer = 0;
+    this.input.lift = 0;
+    this.input.yaw = 0;
+  }
+
+  /** Swap the vehicle under you. */
+  drive(kind: VehicleKind) {
+    this.ride.become(kind);
+  }
+
+  perf(): Perf {
+    const i = this.renderer.info;
+    return {
+      fps: this.fps,
+      calls: i.render.calls,
+      triangles: i.render.triangles,
+      chunks: this.city.buildings.chunkCount,
+      vehicles: this.city.traffic.drawn,
+    };
+  }
+
+  hud(): Hud {
+    return {
+      mode: this.mode,
+      kmh: this.mode === 'fly' ? this.chopper.kmh : this.ride.kmh,
+      altitude: this.chopper.altitude,
+      odo: this.ride.odo,
+      vehicle: this.ride.kind,
+      rpm: this.chopper.rpm,
+      light: this.chopper.lightOn,
+    };
   }
 
   // ------------------------------------------------------------------ tools
@@ -403,6 +569,10 @@ export class World {
   }
 
   zoomBy(k: number) {
+    if (this.mode !== 'plan') {
+      this.chase = THREE.MathUtils.clamp(this.chase * Math.pow(1.0016, k), 0.45, 3.2);
+      return;
+    }
     this.distance = THREE.MathUtils.clamp(this.distance * Math.pow(1.0016, k), 80, 2600);
     // Low and close, high and far: the tilt follows the distance, which is what
     // every builder does and what stops a top-down view at street level.

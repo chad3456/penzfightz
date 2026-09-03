@@ -29,12 +29,25 @@ import type { Terrain } from './terrain';
 
 export type Zone = 'res' | 'com' | 'ind' | 'off' | 'park';
 
+export interface Box {
+  x: number;
+  y: number;
+  z: number;
+  w: number;
+  h: number;
+  d: number;
+  rot: number;
+  /** Plain concrete: a balcony slab, a parapet, a lift overrun. No windows. */
+  plain?: boolean;
+}
+
 export interface Massing {
   /** Boxes, in world space, already rotated to the lot's facing. */
-  boxes: { x: number; y: number; z: number; w: number; h: number; d: number; rot: number }[];
+  boxes: Box[];
   floors: number;
   height: number;
-  props: { x: number; y: number; z: number; s: number; kind: number }[];
+  /** 0 plant, 1 mast, 2 roof light, 3 water tank, 4 hoarding, 5 dish. */
+  props: { x: number; y: number; z: number; s: number; kind: number; rot?: number }[];
 }
 
 const FLOOR = 3.4;
@@ -74,13 +87,33 @@ export function massing(lot: Lot, zone: Zone, demand: number, seed: number): Mas
 
   let floors: number;
   if (zone === 'ind') floors = 1 + Math.floor(r() * 2);
-  else if (zone === 'res') floors = Math.max(1, Math.round(1 + pressure * pressure * 16 + r() * 2));
-  else if (zone === 'com') floors = Math.max(1, Math.round(2 + pressure * 9 + r() * 2));
+  // Residential height is skewed hard rather than spread evenly: a real city
+  // is mostly two and three storeys with a few towers in it, not a smooth ramp
+  // from one to twenty.
+  else if (zone === 'res') floors = Math.max(1, Math.round(1 + Math.pow(pressure, 2.6) * 24 + r() * 2));
+  else if (zone === 'com') floors = Math.max(1, Math.round(1 + Math.pow(pressure, 1.7) * 12 + r() * 2));
   else floors = Math.max(2, Math.round(3 + pressure * pressure * 40 + r() * 4));
 
   const rot = lot.facing;
-  const push = (dy: number, sw: number, sd: number, h: number) => {
-    boxes.push({ x: lot.x, y: dy, z: lot.z, w: sw, d: sd, h, rot });
+  const push = (dy: number, sw: number, sd: number, h: number, plain = false) => {
+    boxes.push({ x: lot.x, y: dy, z: lot.z, w: sw, d: sd, h, rot, plain });
+  };
+  // Everything that projects from the front does so along the lot's facing,
+  // which is why the balcony maths is one line: the frontage is +d/2 away
+  // along the facing, always, whatever direction that happens to be.
+  const fx = Math.cos(rot);
+  const fz = Math.sin(rot);
+  const front = (dy: number, out: number, sw: number, sd: number, h: number, plain = true) => {
+    boxes.push({
+      x: lot.x + fx * out,
+      y: dy,
+      z: lot.z + fz * out,
+      w: sw,
+      d: sd,
+      h,
+      rot,
+      plain,
+    });
   };
 
   if (zone === 'ind') {
@@ -88,10 +121,28 @@ export function massing(lot: Lot, zone: Zone, demand: number, seed: number): Mas
     push(0, w * 1.02, d * 0.95, h);
     // A row of roof lights along the shed, which is what an industrial roof is.
     for (let i = 0; i < 4; i++) props.push({ x: lot.x, y: h, z: lot.z, s: 1, kind: 2 });
-  } else if (floors <= 4) {
+  } else if (floors <= 2 && zone !== 'off') {
+    // The low, dense fabric: two floors, a flat roof, and a tank on it. These
+    // are most of the buildings in the city and they are what keeps the
+    // skyline from being made entirely of towers.
+    const h = floors * 3.0;
+    push(0, w, d, h);
+    push(h, w, d, 0.4, true);
+    props.push({ x: lot.x + (r() - 0.4) * w * 0.4, y: h + 0.4, z: lot.z + (r() - 0.4) * d * 0.4, s: 0.9 + r() * 0.4, kind: 3 });
+  } else if (floors <= 6) {
+    // The walk-up: a continuous access balcony along the front of every floor,
+    // with a parapet on it. It is the single most recognisable thing about a
+    // street of this kind and it is four boxes a floor.
     const h = floors * FLOOR;
     push(0, w, d, h);
-    if (r() < 0.55) push(h, w * 0.62, d * 0.6, FLOOR * (r() < 0.5 ? 1 : 2));
+    const out = d / 2 + 0.85;
+    for (let i = 1; i < floors; i++) {
+      front(i * FLOOR, out * 0.5 - 0.1, w * 0.94, 1.7, 0.22);
+      front(i * FLOOR + 0.22, out * 0.5 + 0.32, w * 0.94, 0.14, 0.86);
+    }
+    push(h, w, d, 0.5, true);
+    props.push({ x: lot.x, y: h + 0.5, z: lot.z, s: 1.0 + r() * 0.5, kind: 3 });
+    if (r() < 0.4) props.push({ x: lot.x + w * 0.2, y: h + 0.5, z: lot.z - d * 0.2, s: 0.8, kind: 0 });
   } else {
     // Setbacks. Three stacked boxes at most, each stepped in, because a tower
     // that is one extruded rectangle reads as a bar of soap from any angle.
@@ -104,16 +155,50 @@ export function massing(lot: Lot, zone: Zone, demand: number, seed: number): Mas
       const take = i === steps - 1 ? left : Math.max(2, Math.round(left * (0.42 + r() * 0.2)));
       const h = take * FLOOR;
       push(y, sw, sd, h);
+      // Residential towers get projecting balconies; offices do not, which is
+      // most of what separates the two at a distance.
+      if (zone === 'res') {
+        const cols = Math.max(1, Math.round(sw / 6.5));
+        for (let f = 1; f < take; f++) {
+          for (let k = 0; k < cols; k++) {
+            const off = (k - (cols - 1) / 2) * (sw / cols);
+            boxes.push({
+              x: lot.x + fx * (sd / 2 + 0.55) - fz * off,
+              y: y + f * FLOOR,
+              z: lot.z + fz * (sd / 2 + 0.55) + fx * off,
+              w: sw / cols - 1.0,
+              h: 0.2,
+              d: 1.3,
+              rot,
+              plain: true,
+            });
+            boxes.push({
+              x: lot.x + fx * (sd / 2 + 1.12) - fz * off,
+              y: y + f * FLOOR + 0.2,
+              z: lot.z + fz * (sd / 2 + 1.12) + fx * off,
+              w: sw / cols - 1.0,
+              h: 0.9,
+              d: 0.12,
+              rot,
+              plain: true,
+            });
+          }
+        }
+      }
       y += h;
       left -= take;
       sw *= 0.74 + r() * 0.12;
       sd *= 0.74 + r() * 0.12;
     }
-    // A crown: plant, mast, or a small penthouse.
+    // A crown: plant, mast, or a small penthouse — and the tanks and dishes
+    // that cover every flat roof in the city.
+    push(y, sw * 0.94, sd * 0.94, 0.6, true);
     if (floors > 14) {
-      push(y, sw * 0.5, sd * 0.5, FLOOR * 1.6);
-      props.push({ x: lot.x, y: y + FLOOR * 1.6, z: lot.z, s: floors > 30 ? 2.4 : 1.5, kind: 1 });
+      push(y + 0.6, sw * 0.5, sd * 0.5, FLOOR * 1.6);
+      props.push({ x: lot.x, y: y + 0.6 + FLOOR * 1.6, z: lot.z, s: floors > 30 ? 2.4 : 1.5, kind: 1 });
     }
+    props.push({ x: lot.x - sw * 0.22, y: y + 0.6, z: lot.z + sd * 0.2, s: 1.1 + r() * 0.6, kind: 3 });
+    if (r() < 0.5) props.push({ x: lot.x + sw * 0.24, y: y + 0.6, z: lot.z - sd * 0.18, s: 0.9, kind: 5 });
   }
 
   const height = boxes.reduce((m, b) => Math.max(m, b.y + b.h), 0);
@@ -130,6 +215,12 @@ export function massing(lot: Lot, zone: Zone, demand: number, seed: number): Mas
       });
     }
   }
+  // A hoarding, on the roof of a shop or a low block on a good corner. They
+  // are everywhere, they are enormous, and from the air they are half the
+  // colour in the picture.
+  if ((zone === 'com' || (zone === 'res' && floors <= 6)) && r() < 0.34) {
+    props.push({ x: lot.x, y: height, z: lot.z, s: Math.min(w * 0.42, 5.5), kind: 4, rot });
+  }
   return { boxes, floors, height, props };
 }
 
@@ -137,11 +228,24 @@ export function massing(lot: Lot, zone: Zone, demand: number, seed: number): Mas
 
 const ZONE_ID: Record<Zone, number> = { res: 0, com: 1, ind: 2, off: 3, park: 4 };
 
+/** Side of a build chunk, in metres. */
+export const CHUNK = 260;
+
+interface Chunk {
+  mesh: THREE.Mesh | null;
+  props: THREE.InstancedMesh[];
+  /** Cheap content hash, so an unchanged chunk is not rebuilt. */
+  sig: number;
+}
+
 export class Buildings {
   readonly group = new THREE.Group();
   readonly material: THREE.MeshStandardMaterial;
-  private mesh: THREE.Mesh | null = null;
-  private props: THREE.InstancedMesh | null = null;
+  /** Rooftop clutter beyond this many metres is not drawn at all. */
+  propRange = 700;
+
+  private chunks = new Map<number, Chunk>();
+  private focus = new THREE.Vector3();
   private uniforms = {
     uNight: { value: 0 },
     uTime: { value: 0 },
@@ -240,7 +344,13 @@ vec3 roofColour(float zone, float seed, float grit, float small) {
 {
   gGlow = vec3(0.0);
   vec3 base = wallColour(vZone, vSeed);
-  if (vFace > 0.5) {
+  if (vFace > 1.5) {
+    // Plain concrete: balcony slabs, parapets, lift overruns. No windows, a
+    // little dirt, and a weathering streak down whatever faces the weather.
+    float grime = h21(floor(vLocal.xy * 0.7) + vSeed) * 0.18;
+    vec3 slab = mix(vec3(0.60, 0.585, 0.555), vec3(0.72, 0.705, 0.675), h11(vSeed * 6.1));
+    diffuseColor.rgb *= slab * (1.0 - grime);
+  } else if (vFace > 0.5) {
     // Roof: felt and gravel, with a parapet edge picked out by how close the
     // fragment is to the outside of the box.
     float edge = min(min(vLocal.x, vSize.x - vLocal.x), min(vLocal.z, vSize.z - vLocal.z));
@@ -315,11 +425,65 @@ totalEmissiveRadiance += gGlow;`);
     this.uniforms.uTime.value = t;
   }
 
-  /** Rebuild the whole set. Cheap enough that partial updates are not worth it. */
+  /**
+   * Rebuild, by chunk.
+   *
+   * One merged mesh for the whole city is the right call at a hundred
+   * buildings and the wrong one at five thousand, for two separate reasons.
+   * It can never be frustum-culled — a single geometry spanning two kilometres
+   * is always partly on screen, so every triangle in the city is submitted
+   * every frame even when you are looking at one street. And every addition
+   * rebuilds all of it, so the cost of placing one more building grows with
+   * how many there already are.
+   *
+   * Chunked, both go away: the renderer culls whole districts behind you, and
+   * adding a building rebuilds the quarter-kilometre square it stands in.
+   * Chunks whose contents did not change are not touched at all, which is
+   * what the signature is for.
+   */
   build(items: { lot: Lot; zone: Zone; m: Massing }[]) {
-    this.clear();
-    if (!items.length) return;
+    const byChunk = new Map<number, { lot: Lot; zone: Zone; m: Massing }[]>();
+    for (const it of items) {
+      const k = chunkKey(it.lot.x, it.lot.z);
+      const list = byChunk.get(k);
+      if (list) list.push(it);
+      else byChunk.set(k, [it]);
+    }
 
+    // Anything that lost every building it had.
+    for (const [k, c] of this.chunks) {
+      if (!byChunk.has(k)) {
+        this.dropChunk(c);
+        this.chunks.delete(k);
+      }
+    }
+
+    for (const [k, list] of byChunk) {
+      let sig = list.length * 2654435761;
+      for (const it of list) sig = (sig ^ (it.lot.id * 2246822519 + it.m.floors)) >>> 0;
+      const had = this.chunks.get(k);
+      if (had && had.sig === sig) continue;
+      if (had) this.dropChunk(had);
+      this.chunks.set(k, this.buildChunk(list, sig));
+    }
+  }
+
+  /** Where the camera is looking, for the clutter cull. */
+  setFocus(p: THREE.Vector3, distance: number) {
+    this.focus.copy(p);
+    this.propRange = THREE.MathUtils.clamp(distance * 1.1 + 300, 340, 1400);
+    const r2 = this.propRange * this.propRange;
+    for (const c of this.chunks.values()) {
+      if (!c.props.length) continue;
+      const b = c.mesh?.geometry.boundingSphere;
+      const d = b ? (b.center.x - p.x) ** 2 + (b.center.z - p.z) ** 2 : 0;
+      const on = d < r2;
+      for (const m of c.props) m.visible = on;
+    }
+  }
+
+  private buildChunk(items: { lot: Lot; zone: Zone; m: Massing }[], sig: number): Chunk {
+    const chunk: Chunk = { mesh: null, props: [], sig };
     const pos: number[] = [];
     const nrm: number[] = [];
     const size: number[] = [];
@@ -335,58 +499,94 @@ totalEmissiveRadiance += gGlow;`);
       for (const b of m.boxes) box(b, ground, s, ZONE_ID[z], { pos, nrm, size, local, face, seed, zone, idx });
     }
 
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-    geo.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
-    geo.setAttribute('aSize', new THREE.Float32BufferAttribute(size, 3));
-    geo.setAttribute('aLocal', new THREE.Float32BufferAttribute(local, 3));
-    geo.setAttribute('aFace', new THREE.Float32BufferAttribute(face, 1));
-    geo.setAttribute('aSeed', new THREE.Float32BufferAttribute(seed, 1));
-    geo.setAttribute('aZone', new THREE.Float32BufferAttribute(zone, 1));
-    geo.setIndex(idx);
-    geo.computeBoundingSphere();
+    if (pos.length) {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+      geo.setAttribute('aSize', new THREE.Float32BufferAttribute(size, 3));
+      geo.setAttribute('aLocal', new THREE.Float32BufferAttribute(local, 3));
+      geo.setAttribute('aFace', new THREE.Float32BufferAttribute(face, 1));
+      geo.setAttribute('aSeed', new THREE.Float32BufferAttribute(seed, 1));
+      geo.setAttribute('aZone', new THREE.Float32BufferAttribute(zone, 1));
+      geo.setIndex(idx);
+      geo.computeBoundingSphere();
+      const mesh = new THREE.Mesh(geo, this.material);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      chunk.mesh = mesh;
+      this.group.add(mesh);
+    }
 
-    this.mesh = new THREE.Mesh(geo, this.material);
-    this.mesh.castShadow = true;
-    this.mesh.receiveShadow = true;
-    this.group.add(this.mesh);
+    // The roofscape.
+    //
+    // Nothing sells an aerial view of this city like what is on top of the
+    // buildings: a water tank on every roof, a satellite dish beside it, a
+    // hoarding the size of the building it stands on. It is a handful of
+    // instanced meshes per chunk and it is worth more than another ten
+    // thousand triangles of massing would be.
+    const byKind = new Map<number, { p: Massing['props'][number]; lot: Lot }[]>();
+    for (const item of items) {
+      for (const p of item.m.props) {
+        const list = byKind.get(p.kind) ?? [];
+        list.push({ p, lot: item.lot });
+        byKind.set(p.kind, list);
+      }
+    }
 
-    // Rooftop plant, as one instanced box. Nothing sells an aerial view of a
-    // city like the clutter on the roofs, and nothing is cheaper.
-    const all = items.flatMap((i) => i.m.props.map((p) => ({ p, lot: i.lot })));
-    if (all.length) {
-      const g = new THREE.BoxGeometry(1, 1, 1);
-      const mat = new THREE.MeshStandardMaterial({ color: 0x9a9a97, roughness: 0.86 });
-      const inst = new THREE.InstancedMesh(g, mat, all.length);
-      const o = new THREE.Object3D();
-      all.forEach(({ p, lot }, i) => {
+    const o = new THREE.Object3D();
+    const col = new THREE.Color();
+    for (const [kind, list] of byKind) {
+      if (!list.length) continue;
+      const { geometry, material, colours } = propKind(kind, this.uniforms);
+      const inst = new THREE.InstancedMesh(geometry, material, list.length);
+      if (colours) inst.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(list.length * 3), 3);
+      list.forEach(({ p, lot }, i) => {
         const y = this.terrain.height(lot.x, lot.z) + p.y;
-        o.position.set(p.x, y + p.s * 0.5, p.z);
-        o.scale.set(p.s * (p.kind === 1 ? 0.3 : 1.6), p.s * (p.kind === 1 ? 5 : 1), p.s * (p.kind === 1 ? 0.3 : 1.6));
-        o.rotation.y = (i * 0.7) % Math.PI;
+        o.position.set(p.x, y, p.z);
+        o.rotation.set(0, p.rot ?? (i * 0.7) % Math.PI, 0);
+        o.scale.setScalar(p.s);
         o.updateMatrix();
         inst.setMatrixAt(i, o.matrix);
+        if (colours && inst.instanceColor) {
+          const c = colours[(i * 7 + kind * 3) % colours.length];
+          col.set(c);
+          inst.instanceColor.setXYZ(i, col.r, col.g, col.b);
+        }
       });
       inst.castShadow = true;
       inst.instanceMatrix.needsUpdate = true;
-      this.props = inst;
+      if (inst.instanceColor) inst.instanceColor.needsUpdate = true;
+      chunk.props.push(inst);
       this.group.add(inst);
+    }
+    return chunk;
+  }
+
+  private dropChunk(c: Chunk) {
+    if (c.mesh) {
+      c.mesh.geometry.dispose();
+      this.group.remove(c.mesh);
+    }
+    for (const p of c.props) {
+      p.geometry.dispose();
+      (p.material as THREE.Material).dispose();
+      this.group.remove(p);
     }
   }
 
   clear() {
-    if (this.mesh) {
-      this.mesh.geometry.dispose();
-      this.group.remove(this.mesh);
-      this.mesh = null;
-    }
-    if (this.props) {
-      this.props.geometry.dispose();
-      (this.props.material as THREE.Material).dispose();
-      this.group.remove(this.props);
-      this.props = null;
-    }
+    for (const c of this.chunks.values()) this.dropChunk(c);
+    this.chunks.clear();
   }
+
+  /** Chunks currently standing, for the readout. */
+  get chunkCount() {
+    return this.chunks.size;
+  }
+}
+
+function chunkKey(x: number, z: number) {
+  return ((Math.floor(x / CHUNK) + 512) << 10) | (Math.floor(z / CHUNK) + 512);
 }
 
 interface Sink {
@@ -396,9 +596,12 @@ interface Sink {
 
 /** One box, with per-face local coordinates in metres. */
 function box(
-  b: { x: number; y: number; z: number; w: number; h: number; d: number; rot: number },
+  b: Box,
   ground: number, s: number, z: number, out: Sink,
 ) {
+  // 0 wall, 1 roof, 2 plain concrete. The roof of a plain box is plain too.
+  const wallFace = b.plain ? 2 : 0;
+  const roofFace = b.plain ? 2 : 1;
   const c = Math.cos(b.rot);
   const sn = Math.sin(b.rot);
   const hw = b.w / 2;
@@ -413,12 +616,12 @@ function box(
     [[-1, 0, 0], [0, 0, 1], [-hw, 0, -hd]],
   ];
 
-  const put = (lx: number, ly: number, lz: number, n: number[], u: number, v: number, isRoof: number, sx: number, sy: number, sz: number) => {
+  const put = (lx: number, ly: number, lz: number, n: number[], u: number, v: number, face: number, sx: number, sy: number, sz: number) => {
     out.pos.push(b.x + lx * c - lz * sn, y0 + ly, b.z + lx * sn + lz * c);
     out.nrm.push(n[0] * c - n[2] * sn, n[1], n[0] * sn + n[2] * c);
-    out.local.push(u, v, isRoof ? v : 0);
+    out.local.push(u, v, face === 1 ? v : 0);
     out.size.push(sx, sy, sz);
-    out.face.push(isRoof);
+    out.face.push(face);
     out.seed.push(s);
     out.zone.push(z);
   };
@@ -429,7 +632,7 @@ function box(
     for (let i = 0; i < 4; i++) {
       const along = i === 1 || i === 2 ? len : 0;
       const up = i >= 2 ? b.h : 0;
-      put(corner[0] + ua[0] * along, up, corner[2] + ua[2] * along, n, along, up, 0, len, b.h, 0);
+      put(corner[0] + ua[0] * along, up, corner[2] + ua[2] * along, n, along, up, wallFace, len, b.h, 0);
     }
     out.idx.push(base, base + 1, base + 2, base, base + 2, base + 3);
   }
@@ -437,6 +640,137 @@ function box(
   // roof
   const base = out.pos.length / 3;
   const rc: [number, number][] = [[-hw, -hd], [hw, -hd], [hw, hd], [-hw, hd]];
-  rc.forEach(([lx, lz]) => put(lx, b.h, lz, [0, 1, 0], lx + hw, lz + hd, 1, b.w, b.h, b.d));
+  rc.forEach(([lx, lz]) => put(lx, b.h, lz, [0, 1, 0], lx + hw, lz + hd, roofFace, b.w, b.h, b.d));
   out.idx.push(base, base + 2, base + 1, base, base + 3, base + 2);
+}
+
+/**
+ * One geometry and one material per kind of thing on a roof.
+ *
+ * Six draw calls for the entire roofscape of the entire city, and each of them
+ * is a shape you would recognise on its own: a tank is a tank because it stands
+ * on legs, a dish is a dish because it is a section of a sphere on an arm.
+ */
+function propKind(kind: number, uniforms: { uNight: { value: number } }) {
+  const merge = (list: [THREE.BufferGeometry, number][]) => {
+    const pos: number[] = [];
+    const nrm: number[] = [];
+    const idx: number[] = [];
+    for (const [g] of list) {
+      const p = g.getAttribute('position');
+      const n = g.getAttribute('normal');
+      const base = pos.length / 3;
+      for (let i = 0; i < p.count; i++) {
+        pos.push(p.getX(i), p.getY(i), p.getZ(i));
+        nrm.push(n.getX(i), n.getY(i), n.getZ(i));
+      }
+      const gi = g.getIndex();
+      if (gi) for (let i = 0; i < gi.count; i++) idx.push(base + gi.getX(i));
+      else for (let i = 0; i < p.count; i++) idx.push(base + i);
+      g.dispose();
+    }
+    const out = new THREE.BufferGeometry();
+    out.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    out.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+    out.setIndex(idx);
+    return out;
+  };
+
+  switch (kind) {
+    case 3: {
+      // Water tank: a tapered drum on four short legs, which is the shape and
+      // the reason you can tell one from an air-conditioning unit at 400 m.
+      const drum = new THREE.CylinderGeometry(0.72, 0.62, 1.15, 12);
+      drum.translate(0, 1.0, 0);
+      const lid = new THREE.CylinderGeometry(0.30, 0.34, 0.14, 10);
+      lid.translate(0.18, 1.62, 0);
+      const legs: [THREE.BufferGeometry, number][] = [[drum, 0], [lid, 0]];
+      for (const [lx, lz] of [[0.5, 0.5], [-0.5, 0.5], [0.5, -0.5], [-0.5, -0.5]]) {
+        const leg = new THREE.BoxGeometry(0.09, 0.46, 0.09);
+        leg.translate(lx, 0.23, lz);
+        legs.push([leg, 0]);
+      }
+      return {
+        geometry: merge(legs),
+        material: new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.72 }),
+        colours: ['#14181a', '#1b2a34', '#123024', '#2a2622', '#0f1c2a'],
+      };
+    }
+    case 4: {
+      // Hoarding: a panel on a frame, and at night it is the brightest thing
+      // for a block in every direction.
+      const panel = new THREE.BoxGeometry(2.0, 1.15, 0.09);
+      panel.translate(0, 2.2, 0);
+      const parts: [THREE.BufferGeometry, number][] = [[panel, 0]];
+      for (const lx of [-0.72, 0.72]) {
+        const leg = new THREE.BoxGeometry(0.11, 1.7, 0.11);
+        leg.translate(lx, 0.85, 0);
+        parts.push([leg, 0]);
+      }
+      const brace = new THREE.BoxGeometry(1.7, 0.09, 0.09);
+      brace.translate(0, 1.5, 0);
+      parts.push([brace, 0]);
+      const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
+      mat.onBeforeCompile = (sh) => {
+        sh.uniforms.uNight = uniforms.uNight;
+        sh.vertexShader = sh.vertexShader
+          .replace('#include <common>', '#include <common>\nvarying vec3 vLocalPos;')
+          .replace('#include <begin_vertex>', '#include <begin_vertex>\nvLocalPos = position;');
+        sh.fragmentShader = sh.fragmentShader
+          .replace('#include <common>', '#include <common>\nuniform float uNight;\nvarying vec3 vLocalPos;')
+          .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+// The panel is lit and the frame is not, which is the difference between a
+// hoarding at night and a glowing lollipop.
+totalEmissiveRadiance += diffuseColor.rgb * uNight * 2.1 * step(1.62, vLocalPos.y);`);
+      };
+      return {
+        geometry: merge(parts),
+        material: mat,
+        colours: ['#d8452f', '#1f6fd0', '#e8a020', '#159457', '#c22f6e', '#f0e6d2'],
+      };
+    }
+    case 5: {
+      const dish = new THREE.SphereGeometry(0.52, 12, 8, 0, Math.PI * 2, 0, Math.PI * 0.42);
+      dish.rotateX(2.3);
+      dish.translate(0, 0.9, 0);
+      const arm = new THREE.BoxGeometry(0.07, 0.9, 0.07);
+      arm.translate(0, 0.45, 0);
+      return {
+        geometry: merge([[dish, 0], [arm, 0]]),
+        material: new THREE.MeshStandardMaterial({ color: 0xd7d3c8, roughness: 0.66, side: THREE.DoubleSide }),
+        colours: null,
+      };
+    }
+    case 1: {
+      const mast = new THREE.CylinderGeometry(0.06, 0.16, 5.4, 6);
+      mast.translate(0, 2.7, 0);
+      const light = new THREE.SphereGeometry(0.14, 8, 6);
+      light.translate(0, 5.5, 0);
+      return {
+        geometry: merge([[mast, 0], [light, 0]]),
+        material: new THREE.MeshStandardMaterial({ color: 0x8c8f92, roughness: 0.5, metalness: 0.6 }),
+        colours: null,
+      };
+    }
+    case 2: {
+      const light = new THREE.BoxGeometry(3.4, 0.5, 1.2);
+      light.translate(0, 0.25, 0);
+      return {
+        geometry: merge([[light, 0]]),
+        material: new THREE.MeshStandardMaterial({ color: 0xb9c6cc, roughness: 0.4 }),
+        colours: null,
+      };
+    }
+    default: {
+      const plant = new THREE.BoxGeometry(1.5, 0.95, 1.5);
+      plant.translate(0, 0.48, 0);
+      const vent = new THREE.CylinderGeometry(0.4, 0.4, 0.24, 10);
+      vent.translate(0, 1.05, 0);
+      return {
+        geometry: merge([[plant, 0], [vent, 0]]),
+        material: new THREE.MeshStandardMaterial({ color: 0x9a9a97, roughness: 0.86 }),
+        colours: null,
+      };
+    }
+  }
 }
