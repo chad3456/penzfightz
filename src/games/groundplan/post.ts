@@ -29,11 +29,14 @@ export const TiltShift = {
     /** Where the sharp band sits, 0 at the top of the frame. */
     uFocus: { value: 0.66 },
     /** How tall the sharp band is. */
-    uBand: { value: 0.3 },
+    uBand: { value: 0.38 },
     /** Maximum blur radius, in pixels. */
-    uRadius: { value: 4.2 },
+    uRadius: { value: 3.6 },
     /** How much harder the top blurs than the bottom. */
     uSkew: { value: 1.7 },
+    /** Scaled by the camera: a diorama at the zoom where a diorama reads,
+     *  and a sharp aerial photograph when you pull all the way out. */
+    uAmount: { value: 0.4 },
   },
   vertexShader: `
 varying vec2 vUv;
@@ -51,6 +54,7 @@ uniform float uFocus;
 uniform float uBand;
 uniform float uRadius;
 uniform float uSkew;
+uniform float uAmount;
 
 void main() {
   float d = vUv.y - uFocus;
@@ -58,7 +62,7 @@ void main() {
   // Above the band (further away in an oblique view) gets the harder falloff.
   float weight = away * (d < 0.0 ? uSkew : 1.0);
   float r = clamp(weight, 0.0, 1.0);
-  r = r * r * uRadius;
+  r = r * r * uRadius * uAmount;
 
   if (r < 0.35) { gl_FragColor = texture2D(tDiffuse, vUv); return; }
 
@@ -95,10 +99,10 @@ export const Grade = {
      *  a 2.4 sun and a 0.3 sky already land above 1.0 on open ground, and
      *  ACES on top of that returns a very confident white. */
     uExposure: { value: 0.78 },
-    uContrast: { value: 1.12 },
+    uContrast: { value: 1.06 },
     uVignette: { value: 0.3 },
     uSaturation: { value: 1.14 },
-    uLift: { value: new THREE.Color(0.012, 0.018, 0.03) },
+    uLift: { value: new THREE.Color(0.022, 0.030, 0.048) },
     uGain: { value: new THREE.Color(1.02, 1.0, 0.965) },
     uGrain: { value: 0.018 },
   },

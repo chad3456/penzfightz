@@ -4695,16 +4695,156 @@ button.card:hover:not(:disabled) {
 
 .gp__top > * { pointer-events: auto; }
 
+.gp__stage--tool { cursor: crosshair; }
+.gp__stage--tool:active { cursor: crosshair; }
+
 .gp__desk {
   position: absolute;
   left: 16px;
+  right: 16px;
   bottom: 16px;
   z-index: 3;
-  padding: 12px 16px;
+  padding: 11px 14px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px 22px;
+  gap: 8px 20px;
+}
+
+.gp__tools { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.gp__tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(12, 16, 22, 0.5);
+  color: rgba(232, 238, 246, 0.78);
+  font: 500 11.5px/1 var(--ui, system-ui, sans-serif);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: border-color 0.14s, color 0.14s, background 0.14s;
+}
+.gp__tool:hover { background: rgba(28, 36, 48, 0.7); color: #eef3f9; }
+.gp__tool i { width: 8px; height: 8px; border-radius: 2px; display: block; opacity: 0.85; }
+.gp__tool--on { background: rgba(10, 14, 20, 0.82); box-shadow: 0 0 0 1px currentColor inset; }
+
+.gp__knobs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+
+.gp__speed { display: flex; gap: 3px; }
+.gp__speedBtn {
+  min-width: 30px;
+  padding: 5px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 16, 22, 0.5);
+  color: rgba(232, 238, 246, 0.6);
+  font-size: 10px;
+  cursor: pointer;
+}
+.gp__speedBtn--on { color: #ffd47a; border-color: rgba(255, 212, 122, 0.55); }
+
+.gp__hint {
+  margin: 0;
+  flex: 1 1 220px;
+  font: 400 11px/1.4 var(--ui, system-ui, sans-serif);
+  color: rgba(214, 226, 240, 0.42);
+  letter-spacing: 0.03em;
+}
+
+/* The readout, top right: the four numbers a mayor actually watches. */
+.gp__meters {
+  position: absolute;
+  right: 16px;
+  top: 86px;
+  z-index: 3;
+  padding: 12px 14px;
+  min-width: 178px;
+  display: grid;
+  gap: 7px;
+}
+.gp__meterRow { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.gp__meterRow b {
+  font: 600 17px/1 var(--mono, ui-monospace, monospace);
+  color: #f1f5fa;
+  letter-spacing: -0.01em;
+}
+.gp__meterRow span {
+  font: 400 10.5px/1.2 var(--ui, system-ui, sans-serif);
+  color: rgba(214, 226, 240, 0.46);
+  text-align: right;
+}
+.gp__meterRow--thin { justify-content: flex-start; }
+.gp__bad { color: #ff7a68 !important; }
+
+.gp__rci { display: flex; gap: 8px; justify-content: center; padding: 4px 0 2px; }
+.gp__rciCol { display: grid; gap: 3px; justify-items: center; }
+.gp__rciTrack {
+  position: relative;
+  width: 13px;
+  height: 42px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+.gp__rciTrack::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.gp__rciTrack i { position: absolute; left: 2px; right: 2px; border-radius: 2px; }
+.gp__rciCol span { font: 600 9.5px/1 var(--mono, ui-monospace, monospace); }
+
+/* Badges pinned to points in the world. Positioned by the render loop. */
+.gp__badges { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.gp__badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  display: grid;
+  gap: 1px;
+  padding: 6px 10px;
+  margin: -46px 0 0 -60px;
+  min-width: 108px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 14, 20, 0.62);
+  backdrop-filter: blur(7px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.34);
+  transition: opacity 0.3s;
+}
+.gp__badgeName { font: 600 12px/1.2 var(--ui, system-ui, sans-serif); color: #f2f6fb; }
+.gp__badgeNote { font: 400 10px/1.2 var(--ui, system-ui, sans-serif); color: rgba(214, 226, 240, 0.52); }
+.gp__badgeStem {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
+}
+.gp__badge--tall { border-color: rgba(255, 196, 92, 0.34); }
+
+.gp__notice {
+  position: absolute;
+  left: 50%;
+  bottom: 118px;
+  transform: translateX(-50%);
+  z-index: 5;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(28, 12, 10, 0.82);
+  border: 1px solid rgba(255, 122, 104, 0.4);
+  color: #ffd9d2;
+  font: 500 11.5px/1 var(--ui, system-ui, sans-serif);
+  letter-spacing: 0.02em;
 }
 
 /* --------------------------------------------------------------- once more

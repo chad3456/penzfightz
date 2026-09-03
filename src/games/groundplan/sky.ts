@@ -87,7 +87,7 @@ void main() {
 export class Sky {
   readonly mesh: THREE.Mesh;
   readonly sun = new THREE.DirectionalLight(0xffffff, 2.4);
-  readonly ambient = new THREE.HemisphereLight(0xbcd3ea, 0x4a4436, 0.32);
+  readonly ambient = new THREE.HemisphereLight(0xbcd3ea, 0x4a4436, 0.5);
   readonly material: THREE.ShaderMaterial;
   /** Unit vector towards the sun. */
   readonly dir = new THREE.Vector3(0.4, 0.6, 0.3).normalize();
@@ -155,7 +155,7 @@ export class Sky {
       1 - low * 0.66,
     );
 
-    this.ambient.intensity = 0.12 + day * 0.28;
+    this.ambient.intensity = 0.30 + day * 0.4;
     this.ambient.color.setRGB(0.62 + day * 0.13, 0.72 + day * 0.1, 0.86 + day * 0.06);
     this.ambient.groundColor.setRGB(0.2 + day * 0.12, 0.19 + day * 0.11, 0.16 + day * 0.08);
 

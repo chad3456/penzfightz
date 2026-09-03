@@ -8,6 +8,10 @@ import { Sky } from './sky';
 import { Terrain, WORLD } from './terrain';
 import { Water } from './water';
 import { Grade, TiltShift } from './post';
+import { City } from './city';
+import { Sim } from './sim';
+import { Cursor } from './cursor';
+import type { Zone } from './buildings';
 
 /**
  * The world, and the camera you look at it with.
@@ -36,6 +40,19 @@ export interface Quality {
   shadows: boolean;
 }
 
+/** What the left mouse button does. */
+export type Tool = 'none' | 'street' | 'avenue' | 'bulldoze' | Zone;
+
+export interface Label {
+  id: string;
+  x: number;
+  y: number;
+  depth: number;
+  title: string;
+  note: string;
+  kind: 'city' | 'tower';
+}
+
 export const QUALITY: Record<'low' | 'high', Quality> = {
   high: { dpr: 1.6, bloom: true, tiltShift: true, shadows: true },
   low: { dpr: 1, bloom: false, tiltShift: false, shadows: false },
@@ -51,7 +68,14 @@ export class World {
   readonly sky = new Sky();
   readonly water: Water;
   readonly composer: EffectComposer;
-  readonly city = new THREE.Group();
+  readonly city: City;
+  readonly sim: Sim;
+  readonly cursor: Cursor;
+
+  tool: Tool = 'none';
+  brush = 46;
+  /** Set when a road drag is refused, for the panel to show and clear. */
+  notice = '';
 
   /** Where the camera is looking, on the ground. */
   target = new THREE.Vector3(60, 15, -20);
@@ -80,20 +104,27 @@ export class World {
     });
     this.renderer.setPixelRatio(Math.min(quality.dpr, window.devicePixelRatio || 1));
     this.renderer.shadowMap.enabled = quality.shadows;
-    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.NoToneMapping; // the grade pass does it
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     this.camera = new THREE.PerspectiveCamera(42, 1, 4, 9000);
 
-    this.scene.fog = new THREE.FogExp2(0x9fb6cf, 0.00034);
+    this.scene.fog = new THREE.FogExp2(0x9fb6cf, 0.0002);
     this.scene.add(this.sky.mesh, this.sky.sun, this.sky.sun.target, this.sky.ambient);
-    this.scene.add(this.city);
 
     this.terrain = new Terrain(seed);
     this.scene.add(this.terrain.mesh);
     this.water = new Water(this.terrain.texture);
     this.scene.add(this.water.mesh);
+
+    this.city = new City(this.terrain, seed);
+    this.city.seed(60, -20);
+    this.city.flush();
+    this.scene.add(this.city.group);
+    this.sim = new Sim(this.city);
+    this.cursor = new Cursor(this.terrain);
+    this.scene.add(this.cursor.group);
 
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
@@ -160,10 +191,22 @@ export class World {
     this.camera.position.set(x, y, z);
     this.camera.lookAt(this.target);
     this.sky.mesh.position.copy(this.camera.position);
-    // Keep the one shadow cascade centred on what is being looked at.
+    // Keep the one shadow cascade centred on what is being looked at, and
+    // shrink it as you zoom in. A fixed 1,800 m map is 0.9 m per texel, which
+    // is fine from the air and unusable at street level; sized to the view it
+    // is a tenth of that when you are close and identical when you are not.
     this.sky.sun.position.copy(this.sky.dir).multiplyScalar(1800).add(this.target);
     this.sky.sun.target.position.copy(this.target);
     this.sky.sun.target.updateMatrixWorld();
+    const extent = THREE.MathUtils.clamp(this.distance * 0.8, 150, 900);
+    const cam = this.sky.sun.shadow.camera;
+    if (Math.abs(cam.right - extent) > 1) {
+      cam.left = -extent;
+      cam.right = extent;
+      cam.top = extent;
+      cam.bottom = -extent;
+      cam.updateProjectionMatrix();
+    }
   }
 
   render() {
@@ -171,9 +214,155 @@ export class World {
     const t = this.clock.elapsedTime;
     this.water.update(t);
     this.grade.uniforms.uTime.value = t;
+
+    // Night is not a clock reading, it is where the sun is. Lamps come on as
+    // it goes below the horizon and the city keeps its own light after that.
+    const night = THREE.MathUtils.clamp((0.10 - this.sky.dir.y) / 0.22, 0, 1);
+    // Tilt-shift belongs at the zoom where a city looks like a model of one.
+    // Pulled all the way out it is an aerial photograph and wants to be sharp;
+    // down among the streets there is no miniature to suggest.
+    const tilt = smoothstep(1500, 700, this.distance) * smoothstep(120, 300, this.distance);
+    this.blurH.uniforms.uAmount.value = tilt;
+    this.blurV.uniforms.uAmount.value = tilt;
+    this.city.setNight(night, t);
+    this.city.syncGraph();
+    this.sim.update(dt);
+    this.city.flush();
+    this.city.traffic.update(dt);
+    this.cursor.update(t);
+
     this.place();
     this.composer.render();
     return dt;
+  }
+
+  // ------------------------------------------------------------------ tools
+
+  setTool(t: Tool) {
+    this.tool = t;
+    this.city.showZones(t !== 'none' && t !== 'street' && t !== 'avenue');
+    this.cursor.setColour(TOOL_COLOUR[t] ?? 0xffc247);
+    if (t === 'none') this.cursor.hide();
+  }
+
+  /** Move the pointer without pressing. */
+  hover(nx: number, ny: number) {
+    if (this.tool === 'none') {
+      this.cursor.hide();
+      return;
+    }
+    const p = this.pick(nx, ny);
+    if (!p) {
+      this.cursor.hide();
+      return;
+    }
+    this.cursor.show(p, this.radius(), this.distance);
+  }
+
+  private radius() {
+    if (this.tool === 'street') return 9;
+    if (this.tool === 'avenue') return 13;
+    if (this.tool === 'bulldoze') return 22;
+    return this.brush;
+  }
+
+  private from: THREE.Vector3 | null = null;
+
+  /** Left button down. Returns true when the tool took the drag. */
+  begin(nx: number, ny: number): boolean {
+    if (this.tool === 'none') return false;
+    const p = this.pick(nx, ny);
+    if (!p) return false;
+    if (this.tool === 'street' || this.tool === 'avenue') {
+      this.from = p;
+      return true;
+    }
+    this.apply(p);
+    return true;
+  }
+
+  dragTool(nx: number, ny: number) {
+    const p = this.pick(nx, ny);
+    if (!p) return;
+    this.cursor.show(p, this.radius(), this.distance);
+    if (this.tool === 'street' || this.tool === 'avenue') {
+      const half = this.tool === 'avenue' ? 11 : 7;
+      this.cursor.drag(this.from, p, half, this.from ? p.distanceTo(this.from) > 22 : false);
+      return;
+    }
+    this.apply(p);
+  }
+
+  /** Left button up. Commits a road drag. */
+  finish(nx: number, ny: number) {
+    this.cursor.drag(null, null, 0, false);
+    const a = this.from;
+    this.from = null;
+    if (!a || (this.tool !== 'street' && this.tool !== 'avenue')) return;
+    const b = this.pick(nx, ny);
+    if (!b) return;
+    const len = Math.hypot(b.x - a.x, b.z - a.z);
+    if (len < 22) {
+      this.notice = 'too short — roads start at 22 m';
+      return;
+    }
+    const cost = Math.round(len * Sim.price(this.tool));
+    if (!this.sim.spend(cost)) {
+      this.notice = 'not enough in the account';
+      return;
+    }
+    if (!this.city.roads.lay(a.x, a.z, b.x, b.z, this.tool)) {
+      this.sim.spend(-cost);
+      this.notice = 'nothing to connect there';
+    }
+  }
+
+  private apply(p: THREE.Vector3) {
+    if (this.tool === 'bulldoze') {
+      const hit = this.city.roads.splitAt(p.x, p.z, this.radius());
+      if (hit) this.city.roads.remove(hit.seg.id);
+      else this.city.paint(p.x, p.z, this.brush * 0.6, null);
+      return;
+    }
+    this.city.paint(p.x, p.z, this.brush, this.tool as Zone);
+  }
+
+  // ----------------------------------------------------------------- labels
+
+  /**
+   * Anchors for the floating badges, in screen space.
+   *
+   * Projected here rather than in React because the projection needs the
+   * camera matrix as it was for the frame just drawn, and because the depth
+   * decides which badges are behind the viewer and must not be drawn at all.
+   */
+  labels(): Label[] {
+    const out: Label[] = [];
+    const b = [...this.city.built.values()];
+    if (!b.length) return out;
+
+    let tall = b[0];
+    let sx = 0;
+    let sz = 0;
+    let w = 0;
+    for (const x of b) {
+      if (x.m.height > tall.m.height) tall = x;
+      const k = x.m.height + 4;
+      sx += x.lot.x * k;
+      sz += x.lot.z * k;
+      w += k;
+    }
+    const s = this.sim.stats;
+    const put = (id: string, x: number, y: number, z: number, title: string, note: string, kind: Label['kind']) => {
+      const v = new THREE.Vector3(x, y, z).project(this.camera);
+      if (v.z > 1) return;
+      out.push({ id, x: (v.x * 0.5 + 0.5) * this.size.x, y: (-v.y * 0.5 + 0.5) * this.size.y, depth: v.z, title, note, kind });
+    };
+    put('city', sx / w, this.terrain.height(sx / w, sz / w) + 40, sz / w,
+      'Downtown', s.population.toLocaleString() + ' residents', 'city');
+    put('tall', tall.lot.x, this.terrain.height(tall.lot.x, tall.lot.z) + tall.m.height + 14, tall.lot.z,
+      Math.round(tall.m.height) + ' m', tall.m.floors + ' floors · ' + ZONE_NAME[tall.zone], 'tower');
+    return out;
   }
 
   // ----------------------------------------------------------------- camera
@@ -244,8 +433,34 @@ export class World {
 
   dispose() {
     this.composer.dispose();
+    this.city.buildings.clear();
+    this.city.roadMesh.clear();
     this.renderer.dispose();
     this.terrain.mesh.geometry.dispose();
     this.water.mesh.geometry.dispose();
   }
+}
+
+const TOOL_COLOUR: Partial<Record<Tool, number>> = {
+  street: 0xffc247,
+  avenue: 0xffa030,
+  bulldoze: 0xff5a4a,
+  res: 0x5fc76c,
+  com: 0x4a9ef5,
+  ind: 0xf2c245,
+  off: 0xb872ee,
+  park: 0x2fdc9e,
+};
+
+const ZONE_NAME: Record<Zone, string> = {
+  res: 'homes',
+  com: 'shops',
+  ind: 'works',
+  off: 'offices',
+  park: 'park',
+};
+
+function smoothstep(a: number, b: number, v: number) {
+  const t = THREE.MathUtils.clamp((v - a) / (b - a), 0, 1);
+  return t * t * (3 - 2 * t);
 }
