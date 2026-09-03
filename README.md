@@ -558,6 +558,51 @@ innumerable times more. Do you want it again?
 [`docs/once-more.md`](docs/once-more.md) has the design and the first playtest,
 including the opening hand that locked two of the three answers in scene one.
 
+## Ground Plan
+
+A city builder in three.js, built against an aerial photograph rather than a
+game screenshot — which decided most of it, because the picture has to survive
+being looked at from eight hundred metres *and* from the middle of a street, and
+almost nothing survives both if it was modelled rather than shaded.
+
+**The road graph is the only thing you author.** Blocks are its faces, found by
+walking every half-edge and turning to the next edge clockwise. Lots are
+subdivisions of those faces along their frontages. Buildings stand on the lots
+and face the edge they were cut from. Traffic runs on the edges. Bulldozing a
+street through the middle of a block re-cuts every lot around it for free,
+because there is exactly one place where the shape of the city is decided.
+
+**Facades are shaded in metres, not in normalised UVs.** A floor is 3.4 m and a
+window bay 2.7 m everywhere, so a forty-storey tower and a corner shop have
+windows the same size. Normalised UVs give every building in the city the same
+number of floors, which is the most obvious tell in a generated skyline and is
+visible from any distance at all. Each use gets three materials rather than one
+tinted one — brick next to render next to painted stone — because what makes a
+generated street look generated is that everything is the same colour at
+different brightnesses.
+
+**Roads have a real cross-section.** Seventeen centimetres of vertical kerb, so a
+low sun puts a shadow along every street. Segments stop short of their nodes and
+the junction is the convex hull of the trimmed corners: two roads of half-width
+`h` meeting at angle θ cross their outer edges at `h / tan(θ/2)`, so four equal
+roads at right angles produce exactly the square you would draw by hand, corners
+included.
+
+**Light a building makes goes through `totalEmissiveRadiance`, never the
+albedo.** The first night was empty — two thousand people and nothing on screen —
+because every lit window was being multiplied by the incident light, and at half
+past nine there is none. A lit window in the albedo is a window that goes out
+when the sun does.
+
+The economy is small enough to hold in your head: workers to jobs, shops to
+shoppers, money in to money out. Its two real bugs were structural rather than
+numeric — job shares that could not add up to the workforce, so the city
+deadlocked at four thousand with every bar reading *enough*; and undamped demand,
+which oscillated between the rails and abandoned half the city every other day.
+
+[`docs/ground-plan.md`](docs/ground-plan.md) has the face-traversal sign that was
+worked out on a triangle, the junction geometry, and the rest.
+
 ## Running it
 
 ```sh
