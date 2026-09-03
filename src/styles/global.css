@@ -4674,6 +4674,39 @@ button.card:hover:not(:disabled) {
 .book__nav { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
 .book__nav .glass--btn { padding: 7px 11px; font-size: 11px; }
 
+/* -------------------------------------------------------------- ground plan */
+.gp { position: fixed; inset: 0; background: #0b0e12; overflow: hidden; }
+.gp__stage { position: absolute; inset: 0; touch-action: none; cursor: grab; }
+.gp__stage:active { cursor: grabbing; }
+.gp__canvas { display: block; width: 100%; height: 100%; }
+
+.gp__top {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.gp__top > * { pointer-events: auto; }
+
+.gp__desk {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 3;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+}
+
 /* --------------------------------------------------------------- once more
 
    A table, not an arcade cabinet. Warm paper, a serif for anything that is an

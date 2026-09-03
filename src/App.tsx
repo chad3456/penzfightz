@@ -8,6 +8,7 @@ import { Rang } from './games/rang/Rang';
 import { Mafia } from './games/mafia/Mafia';
 import { BookStall } from './games/bookstall/BookStall';
 import { OnceMore } from './games/oncemore/OnceMore';
+import { GroundPlan } from './games/groundplan/GroundPlan';
 import { Maze } from './games/maze/Maze';
 import { DotFieldStage } from './effects/DotFieldStage';
 import { RollCall } from './effects/rollcall/RollCall';
@@ -169,6 +170,7 @@ export default function App() {
     if (shell === 'game' && game === 'mafia') return <Mafia onExit={toShelf} />;
     if (shell === 'game' && game === 'bookstall') return <BookStall onExit={toShelf} />;
     if (shell === 'game' && game === 'oncemore') return <OnceMore onExit={toShelf} />;
+    if (shell === 'game' && game === 'groundplan') return <GroundPlan onExit={toShelf} />;
     if (shell === 'game' && game === 'maze') return <Maze onExit={toShelf} />;
     return (
       <Arcade

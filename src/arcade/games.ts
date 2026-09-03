@@ -14,7 +14,8 @@ export type GameId =
   | 'mafia'
   | 'bookstall'
   | 'maze'
-  | 'oncemore';
+  | 'oncemore'
+  | 'groundplan';
 
 export interface GameDef {
   id: GameId;
@@ -155,6 +156,21 @@ export const GAMES: GameDef[] = [
     solo: true,
     ink: '#8c5a3c',
     wash: 'rgba(140, 90, 60, 0.09)',
+    ready: true,
+  },
+  {
+    id: 'groundplan',
+    name: 'Ground Plan',
+    tagline: 'Draw the roads. The city grows on what you drew.',
+    era: 'a bay, a headland, and nothing built yet',
+    blurb:
+      'A city builder in three.js, on a coastline generated from one height field that everything else agrees with — the mesh you look at, the query the road tool makes, the depth the water reads to decide how blue it is, and the slope test that refuses to zone a cliff.',
+    seats: { min: 1, max: 1 },
+    practice: false,
+    online: false,
+    solo: true,
+    ink: '#4f7f6a',
+    wash: 'rgba(79, 127, 106, 0.09)',
     ready: true,
   },
 ];
