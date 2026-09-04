@@ -15,7 +15,8 @@ export type GameId =
   | 'bookstall'
   | 'maze'
   | 'oncemore'
-  | 'groundplan';
+  | 'groundplan'
+  | 'meter';
 
 export interface GameDef {
   id: GameId;
@@ -171,6 +172,22 @@ export const GAMES: GameDef[] = [
     solo: true,
     ink: '#4f7f6a',
     wash: 'rgba(79, 127, 106, 0.09)',
+    ready: true,
+  },
+  {
+    id: 'meter',
+    name: 'Meter Down',
+    tagline: 'Four minutes on the clock and a city in the way.',
+    alsoKnownAs: 'the black and yellow',
+    era: 'a Bombay taxi with a meter on the wing',
+    blurb:
+      'An arcade taxi game. Pick up a fare, get across town before the clock runs out, and flatten whatever is between you and the drop-off — every fare you finish puts time back on the shift, so a clean run never ends. The money buys the car and the stars buy the rest of the country: four cities, from six empty lanes on Marine Drive to lanes in Old Delhi the width of a handcart, and a hill road with forty metres of drop in it.',
+    seats: { min: 1, max: 1 },
+    practice: false,
+    online: false,
+    solo: true,
+    ink: '#e0a52c',
+    wash: 'rgba(224, 165, 44, 0.1)',
     ready: true,
   },
 ];

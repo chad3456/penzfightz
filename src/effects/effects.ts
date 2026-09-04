@@ -17,7 +17,8 @@ export type EffectId =
   | 'book'
   | 'epic'
   | 'cards'
-  | 'underground';
+  | 'underground'
+  | 'whitenights';
 
 export interface EffectDef {
   id: EffectId;
@@ -145,6 +146,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['1,000 panels · 50 mechanisms', 'nine settings, chosen by the joke', 'spot black, one ochre light'],
     ink: '#c8842a',
     wash: 'rgba(200, 132, 42, 0.09)',
+  },
+  {
+    id: 'whitenights',
+    name: 'White Nights',
+    tagline: 'A thousand faces, and every word written by hand.',
+    blurb:
+      'A thousand story cards for Dostoevsky’s four nights on the Petersburg embankment — a portrait and a line of dialogue apiece. The dialogue is handwritten rather than set: a cursive alphabet kept as skeletons, joined letter to letter, and inked with a pointed nib whose width comes from the direction it is travelling, so downstrokes are heavy and upstrokes are hairlines. The faces are built rather than drawn — a head is a set of landmarks in three dimensions, and a three-quarter view is those landmarks turned about a vertical axis, so the far eye foreshortens and the far cheek goes behind the nose without being told to. A dozen of the lines are Dostoevsky’s own and say so.',
+    spec: ['1,000 cards · 5,000 in the grammar', 'a written hand, not a font', 'faces projected, not warped'],
+    ink: '#b58b4a',
+    wash: 'rgba(181, 139, 74, 0.09)',
   },
 ];
 

@@ -32,7 +32,15 @@ export const ROLE = {
   amber: 9,
 } as const;
 
-export type Role = (typeof ROLE)[keyof typeof ROLE];
+/**
+ * A role is just a number.
+ *
+ * The table above is the *vehicle* kit's palette; the city next door has its
+ * own with roads and kerbs and awnings in it, and both go through this same
+ * builder. Widening the type is what lets a second kit share the plumbing
+ * without pretending its awnings are a kind of windscreen.
+ */
+export type Role = number;
 
 export interface Parts {
   pos: number[];

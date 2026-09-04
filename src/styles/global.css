@@ -5540,3 +5540,234 @@ button.card:hover:not(:disabled) {
 .under .book__name { font: 400 15px/1.45 Georgia, "Times New Roman", serif; }
 .under .book__print { background: transparent; }
 .under .book__print canvas { border-radius: 4px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44); }
+
+/* ------------------------------------------------------------ White Nights */
+
+.nights__kinds { max-width: 190px; }
+.nights__peek { max-width: 330px; }
+.nights__peekwho {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(200, 162, 74, 0.9);
+  margin-bottom: 6px;
+}
+.nights__peekline { font: italic 400 14px/1.55 Georgia, "Times New Roman", serif; color: #ece3cf; }
+.nights .book__print { background: transparent; }
+.nights .book__print canvas { border-radius: 3px; box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5); }
+.nights .book__name { font: 400 20px/1.3 Georgia, "Times New Roman", serif; }
+
+/* -------------------------------------------------------------- Meter Down */
+
+.meter {
+  position: fixed;
+  inset: 0;
+  background: #0e0f11;
+  color: #f0e9dc;
+  overflow: hidden;
+}
+.meter__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.meter__top {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  pointer-events: none;
+}
+.meter__clock,
+.meter__take,
+.meter__place { padding: 8px 16px; border-radius: 12px; text-align: center; min-width: 108px; }
+.meter__clocknum { font: 600 28px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.02em; }
+.meter__clock--out .meter__clocknum { color: #ff8a5c; animation: meterpulse 0.8s ease-in-out infinite; }
+@keyframes meterpulse { 50% { opacity: 0.45; } }
+.meter__takenum { font: 600 24px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; color: #ffc247; }
+.meter__placename { font: 500 17px/1.3 Georgia, "Times New Roman", serif; }
+.meter__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 220, 0.6);
+  margin-top: 3px;
+}
+
+.meter__arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -30px 0 0 -30px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+  opacity: 0.85;
+}
+.meter__dist {
+  position: absolute;
+  top: calc(50% + 34px);
+  left: 50%;
+  transform: translateX(-50%);
+  font: 500 13px ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.meter__fare {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  width: min(340px, 46vw);
+  padding: 12px 14px;
+  border-radius: 12px;
+  pointer-events: none;
+}
+.meter__fare--tight { box-shadow: 0 0 0 1px rgba(255, 120, 80, 0.5), 0 10px 30px rgba(0, 0, 0, 0.5); }
+.meter__who { font: 500 15px/1.35 Georgia, "Times New Roman", serif; color: #ffc247; }
+.meter__want { font: italic 400 13.5px/1.5 Georgia, "Times New Roman", serif; margin-top: 3px; }
+.meter__bar,
+.meter__comfort {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  margin-top: 8px;
+}
+.meter__bar span { display: block; height: 100%; background: #ffc247; }
+.meter__comfort { flex: 1; margin-top: 0; }
+.meter__comfort span { display: block; height: 100%; background: #7fd6a0; }
+.meter__comfortrow { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.meter__comfortrow .meter__label { margin-top: 0; white-space: nowrap; }
+
+.meter__dash {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  text-align: center;
+  pointer-events: none;
+}
+.meter__speed { font: 600 34px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.meter__slide {
+  margin-top: 4px;
+  font: 500 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ff9a6a;
+}
+
+.meter__flash {
+  position: absolute;
+  left: 50%;
+  top: 96px;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font: italic 400 15px/1.4 Georgia, "Times New Roman", serif;
+  max-width: min(560px, 80vw);
+  text-align: center;
+  pointer-events: none;
+}
+
+.meter__keys {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font: 500 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 220, 0.62);
+  pointer-events: none;
+}
+.meter__quit { position: absolute; right: 16px; top: 16px; }
+
+/* the garage */
+
+.meter--garage { overflow: auto; background: radial-gradient(120% 90% at 50% 0%, #22242a 0%, #0e0f11 70%); }
+.meter__sheet { max-width: 1100px; margin: 0 auto; padding: 34px 22px 60px; }
+.meter__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.meter__purse { text-align: right; }
+.meter__result { margin: 20px 0 4px; padding: 14px 18px; border-radius: 12px; }
+.meter__resulthead {
+  font: 500 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffc247;
+}
+.meter__resultrow { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 8px; font-size: 15px; }
+
+.meter__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 26px; }
+@media (max-width: 860px) { .meter__cols { grid-template-columns: 1fr; } }
+.meter__h2 {
+  font: 500 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 220, 0.5);
+  margin: 0 0 12px;
+}
+.meter__places { display: flex; flex-direction: column; gap: 10px; }
+.meter__placecard {
+  text-align: left;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.035);
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.meter__placecard:hover:not(:disabled) { background: rgba(255, 255, 255, 0.07); }
+.meter__placecard--on { border-color: rgba(224, 165, 44, 0.65); background: rgba(224, 165, 44, 0.09); }
+.meter__placecard--locked { opacity: 0.42; cursor: not-allowed; }
+.meter__placetitle { font: 500 18px/1.25 Georgia, "Times New Roman", serif; }
+.meter__placewhere {
+  font: 400 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.06em;
+  color: rgba(240, 233, 220, 0.55);
+  margin-top: 2px;
+}
+.meter__placeblurb { font-size: 13.5px; line-height: 1.55; margin-top: 7px; color: rgba(240, 233, 220, 0.85); }
+
+.meter__parts { display: flex; flex-direction: column; gap: 9px; }
+.meter__part {
+  padding: 11px 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+.meter__partname { display: flex; justify-content: space-between; align-items: center; font-size: 15px; }
+.meter__pips { display: flex; gap: 4px; }
+.meter__pips i {
+  width: 13px;
+  height: 5px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.16);
+  display: block;
+}
+.meter__pips i.on { background: #ffc247; }
+.meter__partnote { font-size: 12.5px; line-height: 1.5; color: rgba(240, 233, 220, 0.66); margin-top: 4px; }
+.meter__partfoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; }
+.meter__partfoot .meter__label { margin-top: 0; }
+.meter__buy {
+  padding: 5px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(224, 165, 44, 0.55);
+  background: rgba(224, 165, 44, 0.14);
+  color: #ffc247;
+  font: 500 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.meter__buy--no { opacity: 0.35; cursor: not-allowed; }
+.meter__go { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.meter__drive { font-size: 15px; padding: 12px 22px; }
+.meter__note { font-size: 13px; line-height: 1.65; color: rgba(240, 233, 220, 0.6); margin-top: 14px; max-width: 62ch; }

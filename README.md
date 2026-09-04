@@ -677,6 +677,67 @@ the turn is the italic line underneath.
 as a mushroom, the collar that read as horns, and the corridor that was an X
 until it was drawn the way a corridor is actually drawn.
 
+## White Nights
+
+A thousand story cards for Dostoevsky's four nights on the Petersburg
+embankment — a portrait and a line of dialogue apiece.
+
+The dialogue is **handwritten**, not set. `hand.ts` holds a cursive alphabet as
+skeletons in hundredths of an x-height, joins one letter's exit to the next
+letter's entry with a stroke that sags towards the baseline, and inks the whole
+thing with a pointed nib whose width comes from the direction it is travelling
+— heavy on the pull, a hairline on the lift. That last part is the one that
+matters: everything else is detail, and it is what your eye reads as *pen*.
+
+Three letters had to be argued with, and all three failed by being some other
+letter. `t` came out as a `v`, because a stem retraced straight back down gets
+rounded into one. `r` came out as an `n`, because stem-then-arm is exactly an
+n's silhouette — it has to be shoulder first, and entered high, or the join
+puts the n back. And the dot on the `i` landed over the next letter, because
+the slant is a shear about the baseline and anything high up moves right.
+
+The faces are built rather than drawn. A head is a set of landmarks in three
+dimensions, so a three-quarter view is those landmarks turned about a vertical
+axis and the far eye foreshortens by itself. The edge of a turned head is the
+contour generator of an ellipse deeper than it is wide, which is two lines of
+algebra and the difference between a head that turns and a head that slides
+sideways — and the hair has to be built on the same formula, or the face's own
+fill spills over it.
+
+A dozen of the lines are Dostoevsky's own, in Constance Garnett's 1918
+translation, and the card says so; the rest is a grammar in his register with
+five thousand distinct captions in it.
+
+[The long version.](docs/white-nights.md)
+
+## Meter Down
+
+An arcade taxi game: four minutes on the clock, a fare to deliver across town,
+and a city to flatten on the way. Every finished fare puts time back on the
+shift, so a clean run never ends — the timer is the score, not the limit.
+
+Two currencies that buy different things. Money buys the car. **Stars** — what
+your passengers thought of the journey — are what the next city is priced in,
+so you can grind money by driving badly and still never get to Shimla. Each
+passenger has a nerve and a hurry, and they pull opposite ways: the boy going
+to an exam will forgive anything except being late, and the woman with the cake
+box will forgive being late and nothing else.
+
+Four cities, and a location is not a palette swap: Marine Drive is six empty
+lanes with the sea on your right, Chandni Chowk is lanes the width of a
+handcart with a handcart in every one of them, and the Hill Road has forty
+metres of drop across it with every junction on a slope. That last one is where
+the geometry had to get honest — a ground made of one slab per block turns a
+hillside into a staircase of floating plates, and roads made of axis-aligned
+boxes cannot tilt.
+
+The physics is arcade and says so. A forward speed, a sideways speed, and a
+grip budget the sideways speed is bled off against; ask for more turn than the
+budget covers and the surplus stays as slide. The handbrake spends the budget
+three times as fast.
+
+[The long version.](docs/meter-down.md)
+
 ## Running it
 
 ```sh

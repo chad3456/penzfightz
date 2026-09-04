@@ -1,14 +1,13 @@
-import { drawPanel, ASPECT } from './panel';
-import type { Joke } from './joke';
+import { drawCard, ASPECT } from './card';
+import type { Line } from './lines';
 import type { Plate } from '../globe/Globe';
 
 /**
- * A thousand panels, baked in sheets.
+ * A thousand cards, baked in sheets.
  *
- * A panel is about two thousand marks — the paper alone is nine hundred flecks,
- * and a street has snow on it twice — so the bake yields every few panels
- * rather than every plate. A thousand of them back to back would hold the main
- * thread for the better part of a minute, and the loader exists to be watched.
+ * A card is a portrait and a page of handwriting, and the handwriting alone is
+ * several hundred filled polygons, so the bake yields inside the sheet rather
+ * than between sheets. The loader exists to be watched.
  */
 
 export { ASPECT };
@@ -49,31 +48,32 @@ const idle: () => Promise<void> =
           });
       })();
 
-export async function bakePanels(jokes: Joke[], opts: BakeOptions = {}): Promise<Plate[]> {
-  const cell = opts.cell ?? 164;
+export async function bakeCards(list: Line[], opts: BakeOptions = {}): Promise<Plate[]> {
+  const cell = opts.cell ?? 150;
   const grid = opts.grid ?? 10;
   const per = grid * grid;
+  const tall = Math.round(cell / ASPECT);
   const plates: Plate[] = [];
   let done = 0;
 
-  for (let a = 0; a * per < jokes.length; a++) {
+  for (let a = 0; a * per < list.length; a++) {
     const canvas = document.createElement('canvas');
     canvas.width = grid * cell;
-    canvas.height = grid * cell;
+    canvas.height = grid * tall;
     const g = canvas.getContext('2d');
     if (!g) break;
 
     const start = a * per;
-    const end = Math.min(jokes.length, start + per);
+    const end = Math.min(list.length, start + per);
     for (let i = start; i < end; i++) {
       if (opts.signal?.cancelled) throw new Error('cancelled');
       const k = i - start;
       g.save();
-      g.translate((k % grid) * cell, Math.floor(k / grid) * cell);
+      g.translate((k % grid) * cell, Math.floor(k / grid) * tall);
       g.beginPath();
-      g.rect(0, 0, cell, cell);
+      g.rect(0, 0, cell, tall);
       g.clip();
-      drawPanel(g, jokes[i], cell, cell);
+      drawCard(g, list[i], cell, tall);
       g.restore();
       done++;
       // Yielding and *showing* are two different frequencies. A yield is a
@@ -84,25 +84,25 @@ export async function bakePanels(jokes: Joke[], opts: BakeOptions = {}): Promise
       if (k % 5 === 4) await idle();
       if (k % 25 === 24) {
         opts.onSheet?.({ canvas, grid, used: k + 1, aspect: ASPECT });
-        opts.onProgress?.(done, jokes.length);
+        opts.onProgress?.(done, list.length);
       }
     }
 
     const plate: Plate = { canvas, grid, used: end - start, aspect: ASPECT };
     plates.push(plate);
     opts.onPlate?.(plate, a);
-    opts.onProgress?.(done, jokes.length);
+    opts.onProgress?.(done, list.length);
     await idle();
   }
   return plates;
 }
 
-/** The same panel again at size, rather than an atlas cell scaled up. */
-export function printPanel(joke: Joke, width: number): HTMLCanvasElement {
+/** The same card again at size, rather than an atlas cell scaled up. */
+export function printCard(line: Line, width: number): HTMLCanvasElement {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = Math.round(width / ASPECT);
   const g = canvas.getContext('2d');
-  if (g) drawPanel(g, joke, canvas.width, canvas.height);
+  if (g) drawCard(g, line, canvas.width, canvas.height);
   return canvas;
 }
