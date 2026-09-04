@@ -627,6 +627,56 @@ worked out on a triangle, the junction geometry, the canopy that kept
 triangulating into a solid dome, and the three things that were fine at a hundred
 buildings and would not have been at five thousand.
 
+## Fifty-Two Cats
+
+A full deck — fifty-two cards and both jokers — generated in canvas 2d at
+request time. No image files, no fonts, nothing traced: the cream stock with its
+fibre and foxing, the hand-cut pen line, the pips, the cats and the indices are
+all drawn.
+
+**The pips are objects.** That is the rule the reference invented and every card
+here obeys it, which turns each card into the same puzzle: find a reason for
+exactly this many of exactly this shape to be somewhere a cat can interfere with
+them. Five diamonds are five things somebody has washed and pegged out to dry.
+Ten clubs are what was on the shelf before the shelf was investigated. An ace of
+spades is a hole in the garden nobody is answering questions about.
+
+**The count is audited, not assumed.** Pips reach the paper through one function
+that counts as it goes, and there is a button that redraws all fifty-four and
+checks the counts against the ranks. A five with four diamonds on it is not a
+stylistic choice.
+
+Six engraving techniques and one ink — tapered line, hatch, cross-hatch, stipple
+graded by density rather than dot size, contour hatch that follows the form, and
+spot black used almost never — then a press that draws each card three times: a
+soft spread, the impression, and a ghost a hair out of register.
+
+[`docs/fifty-two-cats.md`](docs/fifty-two-cats.md) has the four things that were
+wrong, including the cats that read as snowmen until the head was turned to the
+front, and the window that kept coming out as a perfect ellipse.
+
+## Notes from Under the Stairs
+
+A thousand single-panel cartoons in one register. The confession that wants
+applause; the generosity that follows the beggar for six streets to see what he
+does with the money; the two-year campaign of revenge for a slight the other man
+never noticed. It is the same joke a thousand times, which is the point.
+
+**Nothing is written out.** Fifty mechanisms — each a *shape* of joke rather than
+a sentence with holes in it — and ten vocabularies supplying the specifics the
+mechanism then does something to. Swap a noun and the joke survives; swap the
+mechanism and it is a different joke. The turn always lands on the last clause,
+because a punchline in the middle of a sentence is a fact.
+
+**The picture is never the punchline.** Draw the turn and the caption becomes a
+label. So the picture is the situation — a man in a room, at a desk, on a
+staircase — in filled black on grey paper with exactly one warm thing in it, and
+the turn is the italic line underneath.
+
+[`docs/under-the-stairs.md`](docs/under-the-stairs.md) has the figure that read
+as a mushroom, the collar that read as horns, and the corridor that was an X
+until it was drawn the way a corridor is actually drawn.
+
 ## Running it
 
 ```sh

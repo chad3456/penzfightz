@@ -5496,3 +5496,47 @@ button.card:hover:not(:disabled) {
 }
 .deck__handcard:hover { transform: translateY(-14px) rotate(0deg) !important; }
 .deck__handclose { flex: 0 0 100%; margin: 18px auto 0; max-width: 140px; }
+
+/* ------------------------------------------- notes from under the stairs
+
+   The panels borrow the picture book's shell and add two things: a row of
+   mechanisms to filter by, and a peek that shows the setup and the turn in the
+   two weights they are set in on the panel itself. */
+.under__kinds {
+  position: absolute;
+  left: 16px;
+  top: 108px;
+  z-index: 4;
+  max-width: 168px;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.under__kind {
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(16, 14, 12, 0.42);
+  color: rgba(228, 218, 200, 0.62);
+  font: 400 10.5px/1 var(--ui, system-ui, sans-serif);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: color 0.14s, border-color 0.14s;
+}
+.under__kind:hover { color: #f2e8d6; }
+.under__kind--on { color: #e8a64a; border-color: rgba(232, 166, 74, 0.5); }
+
+.under__peek { max-width: 320px; }
+.under__peeksetup {
+  font: 400 12px/1.5 Georgia, "Times New Roman", serif;
+  color: rgba(238, 228, 210, 0.82);
+}
+.under__peekturn {
+  margin-top: 4px;
+  font: italic 400 12px/1.5 Georgia, "Times New Roman", serif;
+  color: #f0dcb4;
+}
+.under .book__name { font: 400 15px/1.45 Georgia, "Times New Roman", serif; }
+.under .book__print { background: transparent; }
+.under .book__print canvas { border-radius: 4px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44); }

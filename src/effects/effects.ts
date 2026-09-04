@@ -16,7 +16,8 @@ export type EffectId =
   | 'dragon'
   | 'book'
   | 'epic'
-  | 'cards';
+  | 'cards'
+  | 'underground';
 
 export interface EffectDef {
   id: EffectId;
@@ -134,6 +135,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['54 cards · 52 jokes', 'pip count audited, not assumed', 'six engraving techniques, one ink'],
     ink: '#c8352c',
     wash: 'rgba(200, 53, 44, 0.09)',
+  },
+  {
+    id: 'underground',
+    name: 'Notes from Under the Stairs',
+    tagline: 'One joke, a thousand times, in a city where it is always four in the afternoon.',
+    blurb:
+      'A thousand single-panel cartoons in one register — the confession that wants applause, the generosity that follows the beggar for six streets to see what he does with the money, the two-year campaign of revenge for a slight the other man never noticed. Nothing is written out: fifty mechanisms, each a shape of joke rather than a sentence with holes in it, and ten vocabularies supplying the specifics. The picture is never the punchline; it is the situation, drawn in spot black on grey paper with one warm light in it, and the turn is the italic line underneath.',
+    spec: ['1,000 panels · 50 mechanisms', 'nine settings, chosen by the joke', 'spot black, one ochre light'],
+    ink: '#c8842a',
+    wash: 'rgba(200, 132, 42, 0.09)',
   },
 ];
 

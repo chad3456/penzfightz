@@ -21,6 +21,7 @@ import { Dragon } from './effects/dragon/Dragon';
 import { Book } from './effects/book/Book';
 import { Epic } from './effects/epic/Epic';
 import { Cards } from './effects/cards/Cards';
+import { Underground } from './effects/underground/Underground';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -147,6 +148,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'book') {
     return <Book onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'underground') {
+    return <Underground onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;
