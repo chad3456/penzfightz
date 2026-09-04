@@ -15,7 +15,8 @@ export type EffectId =
   | 'water'
   | 'dragon'
   | 'book'
-  | 'epic';
+  | 'epic'
+  | 'cards';
 
 export interface EffectDef {
   id: EffectId;
@@ -123,6 +124,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['2,000 figures · 268 named', 'crowns, marks and fangs from the texts', 'the host is counted, not named'],
     ink: '#d0762c',
     wash: 'rgba(208, 118, 44, 0.1)',
+  },
+  {
+    id: 'cards',
+    name: 'Fifty-Two Cats',
+    tagline: 'A full deck where the pips are objects and a cat is interfering.',
+    blurb:
+      'Fifty-two cards and both jokers, drawn at request time in canvas 2d — cream stock with fibre and foxing, one printing ink, a hand-cut pen line with a taper on it, hatch and stipple for anything manufactured, and three impressions through a press so the ink spreads and the register is a hair out. The rule every card obeys is the one the reference invented: the pips are things. Five diamonds are five things somebody has pegged out to dry; ten clubs are what was on the shelf before the shelf was investigated. The pip count is audited rather than assumed — the deck will draw all fifty-four and count what actually reached the paper.',
+    spec: ['54 cards · 52 jokes', 'pip count audited, not assumed', 'six engraving techniques, one ink'],
+    ink: '#c8352c',
+    wash: 'rgba(200, 53, 44, 0.09)',
   },
 ];
 

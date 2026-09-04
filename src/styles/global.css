@@ -5438,3 +5438,61 @@ button.card:hover:not(:disabled) {
   .bench__knob input[type='range'] { width: 100px; }
   .bench__knobname { min-width: 70px; }
 }
+
+/* ------------------------------------------------------------ fifty-two cats
+
+   The deck borrows the picture book's shell — same globe, same sheet, same
+   peek — and adds the two things a deck needs that a gallery does not: a hand
+   you can be dealt, and somewhere to print the result of counting the pips. */
+.deck .book__print { background: transparent; border-radius: 10px; }
+.deck .book__print canvas {
+  max-width: min(400px, calc(100vw - 96px));
+  border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+}
+
+.deck__audit {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 8;
+  max-width: min(660px, calc(100vw - 40px));
+  padding: 10px 16px;
+  font: 400 12px/1.5 var(--mono, ui-monospace, monospace);
+  color: rgba(236, 226, 208, 0.86);
+  cursor: pointer;
+}
+
+.deck__hand {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  background: rgba(12, 10, 9, 0.62);
+  backdrop-filter: blur(3px);
+}
+.deck__handinner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  padding: 26px;
+  flex-wrap: wrap;
+}
+.deck__handcard {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+  transition: transform 0.18s ease;
+}
+.deck__handcard canvas {
+  border-radius: 8px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+.deck__handcard:hover { transform: translateY(-14px) rotate(0deg) !important; }
+.deck__handclose { flex: 0 0 100%; margin: 18px auto 0; max-width: 140px; }
