@@ -18,7 +18,8 @@ export type EffectId =
   | 'epic'
   | 'cards'
   | 'underground'
-  | 'whitenights';
+  | 'whitenights'
+  | 'darshan';
 
 export interface EffectDef {
   id: EffectId;
@@ -156,6 +157,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['1,000 cards · 5,000 in the grammar', 'a written hand, not a font', 'faces projected, not warped'],
     ink: '#b58b4a',
     wash: 'rgba(181, 139, 74, 0.09)',
+  },
+  {
+    id: 'darshan',
+    name: 'Darshan',
+    tagline: 'Thirteen gods, thirty-two postures each, none of them drawn.',
+    blurb:
+      'Four hundred and sixteen flat-vector portraits of Hindu deities, and not one of them exists as a drawing anywhere. A jointed figure is posed — tribhanga, the triple bend every Krishna in stone stands in; alidha, the archer’s lunge; padmasana, seated — and then lit by a single terminator that crosses the entire body, so thirty separate shapes turn away from the light at the same moment and read as one person rather than as thirty correctly-lit objects. The iconography is the received one and not invented: skin the colour of a rain cloud and a flute in the hand is Krishna, and a discus in that same hand would make it Vishnu.',
+    spec: ['416 portraits · 28 poses · one light', 'a rig, not a silhouette', 'attributes name the god'],
+    ink: '#c08a3a',
+    wash: 'rgba(192, 138, 58, 0.1)',
   },
 ];
 

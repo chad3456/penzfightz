@@ -738,6 +738,37 @@ three times as fast.
 
 [The long version.](docs/meter-down.md)
 
+## Darshan
+
+*Darshan* is the word for seeing a god, and for being seen back. Thirteen of
+them, thirty-two postures apiece, and not one of the four hundred and sixteen
+exists as a drawing anywhere.
+
+The style is flat mid-century vector — no outline, every edge a change of fill,
+nine colours on unbleached cream — and the thing that makes it work is not the
+palette. It is that there is **one light**, and its terminator crosses the
+entire card: every part is painted its light colour and then the shadow colour
+over it, clipped to that part, against the same line. So the arm, the sash and
+the mace all turn away from the light at the same moment, and thirty separate
+polygons read as one person. Shade each part on its own normal — the obvious
+thing — and you get thirty correctly-lit objects that do not add up to anybody.
+
+The bodies are rigged rather than drawn, so the postures are real postures:
+*samabhanga*, the straight stance; *tribhanga*, the triple bend at neck, waist
+and knee that every Krishna in stone stands in; *alidha*, the archer's lunge.
+Limb angles are absolute rather than shoulder-plus-elbow-bend, because half
+these poses want the forearm pointing somewhere specific and working out the
+bend that gets it there is arithmetic, not drawing.
+
+The iconography is the received one and not invented. In this tradition the
+object in the hand is the name of the god written down: conch, discus, mace and
+lotus in four hands *is* Vishnu, and Krishna is the colour of a rain cloud and
+holds a flute — put a discus in that hand and the picture means something else.
+Each attribute also has a reach, so the camera frames the god *and the thing he
+is carrying*; without that a trident longer than its owner runs off both edges.
+
+[The long version.](docs/darshan.md)
+
 ## Running it
 
 ```sh
