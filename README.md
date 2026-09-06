@@ -769,6 +769,59 @@ is carrying*; without that a trident longer than its owner runs off both edges.
 
 [The long version.](docs/darshan.md)
 
+## A Hundred Ways
+
+One picture and a hundred techniques, and not one of the hundred knows what it
+is drawing.
+
+The picture is drawn once, tonally, into an offscreen buffer and read back as
+three parallel fields — luminance, region and colour. Everything after that is a
+**resampling**. An engraving, a stipple and a Voronoi diagram of this portrait
+are not three drawings; they are three ways of asking the same array what it
+looks like. A technique is a rule for turning tone into marks, and the rule is
+the only thing that changes between them.
+
+Which means the source cannot be a nice picture, it has to be a picture built to
+survive being resampled. A mid-grey background prints as a flat mass in every
+threshold technique. A tight key light models beautifully and then collapses
+into a white wedge with two eyes in it the moment anything thresholds it. Hair
+curtains that converge at the parting pinch the face into a spearhead, and a
+spearhead is what all hundred then print.
+
+A quarter of the set failed the first time it was laid out as a contact sheet,
+and the failures were more interesting than the successes: marks keyed to tone
+by only one property, lines specified as a fraction of the card that go
+sub-pixel on a thumbnail, hatching with a single threshold that prints a
+silhouette rather than a portrait, pale techniques told to scatter by darkness
+so they paint a black wall its own colour, and rulings whose parametrisation
+stops a third of the way up the card. None of them looked wrong in the code.
+
+[The long version.](docs/a-hundred-ways.md)
+
+## A Hundred Kisses
+
+A hundred kisses, all scribbled, no two the same.
+
+Two profiles meet at the lips and everything inside them is filled by a single
+pen that never lifts. Getting that fill right took three attempts. A zigzag
+gives you corduroy. An angled zigzag with a bow in it gives you hatching. What
+actually reads as a scribble is a **confined random walk with momentum**: turn
+by a little each step, step forward, and when you would leave the outline turn
+sharply and carry on — untidily, because a tidy bounce reads as a border.
+
+```ts
+a += (p.r() - 0.5) * (0.5 + p.hand.loose * 1.6);
+const nx = x + Math.cos(a) * step;
+const ny = y + Math.sin(a) * step;
+if (!inside(path, nx, ny)) { a += Math.PI * (0.7 + p.r() * 0.6); continue; }
+```
+
+The outline itself is a nineteen-point profile with the upper lip as the
+furthest-forward point on it, so the two faces meet where they should rather
+than at whatever their noses do. Nine kinds of hair, six inks, six papers.
+
+[The long version.](docs/a-hundred-kisses.md)
+
 ## Running it
 
 ```sh

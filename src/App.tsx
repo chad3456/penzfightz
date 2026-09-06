@@ -25,6 +25,8 @@ import { Cards } from './effects/cards/Cards';
 import { Underground } from './effects/underground/Underground';
 import { WhiteNights } from './effects/whitenights/WhiteNights';
 import { Darshan } from './effects/darshan/Darshan';
+import { Hundred } from './effects/hundred/Hundred';
+import { Kisses } from './effects/kisses/Kisses';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -160,6 +162,12 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'darshan') {
     return <Darshan onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'hundred') {
+    return <Hundred onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'kisses') {
+    return <Kisses onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;
