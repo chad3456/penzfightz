@@ -851,6 +851,38 @@ about the throat instead, which keeps the chin the highest thing on the card.
 
 [The long version.](docs/one-breath.md)
 
+## Wobble
+
+Six jelly dice on a dished table, with real rigid-body physics under them, so
+the number that comes up is the number they actually landed on.
+
+The material is the subject. A jelly die is a volume, not a coloured die: the
+body is transmissive so the tray and the far side show through the near side
+bent, the colour comes from **absorption** over a distance rather than from
+paint — which is why the corners are deeper than the flat of a face — the pips
+are lentils sunk under the surface rather than decals on it, and there is a
+piece of fruit set in the middle like a sweet. Three things there had to be
+measured rather than guessed: a transmissive material with no environment
+renders as flat grey, three.js's own `RoomEnvironment` makes a flat face mirror
+a light panel and print as a white square, and ACES tone mapping desaturates as
+it rolls off and turns a vivid pink jelly into a salmon one.
+
+Every landing flattens a die along the direction it was travelling and a soft
+damped spring lets it back out over about a second. That cannot be an object's
+`scale` — scale is applied in the object's own frame, so a die on its corner
+would squash along its corner rather than towards the table — so it is a
+world-space matrix, `S = s·I + (k − s)·(a ⊗ a)`, with the perpendicular axes
+growing as `1/√k` to keep the volume. Poke a die and it jumps; take hold of one
+and it stretches towards your hand, because the follow is deliberately soft and
+the lag *is* the effect.
+
+Shadows were invisible at first, and the material was not the reason — an
+opaque die and a transmissive one cast identically faint ones. An image-based
+light is not shadowed by anything, so the floor does not receive the shadow: a
+catcher just above it does, at whatever opacity looks right.
+
+[The long version.](docs/wobble.md)
+
 ## Running it
 
 ```sh

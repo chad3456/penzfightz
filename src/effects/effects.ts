@@ -22,7 +22,8 @@ export type EffectId =
   | 'darshan'
   | 'hundred'
   | 'kisses'
-  | 'breath';
+  | 'breath'
+  | 'wobble';
 
 export interface EffectDef {
   id: EffectId;
@@ -200,6 +201,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['100 drawings · one loaded brush', 'width is pressure, and so is colour', 'six attitudes, one gesture each'],
     ink: '#e2551f',
     wash: 'rgba(226, 85, 31, 0.1)',
+  },
+  {
+    id: 'wobble',
+    name: 'Wobble',
+    tagline: 'Six jelly dice on a dished table, and none of them lands like a bone one.',
+    blurb:
+      'Dice made of jelly. The body is transmissive and deep enough to carry its colour by absorption rather than by paint, the pips are lentils sunk just under the surface so the far ones show through the near ones, and there is a piece of fruit set in the middle like a sweet. Every landing flattens a die along the direction it was travelling and a soft damped spring lets it back out over about a second. Poke one and it jumps; take hold of one and it stretches towards your hand. Real rigid-body physics underneath, so the number that comes up is the number it actually landed on — and a die propped on an edge is flicked rather than read.',
+    spec: ['6 flavours · 1 to 6 dice', 'squash along the direction of travel', 'cocked dice get flicked, not read'],
+    ink: '#e0378f',
+    wash: 'rgba(224, 55, 143, 0.1)',
   },
 ];
 

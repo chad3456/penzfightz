@@ -28,6 +28,7 @@ import { Darshan } from './effects/darshan/Darshan';
 import { Hundred } from './effects/hundred/Hundred';
 import { Kisses } from './effects/kisses/Kisses';
 import { OneBreath } from './effects/breath/OneBreath';
+import { Wobble } from './effects/dice/Wobble';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -172,6 +173,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'breath') {
     return <OneBreath onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'wobble') {
+    return <Wobble onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;
