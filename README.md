@@ -883,6 +883,40 @@ catcher just above it does, at whatever opacity looks right.
 
 [The long version.](docs/wobble.md)
 
+## Set in Jelly
+
+A full chess set turned out of jelly — lemon against blackcurrant — with the
+whole of the rules underneath it and an opponent at three strengths.
+
+**The rules were proved before anything was drawn.** A chess program that looks
+right is not the same as one that is right, and the failure modes are all in the
+corners: castling through check, en passant that was legal a move ago, a rook
+capture that removes the castling right of the side being captured. So the move
+generator is checked by counting — `perft` walks the tree and the counts for the
+six standard test positions are published to the node, and all six match
+exactly, to four ply where the numbers are short enough to run. If one is off by
+one, the depth it goes wrong at tells you where to look.
+
+Five of the six men are a `LatheGeometry` and nothing else, because a turned
+chess piece is a profile spun about its axis. The profile has to start and end
+*on* the axis or the solid is a tube with an open top, which in a transmissive
+material means you see straight down the inside of it. Everything that is not a
+surface of revolution — crenellations, coronet, cross, the whole knight — is
+merged into the same geometry, or each part refracts on its own and the joins
+show as seams inside the jelly. The knight is an explicit outline rather than
+beziers: beziers are how you draw a horse's head and also how you get a shard,
+since one control point out of place loops the curve back through the shape and
+`ExtrudeGeometry` builds the self-intersecting result without complaint.
+
+The thing that took the longest to see was about the camera. **A king is one and
+a half squares tall, and a piece hides the square behind it by its height over
+the tangent of the pitch** — so at the fifty degrees a photograph of a chess set
+is taken from, White's own back rank covers the pawn rank in front of it and you
+cannot click your own e-pawn. The board looked completely fine in a screenshot;
+it was only found by trying to play a move through the interface.
+
+[The long version.](docs/set-in-jelly.md)
+
 ## Running it
 
 ```sh

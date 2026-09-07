@@ -16,7 +16,8 @@ export type GameId =
   | 'maze'
   | 'oncemore'
   | 'groundplan'
-  | 'meter';
+  | 'meter'
+  | 'chess';
 
 export interface GameDef {
   id: GameId;
@@ -188,6 +189,22 @@ export const GAMES: GameDef[] = [
     solo: true,
     ink: '#e0a52c',
     wash: 'rgba(224, 165, 44, 0.1)',
+    ready: true,
+  },
+  {
+    id: 'chess',
+    name: 'Set in Jelly',
+    tagline: 'Chess, in lemon and blackcurrant.',
+    alsoKnownAs: 'chess',
+    era: 'the long afternoon · one board, two chairs',
+    blurb:
+      'A full set turned out of jelly — lemon against blackcurrant, translucent enough that the light goes through a queen and comes out the colour of the queen. Every rule is in it: castling, en passant, promotion, the fifty-move rule, dead positions and threefold repetition, with the move generator checked against the published counts for the standard test positions. Play someone next to you, or the machine at three strengths.',
+    seats: { min: 1, max: 2 },
+    practice: true,
+    online: false,
+    solo: true,
+    ink: '#6b2a8f',
+    wash: 'rgba(107, 42, 143, 0.1)',
     ready: true,
   },
 ];
