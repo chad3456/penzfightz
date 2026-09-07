@@ -27,6 +27,7 @@ import { WhiteNights } from './effects/whitenights/WhiteNights';
 import { Darshan } from './effects/darshan/Darshan';
 import { Hundred } from './effects/hundred/Hundred';
 import { Kisses } from './effects/kisses/Kisses';
+import { OneBreath } from './effects/breath/OneBreath';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -168,6 +169,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'kisses') {
     return <Kisses onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'breath') {
+    return <OneBreath onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;

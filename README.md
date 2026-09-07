@@ -822,6 +822,35 @@ than at whatever their noses do. Nine kinds of hair, six inks, six papers.
 
 [The long version.](docs/a-hundred-kisses.md)
 
+## One Breath
+
+A hundred brush drawings of one woman in six attitudes — lying down, in profile,
+turned away, head back, resting on her arms, head and shoulders. Four or five
+marks each, and a great deal of paper.
+
+Nothing is stroked. `lineWidth` is constant along a path and a brush is nothing
+*but* its change of width, so every mark is a filled ribbon: the gesture is
+splined, resampled to an even step, given a width at each step and offset to
+both sides. The rule that makes it read as wet media rather than a fat pen is
+that **thin is also pale** — a brush carrying less pigment lays down less of it,
+so the width and the depth of the colour are the same variable. That means the
+ribbon cannot be one polygon, and overlapping translucent pieces print a ladder
+of dark rungs at every join, so the run is composited with `darken`: overlapping
+ink takes the deeper of the two rather than the sum, which is roughly what wet
+ink does anyway.
+
+The rest is anatomy, and it is where the work actually was. **The silhouette is
+almost never the face**: a head turned towards you shows its hair and its
+shoulder in outline, and the face is three interior marks — a nostril, a mouth,
+a closed lid. Head to shoulder in one smooth swell prints a bell; what makes a
+silhouette a person is two narrowings and one widening, in that order. The lips
+have a fraction of the nose's relief, and given equal swings in the landmark
+chain a profile prints as a zigzag. And a head thrown back, authored from
+scratch, came out as a mountain range — it is the profile chain tipped back
+about the throat instead, which keeps the chin the highest thing on the card.
+
+[The long version.](docs/one-breath.md)
+
 ## Running it
 
 ```sh

@@ -21,7 +21,8 @@ export type EffectId =
   | 'whitenights'
   | 'darshan'
   | 'hundred'
-  | 'kisses';
+  | 'kisses'
+  | 'breath';
 
 export interface EffectDef {
   id: EffectId;
@@ -189,6 +190,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['100 kisses · one line apiece', 'a confined random walk', 'anchored at the lips'],
     ink: '#b2545f',
     wash: 'rgba(178, 84, 95, 0.1)',
+  },
+  {
+    id: 'breath',
+    name: 'One Breath',
+    tagline: 'Four or five marks each, and a great deal of paper.',
+    blurb:
+      'A hundred brush drawings of one woman in six attitudes — lying down, in profile, turned away, head back, resting on her arms, head and shoulders. Nothing is stroked and nothing is outlined and filled: a stroked path has one width along its whole length and a brush is nothing but its change of width, so every mark is a ribbon offset to both sides by however hard the hand was pressing. Thin is also pale, because a brush carrying less pigment lays down less of it. The economy is the subject: the silhouette is almost never the face.',
+    spec: ['100 drawings · one loaded brush', 'width is pressure, and so is colour', 'six attitudes, one gesture each'],
+    ink: '#e2551f',
+    wash: 'rgba(226, 85, 31, 0.1)',
   },
 ];
 
