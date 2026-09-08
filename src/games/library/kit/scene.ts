@@ -328,6 +328,41 @@ export function build(spec: SceneSpec): Built {
   };
 }
 
+/**
+ * Where the camera may actually stand.
+ *
+ * A room has side walls, and a camera level with one of them sees it edge-on:
+ * a slab down one side of the frame with the scene behind it. That is easy to
+ * do by accident, because pulling a shot back along its own view axis scales
+ * *every* component of the offset — push a camera out for room to breathe and
+ * its sideways offset grows with it, straight into the wall it was standing
+ * inside of.
+ *
+ * So the rule lives here rather than in any one shot: inside a room, stay
+ * within the footprint horizontally, and take the distance that costs out in
+ * front instead, through the fourth wall — which is not there.
+ */
+export function viewpoint(spec: SceneSpec): { from: THREE.Vector3; look: THREE.Vector3; fov: number } {
+  const from = new THREE.Vector3(...spec.camera.from);
+  const look = new THREE.Vector3(...spec.camera.look);
+  const fov = spec.camera.fov ?? 42;
+  const r = spec.room;
+  if (!r) return { from, look, fov };
+
+  const limit = Math.max(0.6, r.w / 2 - 1.0);
+  if (Math.abs(from.x) <= limit) return { from, look, fov };
+
+  // Keep the distance the shot was composed at, and the height it was composed
+  // at; give back only the sideways swing, in depth.
+  const d = from.distanceTo(look);
+  const clamped = Math.sign(from.x) * limit;
+  const dx = clamped - look.x;
+  const dy = from.y - look.y;
+  const rest = d * d - dx * dx - dy * dy;
+  const dz = Math.sqrt(Math.max(rest, 0.25));
+  return { from: new THREE.Vector3(look.x + dx, from.y, look.z + Math.sign(from.z - look.z || 1) * dz), look, fov };
+}
+
 /** The lights and the fog for a scene, applied to a scene object. */
 export function dress(scene: THREE.Scene, spec: SceneSpec) {
   const palette = PALETTES[spec.palette];

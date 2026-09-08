@@ -114,6 +114,17 @@ the render. Three things it has to get right:
    the camera to whatever it is looking at, re-measured every frame, so the
    soft parts stay soft and do not swim during a move.
 
+One rule about rooms lives in the kit rather than in any shot: **inside a
+room, the camera stays within the room's footprint.** A camera level with a
+side wall sees it edge-on — a slab down one side of the frame with the scene
+hiding behind it — and that is easy to do by accident, because pulling a shot
+back along its own view axis scales *every* component of the offset. Push a
+camera out to give a room air and its sideways swing grows with it, straight
+into the wall it was standing inside of. `viewpoint()` clamps the sideways
+component and takes the distance that costs out in front instead, through the
+fourth wall, which is not there. It corrected 26 of the 26 interior shots, each
+one keeping the exact distance it was composed at.
+
 Props marked `look` can be pointed at and will say one line. Only those are
 raycast — testing the whole set every frame would check nine hundred grass
 tufts to find a lamp.

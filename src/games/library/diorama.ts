@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { build, dress, type Built, type SceneSpec } from './kit/scene';
+import { build, dress, viewpoint, type Built, type SceneSpec } from './kit/scene';
 import { makeFilm, type Film, type Rig } from './kit/stage';
 import { PALETTES } from './kit/paint';
 
@@ -34,12 +34,10 @@ interface Shot {
   drift: number;
 }
 
-const shotOf = (spec: SceneSpec): Shot => ({
-  from: new THREE.Vector3(...spec.camera.from),
-  look: new THREE.Vector3(...spec.camera.look),
-  fov: spec.camera.fov ?? 42,
-  drift: spec.drift ?? 0.14,
-});
+const shotOf = (spec: SceneSpec): Shot => {
+  const v = viewpoint(spec);
+  return { from: v.from, look: v.look, fov: v.fov, drift: spec.drift ?? 0.14 };
+};
 
 export interface Look {
   /** What the prop says when it is looked at. */
