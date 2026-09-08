@@ -21,7 +21,6 @@ export type EffectId =
   | 'whitenights'
   | 'darshan'
   | 'hundred'
-  | 'kisses'
   | 'breath'
   | 'wobble';
 
@@ -181,16 +180,6 @@ export const EFFECTS: EffectDef[] = [
     spec: ['100 techniques · one source field', 'resampling, not redrawing', 'tone in, marks out'],
     ink: '#b08a3c',
     wash: 'rgba(176, 138, 60, 0.1)',
-  },
-  {
-    id: 'kisses',
-    name: 'A Hundred Kisses',
-    tagline: 'One unbroken line each, and none of them has a plan.',
-    blurb:
-      'A hundred kisses in scribble. Nothing is outlined and filled: a pen with momentum is let loose inside each shape, wanders, and turns roughly back in when the next step would take it outside — one continuous line, no lifts, and the form appears because the line spent longer in some places than others. Two profiles anchored at the lips rather than at their centres, so a card can be a moment before, the moment itself, or a moment into it. Nine kinds of hair, six inks, and a hand that varies in how loose, how fast and how hard it presses.',
-    spec: ['100 kisses · one line apiece', 'a confined random walk', 'anchored at the lips'],
-    ink: '#b2545f',
-    wash: 'rgba(178, 84, 95, 0.1)',
   },
   {
     id: 'breath',

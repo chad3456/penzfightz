@@ -798,30 +798,6 @@ stops a third of the way up the card. None of them looked wrong in the code.
 
 [The long version.](docs/a-hundred-ways.md)
 
-## A Hundred Kisses
-
-A hundred kisses, all scribbled, no two the same.
-
-Two profiles meet at the lips and everything inside them is filled by a single
-pen that never lifts. Getting that fill right took three attempts. A zigzag
-gives you corduroy. An angled zigzag with a bow in it gives you hatching. What
-actually reads as a scribble is a **confined random walk with momentum**: turn
-by a little each step, step forward, and when you would leave the outline turn
-sharply and carry on — untidily, because a tidy bounce reads as a border.
-
-```ts
-a += (p.r() - 0.5) * (0.5 + p.hand.loose * 1.6);
-const nx = x + Math.cos(a) * step;
-const ny = y + Math.sin(a) * step;
-if (!inside(path, nx, ny)) { a += Math.PI * (0.7 + p.r() * 0.6); continue; }
-```
-
-The outline itself is a nineteen-point profile with the upper lip as the
-furthest-forward point on it, so the two faces meet where they should rather
-than at whatever their noses do. Nine kinds of hair, six inks, six papers.
-
-[The long version.](docs/a-hundred-kisses.md)
-
 ## One Breath
 
 A hundred brush drawings of one woman in six attitudes — lying down, in profile,
@@ -999,6 +975,31 @@ Add `?debug` to the URL to expose `window.__penfight` — the match store, pen
 positions, and `flick(power, angleDeg, strike)` for driving the physics from a
 test run.
 
+## The Reading Room
+
+Four short stories built as sets you stand in rather than pages you turn.
+Dostoevsky's *Dream of a Ridiculous Man*, Kafka's *Before the Law*, Poe's
+*Tell-Tale Heart* — all long out of copyright — and one original written for
+the shelf. You choose what happens; the endings are not the same twice.
+
+**A reading cannot get stuck, and that is checked rather than hoped for.** Four
+rules hold it: every choice points at a node that exists, every node either
+offers choices or ends, every node is reachable from the start, and — the one
+that matters — every node offers at least one choice with nothing gating it. A
+choice can depend on what you are carrying, and a room whose every exit is
+gated can be walked into holding the wrong things, with nothing to click. One
+door in every room is always open. Separately: from every node some ending is
+reachable, so the first rule keeps you moving and the second keeps you from
+moving for ever.
+
+Then it is measured. Eight thousand random readings of each of the four visited
+every node, offered every choice at least once, reached every ending, and none
+was stranded — which is the check that matters, because a choice can satisfy
+every structural rule and still be gated on a combination of marks a reader can
+never actually assemble.
+
+[The long version.](docs/the-reading-room.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1010,7 +1011,10 @@ word are a different matter, because a fictional character is copyright in a way
 a folk game is not; so the eight bladers, the twelve beasts and the marks on the
 tops here are ours, and the shelf card says as much.
 **Mafia** and **Raja Rani Chor Police** are traditional games with no owner at
-all. The lines in **The Book Stall** are Dostoevsky's, each printed with the
+all. Three of the four books in **The Reading Room** are adaptations of stories
+long out of copyright and each says so on its card; the fourth is an original,
+written for the shelf rather than adapted from a living writer, and its card
+says that instead. The lines in **The Book Stall** are Dostoevsky's, each printed with the
 book it came from; the English wording depends on the translator, which is why
 the receipt says so in its small print rather than pretending otherwise. The pen brands are named because they were real pens, the way you would
 name a real football.

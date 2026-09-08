@@ -10,6 +10,7 @@ import { BookStall } from './games/bookstall/BookStall';
 import { OnceMore } from './games/oncemore/OnceMore';
 import { GroundPlan } from './games/groundplan/GroundPlan';
 import { Chess } from './games/chess/Chess';
+import { Library } from './games/library/Library';
 import { Meter } from './games/meter/Meter';
 import { Maze } from './games/maze/Maze';
 import { DotFieldStage } from './effects/DotFieldStage';
@@ -27,7 +28,6 @@ import { Underground } from './effects/underground/Underground';
 import { WhiteNights } from './effects/whitenights/WhiteNights';
 import { Darshan } from './effects/darshan/Darshan';
 import { Hundred } from './effects/hundred/Hundred';
-import { Kisses } from './effects/kisses/Kisses';
 import { OneBreath } from './effects/breath/OneBreath';
 import { Wobble } from './effects/dice/Wobble';
 import type { EffectId } from './effects/effects';
@@ -169,9 +169,6 @@ export default function App() {
   if (shell === 'effect' && effect === 'hundred') {
     return <Hundred onExit={toShelf} />;
   }
-  if (shell === 'effect' && effect === 'kisses') {
-    return <Kisses onExit={toShelf} />;
-  }
   if (shell === 'effect' && effect === 'breath') {
     return <OneBreath onExit={toShelf} />;
   }
@@ -207,6 +204,7 @@ export default function App() {
     if (shell === 'game' && game === 'groundplan') return <GroundPlan onExit={toShelf} />;
     if (shell === 'game' && game === 'meter') return <Meter onExit={toShelf} />;
     if (shell === 'game' && game === 'chess') return <Chess onExit={toShelf} />;
+    if (shell === 'game' && game === 'library') return <Library onExit={toShelf} />;
     if (shell === 'game' && game === 'maze') return <Maze onExit={toShelf} />;
     return (
       <Arcade

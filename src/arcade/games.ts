@@ -17,7 +17,8 @@ export type GameId =
   | 'oncemore'
   | 'groundplan'
   | 'meter'
-  | 'chess';
+  | 'chess'
+  | 'library';
 
 export interface GameDef {
   id: GameId;
@@ -205,6 +206,21 @@ export const GAMES: GameDef[] = [
     solo: true,
     ink: '#6b2a8f',
     wash: 'rgba(107, 42, 143, 0.1)',
+    ready: true,
+  },
+  {
+    id: 'library',
+    name: 'The Reading Room',
+    tagline: 'Four short stories. You decide how they go.',
+    era: 'the back of the library · any wet afternoon',
+    blurb:
+      'Four stories built as rooms rather than pages — a Petersburg garret at four in the morning, a door in the country that was only ever yours, a floorboard with something under it, and a paper press in a language nobody speaks any more. Three are adaptations of work long out of copyright; the fourth was written for this shelf, and the card says so. Every scene is a set you can look around, and every reading is yours: the endings are not the same twice.',
+    seats: { min: 1, max: 1 },
+    practice: true,
+    online: false,
+    solo: true,
+    ink: '#2f5d50',
+    wash: 'rgba(47, 93, 80, 0.1)',
     ready: true,
   },
 ];
