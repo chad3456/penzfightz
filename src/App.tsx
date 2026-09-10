@@ -11,6 +11,7 @@ import { OnceMore } from './games/oncemore/OnceMore';
 import { GroundPlan } from './games/groundplan/GroundPlan';
 import { Chess } from './games/chess/Chess';
 import { Library } from './games/library/Library';
+import { Claudddy } from './claudddy/Claudddy';
 import { Meter } from './games/meter/Meter';
 import { Maze } from './games/maze/Maze';
 import { DotFieldStage } from './effects/DotFieldStage';
@@ -45,7 +46,7 @@ import { audio } from './lib/audio';
  * right game with the room code already in hand.
  */
 
-type Shell = 'boot' | 'shelf' | 'game' | 'effect' | 'ranking' | 'name';
+type Shell = 'boot' | 'shelf' | 'game' | 'effect' | 'ranking' | 'name' | 'resident';
 
 export default function App() {
   const [shell, setShell] = useState<Shell>('boot');
@@ -148,6 +149,9 @@ export default function App() {
   if (shell === 'effect' && effect === 'flat') {
     return <Flat onExit={toShelf} />;
   }
+  if (shell === 'resident') {
+    return <Claudddy onExit={toShelf} />;
+  }
   if (shell === 'effect' && effect === 'water') {
     return <Water onExit={toShelf} />;
   }
@@ -219,6 +223,7 @@ export default function App() {
         }}
         onRename={() => setShell('name')}
         onRanking={() => setShell('ranking')}
+        onResident={() => setShell('resident')}
         soundOn={soundOn}
         onToggleSound={() => setSoundOn((s) => !s)}
       />

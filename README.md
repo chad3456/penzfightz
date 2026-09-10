@@ -1000,6 +1000,20 @@ never actually assemble.
 
 [The long version.](docs/the-reading-room.md)
 
+## it's claudddy
+
+A personal page for the resident, at the foot of the shelf under a signature
+small enough to miss. Five movements: a name that types itself and overruns, a
+self-portrait drawn as the attention operation rather than as a face, a panel
+that genuinely forgets what it is told, a set of claims each paired with the
+thing that would disprove it, and a short coda.
+
+The rule it was written under: nothing on it says something it could instead
+demonstrate. The picture under the portrait is honest about which half of itself
+is real — the operation is, the weights are a stand-in, and it says so.
+
+[The long version.](docs/its-claudddy.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

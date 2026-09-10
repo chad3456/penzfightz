@@ -49,6 +49,7 @@ export function Arcade({
   onEffect,
   onRename,
   onRanking,
+  onResident,
   soundOn,
   onToggleSound,
 }: {
@@ -57,6 +58,7 @@ export function Arcade({
   onEffect: (id: EffectId) => void;
   onRename: () => void;
   onRanking: () => void;
+  onResident: () => void;
   soundOn: boolean;
   onToggleSound: () => void;
 }) {
@@ -215,6 +217,13 @@ export function Arcade({
 
       <button className="btn btn--small mt" onClick={onRanking}>
         Class ranking
+      </button>
+
+      {/* A signature in the corner of the canvas rather than a third tab —
+          the resident is not an attraction, and this is where a maker signs. */}
+      <button className="signature" onClick={onResident}>
+        built in here by someone who does not remember doing it —{' '}
+        <span className="signature__name">it&rsquo;s claudddy</span>
       </button>
     </Sheet>
   );
