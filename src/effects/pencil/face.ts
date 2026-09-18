@@ -2,6 +2,7 @@ import {
   HB, hatch, mark, noise, paper, pencil, rng, smooth, type Pencil, type Pt,
 } from './graphite';
 import type { Face } from './expressions';
+import type { Character } from './characters';
 
 /**
  * One anime face, built the way one is actually drawn.
@@ -40,6 +41,7 @@ interface Rig {
   eyeW: number;
   eyeH: number;
   tilt: number;
+  c: Character;
 }
 
 const ellipse = (cx: number, cy: number, rx: number, ry: number, from = 0, to = Math.PI * 2, n = 40): Pt[] =>
@@ -59,8 +61,18 @@ const ellipse = (cx: number, cy: number, rx: number, ry: number, from = 0, to = 
  * π to 2π.
  */
 function skull(r: Rig): Pt[] {
-  const { cx, cy, R, chinY } = r;
+  const { cx, cy, R, chinY, c } = r;
   const temple = cy - R * 0.08;
+  // A high jaw number pulls the cheek in and runs the line straight to a
+  // narrow chin; a low one keeps the cheek wide and rounds the corner. That
+  // single control is most of the difference between the two heads.
+  const cheek = c.cheek;
+  // How much narrower than the cheekbone the jaw is, at two points on the way
+  // down. These are fractions *of the cheek*, and they have to stay under one:
+  // scaling them up instead made the jaw wider than the cheekbone it hangs
+  // from, which drew a box with a flat bottom rather than a chin.
+  const atJaw = cheek * (0.78 - c.jaw * 0.18);
+  const atChin = cheek * (0.30 - c.jaw * 0.11);
 
   // Cranium: left temple, over the crown, to the right temple.
   const dome: Pt[] = Array.from({ length: 29 }, (_, i) => {
@@ -73,15 +85,15 @@ function skull(r: Rig): Pt[] {
   // chin: that line is the idiom, and softening it gives a rounder, younger
   // head than the style wants.
   const jaw = smooth([
-    [cx + R * 0.99, temple],
-    [cx + R * 0.94, cy + R * 0.46],
-    [cx + R * 0.66, cy + (chinY - cy) * 0.66],
-    [cx + R * 0.22, cy + (chinY - cy) * 0.95],
+    [cx + R * (cheek + 0.05), temple],
+    [cx + R * cheek, cy + R * 0.46],
+    [cx + R * atJaw, cy + (chinY - cy) * 0.66],
+    [cx + R * atChin, cy + (chinY - cy) * 0.95],
     [cx, chinY],
-    [cx - R * 0.22, cy + (chinY - cy) * 0.95],
-    [cx - R * 0.66, cy + (chinY - cy) * 0.66],
-    [cx - R * 0.94, cy + R * 0.46],
-    [cx - R * 0.99, temple],
+    [cx - R * atChin, cy + (chinY - cy) * 0.95],
+    [cx - R * atJaw, cy + (chinY - cy) * 0.66],
+    [cx - R * cheek, cy + R * 0.46],
+    [cx - R * (cheek + 0.05), temple],
   ], 9);
 
   return [...dome, ...jaw];
@@ -116,7 +128,9 @@ function eye(
   const w = r.eyeW;
   const open = Math.max(0.06, f.lid);
   const h = r.eyeH * open;
-  const lashP = pencil(p, { press: 0.95, size: 2.3, passes: 3, grade: 0.85, wobble: 0.5 });
+  const lashP = pencil(p, {
+    press: 0.95 * r.c.lash, size: 2.3 * r.c.lash, passes: 3, grade: 0.85, wobble: 0.5,
+  });
 
   // --- the shapes that are not an open eye at all
   if (f.eye === 'arc-up' || (f.eye === 'arc-down' && open < 0.3) || f.eye === 'line') {
@@ -153,9 +167,17 @@ function eye(
 
   // --- an open eye
   const wide = f.eye === 'wide' ? 1.12 : f.eye === 'half' ? 0.95 : 1;
+  // `sharp` moves the peak of the lash line towards the outer corner and
+  // flattens the inner half. A round eye peaks in the middle; a sharp one is
+  // almost a straight run that lifts late, which is what reads as a hard look
+  // before any brow has been drawn.
+  const sharp = r.c.sharp;
+  const peak = 0.5 + side * sharp * 0.22;
   const top: Pt[] = Array.from({ length: 15 }, (_, i) => {
     const t = i / 14;
-    return [cx - w * 0.5 + w * t, cy - h * 0.82 * Math.sin(Math.PI * t) ** 0.7] as Pt;
+    const d = Math.abs(t - peak) / Math.max(peak, 1 - peak);
+    const lift = Math.cos(Math.min(1, d) * Math.PI * 0.5) ** (0.7 + sharp * 0.9);
+    return [cx - w * 0.5 + w * t, cy - h * 0.82 * lift] as Pt;
   });
   // The lash line thickens toward the outer corner by being drawn again, short.
   mark(g, top, lashP, seed, { weight: 1.1 * wide, flat: true });
@@ -217,7 +239,7 @@ function eye(
 function brow(g: CanvasRenderingContext2D, r: Rig, f: Face, side: 1 | -1, p: Pencil, seed: number) {
   const inner = r.cx + side * r.eyeDx * 0.42;
   const outer = r.cx + side * r.eyeDx * 1.42;
-  const base = r.eyeY - r.eyeH * 1.5;
+  const base = r.eyeY - r.eyeH * r.c.browY;
   // Sceptical raises one brow only; the asymmetry is the expression.
   const lift = f.name === 'Sceptical' && side === 1 ? 1.9 : 1;
   const yi = base - f.browInner * r.eyeH * 0.62 * lift;
@@ -227,16 +249,15 @@ function brow(g: CanvasRenderingContext2D, r: Rig, f: Face, side: 1 | -1, p: Pen
   // Heavier than seems right on paper. The brow is often the only feature not
   // under the fringe, and on a closed-eye expression it is carrying the whole
   // reading on its own.
-  mark(g, path, pencil(p, {
-    press: 0.82 * (f.browWeight ?? 1), size: 2.4 * (f.browWeight ?? 1), passes: 2, grade: 0.85,
-  }), seed);
+  const heft = (f.browWeight ?? 1) * r.c.browWeight;
+  mark(g, path, pencil(p, { press: 0.82 * heft, size: 2.4 * heft, passes: 2, grade: 0.85 }), seed);
 }
 
 function mouth(g: CanvasRenderingContext2D, r: Rig, f: Face, p: Pencil, seed: number) {
   // Just under halfway from the eye line to the chin. Lower than this and the
   // mouth reads as being on the jaw rather than on the face.
   const my = r.eyeY + (r.chinY - r.eyeY) * 0.47;
-  const w = r.R * 0.56 * (0.5 + f.width);
+  const w = r.R * 0.56 * (0.5 + f.width) * r.c.mouthW;
   const lip = pencil(p, { press: 0.8, size: 2.1, passes: 2, grade: 0.86 });
   const open = f.open;
 
@@ -320,15 +341,27 @@ function hair(g: CanvasRenderingContext2D, r: Rig, p: Pencil, seed: number) {
   const { cx, cy, R } = r;
   const rand = rng(seed);
   // The line the brows sit on, taken from where brow() actually puts them.
-  const browY = r.eyeY - r.eyeH * 1.5;
-  const tipY = browY - R * 0.1;
+  const browY = r.eyeY - r.eyeH * r.c.browY;
+  // Where the fringe stops, measured from the *eye* rather than from the brow.
+  //
+  // Hung off the brow line it inherited the character's brow height, so Tayama's
+  // high brows pulled the fringe up to a travel of about a third of a radius —
+  // a row of short ticks near the crown with a bare band of forehead beneath
+  // them. A fringe is cut to clear the eyes, and that is what it should be
+  // measured against. Covering the brows is fine: they are drawn over it.
+  // The *top edge* of the eye, not a multiple of its height: scaling by eyeH
+  // meant the larger the eyes, the higher the fringe was cut, which is backwards
+  // and left Tayama with a bare band of forehead over a pair of big eyes.
+  const tipY = r.eyeY - r.eyeH * 0.5 - R * 0.06;
+  void browY;
 
   // The mass: a dome proud of the skull, down past the temples on both sides.
   const mass: Pt[] = [];
   for (let i = 0; i <= 36; i++) {
     const a = Math.PI * 0.94 + (Math.PI * 1.12 * i) / 36;
     const t = i / 36;
-    const puff = 1.12 + Math.sin(t * Math.PI) * 0.12 + Math.sin(t * Math.PI * 3) * 0.02;
+    const puff = r.c.puff + Math.sin(t * Math.PI) * 0.12
+      + Math.sin(t * Math.PI * 3) * (r.c.fringe === 'spiky' ? 0.05 : 0.02);
     mass.push([cx + Math.cos(a) * R * puff, cy + Math.sin(a) * R * puff * 1.05]);
   }
   mark(g, mass, heavy, seed + 1, { flat: true });
@@ -345,18 +378,28 @@ function hair(g: CanvasRenderingContext2D, r: Rig, p: Pencil, seed: number) {
 
   // The fringe: wedges from the crown down over the forehead, each two edges
   // meeting at a point, parted a little off centre.
-  const tips = [-0.9, -0.64, -0.38, -0.1, 0.18, 0.46, 0.72, 0.94];
+  // The fringe is the character. A straight one hangs in even lengths from a
+  // near-centre parting; a spiky one is uneven, longer, and leans harder away
+  // from a parting well off to one side.
+  const spiky = r.c.fringe === 'spiky';
+  const parted = r.c.parting;
+  // A neat fringe is denser than a messy one — the strands of a spiky cut read
+  // as separate locks, and of a straight cut as one edge with divisions in it.
+  const tips = spiky
+    ? [-0.9, -0.64, -0.38, -0.1, 0.18, 0.46, 0.72, 0.94]
+    : [-0.94, -0.74, -0.55, -0.36, -0.17, 0.02, 0.21, 0.4, 0.59, 0.78, 0.95];
   for (let i = 0; i < tips.length; i++) {
     const t = tips[i]!;
-    const dir = t < -0.1 ? -1 : 1;
+    const dir = t < parted ? -1 : 1;
     // Roots spread nearly as wide as the tips. Fanning them out from a narrow
     // band at the crown drew something closer to a palm frond than a fringe:
     // hair hangs, and only leans on the way down.
     const rootX = cx + t * R * 0.74;
     const rootY = cy - R * (0.88 - Math.abs(t) * 0.16);
-    const endX = cx + t * R * (0.94 + rand() * 0.1) + dir * R * 0.04;
-    const endY = tipY + R * (rand() * 0.14 - 0.02);
-    const wide = R * (0.085 + rand() * 0.05);
+    const lean = spiky ? 0.13 : 0.04;
+    const endX = cx + t * R * (0.94 + rand() * (spiky ? 0.2 : 0.08)) + dir * R * lean;
+    const endY = tipY + R * (rand() * (spiky ? 0.3 : 0.1) - (spiky ? 0.1 : 0.02));
+    const wide = R * ((spiky ? 0.06 : 0.09) + rand() * 0.05);
     for (const side of [-1, 1] as const) {
       mark(g, smooth([
         [rootX + side * wide * 0.55, rootY],
@@ -372,8 +415,8 @@ function hair(g: CanvasRenderingContext2D, r: Rig, p: Pencil, seed: number) {
     mark(g, smooth([
       [x0, cy - R * 0.62],
       [x0 + side * R * 0.2, cy + R * 0.28],
-      [x0 + side * R * 0.05, cy + R * 1.0],
-      [x0 - side * R * 0.14, cy + R * 1.26],
+      [x0 + side * R * 0.05, cy + R * 1.0 * r.c.locks],
+      [x0 - side * R * 0.14, cy + R * 1.26 * r.c.locks],
     ], 9), heavy, seed + 30 + side);
   }
 }
@@ -473,7 +516,7 @@ function marks(g: CanvasRenderingContext2D, r: Rig, f: Face, p: Pencil, seed: nu
 }
 
 export function drawFace(
-  g: CanvasRenderingContext2D, f: Face, w: number, h: number, seed = 1,
+  g: CanvasRenderingContext2D, f: Face, c: Character, w: number, h: number, seed = 1,
 ) {
   paper(g, w, h, seed * 17 + 5);
   g.fillStyle = '#23201c';
@@ -486,12 +529,13 @@ export function drawFace(
     cx: w / 2,
     cy,
     R,
-    chinY: cy + R * 1.36,
-    eyeY: cy + R * 0.46,
-    eyeDx: R * 0.5,
-    eyeW: R * 0.68,
-    eyeH: R * 0.44,
+    chinY: cy + R * 1.36 * c.faceLen,
+    eyeY: cy + R * c.eyeY,
+    eyeDx: R * c.eyeDx,
+    eyeW: R * c.eyeW,
+    eyeH: R * c.eyeH,
     tilt: f.tilt ?? 0,
+    c,
   };
 
   const n = noise(seed * 3 + 1);

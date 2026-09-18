@@ -1014,9 +1014,10 @@ is real — the operation is, the weights are a stand-in, and it says so.
 
 [The long version.](docs/its-claudddy.md)
 
-## A Hundred Faces
+## Sasaki & Tayama
 
-One anime character, a hundred named expressions, in pencil.
+Two anime characters, fifty named expressions each, in pencil — a hundred cards,
+every expression drawn on both of them so each has a twin one place along.
 
 **Nothing on the page is stroked.** A stroked path has one darkness and two
 clean edges and graphite has neither, so every mark is a run of small deposits
@@ -1031,7 +1032,13 @@ raised at the outer end is scepticism, and halfway between them is nothing at
 all. Each of the hundred is a named expression first and a set of numbers
 second, across ten families.
 
-[The long version.](docs/a-hundred-faces.md)
+**What makes two faces read as two people** is never the expression — a
+character only recognisable when smiling is not recognisable. It is the jaw, the
+eye shape, where the brow sits at rest, and above all the hair. Neither is a
+reproduction of an existing design; there is no reference art for either in this
+repository, so these are two originals built to be told apart.
+
+[The long version.](docs/sasaki-and-tayama.md)
 
 ## A note on names
 

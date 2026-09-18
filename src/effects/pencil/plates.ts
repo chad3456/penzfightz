@@ -1,5 +1,5 @@
 import { ASPECT, drawFace } from './face';
-import type { Face } from './expressions';
+import type { Variant } from './variants';
 import type { Plate } from '../globe/Globe';
 
 export { ASPECT };
@@ -32,7 +32,7 @@ const idle: () => Promise<void> =
         return () => new Promise<void>((r) => { waiting.push(r); ch.port2.postMessage(0); });
       })();
 
-export async function bakeFaces(list: Face[], opts: BakeOptions = {}): Promise<Plate[]> {
+export async function bakeFaces(list: Variant[], opts: BakeOptions = {}): Promise<Plate[]> {
   const cell = opts.cell ?? 176;
   const grid = opts.grid ?? 10;
   const seed = opts.seed ?? 1;
@@ -59,7 +59,8 @@ export async function bakeFaces(list: Face[], opts: BakeOptions = {}): Promise<P
       g.clip();
       // The seed is the hand, not the face: the same expression drawn again is
       // the same expression, drawn slightly differently.
-      drawFace(g, list[i]!, cell, tall, seed * 131 + i + 1);
+      const v = list[i]!;
+      drawFace(g, v.face, v.who, cell, tall, seed * 131 + i + 1);
       g.restore();
       done++;
       if (k % 4 === 3) await idle();
@@ -78,11 +79,11 @@ export async function bakeFaces(list: Face[], opts: BakeOptions = {}): Promise<P
 }
 
 /** Drawn again at size, rather than an atlas cell scaled up. */
-export function printFace(f: Face, width: number, seed: number): HTMLCanvasElement {
+export function printFace(v: Variant, width: number, seed: number): HTMLCanvasElement {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = Math.round(width / ASPECT);
   const g = canvas.getContext('2d');
-  if (g) drawFace(g, f, canvas.width, canvas.height, seed);
+  if (g) drawFace(g, v.face, v.who, canvas.width, canvas.height, seed);
   return canvas;
 }

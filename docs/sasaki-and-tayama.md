@@ -1,7 +1,33 @@
-# A Hundred Faces
+# Sasaki & Tayama
 
-One anime character, a hundred named expressions, drawn in pencil. Black and
-white, on paper.
+Two anime characters, fifty named expressions each, drawn in pencil. Black and
+white, on paper. A hundred cards, arranged so every expression appears twice —
+once on each of them, one place apart.
+
+## On whose faces these are
+
+There is no reference art for either of them in this repository and none
+reachable from it, so nothing here reproduces an existing design. These are two
+original characters built to be told apart, wearing the names they were asked
+for. If a specific published pair was meant, this will not look like them, and
+that is better known before than after.
+
+## What makes two anime faces read as two people
+
+Not the expression — that is the other axis entirely, and a character who is
+only recognisable when smiling is not recognisable. It is the constant part:
+the length of the jaw, how wide and how round the eye is, where the brow sits at
+rest, and above all the hair, which is what a viewer actually uses at a glance.
+
+- **Sasaki** — long jaw, low heavy brows, narrow eyes with a hard outer corner,
+  and a spiky fringe parted well off centre.
+- **Tayama** — a shorter, rounder face, eyes a size larger and kept round, fine
+  brows set high, and a neat dense fringe.
+
+The pairing is the point. A hundred expressions split fifty-fifty would pack in
+more variety and would be the wrong choice: you cannot compare two faces that
+are never pulling the same face, and the constant part of a design is only
+visible when the variable part is held still.
 
 ## Why nothing is stroked
 
@@ -46,8 +72,8 @@ and the numbers were chosen to produce that name. That is also what makes them
 tell apart at thumbnail size: they differ along the axes a face actually uses
 rather than along all of them at once.
 
-Ten families: joy, sorrow, anger, fear, surprise, disdain, tender, thought,
-exhaustion, unhinged.
+Ten families, five expressions from each: joy, sorrow, anger, fear, surprise,
+disdain, tender, thought, exhaustion, unhinged.
 
 ## What the renders caught
 
@@ -78,9 +104,30 @@ Every one of these was invisible in the code and obvious in a picture.
 - **Tears left the face.** At full length the streak ran a whole radius below the
   eye, which is past the chin, leaving two small circles hanging in the air.
 
+## What the second pass caught
+
+Parameterising one face into two found three more, all of them the same kind of
+mistake — a number that was fine as a constant and wrong as a ratio.
+
+- **The jaw became a box.** The new taper scaled the jaw's width *up* from the
+  cheekbone instead of down, so the first control point below the cheek was
+  wider than the cheek itself and the chin came out flat-bottomed.
+- **The fringe was cut against the brow**, so it inherited each character's brow
+  height: Tayama's high brows dragged the fringe up to a travel of about a third
+  of a radius and left a bare band of forehead under a row of ticks.
+- **Then it was cut against a multiple of eye height**, which is backwards —
+  the larger the eyes, the higher the fringe. It is cut to clear the eyes, so
+  the eye's top edge is what it has to be measured from.
+
+And one that no render could have shown: the character bar and the family bar
+were positioned independently, and the family row — which wraps to two lines at
+most widths — grew upward through the character row and swallowed its clicks.
+The buttons were visible, enabled, and completely unusable. Only driving them
+found it.
+
 ## Reading the page
 
-Ten family buttons filter the hundred. **Draw them again** re-runs the same
+Three character buttons and ten family buttons, which combine. **Draw them again** re-runs the same
 hundred expressions with a different hand — the expression is the same, the
 sketch of it is not. Clicking a face opens it drawn again at size rather than an
 atlas cell scaled up, with arrow keys to walk the set.

@@ -6923,17 +6923,52 @@ button.card:hover:not(:disabled) {
 
 .pencil .book__globe { background: #20201e; }
 
-.pencil__families {
+/*
+   One container, two rows.
+   Positioning the two bars independently meant the family row — which wraps to
+   two lines at most widths — grew upward through the character row above it and
+   swallowed its clicks. The bar was visible, enabled and completely unusable,
+   which is the failure mode a screenshot cannot show you.
+*/
+.pencil__bars {
   position: absolute;
   left: 50%;
-  bottom: 22px;
+  bottom: 18px;
   transform: translateX(-50%);
   z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: min(980px, calc(100% - 28px));
+}
+
+.pencil__who {
+  display: flex;
+  gap: 6px;
+  padding: 7px 9px;
+  border-radius: 14px;
+  background: rgba(32, 32, 30, 0.72);
+  border: 1px solid rgba(242, 240, 234, 0.12);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+.pencil__who .pencil__fam { font-size: 14px; padding: 7px 15px; }
+
+.pencil__whonote {
+  margin-top: 8px !important;
+  padding-left: 11px;
+  border-left: 1px solid rgba(242, 240, 234, 0.22);
+  font-style: italic;
+  opacity: 0.74;
+}
+
+.pencil__families {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
-  max-width: min(960px, calc(100% - 32px));
+  max-width: 100%;
   padding: 8px 10px;
   border-radius: 14px;
   background: rgba(32, 32, 30, 0.72);
@@ -6981,7 +7016,10 @@ button.card:hover:not(:disabled) {
 }
 
 @media (max-width: 720px) {
-  .pencil__families { bottom: 12px; gap: 4px; padding: 6px 7px; }
+  .pencil__bars { bottom: 10px; gap: 6px; }
+  .pencil__who { padding: 5px 7px; }
+  .pencil__who .pencil__fam { font-size: 12.5px; padding: 6px 11px; }
+  .pencil__families { gap: 4px; padding: 6px 7px; }
   .pencil__fam { padding: 5px 8px; font-size: 11.5px; }
   .pencil__famn { display: none; }
 }

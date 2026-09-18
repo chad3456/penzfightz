@@ -2,7 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Globe, type Layout, type Plate } from '../globe/Globe';
 import { LayoutToggle } from '../globe/LayoutToggle';
 import { bakeFaces, printFace } from './plates';
-import { FACES, FAMILIES, type Face, type Family } from './expressions';
+import { FAMILIES, type Family } from './expressions';
+import { CAST } from './characters';
+import { VARIANTS, type Variant } from './variants';
 import { sfx } from '../../lib/audio';
 import { Loader } from '../loader/Loader';
 import type { Sheet } from '../loader/press';
@@ -44,6 +46,7 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
   const [seed, setSeed] = useState(1);
   const [layout, setLayout] = useState<Layout>('grid');
   const [only, setOnly] = useState<'all' | Family>('all');
+  const [who, setWho] = useState<'both' | string>('both');
   const [plates, setPlates] = useState<Plate[]>([]);
   const [baked, setBaked] = useState(0);
   const [live, setLive] = useState<Sheet | null>(null);
@@ -51,8 +54,11 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
   const [hover, setHover] = useState<number | null>(null);
 
   const shown = useMemo(
-    () => (only === 'all' ? FACES : FACES.filter((f) => f.family === only)),
-    [only],
+    () =>
+      VARIANTS.filter(
+        (v) => (only === 'all' || v.face.family === only) && (who === 'both' || v.who.id === who),
+      ),
+    [only, who],
   );
 
   useEffect(() => {
@@ -77,6 +83,10 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
       clearTimeout(t);
     };
   }, [shown, seed]);
+
+  // Both filters feed one list, so changing either has to reset the opened card
+  // rather than leave an index pointing into a set that no longer has it.
+  useEffect(() => setOpen(null), [only, who]);
 
   const step = useCallback(
     (d: number) => {
@@ -117,8 +127,8 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
 
       <div className="ink__top">
         <div className="glass ink__plate">
-          <div className="ink__eyebrow">100 expressions · one face · one pencil</div>
-          <h1 className="ink__title">A Hundred Faces</h1>
+          <div className="ink__eyebrow">50 expressions · two faces · one pencil</div>
+          <h1 className="ink__title">Sasaki &amp; Tayama</h1>
         </div>
         <div className="ink__actions">
           <LayoutToggle layout={layout} onChange={setLayout} className="glass glass--btn" />
@@ -137,12 +147,32 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
         </div>
       </div>
 
+      <div className="pencil__bars">
+      <div className="pencil__who">
+        <button
+          className={`pencil__fam${who === 'both' ? ' pencil__fam--on' : ''}`}
+          onClick={() => { sfx.tick(); setWho('both'); }}
+        >
+          Both
+        </button>
+        {CAST.map((c) => (
+          <button
+            key={c.id}
+            className={`pencil__fam${who === c.id ? ' pencil__fam--on' : ''}`}
+            onClick={() => { sfx.tick(); setWho(c.id); }}
+          >
+            {c.name}
+            <span className="pencil__famn">{VARIANTS.filter((v) => v.who.id === c.id).length}</span>
+          </button>
+        ))}
+      </div>
+
       <div className="pencil__families">
         <button
           className={`pencil__fam${only === 'all' ? ' pencil__fam--on' : ''}`}
           onClick={() => { sfx.tick(); setOnly('all'); }}
         >
-          All 100
+          All
         </button>
         {FAMILIES.map((fam) => (
           <button
@@ -151,9 +181,12 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
             onClick={() => { sfx.tick(); setOnly(fam.id); }}
           >
             {fam.label}
-            <span className="pencil__famn">{FACES.filter((f) => f.family === fam.id).length}</span>
+            <span className="pencil__famn">
+              {VARIANTS.filter((v) => v.face.family === fam.id && (who === 'both' || v.who.id === who)).length}
+            </span>
           </button>
         ))}
+      </div>
       </div>
 
       <div className="glass book__lede">
@@ -167,7 +200,7 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
 
       {baked < 1 && (
         <Loader
-          title="A Hundred Faces"
+          title="Sasaki &amp; Tayama"
           done={Math.round(baked * shown.length)}
           total={shown.length}
           plates={live ? [...plates, live] : plates}
@@ -182,8 +215,10 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
 
       {hover !== null && shown[hover] && (
         <div className="glass book__peek pencil__peek">
-          <div className="pencil__peektitle">{shown[hover]!.name}</div>
-          <div className="pencil__peekmeta">{shown[hover]!.family}</div>
+          <div className="pencil__peektitle">{shown[hover]!.face.name}</div>
+          <div className="pencil__peekmeta">
+            {shown[hover]!.who.name} · {shown[hover]!.face.family}
+          </div>
         </div>
       )}
 
@@ -191,13 +226,16 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
         <div className="book__sheet" onClick={() => setOpen(null)}>
           <div className="glass book__sheetinner" onClick={(e) => e.stopPropagation()}>
             <div className="book__print">
-              <PrintOne f={one} seed={seed * 131 + (open ?? 0) + 1} />
+              <PrintOne v={one} seed={seed * 131 + (open ?? 0) + 1} />
             </div>
             <div className="book__caption">
-              <div className="book__name">{one.name}</div>
-              <div className="book__note">{SAID[one.family]}</div>
+              <div className="book__name">
+                {one.who.name} — {one.face.name}
+              </div>
+              <div className="book__note">{SAID[one.face.family]}</div>
+              <div className="book__note pencil__whonote">{one.who.note}</div>
               <div className="book__meta">
-                {(open ?? 0) + 1} of {shown.length} · {one.family}
+                {(open ?? 0) + 1} of {shown.length} · {one.face.family}
               </div>
               <div className="book__nav">
                 <button className="glass glass--btn" onClick={() => step(-1)}>← Previous</button>
@@ -212,13 +250,13 @@ export function Sketchbook({ onExit }: { onExit: () => void }) {
   );
 }
 
-function PrintOne({ f, seed }: { f: Face; seed: number }) {
+function PrintOne({ v, seed }: { v: Variant; seed: number }) {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = host.current;
     if (!el) return;
     const w = Math.min(420, Math.max(250, Math.round(window.innerWidth - 96)));
-    el.replaceChildren(printFace(f, w, seed));
-  }, [f, seed]);
+    el.replaceChildren(printFace(v, w, seed));
+  }, [v, seed]);
   return <div className="book__printhost" ref={host} />;
 }
