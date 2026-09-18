@@ -6913,3 +6913,75 @@ button.card:hover:not(:disabled) {
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
+
+/* ------------------------------------------------------- A Hundred Faces */
+/*
+   Graphite on cartridge paper, so the room around it is warm grey rather than
+   the near-black the other effects use — a pencil drawing floated on black
+   reads as a photograph of a drawing.
+*/
+
+.pencil .book__globe { background: #20201e; }
+
+.pencil__families {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: min(960px, calc(100% - 32px));
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(32, 32, 30, 0.72);
+  border: 1px solid rgba(242, 240, 234, 0.12);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+.pencil__fam {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(242, 240, 234, 0.16);
+  background: none;
+  color: rgba(242, 240, 234, 0.66);
+  font: 400 12.5px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+.pencil__fam:hover { color: #f2f0ea; border-color: rgba(242, 240, 234, 0.4); }
+.pencil__fam--on {
+  background: #f2f0ea;
+  border-color: #f2f0ea;
+  color: #20201e;
+}
+.pencil__famn {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+}
+
+.pencil__peektitle {
+  font: 400 17px/1.15 Georgia, "Times New Roman", serif;
+  color: #f2f0ea;
+}
+.pencil__peekmeta {
+  margin-top: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(242, 240, 234, 0.46);
+}
+
+@media (max-width: 720px) {
+  .pencil__families { bottom: 12px; gap: 4px; padding: 6px 7px; }
+  .pencil__fam { padding: 5px 8px; font-size: 11.5px; }
+  .pencil__famn { display: none; }
+}

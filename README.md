@@ -1014,6 +1014,25 @@ is real — the operation is, the weights are a stand-in, and it says so.
 
 [The long version.](docs/its-claudddy.md)
 
+## A Hundred Faces
+
+One anime character, a hundred named expressions, in pencil.
+
+**Nothing on the page is stroked.** A stroked path has one darkness and two
+clean edges and graphite has neither, so every mark is a run of small deposits
+whose spacing flickers with the tooth of the paper, laid two or three times over
+because a sketched line is several passes that nearly agree. The construction
+circle is left showing under the face: rubbing it out would be tidier and would
+stop the drawing reading as a sketch.
+
+**The expressions are a taxonomy, not a jitter.** A face is not a random point in
+parameter space — a brow raised at the inner end is grief and the same brow
+raised at the outer end is scepticism, and halfway between them is nothing at
+all. Each of the hundred is a named expression first and a set of numbers
+second, across ten families.
+
+[The long version.](docs/a-hundred-faces.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

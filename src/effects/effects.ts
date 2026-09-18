@@ -22,7 +22,8 @@ export type EffectId =
   | 'darshan'
   | 'hundred'
   | 'breath'
-  | 'wobble';
+  | 'wobble'
+  | 'pencil';
 
 export interface EffectDef {
   id: EffectId;
@@ -200,6 +201,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['6 flavours · 1 to 6 dice', 'squash along the direction of travel', 'cocked dice get flicked, not read'],
     ink: '#e0378f',
     wash: 'rgba(224, 55, 143, 0.1)',
+  },
+  {
+    id: 'pencil',
+    name: 'A Hundred Faces',
+    tagline: 'One character, a hundred expressions, one pencil.',
+    blurb:
+      'A hundred pencil sketches of the same anime face, each of them a different named expression — grief, scepticism, cold fury, the moment somebody realises. Nothing is stroked: a stroked path has one darkness and two clean edges, and graphite has neither, so every mark is a run of small deposits whose spacing flickers with the tooth of the paper, laid two or three times over because a sketched line is several passes that nearly agree. The construction circle is left showing under the face, because rubbing it out would stop the drawing reading as a sketch. The expressions are a taxonomy rather than a jitter — a brow raised at the inner end is grief and the same brow raised at the outer end is scepticism, and halfway between them is nothing.',
+    spec: ['100 expressions · 10 families', 'deposits, never strokes', 'black and white, on paper'],
+    ink: '#6d665c',
+    wash: 'rgba(109, 102, 92, 0.12)',
   },
 ];
 
