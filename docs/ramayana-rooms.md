@@ -71,6 +71,63 @@ Misregistration is per ink, in fractions of a pixel: the drum never lands twice
 in the same place, and a print where all five plates line up perfectly reads as
 a filter.
 
+## The line plate
+
+What separates these prints from a flat vector picture is that **everything is
+drawn first and coloured second**: there is a crisp dark keyline round the whole
+of every object, and the halftone colour sits inside it. Take the line away and
+the same shapes, in the same palette, read as a chart.
+
+So the key is not one of the five screened inks. It is a sixth plate, held in
+colour, and it prints solid and last — the way a black line plate goes on a
+press. Every primitive in `iso.ts` puts its own outline on it: a box draws its
+silhouette hexagon plus the three edges meeting at the near top corner, a room
+draws the cutaway outline and the inside corner, a person draws a torso and a
+head.
+
+The silhouette is easy to get wrong in a way that is invisible in the code and
+glaring on the page. Put the *near top* corner on the outline and leave off the
+far bottom-right, and every solid in the picture reads as an open crate — the
+near top corner is where the three visible faces meet, so it is an interior
+vertex, not part of the edge.
+
+## Opacity, which a press does not have
+
+A press multiplies. Draw a box on a wall and you get box *times* wall: two
+screens at two angles, both of them visible, and the object reads as though you
+can see straight through it. Twenty-five rooms of that looks like a stack of
+transparencies.
+
+Real separation art does not work that way. Things in front **knock out** the
+things behind them, and only the deliberate overprints — light, shadow, a thin
+rug — are left to multiply. So `Press.solid()` clears the shape out of all five
+plates and then prints one ink into it, and every object uses it; `Press.on()`
+overprints and is kept for texture; `Press.over()` puts ink down without
+claiming any sheet at all, which is what light needs.
+
+The knockout takes the shape as a **stencil** — the drawing is run once onto a
+scratch plate and flattened to solid white through its own alpha. Running the
+caller's drawing straight onto each plate does not work, because a drawing sets
+its own greys as it goes, and a knockout performed in mid-grey is not a knockout.
+It is a smear, and it looks exactly like the object went translucent.
+
+Two consequences follow, and both of them bit:
+
+**The line plate needs depth too.** The key prints last and over everything,
+which is right for a press and wrong for a picture unless something orders it —
+without it, the room's own floor-and-wall lines draw straight across the front
+of every object standing in the room. A knockout therefore clears the key under
+the shape as well, which puts the line plate into painter's order along with the
+colour.
+
+**A room has to be painted back to front and bottom up.** Shell, then whatever
+lies flat on the floor, then what stands on it, then people, then the light. Get
+it wrong and the failure is silent and total: a rug drawn after the altar it is
+under does not tint the altar, it erases it, and the room comes back missing the
+thing it is about. That is exactly what happened to the fire in room one and to
+six houses in room twenty-five, where a run of windows drawn onto the back wall
+punched holes straight through the houses standing in front of it.
+
 ## Two things the press has to do that a press does not
 
 **A room has to print with a transparent surround.** Filling paper across the
@@ -108,11 +165,26 @@ The origin is the *top* of the diamond, +x runs down-right, +z runs down-left.
 height fills its sheet with a consistent margin, which is what lets twenty-five
 rooms of different sizes sit on one lattice without being individually tuned.
 
-Everything in `kit.ts` is silhouette, because a person is about fourteen pixels
-tall in a four-hundred-pixel room. A figure is a tapered slab and a head, and
-one shape on the head — a crown, a topknot, a helm, a veil — is the whole of
-characterisation at that size. That is genuinely enough: the reference prints
-carry an entire party on figures with no faces.
+Everything in `kit.ts` is silhouette, because a person is about twenty pixels
+tall in a four-hundred-pixel room. A figure is a rounded torso, a head and a cap
+of hair, and one shape on the head — a crown, a topknot, a helm, a veil — is the
+whole of characterisation at that size. That is genuinely enough: the reference
+prints carry an entire party on figures with no faces.
+
+## A room is full
+
+Every room here carries somewhere between thirty and eighty objects, and that is
+not decoration. **A room with eight things in it does not read as restrained, it
+reads as unfinished.** The reference prints are packed: every shelf has separate
+spines on it, every table has things on it, and there is always something on the
+floor that somebody put down and did not pick up.
+
+`bookcase()` is the object that proves it. A shelf painted as a block of colour
+is furniture; the same shelf with sixty separate spines, each a slightly
+different height and colour, is a library. It costs one loop, and it is the
+difference between the reference and a mockup of the reference. Floors get the
+same treatment — a weave, a plaid, boards, tiles — because a flat floor makes
+everything standing on it look pasted on.
 
 ## The plan is a plan
 

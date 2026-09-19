@@ -27,7 +27,7 @@ const CELL_H = Math.round(CELL_W * 0.78);
  * them. This only works now that a room prints with a transparent surround.
  */
 const STEP_X = 0.5;
-const STEP_Y = 0.5;
+const STEP_Y = 0.54;
 const COLS = 5;
 
 const KANDA_NOTE: Record<Kanda, string> = {

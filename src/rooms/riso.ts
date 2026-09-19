@@ -43,6 +43,19 @@ export const INKS: InkSpec[] = [
 
 export const PAPER = '#f4eee2';
 
+/**
+ * The key line.
+ *
+ * The thing that separates these prints from a flat vector picture is that
+ * every object is *drawn* first and coloured second: there is a crisp dark
+ * keyline round the whole of everything, and the halftone colour sits inside
+ * it. Take the line away and the same shapes read as a chart.
+ *
+ * So the key is not one of the five screened inks — it prints solid, over the
+ * top of all of them, the way a black line plate goes on last.
+ */
+export const KEY = '#2c3346';
+
 const BY_ID = new Map(INKS.map((i) => [i.id, i]));
 
 /**
@@ -70,6 +83,10 @@ export class Press {
    * is laid down only where this says something was drawn.
    */
   private mask: CanvasRenderingContext2D;
+  /** The line plate, held in colour and printed solid over the screens. */
+  private keyG: CanvasRenderingContext2D;
+  /** Scratch, for turning a drawing into a stencil. */
+  private stencil: CanvasRenderingContext2D;
 
   constructor(w: number, h: number) {
     this.w = Math.max(1, Math.round(w));
@@ -90,6 +107,47 @@ export class Press {
     const mg = m.getContext('2d');
     if (!mg) throw new Error('no 2d context for the mask');
     this.mask = mg;
+
+    const k = document.createElement('canvas');
+    k.width = this.w;
+    k.height = this.h;
+    const kg = k.getContext('2d');
+    if (!kg) throw new Error('no 2d context for the key');
+    this.keyG = kg;
+
+    const st = document.createElement('canvas');
+    st.width = this.w;
+    st.height = this.h;
+    const sg = st.getContext('2d');
+    if (!sg) throw new Error('no 2d context for the stencil');
+    this.stencil = sg;
+  }
+
+  /**
+   * Draw on the line plate.
+   *
+   * The context arrives already set to the key colour with round joins, so a
+   * caller only sets `lineWidth` and describes a path. Marks land solid and on
+   * top of every screen, which is exactly where a line plate belongs.
+   */
+  key(paint: (g: CanvasRenderingContext2D) => void) {
+    const g = this.keyG;
+    g.save();
+    g.strokeStyle = KEY;
+    g.fillStyle = KEY;
+    g.lineJoin = 'round';
+    g.lineCap = 'round';
+    paint(g);
+    g.restore();
+
+    const m = this.mask;
+    m.save();
+    m.fillStyle = '#000';
+    m.strokeStyle = '#000';
+    m.lineJoin = 'round';
+    m.lineCap = 'round';
+    paint(m);
+    m.restore();
   }
 
   /**
@@ -127,25 +185,82 @@ export class Press {
    * doing the work by contrast. The mask is still marked, so the hole is part
    * of the sheet rather than a window through it.
    *
+   * The shape is taken as a *stencil*: the drawing is run once onto a scratch
+   * plate, then flattened to solid white through its own alpha. Running the
+   * caller's drawing straight onto each plate does not work, because a drawing
+   * sets its own greys as it goes and a knockout done in mid-grey is not a
+   * knockout — it is a smear, and it looks like the object went translucent.
+   *
    * Only removes what is already there: anything drawn afterwards prints
    * straight back over it.
    */
   knockout(paint: (g: CanvasRenderingContext2D) => void) {
-    for (const ink of INKS) {
-      const g = this.plates.get(ink.id);
-      if (!g) continue;
-      g.save();
-      g.fillStyle = '#fff';
-      g.strokeStyle = '#fff';
-      paint(g);
-      g.restore();
-    }
-    const m = this.mask;
-    m.save();
-    m.fillStyle = '#000';
-    m.strokeStyle = '#000';
-    paint(m);
-    m.restore();
+    const st = this.stencil;
+    st.clearRect(0, 0, this.w, this.h);
+    st.save();
+    st.fillStyle = '#000';
+    st.strokeStyle = '#000';
+    st.lineJoin = 'round';
+    st.lineCap = 'round';
+    paint(st);
+    st.restore();
+    st.save();
+    st.globalCompositeOperation = 'source-in';
+    st.fillStyle = '#fff';
+    st.fillRect(0, 0, this.w, this.h);
+    st.restore();
+
+    for (const ink of INKS) this.plates.get(ink.id)?.drawImage(st.canvas, 0, 0);
+    this.mask.drawImage(st.canvas, 0, 0);
+
+    /*
+      And take the line plate back too.
+
+      The key prints last and over everything, which is correct for a press and
+      wrong for a picture unless something gives it depth: without this, the
+      room's own floor-and-wall lines draw straight across the front of every
+      object standing in the room. Clearing the key under each solid is what
+      puts the line plate into painter's order along with the colour.
+    */
+    this.keyG.save();
+    this.keyG.globalCompositeOperation = 'destination-out';
+    this.keyG.drawImage(st.canvas, 0, 0);
+    this.keyG.restore();
+  }
+
+  /**
+   * An opaque object: clear the shape out of every plate, then print this ink
+   * into it.
+   *
+   * This is the difference between a picture and a pile of transparencies. A
+   * press multiplies, so a box drawn straight onto a wall comes out as box
+   * *times* wall — two screens at two angles, both visible, and the object
+   * reads as though you can see through it. Real separation art does not work
+   * that way: things in front knock out the things behind them and only the
+   * deliberate overprints — light, shadow, a thin rug — are left to multiply.
+   */
+  solid(ink: Ink, paint: (g: CanvasRenderingContext2D) => void) {
+    this.knockout(paint);
+    this.on(ink, paint);
+  }
+
+  /**
+   * Ink on a plate, without claiming any sheet.
+   *
+   * For light. A glow is a gradient that reaches nought long before its
+   * bounding circle does, and marking the mask across the whole of it lays down
+   * paper where there is no ink — which on a page of interlocking rooms shows
+   * up as a cream halo hanging off the edge of the room the lamp is in. Light
+   * should only be visible where something was already printed.
+   */
+  over(ink: Ink, paint: (g: CanvasRenderingContext2D) => void) {
+    const g = this.plates.get(ink);
+    if (!g) return;
+    g.save();
+    g.fillStyle = '#000';
+    g.strokeStyle = '#000';
+    paint(g);
+    g.restore();
   }
 
   /** Coverage 0..1 for one plate, as a flat array. */
@@ -215,6 +330,10 @@ export class Press {
       out.fill();
     }
     out.restore();
+
+    // The line plate last, solid and on top, which is the order a press runs
+    // it in and the only order in which the drawing stays a drawing.
+    out.drawImage(this.keyG.canvas, 0, 0);
   }
 }
 

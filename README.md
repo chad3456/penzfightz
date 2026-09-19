@@ -1055,6 +1055,24 @@ they cross the navy. Screen angles are 30° apart because two screens five
 degrees apart print as a wall of moiré, and dot *area* rather than radius
 follows coverage, because a dot of twice the radius is four times the ink.
 
+**Everything is drawn, then coloured.** A sixth plate, held in colour rather
+than screened, carries a crisp keyline round the whole of every object and
+prints last. Flat coloured shapes on a flat coloured floor read as a diagram; the
+same shapes with a line round them read as an illustration, and no amount of
+palette work substitutes for it.
+
+**Objects are opaque, which a press is not.** A press multiplies, so a box drawn
+on a wall comes out as box *times* wall and looks like you can see through it.
+Things in front knock out what is behind them — cleared from all five plates
+through a stencil, then printed — and only light, shadow and thin rugs are left
+to overprint. The knockout takes the line plate with it, so the key ends up in
+painter's order too.
+
+**A room is full.** Thirty to eighty objects each: every shelf has separate
+spines on it, every floor has a weave or boards or tiles, and there is always
+something somebody put down and did not pick up. A room with eight things in it
+does not read as restrained, it reads as unfinished.
+
 **The light in each room is bare paper.** Nothing a press can lay down is
 lighter than not printing, so the figure is punched back out of all five plates
 and a halo is printed around it. It is the only thing on the sheet no drum
