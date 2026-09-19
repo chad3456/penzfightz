@@ -1070,6 +1070,32 @@ settled that the tradition leaves open.
 
 [The long version.](docs/ramayana-rooms.md)
 
+## The Smoking Area
+
+One issue, six pages, thirty-four panels, in pencil. A man who sells extended
+warranties has one good ten minutes a day, in the gap between the bottle bank
+and the wall, with a woman he does not recognise — she served him at the till
+twenty minutes earlier and has never told him.
+
+**The mix-up is the engine, not the point.** He is invisible at work and cannot
+see that he does exactly the same thing to her. So the reader is told on page
+two, in a panel he is not in, and then knows something he does not for four
+pages. Nothing is ever revealed to him: a reveal would make this a story about a
+misunderstanding, and it is not one.
+
+**Nothing on the page is stroked** — same rule as the sketchbook. Every mark,
+panel borders included, is a run of graphite deposits with tooth, pressure that
+ramps, and two or three passes that nearly agree.
+
+**What only showed up on screen:** the far pencil grades were a third too light,
+so the brickwork and the wall hatching were all drawn and all invisible; figures
+under about twenty-five pixels of head lost their faces to averaging and now get
+a silhouette instead; nobody had a shadow, which reads as bad drawing rather
+than as a missing shadow; and brick drawn with its courses and perpends at the
+same weight is graph paper.
+
+[The long version.](docs/the-smoking-area.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

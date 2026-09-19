@@ -352,7 +352,14 @@ function hair(g: CanvasRenderingContext2D, r: Rig, p: Pencil, seed: number) {
   // The *top edge* of the eye, not a multiple of its height: scaling by eyeH
   // meant the larger the eyes, the higher the fringe was cut, which is backwards
   // and left Tayama with a bare band of forehead over a pair of big eyes.
-  const tipY = r.eyeY - r.eyeH * 0.5 - R * 0.06;
+  // Clearance measured against the *head*, not the eye.
+  //
+  // At six hundredths of a radius this was technically above the eye and
+  // visually on top of it, and the adults in the comic — whose eyes are much
+  // smaller than the sketchbook cast's — ended up with the fringe sitting in
+  // their eyelashes. The gap has to be a fraction of the head to survive a
+  // character whose eyes are small.
+  const tipY = r.eyeY - r.eyeH * 0.5 - R * 0.18;
   void browY;
 
   // The mass: a dome proud of the skull, down past the temples on both sides.
@@ -515,18 +522,31 @@ function marks(g: CanvasRenderingContext2D, r: Rig, f: Face, p: Pencil, seed: nu
   }
 }
 
-export function drawFace(
-  g: CanvasRenderingContext2D, f: Face, c: Character, w: number, h: number, seed = 1,
-) {
-  paper(g, w, h, seed * 17 + 5);
-  g.fillStyle = '#23201c';
+export interface HeadOptions {
+  /** Leave the construction circle and axes out — a comic panel is not a study. */
+  bare?: boolean;
+  /** Skip the neck, for a head that already has a body under it. */
+  noNeck?: boolean;
+  /** Darkness multiplier, so a head in a distant panel can sit back. */
+  weight?: number;
+}
 
-  // The idiom's proportions, not life's: a short face, a narrow chin, and eyes
-  // that take up about a third of the head's width each.
-  const R = Math.min(w * 0.345, h * 0.275);
-  const cy = h * 0.42;
+/**
+ * The head alone, at a place and a size on a canvas somebody else owns.
+ *
+ * Pulled out of `drawFace` so a comic panel can put this face on a body in a
+ * supermarket without inheriting a sheet of paper and a set of construction
+ * lines drawn through the shelving behind it.
+ */
+export function drawHead(
+  g: CanvasRenderingContext2D,
+  f: Face, c: Character,
+  cx: number, cy: number, R: number,
+  seed = 1,
+  o: HeadOptions = {},
+) {
   const rig: Rig = {
-    cx: w / 2,
+    cx,
     cy,
     R,
     chinY: cy + R * 1.36 * c.faceLen,
@@ -539,7 +559,8 @@ export function drawFace(
   };
 
   const n = noise(seed * 3 + 1);
-  const p = pencil(HB, { wobble: 0.8 + n(seed) * 0.5 });
+  const weight = o.weight ?? 1;
+  const p = pencil(HB, { wobble: 0.8 + n(seed) * 0.5, press: HB.press * weight });
   const tilt = rig.tilt;
 
   g.save();
@@ -549,19 +570,21 @@ export function drawFace(
     g.translate(-rig.cx, -rig.cy);
   }
 
-  construction(g, rig, p, seed * 31);
+  if (!o.bare) construction(g, rig, p, seed * 31);
   mark(g, skull(rig), pencil(p, { press: 0.6, size: 1.8, passes: 3 }), seed * 37, { flat: true });
 
-  // Under-chin and neck shadow, so the head sits on something.
-  const neckY = rig.chinY;
-  mark(g, [[rig.cx - R * 0.38, neckY - R * 0.06], [rig.cx - R * 0.34, neckY + R * 0.5]],
-    pencil(p, { press: 0.45, size: 1.6, passes: 2 }), seed * 41);
-  mark(g, [[rig.cx + R * 0.38, neckY - R * 0.06], [rig.cx + R * 0.34, neckY + R * 0.5]],
-    pencil(p, { press: 0.45, size: 1.6, passes: 2 }), seed * 43);
-  hatch(g, [
-    [rig.cx - R * 0.42, neckY - R * 0.02], [rig.cx + R * 0.42, neckY - R * 0.02],
-    [rig.cx + R * 0.36, neckY + R * 0.26], [rig.cx - R * 0.36, neckY + R * 0.26],
-  ], pencil(p, { press: 0.34, size: 1.1 }), seed * 47, Math.PI * 0.3, 2.3, 0.7);
+  if (!o.noNeck) {
+    // Under-chin and neck shadow, so the head sits on something.
+    const neckY = rig.chinY;
+    mark(g, [[rig.cx - R * 0.38, neckY - R * 0.06], [rig.cx - R * 0.34, neckY + R * 0.5]],
+      pencil(p, { press: 0.45, size: 1.6, passes: 2 }), seed * 41);
+    mark(g, [[rig.cx + R * 0.38, neckY - R * 0.06], [rig.cx + R * 0.34, neckY + R * 0.5]],
+      pencil(p, { press: 0.45, size: 1.6, passes: 2 }), seed * 43);
+    hatch(g, [
+      [rig.cx - R * 0.42, neckY - R * 0.02], [rig.cx + R * 0.42, neckY - R * 0.02],
+      [rig.cx + R * 0.36, neckY + R * 0.26], [rig.cx - R * 0.36, neckY + R * 0.26],
+    ], pencil(p, { press: 0.34, size: 1.1 }), seed * 47, Math.PI * 0.3, 2.3, 0.7);
+  }
 
   // Hair first, then the brows over it.
   //
@@ -587,4 +610,14 @@ export function drawFace(
   marks(g, rig, f, p, seed * 83);
 
   g.restore();
+}
+
+/** One head on its own sheet, centred, with the construction showing. */
+export function drawFace(
+  g: CanvasRenderingContext2D, f: Face, c: Character, w: number, h: number, seed = 1,
+) {
+  paper(g, w, h, seed * 17 + 5);
+  g.fillStyle = '#23201c';
+  const R = Math.min(w * 0.345, h * 0.275);
+  drawHead(g, f, c, w / 2, h * 0.42, R, seed);
 }

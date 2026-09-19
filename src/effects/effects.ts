@@ -24,7 +24,8 @@ export type EffectId =
   | 'breath'
   | 'wobble'
   | 'pencil'
-  | 'ramayana';
+  | 'ramayana'
+  | 'comic';
 
 export interface EffectDef {
   id: EffectId;
@@ -222,6 +223,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['25 rooms · 5 inks · 5 screen angles', 'coverage, then dots, then overprint', 'the light never acts in the story'],
     ink: '#3d4f78',
     wash: 'rgba(61, 79, 120, 0.12)',
+  },
+  {
+    id: 'comic',
+    name: 'The Smoking Area',
+    tagline: 'One issue. He has ten good minutes a day and no idea who she is.',
+    blurb:
+      'A man in his early thirties sells extended warranties on kitchen appliances and is invisible at work. The one good part of his day is a cigarette in the gap between the bottle bank and the wall, with a woman who is easy to talk to. She served him at the till twenty minutes earlier and he has never once recognised her. The mix-up is the engine, not the point: the reader is told on page two, in a panel he is not in, and nothing is ever revealed to him — because revealing it would make this a story about a misunderstanding, and it is not one. Six pages, drawn in pencil, where nothing at all is stroked.',
+    spec: ['6 pages · 34 panels', 'graphite deposits, never ctx.stroke()', 'the reader knows, he does not'],
+    ink: '#4a4640',
+    wash: 'rgba(74, 70, 64, 0.12)',
   },
 ];
 

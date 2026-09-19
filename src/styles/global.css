@@ -7220,3 +7220,141 @@ button.card:hover:not(:disabled) {
   .rama__card { grid-template-columns: 1fr; padding: 18px; }
   .rama__tag { display: none; }
 }
+
+/* ------------------------------------------------------- The Smoking Area */
+/*
+   A comic on a table: paper the colour of cheap cartridge, type in pencil
+   grey, and nothing glossy anywhere. The page itself carries all the texture,
+   so the furniture around it stays out of the way.
+*/
+
+.comic {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px max(18px, 3vw) 26px;
+  background: #ded8cc;
+  color: #4a4640;
+  -webkit-font-smoothing: antialiased;
+}
+
+.comic__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.comic__kicker,
+.comic__wait,
+.comic__foot {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: #8a8377;
+}
+.comic__title {
+  margin: 5px 0 0;
+  font: 400 clamp(25px, 3.6vw, 40px)/1 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.015em;
+  color: #3a372f;
+}
+.comic__exit {
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 70, 64, 0.32);
+  background: none;
+  color: #4a4640;
+  font: 400 13px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.comic__exit:hover { background: rgba(74, 70, 64, 0.08); }
+
+.comic__lede {
+  margin: 0;
+  max-width: 76ch;
+  font: 400 14.5px/1.6 Georgia, "Times New Roman", serif;
+  color: #57524a;
+}
+
+/* --- the page */
+
+.comic__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 22px);
+  min-height: 0;
+  flex: 1;
+  /* Both of these matter: without them the stage grows to fit the page and
+     the page hangs over the strip underneath, which then cannot be clicked. */
+  overflow: hidden;
+}
+.comic__frame { position: relative; flex: 0 0 auto; }
+.comic__page canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* The one shadow on the site: a sheet of paper on a table does have one. */
+  box-shadow: 0 2px 0 rgba(74, 70, 64, 0.16), 0 10px 26px rgba(58, 55, 47, 0.18);
+}
+.comic__wait {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #efe9dd;
+}
+
+.comic__turn {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 70, 64, 0.3);
+  background: none;
+  color: #4a4640;
+  font: 400 22px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+}
+.comic__turn:hover:not(:disabled) { background: rgba(74, 70, 64, 0.1); }
+.comic__turn:disabled { opacity: 0.25; cursor: default; }
+
+/* --- the page strip */
+
+.comic__strip {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.comic__pip {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 6px 11px;
+  border: 1px solid rgba(74, 70, 64, 0.22);
+  background: none;
+  color: #6b6459;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.comic__pip b { font-size: 12px; color: #3a372f; }
+.comic__pip:hover { background: rgba(74, 70, 64, 0.07); }
+.comic__pip.is-on { border-color: #3a372f; background: rgba(74, 70, 64, 0.12); color: #3a372f; }
+
+.comic__foot { text-align: center; }
+
+@media (max-width: 720px) {
+  .comic__turn { width: 34px; height: 34px; font-size: 17px; }
+  .comic__pip span { display: none; }
+}
