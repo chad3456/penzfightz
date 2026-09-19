@@ -32,6 +32,7 @@ import { Hundred } from './effects/hundred/Hundred';
 import { OneBreath } from './effects/breath/OneBreath';
 import { Wobble } from './effects/dice/Wobble';
 import { Sketchbook } from './effects/pencil/Sketchbook';
+import { Ramayana } from './rooms/Ramayana';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -182,6 +183,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'pencil') {
     return <Sketchbook onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'ramayana') {
+    return <Ramayana onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;

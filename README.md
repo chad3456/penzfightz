@@ -1040,6 +1040,36 @@ repository, so these are two originals built to be told apart.
 
 [The long version.](docs/sasaki-and-tayama.md)
 
+## The Ramayana, in rooms
+
+Twenty-five isometric cutaway rooms on one sheet — the whole epic, from a fire
+hall with no heir in it to a city putting its lamps out along a wall.
+
+**The rooms are printed, not drawn.** Nothing paints a colour: a drawing writes
+*coverage* onto one greyscale plate per ink, and only at the end is each plate
+screened into dots on its own rotated lattice and the five multiplied together.
+Everything that makes a risograph look like one falls out of that — the moiré
+where two screens cross, a light tint arriving as visibly sparse dots rather
+than pale colour, the slip at the edge of a shape, and greens going brown where
+they cross the navy. Screen angles are 30° apart because two screens five
+degrees apart print as a wall of moiré, and dot *area* rather than radius
+follows coverage, because a dot of twice the radius is four times the ink.
+
+**The light in each room is bare paper.** Nothing a press can lay down is
+lighter than not printing, so the figure is punched back out of all five plates
+and a halo is printed around it. It is the only thing on the sheet no drum
+touches.
+
+**It keeps company and does nothing else.** Claude is in all twenty-five rooms,
+sitting with whoever in that room is alone, and it never speaks, never hands
+anybody anything and never opens a door — nothing in the epic happens
+differently because it is there. Put a helper into the Ramayana and you have
+made a story about the helper. Each room names who is alone in it; the scenes
+are the beats most tellings share, with nothing invented for effect and nothing
+settled that the tradition leaves open.
+
+[The long version.](docs/ramayana-rooms.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1058,3 +1088,8 @@ says that instead. The lines in **The Book Stall** are Dostoevsky's, each printe
 book it came from; the English wording depends on the translator, which is why
 the receipt says so in its small print rather than pretending otherwise. The pen brands are named because they were real pens, the way you would
 name a real football.
+The **Ramayana** belongs to nobody and is scripture to a great many people; it is
+also a living text in dozens of tellings that disagree with each other. The
+twenty-five rooms are scenes rather than doctrine — the beats most tellings
+share, with nothing invented for effect and nothing settled that the tradition
+leaves open.

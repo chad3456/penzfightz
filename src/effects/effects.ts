@@ -23,7 +23,8 @@ export type EffectId =
   | 'hundred'
   | 'breath'
   | 'wobble'
-  | 'pencil';
+  | 'pencil'
+  | 'ramayana';
 
 export interface EffectDef {
   id: EffectId;
@@ -211,6 +212,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['50 expressions × 2 characters', 'deposits, never strokes', 'black and white, on paper'],
     ink: '#6d665c',
     wash: 'rgba(109, 102, 92, 0.12)',
+  },
+  {
+    id: 'ramayana',
+    name: 'The Ramayana, in rooms',
+    tagline: 'Twenty-five isometric rooms, printed one ink at a time.',
+    blurb:
+      'The whole epic as twenty-five cutaway rooms — a fire hall with no heir in it, a chamber where somebody is talked out of herself, a grove where a woman waits ten months under a tree. Nothing is painted directly: every surface writes coverage onto one plate per ink, and the plates are screened into dots at their own angles and overprinted, which is what a risograph does and why the greens go brown where they cross the navy. In each room there is a small light keeping somebody company. It never speaks, never hands anybody anything, and nothing in the epic happens differently because it is there.',
+    spec: ['25 rooms · 5 inks · 5 screen angles', 'coverage, then dots, then overprint', 'the light never acts in the story'],
+    ink: '#3d4f78',
+    wash: 'rgba(61, 79, 120, 0.12)',
   },
 ];
 

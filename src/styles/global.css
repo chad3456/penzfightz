@@ -7023,3 +7023,200 @@ button.card:hover:not(:disabled) {
   .pencil__fam { padding: 5px 8px; font-size: 11.5px; }
   .pencil__famn { display: none; }
 }
+
+/* ------------------------------------------------- The Ramayana, in rooms */
+/*
+   Printed matter, so the page is a sheet: cream ground, ink-blue type, a hard
+   measure on the text, and no shadows anywhere. A drop shadow under a riso
+   print is the one thing that breaks the illusion instantly, because riso has
+   no depth — it has registration.
+*/
+
+.rama {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  color: #2f3a52;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rama__head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: start;
+  padding: 34px max(22px, 4vw) 10px;
+  max-width: 1500px;
+}
+.rama__mark { margin-top: 4px; opacity: 0.8; }
+
+.rama__kicker,
+.rama__kanda,
+.rama__press,
+.rama__small,
+.rama__company span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: #7d88a0;
+}
+.rama__title {
+  margin: 6px 0 8px;
+  font: 400 clamp(28px, 4vw, 46px)/1.02 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.02em;
+  color: #3d4f78;
+}
+.rama__lede {
+  margin: 0;
+  max-width: 64ch;
+  font: 400 15px/1.62 Georgia, "Times New Roman", serif;
+  color: #4b566e;
+}
+.rama__exit {
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(61, 79, 120, 0.3);
+  background: none;
+  color: #3d4f78;
+  font: 400 13px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rama__exit:hover { background: rgba(61, 79, 120, 0.08); }
+
+.rama__press {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 max(22px, 4vw) 6px;
+}
+.rama__bar {
+  display: inline-block;
+  width: 160px;
+  height: 3px;
+  background: rgba(61, 79, 120, 0.16);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.rama__bar i { display: block; height: 100%; background: #e2856f; transition: width 220ms ease; }
+
+/* --- the plan */
+
+.rama__frame {
+  position: relative;
+  margin: 6px auto 0;
+  max-width: 1500px;
+  padding: 0 max(22px, 4vw);
+  overflow: hidden;
+}
+.rama__plan { position: relative; transform-origin: top left; }
+.rama__plan.is-over { cursor: pointer; }
+/*
+   The rooms are out of the pointer path on purpose: they are rectangles and
+   the drawings inside them are diamonds, so a box corner would eat the click
+   meant for the room beneath it. The plan hit-tests the printed ink instead.
+   Keyboard focus is unaffected — tab still walks the rooms in reading order.
+*/
+.rama__room {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: none;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+.rama__room canvas { display: block; width: 100%; height: 100%; }
+.rama__room.is-hot { transform: translateY(-6px); z-index: 3; }
+.rama__room:focus-visible { outline: 2px solid #e2856f; outline-offset: 4px; }
+
+.rama__tag {
+  position: absolute;
+  z-index: 4;
+  transform: translateX(-50%);
+  pointer-events: none;
+  padding: 2px 8px 3px;
+  background: rgba(244, 238, 226, 0.94);
+  border: 1px solid rgba(61, 79, 120, 0.18);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #6d7893;
+  white-space: nowrap;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+.rama__tag b { color: #3d4f78; font-weight: 700; }
+.rama__tag.is-hot { z-index: 5; color: #3d4f78; border-color: #e2856f; }
+
+.rama__foot {
+  max-width: 62ch;
+  margin: 10px auto 60px;
+  padding: 0 max(22px, 4vw);
+}
+.rama__foot p { font: 400 15px/1.66 Georgia, "Times New Roman", serif; color: #4b566e; }
+.rama__small { line-height: 1.7 !important; margin-top: 14px; }
+
+/* --- one room, opened */
+
+.rama__sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(47, 58, 82, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.rama__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 26px;
+  align-items: center;
+  max-width: 1180px;
+  max-height: 92vh;
+  overflow: auto;
+  padding: 26px;
+  background: #f4eee2;
+  border: 1px solid rgba(61, 79, 120, 0.22);
+}
+.rama__print canvas { display: block; width: 100%; height: auto; }
+.rama__text h2 {
+  margin: 8px 0 2px;
+  font: 400 30px/1.06 Georgia, "Times New Roman", serif;
+  color: #3d4f78;
+}
+.rama__where {
+  margin: 0 0 14px;
+  font: italic 400 14px/1.4 Georgia, "Times New Roman", serif;
+  color: #8a93a8;
+}
+.rama__line { margin: 0 0 16px; font: 400 16px/1.64 Georgia, "Times New Roman", serif; }
+.rama__company {
+  margin: 0 0 16px;
+  padding-left: 13px;
+  border-left: 2px solid #e2856f;
+  font: 400 15px/1.6 Georgia, "Times New Roman", serif;
+  color: #4b566e;
+}
+.rama__company span { display: block; margin-bottom: 5px; }
+.rama__note { margin: 0; font: 400 13.5px/1.6 Georgia, "Times New Roman", serif; color: #7d88a0; }
+.rama__nav { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+.rama__nav button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(61, 79, 120, 0.3);
+  background: none;
+  color: #3d4f78;
+  font: 400 13.5px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+}
+.rama__nav button:hover { background: rgba(61, 79, 120, 0.08); }
+
+@media (max-width: 900px) {
+  .rama__head { grid-template-columns: 1fr; }
+  .rama__exit { justify-self: start; }
+  .rama__card { grid-template-columns: 1fr; padding: 18px; }
+  .rama__tag { display: none; }
+}
