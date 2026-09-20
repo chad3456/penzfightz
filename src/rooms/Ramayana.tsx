@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Press, PAPER } from './riso';
-import { fitView } from './iso';
+import { Press, PAPER, bothFrames, type Bounds, type Sheet } from './riso';
+import { fitView, type View } from './iso';
 import { CLOSING, ROOMS, type Kanda, type Room } from './rooms';
 import { sfx } from '../lib/audio';
 
@@ -19,6 +19,20 @@ import { sfx } from '../lib/audio';
 
 const CELL_W = 430;
 const CELL_H = Math.round(CELL_W * 0.78);
+/**
+ * What a room on the plan is actually drawn at.
+ *
+ * Smaller than the cell it is shown in, and deliberately: the whole plan is
+ * scaled down to the window anyway, so a room ends up on screen at about two
+ * hundred and fifty pixels whatever this says. Every pixel here is paid for
+ * twenty-five times over in the kept still sheets — seven plates apiece — and
+ * three hundred and forty is the size at which the plan is still a downscale
+ * rather than an upscale.
+ */
+const PLAN_W = 340;
+const PLAN_H = Math.round(PLAN_W * 0.78);
+/** How much of a frame the plan may spend moving rooms on, in milliseconds. */
+const BUDGET = 9;
 /**
  * How far along the lattice each step moves.
  *
@@ -47,6 +61,17 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
   const frameRef = useRef<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
   const canvases = useRef<Map<number, HTMLCanvasElement>>(new Map());
+  const raf = useRef<number | null>(null);
+  /**
+   * Whether the plan should keep moving.
+   *
+   * It should not while a room is open over the top of it: the opened room runs
+   * its own loop at full size, and the two of them together cost more than a
+   * frame, so the plan's turn-taking simply steals from the thing the reader is
+   * actually looking at. A ref rather than state, so the loop reads it without
+   * being torn down and restarted.
+   */
+  const planLive = useRef(true);
   /**
    * One alpha byte per pixel per room, kept for hit-testing.
    *
@@ -97,10 +122,26 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
   const extentRef = useRef(extent);
   extentRef.current = extent;
 
-  // ── bake, one room at a time, so the page is usable while it prints
+  /*
+    ── printing, and then keeping the rooms moving
+
+    Each room's still layer is drawn once and kept as a sheet of plates. After
+    that a single shared press serves all twenty-five: it loads a room's sheet,
+    draws that room's moving layer at the current time, and re-prints only the
+    rectangle that changed since the room was last drawn.
+
+    The rooms take it in turns, as many as fit in a frame's budget, so the plan
+    keeps a steady rate no matter how many rooms are on it — every room on the
+    sheet is moving, none of them fast, which is what a plan of twenty-five
+    rooms should look like.
+  */
   useEffect(() => {
     let cancelled = false;
     const store = canvases.current;
+    const sheets = new Map<number, Sheet>();
+    const seen = new Map<number, Bounds[] | null>();
+    const press = new Press(PLAN_W, PLAN_H);
+    const views = new Map<number, View>();
 
     const idle = () => new Promise<void>((r) => setTimeout(r, 0));
 
@@ -108,18 +149,24 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
       for (const { room } of placed) {
         if (cancelled) return;
         const canvas = document.createElement('canvas');
-        canvas.width = CELL_W;
-        canvas.height = CELL_H;
+        canvas.width = PLAN_W;
+        canvas.height = PLAN_H;
         const g = canvas.getContext('2d');
         if (!g) continue;
-        const press = new Press(CELL_W, CELL_H);
-        const v = fitView(CELL_W, CELL_H, room.w, room.d, room.wallH);
-        room.build(press, v);
-        press.print(g, 3.0);
+        const v = fitView(PLAN_W, PLAN_H, room.w, room.d, room.wallH);
+        views.set(room.n, v);
+        press.reset();
+        room.still(press, v);
+        room.moving(press, { ...v, t: 0, still: true });
+        sheets.set(room.n, press.take());
+        room.moving(press, { ...v, t: 0 });
+        press.print(g, 2.6);
+        seen.set(room.n, press.dirty);
         store.set(room.n, canvas);
-        const px = g.getImageData(0, 0, CELL_W, CELL_H).data;
-        const a = new Uint8Array(CELL_W * CELL_H);
-        for (let i = 0; i < a.length; i++) a[i] = px[i * 4 + 3];
+
+        const px = g.getImageData(0, 0, PLAN_W, PLAN_H).data;
+        const a = new Uint8Array(PLAN_W * PLAN_H);
+        for (let i = 0; i < a.length; i++) a[i] = px[i * 4 + 3]!;
         masks.current.set(room.n, a);
 
         const slot = hostRef.current?.querySelector<HTMLDivElement>(`[data-room="${room.n}"]`);
@@ -127,9 +174,42 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
         if (!cancelled) setDone((d) => d + 1);
         await idle();
       }
+
+      // ── and from here on, everybody keeps moving
+      let turn = 0;
+      const started = performance.now();
+      const tick = () => {
+        if (cancelled) return;
+        if (!planLive.current) {
+          raf.current = requestAnimationFrame(tick);
+          return;
+        }
+        const t = (performance.now() - started) / 1000;
+        const until = performance.now() + BUDGET;
+        let guard = 0;
+        while (performance.now() < until && guard++ < placed.length) {
+          const { room } = placed[turn % placed.length]!;
+          turn++;
+          const sheet = sheets.get(room.n);
+          const v = views.get(room.n);
+          const canvas = store.get(room.n);
+          const g = canvas?.getContext('2d');
+          if (!sheet || !v || !g) continue;
+          press.put(sheet);
+          room.moving(press, { ...v, t });
+          const bb = bothFrames(seen.get(room.n) ?? null, press.dirty);
+          press.print(g, 2.6, bb);
+          seen.set(room.n, press.dirty);
+        }
+        raf.current = requestAnimationFrame(tick);
+      };
+      raf.current = requestAnimationFrame(tick);
     })();
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+      if (raf.current) cancelAnimationFrame(raf.current);
+    };
   }, [placed]);
 
   /** Topmost room with ink under the page point, or null for bare paper. */
@@ -142,13 +222,15 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
       const py = (clientY - box.top) / scale;
       for (let i = placed.length - 1; i >= 0; i--) {
         const { room, x, y } = placed[i];
-        const lx = Math.floor(px - x);
-        const ly = Math.floor(py - y);
-        if (lx < 0 || ly < 0 || lx >= CELL_W || ly >= CELL_H) continue;
+        // The room is drawn smaller than the cell it is shown in, so the page
+        // point has to be taken back into the render's own pixels.
+        const lx = Math.floor(((px - x) / CELL_W) * PLAN_W);
+        const ly = Math.floor(((py - y) / CELL_H) * PLAN_H);
+        if (lx < 0 || ly < 0 || lx >= PLAN_W || ly >= PLAN_H) continue;
         const mask = masks.current.get(room.n);
         // Not printed yet: fall back to the box, so early clicks still land.
         if (!mask) return room.n;
-        if (mask[ly * CELL_W + lx] > 8) return room.n;
+        if (mask[ly * PLAN_W + lx] > 8) return room.n;
       }
       return null;
     },
@@ -173,6 +255,10 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
     window.addEventListener('keydown', on);
     return () => window.removeEventListener('keydown', on);
   }, [open, step]);
+
+  useEffect(() => {
+    planLive.current = open === null;
+  }, [open]);
 
   const shown: Room | null = open === null ? null : ROOMS[open - 1] ?? null;
 
@@ -282,7 +368,12 @@ export function Ramayana({ onExit }: { onExit: () => void }) {
   );
 }
 
-/** Re-printed at size rather than a thumbnail scaled up. */
+/**
+ * The opened room: re-printed at size, and left running.
+ *
+ * One press, one kept still sheet, and a frame on every tick — no budget and no
+ * taking turns, because there is only ever one of these on screen.
+ */
 function RoomPrint({ room }: { room: Room }) {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -297,9 +388,32 @@ function RoomPrint({ room }: { room: Room }) {
     if (!g) return;
     const press = new Press(w, h);
     const v = fitView(w, h, room.w, room.d, room.wallH);
-    room.build(press, v);
-    press.print(g, 3.2);
+    press.reset();
+    room.still(press, v);
+    room.moving(press, { ...v, t: 0, still: true });
+    const sheet = press.take();
+    room.moving(press, { ...v, t: 0 });
+    press.print(g, 2.9);
+    let was: Bounds[] | null = press.dirty;
     el.replaceChildren(canvas);
+
+    let live = true;
+    let frame = 0;
+    const started = performance.now();
+    const tick = () => {
+      if (!live) return;
+      const t = (performance.now() - started) / 1000;
+      press.put(sheet);
+      room.moving(press, { ...v, t });
+      press.print(g, 2.9, bothFrames(was, press.dirty));
+      was = press.dirty;
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => {
+      live = false;
+      cancelAnimationFrame(frame);
+    };
   }, [room]);
   return <div className="rama__print" ref={host} />;
 }

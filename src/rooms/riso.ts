@@ -56,7 +56,91 @@ export const PAPER = '#f4eee2';
  */
 export const KEY = '#2c3346';
 
+/** A screen-space rectangle: where a mark can possibly land. */
+export type Bounds = [x: number, y: number, w: number, h: number];
+
+/** A press-load: every plate of a finished drawing, kept for reuse. */
+export interface Sheet {
+  plates: Map<Ink, HTMLCanvasElement>;
+  mask: HTMLCanvasElement;
+  key: HTMLCanvasElement;
+  used: Set<Ink>;
+  w: number;
+  h: number;
+}
+
+/** The union of two rectangles. */
+export function span(a: Bounds, b: Bounds): Bounds {
+  const x = Math.min(a[0], b[0]);
+  const y = Math.min(a[1], b[1]);
+  return [x, y, Math.max(a[0] + a[2], b[0] + b[2]) - x, Math.max(a[1] + a[3], b[1] + b[3]) - y];
+}
+
+/**
+ * Where the last frame drew and where this one did, as one rectangle.
+ *
+ * Both have to be repainted: the old place to erase the movement and the new
+ * place to show it. Kept as a single rectangle rather than two, because two
+ * near-identical rectangles are two reads of six plates over almost the same
+ * pixels — which measured three times the cost of reading their union once.
+ */
+export function bothFrames(a: Bounds[] | null, b: Bounds[] | null): Bounds[] | null {
+  const all = [...(a ?? []), ...(b ?? [])];
+  if (!all.length) return null;
+  return [all.reduce((u, r) => span(u, r))];
+}
+
 const BY_ID = new Map(INKS.map((i) => [i.id, i]));
+
+/**
+ * The screen, precomputed.
+ *
+ * A halftone dot is drawn wherever the coverage under it beats the threshold
+ * for that position inside its cell — which depends only on the geometry of the
+ * screen, never on the picture. So the threshold is computed once per ink per
+ * sheet size and reused for every frame of every room at that size, and
+ * printing becomes one integer comparison per pixel per ink.
+ *
+ * The version this replaced walked the rotated lattice and called `arc()` at
+ * every point: about two hundred thousand canvas arcs for one small room, which
+ * is fine once and hopeless sixty times a second. Same dots, same growth curve,
+ * two orders of magnitude apart.
+ */
+const SCREENS = new Map<string, Uint8Array>();
+
+function screen(w: number, h: number, spec: InkSpec, pitch: number): Uint8Array {
+  const key = `${w}x${h}@${spec.angle}/${pitch}`;
+  const had = SCREENS.get(key);
+  if (had) return had;
+
+  const t = new Uint8Array(w * h);
+  const a = (spec.angle * Math.PI) / 180;
+  const ca = Math.cos(a);
+  const sa = Math.sin(a);
+  const [dx, dy] = spec.slip;
+  const cx = w / 2;
+  const cy = h / 2;
+  // Dot radius at full coverage. Area — not radius — tracks coverage, so the
+  // threshold is the *square* of the fractional radius.
+  const full = pitch * 0.62;
+
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      // Into the screen's own frame, including the drum's slip.
+      const px = x - cx - dx;
+      const py = y - cy - dy;
+      const u = px * ca + py * sa;
+      const vv = -px * sa + py * ca;
+      const fu = u - Math.round(u / pitch) * pitch;
+      const fv = vv - Math.round(vv / pitch) * pitch;
+      const r = Math.hypot(fu, fv) / full;
+      const need = r * r;
+      t[y * w + x] = need >= 1 ? 255 : Math.round(need * 255);
+    }
+  }
+  SCREENS.set(key, t);
+  return t;
+}
 
 /**
  * The plates.
@@ -87,6 +171,22 @@ export class Press {
   private keyG: CanvasRenderingContext2D;
   /** Scratch, for turning a drawing into a stencil. */
   private stencil: CanvasRenderingContext2D;
+  /** Which plates have been touched. A blank plate is skipped when printing. */
+  private used: Set<Ink> = new Set();
+  /** Where anything has been drawn since the last sheet was loaded. */
+  private dirtyBox: Bounds[] = [];
+  /**
+   * How many separate repaint rectangles a frame is allowed.
+   *
+   * One is the right answer, and it took measuring to believe it. Seven
+   * rectangles do cover half the area of their union — but each one is a
+   * separate read of six plates, and the per-read overhead swallows the saving
+   * three times over: the same frame went from ten milliseconds to thirty-three.
+   * The pixels are cheap. The calls are not.
+   */
+  private static readonly PATCHES = 1;
+  /** Reused between frames: allocating these per frame is most of the cost. */
+  private sheet: ImageData | null = null;
 
   constructor(w: number, h: number) {
     this.w = Math.max(1, Math.round(w));
@@ -104,22 +204,24 @@ export class Press {
     const m = document.createElement('canvas');
     m.width = this.w;
     m.height = this.h;
-    const mg = m.getContext('2d');
+    const mg = m.getContext('2d', { willReadFrequently: true });
     if (!mg) throw new Error('no 2d context for the mask');
     this.mask = mg;
 
     const k = document.createElement('canvas');
     k.width = this.w;
     k.height = this.h;
-    const kg = k.getContext('2d');
+    const kg = k.getContext('2d', { willReadFrequently: true });
     if (!kg) throw new Error('no 2d context for the key');
     this.keyG = kg;
 
     const st = document.createElement('canvas');
     st.width = this.w;
     st.height = this.h;
-    const sg = st.getContext('2d');
+    const sg = st.getContext('2d', { willReadFrequently: true });
     if (!sg) throw new Error('no 2d context for the stencil');
+    sg.lineJoin = 'round';
+    sg.lineCap = 'round';
     this.stencil = sg;
   }
 
@@ -160,6 +262,7 @@ export class Press {
   on(ink: Ink, paint: (g: CanvasRenderingContext2D) => void) {
     const g = this.plates.get(ink);
     if (!g) return;
+    this.used.add(ink);
     g.save();
     g.fillStyle = '#000';
     g.strokeStyle = '#000';
@@ -194,24 +297,52 @@ export class Press {
    * Only removes what is already there: anything drawn afterwards prints
    * straight back over it.
    */
-  knockout(paint: (g: CanvasRenderingContext2D) => void) {
+  knockout(paint: (g: CanvasRenderingContext2D) => void, bb?: Bounds) {
+    /*
+      Bounded, or this is the whole cost of the picture.
+
+      A knockout touches seven plates. Done across the full sheet that is eight
+      canvas-sized operations for every solid object in the room, and a room has
+      sixty of them — which is why a single frame of one small room took a sixth
+      of a second and a big one took most of a second. Every primitive knows the
+      rectangle its own mark can land in, so every plate operation is clipped to
+      it and the work drops by the ratio of the object to the room.
+    */
+    const x = bb ? Math.max(0, Math.floor(bb[0])) : 0;
+    const y = bb ? Math.max(0, Math.floor(bb[1])) : 0;
+    const w = bb ? Math.min(this.w - x, Math.ceil(bb[2] + (bb[0] - x))) : this.w;
+    const h = bb ? Math.min(this.h - y, Math.ceil(bb[3] + (bb[1] - y))) : this.h;
+    if (w <= 0 || h <= 0) return;
+    // And this is where the frame's repaint rectangle comes from: every solid
+    // in the moving layer reports where it landed, so a frame re-prints the
+    // ground the movement covered and nothing else.
+    this.touch([x, y, w, h]);
+
+    /*
+      The clip is not decoration. `source-in` is a whole-canvas operation —
+      everything the source does not cover is cleared — so without a clip the
+      flatten below touches every pixel of the sheet for every object in the
+      room, and removing the clip to "save a save and a restore" made a frame
+      half again as slow. Clipped, it costs the rectangle and nothing else.
+    */
     const st = this.stencil;
-    st.clearRect(0, 0, this.w, this.h);
+    st.clearRect(x, y, w, h);
     st.save();
+    st.beginPath();
+    st.rect(x, y, w, h);
+    st.clip();
     st.fillStyle = '#000';
     st.strokeStyle = '#000';
-    st.lineJoin = 'round';
-    st.lineCap = 'round';
     paint(st);
-    st.restore();
-    st.save();
     st.globalCompositeOperation = 'source-in';
     st.fillStyle = '#fff';
-    st.fillRect(0, 0, this.w, this.h);
+    st.fillRect(x, y, w, h);
     st.restore();
 
-    for (const ink of INKS) this.plates.get(ink.id)?.drawImage(st.canvas, 0, 0);
-    this.mask.drawImage(st.canvas, 0, 0);
+    for (const ink of INKS) {
+      this.plates.get(ink.id)?.drawImage(st.canvas, x, y, w, h, x, y, w, h);
+    }
+    this.mask.drawImage(st.canvas, x, y, w, h, x, y, w, h);
 
     /*
       And take the line plate back too.
@@ -224,7 +355,7 @@ export class Press {
     */
     this.keyG.save();
     this.keyG.globalCompositeOperation = 'destination-out';
-    this.keyG.drawImage(st.canvas, 0, 0);
+    this.keyG.drawImage(st.canvas, x, y, w, h, x, y, w, h);
     this.keyG.restore();
   }
 
@@ -239,9 +370,115 @@ export class Press {
    * that way: things in front knock out the things behind them and only the
    * deliberate overprints — light, shadow, a thin rug — are left to multiply.
    */
-  solid(ink: Ink, paint: (g: CanvasRenderingContext2D) => void) {
-    this.knockout(paint);
-    this.on(ink, paint);
+  solid(ink: Ink, paint: (g: CanvasRenderingContext2D) => void, bb?: Bounds) {
+    // The knockout has already marked the sheet over this shape, so the ink
+    // goes on with `over` rather than `on`: painting the mask a second time is
+    // a third of the drawing work in the room for no change to the result.
+    this.knockout(paint, bb);
+    this.over(ink, paint);
+  }
+
+  /**
+   * Take a copy of the sheet as it stands.
+   *
+   * Everything in a room that does not move — the shell, the furniture, the
+   * shelves, the trees — is drawn once and kept. A frame of animation then puts
+   * that back and draws only the people and the light over it, which is the
+   * difference between a tenth of a second a frame and a sixtieth: the moving
+   * parts cover a small part of the room, and redrawing the other ninety per
+   * cent sixty times a second is the entire cost.
+   *
+   * The copy is handed back rather than held, so one press can serve
+   * twenty-five rooms in turn: each room keeps its own still sheet and the
+   * press keeps nothing.
+   */
+  take(): Sheet {
+    const copy = (src: HTMLCanvasElement) => {
+      const c = document.createElement('canvas');
+      c.width = this.w;
+      c.height = this.h;
+      c.getContext('2d', { willReadFrequently: true })?.drawImage(src, 0, 0);
+      return c;
+    };
+    const plates = new Map<Ink, HTMLCanvasElement>();
+    for (const ink of INKS) {
+      const g = this.plates.get(ink.id);
+      if (g) plates.set(ink.id, copy(g.canvas));
+    }
+    return {
+      plates,
+      mask: copy(this.mask.canvas),
+      key: copy(this.keyG.canvas),
+      used: new Set(this.used),
+      w: this.w,
+      h: this.h,
+    };
+  }
+
+  /** Load a kept sheet back onto the press, ready for a frame drawn over it. */
+  put(sheet: Sheet) {
+    for (const ink of INKS) {
+      const g = this.plates.get(ink.id);
+      const src = sheet.plates.get(ink.id);
+      if (!g) continue;
+      if (src) g.drawImage(src, 0, 0);
+      else {
+        g.fillStyle = '#fff';
+        g.fillRect(0, 0, this.w, this.h);
+      }
+    }
+    this.mask.clearRect(0, 0, this.w, this.h);
+    this.mask.drawImage(sheet.mask, 0, 0);
+    this.keyG.clearRect(0, 0, this.w, this.h);
+    this.keyG.drawImage(sheet.key, 0, 0);
+    this.used = new Set(sheet.used);
+    this.dirtyBox = [];
+  }
+
+  /** Note that something was drawn here, for the frame's dirty rectangle. */
+  touch(bb: Bounds) {
+    const list = this.dirtyBox;
+    if (list.length < Press.PATCHES) {
+      list.push([bb[0], bb[1], bb[2], bb[3]]);
+      return;
+    }
+    // Merge into whichever rectangle it costs the least to grow.
+    let best = 0;
+    let cheapest = Infinity;
+    for (let i = 0; i < list.length; i++) {
+      const u = span(list[i]!, bb);
+      const cost = u[2] * u[3] - list[i]![2] * list[i]![3];
+      if (cost < cheapest) {
+        cheapest = cost;
+        best = i;
+      }
+    }
+    list[best] = span(list[best]!, bb);
+  }
+
+  /** The rectangles this frame has drawn in. */
+  get dirty(): Bounds[] | null {
+    return this.dirtyBox.length ? this.dirtyBox.map((b) => [b[0], b[1], b[2], b[3]] as Bounds) : null;
+  }
+
+  /**
+   * Wipe every plate for the next frame.
+   *
+   * A room that moves is redrawn from nothing many times a second, and
+   * allocating seven canvases each time is more expensive than everything else
+   * here put together. One press, cleared and reused.
+   */
+  reset() {
+    for (const ink of INKS) {
+      const g = this.plates.get(ink.id);
+      if (!g) continue;
+      g.fillStyle = '#fff';
+      g.fillRect(0, 0, this.w, this.h);
+    }
+    this.mask.clearRect(0, 0, this.w, this.h);
+    this.keyG.clearRect(0, 0, this.w, this.h);
+    this.used.clear();
+    this.dirtyBox = [];
   }
 
   /**
@@ -256,6 +493,7 @@ export class Press {
   over(ink: Ink, paint: (g: CanvasRenderingContext2D) => void) {
     const g = this.plates.get(ink);
     if (!g) return;
+    this.used.add(ink);
     g.save();
     g.fillStyle = '#000';
     g.strokeStyle = '#000';
@@ -263,11 +501,6 @@ export class Press {
     g.restore();
   }
 
-  /** Coverage 0..1 for one plate, as a flat array. */
-  private coverage(ink: Ink): Uint8ClampedArray {
-    const g = this.plates.get(ink)!;
-    return g.getImageData(0, 0, this.w, this.h).data;
-  }
 
   /**
    * Run the sheet.
@@ -278,62 +511,91 @@ export class Press {
    * is why a gradient comes out as dots that grow rather than as a pale wash
    * with speckles in it.
    */
-  print(out: CanvasRenderingContext2D, pitch = 3.1) {
-    out.clearRect(0, 0, this.w, this.h);
+  /**
+   * Run the sheet.
+   *
+   * One pass over the pixels. For each one: if the mask says nothing was drawn
+   * there the sheet stays transparent and the page shows through; otherwise it
+   * starts as paper and every ink whose coverage beats its screen threshold at
+   * that position multiplies into it. That is exactly what a press does and
+   * exactly what the lattice-and-arcs version did, at a speed that can be put
+   * on a clock.
+   *
+   * Plates nothing was drawn on are skipped outright, which in practice is one
+   * or two of the five in most rooms.
+   */
+  print(out: CanvasRenderingContext2D, pitch = 3.1, patches?: Bounds[] | null) {
+    if (!patches) {
+      this.printOne(out, pitch);
+      return;
+    }
+    for (const bb of patches) this.printOne(out, pitch, bb);
+  }
 
-    // Paper, but only inside the shape. Drawn by stamping the mask and then
-    // filling through it, so the edge of the sheet is the edge of the room.
-    out.save();
-    out.drawImage(this.mask.canvas, 0, 0);
-    out.globalCompositeOperation = 'source-in';
-    out.fillStyle = PAPER;
-    out.fillRect(0, 0, this.w, this.h);
-    out.restore();
+  private printOne(out: CanvasRenderingContext2D, pitch: number, bb?: Bounds) {
+    const bx = bb ? Math.max(0, Math.floor(bb[0])) : 0;
+    const by = bb ? Math.max(0, Math.floor(bb[1])) : 0;
+    const bw = bb ? Math.min(this.w - bx, Math.ceil(bb[2] + (bb[0] - bx))) : this.w;
+    const bh = bb ? Math.min(this.h - by, Math.ceil(bb[3] + (bb[1] - by))) : this.h;
+    if (bw <= 0 || bh <= 0) return;
+    const maskData = this.mask.getImageData(bx, by, bw, bh).data;
 
-    const diag = Math.hypot(this.w, this.h);
-    out.save();
-    out.globalCompositeOperation = 'multiply';
+    const live = INKS.filter((s) => this.used.has(s.id));
+    const covs = live.map((s) => this.plates.get(s.id)!.getImageData(bx, by, bw, bh).data);
+    const scr = live.map((s) => screen(this.w, this.h, s, pitch));
+    const rgb = live.map((s) => [
+      parseInt(s.hex.slice(1, 3), 16),
+      parseInt(s.hex.slice(3, 5), 16),
+      parseInt(s.hex.slice(5, 7), 16),
+    ] as const);
 
-    for (const spec of INKS) {
-      const data = this.coverage(spec.id);
-      const a = (spec.angle * Math.PI) / 180;
-      const ca = Math.cos(a);
-      const sa = Math.sin(a);
-      const [dx, dy] = spec.slip;
+    if (!this.sheet || this.sheet.width !== bw || this.sheet.height !== bh) {
+      this.sheet = out.createImageData(bw, bh);
+    }
+    const px = this.sheet.data;
 
-      out.fillStyle = spec.hex;
-      out.beginPath();
+    const pr = parseInt(PAPER.slice(1, 3), 16);
+    const pg = parseInt(PAPER.slice(3, 5), 16);
+    const pb = parseInt(PAPER.slice(5, 7), 16);
 
-      // Walk the lattice in the *rotated* frame and map each point back, so the
-      // dots sit on a true rotated grid rather than on an axis-aligned grid
-      // with jitter pretending to be one.
-      const half = diag * 0.6;
-      const cx = this.w / 2;
-      const cy = this.h / 2;
-      for (let v = -half; v <= half; v += pitch) {
-        for (let u = -half; u <= half; u += pitch) {
-          const x = cx + u * ca - v * sa + dx;
-          const y = cy + u * sa + v * ca + dy;
-          const px = x | 0;
-          const py = y | 0;
-          if (px < 0 || py < 0 || px >= this.w || py >= this.h) continue;
-          const cov = 1 - data[(py * this.w + px) * 4]! / 255;
-          if (cov < 0.02) continue;
-          // Area, not radius, is proportional to coverage — a dot of twice the
-          // radius is four times the ink, and getting this wrong makes every
-          // mid-tone print far too dark.
-          const r = Math.sqrt(cov) * pitch * 0.62;
-          out.moveTo(x + r, y);
-          out.arc(x, y, r, 0, Math.PI * 2);
+    for (let i = 0; i < bw * bh; i++) {
+      const o = i * 4;
+      if (maskData[o + 3] === 0) {
+        px[o + 3] = 0;
+        continue;
+      }
+      // The screen is a property of the sheet, not of the crop, so the
+      // threshold has to be looked up at the pixel's place on the whole sheet.
+      const sx = bx + (i % bw);
+      const sy = by + ((i / bw) | 0);
+      const si = sy * this.w + sx;
+      let r = pr;
+      let g = pg;
+      let b = pb;
+      for (let k = 0; k < live.length; k++) {
+        // The plate holds coverage as a grey: white is none, black is a solid.
+        const cov = 255 - covs[k]![o]!;
+        if (cov > scr[k]![si]!) {
+          const c = rgb[k]!;
+          r = (r * c[0]) / 255;
+          g = (g * c[1]) / 255;
+          b = (b * c[2]) / 255;
         }
       }
-      out.fill();
+      px[o] = r;
+      px[o + 1] = g;
+      px[o + 2] = b;
+      px[o + 3] = 255;
     }
-    out.restore();
+
+    // A crop has to be cleared first: `putImageData` overwrites, but the key
+    // plate underneath it was drawn with alpha and would otherwise accumulate.
+    out.clearRect(bx, by, bw, bh);
+    out.putImageData(this.sheet, bx, by);
 
     // The line plate last, solid and on top, which is the order a press runs
     // it in and the only order in which the drawing stays a drawing.
-    out.drawImage(this.keyG.canvas, 0, 0);
+    out.drawImage(this.keyG.canvas, bx, by, bw, bh, bx, by, bw, bh);
   }
 }
 

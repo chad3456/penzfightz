@@ -1073,6 +1073,22 @@ spines on it, every floor has a weave or boards or tiles, and there is always
 something somebody put down and did not pick up. A room with eight things in it
 does not read as restrained, it reads as unfinished.
 
+**The rooms run.** Flames flicker, the light breathes, and in every room
+somebody is crossing the floor. Getting a screened halftone into a sixteen
+millisecond frame took four things: precomputing the screen so printing is one
+comparison per pixel per ink; bounding every knockout to the rectangle its own
+object can mark; splitting each room into a still layer that is drawn once and
+kept and a moving layer redrawn from the clock; and re-printing only the union
+of where this frame drew and where the last one did. Nothing holds animation
+state — every moving thing is a function of the time, so a room can be drawn at
+any moment and two rooms never drift apart.
+
+**People are drawn, not assembled.** A head with a jaw, a neck, sloping
+shoulders, a waist, arms with elbows, legs with knees, sleeves and a haircut —
+posed off one phase number, so a walk is a function of time rather than a second
+sprite. Every part is an outline path: filled on the colour plates, stroked on
+the line plate.
+
 **The light in each room is bare paper.** Nothing a press can lay down is
 lighter than not printing, so the figure is punched back out of all five plates
 and a halo is printed around it. It is the only thing on the sheet no drum

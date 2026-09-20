@@ -1,5 +1,5 @@
 import { blob, box, cone, glow, lw, panel, project, rule, slab, spark, type View } from './iso';
-import { tone, type Ink, type Press } from './riso';
+import { tone, type Bounds, type Ink, type Press } from './riso';
 
 /**
  * The things that go in a room.
@@ -27,156 +27,436 @@ const SPINE_INKS: Ink[] = ['teal', 'mustard', 'brick', 'navy', 'rose'];
 
 // ───────────────────────────────────────────────────────────────── people
 
+export type Pose =
+  | 'stand' | 'walk' | 'sit' | 'kneel' | 'lie' | 'bow' | 'reach' | 'carry' | 'work';
+
 export interface Body {
   x: number;
   z: number;
-  /** Standing height in world units. About 1.6 for an adult. */
+  /** Standing height in world units. About 1.7 for an adult. */
   h?: number;
+  /** The garment. */
   ink?: Ink;
   hair?: Ink;
-  pose?: 'stand' | 'sit' | 'kneel' | 'lie' | 'bow' | 'reach' | 'read';
+  pose?: Pose;
   /** A crown, a topknot, a helm, a veil — one shape on the head. */
   hat?: 'none' | 'crown' | 'knot' | 'helm' | 'veil' | 'cap';
   /** Facing, only ever left or right: at this size that is all that survives. */
   face?: 1 | -1;
+  /** A long garment — a sari, a dhoti, a robe — covering the legs. */
+  robe?: boolean;
+  /**
+   * Where in its cycle this body is, in turns. Walking legs, a bowing back, a
+   * hand going up and down at a bench: all of it comes from here, so a room
+   * moves by passing a different number, not by holding any state.
+   */
+  phase?: number;
+}
+
+const SKIN: Ink = 'rose';
+
+/**
+ * A capsule, as an outline path.
+ *
+ * Every limb in the picture is one of these. It is built as a real closed path
+ * rather than drawn as a thick round-capped line, because the line plate prints
+ * *over* the colour: a limb stroked wide enough to outline itself would simply
+ * cover itself up. With the outline as a path, the same path fills on the ink
+ * plate and strokes on the key, which is what gives a drawn arm rather than a
+ * bar.
+ */
+function capsule(g: CanvasRenderingContext2D, ax: number, ay: number, bx: number, by: number, r: number) {
+  const dx = bx - ax;
+  const dy = by - ay;
+  const len = Math.hypot(dx, dy) || 1;
+  const a = Math.atan2(dy, dx);
+  g.beginPath();
+  g.arc(ax, ay, r, a + Math.PI / 2, a - Math.PI / 2);
+  g.arc(bx, by, r, a - Math.PI / 2, a + Math.PI / 2);
+  g.closePath();
+  void len;
 }
 
 /**
- * A person, at about twenty pixels tall.
+ * A person.
  *
- * A rounded body, a round head, a cap of hair and — if the pose calls for it —
- * one arm. Which way they lean and what is in front of them is the whole of the
- * acting, and at this size that is genuinely enough: the reference carries a
- * whole birthday party on figures with no faces at all.
+ * Not a tapered slab with a ball on top. A head with a jaw, a neck, sloping
+ * shoulders, a torso that narrows at the waist, arms in two segments with an
+ * elbow, and legs in two segments with a knee — all posed off one phase number,
+ * so a walk is a function of time rather than a second sprite.
+ *
+ * Everything is built as outline paths: filled on the colour plates, stroked on
+ * the line plate. That is the only way to get a figure that is *drawn*, which
+ * is what the whole set is about, and it is why the limbs are capsules with
+ * real outlines instead of thick strokes.
  */
 export function person(press: Press, v: View, b: Body) {
+  if (v.still && b.phase !== undefined) return;
   const h = b.h ?? 1.6;
   const ink = b.ink ?? 'navy';
   const hairInk = b.hair ?? 'brick';
   const pose = b.pose ?? 'stand';
   const dir = b.face ?? 1;
+  const ph = b.phase ?? 0;
+  const robe = b.robe ?? (pose !== 'walk' && (b.hat === 'veil' || b.hat === 'crown'));
 
-  const base = pose === 'sit' ? h * 0.36 : pose === 'kneel' ? h * 0.26 : 0;
+  // Everything below is in pixels off the feet, so a figure is posed once and
+  // the projection is asked exactly one question.
+  const [fx, fy] = project(v, b.x, 0, b.z);
+  const H = h * v.rise;
+  const lwv = lw(v, 0.62);
+
+  const sit = pose === 'sit' ? 0.3 : pose === 'kneel' ? 0.22 : 0;
   const lie = pose === 'lie';
-  const bodyH = lie ? h * 0.24 : h - base;
-  const lean = pose === 'bow' ? 0.22 : pose === 'read' ? 0.1 : 0;
+  const stoop = pose === 'bow' ? 0.34 : pose === 'work' ? 0.2 : 0;
 
-  const halfW = (lie ? h * 0.2 : h * 0.145) * (pose === 'sit' ? 1.12 : 1);
-  const headR = h * 0.15;
-  const shoulder = base + bodyH * 0.76;
+  const hipY = fy - H * (0.46 - sit * 0.7);
+  const shoulderY = hipY - H * 0.28;
+  const neckY = shoulderY - H * 0.035;
+  /*
+    Illustration proportions, not anatomical ones. A figure thirty pixels tall
+    with a correctly-sized head is a stick with a pea on it; the head carries
+    the reading at this scale, so it gets about a seventh of the height rather
+    than an eighth, and the limbs are drawn thicker than they are.
+  */
+  const headR = H * 0.098;
+  const headY = neckY - headR * 1.15;
+  const lean = stoop * H * 0.3 * dir;
 
-  const [bx, by] = project(v, b.x, base, b.z);
-  const [tx, ty] = project(v, b.x + lean * dir, shoulder, b.z);
-  const wpx = halfW * v.unit;
-  const tpx = halfW * 0.78 * v.unit;
+  const hxAt = lie ? fx + H * 0.26 : fx + lean * 1.4;
+  const headYAt = lie ? fy - H * 0.1 : headY;
 
+  const shoulderW = H * 0.118;
+  const hipW = H * 0.092;
+  const limb = Math.max(1.0, H * 0.044);
+  const legR = Math.max(1.1, H * 0.054);
+
+  // ── legs
+  const swing = pose === 'walk' ? Math.sin(ph * Math.PI * 2) : 0;
+  const lift = pose === 'walk' ? Math.max(0, Math.cos(ph * Math.PI * 2)) : 0;
+  const legs: [number, number, number, number, number, number][] = [];
+  if (!lie) {
+    for (const side of [-1, 1] as const) {
+      const sw = swing * side;
+      const hx = fx + hipW * 0.55 * side * 0.6;
+      if (pose === 'sit') {
+        // Thigh forward, shin down: a seated figure is two right angles.
+        const kx = hx + H * 0.17 * dir;
+        const ky = hipY + H * 0.02;
+        legs.push([hx, hipY, kx, ky, kx + H * 0.015 * dir, ky + H * 0.2]);
+      } else if (pose === 'kneel') {
+        const kx = hx + H * 0.05 * dir;
+        legs.push([hx, hipY, kx, hipY + H * 0.14, kx - H * 0.1 * dir, hipY + H * 0.17]);
+      } else {
+        const kx = hx + sw * H * 0.1 * dir;
+        const ky = hipY + H * 0.23 - lift * H * 0.03 * (side > 0 ? 1 : 0);
+        const ax = hx + sw * H * 0.2 * dir;
+        legs.push([hx, hipY, kx, ky, ax, fy - lift * H * 0.04 * (sw > 0 ? 1 : 0)]);
+      }
+    }
+  }
+
+  /*
+    Limbs come in two inks, because people wear clothes. The thigh and most of
+    the shin are the garment, the ankle and foot are not, and the same split
+    runs down the arm as a sleeve and a bare forearm. Drawn all in skin they
+    read as a figure that has forgotten to get dressed, which is exactly how the
+    first version of this looked.
+  */
+  const drawLegs = (g: CanvasRenderingContext2D, part: 'cloth' | 'skin' | 'line') => {
+    const act = (f: boolean) => (part === 'line' ? g.stroke() : f ? g.fill() : undefined);
+    for (const [ax, ay, kx, ky, tx, ty] of legs) {
+      const mx = kx + (tx - kx) * 0.72;
+      const my = ky + (ty - ky) * 0.72;
+      capsule(g, ax, ay, kx, ky, legR);
+      act(part !== 'skin');
+      capsule(g, kx, ky, mx, my, legR * 0.85);
+      act(part !== 'skin');
+      capsule(g, mx, my, tx, ty, legR * 0.7);
+      act(part !== 'cloth');
+      capsule(g, tx, ty, tx + legR * 1.5 * dir, ty, legR * 0.6);
+      act(part !== 'cloth');
+    }
+  };
+
+  // ── arms
+  const armSwing = pose === 'walk' ? -swing : 0;
+  const arms: [number, number, number, number, number, number][] = [];
+  for (const side of [-1, 1] as const) {
+    const sx0 = fx + lean + shoulderW * 0.74 * side;
+    const sy0 = shoulderY;
+    if (pose === 'reach') {
+      const ex = sx0 + H * 0.1 * dir;
+      arms.push([sx0, sy0, ex, sy0 + H * 0.08, ex + H * 0.1 * dir, sy0 - H * 0.12]);
+    } else if (pose === 'carry' || pose === 'work') {
+      const ex = sx0 + H * 0.07 * dir;
+      const wob = pose === 'work' ? Math.sin(ph * Math.PI * 2 + (side > 0 ? 0 : 0.6)) * H * 0.05 : 0;
+      arms.push([sx0, sy0, ex, sy0 + H * 0.11, ex + H * 0.08 * dir, sy0 + H * 0.14 + wob]);
+    } else if (pose === 'bow') {
+      arms.push([sx0, sy0, sx0 + H * 0.05 * dir, sy0 + H * 0.1, sx0 + H * 0.12 * dir, sy0 + H * 0.16]);
+    } else {
+      const sw = armSwing * side;
+      const ex = sx0 - shoulderW * 0.16 * side + sw * H * 0.06 * dir;
+      arms.push([sx0, sy0, ex, sy0 + H * 0.13, ex - shoulderW * 0.1 * side + sw * H * 0.08 * dir, sy0 + H * 0.24]);
+    }
+  }
+
+  const drawArms = (g: CanvasRenderingContext2D, part: 'cloth' | 'skin' | 'line') => {
+    const act = (f: boolean) => (part === 'line' ? g.stroke() : f ? g.fill() : undefined);
+    for (const [ax, ay, ex, ey, wx, wy] of arms) {
+      capsule(g, ax, ay, ex, ey, limb);
+      act(part !== 'skin');
+      capsule(g, ex, ey, wx, wy, limb * 0.85);
+      act(part !== 'cloth');
+      capsule(g, wx, wy, wx + limb * 0.6 * dir, wy + limb * 0.4, limb * 0.72);
+      act(part !== 'cloth');
+    }
+  };
+
+  // ── torso, as a shape with a waist in it
   const torso = (g: CanvasRenderingContext2D) => {
-    const r = Math.min(wpx, (by - ty) * 0.4);
+    const waistY = hipY - H * 0.1;
     g.beginPath();
-    g.moveTo(bx - wpx, by);
-    g.lineTo(bx + wpx, by);
-    g.lineTo(tx + tpx, ty + r);
-    g.quadraticCurveTo(tx + tpx, ty, tx + tpx - r, ty);
-    g.lineTo(tx - tpx + r, ty);
-    g.quadraticCurveTo(tx - tpx, ty, tx - tpx, ty + r);
+    g.moveTo(fx + lean - shoulderW, shoulderY + H * 0.01);
+    g.quadraticCurveTo(fx + lean - shoulderW * 1.06, shoulderY - H * 0.02, fx + lean - shoulderW * 0.6, shoulderY - H * 0.035);
+    g.lineTo(fx + lean + shoulderW * 0.6, shoulderY - H * 0.035);
+    g.quadraticCurveTo(fx + lean + shoulderW * 1.06, shoulderY - H * 0.02, fx + lean + shoulderW, shoulderY + H * 0.01);
+    g.quadraticCurveTo(fx + hipW * 1.15, waistY, fx + hipW, hipY + H * 0.01);
+    g.lineTo(fx - hipW, hipY + H * 0.01);
+    g.quadraticCurveTo(fx - hipW * 1.15, waistY, fx + lean - shoulderW, shoulderY + H * 0.01);
     g.closePath();
   };
 
-  press.solid(ink, (g) => {
-    g.fillStyle = tone(0.82);
-    torso(g);
-    g.fill();
-  });
-
-  // The head, then the hair over it as a separate ink: the cap of hair is the
-  // single strongest thing telling two small figures apart.
-  const [hx, hy] = project(v, b.x + lean * 1.5 * dir, shoulder + headR * 0.92, b.z);
-  const hr = headR * v.rise;
-  press.solid('rose', (g) => {
-    g.fillStyle = tone(0.34);
+  // ── a long garment, which is most of the cast
+  const skirt = (g: CanvasRenderingContext2D) => {
+    const hemY = fy - H * (pose === 'sit' ? 0.06 : 0.02);
+    const sway = pose === 'walk' ? Math.sin(ph * Math.PI * 2) * H * 0.018 : 0;
     g.beginPath();
-    g.arc(hx, hy, hr, 0, Math.PI * 2);
-    g.fill();
-  });
-  press.on(hairInk, (g) => {
-    g.fillStyle = tone(0.8);
-    g.beginPath();
-    g.arc(hx, hy, hr * 1.04, Math.PI * 0.92, Math.PI * 2.16);
+    g.moveTo(fx - hipW * 1.05, hipY - H * 0.04);
+    g.lineTo(fx + hipW * 1.05, hipY - H * 0.04);
+    g.quadraticCurveTo(fx + hipW * 1.9 + sway, hemY - H * 0.1, fx + hipW * 2.1 + sway, hemY);
+    g.quadraticCurveTo(fx, hemY + H * 0.022, fx - hipW * 2.1 + sway, hemY);
+    g.quadraticCurveTo(fx - hipW * 1.9 + sway, hemY - H * 0.1, fx - hipW * 1.05, hipY - H * 0.04);
     g.closePath();
-    g.fill();
-    if (b.hat === 'veil') {
-      g.beginPath();
-      g.moveTo(hx - hr * 1.15, hy);
-      g.quadraticCurveTo(hx, hy - hr * 1.9, hx + hr * 1.15, hy);
-      g.lineTo(hx + hr * 0.95, hy + hr * 2.4);
-      g.lineTo(hx - hr * 0.95, hy + hr * 2.4);
-      g.closePath();
-      g.fill();
-    }
-  });
+  };
 
+  /*
+    Two rectangles, not one.
+
+    Every part of a figure used to knock out the whole figure's box, so a head
+    the size of a thumbnail cleared the legs as well — five times over, once per
+    ink — and a room with three people in it spent most of a frame clearing the
+    same rectangle again and again. The head and hair get the head's box; the
+    body gets the body's.
+  */
+  const bb: Bounds = [
+    fx - H * 0.36, shoulderY - H * 0.08,
+    H * 0.72, fy - shoulderY + H * 0.14,
+  ];
+  const headBB: Bounds = [
+    hxAt - headR * 2.2, headYAt - headR * 2.8,
+    headR * 4.4, headR * 5.4,
+  ];
+
+  // Limbs first, so the torso and the garment sit over the top of them.
+  press.solid(SKIN, (g) => {
+    g.fillStyle = tone(0.4);
+    if (!robe && !lie) drawLegs(g, 'skin');
+    drawArms(g, 'skin');
+  }, bb);
+
+  press.solid(ink, (g) => {
+    g.fillStyle = tone(0.72);
+    if (!robe && !lie) drawLegs(g, 'cloth');
+    drawArms(g, 'cloth');
+  }, bb);
+
+  /*
+    The limbs' outlines go down *before* the body, not with the rest of the line
+    work. A solid clears the key under it, so drawing them here lets the torso
+    and the robe hide the arms behind them — and drawing them at the end, with
+    everything else, put a dark tangle of arm and shoulder lines across the
+    front of every robe in the set.
+  */
   press.key((g) => {
-    g.lineWidth = lw(v, 0.72);
-    torso(g);
-    g.stroke();
-    g.beginPath();
-    g.arc(hx, hy, hr, 0, Math.PI * 2);
-    g.stroke();
-    // One arm, where the pose wants it.
-    if (pose === 'reach' || pose === 'read' || pose === 'bow') {
-      const reach = pose === 'reach' ? 1.5 : 0.85;
-      g.beginPath();
-      g.moveTo(tx + tpx * dir * 0.85, ty + hr * 0.7);
-      g.quadraticCurveTo(
-        tx + tpx * dir * 2.1, ty + hr * (pose === 'reach' ? 0.1 : 1.4),
-        tx + tpx * dir * 2.4 * reach, ty + hr * (pose === 'reach' ? -1.2 : 1.9),
-      );
-      g.stroke();
-    }
+    g.lineWidth = lwv;
+    if (!robe && !lie) drawLegs(g, 'line');
+    drawArms(g, 'line');
   });
 
-  // One shape on the head is the whole of characterisation at this size.
-  const hat = b.hat ?? 'none';
-  if (hat === 'crown' || hat === 'knot' || hat === 'helm' || hat === 'cap') {
-    press.solid(hat === 'crown' ? 'mustard' : hairInk, (g) => {
-      g.fillStyle = tone(0.88);
-      g.beginPath();
-      if (hat === 'crown') {
-        g.moveTo(hx - hr * 1.1, hy - hr * 0.62);
-        g.lineTo(hx + hr * 1.1, hy - hr * 0.62);
-        g.lineTo(hx + hr * 0.7, hy - hr * 2.0);
-        g.lineTo(hx, hy - hr * 1.1);
-        g.lineTo(hx - hr * 0.7, hy - hr * 2.0);
-      } else if (hat === 'knot') {
-        g.arc(hx, hy - hr * 1.3, hr * 0.56, 0, Math.PI * 2);
-      } else if (hat === 'cap') {
-        g.arc(hx, hy - hr * 0.15, hr * 1.16, Math.PI, 0);
-        g.lineTo(hx + hr * 1.7, hy - hr * 0.05);
-        g.lineTo(hx + hr * 1.7, hy - hr * 0.3);
-      } else {
-        g.arc(hx, hy - hr * 0.1, hr * 1.2, Math.PI, 0);
-      }
-      g.closePath();
+  press.solid(ink, (g) => {
+    g.fillStyle = tone(0.8);
+    if (lie) {
+      capsule(g, fx - H * 0.2, fy - H * 0.06, fx + H * 0.16, fy - H * 0.06, H * 0.07);
       g.fill();
-    });
-    press.key((g) => {
-      g.lineWidth = lw(v, 0.6);
-      g.beginPath();
-      if (hat === 'crown') {
-        g.moveTo(hx - hr * 1.1, hy - hr * 0.62);
-        g.lineTo(hx + hr * 1.1, hy - hr * 0.62);
-        g.lineTo(hx + hr * 0.7, hy - hr * 2.0);
-        g.lineTo(hx, hy - hr * 1.1);
-        g.lineTo(hx - hr * 0.7, hy - hr * 2.0);
-        g.closePath();
-      } else if (hat === 'knot') {
-        g.arc(hx, hy - hr * 1.3, hr * 0.56, 0, Math.PI * 2);
-      } else {
-        g.arc(hx, hy - hr * 0.12, hr * 1.18, Math.PI, 0);
+    } else {
+      torso(g);
+      g.fill();
+      if (robe) {
+        skirt(g);
+        g.fill();
       }
+    }
+  }, bb);
+
+  // ── a veil goes on before the head, not after
+  //
+  // Drawn last it covers the face, and a robed figure comes out as a headless
+  // cone. It hangs behind and around the head, which is what a veil does.
+  if ((b.hat ?? 'none') === 'veil') {
+    const veil = (g: CanvasRenderingContext2D) => {
+      g.beginPath();
+      g.moveTo(hxAt - headR * 1.3, headYAt + headR * 0.5);
+      g.quadraticCurveTo(hxAt, headYAt - headR * 2.1, hxAt + headR * 1.3, headYAt + headR * 0.5);
+      g.lineTo(hxAt + headR * 1.55, headYAt + headR * 2.7);
+      g.lineTo(hxAt - headR * 1.55, headYAt + headR * 2.7);
+      g.closePath();
+    };
+    press.solid(ink, (g) => {
+      g.fillStyle = tone(0.62);
+      veil(g);
+      g.fill();
+    }, headBB);
+    press.key((g) => {
+      g.lineWidth = lwv;
+      veil(g);
       g.stroke();
     });
   }
+
+  // ── head: an oval with a jaw, not a ball
+  const hx = hxAt;
+  const hy = headYAt;
+  const headPath = (g: CanvasRenderingContext2D) => {
+    g.beginPath();
+    g.moveTo(hx - headR, hy);
+    g.bezierCurveTo(hx - headR, hy - headR * 1.25, hx + headR, hy - headR * 1.25, hx + headR, hy);
+    g.bezierCurveTo(hx + headR, hy + headR * 0.85, hx + headR * 0.4, hy + headR * 1.3, hx, hy + headR * 1.3);
+    g.bezierCurveTo(hx - headR * 0.4, hy + headR * 1.3, hx - headR, hy + headR * 0.85, hx - headR, hy);
+    g.closePath();
+  };
+  press.solid(SKIN, (g) => {
+    g.fillStyle = tone(0.36);
+    if (!lie) {
+      capsule(g, fx + lean * 1.2, neckY + headR * 0.3, hx, hy + headR * 0.7, headR * 0.34);
+      g.fill();
+    }
+    headPath(g);
+    g.fill();
+  }, headBB);
+
+  // ── hair, as a mass with a shape to it
+  const hairPath = (g: CanvasRenderingContext2D) => {
+    const long = b.hat === 'veil' || hairInk === 'navy';
+    g.beginPath();
+    g.moveTo(hx - headR * 1.06, hy + (long ? headR * 1.9 : headR * 0.1));
+    g.lineTo(hx - headR * 1.06, hy - headR * 0.2);
+    g.bezierCurveTo(hx - headR * 1.1, hy - headR * 1.6, hx + headR * 1.1, hy - headR * 1.6, hx + headR * 1.06, hy - headR * 0.2);
+    g.lineTo(hx + headR * 1.06, hy + (long ? headR * 1.9 : headR * 0.1));
+    g.lineTo(hx + headR * 0.72, hy + (long ? headR * 1.7 : headR * 0.02));
+    g.lineTo(hx + headR * 0.66, hy - headR * 0.45);
+    // The fringe, cut across at a slant so it is a haircut and not a helmet.
+    g.lineTo(hx - headR * 0.2, hy - headR * 0.26);
+    g.lineTo(hx - headR * 0.72, hy - headR * 0.5);
+    g.lineTo(hx - headR * 0.72, hy + (long ? headR * 1.7 : headR * 0.02));
+    g.closePath();
+  };
+  press.solid(hairInk, (g) => {
+    g.fillStyle = tone(0.86);
+    hairPath(g);
+    g.fill();
+  }, headBB);
+
+  // ── the line plate: the same paths, stroked
+  press.key((g) => {
+    g.lineWidth = lwv;
+    if (lie) {
+      capsule(g, fx - H * 0.2, fy - H * 0.06, fx + H * 0.16, fy - H * 0.06, H * 0.07);
+      g.stroke();
+    } else {
+      torso(g);
+      g.stroke();
+      if (robe) {
+        skirt(g);
+        g.stroke();
+      }
+    }
+    headPath(g);
+    g.stroke();
+    hairPath(g);
+    g.stroke();
+    // Two eyes, which at this size is the whole face and quite enough.
+    if (headR > 4.6) {
+      const e = headR * 0.3;
+      g.beginPath();
+      g.ellipse(hx - e, hy + headR * 0.12, Math.max(0.45, headR * 0.1), Math.max(0.6, headR * 0.15), 0, 0, Math.PI * 2);
+      g.ellipse(hx + e, hy + headR * 0.12, Math.max(0.45, headR * 0.1), Math.max(0.6, headR * 0.15), 0, 0, Math.PI * 2);
+      g.fill();
+    }
+  });
+
+  // ── one shape on the head
+  const hat = b.hat ?? 'none';
+  if (hat !== 'none' && hat !== 'veil') {
+    const cap = (g: CanvasRenderingContext2D) => {
+      g.beginPath();
+      if (hat === 'crown') {
+        g.moveTo(hx - headR * 1.12, hy - headR * 0.85);
+        g.lineTo(hx + headR * 1.12, hy - headR * 0.85);
+        g.lineTo(hx + headR * 0.7, hy - headR * 2.1);
+        g.lineTo(hx, hy - headR * 1.3);
+        g.lineTo(hx - headR * 0.7, hy - headR * 2.1);
+      } else if (hat === 'knot') {
+        g.arc(hx - headR * 0.2 * dir, hy - headR * 1.5, headR * 0.5, 0, Math.PI * 2);
+      } else if (hat === 'cap') {
+        g.arc(hx, hy - headR * 0.5, headR * 1.12, Math.PI, 0);
+        g.lineTo(hx + headR * 1.75 * dir, hy - headR * 0.4);
+        g.lineTo(hx + headR * 1.1 * dir, hy - headR * 0.62);
+      } else {
+        g.arc(hx, hy - headR * 0.45, headR * 1.16, Math.PI, 0);
+      }
+      g.closePath();
+    };
+    press.solid(hat === 'crown' ? 'mustard' : hairInk, (g) => {
+      g.fillStyle = tone(0.9);
+      cap(g);
+      g.fill();
+    }, headBB);
+    press.key((g) => {
+      g.lineWidth = lwv;
+      cap(g);
+      g.stroke();
+    });
+  }
+
+}
+
+/**
+ * Somebody walking a path, back and forth.
+ *
+ * The room passes the time and gets a position and a phase: no state anywhere,
+ * so a frame can be drawn at any moment and two rooms never drift apart.
+ */
+export function walker(
+  press: Press, v: View,
+  from: [number, number], to: [number, number],
+  period: number, b: Omit<Body, 'x' | 'z' | 'phase' | 'pose' | 'face'> & { pose?: Pose } = {},
+) {
+  if (v.still) return;
+  const u = (v.t / period) % 1;
+  const back = u > 0.5;
+  const k = back ? 1 - (u - 0.5) * 2 : u * 2;
+  const x = from[0] + (to[0] - from[0]) * k;
+  const z = from[1] + (to[1] - from[1]) * k;
+  // Which way the walk points on screen, which is the only facing there is.
+  const dx = (to[0] - from[0]) - (to[1] - from[1]);
+  person(press, v, {
+    ...b,
+    x, z,
+    pose: b.pose ?? 'walk',
+    phase: (v.t / 0.62) % 1,
+    face: (back ? -dx : dx) >= 0 ? 1 : -1,
+  });
 }
 
 /**
@@ -196,14 +476,22 @@ export function person(press: Press, v: View, b: Body) {
  * to be and a different thing from being a character.
  */
 export function claude(press: Press, v: View, x: number, z: number, size = 0.5, lit = true) {
+  // The pool on the floor is the same every frame and covers a lot of ground,
+  // so it belongs to the sheet that gets kept.
+  if (v.still) {
+    if (lit) {
+      glow(press, 'mustard', v, x, 0, z, size * 3.2, 0.46);
+      glow(press, 'brick', v, x, 0, z, size * 1.5, 0.16);
+    }
+    return;
+  }
+
+  // It breathes. Slowly, and not much — a light that pulses hard reads as a
+  // warning, and this one is keeping somebody company.
+  const beat = 1 + Math.sin(v.t * 1.15 + x * 0.7 + z) * 0.055;
   const y = size * 1.15;
   const [sx, sy] = project(v, x, y, z);
-  const r = size * v.rise;
-
-  if (lit) {
-    glow(press, 'mustard', v, x, 0, z, size * 3.2, 0.46);
-    glow(press, 'brick', v, x, 0, z, size * 1.5, 0.16);
-  }
+  const r = size * beat * v.rise;
 
   const ray = (g: CanvasRenderingContext2D) => {
     g.beginPath();
@@ -243,7 +531,7 @@ export function claude(press: Press, v: View, x: number, z: number, size = 0.5, 
     g.arc(0, 0, r * 0.32, 0, Math.PI * 2);
     g.fill();
     g.restore();
-  });
+  }, [sx - r - 2, sy - r - 2, r * 2 + 4, r * 2 + 4]);
 
   press.key((g) => {
     g.lineWidth = lw(v, 0.7);
@@ -357,14 +645,23 @@ export function lamp(press: Press, v: View, x: number, z: number, h = 1.5, shade
 
 /** A candle, an oil lamp, a diya: a small light on top of something. */
 export function flame(press: Press, v: View, x: number, y: number, z: number, size = 0.22) {
-  spark(press, 'mustard', v, x, y, z, size, 8);
-  spark(press, 'brick', v, x, y, z, size * 0.46, 6);
-  glow(press, 'mustard', v, x, 0, z, size * 5.5, 0.4);
+  if (v.still) {
+    glow(press, 'mustard', v, x, 0, z, size * 5.5, 0.4);
+    return;
+  }
+  // Flicker, from a couple of sines that do not share a period, so it never
+  // settles into a visible beat.
+  // One mark, not two. The second, darker spark inside the first is invisible
+  // at anything under a hand's width and a room can hold twenty of these.
+  const k = 1 + Math.sin(v.t * 9.1 + x * 4.3 + z * 2.7) * 0.2 + Math.sin(v.t * 14.7 + x) * 0.1;
+  spark(press, 'mustard', v, x, y, z, size * k, 8);
 }
 
 /** A candlestick on a table: stem, cup, flame. */
 export function candle(press: Press, v: View, x: number, y: number, z: number, ink: Ink = 'mustard') {
-  box(press, ink, v, x, y, z, 0.07, 0.3, 0.07, { top: 0.5, left: 0.76, right: 0.92, weight: 0.5 });
+  if (v.still) {
+    box(press, ink, v, x, y, z, 0.07, 0.3, 0.07, { top: 0.5, left: 0.76, right: 0.92, weight: 0.5 });
+  }
   flame(press, v, x + 0.035, y + 0.34, z + 0.035, 0.2);
 }
 
@@ -469,13 +766,17 @@ export function doorway(press: Press, v: View, x: number, w = 0.7, h = 1.3, lit 
 
 /** A fire, in a pit or a grate. */
 export function fire(press: Press, v: View, x: number, z: number, size = 1) {
-  slab(press, 'navy', v, x - 0.2 * size, z - 0.2 * size, 0.7 * size, 0.7 * size, 0.6, 0.02);
-  for (let i = 0; i < 3; i++) {
-    spark(press, i ? 'brick' : 'mustard', v,
-      x + 0.15 * size + (i - 1) * 0.1 * size, 0.18 * size + i * 0.06 * size, z + 0.15 * size,
-      (0.32 - i * 0.07) * size, 7);
+  if (v.still) {
+    slab(press, 'navy', v, x - 0.2 * size, z - 0.2 * size, 0.7 * size, 0.7 * size, 0.6, 0.02);
+    glow(press, 'mustard', v, x + 0.15 * size, 0, z + 0.15 * size, 2.4 * size, 0.5);
+    return;
   }
-  glow(press, 'mustard', v, x + 0.15 * size, 0, z + 0.15 * size, 2.4 * size, 0.5);
+  for (let i = 0; i < 2; i++) {
+    const k = 1 + Math.sin(v.t * (7.3 + i * 1.7) + x * 3.1 + z) * 0.22;
+    spark(press, i ? 'brick' : 'mustard', v,
+      x + 0.15 * size + (i - 1) * 0.1 * size, (0.18 + i * 0.06) * size * k, z + 0.15 * size,
+      (0.32 - i * 0.07) * size * k, 7);
+  }
 }
 
 /** A cooking pot, a water jar, a basket: a fat little cylinder. */

@@ -151,6 +151,65 @@ touches, which is exactly the right amount of special.
 Both are ordering-sensitive. A knockout only removes what is already on the
 plates, so `claude()` is the last call in all twenty-five builds.
 
+## Making it move
+
+A static print of a room is a picture of a place. What these are meant to be is
+a place, so the rooms run: flames flicker, the light breathes, and in every room
+somebody is crossing the floor.
+
+The obstacle is that screening a halftone is expensive, and a frame is sixteen
+milliseconds. Four things got it there, in order of how much they mattered.
+
+**Precompute the screen.** A dot is drawn wherever the coverage under it beats
+the threshold for its position inside its cell — and that threshold depends only
+on the geometry of the screen, never on the picture. So it is computed once per
+ink per sheet size and printing becomes one integer comparison per pixel per
+ink. The version this replaced walked the rotated lattice calling `arc()` at
+every point: about two hundred thousand canvas arcs for one small room, which is
+fine once and hopeless sixty times a second.
+
+**Bound the knockouts.** This was the real cost, and it was not where it looked.
+A knockout touches seven plates, and done across the whole sheet that is eight
+canvas-sized operations for every solid object — sixty of them in a room. Every
+primitive knows the rectangle its own mark can land in, so every plate operation
+is clipped to it. A frame went from a sixth of a second to a twelfth.
+
+The clip inside that is not decoration, which also took measuring: `source-in`
+is a whole-canvas operation, so without a clip the flatten touches every pixel
+of the sheet for every object in the room. Removing it "to save a save and a
+restore" made a frame half again as slow.
+
+**Split still from moving.** Most of a room never changes. The shell, the
+furniture, the shelves, the trees and everybody standing still are drawn once
+and kept as a sheet of plates; a frame loads that back and draws only the
+people and the light over it. Lights are half and half — the pool a lamp throws
+is static and expensive, the flame on top of it is tiny and constant — so the
+moving layer is run once at the start with `v.still` set, to lay its static
+halves into the kept sheet, and without it thereafter. That keeps the split
+inside the light rather than smeared across two lists of calls in every room.
+
+**Re-print only what changed.** Every solid reports where it landed, and a frame
+re-prints the union of where it drew and where the last frame drew — the old
+place to erase the movement, the new one to show it.
+
+That last one has a trap in it worth recording. Seven separate repaint
+rectangles genuinely cover half the area of their union, so it looks like an
+easy win; but each one is a separate read of six plates, and the per-read
+overhead swallows the saving three times over. The same frame went from ten
+milliseconds to thirty-three. **The pixels are cheap and the calls are not**,
+which is the opposite of the intuition that got it there.
+
+Measured in this container, which is software rasterisation with no GPU at all:
+a typical room is about five milliseconds a frame at plan size and twenty-three
+at full size. The plan runs all twenty-five taking turns inside a nine
+millisecond budget, so every room on the sheet is moving and the page still
+holds sixty. The opened room runs its own loop at full rate, and the plan pauses
+while it is up — the two together cost more than a frame, and the plan's turn
+would only be stealing from the thing being looked at.
+
+Nothing anywhere holds animation state. Every moving thing is a function of
+`v.t`, so a room can be drawn at any moment, and two rooms never drift apart.
+
 ## The projection
 
 Two-to-one isometric, the one every game with a tile grid uses:
@@ -165,11 +224,33 @@ The origin is the *top* of the diamond, +x runs down-right, +z runs down-left.
 height fills its sheet with a consistent margin, which is what lets twenty-five
 rooms of different sizes sit on one lattice without being individually tuned.
 
-Everything in `kit.ts` is silhouette, because a person is about twenty pixels
-tall in a four-hundred-pixel room. A figure is a rounded torso, a head and a cap
-of hair, and one shape on the head — a crown, a topknot, a helm, a veil — is the
-whole of characterisation at that size. That is genuinely enough: the reference
-prints carry an entire party on figures with no faces.
+## People
+
+Not tapered slabs with a ball on top. A head with a jaw, a neck, sloping
+shoulders, a torso that narrows at the waist, arms in two segments with an
+elbow, legs in two segments with a knee, and hair with a haircut — all posed off
+one phase number, so a walk is a function of time rather than a second sprite.
+
+Everything is built as outline paths: filled on the colour plates, stroked on
+the line plate. That is the only way to get a figure that is *drawn*, and it is
+why the limbs are closed capsule paths rather than thick round-capped strokes —
+the key prints *over* the colour, so a limb stroked wide enough to outline
+itself would simply cover itself up.
+
+Three things had to be fixed once they were on the page:
+
+- **Proportions are illustrative, not anatomical.** A figure thirty pixels tall
+  with a correctly-sized head is a stick with a pea on it. The head gets about a
+  seventh of the height, and the limbs are drawn thicker than they are.
+- **People wear clothes.** Thigh and shin are the garment, ankle and foot are
+  not, and the same split runs down the arm as a sleeve and a bare forearm. All
+  in skin, they read as a cast that has forgotten to get dressed.
+- **Order decides what is in front.** The limbs' outlines go onto the line plate
+  *before* the body, because a solid clears the key under it — drawn at the end
+  with the rest of the line work, they put a tangle of arm and shoulder lines
+  across the front of every robe in the set. A veil goes on before the head for
+  the same reason: drawn last it covers the face, and a robed figure comes out
+  as a headless cone.
 
 ## A room is full
 

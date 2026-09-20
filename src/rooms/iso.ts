@@ -1,4 +1,4 @@
-import { tone, type Ink, type Press } from './riso';
+import { tone, type Bounds, type Ink, type Press } from './riso';
 
 /**
  * Two-to-one isometric, and the two things that make a box read as a box.
@@ -33,6 +33,7 @@ export function fitView(sheetW: number, sheetH: number, w: number, d: number, wa
   const unit = Math.min(unitByW, unitByH);
   const rise = unit * 1.18;
   return {
+    t: 0,
     ox: sheetW / 2 + ((d - w) * unit) / 2,
     oy: sheetH * 0.5 - (across * 0.5 * unit) / 2 + wallH * rise * 0.42,
     unit,
@@ -41,6 +42,19 @@ export function fitView(sheetW: number, sheetH: number, w: number, d: number, wa
 }
 
 export interface View {
+  /** Seconds since the room started moving. Everything animated reads this. */
+  t: number;
+  /**
+   * Whether this is the pass that gets kept.
+   *
+   * Lights are half static and half not: the pool a lamp throws on the floor
+   * never changes and is expensive, the flame on top of it changes constantly
+   * and is tiny. So the moving layer is run twice — once at the start with this
+   * set, to lay down the static halves into the kept sheet, and then on every
+   * frame without it. It keeps the split inside the light rather than smeared
+   * across two lists of calls in every room.
+   */
+  still?: boolean;
   /** Where world origin lands on the sheet. */
   ox: number;
   oy: number;
@@ -65,6 +79,21 @@ export const project = (v: View, x: number, y: number, z: number): P2 => [
  * is the same *drawing* at both sizes.
  */
 export const lw = (v: View, k = 1) => Math.max(0.55, v.unit * 0.034 * k);
+
+/** The screen rectangle a set of points can mark, with room for the line. */
+export function bbox(pts: P2[], pad = 2): Bounds {
+  let x0 = Infinity;
+  let y0 = Infinity;
+  let x1 = -Infinity;
+  let y1 = -Infinity;
+  for (const [x, y] of pts) {
+    if (x < x0) x0 = x;
+    if (y < y0) y0 = y;
+    if (x > x1) x1 = x;
+    if (y > y1) y1 = y;
+  }
+  return [x0 - pad, y0 - pad, x1 - x0 + pad * 2, y1 - y0 + pad * 2];
+}
 
 function path(g: CanvasRenderingContext2D, pts: P2[]) {
   g.beginPath();
@@ -122,11 +151,15 @@ export function box(
   const P = (px: number, py: number, pz: number) => project(v, px, py, pz);
   const top = y + h;
 
+  const hull: P2[] = [
+    P(x, top, z), P(x + w, top, z), P(x + w, y, z),
+    P(x + w, y, z + d), P(x, y, z + d), P(x, top, z + d),
+  ];
   press.solid(ink, (g) => {
     poly(g, [P(x, top, z), P(x + w, top, z), P(x + w, top, z + d), P(x, top, z + d)], s.top);
     poly(g, [P(x, top, z + d), P(x + w, top, z + d), P(x + w, y, z + d), P(x, y, z + d)], s.left);
     poly(g, [P(x + w, top, z), P(x + w, top, z + d), P(x + w, y, z + d), P(x + w, y, z)], s.right);
-  });
+  }, bbox(hull));
 
   if (opts.line === false) return;
   press.key((g) => {
@@ -166,7 +199,7 @@ export function slab(
   const pts: P2[] = [P(x, y, z), P(x + w, y, z), P(x + w, y, z + d), P(x, y, z + d)];
   // A slab with a line round it is an object and hides what is under it; one
   // without is a shadow or a pool of light and has to multiply.
-  if (line) press.solid(ink, (g) => poly(g, pts, density));
+  if (line) press.solid(ink, (g) => poly(g, pts, density), bbox(pts));
   else press.on(ink, (g) => poly(g, pts, density));
   if (!line) return;
   press.key((g) => {
@@ -317,6 +350,7 @@ export function glow(
 ) {
   const [sx, sy] = project(v, x, y, z);
   const r = radius * v.unit;
+  press.touch([sx - r - 1, sy - r * 0.52 - 1, r * 2 + 2, r * 1.04 + 2]);
   press.over(ink, (g) => {
     const grad = g.createRadialGradient(sx, sy, 0, sx, sy, r);
     grad.addColorStop(0, tone(strength));
@@ -347,6 +381,7 @@ export function cone(
 ) {
   const [sx, sy] = project(v, x, y, z);
   const r = reach * v.unit;
+  press.touch([sx - r - 1, sy - r - 1, r * 2 + 2, r * 2 + 2]);
   press.over(ink, (g) => {
     const grad = g.createRadialGradient(sx, sy, 0, sx, sy, r);
     grad.addColorStop(0, tone(strength));
@@ -380,7 +415,7 @@ export function spark(
     }
     g.closePath();
     g.fill();
-  });
+  }, [sx - r - 2, sy - r - 2, r * 2 + 4, r * 2 + 4]);
 }
 
 /** An upright plane facing one way, for anything thin: a door, a picture. */
@@ -393,7 +428,7 @@ export function panel(
   const pts: P2[] = along === 'x'
     ? [P(x, y, z), P(x + w, y, z), P(x + w, y + h, z), P(x, y + h, z)]
     : [P(x, y, z), P(x, y, z + w), P(x, y + h, z + w), P(x, y + h, z)];
-  if (line) press.solid(ink, (g) => poly(g, pts, density));
+  if (line) press.solid(ink, (g) => poly(g, pts, density), bbox(pts));
   else press.on(ink, (g) => poly(g, pts, density));
   if (!line) return;
   press.key((g) => {
@@ -432,7 +467,7 @@ export function blob(
     g.ellipse(sx, sy, a, b, 0, 0, Math.PI * 2);
     g.fill();
   };
-  if (line) press.solid(ink, draw);
+  if (line) press.solid(ink, draw, [sx - a - 2, sy - b - 2, a * 2 + 4, b * 2 + 4]);
   else press.on(ink, draw);
   if (!line) return;
   press.key((g) => {

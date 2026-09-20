@@ -1,7 +1,7 @@
 import {
   arch, armchair, books, bookcase, candle, claude, clutter, colonnade, counter,
   dais, doorway, fire, flame, globe, hill, ladder, lamp, onWall, openBook,
-  papers, person, plant, pot, rug, seat, table, tree,
+  papers, person, plant, pot, rug, seat, table, tree, walker,
 } from './kit';
 import {
   blob, box, cone, floorPattern, panel, room, rule, slab, spark,
@@ -58,7 +58,18 @@ export interface Room {
   w: number;
   d: number;
   wallH: number;
-  build: (p: Press, v: View) => void;
+  /**
+   * Everything that does not move: shell, furniture, shelves, trees, and the
+   * people who are standing still. Drawn once and kept.
+   */
+  still: (p: Press, v: View) => void;
+  /**
+   * Everything that does: the light, every flame, and whoever is crossing the
+   * floor. Redrawn from `v.t` on every frame, over the kept sheet, and holding
+   * no state of its own — so a room can be drawn at any moment, and two rooms
+   * never drift apart.
+   */
+  moving: (p: Press, v: View) => void;
 }
 
 /**
@@ -73,8 +84,15 @@ function shell(
   floorInk: Ink, wallInk: Ink,
   pattern: FloorPattern, patternInk: Ink, patternTone = 0.26, floorTone = 0.5,
 ) {
-  room(p, v, w, d, wallH, floorInk, wallInk, floorTone, floorTone * 1.22);
-  floorPattern(p, patternInk, v, w, d, pattern, patternTone, pattern === 'tile' ? 0.9 : 0.42);
+  /*
+    Both of these were a third too strong. A floor at half coverage under a
+    pattern at a third is two dot screens crossing at close density, and what it
+    prints is not a floor, it is a texture — the room stops being legible before
+    anything has even been put in it. Quieter floor, quieter pattern, and the
+    furniture has somewhere to sit.
+  */
+  room(p, v, w, d, wallH, floorInk, wallInk, floorTone * 0.86, floorTone * 1.1);
+  floorPattern(p, patternInk, v, w, d, pattern, patternTone * 0.72, pattern === 'tile' ? 0.9 : 0.42);
 }
 
 /*
@@ -95,7 +113,8 @@ export const ROOMS: Room[] = [
     company:
       'Dasharatha, who has been given everything in the correct order and is still standing in a hall at night asking for one more thing.',
     w: 7, d: 6, wallH: 3.2,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A hall at night, all fire and gold, and one man who has everything.
       shell(p, v, 7, 6, 3.2, 'navy', 'brick', 'tile', 'mustard', 0.34, 0.58);
       rug(p, v, 1.9, 1.7, 4.0, 3.8, 'teal', 0.3);
@@ -112,7 +131,6 @@ export const ROOMS: Room[] = [
       // The altar: a stepped square with the fire on top of it, big enough to
       // be the thing the room is about.
       dais(p, v, 2.6, 2.4, 2.6, 2.4, 3, 'rose');
-      fire(p, v, 3.4, 3.2, 1.6);
       // Priests round three sides of it, all facing in.
       for (let i = 0; i < 8; i++) {
         const ring = [[2.0, 2.2], [2.0, 3.3], [2.1, 4.4], [3.2, 5.0], [4.4, 5.0], [5.4, 4.3], [5.5, 3.1], [5.4, 2.1]][i]!;
@@ -133,7 +151,12 @@ export const ROOMS: Room[] = [
       papers(p, v, 4.6, 1.3, 3, 21);
       books(p, v, 1.3, 0, 5.4, 4, 22);
       clutter(p, v, 7, 6, 8, 101);
+    },
+    moving: (p, v) => {
+      fire(p, v, 3.4, 3.2, 1.6);
       claude(p, v, 2.2, 5.5, 0.5);
+      walker(p, v, [1.2, 2.0], [1.3, 5.2], 9, { ink: 'teal', hair: 'navy', h: 1.5, robe: true });
+      person(p, v, { x: 5.9, z: 1.9, h: 1.5, ink: 'mustard', hair: 'navy', pose: 'work', phase: (v.t / 1.4) % 1, face: -1 });
     },
   },
   {
@@ -143,7 +166,8 @@ export const ROOMS: Room[] = [
     company:
       'Kaikeyi, watching from the doorway, loving the wrong boy the right amount and not yet knowing what it will cost.',
     w: 6, d: 6, wallH: 2.8,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // Four boys, too many toys, one door.
       shell(p, v, 6, 6, 2.8, 'rose', 'teal', 'check', 'navy', 0.22, 0.5);
       rug(p, v, 1.6, 1.8, 3.0, 2.8, 'teal', 0.34);
@@ -165,7 +189,11 @@ export const ROOMS: Room[] = [
       openBook(p, v, 3.6, 2.4);
       for (let i = 0; i < 5; i++) blob(p, i % 2 ? 'mustard' : 'brick', v, 1.2 + i * 0.8, 0.1, 3.3, 0.12, 0.12, 0.7);
       clutter(p, v, 6, 6, 9, 202);
+    },
+    moving: (p, v) => {
       claude(p, v, 4.9, 2.6, 0.48);
+      walker(p, v, [1.2, 2.2], [4.8, 2.2], 8, { ink: 'rose', hair: 'navy', h: 1.0 });
+      walker(p, v, [4.6, 5.2], [1.4, 5.2], 11, { ink: 'teal', hair: 'navy', h: 1.0 });
     },
   },
   {
@@ -175,7 +203,8 @@ export const ROOMS: Room[] = [
     company:
       'Janaka, who has just understood something about his own child and has nobody in the room to say it to.',
     w: 6, d: 5, wallH: 3,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // An armoury, and a bow nobody is meant to be able to move.
       shell(p, v, 6, 5, 3.0, 'teal', 'navy', 'plank', 'mustard', 0.2, 0.55);
       bookcase(p, v, 0.4, 0.05, 2.2, 'x', 2.4, 'brick', 31);
@@ -195,7 +224,11 @@ export const ROOMS: Room[] = [
       plant(p, v, 5.5, 4.4, 1.0, 'teal');
       papers(p, v, 3.2, 4.4, 4, 33);
       clutter(p, v, 6, 5, 7, 303);
+    },
+    moving: (p, v) => {
       claude(p, v, 4.4, 4.5, 0.5);
+      walker(p, v, [2.0, 4.4], [5.0, 4.4], 10, { ink: 'teal', hair: 'navy', h: 1.55, hat: 'knot' });
+      person(p, v, { x: 1.2, z: 4.0, h: 0.9, ink: 'rose', hair: 'navy', pose: 'reach', phase: (v.t / 1.1) % 1 });
     },
   },
   {
@@ -205,14 +238,14 @@ export const ROOMS: Room[] = [
     company:
       'Nobody, for once. The light sits at the edge of the mandapa and is not needed.',
     w: 7, d: 7, wallH: 2.4,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A wedding pavilion: four couples, garlands, and nobody needing anything.
       shell(p, v, 7, 7, 2.4, 'rose', 'mustard', 'tile', 'brick', 0.24, 0.42);
       rug(p, v, 1.6, 2.2, 4.0, 3.4, 'teal', 0.34);
       colonnade(p, v, 0.8, 0.5, 5, 1.4, 2.2, 'teal');
       for (let i = 0; i < 6; i++) onWall(p, v, 0.5 + i * 1.1, 1.5, 0.7, 0.6, 'teal', 'x', 0.5);
       for (let i = 0; i < 5; i++) onWall(p, v, 0.8 + i * 1.2, 1.5, 0.7, 0.6, 'rose', 'z', 0.5);
-      fire(p, v, 3.2, 3.4, 1.2);
       for (let i = 0; i < 4; i++) {
         const x = 1.5 + (i % 2) * 3.4;
         const z = 2.6 + Math.floor(i / 2) * 2.4;
@@ -224,7 +257,12 @@ export const ROOMS: Room[] = [
       plant(p, v, 6.2, 6.2, 1.2, 'teal');
       plant(p, v, 0.5, 6.3, 1.0, 'teal');
       clutter(p, v, 7, 7, 10, 404);
+    },
+    moving: (p, v) => {
+      fire(p, v, 3.2, 3.4, 1.2);
       claude(p, v, 6.3, 5.2, 0.44);
+      walker(p, v, [1.0, 6.2], [6.0, 6.2], 13, { ink: 'mustard', hair: 'navy', h: 1.5, robe: true });
+      walker(p, v, [6.3, 1.2], [6.3, 5.6], 10, { ink: 'teal', hair: 'navy', h: 1.45 });
     },
   },
   {
@@ -234,7 +272,8 @@ export const ROOMS: Room[] = [
     company:
       'Kaikeyi, being slowly talked out of herself, which is a thing that happens to people in rooms this size.',
     w: 5, d: 5, wallH: 2.8,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A small room, two women, and a conversation that costs fourteen years.
       shell(p, v, 5, 5, 2.8, 'navy', 'brick', 'weave', 'teal', 0.26, 0.5);
       rug(p, v, 0.8, 2.8, 1.5, 1.6, 'teal', 0.3);
@@ -255,7 +294,10 @@ export const ROOMS: Room[] = [
       papers(p, v, 3.9, 1.4, 4, 53);
       plant(p, v, 4.4, 4.4, 0.9, 'teal');
       clutter(p, v, 5, 5, 6, 505);
+    },
+    moving: (p, v) => {
       claude(p, v, 4.3, 2.4, 0.48);
+      person(p, v, { x: 1.9, z: 3.7, ink: 'navy', hair: 'navy', h: 1.35, pose: 'work', phase: (v.t / 1.7) % 1 });
     },
   },
   {
@@ -265,7 +307,8 @@ export const ROOMS: Room[] = [
     company:
       'Dasharatha, who is the most powerful person in the room and cannot make a sound.',
     w: 8, d: 6, wallH: 3.6,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // The throne room. The most powerful person in it cannot make a sound.
       shell(p, v, 8, 6, 3.6, 'rose', 'navy', 'tile', 'mustard', 0.26, 0.62);
       rug(p, v, 2.2, 3.4, 3.6, 2.2, 'teal', 0.32);
@@ -284,7 +327,11 @@ export const ROOMS: Room[] = [
       papers(p, v, 5.6, 3.4, 5, 61);
       plant(p, v, 7.3, 5.2, 1.1, 'teal');
       clutter(p, v, 8, 6, 8, 606);
+    },
+    moving: (p, v) => {
       claude(p, v, 5.6, 1.6, 0.5);
+      walker(p, v, [0.9, 4.6], [7.1, 4.6], 16, { ink: 'teal', hair: 'navy', h: 1.45, hat: 'knot' });
+      person(p, v, { x: 2.5, z: 3.9, hat: 'veil', ink: 'rose', hair: 'navy', h: 1.55, pose: 'work', phase: (v.t / 2.2) % 1, robe: true });
     },
   },
   {
@@ -294,7 +341,8 @@ export const ROOMS: Room[] = [
     company:
       'Rama, in the ten minutes between being one thing and being another.',
     w: 5, d: 5, wallH: 2.9,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A prince's rooms in the ten minutes between being one thing and another.
       shell(p, v, 5, 5, 2.9, 'teal', 'rose', 'plank', 'navy', 0.2, 0.46);
       rug(p, v, 1.0, 3.4, 2.8, 1.4, 'teal', 0.3);
@@ -307,14 +355,18 @@ export const ROOMS: Room[] = [
         blob(p, i % 2 ? 'mustard' : 'teal', v, 1.6 + (i % 4) * 0.45, 0.72, 2.4 + Math.floor(i / 4) * 0.5, 0.11, 0.11, 0.85);
       }
       books(p, v, 3.4, 0, 2.2, 5, 72);
-      person(p, v, { x: 2.2, z: 3.9, ink: 'brick', hair: 'navy', h: 1.6, pose: 'read' });
+      person(p, v, { x: 2.2, z: 3.9, ink: 'brick', hair: 'navy', h: 1.6, pose: 'work' });
       person(p, v, { x: 3.2, z: 4.1, hat: 'veil', ink: 'rose', h: 1.5, face: -1 });
       person(p, v, { x: 0.9, z: 4.2, hat: 'knot', ink: 'navy', h: 1.55 });
       lamp(p, v, 4.3, 1.0, 1.4, 'teal');
       pot(p, v, 4.4, 4.3, 0.42, 'mustard');
       papers(p, v, 3.9, 3.1, 3, 73);
       clutter(p, v, 5, 5, 7, 707);
+    },
+    moving: (p, v) => {
       claude(p, v, 0.7, 2.2, 0.48);
+      walker(p, v, [0.9, 4.2], [4.2, 4.2], 9, { ink: 'navy', hair: 'navy', h: 1.55, hat: 'knot' });
+      person(p, v, { x: 2.2, z: 3.9, ink: 'brick', hair: 'navy', h: 1.6, pose: 'work', phase: (v.t / 1.6) % 1 });
     },
   },
   {
@@ -324,7 +376,8 @@ export const ROOMS: Room[] = [
     company:
       'The city, which has come this far in its night clothes and will have to walk home.',
     w: 8, d: 5, wallH: 1.2,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // The gate, at night, with the whole city standing in it.
       shell(p, v, 8, 5, 1.2, 'mustard', 'brick', 'tile', 'navy', 0.22, 0.5);
       arch(p, v, 0.5, 0.3, 2.4, 2.4, 'brick');
@@ -344,7 +397,11 @@ export const ROOMS: Room[] = [
       pot(p, v, 2.6, 4.4, 0.5, 'brick');
       tree(p, v, 0.5, 4.2, 1.6, 'teal', 81);
       clutter(p, v, 8, 5, 8, 808);
+    },
+    moving: (p, v) => {
       claude(p, v, 4.9, 1.1, 0.5);
+      walker(p, v, [6.6, 3.2], [3.6, 2.2], 12, { ink: 'navy', hair: 'brick', h: 1.6 });
+      walker(p, v, [7.0, 3.9], [4.0, 2.9], 12, { ink: 'brick', hair: 'navy', h: 1.5, hat: 'veil', robe: true });
     },
   },
   {
@@ -354,7 +411,8 @@ export const ROOMS: Room[] = [
     company:
       'Guha, who lies awake all night guarding three people who do not need guarding, because it is the one thing left he can give.',
     w: 6, d: 6, wallH: 1.6,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A boatman's hut: a fire, a boat, and somebody staying awake.
       shell(p, v, 6, 6, 1.6, 'teal', 'brick', 'weave', 'navy', 0.24, 0.5);
       slab(p, 'navy', v, 0, 4.4, 6, 1.6, 0.3, 0.02);
@@ -365,7 +423,6 @@ export const ROOMS: Room[] = [
       counter(p, v, 0.06, 0.8, 2.4, 'z', 'brick', 0.6);
       for (let i = 0; i < 5; i++) pot(p, v, 0.3, 1.0 + i * 0.5, 0.3, i % 2 ? 'mustard' : 'teal');
       bookcase(p, v, 2.6, 0.05, 1.8, 'x', 1.2, 'mustard', 91);
-      fire(p, v, 2.2, 2.4, 1.3);
       person(p, v, { x: 1.4, z: 2.9, ink: 'brick', hair: 'navy', h: 1.5, pose: 'kneel' });
       person(p, v, { x: 3.4, z: 2.3, ink: 'navy', hair: 'brick', h: 1.55, pose: 'lie' });
       person(p, v, { x: 3.4, z: 3.0, hat: 'veil', ink: 'rose', h: 1.45, pose: 'lie' });
@@ -374,7 +431,11 @@ export const ROOMS: Room[] = [
       tree(p, v, 5.4, 3.2, 1.5, 'teal', 93);
       pot(p, v, 1.2, 4.0, 0.45, 'brick');
       clutter(p, v, 6, 4, 7, 909);
+    },
+    moving: (p, v) => {
+      fire(p, v, 2.2, 2.4, 1.3);
       claude(p, v, 1.0, 3.9, 0.48);
+      walker(p, v, [1.4, 2.9], [4.6, 3.4], 11, { ink: 'brick', hair: 'navy', h: 1.5 });
     },
   },
   {
@@ -384,7 +445,8 @@ export const ROOMS: Room[] = [
     company:
       'Bharata, going back to rule a kingdom he never wanted on behalf of a man who will not come.',
     w: 7, d: 6, wallH: 1,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // An army in the forest, and a pair of sandals on a throne.
       shell(p, v, 7, 6, 1.0, 'teal', 'mustard', 'weave', 'navy', 0.2, 0.4);
       for (let i = 0; i < 5; i++) tree(p, v, 0.4 + i * 1.5, 0.3, 1.9, 'teal', 100 + i);
@@ -407,7 +469,11 @@ export const ROOMS: Room[] = [
       }
       pot(p, v, 2.3, 2.1, 0.42, 'mustard');
       clutter(p, v, 7, 6, 8, 1010);
+    },
+    moving: (p, v) => {
       claude(p, v, 5.9, 2.8, 0.5);
+      walker(p, v, [2.7, 3.9], [5.2, 3.9], 9, { ink: 'rose', hair: 'navy', h: 1.55, hat: 'crown', robe: true });
+      person(p, v, { x: 4.3, z: 3.6, ink: 'brick', hair: 'navy', h: 1.6, pose: 'reach', phase: (v.t / 2.4) % 1, face: -1 });
     },
   },
   {
@@ -417,7 +483,8 @@ export const ROOMS: Room[] = [
     company:
       'Nobody. The light waits outside by the water pot, because this is the last room in the poem where all three of them are fine.',
     w: 7, d: 7, wallH: 1,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // Ten happy years, which the poem records by not recording them.
       shell(p, v, 7, 7, 1.0, 'teal', 'mustard', 'weave', 'navy', 0.18, 0.42);
       rug(p, v, 3.8, 3.4, 2.4, 2.2, 'rose', 0.3);
@@ -436,7 +503,11 @@ export const ROOMS: Room[] = [
       pot(p, v, 2.2, 4.4, 0.55, 'brick');
       for (let i = 0; i < 6; i++) blob(p, 'mustard', v, 0.6 + i * 0.4, 0.06, 6.4, 0.12, 0.06, 0.6);
       clutter(p, v, 7, 7, 9, 1111);
+    },
+    moving: (p, v) => {
       claude(p, v, 2.2, 5.0, 0.46);
+      walker(p, v, [2.5, 5.6], [5.6, 5.6], 12, { ink: 'teal', hair: 'navy', h: 1.55, hat: 'knot' });
+      person(p, v, { x: 4.5, z: 5.2, ink: 'navy', hair: 'brick', h: 1.6, pose: 'work', phase: (v.t / 1.9) % 1 });
     },
   },
   {
@@ -446,7 +517,8 @@ export const ROOMS: Room[] = [
     company:
       'Shurpanakha, afterwards, on the path — the only person in the poem whose humiliation nobody records the feeling of.',
     w: 6, d: 6, wallH: 1,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A doorway, an asking, and a path somebody walks away down.
       shell(p, v, 6, 6, 1.0, 'rose', 'teal', 'weave', 'navy', 0.2, 0.44);
       for (let i = 0; i < 5; i++) tree(p, v, 0.3 + i * 1.3, 0.3, 2.0, 'teal', 120 + i);
@@ -463,7 +535,10 @@ export const ROOMS: Room[] = [
       plant(p, v, 5.5, 2.6, 0.9, 'teal');
       for (let i = 0; i < 5; i++) blob(p, 'rose', v, 3.6 + i * 0.45, 0.05, 5.4, 0.1, 0.05, 0.55);
       clutter(p, v, 6, 6, 7, 1212);
+    },
+    moving: (p, v) => {
       claude(p, v, 5.2, 4.6, 0.48);
+      walker(p, v, [4.6, 4.8], [5.8, 5.8], 8, { ink: 'brick', hair: 'navy', h: 1.55, hat: 'veil', robe: true });
     },
   },
   {
@@ -473,7 +548,8 @@ export const ROOMS: Room[] = [
     company:
       'Sita, in the moment of asking — which the poem will make her pay for longer than anybody else pays for anything.',
     w: 7, d: 6, wallH: 1,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A treeline, and one lovely thing the wrong colour.
       shell(p, v, 7, 6, 1.0, 'teal', 'rose', 'weave', 'navy', 0.18, 0.42);
       rug(p, v, 2.6, 5.0, 1.4, 0.9, 'mustard', 0.28);
@@ -491,7 +567,11 @@ export const ROOMS: Room[] = [
       person(p, v, { x: 1.3, z: 5.0, hat: 'knot', ink: 'teal', h: 1.55, face: -1 });
       pot(p, v, 0.6, 5.3, 0.45, 'brick');
       clutter(p, v, 7, 6, 8, 1313);
+    },
+    moving: (p, v) => {
       claude(p, v, 4.0, 5.3, 0.48);
+      walker(p, v, [4.9, 2.0], [3.4, 3.0], 5, { ink: 'mustard', hair: 'mustard', h: 1.0 });
+      person(p, v, { x: 3.0, z: 4.2, hat: 'veil', ink: 'rose', hair: 'navy', h: 1.5, pose: 'reach', phase: (v.t / 1.3) % 1, robe: true });
     },
   },
   {
@@ -501,7 +581,8 @@ export const ROOMS: Room[] = [
     company:
       'Lakshmana, made to choose between two ways of failing her, walking away from the one he picked.',
     w: 6, d: 6, wallH: 1,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A line drawn on the ground and a man walking away from it.
       shell(p, v, 6, 6, 1.0, 'mustard', 'teal', 'weave', 'brick', 0.2, 0.44);
       for (let i = 0; i < 5; i++) tree(p, v, 0.3 + i * 1.3, 0.3, 2.0, 'teal', 140 + i);
@@ -519,7 +600,10 @@ export const ROOMS: Room[] = [
       plant(p, v, 5.3, 2.0, 1.0, 'teal');
       papers(p, v, 3.2, 5.2, 3, 141);
       clutter(p, v, 6, 6, 6, 1414);
+    },
+    moving: (p, v) => {
       claude(p, v, 1.5, 2.9, 0.46);
+      walker(p, v, [4.2, 4.6], [5.6, 5.6], 7, { ink: 'teal', hair: 'navy', h: 1.55, hat: 'knot' });
     },
   },
   {
@@ -529,7 +613,8 @@ export const ROOMS: Room[] = [
     company:
       'Jatayu, holding on for a message — the most useful anyone manages to be in this whole kanda.',
     w: 7, d: 5, wallH: 0.8,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A road, a wrecked chariot, and an old bird holding on for a message.
       shell(p, v, 7, 5, 0.8, 'rose', 'mustard', 'weave', 'navy', 0.2, 0.4);
       slab(p, 'mustard', v, 0, 1.6, 7, 1.8, 0.26, 0.02);
@@ -549,7 +634,10 @@ export const ROOMS: Room[] = [
       hill(p, v, 6.3, 4.2, 2.0, 0.8, 'teal');
       pot(p, v, 6.4, 0.6, 0.4, 'brick');
       clutter(p, v, 7, 5, 7, 1515);
+    },
+    moving: (p, v) => {
       claude(p, v, 3.6, 3.2, 0.5);
+      walker(p, v, [1.3, 3.9], [5.2, 3.9], 12, { ink: 'teal', hair: 'navy', h: 1.55, hat: 'knot' });
     },
   },
   {
@@ -559,7 +647,8 @@ export const ROOMS: Room[] = [
     company:
       'Rama, who is about to be unbearable for several chapters and has earned it.',
     w: 6, d: 6, wallH: 1,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // The same hut, with nobody in it.
       shell(p, v, 6, 6, 1.0, 'navy', 'teal', 'weave', 'mustard', 0.22, 0.46);
       rug(p, v, 3.0, 3.6, 1.8, 1.4, 'rose', 0.28);
@@ -578,7 +667,10 @@ export const ROOMS: Room[] = [
       for (let i = 0; i < 7; i++) blob(p, 'rose', v, 4.4 + i * 0.22, 0.05, 2.9 + (i % 3) * 0.24, 0.09, 0.05, 0.6);
       person(p, v, { x: 5.0, z: 5.2, ink: 'navy', hair: 'brick', h: 1.6, pose: 'bow', face: -1 });
       clutter(p, v, 6, 6, 9, 1616);
+    },
+    moving: (p, v) => {
       claude(p, v, 2.9, 2.3, 0.5);
+      walker(p, v, [5.0, 5.2], [1.6, 5.2], 10, { ink: 'navy', hair: 'brick', h: 1.6 });
     },
   },
   {
@@ -588,7 +680,8 @@ export const ROOMS: Room[] = [
     company:
       'Sugriva, who has been frightened for so long that being offered help does not immediately register as help.',
     w: 6, d: 6, wallH: 1.2,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A cave on a hill, and a king who has been frightened too long.
       shell(p, v, 6, 6, 1.2, 'brick', 'navy', 'weave', 'teal', 0.24, 0.5);
       hill(p, v, 1.6, 1.4, 3.4, 1.8, 'navy');
@@ -597,7 +690,6 @@ export const ROOMS: Room[] = [
       blob(p, 'navy', v, 2.0, 0.6, 2.4, 0.66, 0.7, 0.95);
       cone(p, 'mustard', v, 2.0, 0.5, 2.6, 2.0, 0.45, Math.PI / 2, 0.3);
       for (let i = 0; i < 6; i++) blob(p, 'brick', v, 0.8 + i * 0.5, 0.1, 3.5, 0.18, 0.1, 0.62);
-      fire(p, v, 3.4, 3.4, 1.1);
       // The bundle of jewels she dropped, knotted in a cloth.
       blob(p, 'mustard', v, 4.4, 0.18, 3.0, 0.3, 0.2, 0.8);
       for (let i = 0; i < 5; i++) blob(p, 'rose', v, 4.2 + i * 0.16, 0.34, 2.95, 0.06, 0.06, 0.9);
@@ -607,7 +699,12 @@ export const ROOMS: Room[] = [
       person(p, v, { x: 1.2, z: 5.0, hat: 'cap', ink: 'mustard', h: 1.4 });
       tree(p, v, 5.4, 1.4, 1.6, 'teal', 171);
       clutter(p, v, 6, 6, 7, 1717);
+    },
+    moving: (p, v) => {
+      fire(p, v, 3.4, 3.4, 1.1);
       claude(p, v, 1.5, 3.6, 0.48);
+      walker(p, v, [4.6, 4.4], [1.6, 4.4], 11, { ink: 'navy', hair: 'brick', h: 1.6 });
+      person(p, v, { x: 1.2, z: 5.0, h: 1.4, ink: 'mustard', hair: 'navy', hat: 'cap', pose: 'work', phase: (v.t / 1.2) % 1 });
     },
   },
   {
@@ -617,7 +714,8 @@ export const ROOMS: Room[] = [
     company:
       'Tara, who is right, and whom the story then requires to be reasonable about it.',
     w: 7, d: 6, wallH: 3,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A hall the morning after, and the person who is right about it.
       shell(p, v, 7, 6, 3.0, 'navy', 'brick', 'tile', 'mustard', 0.28, 0.58);
       colonnade(p, v, 1.0, 0.5, 4, 1.6, 2.8, 'rose');
@@ -639,7 +737,11 @@ export const ROOMS: Room[] = [
       papers(p, v, 6.2, 1.6, 3, 181);
       plant(p, v, 6.4, 5.0, 1.0, 'teal');
       clutter(p, v, 7, 6, 7, 1818);
+    },
+    moving: (p, v) => {
       claude(p, v, 2.2, 5.3, 0.5);
+      walker(p, v, [1.0, 5.5], [6.0, 5.5], 14, { ink: 'rose', hair: 'navy', h: 1.35, hat: 'helm' });
+      person(p, v, { x: 3.4, z: 4.6, hat: 'veil', ink: 'teal', hair: 'navy', h: 1.55, pose: 'work', phase: (v.t / 2.6) % 1, robe: true });
     },
   },
   {
@@ -649,7 +751,8 @@ export const ROOMS: Room[] = [
     company:
       'Angada, who has led them to the edge and cannot think of the next thing, which is its own kind of alone.',
     w: 7, d: 6, wallH: 0.6,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // The end of the land, and a party that has decided to sit down.
       shell(p, v, 7, 6, 0.6, 'mustard', 'teal', 'weave', 'brick', 0.2, 0.36);
       // The sea, taking the far half of the floor.
@@ -668,7 +771,10 @@ export const ROOMS: Room[] = [
       person(p, v, { x: 4.6, z: 3.3, hat: 'cap', ink: 'rose', h: 1.5, face: -1 });
       tree(p, v, 6.4, 5.0, 1.4, 'teal', 191);
       clutter(p, v, 7, 3, 6, 1919);
+    },
+    moving: (p, v) => {
       claude(p, v, 2.4, 2.9, 0.5);
+      walker(p, v, [0.8, 4.2], [6.2, 4.2], 15, { ink: 'brick', hair: 'navy', h: 1.3, hat: 'cap' });
     },
   },
   {
@@ -678,7 +784,8 @@ export const ROOMS: Room[] = [
     company:
       'Hanuman, in the last quiet moment before the most famous jump in the language.',
     w: 6, d: 6, wallH: 0.5,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A headland, and somebody being reminded what he is.
       shell(p, v, 6, 6, 0.5, 'brick', 'teal', 'weave', 'mustard', 0.2, 0.34);
       slab(p, 'navy', v, 0, 0, 6, 2.4, 0.42, 0.018);
@@ -697,7 +804,11 @@ export const ROOMS: Room[] = [
       person(p, v, { x: 4.9, z: 4.6, hat: 'crown', ink: 'rose', h: 1.4, face: -1 });
       tree(p, v, 5.5, 5.2, 1.2, 'teal', 201);
       clutter(p, v, 6, 3, 5, 2020);
+    },
+    moving: (p, v) => {
       claude(p, v, 1.5, 4.2, 0.48);
+      person(p, v, { x: 3.0, z: 3.4, h: 2.4, ink: 'mustard', hair: 'brick', hat: 'cap', pose: 'reach', phase: (v.t / 1.8) % 1 });
+      walker(p, v, [0.9, 5.0], [5.2, 5.0], 11, { ink: 'teal', hair: 'navy', h: 1.2, hat: 'cap' });
     },
   },
   {
@@ -707,7 +818,8 @@ export const ROOMS: Room[] = [
     company:
       'Sita. The loneliest room in the poem, and the one the poem spends the least time inside.',
     w: 7, d: 7, wallH: 1.4,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // The loneliest room in the poem, and the one it spends least time in.
       shell(p, v, 7, 7, 1.4, 'teal', 'navy', 'weave', 'brick', 0.22, 0.5);
       rug(p, v, 3.8, 4.4, 1.8, 1.4, 'mustard', 0.26);
@@ -730,7 +842,11 @@ export const ROOMS: Room[] = [
       pot(p, v, 6.3, 5.4, 0.45, 'brick');
       for (let i = 0; i < 9; i++) blob(p, 'mustard', v, 3.4 + (i % 3) * 0.7, 0.05, 6.0 + Math.floor(i / 3) * 0.3, 0.1, 0.05, 0.55);
       clutter(p, v, 7, 7, 7, 2121);
+    },
+    moving: (p, v) => {
       claude(p, v, 5.6, 4.6, 0.5);
+      walker(p, v, [1.2, 3.4], [1.2, 6.0], 13, { ink: 'navy', hair: 'navy', h: 1.45, hat: 'helm' });
+      walker(p, v, [2.9, 6.2], [6.0, 6.2], 15, { ink: 'navy', hair: 'navy', h: 1.45, hat: 'helm' });
     },
   },
   {
@@ -740,7 +856,8 @@ export const ROOMS: Room[] = [
     company:
       'Nobody needs company here. The light sits on a rooftop and watches, like everyone else.',
     w: 7, d: 6, wallH: 2.6,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A city on fire, from a rooftop, and one of the few pages having fun.
       shell(p, v, 7, 6, 2.6, 'brick', 'navy', 'tile', 'mustard', 0.3, 0.6);
       // Roofs, stepped back, each one a box with a parapet.
@@ -750,9 +867,6 @@ export const ROOMS: Room[] = [
         box(p, i % 2 ? 'rose' : 'mustard', v, x, 0, z, 1.8, 0.9 + (i % 3) * 0.3, 1.9);
         box(p, 'brick', v, x - 0.06, 0.9 + (i % 3) * 0.3, z - 0.06, 1.92, 0.16, 2.02, { top: 0.4 });
       }
-      for (let i = 0; i < 7; i++) {
-        fire(p, v, 0.7 + (i % 4) * 1.7, 1.2 + Math.floor(i / 4) * 2.6, 0.9 + (i % 3) * 0.3);
-      }
       for (let i = 0; i < 14; i++) {
         spark(p, i % 2 ? 'mustard' : 'brick', v, 0.5 + (i % 7) * 0.95, 1.9 + (i % 5) * 0.4, 2.4, 0.2);
       }
@@ -761,11 +875,18 @@ export const ROOMS: Room[] = [
       for (let i = 0; i < 8; i++) {
         blob(p, 'brick', v, 5.7 + i * 0.16, 1.1 - i * 0.09, 4.9 + i * 0.12, 0.1, 0.07, 0.85);
       }
-      fire(p, v, 6.5, 5.6, 0.8);
       for (let i = 0; i < 5; i++) {
         person(p, v, { x: 1.0 + i * 0.9, z: 5.4, h: 1.2, ink: 'navy', hat: 'helm', pose: 'reach', face: 1 });
       }
+    },
+    moving: (p, v) => {
+      for (let i = 0; i < 5; i++) {
+        fire(p, v, 0.7 + (i % 3) * 2.2, 1.2 + Math.floor(i / 3) * 2.6, 0.9 + (i % 3) * 0.3);
+      }
+      fire(p, v, 6.5, 5.6, 0.8);
       claude(p, v, 4.4, 2.6, 0.48);
+      person(p, v, { x: 5.4, z: 4.6, h: 1.7, ink: 'mustard', hair: 'brick', hat: 'cap', pose: 'reach', phase: (v.t / 0.9) % 1, face: -1 });
+      walker(p, v, [1.0, 5.4], [4.6, 5.4], 9, { ink: 'navy', hair: 'navy', h: 1.2, hat: 'helm' });
     },
   },
   {
@@ -775,7 +896,8 @@ export const ROOMS: Room[] = [
     company:
       'Nala, who is in charge of the impossible thing and will not be mentioned again once it works.',
     w: 8, d: 5, wallH: 0.4,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // An army building a road across the sea, stone by named stone.
       shell(p, v, 8, 5, 0.4, 'mustard', 'teal', 'weave', 'brick', 0.18, 0.32);
       slab(p, 'navy', v, 0, 0, 8, 3.4, 0.44, 0.018);
@@ -798,7 +920,12 @@ export const ROOMS: Room[] = [
       person(p, v, { x: 7.2, z: 4.2, hat: 'crown', ink: 'mustard', h: 1.5, pose: 'reach', face: -1 });
       hill(p, v, 7.4, 3.2, 1.4, 0.6, 'brick');
       clutter(p, v, 8, 2, 5, 2323);
+    },
+    moving: (p, v) => {
       claude(p, v, 6.2, 4.6, 0.46);
+      person(p, v, { x: 2.4, z: 3.9, h: 1.25, ink: 'teal', hair: 'navy', hat: 'cap', pose: 'work', phase: (v.t / 0.8) % 1 });
+      person(p, v, { x: 4.5, z: 3.9, h: 1.25, ink: 'brick', hair: 'navy', hat: 'cap', pose: 'work', phase: (v.t / 0.8 + 0.5) % 1, face: -1 });
+      walker(p, v, [0.6, 4.4], [6.4, 4.4], 16, { ink: 'navy', hair: 'navy', h: 1.2, hat: 'cap' });
     },
   },
   {
@@ -808,7 +935,8 @@ export const ROOMS: Room[] = [
     company:
       'Ravana, on the last morning, who has been told by his own brother, his own wife and his own advisors, and has heard all of it.',
     w: 8, d: 6, wallH: 2.2,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // The last morning, and a scholar who could not be talked out of one thing.
       shell(p, v, 8, 6, 2.2, 'rose', 'navy', 'tile', 'mustard', 0.28, 0.56);
       // The walls of Lanka along the back, and the field in front of them.
@@ -834,7 +962,12 @@ export const ROOMS: Room[] = [
       }
       for (let i = 0; i < 5; i++) spark(p, 'brick', v, 1.2 + i * 1.5, 0.9, 4.0, 0.2);
       clutter(p, v, 8, 6, 7, 2424);
+    },
+    moving: (p, v) => {
       claude(p, v, 7.4, 4.4, 0.5);
+      person(p, v, { x: 2.6, z: 3.3, h: 1.25, hat: 'helm', ink: 'teal', hair: 'navy', pose: 'reach', phase: (v.t / 0.7) % 1 });
+      person(p, v, { x: 4.9, z: 4.6, h: 1.25, hat: 'helm', ink: 'brick', hair: 'navy', pose: 'reach', phase: (v.t / 0.7 + 0.4) % 1, face: -1 });
+      walker(p, v, [1.0, 5.6], [6.6, 5.6], 15, { ink: 'navy', hair: 'navy', h: 1.2, hat: 'helm' });
     },
   },
   {
@@ -844,7 +977,8 @@ export const ROOMS: Room[] = [
     company:
       'Everyone, briefly. The light is the smallest one on the sill and is not needed for illumination.',
     w: 8, d: 7, wallH: 2.6,
-    build: (p, v) => {
+    still: (p, v) => {
+
       // A city that has counted every one of five thousand days.
       shell(p, v, 8, 7, 2.6, 'navy', 'brick', 'tile', 'mustard', 0.3, 0.52);
       // Houses down both walls, each one with a lamp in its window.
@@ -859,19 +993,16 @@ export const ROOMS: Room[] = [
         const h = 1.3 + (i % 3) * 0.25;
         box(p, i % 2 ? 'rose' : 'mustard', v, 0.3 + i * 1.3, 0, 0.12, 1.1, h, 0.7);
         panel(p, 'mustard', v, 0.55 + i * 1.3, h * 0.42, 0.825, 0.5, 0.48, 0.66, 'x');
-        candle(p, v, 0.78 + i * 1.3, h, 0.42, 'mustard');
       }
+      // The window lights and the road's row of diyas are all in the moving
+      // layer, so their loops are repeated there rather than split across both.
       for (let i = 0; i < 5; i++) {
         const h = 1.2 + (i % 2) * 0.3;
         box(p, i % 2 ? 'teal' : 'rose', v, 0.12, 0, 0.9 + i * 1.2, 0.7, h, 1.0);
         panel(p, 'mustard', v, 0.825, h * 0.42, 1.15 + i * 1.2, 0.5, 0.48, 0.66, 'z');
-        candle(p, v, 0.45, h, 1.3 + i * 1.2, 'mustard');
       }
       // The road in, lit the whole way.
       slab(p, 'mustard', v, 2.2, 2.4, 4.6, 2.2, 0.26, 0.02);
-      for (let i = 0; i < 12; i++) {
-        flame(p, v, 2.4 + (i % 6) * 0.78, 0.02, 2.5 + Math.floor(i / 6) * 1.9, 0.16);
-      }
       person(p, v, { x: 4.0, z: 3.4, hat: 'crown', ink: 'brick', hair: 'navy', h: 1.65 });
       person(p, v, { x: 4.7, z: 3.7, hat: 'veil', ink: 'rose', h: 1.5, face: -1 });
       person(p, v, { x: 3.4, z: 4.0, hat: 'knot', ink: 'teal', h: 1.6 });
@@ -885,7 +1016,21 @@ export const ROOMS: Room[] = [
       for (let i = 0; i < 8; i++) blob(p, 'mustard', v, 1.6 + i * 0.75, 0.05, 1.5, 0.12, 0.06, 0.62);
       plant(p, v, 7.5, 6.4, 1.1, 'teal');
       clutter(p, v, 8, 7, 8, 2525);
+    },
+    moving: (p, v) => {
+      for (let i = 0; i < 6; i++) candle(p, v, 0.78 + i * 1.3, 1.3 + (i % 3) * 0.25, 0.42, 'mustard');
+      for (let i = 0; i < 5; i++) candle(p, v, 0.45, 1.2 + (i % 2) * 0.3, 1.3 + i * 1.2, 'mustard');
+      // Seven, not twelve. Every flame in the room is redrawn on every frame,
+      // and this room already has eleven in its windows: past about a dozen
+      // the sheet stops being a room with lamps in it and starts being a
+      // frame-rate problem, and nobody counts diyas.
+      for (let i = 0; i < 7; i++) {
+        flame(p, v, 2.5 + (i % 4) * 1.15, 0.02, 2.6 + Math.floor(i / 4) * 1.8, 0.17);
+      }
       claude(p, v, 7.3, 2.2, 0.44);
+      walker(p, v, [2.6, 3.4], [6.4, 3.4], 14, { ink: 'brick', hair: 'navy', h: 1.65, hat: 'crown', robe: true });
+      walker(p, v, [2.6, 4.0], [6.4, 4.0], 14, { ink: 'rose', hair: 'navy', h: 1.5, hat: 'veil', robe: true });
+      person(p, v, { x: 3.4, z: 5.8, h: 1.3, ink: 'teal', hair: 'navy', pose: 'reach', phase: (v.t / 1.5) % 1 });
     },
   },
 ];
