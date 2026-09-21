@@ -25,7 +25,8 @@ export type EffectId =
   | 'wobble'
   | 'pencil'
   | 'ramayana'
-  | 'comic';
+  | 'comic'
+  | 'film';
 
 export interface EffectDef {
   id: EffectId;
@@ -233,6 +234,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['6 pages · 34 panels', 'graphite deposits, never ctx.stroke()', 'the reader knows, he does not'],
     ink: '#4a4640',
     wash: 'rgba(74, 70, 64, 0.12)',
+  },
+  {
+    id: 'film',
+    name: 'A Small Light, Carried',
+    tagline: 'Twenty-seven seconds of Rāma, with Rāma left out of it.',
+    blurb:
+      'A lantern film. One eyepiece is pointed at a dozen unrelated subjects — a bow measured in cubits, a natural-history plate of a deer that never existed, a branch of ashoka mounted like a herbarium sheet, a chart of the road south, a flame, an arrow’s arc, the moon over Lanka, two wooden sandals, a city of lit windows — and what they have in common is the whole of the film. He is never drawn: a drawing of him would be somebody’s idea of him, and a drawing of his bow is only ever a bow. Every frame is a pure function of one number, so it renders identically at any rate and can be written out to a file.',
+    spec: ['12 plates · 27 seconds · one lens', 'every frame a function of t', 'the subject is never shown'],
+    ink: '#e8b24a',
+    wash: 'rgba(232, 178, 74, 0.12)',
   },
 ];
 
