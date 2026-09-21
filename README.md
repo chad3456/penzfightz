@@ -1192,6 +1192,41 @@ claim to be a likeness of anybody. Scenes, not doctrine.
 
 [The long version.](docs/ramayana-one-page.md)
 
+## Hallowdene
+
+A school for the magically inclined, built in bricks — twenty-three thousand of
+them, in real time, with a time track of seven terms you travel through: the
+crossing, the hall, the stairs, the courtyard, the bridge, the wood and the
+clock. Drag to look, wheel to move in, arrows for terms; it walks itself until
+you take hold of it.
+
+**A brick can only be moved, turned and coloured.** It cannot be stretched, and
+that is the constraint that does the work: a 1×1 scaled to 4×1 is a 1×1 with
+four oval studs on it. So a wall is a running bond of the longest brick that
+fits, a round tower is a ring of 2×1s each turned to the angle it sits at and
+twisted a little further every course, and a cone is the same ring shrinking.
+Nine sizes, one instanced mesh each, about ten draw calls for the whole castle.
+
+**Each term is a place, a weather and a camera.** The weather crossfades — sky,
+fog, sun angle and power, water, stars, and whatever is falling out of the sky.
+Three lights and no post pass; every window, candle and lamp has an additive
+billboard placed by hand, because a glow the size of a hall window and a glow
+the size of a candle are not the same glow.
+
+**What only showed up on screen:** the floors were five-sixths missing, because
+`slab()` stepped its tile size in both directions and then laid whichever brick
+fitted inside the step; the camera never reached a landmark, because the
+frame-delta clamp meant to survive a background tab was also driving the
+crossfade, and at one frame a second a four-second flight took eighty; the sky
+was a stop and a half dark, because a raw shader writes linear values straight
+to the framebuffer; the hall's best elevation was blank, because the glass sat
+flush in the wall and the banners were hung inside the buttresses; the stair
+hall was a closed cylinder, so the four moving flights inside it — the whole
+point of the room — could not be seen from anywhere; and the bridge crossed a
+lawn.
+
+[The long version.](docs/hallowdene.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1210,6 +1245,13 @@ says that instead. The lines in **The Book Stall** are Dostoevsky's, each printe
 book it came from; the English wording depends on the translator, which is why
 the receipt says so in its small print rather than pretending otherwise. The pen brands are named because they were real pens, the way you would
 name a real football.
+**Hogwarts, Harry Potter and LEGO are all somebody's protected work** — the
+castle, the house names, the characters and the brick system are each owned, and
+none of them is here. **Hallowdene** is a castle school on a lake with towers, a
+great hall, a moving staircase, a bridge, a clock, a boathouse and a dark wood,
+which is the furniture of a genre, and nobody owns a genre. Its four house
+colours have no names, its brickwork is a stud on a cylinder rather than anybody's
+part, and the name on the door is its own.
 The **Ramayana** belongs to nobody and is scripture to a great many people; it is
 also a living text in dozens of tellings that disagree with each other. The
 twenty-five rooms are scenes rather than doctrine — the beats most tellings

@@ -27,7 +27,8 @@ export type EffectId =
   | 'ramayana'
   | 'comic'
   | 'film'
-  | 'frieze';
+  | 'frieze'
+  | 'castle';
 
 export interface EffectDef {
   id: EffectId;
@@ -255,6 +256,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['20 scenes · one continuous move · 2:44', 'seeded from place, never from time', 'scenes, not doctrine'],
     ink: '#c98a3c',
     wash: 'rgba(201, 138, 60, 0.12)',
+  },
+  {
+    id: 'castle',
+    name: 'Hallowdene',
+    tagline: 'A school for the magically inclined, built out of bricks, in real time.',
+    blurb:
+      'A castle on a lake with four towers, a great hall, a shaft of staircases that move, a bridge over a gorge and a dark wood at the edge of the grounds — forty thousand studded bricks, laid in a running bond, in nine draw calls. A time track runs along the bottom: moving through the seven terms moves you through the building as well as the year, because each term is a place as much as a moment. Every glow is an additive billboard sitting exactly where the light is, which is what bloom looks like and costs one quad instead of three full-screen passes. It is not a reproduction of any particular school from any particular series, and no names, houses, crests or licensed brick parts of one appear in it.',
+    spec: ['~40k bricks · 9 draw calls', 'seven terms, each one a place', 'no post pass: the bloom is billboards'],
+    ink: '#e3b45c',
+    wash: 'rgba(227, 180, 92, 0.12)',
   },
 ];
 

@@ -7466,3 +7466,185 @@ button.card:hover:not(:disabled) {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 10.5px;
 }
+
+/* --------------------------------------------------------------- Hallowdene */
+/*
+   The castle fills the window and everything else floats over it. No panels
+   and no chrome: a title, a caption, a read-out and a track along the bottom,
+   all of them on the glass rather than beside it.
+*/
+
+.cst {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #0c1430;
+  color: #e6ebf4;
+  -webkit-font-smoothing: antialiased;
+}
+.cst__view { position: absolute; inset: 0; cursor: grab; }
+.cst__view:active { cursor: grabbing; }
+
+.cst__top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px max(16px, 3vw);
+  pointer-events: none;
+  background: linear-gradient(rgba(6, 10, 24, 0.55), rgba(6, 10, 24, 0));
+}
+.cst__top > * { pointer-events: auto; }
+.cst__kicker,
+.cst__hud,
+.cst__term span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9fb0cc;
+}
+.cst__title {
+  margin: 6px 0 0;
+  font: 400 clamp(26px, 4vw, 44px)/1 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.015em;
+  color: #f6f1e4;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
+}
+.cst__exit {
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(230, 235, 244, 0.28);
+  background: rgba(10, 16, 34, 0.42);
+  color: #e6ebf4;
+  font: 400 13px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+.cst__exit:hover { background: rgba(230, 235, 244, 0.16); }
+
+.cst__card {
+  position: absolute;
+  left: max(16px, 3vw);
+  bottom: 132px;
+  max-width: 40ch;
+  padding: 16px 18px;
+  border-left: 2px solid #e3b45c;
+  background: rgba(8, 13, 30, 0.58);
+  backdrop-filter: blur(8px);
+}
+.cst__where {
+  margin: 0 0 7px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e3b45c;
+}
+.cst__note {
+  margin: 0;
+  font: 400 15px/1.66 Georgia, "Times New Roman", serif;
+  color: #dfe5f0;
+}
+
+.cst__hud {
+  position: absolute;
+  right: max(16px, 3vw);
+  bottom: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  text-align: right;
+}
+.cst__hint { opacity: 0.6; letter-spacing: 0.1em; }
+
+/* --- the time track */
+
+.cst__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px max(16px, 3vw) 26px;
+  background: linear-gradient(rgba(6, 10, 24, 0), rgba(6, 10, 24, 0.78) 45%);
+}
+.cst__auto {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(230, 235, 244, 0.28);
+  background: rgba(10, 16, 34, 0.5);
+  color: #f6f1e4;
+  font-size: 11px;
+  cursor: pointer;
+}
+.cst__auto.is-on { border-color: #e3b45c; color: #e3b45c; }
+
+.cst__terms {
+  display: flex;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 0;
+}
+.cst__terms li { flex: 1; min-width: 0; }
+.cst__term {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px 6px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+/* The rail, and the mark on it. */
+.cst__term::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(230, 235, 244, 0.22);
+}
+.cst__term i {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #0c1430;
+  border: 1px solid rgba(230, 235, 244, 0.45);
+  transition: background 260ms ease, border-color 260ms ease, transform 260ms ease;
+}
+.cst__term.is-past i { background: rgba(227, 180, 92, 0.55); border-color: rgba(227, 180, 92, 0.7); }
+.cst__term.is-on i { background: #e3b45c; border-color: #e3b45c; transform: scale(1.5); }
+.cst__term.is-on span { color: #f6f1e4; }
+.cst__term:hover span { color: #dfe5f0; }
+.cst__term span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .cst__card { bottom: 120px; max-width: none; right: max(16px, 3vw); }
+  .cst__hud { display: none; }
+  .cst__term span { display: none; }
+  .cst__term { padding-top: 10px; }
+}

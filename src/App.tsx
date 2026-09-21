@@ -36,6 +36,7 @@ import { Ramayana } from './rooms/Ramayana';
 import { Comic } from './effects/comic/Comic';
 import { Film } from './film/Film';
 import { Frieze } from './frieze/Frieze';
+import { Castle } from './castle/Castle';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -198,6 +199,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'frieze') {
     return <Frieze onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'castle') {
+    return <Castle onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;
