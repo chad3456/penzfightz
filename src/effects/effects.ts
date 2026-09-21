@@ -26,7 +26,8 @@ export type EffectId =
   | 'pencil'
   | 'ramayana'
   | 'comic'
-  | 'film';
+  | 'film'
+  | 'frieze';
 
 export interface EffectDef {
   id: EffectId;
@@ -244,6 +245,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['12 plates · 27 seconds · one lens', 'every frame a function of t', 'the subject is never shown'],
     ink: '#e8b24a',
     wash: 'rgba(232, 178, 74, 0.12)',
+  },
+  {
+    id: 'frieze',
+    name: 'The Ramayana, along one page',
+    tagline: 'His whole life, left to right, on ruled exercise paper.',
+    blurb:
+      'Twenty scenes drawn end to end along one very long page, and a camera that travels it: a fire in a hall with no heir in it, four boys, a bow that breaks, two boons called in years late, a road south, ten quiet years, a deer the wrong colour, a line across a doorway, a sea, a bridge, a war, and a city that counted the days and lit every window on the way in. There is one cut in the whole film and it is at the very end — the middle of this story is a journey, so the page simply is the journey. Felt tip and crayon on ruled paper: every line wanders, the colour overshoots the outline, and everything casts a small shadow because everything is a cut-out lying on the page.',
+    spec: ['20 scenes · one continuous move · 2:44', 'seeded from place, never from time', 'scenes, not doctrine'],
+    ink: '#c98a3c',
+    wash: 'rgba(201, 138, 60, 0.12)',
   },
 ];
 

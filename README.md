@@ -1167,6 +1167,31 @@ barrel still. It is the reason twelve unrelated plates are a set.
 
 [The long version.](docs/a-small-light-carried.md)
 
+## The Ramayana, drawn along one very long page
+
+Twenty scenes, left to right, on ruled exercise paper — his whole life from a
+fire in a hall with no heir in it to a city that counted the days and lit every
+window on the way in.
+
+**There is one cut in the film and it is at the very end.** Everything else is a
+single move along a single page. The middle of this story is a journey south, so
+the page simply *is* the journey: Ayodhya is at the start of the book and Lanka
+is a very long way into it.
+
+**Felt tip and crayon.** Every line wanders off the path it meant to take and is
+gone over twice in places; the colour overshoots the outline on one side and
+falls short on the other; and everything casts a small shadow, because
+everything is a cut-out lying on the page. Nothing is seeded from the clock —
+only from where it is — so a doodle looks hand-drawn and does not crawl about
+while the camera passes over it.
+
+**He is drawn here**, where the lantern film left him out. That one was twelve
+plates with no story in it; this is a life, and a life needs somebody living it.
+The register is the point: plainly a retelling in a school notebook, making no
+claim to be a likeness of anybody. Scenes, not doctrine.
+
+[The long version.](docs/ramayana-one-page.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

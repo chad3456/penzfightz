@@ -7310,3 +7310,159 @@ button.card:hover:not(:disabled) {
   font: 400 13.5px/1.7 Georgia, "Times New Roman", serif;
   color: #79818f;
 }
+
+/* ------------------------------- The Ramayana, along one very long page */
+/*
+   A desk with a page on it. Everything round the frame is dark and quiet so
+   that the only bright thing is the paper, which is the point of the piece.
+*/
+
+.frz {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px max(16px, 3vw) 44px;
+  background: #16150f;
+  color: #cbc6b6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.frz__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 1120px;
+  flex-wrap: wrap;
+}
+.frz__kicker,
+.frz__time,
+.frz__num,
+.frz__pip {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #857f6d;
+}
+.frz__title {
+  margin: 6px 0 0;
+  font: 400 clamp(22px, 3.2vw, 36px)/1.06 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.015em;
+  color: #f2ecdd;
+}
+.frz__exit {
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(203, 198, 182, 0.28);
+  background: none;
+  color: #cbc6b6;
+  font: 400 13px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.frz__exit:hover { background: rgba(203, 198, 182, 0.1); }
+
+.frz__lede {
+  margin: 0;
+  width: 100%;
+  max-width: 1120px;
+  font: 400 14.5px/1.68 Georgia, "Times New Roman", serif;
+  color: #9a9483;
+}
+
+.frz__stage { display: flex; justify-content: center; width: 100%; }
+.frz__frame { width: min(1120px, 96vw); aspect-ratio: 16 / 9; }
+.frz__frame canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+.frz__slide {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-height: 26px;
+}
+.frz__slide b { font: 400 19px/1.2 Georgia, "Times New Roman", serif; color: #f2ecdd; }
+
+.frz__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 1120px);
+}
+.frz__play {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(203, 198, 182, 0.28);
+  background: none;
+  color: #f2ecdd;
+  font-size: 12px;
+  cursor: pointer;
+}
+.frz__play:hover { background: rgba(203, 198, 182, 0.1); }
+.frz__scrub {
+  flex: 1;
+  appearance: none;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(203, 198, 182, 0.22);
+  cursor: pointer;
+}
+.frz__scrub::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #e3b45c;
+}
+.frz__scrub::-moz-range-thumb {
+  width: 12px; height: 12px; border: 0; border-radius: 999px; background: #e3b45c;
+}
+
+.frz__scenes {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1120px;
+}
+.frz__pip {
+  padding: 5px 9px;
+  border: 1px solid rgba(203, 198, 182, 0.16);
+  background: none;
+  color: #857f6d;
+  cursor: pointer;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+}
+.frz__pip:hover { background: rgba(203, 198, 182, 0.08); }
+.frz__pip.is-on { border-color: #e3b45c; color: #f2ecdd; }
+
+.frz__foot { max-width: 76ch; margin-top: 6px; }
+.frz__foot p {
+  margin: 0 0 12px;
+  font: 400 13.5px/1.72 Georgia, "Times New Roman", serif;
+  color: #7f7a6a;
+}
+.frz__small { font-size: 12.5px !important; }
+.frz__key {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 0 1px;
+  border: 1px solid rgba(203, 198, 182, 0.24);
+  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+}
