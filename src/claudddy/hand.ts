@@ -57,7 +57,7 @@ const shoulder = (x0: number, x1: number): Pt[] => [
   [x1, X + 0.14], [x1, BASE],
 ];
 
-const G: Record<string, Glyph> = {
+export const GLYPHS: Record<string, Glyph> = {
   ' ': { w: 0.30, s: [] },
 
   a: { w: 0.54, s: [bowl(0.26, 0.19, X, BASE, 0.05, 1), [[0.45, X], [0.46, BASE]]] },
@@ -146,7 +146,7 @@ const G: Record<string, Glyph> = {
 /** How wide a string will be, in ems. */
 export function measure(text: string, tracking = 0.02): number {
   let w = 0;
-  for (const ch of text) w += (G[ch] ?? G[ch.toLowerCase()] ?? G[' ']!).w + tracking;
+  for (const ch of text) w += (GLYPHS[ch] ?? GLYPHS[ch.toLowerCase()] ?? GLYPHS[' ']!).w + tracking;
   return w;
 }
 
@@ -197,7 +197,7 @@ export function write(
 
   for (let i = 0; i < text.length; i++) {
     const ch = text[i]!;
-    const gl = G[ch] ?? G[ch.toLowerCase()] ?? G[' ']!;
+    const gl = GLYPHS[ch] ?? GLYPHS[ch.toLowerCase()] ?? GLYPHS[' ']!;
     const s = seed * 131 + i * 17;
     // Each letter gets its own small sins: a little high or low, a little
     // wider or tighter, a degree more or less slope.

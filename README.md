@@ -1227,6 +1227,41 @@ lawn.
 
 [The long version.](docs/hallowdene.md)
 
+## The Nightwalkers' Map
+
+A survey of Hallowdene in pen and ink, on parchment, that knows who is standing
+on it. The sheet is blank until you say the words; then the ink spreads out
+into the paper and the whole building is there — walls hatched, water lined,
+the wood drawn tree by tree. Two dozen people are walking about in it, each one
+a pair of footprints and a name on a hairline leader, leaving prints that fade
+over about eight seconds. Click anywhere and you walk there along the
+corridors. Say the other words and it goes blank again.
+
+**It is the same building, twice.** The map is written in the same coordinates
+as the brick castle — the great hall is at x −34…20 on the sheet because it is
+at x −34…20 in the model — so standing anywhere on the map, *look at it from
+here* opens Hallowdene at whichever of its seven vantages is nearest your feet.
+Because the two files agree, that is three lines of arithmetic rather than a
+table somebody has to keep in step.
+
+**Every line is drawn with a nib, not stroked.** The path is resampled, each
+sample pushed sideways by a slow wave, the result drawn in segments whose width
+breathes. The poché — the hatching inside a wall — is the one exception, and is
+ruled, because a wobbling nib through a hundred lines a wall costs a third of a
+second for a difference nobody can see. The lettering is the hand from *it's
+claudddy*, drawn in ink instead of graphite, so no two 'e's on the sheet match.
+
+**What only showed up on screen:** every room was filled in solid, because a
+poché band wound the same way twice needs `clip('evenodd')` and without it the
+hole is not a hole; all three secret passages had been found before the ink
+finished spreading, because walkers were barred from standing on them but not
+from routing through them, and the shortest way across a castle is very often
+the passage; four people standing together in the cloister came out as
+WinifredLoomBarnabyMilne; and leaning all the way in on the hall made 'The
+Great Hall' four hundred pixels tall with the room it named gone.
+
+[The long version.](docs/the-nightwalkers-map.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1245,13 +1280,17 @@ says that instead. The lines in **The Book Stall** are Dostoevsky's, each printe
 book it came from; the English wording depends on the translator, which is why
 the receipt says so in its small print rather than pretending otherwise. The pen brands are named because they were real pens, the way you would
 name a real football.
-**Hogwarts, Harry Potter and LEGO are all somebody's protected work** — the
+**Hogwarts, Harry Potter, the Marauder's Map and LEGO are all somebody's protected work** — the
 castle, the house names, the characters and the brick system are each owned, and
 none of them is here. **Hallowdene** is a castle school on a lake with towers, a
 great hall, a moving staircase, a bridge, a clock, a boathouse and a dark wood,
 which is the furniture of a genre, and nobody owns a genre. Its four house
 colours have no names, its brickwork is a stud on a cylinder rather than anybody's
-part, and the name on the door is its own.
+part, and the name on the door is its own. **The Nightwalkers' Map** is a map of
+that castle and not of anybody else's: a plan that is blank until you speak to it
+and then shows you everyone in the building is an old idea and a good one, but
+the castle it surveys, the names of its rooms, its two incantations and the four
+students in its cartouche are all ours.
 The **Ramayana** belongs to nobody and is scripture to a great many people; it is
 also a living text in dozens of tellings that disagree with each other. The
 twenty-five rooms are scenes rather than doctrine — the beats most tellings

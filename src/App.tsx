@@ -37,6 +37,7 @@ import { Comic } from './effects/comic/Comic';
 import { Film } from './film/Film';
 import { Frieze } from './frieze/Frieze';
 import { Castle } from './castle/Castle';
+import { Nightwalkers } from './nightwalkers/Nightwalkers';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -58,6 +59,15 @@ export default function App() {
   const [shell, setShell] = useState<Shell>('boot');
   const [game, setGame] = useState<GameId | null>(null);
   const [effect, setEffect] = useState<EffectId | null>(null);
+  /*
+    Which term the castle opens on.
+
+    The map and the model are the same building in the same coordinates, so
+    standing somewhere on the map and asking to look at it should put you in
+    front of that part of the castle rather than back at the beginning. This
+    is the one piece of state two effects share, and it is one number.
+  */
+  const [castleTerm, setCastleTerm] = useState(0);
   const [player, setPlayer] = useState<PlayerRow | null>(null);
   const [name, setName] = useState(playerName());
   const [soundOn, setSoundOn] = useState(true);
@@ -201,7 +211,15 @@ export default function App() {
     return <Frieze onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'castle') {
-    return <Castle onExit={toShelf} />;
+    return <Castle onExit={toShelf} startTerm={castleTerm} />;
+  }
+  if (shell === 'effect' && effect === 'nightwalkers') {
+    return (
+      <Nightwalkers
+        onExit={toShelf}
+        onLookAt={(term) => { setCastleTerm(term); setEffect('castle'); }}
+      />
+    );
   }
   if (shell === 'effect' && effect === 'cards') {
     return <Cards onExit={toShelf} />;

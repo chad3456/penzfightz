@@ -13,14 +13,16 @@ import { sfx } from '../lib/audio';
  * clock tower with the whole thing finally small enough to see at once.
  */
 
-export function Castle({ onExit }: { onExit: () => void }) {
+export function Castle({ onExit, startTerm = 0 }: { onExit: () => void; startTerm?: number }) {
   const host = useRef<HTMLDivElement>(null);
   const world = useRef<World | null>(null);
-  const [term, setTerm] = useState(0);
+  const [term, setTerm] = useState(startTerm);
   const [bricks, setBricks] = useState(0);
   const [fps, setFps] = useState(0);
   const [ready, setReady] = useState(false);
-  const [auto, setAuto] = useState(true);
+  // The clock does not start if you arrived here asking for a particular
+  // place: walking away from what somebody just asked to see is rude.
+  const [auto, setAuto] = useState(startTerm === 0);
 
   useEffect(() => {
     const el = host.current;
@@ -38,7 +40,7 @@ export function Castle({ onExit }: { onExit: () => void }) {
     const name = dbg ? String((gl as WebGLRenderingContext).getParameter((dbg as { UNMASKED_RENDERER_WEBGL: number }).UNMASKED_RENDERER_WEBGL)) : '';
     const low = /swiftshader|llvmpipe|software/i.test(name);
 
-    const w = new World(canvas, { quality: low ? 'low' : 'high' });
+    const w = new World(canvas, { quality: low ? 'low' : 'high', term: startTerm });
     world.current = w;
     // Left in deliberately: every camera in TERMS was placed by driving
     // the page and reading `__hallowdene.camera.position` back out, and the
@@ -109,6 +111,7 @@ export function Castle({ onExit }: { onExit: () => void }) {
       w.dispose();
       world.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const go = useCallback((i: number) => {

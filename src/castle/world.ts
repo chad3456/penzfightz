@@ -113,6 +113,8 @@ const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 
 export interface WorldOptions {
   /** Drop the shadow map and some particles on a machine that needs it. */
   quality?: 'high' | 'low';
+  /** Which term to open on. */
+  term?: number;
 }
 
 export class World {
@@ -361,7 +363,10 @@ export class World {
     this.scene.add(this.stars);
 
     this.addStairs();
-    this.goTo(0, true);
+    this.term = Math.max(0, Math.min(TERM_WEATHER.length - 1, opts.term ?? 0));
+    this.weather = TERM_WEATHER[this.term]!;
+    this.blend = { from: this.weather, k: 1 };
+    this.goTo(this.term, true);
   }
 
   /**

@@ -28,7 +28,8 @@ export type EffectId =
   | 'comic'
   | 'film'
   | 'frieze'
-  | 'castle';
+  | 'castle'
+  | 'nightwalkers';
 
 export interface EffectDef {
   id: EffectId;
@@ -263,9 +264,19 @@ export const EFFECTS: EffectDef[] = [
     tagline: 'A school for the magically inclined, built out of bricks, in real time.',
     blurb:
       'A castle on a lake with four towers, a great hall, a shaft of staircases that move, a bridge over a gorge and a dark wood at the edge of the grounds — forty thousand studded bricks, laid in a running bond, in nine draw calls. A time track runs along the bottom: moving through the seven terms moves you through the building as well as the year, because each term is a place as much as a moment. Every glow is an additive billboard sitting exactly where the light is, which is what bloom looks like and costs one quad instead of three full-screen passes. It is not a reproduction of any particular school from any particular series, and no names, houses, crests or licensed brick parts of one appear in it.',
-    spec: ['~40k bricks · 9 draw calls', 'seven terms, each one a place', 'no post pass: the bloom is billboards'],
+    spec: ['23k bricks · ~10 draw calls', 'seven terms, each one a place', 'no post pass: the bloom is billboards'],
     ink: '#e3b45c',
     wash: 'rgba(227, 180, 92, 0.12)',
+  },
+  {
+    id: 'nightwalkers',
+    name: "The Nightwalkers' Map",
+    tagline: 'A sheet of parchment that knows who is standing on it.',
+    blurb:
+      'A survey of Hallowdene in pen and ink, on parchment, drawn in the same coordinates as the castle itself — stand on the bridge in one and the other agrees with you. The sheet is blank until you say the words; then the ink spreads out into the paper and the whole building is there, walls hatched, water lined, the wood drawn tree by tree. Two dozen people are walking about in it, each one a pair of footprints and a name on a hairline leader, and they leave prints behind them that fade over about eight seconds. Click anywhere and you walk there along the corridors; there are three passages on this map that are on no other plan of the building, and they only appear once somebody has actually been down one. Say the other words and it goes blank again. It is not a reproduction of anybody else’s map of anybody else’s school: the castle is ours, the rooms are named for what they are, and so are the words.',
+    spec: ['ink, not a font · no two es alike', 'static plate cached, people redrawn', 'three ways that are on no other plan'],
+    ink: '#c07a4a',
+    wash: 'rgba(192, 122, 74, 0.12)',
   },
 ];
 
