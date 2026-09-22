@@ -1262,6 +1262,35 @@ Great Hall' four hundred pixels tall with the room it named gone.
 
 [The long version.](docs/the-nightwalkers-map.md)
 
+## The landing page
+
+A personal site, with the month of work drawn on it as what it actually is: not
+a grid of cards but a graph. Filled discs are pieces, in their own colour, and
+open when you click them; hollow rings are the machinery underneath — a
+risograph press, a graphite deposit, a hand that writes rather than sets, one
+castle's plan used twice. **Every line is a real import, read off the source
+rather than off memory**, and one of them was wrong when it was done from
+memory. Underneath, everything again as an index in the order it was made, with
+dates taken from the first commit that carried each folder.
+
+**The layout settles once and stops.** It runs to convergence synchronously
+from a seeded start while the page fades in, so it is the same picture every
+visit and can be designed against; a force graph left running is a lava lamp.
+
+**Three things the layout had to learn:** clearance is an ellipse, not a circle,
+because a node is eleven pixels across and its title is a hundred and forty, so
+what two of them collide with is the other one's *name*; a hub needs a ring big
+enough to hang its children's names round, so an edge's rest length is set by
+how busy its busier end is; and fourteen engine labels on top of thirty-six
+titles is more lettering than the box holds, so the quiet engines give their
+name up only when you point at them.
+
+The masthead is a canvas rather than a heading, because everything else on the
+site is drawn at run time and a masthead in a web font would be the one thing on
+the page that came out of a box.
+
+[The long version.](docs/the-landing-page.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

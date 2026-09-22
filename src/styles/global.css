@@ -7813,3 +7813,259 @@ button.card:hover:not(:disabled) {
   transition: background 200ms ease;
 }
 .nwm__look:hover { background: rgba(224, 182, 113, 0.3); }
+
+/* ── The landing page: a personal site with the work on it ─────────────── */
+
+.desk {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 700px at 50% -8%, rgba(233, 220, 189, 0.08), transparent 70%),
+    #17140f;
+  color: #e9dcbd;
+  font-family: var(--font-body, Georgia, 'Times New Roman', serif);
+  padding-bottom: 72px;
+  overflow-x: hidden;
+}
+
+/* masthead */
+.desk__top {
+  position: relative;
+  padding: clamp(16px, 3vh, 34px) max(20px, 5vw) 0;
+  text-align: center;
+}
+.desk__kicker {
+  margin: 0 0 10px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(233, 220, 189, 0.45);
+}
+.desk__h1 { margin: 0; height: 0; overflow: hidden; }
+.desk__h1 span { position: absolute; left: -9999px; }
+.desk__mast {
+  display: block;
+  width: min(760px, 92vw);
+  height: clamp(74px, 11.5vw, 136px);
+  margin: 0 auto;
+}
+.desk__rule {
+  display: block;
+  width: min(760px, 92vw);
+  height: 1px;
+  margin: 10px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(233, 220, 189, 0.4), transparent);
+  transform-origin: left center;
+  transition: transform 120ms linear;
+}
+
+/* the opening */
+.desk__intro {
+  max-width: 880px;
+  margin: clamp(14px, 2.2vh, 24px) auto 0;
+  padding: 0 max(20px, 5vw);
+  text-align: center;
+}
+.desk__standfirst {
+  margin: 0;
+  font-size: clamp(16px, 1.75vw, 19px);
+  line-height: 1.58;
+  color: rgba(233, 220, 189, 0.93);
+}
+.desk__sub {
+  margin: 14px 0 0;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(233, 220, 189, 0.5);
+}
+.desk__tally {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(233, 220, 189, 0.45);
+}
+.desk__tally b { color: #f2e5c4; font-weight: 400; font-size: 15px; letter-spacing: 0.04em; }
+
+/* the constellation */
+.desk__sky {
+  position: relative;
+  margin: clamp(12px, 1.8vh, 22px) auto 0;
+  max-width: 1640px;
+  padding: 0 max(12px, 2vw);
+}
+.desk__skyhost {
+  height: clamp(480px, 78vh, 880px);
+  border-radius: 3px;
+  overflow: hidden;
+  background: #17140f;
+  box-shadow: inset 0 0 0 1px rgba(233, 220, 189, 0.08);
+}
+.desk__skyhost canvas { display: block; width: 100%; height: 100%; }
+.desk__caption {
+  display: grid;
+  grid-template-columns: minmax(180px, 250px) 1fr auto;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  min-height: 96px;
+  padding: 16px 4px 0;
+  border-top: 1px solid rgba(233, 220, 189, 0.14);
+  margin-top: 14px;
+}
+.desk__caption h3 {
+  margin: 3px 0 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #f6ead0;
+}
+.desk__cardkind {
+  margin: 0;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(233, 220, 189, 0.5);
+}
+.desk__cardline { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(233, 220, 189, 0.86); }
+.desk__cardmedium {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  font-style: italic;
+  color: rgba(233, 220, 189, 0.5);
+}
+.desk__go {
+  margin-top: 14px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+.desk__go:hover { background: rgba(233, 220, 189, 0.12); }
+
+/* the three panels */
+.desk__panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  max-width: 1280px;
+  margin: clamp(46px, 8vh, 90px) auto 0;
+  padding: 0 max(20px, 5vw);
+}
+.desk__panel { display: flex; flex-direction: column; }
+.desk__panel h2 {
+  margin: 0 0 6px;
+  font-size: 23px;
+  font-weight: 400;
+  color: #f6ead0;
+}
+.desk__panel p {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.66;
+  color: rgba(233, 220, 189, 0.82);
+}
+.desk__lede { font-style: italic; color: rgba(233, 220, 189, 0.55) !important; }
+.desk__margin {
+  /* Pushed to the foot of its column, so the three rules line up across the
+     three panels instead of ending wherever the prose happens to stop. */
+  margin-top: auto !important;
+  padding-top: 12px;
+  border-top: 1px solid rgba(233, 220, 189, 0.16);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(216, 176, 106, 0.8) !important;
+}
+
+/* the index */
+.desk__index {
+  max-width: 1120px;
+  margin: clamp(52px, 9vh, 104px) auto 0;
+  padding: 0 max(20px, 5vw);
+}
+.desk__index h2 { margin: 0 0 6px; font-size: 26px; font-weight: 400; color: #f6ead0; }
+.desk__index > .desk__lede { margin: 0 0 22px; font-size: 15px; }
+.desk__index ol { list-style: none; margin: 0; padding: 0; }
+.desk__index li { border-top: 1px solid rgba(233, 220, 189, 0.12); }
+.desk__index li:last-child { border-bottom: 1px solid rgba(233, 220, 189, 0.12); }
+.desk__index button {
+  display: grid;
+  grid-template-columns: 34px 12px minmax(150px, 230px) 1fr auto;
+  align-items: baseline;
+  gap: 14px;
+  width: 100%;
+  padding: 13px 8px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, padding-left 160ms ease;
+}
+.desk__index button:hover { background: rgba(233, 220, 189, 0.05); padding-left: 16px; }
+.desk__no {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: rgba(233, 220, 189, 0.32);
+}
+.desk__dot { width: 9px; height: 9px; border-radius: 50%; align-self: center; }
+.desk__name { font-size: 16.5px; color: #f2e5c4; }
+.desk__what { font-size: 14px; color: rgba(233, 220, 189, 0.55); }
+.desk__when {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(233, 220, 189, 0.32);
+  white-space: nowrap;
+}
+
+/* the foot */
+.desk__foot {
+  max-width: 1120px;
+  margin: clamp(52px, 9vh, 96px) auto 0;
+  padding: 26px max(20px, 5vw) 0;
+  border-top: 1px solid rgba(233, 220, 189, 0.12);
+}
+.desk__colophon {
+  margin: 0 0 18px;
+  max-width: 620px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(233, 220, 189, 0.5);
+}
+.desk__tools { display: flex; flex-wrap: wrap; gap: 10px; }
+.desk__tools button {
+  padding: 8px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(233, 220, 189, 0.22);
+  background: none;
+  color: rgba(233, 220, 189, 0.75);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+.desk__tools button:hover { border-color: rgba(233, 220, 189, 0.6); color: #f6ead0; }
+
+@media (max-width: 860px) {
+  .desk__caption { grid-template-columns: 1fr; gap: 10px; }
+  .desk__index button { grid-template-columns: 28px 10px 1fr; row-gap: 4px; }
+  .desk__what { grid-column: 3; }
+  .desk__when { grid-column: 3; }
+}

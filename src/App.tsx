@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Arcade } from './arcade/Arcade';
+import { Desk } from './desk/Desk';
 import { Leaderboard } from './ui/Leaderboard';
 import { Sheet, SheetHeader } from './ui/Sheet';
 import { PenFightGame } from './games/penfight/PenFightGame';
@@ -53,7 +54,13 @@ import { audio } from './lib/audio';
  * right game with the room code already in hand.
  */
 
-type Shell = 'boot' | 'shelf' | 'game' | 'effect' | 'ranking' | 'name' | 'resident';
+/*
+  `shelf` is the landing page — a personal site with the work drawn on it as a
+  graph of what it is built out of. `arcade` is the older plain shelf of cards,
+  kept because a list of everything sorted into two tabs is genuinely the
+  faster way in when you already know what you came for.
+*/
+type Shell = 'boot' | 'shelf' | 'arcade' | 'game' | 'effect' | 'ranking' | 'name' | 'resident';
 
 export default function App() {
   const [shell, setShell] = useState<Shell>('boot');
@@ -226,6 +233,22 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'epic') {
     return <Epic onExit={toShelf} />;
+  }
+
+  if (shell === 'shelf') {
+    return (
+      <Desk
+        playerName={name}
+        onPick={(id) => { setGame(id); setShell('game'); }}
+        onEffect={(id) => { setEffect(id); setShell('effect'); }}
+        onResident={() => setShell('resident')}
+        onShelf={() => setShell('arcade')}
+        onRename={() => setShell('name')}
+        onRanking={() => setShell('ranking')}
+        soundOn={soundOn}
+        onToggleSound={() => setSoundOn((s) => !s)}
+      />
+    );
   }
 
   const inner = () => {
