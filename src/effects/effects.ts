@@ -29,7 +29,8 @@ export type EffectId =
   | 'film'
   | 'frieze'
   | 'castle'
-  | 'nightwalkers';
+  | 'nightwalkers'
+  | 'fermi';
 
 export interface EffectDef {
   id: EffectId;
@@ -277,6 +278,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['ink, not a font · no two es alike', 'static plate cached, people redrawn', 'three ways that are on no other plan'],
     ink: '#c07a4a',
     wash: 'rgba(192, 122, 74, 0.12)',
+  },
+  {
+    id: 'fermi',
+    name: 'Where is everybody?',
+    tagline: 'The Fermi Paradox in a minute, explained by a cat who may or may not be in this box.',
+    blurb:
+      'A fifty-eight second film in cut paper and boiling ink. Over lunch in 1950 Enrico Fermi asked where everybody was; this is the question, the arithmetic behind it — a few hundred billion stars, most with planets, and a galaxy old enough to have been crossed a thousand times over — the silence, and five guesses pulled out of a cardboard box. The anchor is Schrödinger’s cat, alive and dead until somebody looks, because the galaxy is the same sort of box. Pure JavaScript: no libraries, no images, no audio files. Every frame is drawn on a canvas and every sound, from the music box to the cat, is synthesised in the same script.',
+    spec: ['58 s · 1920 × 1080 · canvas 2D', 'score synthesised sample by sample', 'no libraries, no assets'],
+    ink: '#ee9444',
+    wash: 'rgba(238, 148, 68, 0.12)',
   },
 ];
 

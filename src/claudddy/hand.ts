@@ -51,6 +51,27 @@ const bowl = (cx: number, r: number, top = X, bot = BASE, from = 0.2, turns = 1)
   return pts;
 };
 
+/**
+ * The e, as one stroke: across the bar, then up and over and round, ending open
+ * at the bottom right.
+ *
+ * It used to be the bar and then a bowl run clockwise from the bar's end,
+ * which puts the opening at the top right — so every e on the site, the one
+ * in the masthead included, read as a 6 turned on its side. It took drawing a
+ * film title at a hundred and thirty pixels to make it impossible to miss.
+ */
+function eStroke(): Pt[] {
+  const cy = (X + BASE) / 2;
+  const ry = (BASE - X) / 2;
+  const pts: Pt[] = [[0.08, cy + 0.01], [0.47, cy]];
+  const n = 16;
+  for (let i = 1; i <= n; i++) {
+    const a = -(i / n) * 0.8 * Math.PI * 2;
+    pts.push([0.27 + Math.cos(a) * 0.2, cy + Math.sin(a) * ry]);
+  }
+  return pts;
+}
+
 /** A shoulder: the arch that starts n, m, h, r. */
 const shoulder = (x0: number, x1: number): Pt[] => [
   [x0, X + 0.12], [x0 + (x1 - x0) * 0.2, X - 0.02], [x0 + (x1 - x0) * 0.62, X - 0.01],
@@ -64,7 +85,7 @@ export const GLYPHS: Record<string, Glyph> = {
   b: { w: 0.54, s: [[[0.08, TOP], [0.09, BASE]], bowl(0.31, 0.21, X + 0.02, BASE, 0.42, 0.9)] },
   c: { w: 0.50, s: [bowl(0.28, 0.20, X, BASE, 0.08, 0.72)] },
   d: { w: 0.54, s: [bowl(0.26, 0.19, X, BASE, 0.05, 1), [[0.46, TOP], [0.46, BASE]]] },
-  e: { w: 0.50, s: [[[0.08, X + 0.2], [0.47, X + 0.17]], bowl(0.27, 0.20, X, BASE, 0.0, 0.8)] },
+  e: { w: 0.50, s: [eStroke()] },
   f: { w: 0.36, s: [[[0.30, TOP + 0.02], [0.18, TOP + 0.06], [0.16, X + 0.1], [0.16, BASE]], [[0.02, X + 0.04], [0.34, X + 0.02]]] },
   g: { w: 0.54, s: [bowl(0.26, 0.19, X, BASE, 0.05, 1), [[0.45, X], [0.46, BASE + 0.1], [0.36, DESC], [0.16, DESC - 0.03]]] },
   h: { w: 0.54, s: [[[0.09, TOP], [0.10, BASE]], shoulder(0.10, 0.46)] },

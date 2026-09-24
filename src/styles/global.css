@@ -8069,3 +8069,14 @@ button.card:hover:not(:disabled) {
   .desk__what { grid-column: 3; }
   .desk__when { grid-column: 3; }
 }
+
+/* ── Where is everybody? ───────────────────────────────────────────────── */
+.fermi { position: fixed; inset: 0; background: #1b1712; }
+.fermi__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.fermi__exit {
+  position: absolute; top: 18px; right: max(16px, 2vw);
+  border: 1px solid rgba(251, 243, 225, 0.3); background: rgba(27, 23, 18, 0.6); color: #fbf3e1;
+  border-radius: 999px; padding: 8px 16px; font: inherit; font-size: 13px; cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.fermi__exit:hover { background: rgba(251, 243, 225, 0.14); }

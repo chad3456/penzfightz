@@ -39,6 +39,7 @@ import { Film } from './film/Film';
 import { Frieze } from './frieze/Frieze';
 import { Castle } from './castle/Castle';
 import { Nightwalkers } from './nightwalkers/Nightwalkers';
+import { Fermi } from './fermi/Fermi';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -219,6 +220,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'castle') {
     return <Castle onExit={toShelf} startTerm={castleTerm} />;
+  }
+  if (shell === 'effect' && effect === 'fermi') {
+    return <Fermi onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'nightwalkers') {
     return (

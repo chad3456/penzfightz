@@ -1291,6 +1291,34 @@ the page that came out of a box.
 
 [The long version.](docs/the-landing-page.md)
 
+## Where is everybody?
+
+The Fermi Paradox in fifty-eight seconds, explained by a cat who may or may not
+be in this box: Fermi's lunchtime question in 1950, a few hundred billion stars,
+a galaxy old enough to have been crossed a thousand times over at 1% of the
+speed of light, the silence, five guesses pulled out of a cardboard box — and
+Schrödinger's cat, alive and dead until somebody looks, because the galaxy is the
+same sort of box. The film does not pick an answer, because nobody has one.
+
+**Plain JavaScript, no libraries, no assets.** One HTML file and one classic
+script in `public/fermi/`, so it opens from a bare `file://` as well as from the
+shelf. Every frame is a pure function of its timestamp; every "random" thing is
+a hash. Cut paper with a white rim and a hard shadow, torn strips held on with
+washi tape, and ink that re-traces itself eight times a second while the paper
+stays put. **The score is synthesised in the same file**, sample by sample —
+music box, plucked bass, pad, star plinks timed off the same star table the
+picture uses, a clock that speeds up as the galaxy fills, static, a cat, three
+beeps from very far away — and the superposition scene plays its tune on two
+music boxes fourteen cents apart. `scripts/render-fermi.mjs` writes the same
+frames and the same samples to an mp4.
+
+**What only showed up on screen:** every `e` read as a `6`, because the glyph
+ran its bowl the wrong way round — the same glyph the whole site is lettered in,
+so it is fixed there too; captions were still being written when the scene cut;
+and the dead cat's halo floated over the living cat's head.
+
+[The long version.](docs/where-is-everybody.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
