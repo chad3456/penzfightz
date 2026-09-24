@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Diary</title>
+<meta name="description" content="Two minutes inside a schoolboy's diary. A fan work: original words and an original score, in pure JavaScript.">
+<style>
+  html, body { margin: 0; height: 100%; background: #070403; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; font-family: Georgia, 'Times New Roman', serif; }
+  canvas { display: block; cursor: pointer; }
+  #ui {
+    position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding-bottom: 2.5vh; gap: 10px; pointer-events: none; transition: opacity 500ms ease;
+  }
+  #ui.is-hidden { opacity: 0; }
+  #ui.is-hidden button { pointer-events: none; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  button {
+    pointer-events: auto; cursor: pointer; font: inherit; font-size: clamp(16px, 2vw, 21px);
+    padding: 12px 26px; border-radius: 3px; border: 1px solid rgba(230, 193, 92, 0.6);
+    background: rgba(20, 12, 8, 0.78); color: #efe1bf; letter-spacing: 0.02em; transition: background 200ms ease;
+  }
+  button:hover { background: rgba(60, 40, 20, 0.85); }
+  button:disabled { opacity: 0.6; cursor: progress; }
+  #write { border-color: rgba(239, 225, 191, 0.25); font-style: italic; }
+  #note { margin: 0; color: rgba(239, 225, 191, 0.7); font-style: italic; font-size: 14px; text-shadow: 0 1px 6px #000; }
+  #credit { position: fixed; left: 14px; bottom: 10px; margin: 0; color: rgba(239, 225, 191, 0.35); font-size: 11px; }
+  #pen { position: fixed; left: -9999px; top: 0; opacity: 0; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: rgba(239,225,191,0.55); font-style: italic; font-size: 14px; display: none; pointer-events: none; }
+  body.is-writing #hint { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="An animated film: a diary that writes its owner's thoughts, then drinks the ink."></canvas>
+<div id="ui">
+  <div class="row">
+    <button id="play">▶&nbsp; open the diary, with sound</button>
+    <button id="write">write in it</button>
+  </div>
+  <p id="note">about two minutes · click the picture to pause · R to start again</p>
+</div>
+<input id="pen" autocomplete="off" spellcheck="false" aria-label="write in the diary">
+<p id="hint">type, then press Enter · Esc to close the book</p>
+<p id="credit">A fan work. The character and his world are J. K. Rowling’s; the words and the music here are original.</p>
+<script src="riddle.js"></script>
+</body>
+</html>

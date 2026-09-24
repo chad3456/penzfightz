@@ -30,7 +30,8 @@ export type EffectId =
   | 'frieze'
   | 'castle'
   | 'nightwalkers'
-  | 'fermi';
+  | 'fermi'
+  | 'diary';
 
 export interface EffectDef {
   id: EffectId;
@@ -288,6 +289,15 @@ export const EFFECTS: EffectDef[] = [
     spec: ['58 s · 1920 × 1080 · canvas 2D', 'score synthesised sample by sample', 'no libraries, no assets'],
     ink: '#ee9444',
     wash: 'rgba(238, 148, 68, 0.12)',
+  },  {
+    id: 'diary',
+    name: 'The Diary',
+    tagline: 'Two minutes inside a schoolboy’s diary. It writes, and then it drinks the ink.',
+    blurb:
+      'A fan work: a black leather diary on a desk by one candle, and the thoughts of the boy whose name is stamped on it — an orphanage in 1938, a page of potions with his notes in the margin, a door that only opens for one language, a name taken apart and put back together as another, and the thing he did because death was the only thing he was ever afraid of. Every line is written stroke by stroke with a broad nib and then sinks into the paper and is gone, because that is what this book does. When the film is over you can write in it yourself, and it writes back. The character and his world are J. K. Rowling’s; every word written in the diary and every note of the score is original, and nothing is quoted from the books or the films. Pure JavaScript: no libraries, no images, no audio files.',
+    spec: ['2 min · 1920 × 1080 · canvas 2D', 'an original waltz, synthesised', 'a fan work · original words'],
+    ink: '#3fdc86',
+    wash: 'rgba(63, 220, 134, 0.1)',
   },
 ];
 

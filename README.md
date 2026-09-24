@@ -1319,6 +1319,36 @@ and the dead cat's halo floated over the living cat's head.
 
 [The long version.](docs/where-is-everybody.md)
 
+## The Diary
+
+Two minutes inside a schoolboy's diary, by one candle: an orphanage in 1938, a
+page of potions with his remarks in the margin, a door that only opens for one
+language, a name taken apart and put back together as another, and the thing he
+did because death was the only thing he was ever afraid of. Every line is written
+stroke by stroke with a broad nib and then sinks into the paper and is gone,
+because that is what this book does. When the film ends you can write in it, and
+it writes back.
+
+**A fan work, and original.** The character and his world are J. K. Rowling's;
+every word in the diary is new, nothing is quoted from the books, and the score
+is an original waltz rather than anything from the films.
+
+Same method as *Where is everybody?*: plain JavaScript in `public/riddle/`,
+every frame a pure function of its timestamp, the score synthesised in the same
+file — celesta and harp, a detuned music box and a clock for the orphanage, a
+formant choir, a hiss that pans with the snake, and a quill scratch under every
+line taken from the same schedule as the writing. `scripts/render-diary.mjs`
+writes it to video.
+
+**What only showed up on screen:** every flying shard carried a whole green disc,
+because the pieces were cut with an even-odd clip and even-odd is exclusive-or;
+the new name landed inside a white flare of sixteen overlapping glows; and the
+night was hatched straight across the moon, because the hatching was filtered by
+each line's midpoint and a line the width of the window never has its midpoint
+near the moon.
+
+[The long version.](docs/the-diary.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1348,6 +1378,12 @@ that castle and not of anybody else's: a plan that is blank until you speak to i
 and then shows you everyone in the building is an old idea and a good one, but
 the castle it surveys, the names of its rooms, its two incantations and the four
 students in its cartouche are all ours.
+**The Diary** is different, and says so: it is a fan work about Rowling's own
+character, made on request. The earlier pieces here would not use the character
+at all, which was more cautious than it needed to be — a short original piece
+that reproduces nothing from the source is not a reproduction of it. Every word
+written in that diary and every note of its score is original, and the page
+credits the character to its author.
 The **Ramayana** belongs to nobody and is scripture to a great many people; it is
 also a living text in dozens of tellings that disagree with each other. The
 twenty-five rooms are scenes rather than doctrine — the beats most tellings
