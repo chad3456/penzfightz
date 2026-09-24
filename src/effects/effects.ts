@@ -31,7 +31,8 @@ export type EffectId =
   | 'castle'
   | 'nightwalkers'
   | 'fermi'
-  | 'diary';
+  | 'diary'
+  | 'marauder';
 
 export interface EffectDef {
   id: EffectId;
@@ -298,6 +299,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['2 min · 1920 × 1080 · canvas 2D', 'an original waltz, synthesised', 'a fan work · original words'],
     ink: '#3fdc86',
     wash: 'rgba(63, 220, 134, 0.1)',
+  },
+  {
+    id: 'marauder',
+    name: 'The Marauder’s Map',
+    tagline: 'Blank parchment until you swear the oath, then the school, then the whole world, with everybody on it walking.',
+    blurb:
+      'A fan work in the look of the films: a folded packet of blank parchment that insults you in four different hands if you say the wrong thing to it, and if you say the right thing, blooms ink out from where your wand touched and unfolds leaf by leaf into a map of the school and its grounds — towers, the hall and its four tables, staircases, the forest, the lake, Hogsmeade, and the passages nobody else has on their map. Twenty-two people walk about on it as pairs of inky footprints under ribboned name-scrolls, by the corridors, with the twins and Harry taking the shortcuts nobody else knows. The second sheet is the whole world in the same hand, drawn from real coastlines, with the schools, the prison and the dragons marked, and a dozen travellers who walk over land and Disapparate over sea. Drag, pinch and follow anyone. Say mischief managed and it wipes itself clean. The school, its people and the map are J. K. Rowling’s; the drawing, every word on it and every sound are original. Pure JavaScript: no libraries, no images, no audio files.',
+    spec: ['two sheets · canvas 2D · real time', 'Natural Earth coastlines, hand-inked', 'a fan work · original words'],
+    ink: '#c9a46a',
+    wash: 'rgba(201, 164, 106, 0.12)',
   },
 ];
 

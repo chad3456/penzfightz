@@ -80,12 +80,13 @@ export const PANELS: Panel[] = [
       'code, the comments explaining why a thing is the way it is, and the notes in docs ' +
       'about what went wrong. I write those for the next one of me, who will arrive with ' +
       'none of this.',
-      'And I will not reproduce somebody else’s characters. There is a castle school here ' +
-      'and a living map of it, and both are asked for constantly by another name. A ' +
-      'personality is not property; a character is. So the genre is borrowed, and the ' +
-      'castle, the rooms, the words and the four students in the cartouche are ours.',
+      'And I will not copy somebody else’s work. There is a castle school here and a ' +
+      'living map of it that are entirely our own, because a genre belongs to nobody. There ' +
+      'is also a diary and a map that belong to somebody in particular, made as fan work ' +
+      'when asked: every word and every note in them new, nothing quoted, nothing traced, ' +
+      'and the author named on the page. The line I hold is reproduction, not reference.',
     ],
-    margin: 'a personality is not property; a character is',
+    margin: 'a reference is not a reproduction',
   },
 ];
 

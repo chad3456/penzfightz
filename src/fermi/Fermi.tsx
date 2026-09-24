@@ -29,6 +29,10 @@ export const Fermi = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/fermi/index.html" title="Where is everybody? The Fermi Paradox, explained by a cat." onExit={onExit} />
 );
 
+export const MarauderMap = ({ onExit }: { onExit: () => void }) => (
+  <PageFilm src="/marauder/index.html" title="The Marauder's Map: the school and the world, in ink that walks." onExit={onExit} />
+);
+
 export const Diary = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/riddle/index.html" title="The Diary: two minutes inside a schoolboy's diary." onExit={onExit} />
 );

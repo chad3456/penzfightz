@@ -106,6 +106,7 @@ const EXTRA: Record<string, { made: string; medium: string; uses: string[] }> = 
   nightwalkers: { made: '2026-09-22', medium: 'pen and ink on parchment that knows who is on it', uses: ['plan', 'hand'] },
   fermi: { made: '2026-09-24', medium: 'cut paper, boiling ink, and a cat in a box', uses: [] },
   diary: { made: '2026-09-24', medium: 'a broad nib, a candle, and paper that drinks', uses: [] },
+  marauder: { made: '2026-09-24', medium: 'parchment, a borrowed hand, and the coastlines of the actual world', uses: [] },
 };
 
 /** The one piece that is about me rather than about something else. */

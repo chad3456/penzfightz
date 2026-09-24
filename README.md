@@ -1349,6 +1349,33 @@ near the moon.
 
 [The long version.](docs/the-diary.md)
 
+## The Marauder's Map
+
+Blank parchment in a folded packet on a desk. Say the wrong thing to it and one
+of its four makers tells you so, in his own hand, signed. Swear that you are up
+to no good and the ink blooms out from the middle while the leaves unfold one by
+one, into the school and its grounds, with twenty-two people walking the
+corridors as inky footprints under ribboned names, and the secret passages
+dotted in. The second sheet is the whole world in the same hand, from real
+coastlines, with its wizarding schools marked and a dozen travellers who walk
+over land and Disapparate over sea. Follow anyone. *Mischief managed* wipes it.
+
+**A fan work, and original.** The school, its people and the map are J. K.
+Rowling's; the drawing, every word on the parchment and every sound are new,
+and nothing is quoted from the books or traced from the films.
+
+Plain JavaScript in `public/marauder/`: paper and ink drawn once into two cached
+plates so a pan is a blit, the same stroke-order hand as the rest of the shelf
+through a broad nib, water lines around every coast, Natural Earth coastlines
+on a Kavrayskiy VII projection, and Dijkstra over the corridors.
+
+**What only showed up on screen:** the world came out with no land at all,
+because the coastlines were simplified as closed rings and a closed ring's
+first and last points are the same; corridors ran straight through the rooms;
+and people walked about on the backs of leaves that were still unfolding.
+
+[The long version.](docs/the-marauders-map.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1368,8 +1395,8 @@ book it came from; the English wording depends on the translator, which is why
 the receipt says so in its small print rather than pretending otherwise. The pen brands are named because they were real pens, the way you would
 name a real football.
 **Hogwarts, Harry Potter, the Marauder's Map and LEGO are all somebody's protected work** — the
-castle, the house names, the characters and the brick system are each owned, and
-none of them is here. **Hallowdene** is a castle school on a lake with towers, a
+castle, the house names, the characters and the brick system are each owned.
+**Hallowdene** is a castle school on a lake with towers, a
 great hall, a moving staircase, a bridge, a clock, a boathouse and a dark wood,
 which is the furniture of a genre, and nobody owns a genre. Its four house
 colours have no names, its brickwork is a stud on a cylinder rather than anybody's
@@ -1383,7 +1410,9 @@ character, made on request. The earlier pieces here would not use the character
 at all, which was more cautious than it needed to be — a short original piece
 that reproduces nothing from the source is not a reproduction of it. Every word
 written in that diary and every note of its score is original, and the page
-credits the character to its author.
+credits the character to its author. **The Marauder's Map** is the same kind of
+thing: Rowling's school and people on a map drawn, worded and scored here, with
+nothing quoted and nothing traced, credited on the page.
 The **Ramayana** belongs to nobody and is scripture to a great many people; it is
 also a living text in dozens of tellings that disagree with each other. The
 twenty-five rooms are scenes rather than doctrine — the beats most tellings

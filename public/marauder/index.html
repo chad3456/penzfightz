@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Marauder's Map</title>
+<meta name="description" content="A fan-made Marauder's Map in pure JavaScript: the school and the whole world, in ink that walks. Swear the oath to open it.">
+<style>
+  html, body { margin: 0; height: 100%; background: #140c07; overflow: hidden; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: #3a2512; }
+  canvas { display: block; position: fixed; inset: 0; touch-action: none; cursor: grab; }
+  body:not(.is-open) canvas { cursor: text; }
+  canvas:active { cursor: grabbing; }
+
+  /* the oath */
+  #swearing {
+    position: fixed; left: 0; right: 0; bottom: 7vh; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  body.is-opening #swearing, body.is-open #swearing, body.is-closing #swearing { opacity: 0; transform: translateY(12px); pointer-events: none; }
+  .oathrow { display: flex; gap: 10px; align-items: stretch; }
+  #oath {
+    width: min(460px, 70vw); font: italic 19px/1.2 Georgia, serif; color: #f1e2bd; background: rgba(20, 11, 5, 0.72);
+    border: 0; border-bottom: 1px solid rgba(241, 226, 189, 0.45); padding: 12px 16px; outline: none; border-radius: 2px 2px 0 0;
+    caret-color: #e9c77a;
+  }
+  #oath::placeholder { color: rgba(241, 226, 189, 0.42); }
+  #oath:focus { border-bottom-color: #e9c77a; }
+  button {
+    font: inherit; cursor: pointer; color: #f1e2bd; background: rgba(20, 11, 5, 0.72); border: 1px solid rgba(233, 199, 122, 0.5);
+    padding: 10px 18px; border-radius: 2px; letter-spacing: 0.03em; transition: background 200ms ease, border-color 200ms ease;
+  }
+  button:hover { background: rgba(62, 38, 16, 0.9); border-color: #e9c77a; }
+  .wand { font-style: italic; }
+  #swearing small { color: rgba(241, 226, 189, 0.5); font-style: italic; font-size: 13px; text-shadow: 0 1px 4px #000; }
+
+  /* the open map */
+  .open-only { opacity: 0; pointer-events: none; transition: opacity 600ms ease; }
+  body.is-open .open-only { opacity: 1; pointer-events: auto; }
+  #bar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; }
+  #tabs { display: flex; gap: 0; }
+  #tabs button { border-radius: 0; font-size: 14px; padding: 8px 14px; }
+  #tabs button:first-child { border-radius: 2px 0 0 2px; }
+  #tabs button:last-child { border-radius: 0 2px 2px 0; border-left: 0; }
+  #tabs button.is-on { background: #e9d8ae; color: #2d1a0a; border-color: #e9d8ae; }
+  body:not(.is-open) #tabs { opacity: 1; pointer-events: auto; }
+  body.is-opening #bar, body.is-closing #bar { opacity: 0; pointer-events: none; }
+  #bar button { white-space: nowrap; }
+  #close { font-style: italic; font-size: 14px; padding: 8px 14px; }
+
+  #who {
+    position: fixed; right: 12px; top: 60px; max-height: calc(100vh - 110px); width: 184px; display: flex; flex-direction: column;
+    background: rgba(20, 11, 5, 0.62); border: 1px solid rgba(233, 199, 122, 0.25); border-radius: 2px; padding: 10px 0 8px;
+  }
+  #who h2 { margin: 0 14px 6px; font: italic 13px Georgia, serif; color: rgba(241, 226, 189, 0.6); font-weight: normal; }
+  #people { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: rgba(233,199,122,0.3) transparent; }
+  #people button { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 4px 14px; font-size: 13.5px; border-radius: 0; }
+  #people button:hover { background: rgba(233, 199, 122, 0.12); }
+  #who.is-shut { bottom: auto; }
+  #who.is-shut #people { display: none; }
+  #who h2 button { border: 0; background: none; padding: 0; font: inherit; color: inherit; }
+
+  #following { position: fixed; left: 0; right: 0; top: 58px; text-align: center; margin: 0; color: #f1e2bd; font-style: italic; font-size: 14px; text-shadow: 0 1px 6px #000, 0 0 2px #000; pointer-events: none; }
+  #hint { position: fixed; left: 14px; bottom: 26px; margin: 0; color: rgba(241, 226, 189, 0.55); font-style: italic; font-size: 12px; text-shadow: 0 1px 4px #000; }
+  #credit { position: fixed; left: 14px; bottom: 8px; margin: 0; color: rgba(241, 226, 189, 0.35); font-size: 11px; }
+
+  @media (max-width: 640px) {
+    #who { top: auto; bottom: 44px; height: 38vh; width: 160px; }
+    #who.is-shut { height: auto; }
+    #bar { top: 8px; }
+    #tabs button, #close { font-size: 13px; padding: 7px 10px; }
+    #hint { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="map" aria-label="A map on parchment that shows where everyone is. Swear the oath to open it."></canvas>
+
+<div id="swearing">
+  <div class="oathrow">
+    <input id="oath" autocomplete="off" spellcheck="false" placeholder="swear that you are up to no good…" aria-label="the oath">
+    <button id="swear" class="wand">tap it with your wand</button>
+  </div>
+  <small>the map only opens for the right sort of person · sound on</small>
+</div>
+
+<div id="bar">
+  <div id="tabs" role="tablist">
+    <button data-sheet="hogwarts" class="is-on">the school</button>
+    <button data-sheet="world">the world</button>
+  </div>
+  <button id="close" class="open-only">mischief managed</button>
+</div>
+
+<div id="who" class="open-only">
+  <h2><button id="whoToggle" aria-expanded="true">who is on the map ▾</button></h2>
+  <ul id="people"></ul>
+</div>
+<p id="following"></p>
+<p id="hint" class="open-only">drag to walk the map · wheel or pinch to lean in · click a name to follow them · Esc to close</p>
+<p id="credit">A fan work, made for nobody’s profit. The school, its people and the map are J. K. Rowling’s; this map’s drawing, words and sounds are original. Coastlines: Natural Earth.</p>
+
+<script>
+  // the list folds away; on a phone it starts folded, so the map is not behind it
+  const who = document.getElementById('who');
+  const toggle = document.getElementById('whoToggle');
+  const setShut = (shut) => {
+    who.classList.toggle('is-shut', shut);
+    toggle.setAttribute('aria-expanded', String(!shut));
+    toggle.textContent = shut ? 'who is on the map ▸' : 'who is on the map ▾';
+  };
+  setShut(window.innerWidth < 640);
+  toggle.addEventListener('click', () => setShut(!who.classList.contains('is-shut')));
+</script>
+<script src="world.js"></script>
+<script src="marauder.js"></script>
+</body>
+</html>
