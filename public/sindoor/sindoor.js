@@ -29,7 +29,9 @@
   const eOut = (t) => 1 - (1 - t) * (1 - t);
   const eOut3 = (t) => 1 - Math.pow(1 - t, 3);
   const eInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
-  const eBack = (t) => { const c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+  // exactly zero at zero: at t = 0 the polynomial lands a hair below it, and a
+  // negative radius makes arc() throw
+  const eBack = (t) => { if (t <= 0) return 0; const c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
   function hash(n) {
     const s = Math.sin(n * 127.1 + 311.7) * 43758.5453;
     return s - Math.floor(s);
