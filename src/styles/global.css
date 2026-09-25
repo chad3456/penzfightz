@@ -7824,3 +7824,25 @@ button.card:hover:not(:disabled) {
   backdrop-filter: blur(6px);
 }
 .fermi__exit:hover { background: rgba(251, 243, 225, 0.14); }
+
+/* ── Ahmedabad, on a Navratri night ────────────────────────────────────── */
+.amd { position: fixed; inset: 0; background: #080a1c; color: #fff4e0; font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif; overflow: hidden; }
+.amd__view { position: absolute; inset: 0; touch-action: none; cursor: grab; }
+.amd__view:active { cursor: grabbing; }
+.amd__top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 18px max(16px, 2vw); pointer-events: none; background: linear-gradient(rgba(8,6,20,0.7), rgba(8,6,20,0)); }
+.amd__kicker { margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb35a; }
+.amd__title { margin: 4px 0 0; font-size: clamp(22px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.01em; text-shadow: 0 2px 18px rgba(255, 120, 40, 0.45); }
+.amd__tools { display: flex; gap: 8px; pointer-events: auto; flex-shrink: 0; }
+.amd__tools button, .amd__places button { font: inherit; font-size: 13px; cursor: pointer; border-radius: 999px; padding: 8px 14px; border: 1px solid rgba(255, 200, 120, 0.35); background: rgba(20, 12, 30, 0.6); color: #fff4e0; backdrop-filter: blur(6px); transition: background 160ms ease, border-color 160ms ease; }
+.amd__tools button:hover, .amd__places button:not(.is-on):hover { background: rgba(255, 140, 40, 0.18); }
+.amd__sound.is-on { background: #ff7a1a; border-color: #ff7a1a; color: #1a0a04; font-weight: 700; }
+.amd__here { position: absolute; left: max(16px, 2vw); bottom: 110px; max-width: 460px; pointer-events: none; animation: amd-in 700ms ease both; }
+.amd__here h2 { margin: 0 0 6px; font-size: 24px; font-weight: 700; text-shadow: 0 2px 12px #000; }
+.amd__here p { margin: 0; font-size: 15px; line-height: 1.45; color: rgba(255, 240, 220, 0.85); text-shadow: 0 1px 8px #000; }
+@keyframes amd-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.amd__places { position: absolute; left: 0; right: 0; bottom: 36px; display: flex; gap: 8px; padding: 0 max(16px, 2vw); overflow-x: auto; scrollbar-width: none; }
+.amd__places button { white-space: nowrap; flex-shrink: 0; }
+.amd__places button.is-on { background: #ffd23f; border-color: #ffd23f; color: #1a0a04; font-weight: 700; }
+.amd__tour.is-on { border-style: dashed; }
+.amd__stats { position: absolute; left: max(16px, 2vw); bottom: 10px; margin: 0; font-size: 11px; color: rgba(255, 240, 220, 0.45); }
+@media (max-width: 640px) { .amd__here { bottom: 96px; right: 16px; } .amd__here h2 { font-size: 19px; } .amd__here p { font-size: 13px; } .amd__tools .amd__exit { display: none; } }

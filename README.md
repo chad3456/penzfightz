@@ -1393,6 +1393,39 @@ video.
 
 [The long version.](docs/operation-sindoor.md)
 
+## Ahmedabad, on a Navratri night
+
+The whole city on one of the nine nights, in real time. The Sabarmati through
+the middle with the Atal Bridge lit across it. On the west bank the newer city
+and a riverfront garba ground the size of a stadium: nearly two thousand
+dancers in rings round a lamp-lit shrine to Amba, each ring turning the other
+way to the one inside it — three steps, a clap and a turn to every phrase of
+the dhol — under forty radial strings of lights, with fireworks going up. On
+the east bank the walled city, laid out roughly as it is: Bhadra fort with the
+Bhadrakali temple inside, the Maidan-e-Shahi and its stalls, Teen Darwaza, the
+Jama Masjid, Sidi Saiyyed's tree-of-life window lit from inside, and the pols —
+carved houses in every colour, lights zigzagged across the lanes, and a garba
+of the neighbours in the chowk. Rickshaws run the roads. Fly between seven
+places or let it tour; drag to look round.
+
+The music is an original garba — dhol, claps, manjira, harmonium and a shehnai
+tune in Khamaj — synthesised and looped, as loud as it would be from where the
+camera is, and the dancers keep time from the music's own clock.
+
+**How it gets away with it:** almost nothing is a light. Every bulb in the city
+is an instance of one tiny mesh whose colour is brighter than white, and the
+bloom pass does the rest; the windows are not geometry but a few lines in the
+building shader that work them out from world position, so a tower is one box
+and still has four hundred windows, some of them on.
+
+**What only showed up on screen:** the towers were lit so densely the west bank
+read as snow; the dupatta stood up off the dancers' backs like a plank; the pol
+camera had been placed inside a house; and on the low-quality path not one pol
+lane got its lights, because the test for "every other lane" was a divisibility
+that no lane ever passed.
+
+[The long version.](docs/ahmedabad-navratri.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

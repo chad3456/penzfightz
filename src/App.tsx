@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Arcade } from './arcade/Arcade';
+import { Ahmedabad } from './ahmedabad/Ahmedabad';
 import { Leaderboard } from './ui/Leaderboard';
 import { Sheet, SheetHeader } from './ui/Sheet';
 import { PenFightGame } from './games/penfight/PenFightGame';
@@ -228,6 +229,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'sindoor') {
     return <Sindoor onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'ahmedabad') {
+    return <Ahmedabad onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'nightwalkers') {
     return (

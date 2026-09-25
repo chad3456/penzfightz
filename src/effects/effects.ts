@@ -34,7 +34,8 @@ export type EffectId =
   | 'diary'
   | 'marauder'
   | 'ramanime'
-  | 'sindoor';
+  | 'sindoor'
+  | 'ahmedabad';
 
 export interface EffectDef {
   id: EffectId;
@@ -331,6 +332,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['3 min 10 s · 1920 × 1080 · canvas 2D', 'from the public record, both sides’ claims', 'original score, synthesised'],
     ink: '#d3241c',
     wash: 'rgba(211, 36, 28, 0.1)',
+  },
+  {
+    id: 'ahmedabad',
+    name: 'Ahmedabad, on a Navratri night',
+    tagline: 'The whole city on one of the nine nights: a thousand dancers in rings on the riverfront, and the pols lit end to end.',
+    blurb:
+      'A real-time city you can fly round. The Sabarmati through the middle with the Atal Bridge lit across it; on the west bank the newer city and a riverfront garba ground the size of a stadium, dancers in rings round a lamp-lit shrine to Amba — each ring turning the other way to the one inside it, three steps, a clap and a turn to every phrase of the dhol — under radial strings of lights, with fireworks going up. On the east bank the walled city: Bhadra fort with the Bhadrakali temple inside, the Maidan-e-Shahi and its stalls, Teen Darwaza, the Jama Masjid, Sidi Saiyyed’s tree-of-life window lit from within, and the pols, carved houses in every colour with lights zigzagged across the lanes and a garba of the neighbours in the chowk. Rickshaws run the roads. The music is an original garba — dhol, claps, manjira, harmonium and shehnai — synthesised, and as loud as it would be from wherever you are standing.',
+    spec: ['three.js · real time · bloom', 'thousands of bulbs, one mesh', 'an original garba, synthesised'],
+    ink: '#ff8a1f',
+    wash: 'rgba(255, 138, 31, 0.12)',
   },
 ];
 
