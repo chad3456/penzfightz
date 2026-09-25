@@ -1347,6 +1347,52 @@ and people walked about on the backs of leaves that were still unfolding.
 
 [The long version.](docs/the-marauders-map.md)
 
+## Ramayana, in motion
+
+The Ramayana in under two minutes, as an anime short. Twenty-two shots, from a
+lamp in the dark to every lamp in Ayodhya: the bow of Shiva lifted and broken,
+the garland, the forest and the golden deer, the flying palace in a storm and
+Jatayu's dive, Hanuman's leap and Lanka burning, the bridge of stones carved with
+Rama's name, ten heads and one arrow. The look is borrowed from Japanese feature
+animation — painted skies with lit cloud-bellies and god rays, figures as cel
+silhouettes with a hard rim of light, focus lines, impact frames, extreme
+close-ups of eyes, and a soft bloom over everything — and none of it is traced
+from anybody's film. The score is original: tanpura, bansuri, strings, choir,
+dhol and taiko, all synthesised in the same file.
+
+Plain JavaScript in `public/ramayana-anime/`, every frame a pure function of its
+timestamp; `scripts/render-ramayana-anime.mjs` writes it to video.
+
+**What only showed up on screen:** the crowns read as cat's ears until they were
+redrawn as one tall rounded mukut; the scarves read as sticks; the clouds had
+flat, boxed-off bottoms; the title sat on the palace spire; and Lanka's fire,
+sixty overlapping additive glows, summed to a white blob that hid the city it
+was meant to be burning.
+
+[The long version.](docs/ramayana-in-motion.md)
+
+## Operation Sindoor, explained
+
+A three-minute animated explainer, in cut paper, highlighter and moving maps:
+the Pahalgam attack of 22 April 2025, the diplomatic squeeze, the strikes of
+7 May on nine sites in Pakistan and Pakistan-administered Kashmir, why each
+Indian answer since 2016 has gone further than the last, the four days of
+drones, missiles and air bases that followed, the phone call that stopped it,
+and what it changed.
+
+**How it handles a real conflict.** Everything stated as fact is from the public
+record. Where India and Pakistan disagree — on who was killed, on what was hit,
+on aircraft lost — it says who claimed what rather than choosing. The map is
+Natural Earth's and schematic: Kashmir is shown the way most international maps
+show it, the Line of Control dashed, each side labelled by who administers it.
+Nothing is shown of anybody being hurt; the dead are a number and twenty-six
+candles.
+
+Plain JavaScript in `public/sindoor/`; `scripts/render-sindoor.mjs` writes it to
+video.
+
+[The long version.](docs/operation-sindoor.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
@@ -1388,4 +1434,5 @@ The **Ramayana** belongs to nobody and is scripture to a great many people; it i
 also a living text in dozens of tellings that disagree with each other. The
 twenty-five rooms are scenes rather than doctrine — the beats most tellings
 share, with nothing invented for effect and nothing settled that the tradition
-leaves open.
+leaves open. **Ramayana, in motion** tells the same story again, in
+the manner of Japanese animation; the manner is borrowed, the drawing is not.

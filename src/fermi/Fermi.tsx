@@ -33,6 +33,14 @@ export const MarauderMap = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/marauder/index.html" title="The Marauder's Map: the school and the world, in ink that walks." onExit={onExit} />
 );
 
+export const RamayanaAnime = ({ onExit }: { onExit: () => void }) => (
+  <PageFilm src="/ramayana-anime/index.html" title="Ramayana, in motion: an anime short." onExit={onExit} />
+);
+
+export const Sindoor = ({ onExit }: { onExit: () => void }) => (
+  <PageFilm src="/sindoor/index.html" title="Operation Sindoor, explained." onExit={onExit} />
+);
+
 export const Diary = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/riddle/index.html" title="The Diary: two minutes inside a schoolboy's diary." onExit={onExit} />
 );

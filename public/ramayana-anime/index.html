@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ramayana — an anime short</title>
+<meta name="description" content="The Ramayana in under two minutes, as an anime short: painted skies, cel silhouettes, impact frames and an original synthesised score. Pure JavaScript.">
+<style>
+  html, body { margin: 0; height: 100%; background: #020103; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; flex-direction: column; font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif; }
+  canvas { display: block; cursor: pointer; }
+  #ui {
+    position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding-bottom: 4vh; gap: 10px; pointer-events: none; transition: opacity 500ms ease;
+  }
+  #ui.is-hidden { opacity: 0; }
+  #ui.is-hidden button { pointer-events: none; }
+  button {
+    pointer-events: auto; cursor: pointer; font: inherit; font-size: clamp(15px, 1.8vw, 20px); font-weight: 600; letter-spacing: 0.06em;
+    padding: 12px 28px; border-radius: 999px; border: 1px solid rgba(255, 210, 120, 0.7);
+    background: rgba(20, 8, 4, 0.72); color: #fff1d0; transition: background 200ms ease;
+  }
+  button:hover { background: rgba(120, 50, 10, 0.8); }
+  button:disabled { opacity: 0.6; cursor: progress; }
+  #note { margin: 0; color: rgba(255, 240, 215, 0.7); font-size: 13px; letter-spacing: 0.04em; text-shadow: 0 1px 6px #000; }
+  #bar { position: fixed; bottom: 0; height: 6px; background: rgba(255, 255, 255, 0.08); cursor: pointer; }
+  #bar:hover { height: 10px; }
+  #fill { height: 100%; width: 0; background: linear-gradient(90deg, #ff9a3c, #ffd25a); }
+  #credit { position: fixed; left: 14px; top: 10px; margin: 0; color: rgba(255, 240, 215, 0.35); font-size: 11px; }
+</style>
+</head>
+<body>
+<canvas id="c" data-poster="11.6" aria-label="An animated short: the Ramayana, from the breaking of Shiva's bow to the lamps of Ayodhya, in the style of Japanese animation."></canvas>
+<div id="ui">
+  <button id="play">▶&nbsp; watch, with sound</button>
+  <p id="note">1 min 54 s · click the picture to pause · ← → to skip · R to start again</p>
+</div>
+<div id="bar"><div id="fill"></div></div>
+<p id="credit">After Valmiki’s Ramayana. A fan animation; every picture and every note is made in code on this page.</p>
+<script src="rama.js" data-global="RAMA"></script>
+</body>
+</html>

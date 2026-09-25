@@ -38,7 +38,7 @@ import { Film } from './film/Film';
 import { Frieze } from './frieze/Frieze';
 import { Castle } from './castle/Castle';
 import { Nightwalkers } from './nightwalkers/Nightwalkers';
-import { Diary, Fermi, MarauderMap } from './fermi/Fermi';
+import { Diary, Fermi, MarauderMap, RamayanaAnime, Sindoor } from './fermi/Fermi';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -222,6 +222,12 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'marauder') {
     return <MarauderMap onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'ramanime') {
+    return <RamayanaAnime onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'sindoor') {
+    return <Sindoor onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'nightwalkers') {
     return (

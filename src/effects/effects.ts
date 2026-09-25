@@ -32,7 +32,9 @@ export type EffectId =
   | 'nightwalkers'
   | 'fermi'
   | 'diary'
-  | 'marauder';
+  | 'marauder'
+  | 'ramanime'
+  | 'sindoor';
 
 export interface EffectDef {
   id: EffectId;
@@ -309,6 +311,26 @@ export const EFFECTS: EffectDef[] = [
     spec: ['two sheets · canvas 2D · real time', 'Natural Earth coastlines, hand-inked', 'a fan work · original words'],
     ink: '#c9a46a',
     wash: 'rgba(201, 164, 106, 0.12)',
+  },
+  {
+    id: 'ramanime',
+    name: 'Ramayana, in motion',
+    tagline: 'The Ramayana in under two minutes, as an anime short: painted skies, impact frames, and a bow that breaks.',
+    blurb:
+      'Valmiki’s story in twenty-two shots, in the look of Japanese feature animation: skies painted in gradients with lit cloud-bellies and god rays, figures as cel silhouettes with a hard rim of light on the side facing the sun, focus lines, impact frames, extreme close-ups of eyes, petals and embers in the air, and a soft bloom over all of it. A lamp in the dark; Ayodhya at sunrise; the bow of Shiva lifted and snapped; Sita’s garland; the forest and the golden deer; Ravana’s flying palace in a storm and Jatayu’s dive; the jewels let fall; Hanuman’s leap across the sea and Lanka burning; the bridge of stones carved with Rama’s name; ten heads, twenty arms, one arrow; and every lamp in Ayodhya lit to bring them home. The score is original: a tanpura under nearly all of it, a bansuri for the tunes, dhol and taiko for the fights. Pure JavaScript: no libraries, no images, no audio files.',
+    spec: ['1 min 54 s · 1920 × 1080 · canvas 2D', 'tanpura, bansuri, dhol, all synthesised', 'after Valmiki'],
+    ink: '#f5a53a',
+    wash: 'rgba(245, 165, 58, 0.12)',
+  },
+  {
+    id: 'sindoor',
+    name: 'Operation Sindoor, explained',
+    tagline: 'A three-minute explainer: the Pahalgam attack, the strikes of 7 May 2025, four days of fighting, and the ceasefire.',
+    blurb:
+      'An animated explainer in cut paper, highlighter and moving maps. In April 2025 gunmen killed twenty-six people at a meadow above Pahalgam; on 7 May India struck nine sites in Pakistan and Pakistan-administered Kashmir and called it Operation Sindoor. This is how that happened: the diplomatic squeeze first, then the strikes and where they fell, why the name, how each Indian answer since 2016 has gone further than the last, the four days of drones, missiles and air bases that followed, the phone call that stopped it, and what it changed. Everything is from the public record; where the two governments disagree — on who was killed, on what was hit, on aircraft lost — it says who claimed what rather than picking. The map is Natural Earth’s and schematic, with Kashmir shown by who administers each side of the Line of Control. Pure JavaScript: no libraries, no footage, no audio files.',
+    spec: ['3 min 10 s · 1920 × 1080 · canvas 2D', 'from the public record, both sides’ claims', 'original score, synthesised'],
+    ink: '#d3241c',
+    wash: 'rgba(211, 36, 28, 0.1)',
   },
 ];
 
