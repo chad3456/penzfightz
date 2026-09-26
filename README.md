@@ -1426,6 +1426,39 @@ that no lane ever passed.
 
 [The long version.](docs/ahmedabad-navratri.md)
 
+## Wind and a Bicycle
+
+風と自転車. A girl on a bicycle, riding an endless road through a Japanese town
+from morning round to morning, in real time and in a painted style. She rides a
+mamachari with a black cat in the basket, her ponytail and ribbon streaming,
+her feet on the pedals. The road runs through four kinds of Japan in turn: a
+slope town above the sea with hydrangeas along the wall and washing on the
+balconies; a shopping street strung with paper lanterns and shop signs; the city,
+with neon, a konbini, and a railway crossing where she stops for the train; and
+the rice fields, with cherry trees, a shrine, and a tunnel of red torii over the
+road. A whole day passes in five minutes — painted cumulus at noon, a sunset in
+orange and lilac, the windows and lanterns and vending machines coming on, stars
+and fireflies — or hold the hour on the slider. The camera has a director, or
+ride behind her, beside her, ahead of her or above.
+
+The painted look is four things together: toon shading in four flat steps, a
+sky of painted clouds and a ring of painted hills, a Kuwahara filter over the
+whole frame — which smooths inside regions and keeps the edges between them, so
+everything looks laid down with a brush — and bloom for the lights at night.
+The world is streamed forty metres at a time, every chunk merged into a handful
+of draw calls and seeded from where it is. The music is an original piano waltz
+in F, with cicadas by day, higurashi at dusk, crickets at night, the sea, the
+city, the crossing bell, and the bicycle bell on B.
+
+**What only showed up on screen:** filmic tone mapping turned a summer morning
+grey, because greying out saturated colour is what it is for; at night every
+shop front was a white panel metres wide and the bloom turned the street into
+fog; windows by day were cardboard; the torii spanned the road lengthways; and
+the train ran its whole length through the office blocks either side of the
+crossing, which had been built on the line.
+
+[The long version.](docs/wind-and-a-bicycle.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

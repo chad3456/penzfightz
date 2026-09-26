@@ -35,7 +35,8 @@ export type EffectId =
   | 'marauder'
   | 'ramanime'
   | 'sindoor'
-  | 'ahmedabad';
+  | 'ahmedabad'
+  | 'ride';
 
 export interface EffectDef {
   id: EffectId;
@@ -342,6 +343,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · real time · bloom', 'thousands of bulbs, one mesh', 'an original garba, synthesised'],
     ink: '#ff8a1f',
     wash: 'rgba(255, 138, 31, 0.12)',
+  },
+  {
+    id: 'ride',
+    name: 'Wind and a Bicycle',
+    tagline: 'A girl on a bicycle, riding an endless road through a Japanese town, from morning round to morning.',
+    blurb:
+      '風と自転車. A real-time world, painted: a girl on a mamachari with a black cat in the basket, riding forever through four kinds of Japan in turn — a slope town above the sea with hydrangeas along the wall, a shopping street strung with paper lanterns, the city with its neon and a railway crossing where she stops for the train, and the rice fields, with a tunnel of torii gates and cherry trees along the road. A whole day goes by in five minutes: painted cumulus at noon, a sunset in orange and lilac, the windows and lanterns and vending machines coming on, stars, fireflies, dawn. Toon shading, a Kuwahara filter that makes everything look laid down with a brush, and bloom for the lights. The music is an original piano waltz, with cicadas by day, higurashi at dusk, crickets at night, the sea, the city, the crossing bell — and her bell, if you press B.',
+    spec: ['three.js · real time · endless', 'a painted look: toon, Kuwahara, bloom', 'an original waltz, synthesised'],
+    ink: '#5aa8e8',
+    wash: 'rgba(90, 168, 232, 0.12)',
   },
 ];
 

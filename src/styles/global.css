@@ -7846,3 +7846,28 @@ button.card:hover:not(:disabled) {
 .amd__tour.is-on { border-style: dashed; }
 .amd__stats { position: absolute; left: max(16px, 2vw); bottom: 10px; margin: 0; font-size: 11px; color: rgba(255, 240, 220, 0.45); }
 @media (max-width: 640px) { .amd__here { bottom: 96px; right: 16px; } .amd__here h2 { font-size: 19px; } .amd__here p { font-size: 13px; } .amd__tools .amd__exit { display: none; } }
+
+/* ── 風と自転車 ─────────────────────────────────────────────────────────── */
+.ride { position: fixed; inset: 0; background: #0a1030; color: #fff; font-family: 'Hiragino Sans', 'Yu Gothic', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif; overflow: hidden; }
+.ride__view { position: absolute; inset: 0; cursor: grab; touch-action: none; }
+.ride__view:active { cursor: grabbing; }
+.ride__top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start; padding: 18px max(16px, 2vw); pointer-events: none; }
+.ride__kicker { margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); text-shadow: 0 1px 8px rgba(0, 0, 40, 0.6); }
+.ride__title { margin: 4px 0 0; font-size: clamp(24px, 3.4vw, 42px); font-weight: 700; text-shadow: 0 2px 16px rgba(0, 20, 60, 0.55); }
+.ride__title span { font-size: 0.5em; font-weight: 500; letter-spacing: 0.04em; opacity: 0.9; margin-left: 8px; }
+.ride button { font: inherit; font-size: 13px; cursor: pointer; border-radius: 999px; padding: 7px 13px; border: 1px solid rgba(255, 255, 255, 0.45); background: rgba(20, 30, 70, 0.35); color: #fff; backdrop-filter: blur(8px); transition: background 160ms ease; white-space: nowrap; }
+.ride button:hover { background: rgba(255, 255, 255, 0.2); }
+.ride button.is-on { background: #fff; color: #1a2250; border-color: #fff; font-weight: 700; }
+.ride__exit { pointer-events: auto; }
+.ride__where { position: absolute; left: max(16px, 2vw); bottom: 96px; pointer-events: none; animation: ride-in 1.2s ease both; text-shadow: 0 2px 14px rgba(0, 10, 40, 0.7); }
+.ride__jp { margin: 0; font-size: clamp(34px, 5vw, 64px); font-weight: 700; letter-spacing: 0.08em; }
+.ride__en { margin: 2px 0 0; font-size: 15px; letter-spacing: 0.06em; opacity: 0.9; }
+.ride__wait { margin: 8px 0 0; display: inline-block; font-size: 14px; background: rgba(200, 30, 20, 0.8); padding: 4px 10px; border-radius: 4px; animation: ride-blink 0.8s steps(2) infinite; }
+@keyframes ride-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes ride-blink { 50% { opacity: 0.55; } }
+.ride__bar { position: absolute; left: 0; right: 0; bottom: 30px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; padding: 0 max(16px, 2vw); }
+.ride__time, .ride__cams, .ride__tools { display: flex; gap: 6px; align-items: center; }
+.ride__clock { font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 700; min-width: 76px; text-shadow: 0 1px 8px rgba(0, 10, 40, 0.8); }
+.ride__time input { width: min(260px, 36vw); accent-color: #ffd23f; }
+.ride__stats { position: absolute; left: max(16px, 2vw); bottom: 8px; margin: 0; font-size: 11px; color: rgba(255, 255, 255, 0.6); text-shadow: 0 1px 4px #000; }
+@media (max-width: 760px) { .ride__bar { bottom: 26px; } .ride__cams { order: 3; overflow-x: auto; max-width: 100%; } .ride__where { bottom: 150px; } }
