@@ -36,7 +36,8 @@ export type EffectId =
   | 'ramanime'
   | 'sindoor'
   | 'ahmedabad'
-  | 'ride';
+  | 'ride'
+  | 'heatwave';
 
 export interface EffectDef {
   id: EffectId;
@@ -353,6 +354,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · real time · endless', 'a painted look: toon, Kuwahara, bloom', 'an original waltz, synthesised'],
     ink: '#5aa8e8',
     wash: 'rgba(90, 168, 232, 0.12)',
+  },
+  {
+    id: 'heatwave',
+    name: 'Heatwave',
+    tagline: 'A police-chase arcade game: no guns, no brakes, just a hot rod and the desert — make the cops crash into everything, including each other.',
+    blurb:
+      'A playable prototype of a top-down chase game, built to a design document written for Unity and made here in the browser instead. You drive an orange hot rod round a desert arena of mesas, a ghost town, wrecks, cacti, fences, ramps and red barrels; the police come for you, and you have nothing to fight them with except where you lead them. They aim at where you are going to be, look ahead for the big obvious things but not for each other, and every so often do not look at all — so they wrap themselves round rocks, T-bone one another and follow you over barrels. Kills close together chain: COP SMASHED, DOUBLE, TRIPLE, PILEUP. Five stars of wanted level, from two cars to twelve with navy interceptors among them; near misses, drifts and jumps score too. Arcade physics with a slide you can hold, a camera that leads and pulls back with speed, shake and hit-stop, dust, skids, smoke, sparks, explosions and flying debris, and every sound synthesised — the engine, the tyres, a siren per car getting more chaotic with the heat. One thumb anywhere on a phone; arrows or WASD on a desk. T opens a tuning panel.',
+    spec: ['three.js · 60 fps on a phone', 'arcade physics, interception AI', 'synthesised engine, sirens and bangs'],
+    ink: '#ff5a1f',
+    wash: 'rgba(255, 90, 31, 0.12)',
   },
 ];
 

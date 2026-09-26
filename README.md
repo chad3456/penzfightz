@@ -1459,6 +1459,23 @@ crossing, which had been built on the line.
 
 [The long version.](docs/wind-and-a-bicycle.md)
 
+## Heatwave
+
+A police-chase arcade game, played with one thumb. You drive an orange hot rod
+round a desert arena — mesas, a ghost town, wrecks, cacti, fences, ramps and red
+barrels — and the police come for you. You have no weapons and no brake; the
+only way to stop them is to lead them into things. They aim at where you are
+going to be, look out for the big rocks but not for each other, and sometimes
+don't look at all, so they wrap themselves round mesas, T-bone one another and
+chase you over barrels. Kills close together chain: COP SMASHED, DOUBLE,
+TRIPLE, PILEUP. Five stars of heat, from two cars to twelve with interceptors
+among them; close calls, drifts and jumps score too. Built as a browser
+prototype of a design written for Unity, with every tunable in one file and a
+live tuning panel on T. On a phone, put a thumb anywhere and push; on a
+keyboard, arrows or WASD.
+
+[The long version.](docs/heatwave.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
