@@ -37,7 +37,8 @@ export type EffectId =
   | 'sindoor'
   | 'ahmedabad'
   | 'ride'
-  | 'heatwave';
+  | 'heatwave'
+  | 'banter';
 
 export interface EffectDef {
   id: EffectId;
@@ -364,6 +365,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · 60 fps on a phone', 'arcade physics, interception AI', 'synthesised engine, sirens and bangs'],
     ink: '#ff5a1f',
     wash: 'rgba(255, 90, 31, 0.12)',
+  },
+  {
+    id: 'banter',
+    name: 'NaMo vs RaGa',
+    tagline: 'A hundred rounds of banter between two vinyl-toy mascots: kurta versus T-shirt, over chai, cricket, kites, yatras and yoga.',
+    blurb:
+      'A shelf of a hundred collectible dioramas in the Heatwave toy style, each a little round stand with two chunky mascots on it — NaMo in a half-sleeved kurta and a jacket, white hair and beard and rimless glasses; RaGa in a white T-shirt, greying at the sides, with a salt-and-pepper beard — going at it about the things each is famous for. A chai stall face-off, a selfie-off, the yatra against the yoga mat, the winter T-shirt, kite fights on the rooftops, a yorker of development, arm-wrestling, tug of war, a Holi water-balloon fight, garba, the jalebi factory, the Mohabbat ki Dukaan, the Moon, bullet trains and one umbrella in the rain. Open one and it plays: they move, the lines pop up over their heads, and a stamp says who took the round. It is satire and every line is invented; both get teased, both land jabs, and the wins come out twenty-five each, with the other fifty going to the chai, the voter, ISRO and the rain.',
+    spec: ['three.js · 100 dioramas, built live', 'two rigged mascots, 50 poses, 13 faces', 'all lines invented · wins split evenly'],
+    ink: '#f08a2a',
+    wash: 'rgba(240, 138, 42, 0.12)',
   },
 ];
 

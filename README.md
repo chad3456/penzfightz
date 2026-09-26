@@ -1476,6 +1476,21 @@ keyboard, arrows or WASD.
 
 [The long version.](docs/heatwave.md)
 
+## NaMo vs RaGa
+
+A hundred rounds of banter between two vinyl-toy mascots — kurta versus
+T-shirt — in the chunky toy style of Heatwave. Each is a collectible diorama on
+a round stand: a chai stall face-off, a selfie-off, the Yatra against the yoga
+mat, the winter T-shirt, kite fights, a yorker of development, arm-wrestling,
+tug of war, Holi water balloons, garba, the jalebi factory, the Mohabbat ki
+Dukaan, the Moon, bullet trains, one umbrella in the rain, and a grand finale.
+Open one and it plays, lines popping up over their heads, with a stamp for who
+won. It is satire and every line is invented; both are teased, both land
+jabs, and the wins come out twenty-five each, with the other fifty going to the
+chai, the voter, ISRO and the rain. Save the whole set as a poster.
+
+[The long version.](docs/namo-vs-raga.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

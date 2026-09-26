@@ -3,6 +3,7 @@ import { Arcade } from './arcade/Arcade';
 import { Ahmedabad } from './ahmedabad/Ahmedabad';
 import { Ride } from './ride/Ride';
 import { Heatwave } from './heatwave/Heatwave';
+import { Banter } from './banter/Banter';
 import { Leaderboard } from './ui/Leaderboard';
 import { Sheet, SheetHeader } from './ui/Sheet';
 import { PenFightGame } from './games/penfight/PenFightGame';
@@ -240,6 +241,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'heatwave') {
     return <Heatwave onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'banter') {
+    return <Banter onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'nightwalkers') {
     return (
