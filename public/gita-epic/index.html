@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gita — the epic cut</title>
+<meta name="description" content="The Bhagavad Gita as a vertical reel: 3D-rendered Krishna and Arjuna, the verses in Sanskrit and English, a synthesised voice-over. 1 min 42 s.">
+<link rel="stylesheet" href="../fonts-sacred/fonts.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #01020a; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', Georgia, serif; }
+  canvas { display: block; cursor: pointer; }
+  #ui { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 8vh; gap: 10px; pointer-events: none; transition: opacity 500ms ease; }
+  #ui.is-hidden { opacity: 0; }
+  #ui.is-hidden button { pointer-events: none; }
+  button { pointer-events: auto; cursor: pointer; font-family: Cinzel, Georgia, serif; font-size: 16px; letter-spacing: 0.3em; padding: 14px 30px; border: 1px solid #e9b45a; background: rgba(2, 4, 16, 0.7); color: #f2ecdf; }
+  button:hover { background: #e9b45a; color: #01020a; }
+  #note { margin: 0; color: rgba(242, 236, 223, 0.75); font-size: 15px; letter-spacing: 0.08em; }
+  #bar { position: fixed; bottom: 0; height: 4px; background: rgba(255, 255, 255, 0.08); cursor: pointer; }
+  #fill { height: 100%; width: 0; background: #e9b45a; }
+</style>
+</head>
+<body>
+<canvas id="c" data-poster="66.5" aria-label="A vertical film of the Bhagavad Gita: Krishna and Arjuna rendered in 3D, verses in Sanskrit and English."></canvas>
+<div id="ui"><button id="play">▶&nbsp; WATCH</button><p id="note">loading…</p></div>
+<div id="bar"><div id="fill"></div></div>
+<script src="epic.js" data-global="EPIC"></script>
+</body>
+</html>

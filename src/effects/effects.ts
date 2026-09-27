@@ -39,7 +39,9 @@ export type EffectId =
   | 'ride'
   | 'heatwave'
   | 'banter'
-  | 'gitareel';
+  | 'gitareel'
+  | 'gitaepic'
+  | 'sahasranama';
 
 export interface EffectDef {
   id: EffectId;
@@ -386,6 +388,26 @@ export const EFFECTS: EffectDef[] = [
     spec: ['canvas 2D · 1080 × 1920 · 80 s', 'stippled ink, washes, kinetic type', 'an original score, synthesised'],
     ink: '#d4951a',
     wash: 'rgba(212, 149, 26, 0.12)',
+  },
+  {
+    id: 'gitaepic',
+    name: 'Gita, the epic cut',
+    tagline: 'Kurukshetra in a hundred seconds: sculpted busts of Krishna and Arjuna, the verses in gold over their faces, a voice like thunder, and the Universal Form.',
+    blurb:
+      'The reel again, rebuilt. Krishna and Arjuna are 3D busts from a real head scan — Krishna deep blue with the mukut, peacock feather, tilak, Kaustubha and vaijayanti; Arjuna in bronze with his kirita and armour — lit like a film and cut through ink-wash transitions. Every lesson arrives as a verse, Devanagari in gold with Purohit Swami\'s English beneath it, laid over the face that speaks it; the voices are neural, pitched and treated: a narrator, a trembling Arjuna, and a Krishna who fills the room. It climbs through Arjuna\'s fall, the undying Self, karma and the promise to return, to SHOW ME — and then the Vishvarupa: a galaxy, a ring of heads, a wheel of arms and weapons, कालोऽस्मि, a thousand suns, and surrender.',
+    spec: ['canvas 2D · 1080 × 1920 · 102 s', '3D head-scan busts, ink-wash cuts', 'neural voices · verses in gold'],
+    ink: '#e0b050',
+    wash: 'rgba(224, 176, 80, 0.12)',
+  },
+  {
+    id: 'sahasranama',
+    name: 'Vishnu Sahasranama',
+    tagline: 'A deep dive into the thousand names of Vishnu, told in starlight: the bed of arrows, the cosmic body, the Vishvarupa, and a galaxy of a thousand touchable names.',
+    blurb:
+      'A hundred thousand particles behind a scroll story in eight chapters. They gather into Krishna\'s face, fall into the bed of arrows where Bhishma lay, open as a lotus for his answer, and become the Dhyana shloka\'s cosmic body — earth His feet, sky His navel, sun and moon His eyes, each part labelled on the stars. Then Gita 11: open the divine eye and the Universal Form bursts out — many faces, a fan of arms, the light of a thousand suns — a verse at a time. The thousand names become a spiral galaxy, one star per name in recitation order: hover to read, search in English or Devanagari, tap a story card to find its star. The whole stotram, all 191 verses with IAST, closes it.',
+    spec: ['three.js · 110k particles, 8 formations', '1000 name-stars, search & readings', 'the full stotram, Devanagari + IAST'],
+    ink: '#d9b566',
+    wash: 'rgba(217, 181, 102, 0.12)',
   },
 ];
 

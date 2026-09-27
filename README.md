@@ -1503,6 +1503,32 @@ in code; `node scripts/render-gita-reel.mjs` writes the MP4.
 
 [The long version.](docs/gita-reel.md)
 
+## Gita, the epic cut
+
+The reel rebuilt with faces: Krishna and Arjuna as 3D busts from a real head
+scan, dressed in three.js — mukut, peacock feather, tilak, Kaustubha and
+vaijayanti for one, kirita and armour for the other — lit like a film and cut
+through ink-wash wipes. Each lesson lands as a verse in gold Devanagari with
+Purohit Swami's English over the face that speaks it (1.30, 2.3, 2.23, 2.47,
+4.7–8, 11.12, 11.32, 18.66, 18.73), voiced by locally run neural voices treated
+to thunder, climbing to SHOW ME and the Vishvarupa on the beat of the drop.
+`node scripts/render-gita-epic.mjs` writes the MP4; the music on the published
+cut was the user's own and is not in the repository.
+
+[The long version.](docs/gita-epic.md)
+
+## Vishnu Sahasranama
+
+A deep dive into the thousand names, told in starlight, after the look of
+trinetra.shivag.fyi. A hundred thousand particles behind an eight-chapter scroll
+story become Krishna's face, the bed of arrows Bhishma lay on, a lotus, the
+cosmic body of the Dhyana shloka and the Vishvarupa of Gita 11 — open the divine
+eye and it bursts — and then a galaxy whose thousand brightest stars are the
+thousand names, to hover, search and pin. The full stotram, in Devanagari with
+IAST, closes it.
+
+[The long version.](docs/sahasranama.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

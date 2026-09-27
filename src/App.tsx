@@ -42,7 +42,8 @@ import { Film } from './film/Film';
 import { Frieze } from './frieze/Frieze';
 import { Castle } from './castle/Castle';
 import { Nightwalkers } from './nightwalkers/Nightwalkers';
-import { Diary, Fermi, GitaReel, MarauderMap, RamayanaAnime, Sindoor } from './fermi/Fermi';
+import { Diary, Fermi, GitaEpic, GitaReel, MarauderMap, RamayanaAnime, Sindoor } from './fermi/Fermi';
+import { Sahasranama } from './sahasranama/Sahasranama';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -244,6 +245,12 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'gitareel') {
     return <GitaReel onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'gitaepic') {
+    return <GitaEpic onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'sahasranama') {
+    return <Sahasranama onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

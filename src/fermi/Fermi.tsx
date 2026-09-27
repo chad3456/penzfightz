@@ -45,6 +45,10 @@ export const GitaReel = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/gita-reel/index.html" title="Gita, the reel: Krishna and Arjuna in eighty seconds." onExit={onExit} />
 );
 
+export const GitaEpic = ({ onExit }: { onExit: () => void }) => (
+  <PageFilm src="/gita-epic/index.html" title="Gita, the epic cut: Kurukshetra and the Universal Form in a hundred seconds." onExit={onExit} />
+);
+
 export const Diary = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/riddle/index.html" title="The Diary: two minutes inside a schoolboy's diary." onExit={onExit} />
 );
