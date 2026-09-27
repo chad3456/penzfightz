@@ -1529,6 +1529,17 @@ IAST, closes it.
 
 [The long version.](docs/sahasranama.md)
 
+## Watercolour, from blank paper
+
+Give it a photograph and it paints it: a pencil sketch drawn outward from the
+subject, a pale first wash, mid tones, details and last glazes, stroke by
+stroke with a moving pencil and brush, pooled rims, granulation and paper grain
+— and the last frame is the photograph itself, which it proves by sliding one
+over the other and reporting a pixel difference of zero.
+`python scripts/watercolor-process/paint.py photo.jpg out.mp4`.
+
+[The long version.](docs/watercolor-process.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name
