@@ -38,7 +38,8 @@ export type EffectId =
   | 'ahmedabad'
   | 'ride'
   | 'heatwave'
-  | 'banter';
+  | 'banter'
+  | 'gitareel';
 
 export interface EffectDef {
   id: EffectId;
@@ -375,6 +376,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · 100 dioramas, built live', 'two rigged mascots, 50 poses, 13 faces', 'all lines invented · wins split evenly'],
     ink: '#f08a2a',
     wash: 'rgba(240, 138, 42, 0.12)',
+  },
+  {
+    id: 'gitareel',
+    name: 'Gita, the reel',
+    tagline: 'Krishna talks Arjuna back onto his feet in eighty seconds — a vertical reel in stippled ink, watercolour and kinetic type.',
+    blurb:
+      'The Bhagavad Gita as a reel on the feed: 1080 × 1920, eighty seconds, cut to a 96-bpm lo-fi beat. The greatest archer alive has just dropped his bow, the Pandava group chat has three dots in it, and on a live feed from Kurukshetra the charioteer is smiling. Then four lessons, each announced by a stamp: the self that no weapon cuts and no fire burns (2.23); the work, not its fruits (2.47); win or lose, the same energy (2.48); the mind as best friend or worst enemy (6.5) — and the universal form, a wheel of arms and heads and light, saying I am Time (11.32). Arjuna picks up the bow. The look is the look of a certain kind of explainer: off-white paper, figures drawn in ink and then stippled, pastel washes, one mustard word to a line, heavy condensed type against an italic serif, captions a word at a time with the rest waiting in grey, and a meter in the corner reading AURA. Every picture and every note is made in code on the page — a bansuri in Yaman, a tanpura, keys, a conch, a choir — and the verses are shown in Sanskrit.',
+    spec: ['canvas 2D · 1080 × 1920 · 80 s', 'stippled ink, washes, kinetic type', 'an original score, synthesised'],
+    ink: '#d4951a',
+    wash: 'rgba(212, 149, 26, 0.12)',
   },
 ];
 

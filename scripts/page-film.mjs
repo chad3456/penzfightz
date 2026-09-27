@@ -1,7 +1,7 @@
 /**
  * Render one of the standalone page films in public/ to a video file.
  *
- * Both films are plain pages that expose `{ DURATION, frame, synth, wavBytes }`
+ * The films are plain pages that expose `{ DURATION, frame, synth, wavBytes }`
  * on a global, and in both every frame is a pure function of its timestamp.
  * So frame n is simply asked for at n / fps — nothing runs in real time and
  * nothing can drop — and the sound is the very buffer the page itself plays,
@@ -21,7 +21,6 @@ const FF = process.env.FFMPEG
   || '/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2';
 
 export async function renderPageFilm({ dir, global, out, height = 1080, fps = 30 }) {
-  const width = Math.round((height * 16) / 9);
   const here = path.dirname(fileURLToPath(import.meta.url));
   const page = pathToFileURL(path.join(here, '..', 'public', dir, 'index.html')).href + '?render';
 
@@ -30,14 +29,19 @@ export async function renderPageFilm({ dir, global, out, height = 1080, fps = 30
   p.on('pageerror', (e) => { throw e; });
   await p.goto(page, { waitUntil: 'load' });
 
-  const duration = await p.evaluate(({ W, H, G }) => {
+  // a film says how big it is drawn (1920 × 1080 unless it says otherwise, 1080 × 1920 for a reel)
+  const { duration, fw, fh } = await p.evaluate((G) => {
+    const f = window[G];
+    return { duration: f.DURATION, fw: f.W || 1920, fh: f.H || 1080 };
+  }, global);
+  const width = Math.round((height * fw) / fh);
+  await p.evaluate(({ W, H, G }) => {
     const c = document.createElement('canvas');
     c.width = W;
     c.height = H;
     window.__c = c;
     window.__g = c.getContext('2d');
     window.__film = window[G];
-    return window.__film.DURATION;
   }, { W: width, H: height, G: global });
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `${dir}-`));
@@ -64,12 +68,12 @@ export async function renderPageFilm({ dir, global, out, height = 1080, fps = 30
   const total = Math.round(duration * fps);
   const t0 = Date.now();
   for (let i = 0; i < total; i++) {
-    const url = await p.evaluate(({ t, W }) => {
+    const url = await p.evaluate(({ t, W, FW }) => {
       const g = window.__g;
-      g.setTransform(W / 1920, 0, 0, W / 1920, 0, 0);
+      g.setTransform(W / FW, 0, 0, W / FW, 0, 0);
       window.__film.frame(g, t);
       return window.__c.toDataURL('image/jpeg', 0.94);
-    }, { t: i / fps, W: width });
+    }, { t: i / fps, W: width, FW: fw });
     const buf = Buffer.from(url.split(',')[1], 'base64');
     if (!ff.stdin.write(buf)) await new Promise((r) => ff.stdin.once('drain', r));
     if (i % fps === 0) {

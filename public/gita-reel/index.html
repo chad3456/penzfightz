@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gita, the reel</title>
+<meta name="description" content="Krishna talks Arjuna back onto his feet in eighty seconds: a vertical reel in stippled ink, watercolour and kinetic type, with an original synthesised score. Pure JavaScript.">
+<style>
+  html, body { margin: 0; height: 100%; background: #1a1712; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; flex-direction: column; font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace; }
+  canvas { display: block; cursor: pointer; box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5); }
+  #ui {
+    position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding-bottom: 7vh; gap: 10px; pointer-events: none; transition: opacity 500ms ease;
+  }
+  #ui.is-hidden { opacity: 0; }
+  #ui.is-hidden button { pointer-events: none; }
+  button {
+    pointer-events: auto; cursor: pointer; font: inherit; font-size: clamp(14px, 1.6vw, 18px); font-weight: 700; letter-spacing: 0.06em;
+    padding: 12px 26px; border-radius: 999px; border: 2px solid #17140f; background: #17140f; color: #ebe7df;
+  }
+  button:hover { background: #d4951a; border-color: #d4951a; color: #17140f; }
+  button:disabled { opacity: 0.6; cursor: progress; }
+  #note { margin: 0; color: #17140f; background: rgba(235, 231, 223, 0.85); padding: 3px 10px; border-radius: 4px; font-size: 12px; letter-spacing: 0.02em; }
+  #bar { position: fixed; bottom: 0; height: 6px; background: rgba(255, 255, 255, 0.1); cursor: pointer; }
+  #bar:hover { height: 10px; }
+  #fill { height: 100%; width: 0; background: #e0302a; }
+</style>
+</head>
+<body>
+<canvas id="c" data-poster="21.8" aria-label="A vertical animated reel: Krishna teaches Arjuna on the battlefield of Kurukshetra, in stippled ink drawings, watercolour washes and kinetic type."></canvas>
+<div id="ui">
+  <button id="play">▶&nbsp; watch, with sound</button>
+  <p id="note">1 min 20 s · 9:16 · click the picture to pause · ← → to skip · R to start again</p>
+</div>
+<div id="bar"><div id="fill"></div></div>
+<script src="gita.js" data-global="GITA"></script>
+</body>
+</html>

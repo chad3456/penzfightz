@@ -1491,6 +1491,18 @@ chai, the voter, ISRO and the rain. Save the whole set as a poster.
 
 [The long version.](docs/namo-vs-raga.md)
 
+## Gita, the reel
+
+Krishna talks Arjuna back onto his feet in eighty seconds — the Bhagavad Gita as
+a vertical reel, in stippled ink drawings, pastel watercolour washes and kinetic
+type, with an AURA meter in the corner. The greatest archer alive drops his bow;
+the Pandava group chat has three dots in it; a live feed from Kurukshetra shows a
+smiling charioteer; then four lessons (2.23, 2.47, 2.48, 6.5), the universal form
+saying I am Time (11.32), and the bow picked up again. Drawn and scored entirely
+in code; `node scripts/render-gita-reel.mjs` writes the MP4.
+
+[The long version.](docs/gita-reel.md)
+
 ## A note on names
 
 **Rang** is the colour-and-number card game everyone has played under some name

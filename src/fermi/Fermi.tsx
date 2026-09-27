@@ -41,6 +41,10 @@ export const Sindoor = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/sindoor/index.html" title="Operation Sindoor, explained." onExit={onExit} />
 );
 
+export const GitaReel = ({ onExit }: { onExit: () => void }) => (
+  <PageFilm src="/gita-reel/index.html" title="Gita, the reel: Krishna and Arjuna in eighty seconds." onExit={onExit} />
+);
+
 export const Diary = ({ onExit }: { onExit: () => void }) => (
   <PageFilm src="/riddle/index.html" title="The Diary: two minutes inside a schoolboy's diary." onExit={onExit} />
 );
