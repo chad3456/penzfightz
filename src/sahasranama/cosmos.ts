@@ -1,27 +1,47 @@
 import * as THREE from 'three';
+import { PLATE_H, paintPlates, type Plate, type PlateName } from './painting';
 
 /**
- * The cosmos: one cloud of particles that moves between formations.
+ * The cosmos: one cloud of brush strokes that paints one picture after another.
  *
- * Every particle has somewhere it came from and somewhere it is going; a
- * shader mixes the two, staggered by a per-particle seed so the cloud pours
- * rather than jumps, and swirls them in transit. Formations are sampled from
- * the 3D renders of Krishna (each lit pixel becomes a point, its brightness
- * its depth) or built from geometry: a lotus, a field of arrows, the cosmic
- * body of the Dhyana shloka, the thousand-armed form of Gita 11, a galaxy.
+ * Every particle is a stroke — a short bristled dab with a direction and a
+ * length — and knows where it came from and where it is going. Most formations
+ * are paintings (painting.ts): each plate is sampled into strokes that take
+ * their colour from the paint, their direction from the grain of the picture
+ * (a structure tensor, so strokes run along edges and round forms), their
+ * length from how busy it is there (long in the sky, short in a face) and
+ * their depth from the plate's depth layer. The rest are built from geometry:
+ * the cosmic body of the Dhyana shloka, a galaxy, drifting petals.
  *
- * A second, smaller cloud holds the thousand names as stars you can touch.
+ * The paint never quite dries: strokes breathe and drift, a slow wind ripples
+ * through them along their own directions, and the pointer stirs a vortex.
+ * Morphing between formations pours the strokes rather than jumping them.
+ *
+ * Every stroke also carries one of the thousand names. Click a stroke and the
+ * page is told which name it is, and every other stroke carrying that name
+ * lights up across the painting.
+ *
+ * A second, smaller cloud holds the thousand names as stars you can touch, in
+ * the galaxy.
  */
 
 export type FormationName = 'face' | 'arrows' | 'lotus' | 'body' | 'vishvarupa' | 'galaxy' | 'hero' | 'dust';
-interface Formation { pos: Float32Array; col: Float32Array }
+interface Formation { pos: Float32Array; col: Float32Array; sty: Float32Array }
+
+export type Theme = 'dawn' | 'dusk' | 'night';
+export const THEME_BG: Record<Theme, string> = { dawn: '#f4ecdf', dusk: '#3a1c2e', night: '#01030d' };
+
+const PLATE_OF: Partial<Record<FormationName, PlateName>> = { face: 'faces', arrows: 'arrows', lotus: 'lotus', vishvarupa: 'vishvarupa', hero: 'portrait' };
 
 const VERT = /* glsl */ `
 attribute vec3 aFrom;
 attribute vec3 aTo;
 attribute vec3 cFrom;
 attribute vec3 cTo;
+attribute vec2 sFrom;
+attribute vec2 sTo;
 attribute float aSeed;
+attribute float aName;
 uniform float uT;
 uniform float uTime;
 uniform float uSize;
@@ -29,37 +49,68 @@ uniform float uBurst;
 uniform vec2 uMouse;
 uniform float uAspect;
 uniform float uPx;
+uniform float uPick;
+uniform float uStir;
 varying vec3 vCol;
-varying float vA;
+varying float vAng;
+varying float vSeed;
+varying float vHi;
 void main() {
   float k = clamp((uT - aSeed * 0.45) / 0.55, 0.0, 1.0);
   k = k * k * (3.0 - 2.0 * k);
   vec3 p = mix(aFrom, aTo, k);
   float mid = sin(k * 3.14159);
-  p += vec3(sin(aSeed * 91.0 + uTime * 0.7), cos(aSeed * 57.0 + uTime * 0.6), sin(aSeed * 33.0 + uTime * 0.5)) * mid * 1.6;
-  p += 0.025 * vec3(sin(uTime * 0.8 + aSeed * 60.0), cos(uTime * 0.7 + aSeed * 45.0), sin(uTime * 0.5 + aSeed * 20.0));
+  // in transit, the strokes swirl
+  p += vec3(sin(aSeed * 91.0 + uTime * 0.7), cos(aSeed * 57.0 + uTime * 0.6), sin(aSeed * 33.0 + uTime * 0.5)) * mid * 1.8;
+  vec2 s = mix(sFrom, sTo, k);
+  float ang = s.x;
+  // the paint breathes, and a wind runs through it along its own grain
+  float ph = uTime * 0.45 + aSeed * 6.2831;
+  p.xy += 0.03 * vec2(sin(ph + p.y * 0.9), cos(ph * 0.8 + p.x * 0.7));
+  float wv = sin(p.x * 0.7 - uTime * 1.3 + p.y * 0.35);
+  p.xy += 0.035 * wv * vec2(cos(ang), -sin(ang));
+  p.z += 0.06 * sin(ph * 1.3);
   p += normalize(p + vec3(0.0001)) * uBurst * (2.0 + aSeed * 6.0);
   vec4 mv = modelViewMatrix * vec4(p, 1.0);
   vec4 cp = projectionMatrix * mv;
+  // the pointer stirs the paint: a vortex round it
   vec2 ndc = cp.xy / cp.w;
   vec2 d = (ndc - uMouse) * vec2(uAspect, 1.0);
-  float dist = length(d);
-  float push = exp(-dist * dist * 30.0) * 0.12;
-  cp.xy += normalize(d + vec2(0.0001)) * push * cp.w / vec2(uAspect, 1.0);
+  float r2 = dot(d, d);
+  float swirl = exp(-r2 * 16.0) * (0.55 + uStir);
+  float cs = cos(swirl), sn = sin(swirl);
+  vec2 dr = vec2(cs * d.x - sn * d.y, sn * d.x + cs * d.y) * (1.0 + exp(-r2 * 40.0) * 0.25);
+  cp.xy += (dr - d) / vec2(uAspect, 1.0) * cp.w;
   gl_Position = cp;
-  gl_PointSize = uPx * uSize * (0.55 + aSeed * 0.9) / max(0.5, -mv.z);
+  float hi = abs(aName - uPick) < 0.5 ? 1.0 : 0.0;
+  vHi = hi;
+  gl_PointSize = uPx * uSize * s.y * (0.8 + aSeed * 0.4) * (1.0 + hi * 0.9) / max(0.5, -mv.z);
   vCol = mix(cFrom, cTo, k);
-  vA = 0.55 + 0.45 * sin(uTime * (0.6 + aSeed) + aSeed * 30.0);
+  vAng = ang + swirl * 0.8 + wv * 0.08;
+  vSeed = aSeed;
 }`;
+
 const FRAG = /* glsl */ `
 varying vec3 vCol;
-varying float vA;
+varying float vAng;
+varying float vSeed;
+varying float vHi;
 void main() {
-  vec2 c = gl_PointCoord - 0.5;
-  float r = length(c);
-  if (r > 0.5) discard;
-  float a = smoothstep(0.5, 0.0, r);
-  gl_FragColor = vec4(vCol * (0.7 + 1.1 * a), a * vA);
+  vec2 p = gl_PointCoord - 0.5;
+  float c = cos(vAng), s = sin(vAng);
+  // along the stroke, and across it
+  float u = c * p.x + s * p.y;
+  float v = -s * p.x + c * p.y;
+  float w = 0.16 * (1.0 - 1.6 * u * u) + 0.02;
+  float e = (u * u) / 0.25 + (v * v) / (w * w);
+  if (e > 1.0) discard;
+  // bristles: fine stripes along the stroke, and a dry, broken tail
+  float bristle = 0.84 + 0.16 * sin(v * 110.0 + vSeed * 50.0);
+  float gap = step(0.8, fract(sin(v * 300.0 + vSeed * 9.0) * 43758.5));
+  if (gap > 0.5 && u > 0.3) discard;
+  vec3 col = vCol * bristle * (0.94 + 0.12 * (1.0 - e));
+  col = mix(col, vec3(1.0, 0.93, 0.62), vHi * 0.55);
+  gl_FragColor = vec4(col, 1.0);
 }`;
 
 const STAR_VERT = /* glsl */ `
@@ -103,49 +154,165 @@ function rnd(seed: number) {
   };
 }
 
-const BLUE = new THREE.Color('#5d8cff');
+const BLUE = new THREE.Color('#4a7cf0');
 const DEEP = new THREE.Color('#1f3fae');
-const GOLD = new THREE.Color('#ffc766');
-const WHITE = new THREE.Color('#e8f0ff');
+const GOLD = new THREE.Color('#ffbf4a');
+const WHITE = new THREE.Color('#f4f0ff');
+const PINK = new THREE.Color('#ef5a8e');
 
-/** Sample an image into points: lit pixels become particles, brightness becomes depth. */
-async function sampleImage(url: string, n: number, o: { scale: number; ox?: number; oy?: number; depth?: number; crop?: [number, number, number, number]; tint?: number }): Promise<Formation> {
+/** Plate pixels to world units: the plate is ten units tall, centred. */
+const UNIT = 10 / PLATE_H;
+
+/**
+ * Turn a painted plate into strokes. Each stroke lands on a pixel, chosen more
+ * often where the picture has edges or colour; it takes that pixel's colour,
+ * runs along the local grain, is long where the picture is quiet and short
+ * where it is busy, and sits at the plate's depth there. The plate's rim
+ * dissolves into scattered strokes rather than ending in a hard rectangle.
+ */
+function samplePlate(p: Plate, n: number, seed: number): Formation {
+  const { w, h, rgba, depth } = p;
+  // the grain, at half size: a structure tensor, smoothed
+  const hw = w >> 1;
+  const hh = h >> 1;
+  const L = new Float32Array(hw * hh);
+  for (let y = 0; y < hh; y++) {
+    for (let x = 0; x < hw; x++) {
+      const i = (y * 2 * w + x * 2) * 4;
+      L[y * hw + x] = (0.3 * rgba[i]! + 0.59 * rgba[i + 1]! + 0.11 * rgba[i + 2]!) / 255;
+    }
+  }
+  const jxx = new Float32Array(hw * hh);
+  const jyy = new Float32Array(hw * hh);
+  const jxy = new Float32Array(hw * hh);
+  for (let y = 1; y < hh - 1; y++) {
+    for (let x = 1; x < hw - 1; x++) {
+      const i = y * hw + x;
+      const gx = L[i + 1]! - L[i - 1]! + 0.5 * (L[i - hw + 1]! - L[i - hw - 1]! + L[i + hw + 1]! - L[i + hw - 1]!);
+      const gy = L[i + hw]! - L[i - hw]! + 0.5 * (L[i + hw - 1]! - L[i - hw - 1]! + L[i + hw + 1]! - L[i - hw + 1]!);
+      jxx[i] = gx * gx;
+      jyy[i] = gy * gy;
+      jxy[i] = gx * gy;
+    }
+  }
+  const blur = (a: Float32Array, r: number) => {
+    const t = new Float32Array(a.length);
+    const norm = 1 / ((2 * r + 1) * (2 * r + 1));
+    for (let y = 0; y < hh; y++) {
+      let acc = 0;
+      for (let x = -r; x < hw; x++) {
+        if (x + r < hw) acc += a[y * hw + x + r]!;
+        if (x - r - 1 >= 0) acc -= a[y * hw + x - r - 1]!;
+        if (x >= 0) t[y * hw + x] = acc;
+      }
+    }
+    const o = new Float32Array(a.length);
+    for (let x = 0; x < hw; x++) {
+      let acc = 0;
+      for (let y = -r; y < hh; y++) {
+        if (y + r < hh) acc += t[(y + r) * hw + x]!;
+        if (y - r - 1 >= 0) acc -= t[(y - r - 1) * hw + x]!;
+        if (y >= 0) o[y * hw + x] = acc * norm;
+      }
+    }
+    return o;
+  };
+  const bxx = blur(jxx, 4);
+  const byy = blur(jyy, 4);
+  const bxy = blur(jxy, 4);
+  const hidx = (x: number, y: number) => Math.min(hh - 1, Math.max(0, y >> 1)) * hw + Math.min(hw - 1, Math.max(0, x >> 1));
+  const edgeAt = (x: number, y: number) => {
+    const i = hidx(x, y);
+    return Math.min(1, Math.sqrt(bxx[i]! + byy[i]!) * 6);
+  };
+  // where to put strokes
+  const wts = new Float32Array(w * h);
+  let tot = 0;
+  for (let y = 0; y < h; y++) {
+    const fy = Math.min(1, Math.min(y, h - 1 - y) / 70);
+    for (let x = 0; x < w; x++) {
+      const fx = Math.min(1, Math.min(x, w - 1 - x) / 70);
+      const i = y * w + x;
+      const r = rgba[i * 4]!;
+      const g = rgba[i * 4 + 1]!;
+      const b = rgba[i * 4 + 2]!;
+      const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
+      tot += (0.35 + edgeAt(x, y) * 1.8 + sat * 0.4 + (depth[i]! / 255) * 0.6) * fx * fy;
+      wts[i] = tot;
+    }
+  }
+  const R = rnd(seed);
+  const pos = new Float32Array(n * 3);
+  const col = new Float32Array(n * 3);
+  const sty = new Float32Array(n * 2);
+  for (let k = 0; k < n; k++) {
+    const t = R() * tot;
+    let lo = 0;
+    let hi = wts.length - 1;
+    while (lo < hi) {
+      const m = (lo + hi) >> 1;
+      if (wts[m]! < t) lo = m + 1;
+      else hi = m;
+    }
+    const px = lo % w;
+    const py = Math.floor(lo / w);
+    const x = px + R() - 0.5;
+    const y = py + R() - 0.5;
+    const rim = Math.min(x, w - x, y, h - y);
+    pos[k * 3] = (x - w / 2) * UNIT;
+    pos[k * 3 + 1] = -(y - h / 2) * UNIT;
+    pos[k * 3 + 2] = (depth[lo]! / 255 - 0.45) * 2.6 + (R() - 0.5) * 0.12 + (rim < 70 ? (R() - 0.5) * (70 - rim) * 0.02 : 0);
+    const c = lo * 4;
+    // a touch more saturation, as paint has
+    let r = rgba[c]! / 255;
+    let g = rgba[c + 1]! / 255;
+    let b = rgba[c + 2]! / 255;
+    const l = 0.3 * r + 0.59 * g + 0.11 * b;
+    r = l + (r - l) * 1.12;
+    g = l + (g - l) * 1.12;
+    b = l + (b - l) * 1.12;
+    col[k * 3] = r;
+    col[k * 3 + 1] = g;
+    col[k * 3 + 2] = b;
+    const i2 = hidx(px, py);
+    const xx = bxx[i2]!;
+    const yy = byy[i2]!;
+    const xy = bxy[i2]!;
+    // the direction of least change: along edges and round forms
+    const ang = 0.5 * Math.atan2(2 * xy, xx - yy) + Math.PI / 2 + (R() - 0.5) * 0.35;
+    const coh = Math.sqrt((xx - yy) * (xx - yy) + 4 * xy * xy) / (xx + yy + 1e-9);
+    const busy = edgeAt(px, py);
+    sty[k * 2] = xx + yy < 1e-8 ? R() * Math.PI : ang;
+    sty[k * 2 + 1] = (1.45 - busy * 0.85) * (0.8 + coh * 0.3) * (0.75 + R() * 0.5);
+  }
+  return { pos, col, sty };
+}
+
+/** Sample a picture into strokes by its alpha (for the bust inside the cosmic body). */
+async function sampleImage(url: string, n: number, o: { scale: number; oy?: number; depth?: number }): Promise<Formation> {
   const im = await new Promise<HTMLImageElement>((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url; });
-  const [cx, cy, cw, ch] = o.crop || [0, 0, im.width, im.height];
   const w = 360;
-  const h = Math.round((w * ch) / cw);
+  const h = Math.round((w * im.height) / im.width);
   const c = document.createElement('canvas');
   c.width = w;
   c.height = h;
-  const g = c.getContext('2d')!;
-  g.drawImage(im, cx, cy, cw, ch, 0, 0, w, h);
+  const g = c.getContext('2d', { willReadFrequently: true })!;
+  g.drawImage(im, 0, 0, w, h);
   const d = g.getImageData(0, 0, w, h).data;
-  const lum = new Float32Array(w * h);
-  for (let i = 0; i < w * h; i++) lum[i] = ((0.3 * d[i * 4]! + 0.59 * d[i * 4 + 1]! + 0.11 * d[i * 4 + 2]!) / 255) * (d[i * 4 + 3]! / 255);
-  // weight by brightness and by edges, so the eyes, brows, lips and the crown's
-  // contours get more stars than the flat of a cheek
   const cand: number[] = [];
-  const wts: number[] = [];
-  for (let y = 1; y < h - 1; y++) {
-    for (let x = 1; x < w - 1; x++) {
-      const i = y * w + x;
-      if (d[i * 4 + 3]! < 100) continue;
-      const L = lum[i]!;
-      const gx = lum[i + 1]! - lum[i - 1]! + 0.5 * (lum[i - w + 1]! - lum[i - w - 1]! + lum[i + w + 1]! - lum[i + w - 1]!);
-      const gy = lum[i + w]! - lum[i - w]! + 0.5 * (lum[i + w - 1]! - lum[i - w - 1]! + lum[i + w + 1]! - lum[i - w + 1]!);
-      const e = Math.min(1, Math.hypot(gx, gy) * 3);
-      cand.push(i);
-      wts.push(0.12 + L * L * 1.6 + e * 2.4);
-    }
-  }
   const cum: number[] = [];
   let tot = 0;
-  for (const x of wts) { tot += x; cum.push(tot); }
+  for (let i = 0; i < w * h; i++) {
+    if (d[i * 4 + 3]! < 110) continue;
+    const L = (0.3 * d[i * 4]! + 0.59 * d[i * 4 + 1]! + 0.11 * d[i * 4 + 2]!) / 255;
+    tot += 0.3 + L * 1.5;
+    cand.push(i);
+    cum.push(tot);
+  }
   const R = rnd(7);
   const pos = new Float32Array(n * 3);
   const col = new Float32Array(n * 3);
-  const tint = o.tint ?? 0.35;
-  const tmp = new THREE.Color();
+  const sty = new Float32Array(n * 2);
   for (let k = 0; k < n; k++) {
     const r = R() * tot;
     let lo = 0;
@@ -155,33 +322,35 @@ async function sampleImage(url: string, n: number, o: { scale: number; ox?: numb
     const x = (i % w) + R() - 0.5;
     const y = Math.floor(i / w) + R() - 0.5;
     const L = (0.3 * d[i * 4]! + 0.59 * d[i * 4 + 1]! + 0.11 * d[i * 4 + 2]!) / 255;
-    pos[k * 3] = ((x - w / 2) / w) * o.scale + (o.ox || 0);
+    pos[k * 3] = ((x - w / 2) / w) * o.scale;
     pos[k * 3 + 1] = (-(y - h / 2) / w) * o.scale + (o.oy || 0);
-    pos[k * 3 + 2] = (L - 0.4) * (o.depth ?? 1.4) + (R() - 0.5) * 0.08;
-    tmp.setRGB(d[i * 4]! / 255, d[i * 4 + 1]! / 255, d[i * 4 + 2]! / 255);
-    tmp.lerp(L > 0.55 ? GOLD : BLUE, tint);
-    // lift the darks: deep-blue skin should glow, not vanish
-    const m = Math.max(tmp.r, tmp.g, tmp.b, 0.001);
-    const lift = Math.max(1.3, 0.55 / m);
-    col[k * 3] = tmp.r * lift;
-    col[k * 3 + 1] = tmp.g * lift;
-    col[k * 3 + 2] = tmp.b * lift;
+    pos[k * 3 + 2] = (L - 0.4) * (o.depth ?? 1.0);
+    const lift = Math.max(1.25, 0.5 / Math.max(0.05, Math.max(d[i * 4]!, d[i * 4 + 1]!, d[i * 4 + 2]!) / 255));
+    col[k * 3] = (d[i * 4]! / 255) * lift;
+    col[k * 3 + 1] = (d[i * 4 + 1]! / 255) * lift;
+    col[k * 3 + 2] = (d[i * 4 + 2]! / 255) * lift;
+    sty[k * 2] = R() * Math.PI;
+    sty[k * 2 + 1] = 0.7;
   }
-  return { pos, col };
+  return { pos, col, sty };
 }
 
-function build(n: number, fill: (i: number, R: () => number, p: THREE.Vector3, c: THREE.Color) => void, seed: number): Formation {
+function build(n: number, fill: (i: number, R: () => number, p: THREE.Vector3, c: THREE.Color, s: THREE.Vector2) => void, seed: number): Formation {
   const R = rnd(seed);
   const pos = new Float32Array(n * 3);
   const col = new Float32Array(n * 3);
+  const sty = new Float32Array(n * 2);
   const p = new THREE.Vector3();
   const c = new THREE.Color();
+  const s = new THREE.Vector2();
   for (let i = 0; i < n; i++) {
-    fill(i, R, p, c);
+    s.set(R() * Math.PI, 0.9);
+    fill(i, R, p, c, s);
     pos[i * 3] = p.x; pos[i * 3 + 1] = p.y; pos[i * 3 + 2] = p.z;
     col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+    sty[i * 2] = s.x; sty[i * 2 + 1] = s.y;
   }
-  return { pos, col };
+  return { pos, col, sty };
 }
 
 /** Where the parts of the cosmic body are, in formation space (for the labels). */
@@ -208,42 +377,49 @@ export class Cosmos {
   n: number;
   forms: Partial<Record<FormationName, Formation>> = {};
   current: FormationName = 'dust';
+  /** Which of the thousand names each stroke carries (0-based). */
+  names: Float32Array;
+  private wanted: FormationName = 'dust';
   private morphT = 1;
   private rotV = new THREE.Vector2();
   private rot = new THREE.Vector2();
-  private drag: { x: number; y: number } | null = null;
+  private drag: { x: number; y: number; moved: number } | null = null;
   private raf = 0;
   private last = performance.now();
   private burst = 0;
+  private stir = 0;
   hover = -1;
   onHover: ((i: number, x: number, y: number) => void) | null = null;
+  /** A stroke was clicked: which one, which name (0-based), and where. */
+  onPick: ((i: number, name: number, x: number, y: number) => void) | null = null;
   starsVisible = 0;
   private starsTarget = 0;
   private ray = new THREE.Raycaster();
   private mouseNdc = new THREE.Vector2(9, 9);
   camZ = 13;
-  /** How far right of centre the figure sits, as a fraction of the width (a text column is on the left). */
+  private camZT = 13;
   private shift = 0;
   private shiftT = 0;
   private wide = false;
   private vw = 1;
   private vh = 1;
-  private camZT = 13;
-  private camY = 0;
-  private camYT = 0;
 
-  constructor(canvas: HTMLCanvasElement, private base: string, low: boolean) {
+  constructor(canvas: HTMLCanvasElement, private base: string, low: boolean, theme: Theme = 'dawn') {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
     this.renderer.setPixelRatio(Math.min(low ? 1 : 1.75, window.devicePixelRatio || 1));
-    this.renderer.setClearColor('#01030d');
-    this.n = low ? 40000 : 110000;
+    this.setTheme(theme);
+    this.n = low ? 42000 : 90000;
     this.scene.add(this.group);
     this.camera.position.set(0, 0, 13);
     const geo = new THREE.BufferGeometry();
     const n = this.n;
     const seeds = new Float32Array(n);
+    this.names = new Float32Array(n);
     const R = rnd(3);
-    for (let i = 0; i < n; i++) seeds[i] = R();
+    for (let i = 0; i < n; i++) {
+      seeds[i] = R();
+      this.names[i] = Math.floor(R() * 1000);
+    }
     const dust = this.dust();
     this.forms.dust = dust;
     geo.setAttribute('position', new THREE.BufferAttribute(dust.pos.slice(), 3));
@@ -251,15 +427,20 @@ export class Cosmos {
     geo.setAttribute('aTo', new THREE.BufferAttribute(dust.pos.slice(), 3));
     geo.setAttribute('cFrom', new THREE.BufferAttribute(dust.col.slice(), 3));
     geo.setAttribute('cTo', new THREE.BufferAttribute(dust.col.slice(), 3));
+    geo.setAttribute('sFrom', new THREE.BufferAttribute(dust.sty.slice(), 2));
+    geo.setAttribute('sTo', new THREE.BufferAttribute(dust.sty.slice(), 2));
     geo.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 1));
+    geo.setAttribute('aName', new THREE.BufferAttribute(this.names, 1));
     geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 60);
     this.mat = new THREE.ShaderMaterial({
       vertexShader: VERT,
       fragmentShader: FRAG,
-      uniforms: { uT: { value: 1 }, uTime: { value: 0 }, uSize: { value: low ? 30 : 22 }, uBurst: { value: 0 }, uMouse: { value: new THREE.Vector2(9, 9) }, uAspect: { value: 1 }, uPx: { value: 1 } },
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      uniforms: {
+        uT: { value: 1 }, uTime: { value: 0 }, uSize: { value: low ? 190 : 150 }, uBurst: { value: 0 }, uMouse: { value: new THREE.Vector2(9, 9) },
+        uAspect: { value: 1 }, uPx: { value: 1 }, uPick: { value: -1 }, uStir: { value: 0 },
+      },
+      depthTest: true,
+      depthWrite: true,
     });
     this.points = new THREE.Points(geo, this.mat);
     this.group.add(this.points);
@@ -276,7 +457,7 @@ export class Cosmos {
       const a = arm * (Math.PI / 2) + r * 0.62;
       sp[i * 3] = Math.cos(a) * r + Math.sin(i * 7.1) * 0.18;
       sp[i * 3 + 1] = Math.sin(a) * r * 0.62 + Math.cos(i * 3.3) * 0.18;
-      sp[i * 3 + 2] = Math.sin(i * 1.7) * 0.5;
+      sp[i * 3 + 2] = Math.sin(i * 1.7) * 0.5 + 0.4;
       ss[i] = 0.06;
       si[i] = i;
       sc[i * 3] = 0.75; sc[i * 3 + 1] = 0.85; sc[i * 3 + 2] = 1.0;
@@ -291,16 +472,21 @@ export class Cosmos {
       uniforms: { uTime: { value: 0 }, uShow: { value: 0 }, uHover: { value: -1 }, uPx: { value: 1 } },
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      depthTest: false,
     });
     this.stars = new THREE.Points(sg, this.starMat);
     this.stars.visible = false;
+    this.stars.renderOrder = 2;
     this.group.add(this.stars);
     this.ray.params.Points = { threshold: 0.16 };
     window.addEventListener('pointerdown', this.down);
     window.addEventListener('pointermove', this.move);
     window.addEventListener('pointerup', this.up);
     this.raf = requestAnimationFrame(this.loop);
+  }
+
+  setTheme(t: Theme) {
+    this.renderer.setClearColor(THEME_BG[t]);
   }
 
   /** Colour the name-stars: gold for those with a reading, brighter where the search matches. */
@@ -310,80 +496,50 @@ export class Cosmos {
     for (let i = 0; i < 1000; i++) {
       const on = !match || match.has(i);
       const g = gold.has(i + 1);
-      const k = on ? 1 : 0.18;
-      c.setXYZ(i, (g ? 1.0 : 0.72) * k, (g ? 0.78 : 0.84) * k, (g ? 0.4 : 1.0) * k);
+      const k = on ? 1 : 0.25;
+      c.setXYZ(i, (g ? 1.0 : 0.85) * k, (g ? 0.72 : 0.9) * k, (g ? 0.25 : 1.0) * k);
       s.setX(i, (g ? 0.09 : 0.055) * (match && on ? 1.6 : 1));
     }
     c.needsUpdate = true;
     s.needsUpdate = true;
   }
 
+  /** Light up every stroke that carries this name (0-based), or none with -1. */
+  highlight(name: number) {
+    this.mat.uniforms.uPick!.value = name;
+  }
+
   async load() {
     const n = this.n;
-    const [face, hero] = await Promise.all([
-      sampleImage(this.base + 'gita-epic/img/k_face.webp', n, { scale: 5.4, oy: 0.1, depth: 1.3 }),
-      sampleImage(this.base + 'gita-epic/img/k_hero.webp', n, { scale: 5.8, oy: 0.2, depth: 1.0 }),
-    ]);
-    this.forms.face = face;
-    this.forms.hero = hero;
-    this.forms.arrows = this.arrows();
-    this.forms.lotus = this.lotus();
-    this.forms.body = this.body(hero);
-    this.forms.vishvarupa = this.vishvarupa(hero, face);
+    // the geometry formations first, so something is always ready
+    const bust = await sampleImage(this.base + 'gita-epic/img/k_hero.webp', n, { scale: 5.8, oy: 0.2, depth: 1.0 });
+    this.forms.body = this.body(bust);
     this.forms.galaxy = this.galaxy();
+    let seed = 11;
+    await paintPlates(this.base, (name, plate) => {
+      const f = samplePlate(plate, n, seed++);
+      for (const [k, v] of Object.entries(PLATE_OF)) if (v === name) this.forms[k as FormationName] = f;
+      if (this.wanted !== this.current) this.go(this.wanted);
+    });
   }
 
   private dust() {
-    return build(this.n, (_i, R, p, c) => {
-      const r = 6 + R() * 22;
+    return build(this.n, (_i, R, p, c, s) => {
+      // petals and gold leaf, drifting
+      const r = 5 + R() * 16;
       const a = R() * Math.PI * 2;
       const b = Math.acos(2 * R() - 1);
       p.set(Math.sin(b) * Math.cos(a) * r, Math.sin(b) * Math.sin(a) * r * 0.8, Math.cos(b) * r - 6);
-      c.copy(R() < 0.15 ? GOLD : BLUE).multiplyScalar(0.35 + R() * 0.5);
+      const pick = R();
+      c.copy(pick < 0.35 ? PINK : pick < 0.6 ? GOLD : pick < 0.8 ? BLUE : WHITE).multiplyScalar(0.7 + R() * 0.4);
+      s.set(R() * Math.PI, 0.8 + R() * 0.6);
     }, 1);
-  }
-
-  private arrows() {
-    // a field of arrow-shafts, all pointing up, with gold tips: a bed of arrows
-    const shafts = 260;
-    return build(this.n, (i, R, p, c) => {
-      const s = i % shafts;
-      const sx = ((s * 0.618) % 1) * 12 - 6 + Math.sin(s) * 0.2;
-      const sz = ((s * 0.382) % 1) * 6 - 3;
-      const lean = Math.sin(s * 3.1) * 0.25;
-      const t = R();
-      const len = 3.2 + Math.sin(s * 1.3) * 0.8;
-      const tip = t > 0.93;
-      p.set(sx + lean * t * len, -4 + t * len + (tip ? 0.1 : 0), sz);
-      if (t < 0.08) { p.x += (R() - 0.5) * 0.35; }
-      c.copy(tip ? GOLD : t < 0.1 ? WHITE : DEEP).multiplyScalar(tip ? 1.4 : 0.8);
-      if (R() < 0.25) { p.set((R() - 0.5) * 14, -4 + R() * 0.3, (R() - 0.5) * 6); c.copy(BLUE).multiplyScalar(0.4); }
-    }, 5);
-  }
-
-  private lotus() {
-    return build(this.n, (_i, R, p, c) => {
-      const ring = R() < 0.2 ? 0 : R() < 0.55 ? 1 : 2;
-      const petals = [8, 12, 16][ring]!;
-      const pi = Math.floor(R() * petals);
-      const base = (pi / petals) * Math.PI * 2 + ring * 0.2;
-      const u = R();
-      const v = R() * 2 - 1;
-      const len = [2.2, 3.4, 4.6][ring]!;
-      const lift = [1.6, 1.0, 0.4][ring]!;
-      const width = Math.sin(u * Math.PI) * 0.42 * (1 - u * 0.3);
-      const ang = base + v * width;
-      const r = u * len;
-      p.set(Math.cos(ang) * r, Math.sin(u * Math.PI * 0.9) * lift + u * lift * 0.6 - 1.5, Math.sin(ang) * r);
-      c.copy(u > 0.8 ? WHITE : ring === 0 ? GOLD : BLUE).lerp(DEEP, 1 - u).multiplyScalar(0.9);
-      if (R() < 0.08) { p.set((R() - 0.5) * 1.2, -1 + R() * 0.8, (R() - 0.5) * 1.2); c.copy(GOLD).multiplyScalar(1.3); }
-    }, 9);
   }
 
   /** The Dhyana shloka's body: the bust above, the worlds in the rest. */
   private body(hero: Formation) {
     const n = this.n;
-    const f = build(n, (i, R, p, c) => {
+    const f = build(n, (_i, R, p, c, s) => {
       const pick = R();
       if (pick < 0.45) {
         // the head and shoulders only; below them the worlds take over
@@ -391,6 +547,7 @@ export class Cosmos {
         for (let tries = 0; tries < 6 && hero.pos[j * 3 + 1]! < -2.2; tries++) j = Math.floor(R() * n);
         p.set(hero.pos[j * 3]! * 0.62, hero.pos[j * 3 + 1]! * 0.62 + 2.2, hero.pos[j * 3 + 2]! * 0.62);
         c.setRGB(hero.col[j * 3]!, hero.col[j * 3 + 1]!, hero.col[j * 3 + 2]!);
+        s.set(R() * Math.PI, 0.55);
         return;
       }
       if (pick < 0.62) {
@@ -399,6 +556,7 @@ export class Cosmos {
         const a = r * 5 + Math.floor(R() * 3) * 2.09;
         p.set(Math.cos(a) * r, -0.3 + Math.sin(a) * r * 0.5, 1.0 + (R() - 0.5) * 0.2);
         c.copy(WHITE).lerp(BLUE, r / 1.3);
+        s.set(-(a + Math.PI / 2), 0.8);
         return;
       }
       if (pick < 0.78) {
@@ -407,6 +565,7 @@ export class Cosmos {
         const y = -1.4 + Math.sin(x * 3 + R()) * 0.12 + (R() - 0.5) * 0.9;
         p.set(x, y, 0.4 + Math.cos(x) * 0.3);
         c.copy(DEEP).lerp(new THREE.Color('#2fb5c8'), R());
+        s.set((R() - 0.5) * 0.3, 1.1);
         return;
       }
       if (pick < 0.94) {
@@ -415,113 +574,66 @@ export class Cosmos {
         const b = Math.acos(2 * R() - 1);
         const r = 1.5;
         p.set(Math.sin(b) * Math.cos(a) * r, -4.4 + Math.cos(b) * r * 0.6, Math.sin(b) * Math.sin(a) * r * 0.5);
-        c.copy(new THREE.Color('#3a8a52')).lerp(new THREE.Color('#2a5ad8'), R() < 0.6 ? 1 : 0);
+        c.copy(new THREE.Color('#3a9a52')).lerp(new THREE.Color('#2a6ad8'), R() < 0.6 ? 1 : 0);
+        s.set(R() * Math.PI, 0.8);
         return;
       }
       // a column of starlight joining them
       const t = R();
       p.set((R() - 0.5) * (1.8 - t * 0.6), -3.2 + t * 4.4, (R() - 0.5) * 0.6);
-      c.copy(BLUE).multiplyScalar(0.5);
-      void i;
+      c.copy(GOLD).multiplyScalar(0.8);
+      s.set(Math.PI / 2 + (R() - 0.5) * 0.3, 1.0);
     }, 13);
     // the sun and the moon, as eyes
     for (let k = 0; k < 900; k++) {
       const i = Math.floor((k / 900) * n);
-      const s = k % 2 ? 1 : -1;
+      const sgn = k % 2 ? 1 : -1;
       const r = Math.sqrt(Math.random()) * 0.22;
       const a = Math.random() * Math.PI * 2;
-      f.pos[i * 3] = s * 0.36 + Math.cos(a) * r;
+      f.pos[i * 3] = sgn * 0.36 + Math.cos(a) * r;
       f.pos[i * 3 + 1] = 3.2 + Math.sin(a) * r;
       f.pos[i * 3 + 2] = 1.3;
-      const col = s > 0 ? GOLD : WHITE;
-      f.col[i * 3] = col.r * 1.6; f.col[i * 3 + 1] = col.g * 1.6; f.col[i * 3 + 2] = col.b * 1.6;
+      const col = sgn > 0 ? GOLD : WHITE;
+      f.col[i * 3] = col.r * 1.3; f.col[i * 3 + 1] = col.g * 1.3; f.col[i * 3 + 2] = col.b * 1.3;
+      f.sty[i * 2 + 1] = 0.45;
     }
     return f;
   }
 
-  /** Gita 11: many faces, many arms, weapons raised, the light of a thousand suns. */
-  private vishvarupa(hero: Formation, face: Formation) {
-    const n = this.n;
-    return build(n, (_i, R, p, c) => {
-      const pick = R();
-      if (pick < 0.36) {
-        const j = Math.floor(R() * n);
-        p.set(hero.pos[j * 3]! * 0.72, hero.pos[j * 3 + 1]! * 0.72 + 0.2, hero.pos[j * 3 + 2]! * 0.72 + 0.5);
-        c.setRGB(hero.col[j * 3]! * 1.2, hero.col[j * 3 + 1]! * 1.2, hero.col[j * 3 + 2]! * 1.2);
-        return;
-      }
-      if (pick < 0.54) {
-        // a ring of faces behind: “many mouths and eyes” (11.10)
-        const j = Math.floor(R() * n);
-        const k = Math.floor(R() * 10);
-        const a = (k / 10) * Math.PI * 2 + Math.PI / 2;
-        const s = 0.19;
-        p.set(face.pos[j * 3]! * s + Math.cos(a) * 4.4, face.pos[j * 3 + 1]! * s + Math.sin(a) * 3.3 + 1.0, face.pos[j * 3 + 2]! * s - 1.5);
-        c.setRGB(face.col[j * 3]!, face.col[j * 3 + 1]!, face.col[j * 3 + 2]!).lerp(GOLD, 0.35).multiplyScalar(1.1);
-        return;
-      }
-      if (pick < 0.82) {
-        // the arms, a fan of them, each with a bright hand
-        const k = Math.floor(R() * 36);
-        const a = (k / 36) * Math.PI * 2;
-        const t = Math.pow(R(), 0.8);
-        const r = 1.2 + t * 5.0;
-        const bend = Math.sin(t * Math.PI) * 0.25 * (k % 2 ? 1 : -1);
-        const w = (1 - t * 0.6) * 0.16;
-        p.set(Math.cos(a + bend) * r + (R() - 0.5) * w, Math.sin(a + bend) * r * 0.8 + 0.6 + (R() - 0.5) * w, -0.8 - t * 0.6);
-        c.copy(t > 0.92 ? GOLD : BLUE).lerp(WHITE, t * 0.4).multiplyScalar(t > 0.92 ? 1.6 : 0.8);
-        return;
-      }
-      if (pick < 0.92) {
-        // discus rings
-        const a = R() * Math.PI * 2;
-        const rr = [5.8, 6.6][Math.floor(R() * 2)]!;
-        p.set(Math.cos(a) * rr, Math.sin(a) * rr * 0.8 + 0.6, -2.2);
-        c.copy(GOLD).multiplyScalar(0.9);
-        return;
-      }
-      // a thousand suns
-      const a = R() * Math.PI * 2;
-      const rr = Math.pow(R(), 2) * 1.2;
-      p.set(Math.cos(a) * rr, Math.sin(a) * rr + 3.4, 0.2);
-      c.copy(WHITE).multiplyScalar(1.8);
-    }, 21);
-  }
-
   private galaxy() {
-    return build(this.n, (_i, R, p, c) => {
+    return build(this.n, (_i, R, p, c, s) => {
       const arm = Math.floor(R() * 4);
       const r = Math.pow(R(), 0.8) * 9;
       const a = arm * (Math.PI / 2) + r * 0.62 + (R() - 0.5) * (0.5 + r * 0.05);
-      p.set(Math.cos(a) * r + (R() - 0.5) * 0.4, Math.sin(a) * r * 0.62 + (R() - 0.5) * 0.4, (R() - 0.5) * (1.4 - r * 0.1));
-      c.copy(r < 1.4 ? GOLD : BLUE).lerp(DEEP, r / 12).multiplyScalar(0.55 + R() * 0.4);
+      p.set(Math.cos(a) * r + (R() - 0.5) * 0.4, Math.sin(a) * r * 0.62 + (R() - 0.5) * 0.4, (R() - 0.5) * (1.4 - r * 0.1) - 0.3);
+      c.copy(r < 1.4 ? GOLD : r < 4 ? BLUE : PINK).lerp(DEEP, r / 14).multiplyScalar(0.7 + R() * 0.4);
+      // strokes run round the spiral
+      s.set(-(a + Math.PI / 2), 0.9 + R() * 0.5);
     }, 17);
   }
 
   go(name: FormationName) {
+    this.wanted = name;
     const f = this.forms[name];
     if (!f || name === this.current) return;
     const geo = this.points.geometry;
-    // start from wherever the particles are now
+    // start from wherever the strokes are now
     const k = this.morphT;
-    const af = geo.getAttribute('aFrom') as THREE.BufferAttribute;
-    const at = geo.getAttribute('aTo') as THREE.BufferAttribute;
-    const cf = geo.getAttribute('cFrom') as THREE.BufferAttribute;
-    const ct = geo.getAttribute('cTo') as THREE.BufferAttribute;
     const blend = k >= 1 ? 1 : k <= 0 ? 0 : k;
-    for (let i = 0; i < af.array.length; i++) {
-      (af.array as Float32Array)[i] = (af.array as Float32Array)[i]! * (1 - blend) + (at.array as Float32Array)[i]! * blend;
-      (cf.array as Float32Array)[i] = (cf.array as Float32Array)[i]! * (1 - blend) + (ct.array as Float32Array)[i]! * blend;
+    for (const [fa, ta, src] of [['aFrom', 'aTo', f.pos], ['cFrom', 'cTo', f.col], ['sFrom', 'sTo', f.sty]] as const) {
+      const a = geo.getAttribute(fa) as THREE.BufferAttribute;
+      const b = geo.getAttribute(ta) as THREE.BufferAttribute;
+      const A = a.array as Float32Array;
+      const B = b.array as Float32Array;
+      for (let i = 0; i < A.length; i++) A[i] = A[i]! * (1 - blend) + B[i]! * blend;
+      B.set(src);
+      a.needsUpdate = b.needsUpdate = true;
     }
-    (at.array as Float32Array).set(f.pos);
-    (ct.array as Float32Array).set(f.col);
-    af.needsUpdate = at.needsUpdate = cf.needsUpdate = ct.needsUpdate = true;
     this.morphT = 0;
     this.current = name;
     this.starsTarget = name === 'galaxy' ? 1 : 0;
-    this.camZT = name === 'galaxy' ? 15 : name === 'body' ? 14.5 : name === 'vishvarupa' ? 18.5 : name === 'arrows' ? 12 : 13;
+    this.camZT = name === 'galaxy' ? 15 : name === 'body' ? 14.5 : name === 'dust' ? 13 : 14.2;
     this.aim();
-    this.camYT = name === 'body' ? 0 : 0;
   }
 
   /** Throw everything outward for a moment. */
@@ -530,27 +642,74 @@ export class Cosmos {
   private down = (e: PointerEvent) => {
     // a drag that starts on a control belongs to the control
     if ((e.target as HTMLElement | null)?.closest?.('button, input, a, [data-nodrag]')) return;
-    this.drag = { x: e.clientX, y: e.clientY };
+    this.drag = { x: e.clientX, y: e.clientY, moved: 0 };
   };
   private move = (e: PointerEvent) => {
     const r = this.renderer.domElement.getBoundingClientRect();
     this.mouseNdc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    this.stir = Math.min(1.2, this.stir + Math.hypot(e.movementX || 0, e.movementY || 0) * 0.004);
     if (this.drag) {
       this.rotV.x += (e.clientX - this.drag.x) * 0.0006;
       this.rotV.y += (e.clientY - this.drag.y) * 0.0004;
-      this.drag = { x: e.clientX, y: e.clientY };
+      this.drag.moved += Math.abs(e.clientX - this.drag.x) + Math.abs(e.clientY - this.drag.y);
+      this.drag.x = e.clientX;
+      this.drag.y = e.clientY;
     }
-    this.pick(e.clientX, e.clientY);
+    this.pickStar();
   };
-  private up = () => { this.drag = null; };
+  private up = (e: PointerEvent) => {
+    const d = this.drag;
+    this.drag = null;
+    if (!d || d.moved > 8) return;
+    if ((e.target as HTMLElement | null)?.closest?.('button, input, a, [data-nodrag], .vs-verse, .vs-card, .vs-reader, .vs-tip, .vs-name')) return;
+    if (this.starsVisible > 0.5 && this.hover >= 0) return;
+    const i = this.strokeAt(e.clientX, e.clientY);
+    if (i >= 0) {
+      const name = this.names[i]!;
+      this.highlight(name);
+      this.onPick?.(i, name, e.clientX, e.clientY);
+    }
+  };
 
-  private pick(x: number, y: number) {
-    if (this.starsVisible < 0.5) { if (this.hover !== -1) { this.hover = -1; this.onHover?.(-1, x, y); } return; }
+  /** The stroke under a screen point, nearest the eye, or -1. */
+  strokeAt(x: number, y: number) {
+    const r = this.renderer.domElement.getBoundingClientRect();
+    const A = (this.points.geometry.getAttribute('aTo') as THREE.BufferAttribute).array as Float32Array;
+    this.group.updateMatrixWorld();
+    const m = new THREE.Matrix4().multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse).multiply(this.group.matrixWorld);
+    const e = m.elements;
+    const px = ((x - r.left) / r.width) * 2 - 1;
+    const py = -((y - r.top) / r.height) * 2 + 1;
+    const tol = (14 / r.width) * 2;
+    let best = -1;
+    let bestScore = Infinity;
+    for (let i = 0; i < this.n; i++) {
+      const ax = A[i * 3]!;
+      const ay = A[i * 3 + 1]!;
+      const az = A[i * 3 + 2]!;
+      const w = e[3]! * ax + e[7]! * ay + e[11]! * az + e[15]!;
+      const cx = (e[0]! * ax + e[4]! * ay + e[8]! * az + e[12]!) / w;
+      const cy = (e[1]! * ax + e[5]! * ay + e[9]! * az + e[13]!) / w;
+      const dx = cx - px;
+      const dy = (cy - py) * (r.height / r.width);
+      const d2 = dx * dx + dy * dy;
+      if (d2 > tol * tol) continue;
+      const score = d2 / (tol * tol) + w * 0.02;
+      if (score < bestScore) { bestScore = score; best = i; }
+    }
+    return best;
+  }
+
+  private pickStar() {
+    const r = this.renderer.domElement.getBoundingClientRect();
+    const sx = ((this.mouseNdc.x + 1) / 2) * r.width + r.left;
+    const sy = ((1 - this.mouseNdc.y) / 2) * r.height + r.top;
+    if (this.starsVisible < 0.5) { if (this.hover !== -1) { this.hover = -1; this.onHover?.(-1, sx, sy); } return; }
     this.ray.setFromCamera(this.mouseNdc, this.camera);
     const hits = this.ray.intersectObject(this.stars, false);
     const i = hits.length ? hits[0]!.index! : -1;
     if (i !== this.hover) { this.hover = i; this.starMat.uniforms.uHover!.value = i; }
-    this.onHover?.(i, x, y);
+    this.onHover?.(i, sx, sy);
   }
 
   /** Project a formation-space point to the screen (for labels). */
@@ -567,7 +726,7 @@ export class Cosmos {
   }
 
   private aim() {
-    this.shiftT = this.wide && this.current !== 'hero' && this.current !== 'dust' ? 0.2 : 0;
+    this.shiftT = this.wide && this.current !== 'dust' ? 0.25 : 0;
   }
 
   resize(w: number, h: number) {
@@ -580,7 +739,7 @@ export class Cosmos {
     this.starMat.uniforms.uPx!.value = this.mat.uniforms.uPx!.value;
     this.camera.aspect = w / h;
     // keep the figure in frame on a tall phone
-    this.camera.fov = w < h ? 58 : 42;
+    this.camera.fov = w < h ? 60 : 42;
     this.camera.updateProjectionMatrix();
     this.mat.uniforms.uAspect!.value = w / h;
   }
@@ -594,10 +753,12 @@ export class Cosmos {
     // the morph and the burst keep wall-clock time even on a slow machine
     this.morphT = Math.min(1, this.morphT + real / 2.4);
     this.burst = Math.max(0, this.burst - real * 0.9);
+    this.stir = Math.max(0, this.stir - real * 0.8);
     this.mat.uniforms.uT!.value = this.morphT;
     this.mat.uniforms.uTime!.value = t;
     this.mat.uniforms.uBurst!.value = Math.sin(this.burst * Math.PI) * 0.9;
     this.mat.uniforms.uMouse!.value.copy(this.mouseNdc);
+    this.mat.uniforms.uStir!.value = this.stir;
     this.starsVisible += (this.starsTarget - this.starsVisible) * Math.min(1, dt * 2.5);
     this.stars.visible = this.starsVisible > 0.02;
     this.starMat.uniforms.uShow!.value = this.starsVisible;
@@ -608,17 +769,16 @@ export class Cosmos {
     this.rotV.multiplyScalar(0.92);
     this.rot.y *= 0.985;
     this.rot.x *= this.current === 'galaxy' ? 0.998 : 0.985;
-    this.group.rotation.y = this.rot.x + Math.sin(t * 0.15) * 0.12;
+    this.group.rotation.y = this.rot.x + Math.sin(t * 0.15) * 0.08;
     this.group.rotation.x = this.rot.y + (this.current === 'galaxy' ? -0.35 : 0);
     if (this.current === 'galaxy') this.group.rotation.z = t * 0.01;
     else this.group.rotation.z *= 0.97;
     this.camZ += (this.camZT - this.camZ) * Math.min(1, dt * 1.5);
-    this.camY += (this.camYT - this.camY) * Math.min(1, dt * 1.5);
     this.shift += (this.shiftT - this.shift) * Math.min(1, dt * 1.5);
     if (Math.abs(this.shift) > 0.001) this.camera.setViewOffset(this.vw, this.vh, -this.shift * this.vw, 0, this.vw, this.vh);
     else this.camera.clearViewOffset();
-    this.camera.position.set(0, this.camY, this.camZ);
-    this.camera.lookAt(0, this.camY, 0);
+    this.camera.position.set(0, 0, this.camZ);
+    this.camera.lookAt(0, 0, 0);
     this.renderer.render(this.scene, this.camera);
   };
 

@@ -1519,13 +1519,14 @@ cut was the user's own and is not in the repository.
 
 ## Vishnu Sahasranama
 
-A deep dive into the thousand names, told in starlight, after the look of
-trinetra.shivag.fyi. A hundred thousand particles behind an eight-chapter scroll
-story become Krishna's face, the bed of arrows Bhishma lay on, a lotus, the
-cosmic body of the Dhyana shloka and the Vishvarupa of Gita 11 — open the divine
-eye and it bursts — and then a galaxy whose thousand brightest stars are the
-thousand names, to hover, search and pin. The full stotram, in Devanagari with
-IAST, closes it.
+A deep dive into the thousand names, painted in moving brush strokes. Five
+original paintings — a fan of blue faces and arms, the bed of arrows at
+sundown, a lotus under a burning sky, the Universal Form with its serpent hoods,
+the Lord before a wheel of peacock feathers — become ninety thousand living
+strokes that breathe, ripple, swirl round your finger and pour from one picture
+into the next through an eight-chapter scroll story. Tap any stroke: it is one of
+the thousand names, and a card says which and what it means. Then a galaxy of
+the names to search, and the whole stotram. Dawn, dusk or night colours.
 
 [The long version.](docs/sahasranama.md)
 

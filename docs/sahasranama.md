@@ -23,21 +23,45 @@ Bhagavad Gita 11.
 | 06 | Names That Tell Stories | Krishna's bust | 47 names with a reading and a note; tap one to fly to its star |
 | 07 | The Stotram | drifting dust | the whole hymn — Purva Pithika, Dhyanam, the 110 verses of names, Phalashruti — in Devanagari with IAST on a toggle |
 
-## The particles
+## The paintings, in particles
 
-110,000 points on a desktop (40,000 on a phone or a modest machine, or with
-`?low` in the address), each carrying where it came from, where it is going and a seed. A
-vertex shader mixes the two with a stagger, so a change of formation pours
-rather than jumps and swirls on the way; the pointer pushes the stars aside; a
-drag turns the figure with inertia. The figure formations are sampled from the
-renders of the Krishna bust made for the Gita films: every lit pixel is a
-candidate, weighted by brightness and by edge strength so the eyes, brows,
-lips and the contours of the crown get more stars than a flat cheek, with
-brightness as depth. On a wide screen the figure stands to the right of a
-column of text; on a phone it stands behind the text.
+Five of the chapters are paintings (`painting.ts`), original compositions in
+the manner of contemporary devotional painting — swirling brush-stroke skies in
+saffron, rose and lilac, deep-blue skin, gold ornament, faceted lotuses:
 
-The thousand name-stars are a second, smaller cloud, raycast for hover. Gold
-stars are the names with a reading; a search dims everything else.
+| | plate | what is in it |
+| --- | --- | --- |
+| 00 | *faces* | a fan of nine faces on a turning mandala, fourteen arms with white-dotted skin and gold bands holding discus, conch, mace, lotus, bow and sword, a lotus on the chest, and in the belly a lit arch with a flute and a peacock feather |
+| 01 | *arrows* | the bed of arrows at sundown: a low sun, a purple field, Bhishma in white on the arrows, the brothers watching, one in yellow |
+| 02 | *lotus* | a sky burning in circles, a great faceted lotus, the blue Lord leaning in from the right |
+| 04 | *vishvarupa* | the Universal Form over Kurukshetra: seven serpent hoods, twelve arms with their weapons, gold pleats, a flying red scarf, a chariot very small on a far hill |
+| 06 | *portrait* | the Lord against a wheel of peacock feathers and a saffron sun, a marigold garland |
+
+They are painted at load time on a canvas, stroke by stroke, with a seeded
+hand; the faces are the Krishna busts rendered for the Gita films, set into the
+compositions and painted over. Every mark also goes into a depth canvas, so the
+layers stand apart when the picture turns.
+
+Then each plate becomes about 90,000 brush strokes (42,000 on a phone). A
+stroke takes its colour from the paint, its direction from the grain of the
+picture (a smoothed structure tensor, so strokes run along edges and round
+forms), its length from how busy the picture is there — long in the sky, short
+in a face — and its depth from the depth canvas. The shader draws each as a
+bristled, tapering dab with a dry, broken tail. The paint never quite dries:
+strokes breathe, a slow wind ripples through them along their own grain, the
+pointer stirs a vortex, and between chapters the strokes pour from one picture
+into the next. The cosmic body, the galaxy and the drifting petals of the last
+chapter are built from geometry the same way.
+
+**Every stroke is one of the thousand names.** Tap any stroke of paint and a
+card gives the name — its archana line in Devanagari and IAST, the name, and
+what it means — and every other stroke carrying that name lights up across the
+painting. The meanings of all thousand (`meanings.ts`) were written for this
+page after Shankara's commentary; `source/meanings.txt` is the list to edit,
+and `scripts/gen-sahasranama-meanings.py` rebuilds the module.
+
+Three colourings: **Dawn** (warm paper, the default), **Dusk** and **Night**,
+remembered on the device.
 
 ## Search
 
@@ -56,6 +80,6 @@ twice, at 187 and 539 — and *187* goes straight to the first.
   Swami (1935), public domain. `gita11.ts` is generated from it.
 - The readings of the names were written for this page after the traditional
   commentaries. They are short glosses, not a translation.
-- The particle figure: renders of Lee Perry-Smith's head scan (CC BY 3.0).
+- The paintings are original compositions made in code for this page; the faces in them are renders of Lee Perry-Smith's head scan (CC BY 3.0).
 - Type: Cinzel, Cormorant Garamond, Tiro Devanagari Sanskrit and Noto Serif
   Devanagari, SIL OFL.

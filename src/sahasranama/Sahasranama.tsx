@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BODY_ANCHORS, Cosmos, type FormationName } from './cosmos';
+import { BODY_ANCHORS, Cosmos, type FormationName, type Theme } from './cosmos';
 import { CURATED, NAMES, STOTRAM } from './data';
 import { GITA11 } from './gita11';
+import { MEANINGS } from './meanings';
 
 /**
  * Vishnu Sahasranama — a deep dive, in starlight.
@@ -89,6 +90,18 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
   const [eye, setEye] = useState(0);
   const [tab, setTab] = useState(0);
   const [iast, setIast] = useState(false);
+  const [picked, setPicked] = useState<{ n: number; x: number; y: number } | null>(null);
+  const [theme, setTheme] = useState<Theme>(() => {
+    try {
+      const t = window.localStorage.getItem('vs-theme');
+      if (t === 'dawn' || t === 'dusk' || t === 'night') return t;
+    } catch {
+      /* private mode: the default will do */
+    }
+    return 'dawn';
+  });
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   const low = useMemo(() => {
     const q = new URLSearchParams(window.location.search);
@@ -108,12 +121,13 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
   useEffect(() => {
     const c = canvasRef.current;
     if (!c) return;
-    const cos = new Cosmos(c, '/', low);
+    const cos = new Cosmos(c, '/', low, themeRef.current);
     cosmosRef.current = cos;
     const fit = () => cos.resize(window.innerWidth, window.innerHeight);
     fit();
     window.addEventListener('resize', fit);
     cos.onHover = (i, x, y) => setHover(i < 0 ? null : { i, x, y });
+    cos.onPick = (_i, name, x, y) => setPicked({ n: name + 1, x, y });
     cos.paintStars(GOLD, null);
     let alive = true;
     void cos.load().then(() => {
@@ -127,6 +141,20 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
       cosmosRef.current = null;
     };
   }, [low]);
+
+  useEffect(() => {
+    cosmosRef.current?.setTheme(theme);
+    try {
+      window.localStorage.setItem('vs-theme', theme);
+    } catch {
+      /* not remembered, no matter */
+    }
+  }, [theme]);
+
+  const closePick = () => {
+    setPicked(null);
+    cosmosRef.current?.highlight(-1);
+  };
 
   // scroll drives the chapter
   const onScroll = useCallback(() => {
@@ -221,13 +249,9 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
         <div className="vs-tip__num">Name {n} of 1000</div>
         <div className="vs-tip__deva">ॐ {row[1]} नमः</div>
         <div className="vs-tip__iast">oṃ {row[2]} namaḥ</div>
-        {c ? (
-          <>
-            <div className="vs-tip__name">{c.n}</div>
-            <div className="vs-tip__m">{c.m}</div>
-            {c.note ? <div className="vs-tip__note">{c.note}</div> : null}
-          </>
-        ) : null}
+        <div className="vs-tip__name">{c ? c.n : MEANINGS[n - 1]![0]}</div>
+        <div className="vs-tip__m">{c ? c.m : MEANINGS[n - 1]![1]}</div>
+        {c?.note ? <div className="vs-tip__note">{c.note}</div> : null}
       </>
     );
   };
@@ -244,7 +268,7 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
   };
 
   return (
-    <div className="vs" onClick={onClick}>
+    <div className="vs" data-theme={theme} onClick={onClick}>
       <canvas ref={canvasRef} className="vs__canvas" aria-hidden="true" />
       <div className="vs__veil" />
 
@@ -255,9 +279,31 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
         </button>
         <span>Vishnu Sahasranama</span>
       </div>
-      <div className="vs-chrome vs-chrome--tr" lang="sa">
-        ॐ नमो भगवते वासुदेवाय
+      <div className="vs-chrome vs-chrome--tr">
+        <span lang="sa">ॐ नमो भगवते वासुदेवाय</span>
+        <div className="vs-themes" role="group" aria-label="Colours">
+          {(['dawn', 'dusk', 'night'] as Theme[]).map((t) => (
+            <button key={t} className={t === theme ? 'on' : ''} onClick={() => setTheme(t)} aria-pressed={t === theme}>
+              {t}
+            </button>
+          ))}
+        </div>
       </div>
+      {picked ? (
+        <div
+          className="vs-tip vs-name"
+          style={{
+            left: Math.max(12, Math.min(picked.x + 18, window.innerWidth - 312)),
+            top: Math.max(60, Math.min(picked.y + 18, window.innerHeight - 280)),
+          }}
+        >
+          {card(picked.n)}
+          <div className="vs-tip__lit">Every stroke that carries this name is lit.</div>
+          <button className="vs-x" onClick={closePick} aria-label="Close">
+            ×
+          </button>
+        </div>
+      ) : null}
       <div className="vs-chrome vs-chrome--bl">
         <b>
           {pad(active)} <i>/</i> {pad(CHAPTERS.length - 1)}
@@ -322,6 +368,7 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
             A dying warrior, a grieving king, and a question the whole war could not answer. Bhishma's reply was a list — a
             thousand names for one God — and it has been recited, every morning, somewhere, for two thousand years.
           </p>
+          <p className="vs-hint">Every stroke of paint here is one of the thousand names. Touch one.</p>
           <div className="vs-awaken">
             <span>Scroll to awaken</span>
             <i />

@@ -402,10 +402,10 @@ export const EFFECTS: EffectDef[] = [
   {
     id: 'sahasranama',
     name: 'Vishnu Sahasranama',
-    tagline: 'A deep dive into the thousand names of Vishnu, told in starlight: the bed of arrows, the cosmic body, the Vishvarupa, and a galaxy of a thousand touchable names.',
+    tagline: 'A deep dive into the thousand names of Vishnu, painted in moving brush strokes — and every stroke is a name you can tap.',
     blurb:
-      'A hundred thousand particles behind a scroll story in eight chapters. They gather into Krishna\'s face, fall into the bed of arrows where Bhishma lay, open as a lotus for his answer, and become the Dhyana shloka\'s cosmic body — earth His feet, sky His navel, sun and moon His eyes, each part labelled on the stars. Then Gita 11: open the divine eye and the Universal Form bursts out — many faces, a fan of arms, the light of a thousand suns — a verse at a time. The thousand names become a spiral galaxy, one star per name in recitation order: hover to read, search in English or Devanagari, tap a story card to find its star. The whole stotram, all 191 verses with IAST, closes it.',
-    spec: ['three.js · 110k particles, 8 formations', '1000 name-stars, search & readings', 'the full stotram, Devanagari + IAST'],
+      'Five original paintings — a fan of blue faces and arms on a mandala, the bed of arrows at sundown, a lotus under a burning sky, the Universal Form with its serpent hoods and weapons, the Lord before a wheel of peacock feathers — each turned into ninety thousand living brush strokes that breathe, ripple and swirl round your finger, and pour from one picture into the next as you scroll the story: Bhishma\'s answer, the cosmic body of the Dhyana shloka, the Vishvarupa of Gita 11. Tap any stroke and it tells you which of the thousand names it is and what that name means, and lights every other stroke that carries it. Then a galaxy of the thousand names to search, and the whole stotram. Dawn, dusk or night colours.',
+    spec: ['three.js · 90k brush-stroke particles', 'five paintings, painted in code', '1000 names, each with its meaning'],
     ink: '#d9b566',
     wash: 'rgba(217, 181, 102, 0.12)',
   },
