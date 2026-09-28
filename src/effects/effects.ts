@@ -402,10 +402,10 @@ export const EFFECTS: EffectDef[] = [
   {
     id: 'sahasranama',
     name: 'Vishnu Sahasranama',
-    tagline: 'A deep dive into the thousand names of Vishnu, painted in moving brush strokes — and every stroke is a name you can tap.',
+    tagline: 'A deep dive into the thousand names of Vishnu, told through devotional paintings in moving brush strokes — and every stroke is a name you can tap.',
     blurb:
-      'Five original paintings — a fan of blue faces and arms on a mandala, the bed of arrows at sundown, a lotus under a burning sky, the Universal Form with its serpent hoods and weapons, the Lord before a wheel of peacock feathers — each turned into ninety thousand living brush strokes that breathe, ripple and swirl round your finger, and pour from one picture into the next as you scroll the story: Bhishma\'s answer, the cosmic body of the Dhyana shloka, the Vishvarupa of Gita 11. Tap any stroke and it tells you which of the thousand names it is and what that name means, and lights every other stroke that carries it. Then a galaxy of the thousand names to search, and the whole stotram. Dawn, dusk or night colours.',
-    spec: ['three.js · 90k brush-stroke particles', 'five paintings, painted in code', '1000 names, each with its meaning'],
+      'Four devotional paintings — the many-faced blue Vishvarupa with Krishna within, the Lord of fire and lotus over Brahma and Vishnu, the Universal Form towering over Arjuna, the three faces of the Trimurti — plus the bed of arrows at sundown, each turned into a hundred thousand living brush strokes that breathe, ripple, swirl round your finger and pour from one picture into the next as you scroll the story: Bhishma\'s answer, the cosmic body of the Dhyana shloka, the Vishvarupa of Gita 11. Tap any stroke and it tells you which of the thousand names it is and what that name means, and lights every other stroke that carries it. Then a galaxy of the thousand names to search, and the whole stotram. Dawn, dusk or night colours.',
+    spec: ['three.js · 140k brush-stroke particles', 'four chosen paintings, alive', '1000 names, each with its meaning'],
     ink: '#d9b566',
     wash: 'rgba(217, 181, 102, 0.12)',
   },

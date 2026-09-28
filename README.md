@@ -1519,10 +1519,10 @@ cut was the user's own and is not in the repository.
 
 ## Vishnu Sahasranama
 
-A deep dive into the thousand names, painted in moving brush strokes. Five
-original paintings — a fan of blue faces and arms, the bed of arrows at
-sundown, a lotus under a burning sky, the Universal Form with its serpent hoods,
-the Lord before a wheel of peacock feathers — become ninety thousand living
+A deep dive into the thousand names, told through devotional paintings in
+moving brush strokes. Four paintings — the many-faced blue Vishvarupa with
+Krishna within, the Lord of fire and lotus, the Universal Form over Arjuna, the
+Trimurti — and a bed of arrows at sundown become a hundred thousand living
 strokes that breathe, ripple, swirl round your finger and pour from one picture
 into the next through an eight-chapter scroll story. Tap any stroke: it is one of
 the thousand names, and a card says which and what it means. Then a galaxy of

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { PLATE_H, paintPlates, type Plate, type PlateName } from './painting';
+import { cropTop, paintPlates, type Plate, type PlateName } from './painting';
 
 /**
  * The cosmos: one cloud of brush strokes that paints one picture after another.
@@ -160,8 +160,6 @@ const GOLD = new THREE.Color('#ffbf4a');
 const WHITE = new THREE.Color('#f4f0ff');
 const PINK = new THREE.Color('#ef5a8e');
 
-/** Plate pixels to world units: the plate is ten units tall, centred. */
-const UNIT = 10 / PLATE_H;
 
 /**
  * Turn a painted plate into strokes. Each stroke lands on a pixel, chosen more
@@ -172,6 +170,8 @@ const UNIT = 10 / PLATE_H;
  */
 function samplePlate(p: Plate, n: number, seed: number): Formation {
   const { w, h, rgba, depth } = p;
+  // plate pixels to world units: every picture is ten units tall, centred
+  const UNIT = 10 / h;
   // the grain, at half size: a structure tensor, smoothed
   const hw = w >> 1;
   const hh = h >> 1;
@@ -237,7 +237,7 @@ function samplePlate(p: Plate, n: number, seed: number): Formation {
       const g = rgba[i * 4 + 1]!;
       const b = rgba[i * 4 + 2]!;
       const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
-      tot += (0.35 + edgeAt(x, y) * 1.8 + sat * 0.4 + (depth[i]! / 255) * 0.6) * fx * fy;
+      tot += (0.9 + edgeAt(x, y) * 1.3 + sat * 0.3 + (depth[i]! / 255) * 0.4) * fx * fy;
       wts[i] = tot;
     }
   }
@@ -288,53 +288,6 @@ function samplePlate(p: Plate, n: number, seed: number): Formation {
   return { pos, col, sty };
 }
 
-/** Sample a picture into strokes by its alpha (for the bust inside the cosmic body). */
-async function sampleImage(url: string, n: number, o: { scale: number; oy?: number; depth?: number }): Promise<Formation> {
-  const im = await new Promise<HTMLImageElement>((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url; });
-  const w = 360;
-  const h = Math.round((w * im.height) / im.width);
-  const c = document.createElement('canvas');
-  c.width = w;
-  c.height = h;
-  const g = c.getContext('2d', { willReadFrequently: true })!;
-  g.drawImage(im, 0, 0, w, h);
-  const d = g.getImageData(0, 0, w, h).data;
-  const cand: number[] = [];
-  const cum: number[] = [];
-  let tot = 0;
-  for (let i = 0; i < w * h; i++) {
-    if (d[i * 4 + 3]! < 110) continue;
-    const L = (0.3 * d[i * 4]! + 0.59 * d[i * 4 + 1]! + 0.11 * d[i * 4 + 2]!) / 255;
-    tot += 0.3 + L * 1.5;
-    cand.push(i);
-    cum.push(tot);
-  }
-  const R = rnd(7);
-  const pos = new Float32Array(n * 3);
-  const col = new Float32Array(n * 3);
-  const sty = new Float32Array(n * 2);
-  for (let k = 0; k < n; k++) {
-    const r = R() * tot;
-    let lo = 0;
-    let hi = cum.length - 1;
-    while (lo < hi) { const mid = (lo + hi) >> 1; if (cum[mid]! < r) lo = mid + 1; else hi = mid; }
-    const i = cand[lo]!;
-    const x = (i % w) + R() - 0.5;
-    const y = Math.floor(i / w) + R() - 0.5;
-    const L = (0.3 * d[i * 4]! + 0.59 * d[i * 4 + 1]! + 0.11 * d[i * 4 + 2]!) / 255;
-    pos[k * 3] = ((x - w / 2) / w) * o.scale;
-    pos[k * 3 + 1] = (-(y - h / 2) / w) * o.scale + (o.oy || 0);
-    pos[k * 3 + 2] = (L - 0.4) * (o.depth ?? 1.0);
-    const lift = Math.max(1.25, 0.5 / Math.max(0.05, Math.max(d[i * 4]!, d[i * 4 + 1]!, d[i * 4 + 2]!) / 255));
-    col[k * 3] = (d[i * 4]! / 255) * lift;
-    col[k * 3 + 1] = (d[i * 4 + 1]! / 255) * lift;
-    col[k * 3 + 2] = (d[i * 4 + 2]! / 255) * lift;
-    sty[k * 2] = R() * Math.PI;
-    sty[k * 2 + 1] = 0.7;
-  }
-  return { pos, col, sty };
-}
-
 function build(n: number, fill: (i: number, R: () => number, p: THREE.Vector3, c: THREE.Color, s: THREE.Vector2) => void, seed: number): Formation {
   const R = rnd(seed);
   const pos = new Float32Array(n * 3);
@@ -355,11 +308,11 @@ function build(n: number, fill: (i: number, R: () => number, p: THREE.Vector3, c
 
 /** Where the parts of the cosmic body are, in formation space (for the labels). */
 export const BODY_ANCHORS: [string, string, string, THREE.Vector3][] = [
-  ['dyauḥ', 'heaven', 'His head', new THREE.Vector3(0, 4.3, 0.5)],
-  ['candra-sūryau', 'the moon and the sun', 'His eyes', new THREE.Vector3(0.0, 3.2, 1.2)],
-  ['āśāḥ', 'the directions', 'His ears', new THREE.Vector3(-1.1, 2.9, 0.6)],
-  ['dahanaḥ', 'fire', 'His mouth', new THREE.Vector3(0, 2.55, 1.2)],
-  ['anilaḥ', 'the wind', 'His breath', new THREE.Vector3(1.3, 2.2, 0.8)],
+  ['dyauḥ', 'heaven', 'His head', new THREE.Vector3(0, 4.6, 0.5)],
+  ['candra-sūryau', 'the moon and the sun', 'His eyes', new THREE.Vector3(0.0, 3.7, 1.2)],
+  ['āśāḥ', 'the directions', 'His ears', new THREE.Vector3(-1.6, 3.3, 0.6)],
+  ['dahanaḥ', 'fire', 'His mouth', new THREE.Vector3(0, 3.1, 1.2)],
+  ['anilaḥ', 'the wind', 'His breath', new THREE.Vector3(1.6, 2.6, 0.8)],
   ['viyat', 'the sky', 'His navel', new THREE.Vector3(0, -0.3, 1.1)],
   ['abdhiḥ', 'the ocean', 'His belly', new THREE.Vector3(-1.2, -1.0, 0.8)],
   ['bhūḥ', 'the earth', 'His feet', new THREE.Vector3(0, -4.2, 0.6)],
@@ -380,6 +333,8 @@ export class Cosmos {
   /** Which of the thousand names each stroke carries (0-based). */
   names: Float32Array;
   private wanted: FormationName = 'dust';
+  /** A softened copy of each painting, behind its strokes, so no page shows through the gaps. */
+  private under = new Map<FormationName, THREE.Mesh>();
   private morphT = 1;
   private rotV = new THREE.Vector2();
   private rot = new THREE.Vector2();
@@ -408,7 +363,7 @@ export class Cosmos {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
     this.renderer.setPixelRatio(Math.min(low ? 1 : 1.75, window.devicePixelRatio || 1));
     this.setTheme(theme);
-    this.n = low ? 42000 : 90000;
+    this.n = low ? 60000 : 140000;
     this.scene.add(this.group);
     this.camera.position.set(0, 0, 13);
     const geo = new THREE.BufferGeometry();
@@ -436,7 +391,7 @@ export class Cosmos {
       vertexShader: VERT,
       fragmentShader: FRAG,
       uniforms: {
-        uT: { value: 1 }, uTime: { value: 0 }, uSize: { value: low ? 190 : 150 }, uBurst: { value: 0 }, uMouse: { value: new THREE.Vector2(9, 9) },
+        uT: { value: 1 }, uTime: { value: 0 }, uSize: { value: low ? 150 : 118 }, uBurst: { value: 0 }, uMouse: { value: new THREE.Vector2(9, 9) },
         uAspect: { value: 1 }, uPx: { value: 1 }, uPick: { value: -1 }, uStir: { value: 0 },
       },
       depthTest: true,
@@ -511,16 +466,53 @@ export class Cosmos {
 
   async load() {
     const n = this.n;
-    // the geometry formations first, so something is always ready
-    const bust = await sampleImage(this.base + 'gita-epic/img/k_hero.webp', n, { scale: 5.8, oy: 0.2, depth: 1.0 });
-    this.forms.body = this.body(bust);
+    // the geometry first, so something is always ready
     this.forms.galaxy = this.galaxy();
     let seed = 11;
     await paintPlates(this.base, (name, plate) => {
       const f = samplePlate(plate, n, seed++);
-      for (const [k, v] of Object.entries(PLATE_OF)) if (v === name) this.forms[k as FormationName] = f;
+      const under = this.underpaint(plate);
+      for (const [k, v] of Object.entries(PLATE_OF)) if (v === name) { this.forms[k as FormationName] = f; this.under.set(k as FormationName, under); }
+      // the cosmic body wears the crown of heads from the many-faced painting
+      if (name === 'faces') this.forms.body = this.body(samplePlate(cropTop(plate, 0.55), n, 99));
       if (this.wanted !== this.current) this.go(this.wanted);
     });
+  }
+
+  /** The softened copy: blurred, feathered at its edges, set just behind the deepest strokes. */
+  private underpaint(p: Plate) {
+    const c = document.createElement('canvas');
+    c.width = p.w;
+    c.height = p.h;
+    const g = c.getContext('2d')!;
+    const raw = document.createElement('canvas');
+    raw.width = p.w;
+    raw.height = p.h;
+    const im = raw.getContext('2d')!.createImageData(p.w, p.h);
+    im.data.set(p.rgba);
+    raw.getContext('2d')!.putImageData(im, 0, 0);
+    g.filter = 'blur(5px) saturate(1.1)';
+    g.drawImage(raw, 0, 0);
+    g.filter = 'none';
+    // feather the edges so the picture dissolves like the strokes do
+    g.globalCompositeOperation = 'destination-in';
+    const f = Math.min(p.w, p.h) * 0.09;
+    const gx = g.createLinearGradient(0, 0, p.w, 0);
+    gx.addColorStop(0, 'rgba(0,0,0,0)'); gx.addColorStop(f / p.w, 'rgba(0,0,0,1)'); gx.addColorStop(1 - f / p.w, 'rgba(0,0,0,1)'); gx.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gx;
+    g.fillRect(0, 0, p.w, p.h);
+    const gy = g.createLinearGradient(0, 0, 0, p.h);
+    gy.addColorStop(0, 'rgba(0,0,0,0)'); gy.addColorStop(f / p.h, 'rgba(0,0,0,1)'); gy.addColorStop(1 - f / p.h, 'rgba(0,0,0,1)'); gy.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gy;
+    g.fillRect(0, 0, p.w, p.h);
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry((10 * p.w) / p.h, 10), new THREE.MeshBasicMaterial({ map: t, transparent: true, opacity: 0, depthWrite: false }));
+    m.position.z = -1.3;
+    m.renderOrder = -1;
+    m.visible = false;
+    this.group.add(m);
+    return m;
   }
 
   private dust() {
@@ -536,18 +528,17 @@ export class Cosmos {
     }, 1);
   }
 
-  /** The Dhyana shloka's body: the bust above, the worlds in the rest. */
+  /** The Dhyana shloka's body: the crown of heads above, the worlds in the rest. */
   private body(hero: Formation) {
     const n = this.n;
     const f = build(n, (_i, R, p, c, s) => {
       const pick = R();
       if (pick < 0.45) {
-        // the head and shoulders only; below them the worlds take over
-        let j = Math.floor(R() * n);
-        for (let tries = 0; tries < 6 && hero.pos[j * 3 + 1]! < -2.2; tries++) j = Math.floor(R() * n);
-        p.set(hero.pos[j * 3]! * 0.62, hero.pos[j * 3 + 1]! * 0.62 + 2.2, hero.pos[j * 3 + 2]! * 0.62);
+        // the heads; below them the worlds take over
+        const j = Math.floor(R() * n);
+        p.set(hero.pos[j * 3]! * 0.5, hero.pos[j * 3 + 1]! * 0.5 + 2.4, hero.pos[j * 3 + 2]! * 0.5);
         c.setRGB(hero.col[j * 3]!, hero.col[j * 3 + 1]!, hero.col[j * 3 + 2]!);
-        s.set(R() * Math.PI, 0.55);
+        s.set(hero.sty[j * 2]!, hero.sty[j * 2 + 1]! * 0.7);
         return;
       }
       if (pick < 0.62) {
@@ -591,7 +582,7 @@ export class Cosmos {
       const r = Math.sqrt(Math.random()) * 0.22;
       const a = Math.random() * Math.PI * 2;
       f.pos[i * 3] = sgn * 0.36 + Math.cos(a) * r;
-      f.pos[i * 3 + 1] = 3.2 + Math.sin(a) * r;
+      f.pos[i * 3 + 1] = 3.7 + Math.sin(a) * r;
       f.pos[i * 3 + 2] = 1.3;
       const col = sgn > 0 ? GOLD : WHITE;
       f.col[i * 3] = col.r * 1.3; f.col[i * 3 + 1] = col.g * 1.3; f.col[i * 3 + 2] = col.b * 1.3;
@@ -632,7 +623,7 @@ export class Cosmos {
     this.morphT = 0;
     this.current = name;
     this.starsTarget = name === 'galaxy' ? 1 : 0;
-    this.camZT = name === 'galaxy' ? 15 : name === 'body' ? 14.5 : name === 'dust' ? 13 : 14.2;
+    this.camZT = name === 'galaxy' ? 15 : name === 'body' ? 14.5 : name === 'dust' ? 13 : name === 'hero' ? 19 : 14.2;
     this.aim();
   }
 
@@ -726,7 +717,7 @@ export class Cosmos {
   }
 
   private aim() {
-    this.shiftT = this.wide && this.current !== 'dust' ? 0.25 : 0;
+    this.shiftT = this.wide && this.current !== 'dust' ? (this.current === 'hero' ? 0.3 : 0.25) : 0;
   }
 
   resize(w: number, h: number) {
@@ -760,6 +751,12 @@ export class Cosmos {
     this.mat.uniforms.uMouse!.value.copy(this.mouseNdc);
     this.mat.uniforms.uStir!.value = this.stir;
     this.starsVisible += (this.starsTarget - this.starsVisible) * Math.min(1, dt * 2.5);
+    for (const [name, m] of this.under) {
+      const mat = m.material as THREE.MeshBasicMaterial;
+      const target = name === this.current && this.morphT > 0.55 ? 0.92 : 0;
+      mat.opacity += (target - mat.opacity) * Math.min(1, real * (target > 0 ? 1.6 : 4));
+      m.visible = mat.opacity > 0.01;
+    }
     this.stars.visible = this.starsVisible > 0.02;
     this.starMat.uniforms.uShow!.value = this.starsVisible;
     this.starMat.uniforms.uTime!.value = t;
