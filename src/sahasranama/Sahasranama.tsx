@@ -618,7 +618,7 @@ export function Sahasranama({ onExit }: { onExit: () => void }) {
               are glosses, not a translation.
             </p>
             <p>
-              The four paintings brought to life here are devotional artworks by other artists, used with thanks; the bed of
+              The four paintings brought to life here are public-domain photographs of devotional art; the bed of
               arrows is painted in code for this page. Type: Cinzel, Cormorant Garamond, Tiro Devanagari Sanskrit and Noto Serif Devanagari (SIL OFL). Design
               after trinetra.shivag.fyi.
             </p>

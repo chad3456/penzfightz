@@ -1,8 +1,8 @@
 /**
  * The pictures the cosmos is made of.
  *
- * Four of them are paintings the site's owner chose — devotional artworks by
- * other artists (see public/sahasranama/art/README.md) — loaded as images and
+ * Four of them are paintings the site's owner chose — public-domain
+ * photographs of devotional art (see public/sahasranama/art/README.md) — loaded as images and
  * turned into plates: the colour as it is, and a depth layer guessed from the
  * picture itself (brighter, more saturated and more central reads as nearer),
  * so that the strokes stand apart a little when the picture turns.

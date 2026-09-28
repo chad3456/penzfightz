@@ -25,9 +25,9 @@ Bhagavad Gita 11.
 
 ## The paintings, in particles
 
-Four chapters are devotional paintings chosen by the site's owner, by other
-artists (credited in `public/sahasranama/art/README.md`); the fifth is painted
-in code:
+Four chapters are devotional paintings chosen by the site's owner —
+public-domain photographs, listed in `public/sahasranama/art/README.md`; the
+fifth is painted in code:
 
 | | chapter | painting |
 | --- | --- | --- |
@@ -81,6 +81,6 @@ twice, at 187 and 539 — and *187* goes straight to the first.
   Swami (1935), public domain. `gita11.ts` is generated from it.
 - The readings of the names were written for this page after the traditional
   commentaries. They are short glosses, not a translation.
-- The four paintings are other artists' work, supplied by the site's owner — see `public/sahasranama/art/README.md`. The bed of arrows is painted in code for this page.
+- The four paintings are public-domain photographs supplied by the site's owner — see `public/sahasranama/art/README.md`. The bed of arrows is painted in code for this page.
 - Type: Cinzel, Cormorant Garamond, Tiro Devanagari Sanskrit and Noto Serif
   Devanagari, SIL OFL.
