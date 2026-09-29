@@ -42,7 +42,8 @@ export type EffectId =
   | 'gitareel'
   | 'gitaepic'
   | 'sahasranama'
-  | 'shivaloka';
+  | 'shivaloka'
+  | 'hiddengirl';
 
 export interface EffectDef {
   id: EffectId;
@@ -419,6 +420,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · ink-wash post-process', '111 shrines · 8 kinds of task', 'stories retold, with sources'],
     ink: '#c8901c',
     wash: 'rgba(200, 144, 28, 0.12)',
+  },
+  {
+    id: 'hiddengirl',
+    name: 'The Hidden Girl',
+    tagline: 'Ken Liu\'s stories told as games you scroll through. First, "Ghost Days": a story built like a recursive function, played down the call stack from 2313 to 1905 and back.',
+    blurb:
+      'The stories of The Hidden Girl and Other Stories, retold one at a time in the look of a landscape architect\'s presentation board: pale greens, stipple, meadows of lavender and yarrow, faceless white figures. The camera zooms through painted dioramas as you scroll, and a narrator tells you the story. The first is "Ghost Days", three stories nested like the Fibonacci function on a colony classroom\'s board, joined by one bronze spade coin. Ona, a girl engineered for a poisonous planet, finds it in the steam of an alien ruin in 2313. Fred Ho, an undocumented boy in a Reagan mask, carries it to a Halloween dinner in Connecticut in 1989. William, home from English school for the Hungry Ghost Festival in Hong Kong in 1905, finds his father forging it. You rub the patina off the coin, hold down to lift the masks people wear, and trace the stroke that turns 宇 (the universe) into 字 (writing). Two choices come back at the end, when the coin shows every mark three centuries have cut into it.',
+    spec: ['three.js dioramas · GSAP · Lenis', 'rub, hold, trace · two choices', 'a retelling in our own words'],
+    ink: '#7fae63',
+    wash: 'rgba(127, 174, 99, 0.12)',
   },
 ];
 

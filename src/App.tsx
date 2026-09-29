@@ -45,6 +45,7 @@ import { Nightwalkers } from './nightwalkers/Nightwalkers';
 import { Diary, Fermi, GitaEpic, GitaReel, MarauderMap, RamayanaAnime, Sindoor } from './fermi/Fermi';
 import { Sahasranama } from './sahasranama/Sahasranama';
 import { ShivaLoka } from './shivaloka/ShivaLoka';
+import { HiddenGirl } from './hiddengirl/HiddenGirl';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -255,6 +256,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'shivaloka') {
     return <ShivaLoka onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'hiddengirl') {
+    return <HiddenGirl onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

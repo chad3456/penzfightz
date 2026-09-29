@@ -1551,6 +1551,25 @@ temple rises again in a time-lapse of its history. Keyboard or a thumb stick.
 
 [The long version.](docs/shivaloka.md)
 
+## The Hidden Girl
+
+Ken Liu's stories retold as games you scroll through, drawn like a landscape
+architect's presentation board: pale greens, stipple, meadows and faceless
+white figures. A narrator tells you the story in our own words, and the
+camera zooms down into painted dioramas as you scroll.
+
+The first is "Ghost Days". It is built like the recursive Fibonacci function
+on a colony classroom's board, so the scroll runs down the call stack from
+2313 to 1989 to 1905 and back, following one bronze spade coin. You interact
+in three ways:
+- **rub** its patina away;
+- **hold** to lift the masks people wear;
+- **trace** the one stroke that turns 宇 (the universe) into 字 (writing).
+
+The coin keeps every mark the centuries cut into it.
+
+[The long version.](docs/hidden-girl.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the
