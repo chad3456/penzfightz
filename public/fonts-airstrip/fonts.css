@@ -1,0 +1,5 @@
+/* Open Font License faces, from @fontsource: Fredoka (display) and Nunito (text). */
+@font-face { font-family: 'Fredoka'; font-weight: 600; font-display: swap; src: url('fredoka-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fredoka'; font-weight: 700; font-display: swap; src: url('fredoka-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Nunito'; font-weight: 500; font-display: swap; src: url('nunito-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Nunito'; font-weight: 700; font-display: swap; src: url('nunito-latin-700-normal.woff2') format('woff2'); }

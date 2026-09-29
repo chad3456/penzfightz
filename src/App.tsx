@@ -46,6 +46,7 @@ import { Diary, Fermi, GitaEpic, GitaReel, MarauderMap, RamayanaAnime, Sindoor }
 import { Sahasranama } from './sahasranama/Sahasranama';
 import { ShivaLoka } from './shivaloka/ShivaLoka';
 import { HiddenGirl } from './hiddengirl/HiddenGirl';
+import { Airstrip } from './airstrip/Airstrip';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -259,6 +260,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'hiddengirl') {
     return <HiddenGirl onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'airstrip') {
+    return <Airstrip onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

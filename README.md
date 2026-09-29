@@ -1570,6 +1570,22 @@ The coin keeps every mark the centuries cut into it.
 
 [The long version.](docs/hidden-girl.md)
 
+## Airstrip One
+
+A game after *Nineteen Eighty-Four*, in the look of *Don't Look Up*: you are
+the Party. A square of little white citizens works under Big Brother's
+hoarding, and every coin they earn flies up to the Ministries. Push the quota
+past the red line and they start to think: they turn yellow, look up, stop
+working and set their neighbours thinking. Hold them with:
+- the Two Minutes Hate, Victory Gin and the Lottery;
+- telescreens, Junior Spies, Records Desks and Newspeak Dictionaries;
+- the van.
+
+Survive the year: the diary, the chocolate ration, Julia's note, the change of
+enemy, Hate Week, and Room 101.
+
+[The long version.](docs/airstrip-one.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

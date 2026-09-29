@@ -43,7 +43,8 @@ export type EffectId =
   | 'gitaepic'
   | 'sahasranama'
   | 'shivaloka'
-  | 'hiddengirl';
+  | 'hiddengirl'
+  | 'airstrip';
 
 export interface EffectDef {
   id: EffectId;
@@ -430,6 +431,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js dioramas · GSAP · Lenis', 'rub, hold, trace · two choices', 'a retelling in our own words'],
     ink: '#7fae63',
     wash: 'rgba(127, 174, 99, 0.12)',
+  },
+  {
+    id: 'airstrip',
+    name: 'Airstrip One',
+    tagline: 'A game after Nineteen Eighty-Four: you are the Party. Keep them working, keep their heads down, and survive the year.',
+    blurb:
+      'Victory Square from above: a hundred and fifty little round-headed citizens walking to work under a hoarding of Big Brother whose eyes follow your hand, the four Ministries rising at the corners in pencil-hatched terraces, and every coin they earn flying up to the Party. Push the quota past the red line and they begin to think — the thinkers turn yellow, stop, look up and say so, and thinking is catching. Give them someone to hate (the Two Minutes Hate, Victory Gin, the Lottery, a Hate Week rally), put up telescreens and Junior Spies, Records Desks and Newspeak Dictionaries, and send the van. Through the year: a man buys a diary, the chocolate ration is cut (or "raised"), a girl slips him a note, Oceania changes enemies mid-speech and the records must be rewritten, Hate Week, and Room 101. Lose them, and it turns out there was hope after all.',
+    spec: ['three.js · 150 citizens, inked', 'nine tools, six events, one year', 'after Orwell · the words are ours'],
+    ink: '#c8312a',
+    wash: 'rgba(200, 49, 42, 0.10)',
   },
 ];
 
