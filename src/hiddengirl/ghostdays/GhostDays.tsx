@@ -37,6 +37,7 @@ function beatAt(pos: number) {
 
 export function GhostDays({ onExit }: { onExit: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -90,7 +91,8 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
     const size = () => stage.resize(innerWidth, innerHeight);
     size();
     addEventListener('resize', size);
-    const lenis = new Lenis({ wrapper, content, lerp: 0.075, wheelMultiplier: 0.8, touchMultiplier: 1.4 });
+    // the wheel is caught over the whole page, not only the (invisible) scroll layer, so no card or panel swallows it
+    const lenis = new Lenis({ wrapper, content, eventsTarget: rootRef.current!, lerp: 0.1, wheelMultiplier: 1, touchMultiplier: 1.4 });
     lenisRef.current = lenis;
 
     // paint the first scene before showing anything, the next ones when there is time
@@ -99,6 +101,11 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
       stage.build(SCENES[0]!);
       if (alive) setReady(true);
     });
+
+    // paint the next scene's cards one at a time, in the gaps between frames
+    const ric = (window as unknown as { requestIdleCallback?: (f: () => void, o?: object) => number }).requestIdleCallback;
+    const later = ric ? (f: () => void) => ric(f, { timeout: 1200 }) : (f: () => void) => setTimeout(f, 150);
+    const pumpSoon = () => later(() => { if (alive && stage.pump()) pumpSoon(); });
 
     let raf = 0;
     let lastBeat = -1, lastScene = -1, lastOp = -1, lastTop = -1, lastBar = -1;
@@ -133,10 +140,7 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
         const keep = [s - 1, s, s + 1].filter((k) => k >= 0 && k < SCENES.length).map((k) => SCENES[k]!.id);
         stage.keep(keep);
         const next = SCENES[s + 1];
-        if (next && !stage.isBuilt(next.id)) {
-          const ric = (window as unknown as { requestIdleCallback?: (f: () => void, o?: object) => number }).requestIdleCallback;
-          (ric ? (f: () => void) => ric(f, { timeout: 2500 }) : (f: () => void) => setTimeout(f, 600))(() => { if (alive) stage.build(next); });
-        }
+        if (next && !stage.isBuilt(next.id)) { stage.build(next, true); pumpSoon(); }
       }
       // fades at scene edges: gold as we fall into the coin, paper as we come back
       let fade = 0, col = SCENES[s]!.paper;
@@ -239,7 +243,7 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
   const endB = beat.kind === 'end';
 
   return (
-    <div className={`hg-root hg-scene-${SCENES[scene]!.id} ${gb ? 'hg-gated' : ''}`}>
+    <div ref={rootRef} className={`hg-root hg-scene-${SCENES[scene]!.id} ${gb ? 'hg-gated' : ''}`}>
       <canvas ref={canvasRef} className="hg-canvas" />
       <div className="hg-scroll" ref={wrapRef}>
         <div ref={contentRef} style={{ height: `calc(${TOTAL * 100}vh + 100vh)` }} />
@@ -279,6 +283,14 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
             : <><p>{beat.text.split(' ').map((w, k) => <span key={k} className="hg-w">{w} </span>)}</p>{beat.cite && <p className="hg-cite">— {beat.cite}</p>}</>
         )}
       </div>
+
+      {!gb && !endB && ready && (
+        <button
+          className="hg-next"
+          aria-label="Next"
+          onClick={() => { soundRef.current?.start(); const vh = wrapRef.current!.clientHeight; lenisRef.current?.scrollTo((starts[beatIdx + 1] ?? TOTAL) * vh + 2, { duration: 1.6 }); }}
+        >{beatIdx === 0 ? 'begin' : 'next'} <span>↓</span></button>
+      )}
 
       {marks.size > 0 && (
         <button className="hg-inv" onClick={() => setShowMarks((v) => !v)} aria-label="The spade and its marks">

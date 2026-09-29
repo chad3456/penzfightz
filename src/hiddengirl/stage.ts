@@ -160,9 +160,9 @@ void main() {
   gl_FragColor = vec4(c, 1.0);
 }`;
 
-interface BuiltLayer { def: LayerDef; mesh: THREE.Mesh; tex: THREE.CanvasTexture }
+interface BuiltLayer { def: LayerDef; mesh: THREE.Mesh; tex: THREE.CanvasTexture | null; seed: number }
 interface BuiltParticles { def: ParticleDef; pts: THREE.Points; mat: THREE.ShaderMaterial }
-interface Built { def: SceneDef; scene: THREE.Scene; layers: BuiltLayer[]; parts: BuiltParticles[] }
+interface Built { def: SceneDef; scene: THREE.Scene; layers: BuiltLayer[]; parts: BuiltParticles[]; todo: number[] }
 
 const smooth = (x: number) => x * x * (3 - 2 * x);
 
@@ -190,9 +190,10 @@ export class Stage {
 
   constructor(public canvasEl: HTMLCanvasElement, public low: boolean) {
     this.renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: true, powerPreference: 'high-performance' });
-    this.pr = Math.min(window.devicePixelRatio || 1, low ? 1.5 : 2);
+    this.pr = Math.min(window.devicePixelRatio || 1, low ? 1.25 : 1.75);
     this.renderer.setPixelRatio(this.pr);
-    this.maxPx = low ? 2048 : Math.min(4096, this.renderer.capabilities.maxTextureSize);
+    // big enough for the close-ups, small enough that three painted scenes fit in a laptop's memory
+    this.maxPx = low ? 1600 : Math.min(2560, this.renderer.capabilities.maxTextureSize);
     // ?tex=1024 caps the cards' resolution (for slow machines, and for tests)
     const cap = Number(new URLSearchParams(location.search).get('tex'));
     if (cap > 256) this.maxPx = Math.min(this.maxPx, cap);
@@ -226,32 +227,48 @@ export class Stage {
     this.camera.updateProjectionMatrix();
   }
 
-  /** Paint a scene's cards (once) and keep it ready. */
-  build(def: SceneDef) {
+  /** Paint one card onto its canvas and hand it to the GPU. */
+  private paint(b: Built, i: number) {
+    const l = b.layers[i]!;
+    if (l.tex) return;
+    const L = l.def;
+    let H = Math.min(L.px, this.maxPx);
+    let W = H * L.aspect;
+    if (W > this.maxPx) { W = this.maxPx; H = W / L.aspect; }
+    const c = canvas(W, H);
+    const g = c.getContext('2d')!;
+    const t0 = performance.now();
+    L.draw(g, c.width, c.height, rng(l.seed));
+    if (import.meta.env.DEV) console.debug(`[stage] ${b.def.id}/${L.name} ${c.width}x${c.height} ${(performance.now() - t0).toFixed(0)}ms`);
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    if (L.rx) tex.anisotropy = 4;
+    const mat = l.mesh.material as THREE.MeshBasicMaterial;
+    mat.map = tex;
+    mat.needsUpdate = true;
+    this.renderer.initTexture(tex);
+    l.tex = tex;
+  }
+
+  /**
+   * Set a scene up. With `lazy`, only its frame is made and the cards are
+   * painted later, one per call to pump(), so scrolling never waits on a
+   * whole scene being painted at once.
+   */
+  build(def: SceneDef, lazy = false) {
     const had = this.built.get(def.id);
-    if (had) return had;
+    if (had) { if (!lazy) while (had.todo.length) this.paint(had, had.todo.shift()!); return had; }
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(def.paper);
     const layers: BuiltLayer[] = def.layers.map((L, i) => {
-      let H = Math.min(L.px, this.maxPx);
-      let W = H * L.aspect;
-      if (W > this.maxPx) { W = this.maxPx; H = W / L.aspect; }
-      const c = canvas(W, H);
-      const g = c.getContext('2d')!;
-      const t0 = performance.now();
-      L.draw(g, c.width, c.height, rng(i * 7919 + def.id.length * 131 + 7));
-      if (import.meta.env.DEV) console.debug(`[stage] ${def.id}/${L.name} ${c.width}x${c.height} ${(performance.now() - t0).toFixed(0)}ms`);
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      if (L.rx) tex.anisotropy = 4;
-      const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, toneMapped: false, blending: L.add ? THREE.AdditiveBlending : THREE.NormalBlending });
+      const mat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, blending: L.add ? THREE.AdditiveBlending : THREE.NormalBlending });
       const mesh = new THREE.Mesh(new THREE.PlaneGeometry(L.h * L.aspect, L.h), mat);
       mesh.position.set(...L.at);
       if (L.rx) mesh.rotation.x = L.rx;
       mesh.renderOrder = Math.round(L.at[2] * 100) + 100000;
       mesh.userData.base = mesh.position.clone();
       scene.add(mesh);
-      return { def: L, mesh, tex };
+      return { def: L, mesh, tex: null, seed: i * 7919 + def.id.length * 131 + 7 };
     });
     const parts: BuiltParticles[] = (def.particles ?? []).map((P, i) => {
       const R = rng(1000 + i * 17);
@@ -282,16 +299,23 @@ export class Stage {
       scene.add(pts);
       return { def: P, pts, mat };
     });
-    const b = { def, scene, layers, parts };
+    const b: Built = { def, scene, layers, parts, todo: layers.map((_, i) => i) };
     this.built.set(def.id, b);
+    if (!lazy) while (b.todo.length) this.paint(b, b.todo.shift()!);
     return b;
+  }
+
+  /** Paint one waiting card, if any; true if there was one. */
+  pump() {
+    for (const b of this.built.values()) if (b.todo.length) { this.paint(b, b.todo.shift()!); return true; }
+    return false;
   }
 
   /** Let go of every scene but these. */
   keep(ids: string[]) {
     for (const [id, b] of this.built) {
       if (ids.includes(id)) continue;
-      for (const l of b.layers) { l.tex.dispose(); l.mesh.geometry.dispose(); (l.mesh.material as THREE.Material).dispose(); }
+      for (const l of b.layers) { l.tex?.dispose(); l.mesh.geometry.dispose(); (l.mesh.material as THREE.Material).dispose(); }
       for (const p of b.parts) { p.pts.geometry.dispose(); p.mat.dispose(); }
       this.built.delete(id);
     }
