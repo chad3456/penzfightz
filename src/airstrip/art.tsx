@@ -7,25 +7,31 @@ import type { ToolId } from './sim';
  * the Party alone.
  */
 
-const S = { stroke: '#161616', strokeWidth: 3, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: '#fbfaf5' };
+const S = { stroke: '#1d1c1a', strokeWidth: 2.6, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: '#fbfaf5' };
 const RED = '#c8312a';
-const YEL = '#f2d44a';
+const YEL = '#f2cf3a';
+/** Party members wear blue overalls; the heads are all the same pale cream. */
+const OVER = '#9db3d3';
+const HEAD = '#f5f0e2';
 
 /** A citizen. (x, y) is where the feet are; s is the scale. */
-export function Person({ x, y, s = 1, look = 'ahead', arms = 'down', fill = '#fbfaf5', eyes = true, cap = false, scarf = false, dotted = false, flip = false }: {
+export function Person({ x, y, s = 1, look = 'ahead', arms = 'down', fill, eyes = true, cap = false, scarf = false, dotted = false, flip = false }: {
   x: number; y: number; s?: number; look?: 'ahead' | 'up' | 'down'; arms?: 'down' | 'up' | 'phone' | 'point'; fill?: string; eyes?: boolean; cap?: boolean; scarf?: boolean; dotted?: boolean; flip?: boolean;
 }) {
   const d = dotted ? { strokeDasharray: '3 5' } : {};
   const hy = look === 'up' ? -62 : look === 'down' ? -54 : -58;
   const hx = look === 'down' ? 3 : 0;
+  const body = fill ?? (cap ? '#c9b89e' : scarf ? '#e8e2d2' : OVER);
+  const headFill = fill && fill !== '#fbfaf5' ? fill : HEAD;
   return (
     <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`} {...S} {...d}>
-      <path d="M-13 0 C-17 -18 -17 -34 -9 -40 C-4 -44 4 -44 9 -40 C17 -34 17 -18 13 0 Z" fill={fill} />
+      <path d="M-13 0 C-17 -18 -17 -34 -9 -40 C-4 -44 4 -44 9 -40 C17 -34 17 -18 13 0 Z" fill={body} />
+      <path d="M-4 -40 L-4 -22 M4 -40 L4 -22" fill="none" strokeWidth="1.6" />
       <path d="M-6 0 L-6 -10 M6 0 L6 -10" fill="none" />
       {arms === 'up' && <path d="M-11 -34 L-20 -54 M11 -34 L20 -54" fill="none" />}
       {arms === 'point' && <path d="M11 -32 L28 -40" fill="none" />}
       {arms === 'phone' && <><path d="M-9 -30 L-2 -26 M9 -30 L2 -26" fill="none" /><rect x="-4" y="-30" width="8" height="10" rx="1.5" fill="#161616" /></>}
-      <circle cx={hx} cy={hy} r="13" fill={fill} />
+      <circle cx={hx} cy={hy} r="13" fill={headFill} />
       {cap && <path d={`M${hx - 13} ${hy - 4} Q${hx} ${hy - 20} ${hx + 13} ${hy - 4} L${hx + 17} ${hy - 3} Z`} fill="#3a3936" />}
       {scarf && <path d="M-9 -38 L9 -38 L4 -30 Z" fill={RED} />}
       {eyes && look !== 'up' && <><circle cx={hx - 4} cy={hy + 1} r="1.6" fill="#161616" stroke="none" /><circle cx={hx + 4} cy={hy + 1} r="1.6" fill="#161616" stroke="none" /></>}

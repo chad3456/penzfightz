@@ -8,13 +8,18 @@ import { TOOL_BY_ID, WORLD, type Citizen, type Sim, type ToolId } from './sim';
  * hatching, and Big Brother on a hoarding whose eyes follow your hand.
  */
 
-const PAPER = '#f2f1ec';
+const PAPER = '#cfcec4';
 const INK = '#161616';
-const WHITE = new THREE.Color('#fbfaf5');
-const YELLOW = new THREE.Color('#f2d44a');
-const FEAR = new THREE.Color('#d6dbe4');
-const CHILD = new THREE.Color('#f4efe4');
-const GREY = new THREE.Color('#b8b8b8');
+const HEAD = new THREE.Color('#f5f0e2');
+const OVERALLS = new THREE.Color('#7d98bf');
+const PROLE = new THREE.Color('#a8957c');
+const YELLOW = new THREE.Color('#f2cf3a');
+const FEAR = new THREE.Color('#b9c1cc');
+const FEAR_HEAD = new THREE.Color('#e2e5ea');
+const CHILD = new THREE.Color('#c8312a');
+const GREY = new THREE.Color('#9a9a96');
+const AGENT = new THREE.Color('#2e2c2a');
+const AGENT_HEAD = new THREE.Color('#c8312a');
 
 /** Paper white where lit, pencil hatching where not, one or two layers deep. */
 function hatchMaterial(base = '#f7f6f1') {
@@ -97,7 +102,7 @@ export function drawGoldstein(g: CanvasRenderingContext2D, W: number, H: number)
   g.fillStyle = INK; g.beginPath(); g.moveTo(cx - r * 0.18, cy + r * 0.8); g.lineTo(cx, cy + r * 1.35); g.lineTo(cx + r * 0.18, cy + r * 0.8); g.fill();
   g.beginPath(); g.arc(cx - r * 0.28, cy - r * 0.1, r * 0.08, 0, Math.PI * 2); g.fill(); g.beginPath(); g.arc(cx + r * 0.28, cy - r * 0.1, r * 0.08, 0, Math.PI * 2); g.fill();
   g.beginPath(); g.ellipse(cx - r * 0.28, cy - r * 0.1, r * 0.18, r * 0.14, 0, 0, Math.PI * 2); g.stroke(); g.beginPath(); g.ellipse(cx + r * 0.28, cy - r * 0.1, r * 0.18, r * 0.14, 0, 0, Math.PI * 2); g.stroke();
-  g.fillStyle = '#c8312a'; g.font = `700 ${W * 0.1}px Fredoka, sans-serif`; g.textAlign = 'center'; g.fillText('GOLDSTEIN', cx, H * 0.95);
+  g.fillStyle = '#c8312a'; g.font = `700 ${W * 0.1}px Oswald, sans-serif`; g.textAlign = 'center'; g.fillText('GOLDSTEIN', cx, H * 0.95);
 }
 
 
@@ -142,9 +147,9 @@ export class World {
 
     // the paving of Victory Square
     const gt = canvasTex(2048, 1244, (g) => {
-      g.fillStyle = PAPER; g.fillRect(0, 0, 2048, 1244);
-      for (let i = 0; i < 90000; i++) { g.fillStyle = `rgba(0,0,0,${Math.random() * 0.035})`; g.fillRect(Math.random() * 2048, Math.random() * 1244, 2, 2); }
-      g.strokeStyle = 'rgba(0,0,0,0.05)'; g.lineWidth = 2;
+      g.fillStyle = '#dedcd2'; g.fillRect(0, 0, 2048, 1244);
+      for (let i = 0; i < 120000; i++) { g.fillStyle = `rgba(40,40,30,${Math.random() * 0.05})`; g.fillRect(Math.random() * 2048, Math.random() * 1244, 2, 2); }
+      g.strokeStyle = 'rgba(40,40,30,0.12)'; g.lineWidth = 2;
       for (let x = 0; x <= 2048; x += 2048 / 28) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 1244); g.stroke(); }
       for (let y = 0; y <= 1244; y += 1244 / 17) { g.beginPath(); g.moveTo(0, y); g.lineTo(2048, y); g.stroke(); }
       g.strokeStyle = 'rgba(0,0,0,0.12)'; g.lineWidth = 5; g.strokeRect(40, 40, 2048 - 80, 1244 - 80);
@@ -152,7 +157,7 @@ export class World {
     this.ground = new THREE.Mesh(new THREE.PlaneGeometry(WORLD.w + 4, WORLD.d + 4), new THREE.MeshBasicMaterial({ map: gt }));
     this.ground.rotation.x = -Math.PI / 2;
     s.add(this.ground);
-    const outer = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshBasicMaterial({ color: '#e9e8e2' }));
+    const outer = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshBasicMaterial({ color: '#c9c8be' }));
     outer.rotation.x = -Math.PI / 2; outer.position.y = -0.02; s.add(outer);
 
     // Victory Mansions and the rest of London, around the square
@@ -161,11 +166,20 @@ export class World {
     // a row behind the square (leaving a gap for Big Brother) and down both sides; nothing in front, where you stand
     for (let x = -WORLD.w / 2 - 4; x < WORLD.w / 2 + 6; x += 6.5) if (Math.abs(x) > 9) blocks.push([x, -WORLD.d / 2 - 5, 5.5, 4 + ((x * 7) % 4 + 4) % 4, 5]);
     for (let z = -WORLD.d / 2 + 2; z < WORLD.d / 2 - 4; z += 6.5) { blocks.push([-WORLD.w / 2 - 5, z, 5, 3 + ((z * 5) % 3 + 3) % 3, 5.5]); blocks.push([WORLD.w / 2 + 5, z, 5, 3 + ((z * 3) % 3 + 3) % 3, 5.5]); }
-    for (const [x, z, w, h, d] of blocks) {
+    const posterTex = canvasTex(256, 330, (g) => { drawBigBrother(g, 256, 256); g.fillStyle = INK; g.fillRect(0, 256, 256, 74); g.fillStyle = '#f7f6f1'; g.font = '700 30px Oswald, sans-serif'; g.textAlign = 'center'; g.fillText('BIG BROTHER', 128, 290); g.fillText('IS WATCHING YOU', 128, 322); });
+    const posterMat = new THREE.MeshBasicMaterial({ map: posterTex });
+    blocks.forEach(([x, z, w, h, d], i) => {
       const b = withOutline(new THREE.BoxGeometry(w, h, d), hatch, 1.02);
       b.position.set(x, h / 2, z);
       s.add(b);
-    }
+      if (i % 2 === 0 && h > 3) {
+        const pst = new THREE.Mesh(new THREE.PlaneGeometry(2, 2.6), posterMat);
+        const side = Math.abs(z) > WORLD.d / 2 ? 'ns' : 'ew';
+        if (side === 'ns') { pst.position.set(x, h * 0.55, z + (z < 0 ? d / 2 + 0.03 : -d / 2 - 0.03)); if (z > 0) pst.rotation.y = Math.PI; }
+        else { pst.position.set(x + (x < 0 ? w / 2 + 0.03 : -w / 2 - 0.03), h * 0.55, z); pst.rotation.y = x < 0 ? Math.PI / 2 : -Math.PI / 2; }
+        s.add(pst);
+      }
+    });
     // the four Ministries: terrace upon terrace of white concrete
     const corners: [number, number, string][] = [[-22, -WORLD.d / 2 - 22, 'MINITRUE'], [22, -WORLD.d / 2 - 22, 'MINIPLENTY'], [-46, -WORLD.d / 2 - 12, 'MINILUV'], [46, -WORLD.d / 2 - 12, 'MINIPAX']];
     for (const [x, z, label] of corners) {
@@ -175,7 +189,7 @@ export class World {
         const t = withOutline(new THREE.BoxGeometry(w, h, w), hatch, 1.015);
         t.position.y = h / 2 + k * h; grp.add(t);
       }
-      const sign = new THREE.Mesh(new THREE.PlaneGeometry(9, 1.6), new THREE.MeshBasicMaterial({ map: canvasTex(512, 90, (g) => { g.fillStyle = '#f7f6f1'; g.fillRect(0, 0, 512, 90); g.fillStyle = INK; g.font = '700 58px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText(label, 256, 66); }) }));
+      const sign = new THREE.Mesh(new THREE.PlaneGeometry(9, 1.6), new THREE.MeshBasicMaterial({ map: canvasTex(512, 90, (g) => { g.fillStyle = '#f7f6f1'; g.fillRect(0, 0, 512, 90); g.fillStyle = INK; g.font = '700 58px Oswald, sans-serif'; g.textAlign = 'center'; g.fillText(label, 256, 66); }) }));
       sign.position.set(0, 1.6, 9.05); grp.add(sign);
       grp.position.set(x, 0, z);
       s.add(grp);
@@ -185,13 +199,13 @@ export class World {
     const bbTex = canvasTex(1024, 1200, (g) => {
       drawBigBrother(g, 1024, 1024, false);
       g.fillStyle = INK; g.fillRect(0, 1024, 1024, 176);
-      g.fillStyle = '#f7f6f1'; g.font = '700 76px Fredoka, sans-serif'; g.textAlign = 'center';
+      g.fillStyle = '#f7f6f1'; g.font = '700 76px Oswald, sans-serif'; g.textAlign = 'center';
       g.fillText('BIG BROTHER IS', 512, 1098); g.fillText('WATCHING YOU', 512, 1178);
       g.strokeStyle = INK; g.lineWidth = 14; g.strokeRect(7, 7, 1010, 1186);
     });
     const bb = new THREE.Mesh(new THREE.PlaneGeometry(12, 14), new THREE.MeshBasicMaterial({ map: bbTex }));
-    bb.position.set(0, 9.5, -WORLD.d / 2 - 6);
-    bb.rotation.x = -0.25;
+    bb.position.set(0, 7.6, -WORLD.d / 2 - 6);
+    bb.rotation.x = -0.32;
     s.add(bb);
     const frame = new THREE.Mesh(new THREE.BoxGeometry(12.6, 14.6, 0.4), OUTLINE);
     frame.position.copy(bb.position).add(new THREE.Vector3(0, 0, -0.25)); frame.rotation.copy(bb.rotation); s.add(frame);
@@ -211,7 +225,7 @@ export class World {
     const bodyG = new THREE.CapsuleGeometry(0.32, 0.36, 4, 12); bodyG.translate(0, 0.6, 0);
     const headG = new THREE.SphereGeometry(0.42, 20, 14); headG.translate(0, 1.42, 0);
     const capG = new THREE.SphereGeometry(0.44, 16, 8, 0, Math.PI * 2, 0, Math.PI * 0.42); capG.translate(0, 1.47, 0.02);
-    const toon = new THREE.MeshToonMaterial({ color: '#ffffff', gradientMap: (() => { const t = new THREE.DataTexture(new Uint8Array([200, 200, 200, 255, 255, 255, 255, 255]), 2, 1); t.needsUpdate = true; return t; })() });
+    const toon = new THREE.MeshToonMaterial({ color: '#ffffff', gradientMap: (() => { const t = new THREE.DataTexture(new Uint8Array([185, 185, 185, 255, 255, 255, 255, 255]), 2, 1); t.needsUpdate = true; return t; })() });
     this.bodies = new THREE.InstancedMesh(bodyG, toon, this.n);
     this.heads = new THREE.InstancedMesh(headG, toon, this.n);
     this.bodyOut = new THREE.InstancedMesh(bodyG, OUTLINE, this.n);
@@ -221,7 +235,7 @@ export class World {
     const shG = new THREE.PlaneGeometry(1.3, 0.9); shG.rotateX(-Math.PI / 2);
     this.shadows = new THREE.InstancedMesh(shG, new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false }), this.n);
     for (const im of [this.bodies, this.heads, this.bodyOut, this.headOut, this.caps, this.shadows]) { im.frustumCulled = false; im.count = 0; s.add(im); }
-    for (let i = 0; i < this.n; i++) { this.bodies.setColorAt(i, WHITE); this.heads.setColorAt(i, WHITE); }
+    for (let i = 0; i < this.n; i++) { this.bodies.setColorAt(i, OVERALLS); this.heads.setColorAt(i, HEAD); }
     // tribute, flying up to the Ministries
     const coinG = new THREE.CylinderGeometry(0.16, 0.16, 0.04, 14); coinG.rotateX(Math.PI / 2);
     this.coins = new THREE.InstancedMesh(coinG, new THREE.MeshBasicMaterial({ color: '#fdfcf6' }), 240);
@@ -235,6 +249,16 @@ export class World {
     this.ghost.add(this.ghostRing);
     this.ghost.visible = false;
     s.add(this.ghost);
+    this.hl = new THREE.Mesh(new THREE.RingGeometry(0.9, 1, 72), new THREE.MeshBasicMaterial({ color: '#c8312a', transparent: true, opacity: 0.9, depthTest: false }));
+    this.hl.rotation.x = -Math.PI / 2; this.hl.position.y = 0.05; this.hl.visible = false; this.hl.renderOrder = 10;
+    s.add(this.hl);
+  }
+
+  private hl: THREE.Mesh;
+  /** Point at a spot on the square (or stop pointing). */
+  setHighlight(x: number | null, z = 0, r = 3) {
+    if (x === null) { this.hl.visible = false; return; }
+    this.hl.visible = true; this.hl.position.x = x; this.hl.position.z = z; this.hl.userData.r = r;
   }
 
   resize(w: number, h: number) {
@@ -315,8 +339,8 @@ export class World {
       c.fillStyle = '#f7f6f1'; c.fillRect(0, 0, 256, 256);
       c.strokeStyle = INK; c.lineWidth = 10; c.strokeRect(5, 5, 246, 246);
       if (tool === 'hate' || tool === 'rally') drawGoldstein(c, 256, 256);
-      else if (tool === 'gin') { c.lineWidth = 9; c.beginPath(); c.moveTo(108, 40); c.lineTo(148, 40); c.lineTo(148, 90); c.quadraticCurveTo(190, 110, 190, 150); c.lineTo(190, 220); c.lineTo(66, 220); c.lineTo(66, 150); c.quadraticCurveTo(66, 110, 108, 90); c.closePath(); c.stroke(); c.fillStyle = INK; c.font = '700 40px Fredoka, sans-serif'; c.textAlign = 'center'; c.fillText('GIN', 128, 180); }
-      else if (tool === 'lottery') { c.fillStyle = INK; c.font = '700 44px Fredoka, sans-serif'; c.textAlign = 'center'; c.fillText('LOTTERY', 128, 70); c.font = '700 60px Fredoka, sans-serif'; c.fillText('7 · 19 · 42', 128, 160); c.fillStyle = '#c8312a'; c.fillText('?', 128, 225); }
+      else if (tool === 'gin') { c.lineWidth = 9; c.beginPath(); c.moveTo(108, 40); c.lineTo(148, 40); c.lineTo(148, 90); c.quadraticCurveTo(190, 110, 190, 150); c.lineTo(190, 220); c.lineTo(66, 220); c.lineTo(66, 150); c.quadraticCurveTo(66, 110, 108, 90); c.closePath(); c.stroke(); c.fillStyle = INK; c.font = '700 40px Oswald, sans-serif'; c.textAlign = 'center'; c.fillText('GIN', 128, 180); }
+      else if (tool === 'lottery') { c.fillStyle = INK; c.font = '700 44px Oswald, sans-serif'; c.textAlign = 'center'; c.fillText('LOTTERY', 128, 70); c.font = '700 60px Oswald, sans-serif'; c.fillText('7 · 19 · 42', 128, 160); c.fillStyle = '#c8312a'; c.fillText('?', 128, 225); }
     });
     const board = new THREE.Mesh(new THREE.PlaneGeometry(tool === 'rally' ? 4 : 2.6, tool === 'rally' ? 4 : 2.6), new THREE.MeshBasicMaterial({ map: tex }));
     board.position.y = tool === 'rally' ? 4.6 : 3.2; board.rotation.x = -0.4; board.name = 'board';
@@ -386,10 +410,11 @@ export class World {
       this.caps.setMatrixAt(i, capped ? headM : new THREE.Matrix4().makeScale(0, 0, 0));
       this.m.compose(this.s.set(c.x + 0.25, 0.02, c.z + 0.2), new THREE.Quaternion(), this.v.set(sc, 1, sc));
       this.shadows.setMatrixAt(i, this.m);
-      const col = c.vanish > 0 ? GREY : c.thinking ? YELLOW : c.fear > 0 ? FEAR : child ? CHILD : WHITE;
-      const bcol = child ? new THREE.Color('#c8312a') : c.special === 'julia' ? new THREE.Color('#c8312a') : col;
-      this.bodies.setColorAt(i, child ? bcol : col);
-      this.heads.setColorAt(i, col);
+      const shown = c.agent && c.revealed > 0;
+      const body = c.vanish > 0 ? GREY : shown ? AGENT : c.thinking ? YELLOW : c.fear > 0 ? FEAR : child ? CHILD : c.special === 'julia' ? CHILD : c.kind === 'prole' ? PROLE : OVERALLS;
+      const head = c.vanish > 0 ? GREY : shown ? AGENT_HEAD : c.thinking ? YELLOW : c.fear > 0 ? FEAR_HEAD : HEAD;
+      this.bodies.setColorAt(i, body);
+      this.heads.setColorAt(i, head);
       i++;
     }
     for (const im of [this.bodies, this.heads, this.bodyOut, this.headOut, this.caps, this.shadows]) { im.count = i; im.instanceMatrix.needsUpdate = true; if (im.instanceColor) im.instanceColor.needsUpdate = true; }
@@ -424,6 +449,7 @@ export class World {
     }
     this.coins.count = j; out.count = j;
     this.coins.instanceMatrix.needsUpdate = true; out.instanceMatrix.needsUpdate = true;
+    if (this.hl.visible) { const r = (this.hl.userData.r as number) * (1 + 0.08 * Math.sin(t * 5)); this.hl.scale.setScalar(r); }
     // Big Brother's eyes follow the pointer
     for (const e of this.bbEyes) {
       const b = e.userData.base as THREE.Vector3;
