@@ -166,7 +166,7 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
     addEventListener('pointerdown', wake, { once: true });
     addEventListener('wheel', wake, { once: true, passive: true });
     addEventListener('keydown', wake, { once: true });
-    if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__ghostdays = { lenis, stage, starts, kinds: BEATS.map((b) => b.kind), solve: (g: number) => solved.current.add(g) };
+    if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__ghostdays = { lenis, stage, starts, kinds: BEATS.map((b) => b.kind), solve: (g: number) => { solved.current.add(g); gateRef.current = -1; setGate(-1); } };
 
     return () => {
       alive = false;
@@ -309,10 +309,10 @@ export function GhostDays({ onExit }: { onExit: () => void }) {
             <p className="hg-kicker">(fib 3) → 3</p>
             <h2>The spade, as she carries it home</h2>
             <ul className="hg-end-marks">
-              <li><b>字</b> a father's reading, cut in 1905: the extra curve between the world and the word</li>
-              <li><b>F · C</b> two teenagers in 1989: a story chosen over a family's</li>
-              <li><b>⟨⟩</b> the hooks of a people whose sun was dying: <i>keep us</i></li>
-              <li><b>✦</b> a bright place rubbed clean, shaped like a little person: someone new</li>
+              <li><b>字</b><span>a father's reading, cut in 1905: the extra curve between the world and the word</span></li>
+              <li><b>F · C</b><span>two teenagers in 1989: a story chosen over a family's</span></li>
+              <li><b>⟨⟩</b><span>the hooks of a people whose sun was dying: <i>keep us</i></span></li>
+              <li><b>✦</b><span>a bright place rubbed clean, shaped like a little person: someone new</span></li>
             </ul>
             {choices.authentic !== undefined && <p className="hg-echo">{(BEATS.find((b) => b.kind === 'choice' && b.key === 'authentic') as Extract<Beat, { kind: 'choice' }>).notes[choices.authentic]!}</p>}
             {choices.keep !== undefined && <p className="hg-echo">{(BEATS.find((b) => b.kind === 'choice' && b.key === 'keep') as Extract<Beat, { kind: 'choice' }>).notes[choices.keep]!}</p>}

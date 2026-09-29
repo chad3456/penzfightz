@@ -142,16 +142,16 @@ export function conifer(g: Ctx, x: number, y: number, h: number, R: Rng, col = '
  * A whitewood tree of Nova Pacifica: a six-sided trunk drawn as two
  * flat-lit faces, and a canopy of small hexagonal leaves like mirrors.
  */
-export function hexTree(g: Ctx, x: number, y: number, h: number, R: Rng, tint = '#dfe9e2') {
+export function hexTree(g: Ctx, x: number, y: number, h: number, R: Rng, tint = '#dfe9e2', leaf = 1) {
   const w = h * 0.045;
   g.fillStyle = shade(tint, -0.08); g.fillRect(x - w, y - h, w, h);
   g.fillStyle = shade(tint, -0.22); g.fillRect(x, y - h, w * 0.8, h);
   g.strokeStyle = shade(tint, -0.35); g.lineWidth = Math.max(0.5, w * 0.08);
   g.strokeRect(x - w, y - h, w * 1.8, h);
-  const n = 26 + Math.floor(R() * 20);
+  const n = Math.round((26 + Math.floor(R() * 20)) / (leaf * leaf));
   for (let i = 0; i < n; i++) {
     const a = R() * Math.PI * 2, d = Math.sqrt(R()) * h * 0.3;
-    hexagon(g, x + Math.cos(a) * d, y - h * 0.95 + Math.sin(a) * d * 0.7, h * (0.03 + R() * 0.035), R() * 0.5,
+    hexagon(g, x + Math.cos(a) * d, y - h * 0.95 + Math.sin(a) * d * 0.7, h * (0.03 + R() * 0.035) * leaf, R() * 0.5,
       R() < 0.3 ? '#ffffff' : R() < 0.6 ? tint : shade(tint, -0.12), shade(tint, -0.3));
   }
 }

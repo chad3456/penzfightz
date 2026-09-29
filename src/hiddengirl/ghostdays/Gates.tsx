@@ -187,7 +187,7 @@ const GLYPHS: Record<'zi' | 'initials' | 'crown', Glyph> = {
   },
   initials: {
     ink: [],
-    guide: 'M38,46 L38,72 M38,46 L50,46 M38,58 L47,58 M68,50 Q60,44 56,52 Q54,62 60,68 Q66,72 70,66',
+    guide: 'M42,46 L42,72 M42,46 L53,46 M42,58 L50,58 M70,50 Q62,44 58,52 Q56,62 62,68 Q68,72 72,66',
     tol: 6, need: 0.85, bg: 'coin',
   },
   crown: {
@@ -253,7 +253,7 @@ export function TraceGate({ beat, sfx, onDone }: GateProps<'trace'>) {
           onPointerCancel={() => { down.current = false; }}
         >
           {G.bg === 'coin' && <path d={SPADE_SVG} className="hg-trace-coin" />}
-          {G.bg === 'coin' && <text x="30" y="64" className="hg-trace-old">字</text>}
+          {G.bg === 'coin' && <text x="25" y="64" className="hg-trace-old">字</text>}
           {G.bg === 'head' && (<><circle cx="50" cy="62" r="11" className="hg-trace-head" /><path d="M36,100 Q38,78 50,76 Q62,78 64,100" className="hg-trace-head" /></>)}
           {G.ink.map((d) => <path key={d} d={d} className="hg-trace-ink" />)}
           {G.before && !done && <path d={G.before} className="hg-trace-before" />}

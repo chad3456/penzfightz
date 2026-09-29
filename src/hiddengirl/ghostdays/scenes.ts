@@ -66,7 +66,7 @@ function novaMid(g: Ctx, W: number, H: number, R: Rng) {
   fadeTop(g, W, H, 0.44, 0.47);
   // the rubble hills: angular heaps over the dead city
   for (let i = 0; i < 16; i++) {
-    const x = R() * W, y = top + H * (0.04 + R() * 0.3), s = H * (0.03 + R() * 0.05);
+    const x = R() * W, y = top + H * (0.04 + R() * 0.3), s = H * (0.012 + R() * 0.022);
     for (let k = 0; k < 7; k++) {
       const px = x + (R() - 0.5) * s * 2, py = y - R() * s * 0.8;
       hexagon(g, px, py, s * (0.25 + R() * 0.3), R(), R() < 0.5 ? '#d9d7e0' : '#c6c4d2', '#a9a6b8');
@@ -83,7 +83,7 @@ function novaNear(g: Ctx, W: number, H: number, R: Rng) {
   meadow(g, W, H * 0.8, H, R, { grass: '#b5d3aa', flowers: ['#6fa8dc', '#ffffff', '#b6a6e0', '#e6f0f6'], hexes: true, density: 1.2 });
   fadeTop(g, W, H, 0.76, 0.82);
   // tall whitewoods framing the view
-  for (const [x, h] of [[0.04, 1.1], [0.12, 0.95], [0.9, 1.05], [0.97, 1.2], [0.82, 0.8]] as [number, number][]) hexTree(g, W * x, H * 1.02, H * h, R, '#e6efe8');
+  for (const [x, h] of [[0.04, 1.1], [0.12, 0.95], [0.9, 1.05], [0.97, 1.2], [0.82, 0.8]] as [number, number][]) hexTree(g, W * x, H * 1.02, H * h, R, '#e6efe8', 0.45);
 }
 
 function novaOna(g: Ctx, W: number, H: number, R: Rng) {
@@ -370,28 +370,56 @@ function hkInside(g: Ctx, W: number, H: number, R: Rng) {
       else figure(g, x, y, H * 0.08, R, { color: '#e2c9a0', dress: true });
     }
   }
-  // a shaft of light through the papered window, onto the bench
-  g.fillStyle = 'rgba(255,240,200,0.35)';
+  // a shaft of light through the papered window, and a doorway through to the hall
+  g.fillStyle = 'rgba(255,240,200,0.3)';
   g.beginPath(); g.moveTo(W * 0.3, 0); g.lineTo(W * 0.38, 0); g.lineTo(W * 0.43, H * 0.62); g.lineTo(W * 0.29, H * 0.62); g.closePath(); g.fill();
-  const bench = new Path2D(); bench.rect(W * 0.27, H * 0.6, W * 0.18, H * 0.03); fillStipple(g, bench, '#8a6448', R, [W * 0.27, H * 0.6, W * 0.18, H * 0.03]);
-  g.fillStyle = '#6a4a36'; g.fillRect(W * 0.28, H * 0.63, W * 0.008, H * 0.09); g.fillRect(W * 0.44, H * 0.63, W * 0.008, H * 0.09);
-  spade(g, W * 0.335, H * 0.585, H * 0.05, R, { rot: -0.1 });
-  spade(g, W * 0.37, H * 0.585, H * 0.05, R, { rot: 0.08, gleam: 0.8 });
-  g.fillStyle = '#3f5fa0'; g.beginPath(); g.ellipse(W * 0.405, H * 0.598, W * 0.01, H * 0.006, 0, 0, Math.PI * 2); g.fill();
-  g.strokeStyle = '#5a3a2a'; g.lineWidth = 2; g.beginPath(); g.moveTo(W * 0.42, H * 0.598); g.lineTo(W * 0.44, H * 0.585); g.stroke();
-  // the front hall, laid for the ghosts: eight places, mock meats, paper houses and paper money
   g.fillStyle = '#7a4a34'; g.fillRect(W * 0.55, 0, W * 0.006, H * 0.72);
-  const table = new Path2D(); table.rect(W * 0.6, H * 0.56, W * 0.24, H * 0.04); fillStipple(g, table, '#9a5a3a', R, [W * 0.6, H * 0.56, W * 0.24, H * 0.04]);
-  g.fillStyle = '#7a4a2a'; g.fillRect(W * 0.61, H * 0.6, W * 0.01, H * 0.12); g.fillRect(W * 0.82, H * 0.6, W * 0.01, H * 0.12);
-  for (let k = 0; k < 8; k++) { g.fillStyle = '#f4f0e6'; g.beginPath(); g.ellipse(W * (0.615 + k * 0.03), H * 0.555, W * 0.011, H * 0.006, 0, 0, Math.PI * 2); g.fill(); g.fillStyle = ['#c8844a', '#e9c54a', '#d06a5a', '#9cc27a'][k % 4]!; g.beginPath(); g.arc(W * (0.615 + k * 0.03), H * 0.549, W * 0.005, Math.PI, 0); g.fill(); }
-  building(g, W * 0.87, H * 0.72, W * 0.06, H * 0.08, W * 0.015, R, { wall: '#f2e7c9', roof: '#c85a4a', roofPeak: H * 0.03 });
-  paperCar(g, W * 0.86, H * 0.84, W * 0.08, R);
-  for (let k = 0; k < 5; k++) { g.fillStyle = k % 2 ? '#e9c54a' : '#f4e9c8'; g.fillRect(W * (0.63 + k * 0.025), H * 0.66, W * 0.02, H * 0.012); }
-  // incense
-  for (let k = 0; k < 3; k++) { g.strokeStyle = '#b84a3a'; g.lineWidth = 2; g.beginPath(); g.moveTo(W * (0.71 + k * 0.006), H * 0.55); g.lineTo(W * (0.71 + k * 0.006), H * 0.5); g.stroke(); }
-  // father and son
-  figure(g, W * 0.66, H * 0.8, H * 0.36, R, { head: 'queue', color: '#e8e2d6', facing: 1 });
-  figure(g, W * 0.76, H * 0.8, H * 0.38, R, { head: 'hair', color: '#f7f6f2', accent: '#3a3a44', facing: -1 });
+  const hall = new Path2D(); hall.rect(W * 0.556, 0, W * 0.444, H * 0.72); fillStipple(g, hall, '#e2cba6', R, [W * 0.556, 0, W * 0.444, H * 0.72], 0.6);
+  for (let k = 0; k < 4; k++) lantern(g, W * (0.62 + k * 0.1), H * 0.12, H * 0.025);
+}
+
+/** The workbench, close: the matched pair of bubi, the copper-blue powder, the brush. */
+function hkBench(g: Ctx, W: number, H: number, R: Rng) {
+  g.fillStyle = 'rgba(255,240,200,0.35)';
+  g.beginPath(); g.moveTo(W * 0.2, 0); g.lineTo(W * 0.55, 0); g.lineTo(W * 0.75, H * 0.62); g.lineTo(W * 0.15, H * 0.62); g.closePath(); g.fill();
+  const top = new Path2D(); top.rect(W * 0.02, H * 0.6, W * 0.96, H * 0.1); fillStipple(g, top, '#8a6448', R, [0, H * 0.6, W, H * 0.1]);
+  g.strokeStyle = 'rgba(60,35,20,0.4)'; g.lineWidth = 2;
+  for (let y = H * 0.62; y < H * 0.7; y += H * 0.02) { g.beginPath(); g.moveTo(W * 0.02, y); g.lineTo(W * 0.98, y + H * 0.004); g.stroke(); }
+  const face = new Path2D(); face.rect(W * 0.02, H * 0.7, W * 0.96, H * 0.08); fillStipple(g, face, '#6a4a36', R, [0, H * 0.7, W, H * 0.08]);
+  g.fillStyle = '#5a3a2a'; g.fillRect(W * 0.05, H * 0.78, W * 0.04, H * 0.22); g.fillRect(W * 0.91, H * 0.78, W * 0.04, H * 0.22);
+  // the pair, lying on the bench
+  for (const [x, rot, gleam] of [[0.36, -0.2, 0], [0.55, 0.15, 0.8]] as [number, number, number][]) {
+    g.save(); g.translate(W * x, H * 0.64); g.scale(1, 0.42);
+    spade(g, 0, 0, H * 0.24, R, { rot, gleam });
+    g.restore();
+  }
+  // the dish of powder, the brush, a file
+  g.fillStyle = '#e8e2d6'; g.beginPath(); g.ellipse(W * 0.75, H * 0.62, W * 0.07, H * 0.03, 0, 0, Math.PI * 2); g.fill();
+  g.fillStyle = '#3f5fa0'; g.beginPath(); g.ellipse(W * 0.75, H * 0.615, W * 0.05, H * 0.02, 0, 0, Math.PI * 2); g.fill();
+  stipple(g, W * 0.7, H * 0.6, W * 0.1, H * 0.03, '#7ea0d8', 30, R, 2);
+  g.strokeStyle = '#5a3a2a'; g.lineWidth = H * 0.012; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(W * 0.82, H * 0.6); g.lineTo(W * 0.93, H * 0.52); g.stroke();
+  g.fillStyle = '#2f2a28'; g.beginPath(); g.ellipse(W * 0.815, H * 0.605, W * 0.012, H * 0.012, 0.6, 0, Math.PI * 2); g.fill();
+  g.fillStyle = '#9a9a9a'; g.fillRect(W * 0.12, H * 0.61, W * 0.1, H * 0.012);
+  vignette(g, W, H, 0.3, 0.52);
+}
+
+/** The front hall, laid for the ghosts: eight places, mock meats, paper houses, paper money; father and son. */
+function hkHall(g: Ctx, W: number, H: number, R: Rng) {
+  const table = new Path2D(); table.rect(W * 0.12, H * 0.56, W * 0.6, H * 0.05); fillStipple(g, table, '#9a5a3a', R, [W * 0.12, H * 0.56, W * 0.6, H * 0.05]);
+  g.fillStyle = '#7a4a2a'; g.fillRect(W * 0.14, H * 0.61, W * 0.02, H * 0.3); g.fillRect(W * 0.68, H * 0.61, W * 0.02, H * 0.3);
+  for (let k = 0; k < 8; k++) {
+    const x = W * (0.16 + k * 0.073);
+    g.fillStyle = '#f4f0e6'; g.beginPath(); g.ellipse(x, H * 0.555, W * 0.028, H * 0.012, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = ['#c8844a', '#e9c54a', '#d06a5a', '#9cc27a'][k % 4]!; g.beginPath(); g.arc(x, H * 0.548, W * 0.013, Math.PI, 0); g.fill();
+    g.strokeStyle = '#3a2a1a'; g.lineWidth = 2; g.beginPath(); g.moveTo(x + W * 0.02, H * 0.556); g.lineTo(x + W * 0.03, H * 0.53); g.stroke();
+  }
+  for (let k = 0; k < 3; k++) { g.strokeStyle = '#b84a3a'; g.lineWidth = 2.5; g.beginPath(); g.moveTo(W * (0.42 + k * 0.012), H * 0.55); g.lineTo(W * (0.42 + k * 0.012), H * 0.44); g.stroke(); glow(g, W * (0.42 + k * 0.012), H * 0.44, H * 0.012, '#ffb070', 0.8); }
+  for (let k = 0; k < 7; k++) { g.fillStyle = k % 2 ? '#e9c54a' : '#f4e9c8'; g.fillRect(W * (0.2 + k * 0.06), H * 0.8, W * 0.05, H * 0.025); }
+  building(g, W * 0.78, H * 0.78, W * 0.12, H * 0.14, W * 0.03, R, { wall: '#f2e7c9', roof: '#c85a4a', roofPeak: H * 0.05, windows: '#e9c54a' });
+  paperCar(g, W * 0.76, H * 0.93, W * 0.18, R);
+  figure(g, W * 0.3, H * 0.95, H * 0.6, R, { head: 'queue', color: '#e8e2d6', facing: 1 });
+  figure(g, W * 0.56, H * 0.95, H * 0.64, R, { head: 'hair', color: '#f7f6f2', accent: '#3a3a44', facing: -1 });
 }
 
 function hkDixon(g: Ctx, W: number, H: number, R: Rng) {
@@ -420,15 +448,18 @@ export const C1: SceneDef = {
     { u: 0, pos: [0, 2, 28], look: [0, 0, -12] },
     { u: 0.3, pos: [0, -2.5, 6], look: [0, -4.4, -12] },
     { u: 0.42, pos: [0, -4.4, -9.4], look: [-1.5, -5, -17] },
-    { u: 0.55, pos: [-3.8, -5.6, -14.2], look: [-3.8, -5.75, -17] },
-    { u: 0.72, pos: [-3.6, -5.3, -13.2], look: [-3.6, -5.6, -17] },
-    { u: 0.85, pos: [3.6, -4.9, -10.4], look: [4.5, -5, -17] },
-    { u: 1, pos: [3.6, -4.8, -9.6], look: [4.5, -5.2, -17] },
+    { u: 0.55, pos: [-3.7, -5.55, -14.3], look: [-3.7, -5.7, -16.9] },
+    { u: 0.72, pos: [-3.5, -5.4, -13.4], look: [-3.5, -5.6, -16.9] },
+    { u: 0.77, pos: [1, -5, -8.5], look: [2, -5.5, -16.9] },
+    { u: 0.82, pos: [5.4, -5.3, -8.4], look: [5.7, -5.7, -16.9] },
+    { u: 1, pos: [5.2, -5.2, -7.6], look: [5.7, -5.7, -16.9] },
   ],
   layers: [
     card('sky', [0, -4, -60], 100, 2.0, 1400, hkSky),
     card('peak', [0, -2, -42], 80, 2.0, 2200, hkPeak),
     card('inside', [0, -4.6, -17], 12, 2.2, 2600, hkInside),
+    card('bench', [-3.7, -5.6, -16.9], 2.4, 1.6, 1600, hkBench),
+    card('hall', [5.8, -5.2, -16.9], 6.5, 1.5, 2000, hkHall),
     card('dixon', [7.4, -6.2, -16.4], 3.4, 1.4, 900, hkDixon, { show: [0.8, 0.92] }),
     card('after', [6.6, -6.4, -16.2], 3.6, 1.8, 1000, hkAfter, { show: [0.92, 1.1] }),
     card('street', [0, 4, -12], 44, 2.1, 3200, hkStreet),
@@ -596,7 +627,7 @@ export const A2: SceneDef = {
 function meadowMid(g: Ctx, W: number, H: number, R: Rng) {
   meadow(g, W, H * 0.34, H, R, { grass: '#aecb98', flowers: ['#6fa8dc', '#ffffff', '#b6a6e0', '#7a63b8', '#e9c54a'], hexes: true, density: 2.2 });
   fadeTop(g, W, H, 0.3, 0.38);
-  for (let i = 0; i < 12; i++) hexTree(g, R() * W, H * (0.4 + R() * 0.1), H * (0.4 + R() * 0.3), R, '#e6efe8');
+  for (let i = 0; i < 12; i++) hexTree(g, R() * W, H * (0.4 + R() * 0.06), H * (0.22 + R() * 0.16), R, '#e6efe8', 0.6);
 }
 function meadowNear(g: Ctx, W: number, H: number, R: Rng) {
   meadow(g, W, H * 0.5, H, R, { grass: '#9cbf7a', flowers: ['#7a63b8', '#9a86d6', '#ffffff', '#6fa8dc', '#e48aa8'], hexes: true, density: 3, leaves: true });

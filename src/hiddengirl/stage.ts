@@ -192,7 +192,10 @@ export class Stage {
     this.renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: true, powerPreference: 'high-performance' });
     this.pr = Math.min(window.devicePixelRatio || 1, low ? 1.5 : 2);
     this.renderer.setPixelRatio(this.pr);
-    this.maxPx = low ? 1600 : Math.min(4096, this.renderer.capabilities.maxTextureSize);
+    this.maxPx = low ? 2048 : Math.min(4096, this.renderer.capabilities.maxTextureSize);
+    // ?tex=1024 caps the cards' resolution (for slow machines, and for tests)
+    const cap = Number(new URLSearchParams(location.search).get('tex'));
+    if (cap > 256) this.maxPx = Math.min(this.maxPx, cap);
     this.target = new THREE.WebGLRenderTarget(4, 4, { samples: low ? 0 : 4 });
     this.post = new THREE.ShaderMaterial({
       vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
@@ -233,7 +236,6 @@ export class Stage {
       let H = Math.min(L.px, this.maxPx);
       let W = H * L.aspect;
       if (W > this.maxPx) { W = this.maxPx; H = W / L.aspect; }
-      if (this.low) { W *= 0.75; H *= 0.75; }
       const c = canvas(W, H);
       const g = c.getContext('2d')!;
       const t0 = performance.now();
