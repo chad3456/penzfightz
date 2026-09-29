@@ -1530,6 +1530,27 @@ the names to search, and the whole stotram. Dawn, dusk or night colours.
 
 [The long version.](docs/sahasranama.md)
 
+## Shiva Loka
+
+A pilgrim's map of India in ink and wash, as a game: a 3D paper relief with
+torn edges, dry-brush outlines and washes. On it are 111 shrines: the twelve
+Jyotirlingas, Kailash, Amarnath, the five element lingas, the Panch Kedar, the
+fifty-one Shakti Peethas, and Krishna's places from Mathura to Dwarka,
+Shrinathji, Jagannath and Udupi. Walk there (a boat takes over at sea) and step
+in. Each shrine is a level with a difficulty from one to five and a task from
+its story:
+
+- the lamps of the waning Moon at Somnath;
+- Dushana at the gate of Mahakala;
+- the thin-air climb to Kedarnath;
+- Ravana's linga carried to Deoghar;
+- the priest's questions at Udupi.
+
+The diary keeps each story, retold from the Puranas with its source. Each
+temple rises again in a time-lapse of its history. Keyboard or a thumb stick.
+
+[The long version.](docs/shivaloka.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

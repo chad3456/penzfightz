@@ -41,7 +41,8 @@ export type EffectId =
   | 'banter'
   | 'gitareel'
   | 'gitaepic'
-  | 'sahasranama';
+  | 'sahasranama'
+  | 'shivaloka';
 
 export interface EffectDef {
   id: EffectId;
@@ -408,6 +409,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · 140k brush-stroke particles', 'four chosen paintings, alive', '1000 names, each with its meaning'],
     ink: '#d9b566',
     wash: 'rgba(217, 181, 102, 0.12)',
+  },
+  {
+    id: 'shivaloka',
+    name: 'Shiva Loka',
+    tagline: 'A pilgrim\'s map of India in ink and wash: walk to the Jyotirlingas, the great Shivalingas, the Shakti Peethas and Krishna\'s places, and earn each darshan.',
+    blurb:
+      'A 3D map of India drawn as an ink-wash painting — torn paper, dry-brush outlines, washes that thin into the distance — with a hundred and eleven shrines on it: the twelve Jyotirlingas, Kailash, Amarnath, the five element lingas, the Panch Kedar and Pancharama, the rock-cut temples; the fifty-one Shakti Peethas where Sati\'s body fell, from Hinglaj to Kamakhya; and Mathura, Vrindavan, Govardhan, Dwarka, Kurukshetra, Shrinathji at Nathdwara, Jagannath, Udupi, Guruvayur and Pandharpur. Walk the pilgrim there (a boat takes over at sea), step in, and every shrine is a level on its own ground, with a difficulty from one to five and a task out of its story: fifteen lamps for the waning Moon at Somnath, jasmine for Mallika at Srisailam, Dushana at the gate of Mahakala, Ganga water carried up to Kashi Vishwanath, the climb to Kedarnath with the air running thin, the linga Ravana could not set down at Deoghar, the priest\'s questions at Udupi. Win and the diary gets the story — retold from the Shiva Purana and the other Puranas, with the chapter — and the temple rises again in a time-lapse of its history, from legend to the last rebuilding.',
+    spec: ['three.js · ink-wash post-process', '111 shrines · 8 kinds of task', 'stories retold, with sources'],
+    ink: '#c8901c',
+    wash: 'rgba(200, 144, 28, 0.12)',
   },
 ];
 
