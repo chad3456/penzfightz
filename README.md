@@ -1605,6 +1605,23 @@ occlusion, bloom, a tilt-shift lens and a day that turns to night.
 
 [The long version.](docs/uproar.md)
 
+## Guitar Atlas
+
+An illustrated, interactive map of where the world's guitars are made. Every
+place that builds guitars is a guitar pick sized by its reported output: from
+Zheng'an County in Guizhou (about six million a year, by its own count one in
+seven worldwide) to Martin's Nazareth, Pennsylvania (since 1839). Switch the
+map to:
+- **exports** (China ships 38.6% of the world's guitar-type exports by value);
+- **tonewood** (spruce, mahogany, ebony and rosewood flowing to the
+  factories);
+- **history**, as the factory moves from America to Japan, Korea, Mexico,
+  China and Indonesia.
+
+Look up a brand to see where each line is built. Every figure is sourced.
+
+[The long version.](docs/guitar-atlas.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

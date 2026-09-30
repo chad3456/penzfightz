@@ -48,6 +48,7 @@ import { ShivaLoka } from './shivaloka/ShivaLoka';
 import { HiddenGirl } from './hiddengirl/HiddenGirl';
 import { Airstrip } from './airstrip/Airstrip';
 import { Uproar } from './uproar/Uproar';
+import { GuitarAtlas } from './guitaratlas/GuitarAtlas';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -267,6 +268,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'uproar') {
     return <Uproar onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'guitaratlas') {
+    return <GuitarAtlas onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

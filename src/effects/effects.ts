@@ -45,7 +45,8 @@ export type EffectId =
   | 'shivaloka'
   | 'hiddengirl'
   | 'airstrip'
-  | 'uproar';
+  | 'uproar'
+  | 'guitaratlas';
 
 export interface EffectDef {
   id: EffectId;
@@ -452,6 +453,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['R3F · drei · Rapier · postprocessing', '720 people · 7 districts · 7 moves', 'ambient occlusion, bloom, tilt-shift'],
     ink: '#ff2e88',
     wash: 'rgba(255, 46, 136, 0.10)',
+  },
+  {
+    id: 'guitaratlas',
+    name: 'Guitar Atlas',
+    tagline: 'An illustrated, interactive atlas of where the world\'s guitars are made: the factories, the money and the wood.',
+    blurb:
+      'A hand-drawn world map with a guitar pick on every place that builds guitars, sized by how many it says it makes each year: Zheng\'an County in Guizhou (about six million, one in seven of the world\'s), Changle and Huizhou, Cort\'s plant in Surabaya, Fender in Ensenada, Taylor in Tecate, Martin in Nazareth since 1839. Switch the map to exports (China ships 38% of the world\'s guitar-type exports by value), to tonewood (Sitka spruce from Alaska, ebony from Cameroon, rosewood from India, flowing to the factories that use them), or to history, as the factory moves from America to Japan, Korea, Mexico, China and Indonesia. Look up your own guitar\'s brand to see which country each line comes from. Every figure is sourced.',
+    spec: ['d3-geo · d3-zoom · Natural Earth', '31 places · 11 tonewoods · 14 brands', 'every figure sourced'],
+    ink: '#b0662a',
+    wash: 'rgba(176, 102, 42, 0.10)',
   },
 ];
 
