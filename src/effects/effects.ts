@@ -44,7 +44,8 @@ export type EffectId =
   | 'sahasranama'
   | 'shivaloka'
   | 'hiddengirl'
-  | 'airstrip';
+  | 'airstrip'
+  | 'uproar';
 
 export interface EffectDef {
   id: EffectId;
@@ -441,6 +442,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · 150 citizens, inked', 'nine tools, six events, one year', 'after Orwell · the words are ours'],
     ink: '#c8312a',
     wash: 'rgba(200, 49, 42, 0.10)',
+  },
+  {
+    id: 'uproar',
+    name: 'UPROAR',
+    tagline: 'One megaphone, one city: gather a crowd, throw street parties, occupy the plazas and march on City Hall.',
+    blurb:
+      'A toy city in a tilt-shift lens, seven districts round a domed City Hall, seven hundred people going about their day and forty-four cars going round the block. You have a megaphone. Chant and the people you pass fall in behind you and follow the path you walk; roll up a sound system and the street stops to dance; paint a mural on a wall, blow a cloud of colour, and bounce giant beach balls over the heads of the crowd (real rigid bodies, kept in the air by the people underneath). Fill a district\'s plaza and hold it, and the fireworks go up. The noise brings heat: patrols that pick off stragglers, vans, a news helicopter with a searchlight after dark, and at the top a water cannon that meets a thousand umbrellas. Big crowds simply outnumber the police, and every officer in the city will stop for pizza. Take five districts and City Hall opens its doors. A cartoon: nobody gets hurt.',
+    spec: ['R3F · drei · Rapier · postprocessing', '720 people · 7 districts · 7 moves', 'ambient occlusion, bloom, tilt-shift'],
+    ink: '#ff2e88',
+    wash: 'rgba(255, 46, 136, 0.10)',
   },
 ];
 

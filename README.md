@@ -1586,6 +1586,25 @@ enemy, Hate Week, and Room 101.
 
 [The long version.](docs/airstrip-one.md)
 
+## UPROAR
+
+A game of people power in a toy city. You have a megaphone. Chant, and the
+people you pass fall in behind you and follow your path. Then:
+- throw street parties that stop the traffic;
+- paint murals;
+- bounce giant beach balls over the crowd;
+- blow clouds of colour.
+
+Fill a district's plaza and hold it. Take five districts and march on City
+Hall. The noise brings police, who pick off stragglers, then a water cannon;
+answer them with umbrellas, pizza and sheer numbers. A cartoon: nobody gets
+hurt.
+
+Built with react-three-fiber, drei, Rapier and postprocessing: ambient
+occlusion, bloom, a tilt-shift lens and a day that turns to night.
+
+[The long version.](docs/uproar.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the
