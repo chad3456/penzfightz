@@ -46,7 +46,8 @@ export type EffectId =
   | 'hiddengirl'
   | 'airstrip'
   | 'uproar'
-  | 'guitaratlas';
+  | 'guitaratlas'
+  | 'greatbuild';
 
 export interface EffectDef {
   id: EffectId;
@@ -463,6 +464,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['d3-geo · d3-zoom · Natural Earth', '31 places · 11 tonewoods · 14 brands', 'every figure sourced'],
     ink: '#b0662a',
     wash: 'rgba(176, 102, 42, 0.10)',
+  },
+  {
+    id: 'greatbuild',
+    name: 'The Great Build',
+    tagline: 'A scrolling visual story of twenty years of ports, subways and expressways: who built them, and how fast.',
+    blurb:
+      'Three chapters that redraw themselves as you scroll. Ports: container bubbles on a world map swell from 2004 to 2024 (Shanghai 14.6 to 51.5 million boxes, Ningbo 4 to 39) while Hong Kong, the busiest port on Earth in 2004, shrinks to a 28-year low; then the World Bank\'s most efficient ports, which are not the biggest. Metros: Beijing\'s subway grows from 114 km to 909 km beside New York\'s five new kilometres, Delhi, Dubai and Riyadh get whole new systems, and China\'s 10,946 km of urban rail is laid out 50 km to a square. Expressways: China\'s network overtakes the US Interstate in 2011 and reaches 190,700 km, and the 156,400 km it added wraps round the equator 3.9 times. Every figure is in a sourced ledger at the end.',
+    spec: ['scrollytelling · d3-geo', '15 ports · 6 metros · 3 road networks', 'sourced, with checked figures marked'],
+    ink: '#eb6834',
+    wash: 'rgba(235, 104, 52, 0.10)',
   },
 ];
 

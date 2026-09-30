@@ -1622,6 +1622,21 @@ Look up a brand to see where each line is built. Every figure is sourced.
 
 [The long version.](docs/guitar-atlas.md)
 
+## The Great Build
+
+A scrolling visual story about twenty years of infrastructure, 2004 to 2024:
+- **Ports:** container ports swell on a world map. Shanghai goes from 14.6 M
+  to 51.5 M boxes, while Hong Kong, the world's busiest in 2004, shrinks.
+- **Metros:** Beijing's subway goes from 114 km to 909 km while New York adds
+  5.
+- **Expressways:** China's network passes the US Interstate in 2011 and adds
+  enough road to circle the equator 3.9 times.
+
+Every number is in a sourced ledger at the end, with the ones not re-checked
+marked.
+
+[The long version.](docs/great-build.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the
