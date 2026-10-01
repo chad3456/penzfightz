@@ -1634,6 +1634,16 @@ A scrolling visual story about twenty years of infrastructure, 2004 to 2024:
 
 Every number is in a sourced ledger at the end, with the ones not re-checked
 marked.
+After each chapter, "Go deeper" labs let you:
+- scrub through record container ships, which got wider, not longer;
+- pick a budget and see how many km of metro it buys in New York vs Seoul
+  (Transit Costs Project);
+- draw your guess of China's expressway curve before seeing the real one;
+- take a four-question guess-first quiz.
+
+Insight cards add the small print, from research papers, industry reports,
+books and bulletins: toll-road debt, falling metro ridership, India's
+reclassified highways, and the Hambantota myth.
 
 [The long version.](docs/great-build.md)
 

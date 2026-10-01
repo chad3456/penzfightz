@@ -4,6 +4,8 @@ import { feature } from 'topojson-client';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import type { GeometryCollection, Topology } from 'topojson-specification';
 import worldUrl from 'world-atlas/countries-110m.json?url';
+import { CostLab, DrawLab, Insights, Lab, QuizLab, ShipsLab } from './Labs';
+import { METRO_INSIGHTS, PORT_INSIGHTS, ROAD_INSIGHTS } from './deep';
 import {
   CHINA_URBAN_RAIL, CN_EXPRESSWAY, CN_EXP_CHECKED, CPPI_2023, EARTH_KM, INDIA_METRO, IN_EXPRESSWAY, IN_NH, METROS, PORTS, SOURCES, US_INTERSTATE, fmt,
   type Nation, type Port,
@@ -169,6 +171,10 @@ export function GreatBuild({ onExit }: { onExit: () => void }) {
           graphic={(step, w, h) => <PortsGraphic step={step} w={w} h={h} world={world} />}
         />
       </div>
+      <Lab n="01+" title="Wider, not longer" sub="The record ship of each era, drawn to scale. Scrub through the years, then open the cards for what the headline numbers leave out.">
+        <ShipsLab />
+        <Insights items={PORT_INSIGHTS} />
+      </Lab>
 
       <div id="gb-metro">
         <Chapter
@@ -182,6 +188,10 @@ export function GreatBuild({ onExit }: { onExit: () => void }) {
           graphic={(step, w, h) => <MetroGraphic step={step} w={w} h={h} />}
         />
       </div>
+      <Lab n="02+" title="What does a kilometre buy?" sub="Pick a budget. Each line shows how much metro it buys at that city's cost per kilometre; each dot is a station every 2 km.">
+        <CostLab />
+        <Insights items={METRO_INSIGHTS} />
+      </Lab>
 
       <div id="gb-roads">
         <Chapter
@@ -191,11 +201,18 @@ export function GreatBuild({ onExit }: { onExit: () => void }) {
             <><h3>2011</h3><p>China passed the Interstate. Since 2004 it has added an average of <b>7,800 km a year</b>: a whole Interstate system&rsquo;s worth in under ten years.</p></>,
             <><h3>2024</h3><p><b>190,700 km</b>, about half of all the expressway on Earth. The Interstate grew by a few thousand kilometres over the same twenty years.</p></>,
             <><h3>{(addedCn / EARTH_KM).toFixed(1)} times round the planet</h3><p>The <b>{fmt(addedCn)} km</b> China added since 2004, laid end to end, would wrap round the equator {(addedCn / EARTH_KM).toFixed(1)} times.</p></>,
-            <><h3>India is next</h3><p><span className="gb-k gb-k--in">India</span> had under 200 km of access-controlled expressway in 2004. It had <b>{fmt(IN_EXPRESSWAY[1]![1])} km</b> by 2026, with another 11,000 km under construction.</p><p>Its national highways grew from {fmt(IN_NH.km14)} km in 2014 to {fmt(IN_NH.km24)} km in 2024.</p></>,
+            <><h3>India is next</h3><p><span className="gb-k gb-k--in">India</span> had under 200 km of access-controlled expressway in 2004. It had <b>{fmt(IN_EXPRESSWAY[1]![1])} km</b> by 2026, with another 11,000 km under construction.</p><p>Its national highways grew from {fmt(IN_NH.km14)} km in 2014 to {fmt(IN_NH.km24)} km in 2024, though about 50,000 km of that was existing state roads renamed as national highways (see the small print below).</p></>,
           ]}
           graphic={(step, w, h) => <RoadGraphic step={step} w={w} h={h} />}
         />
       </div>
+      <Lab n="03+" title="Draw it before you see it" sub="Draw your guess of the curve first, then compare it with the real one. The gap between the two is the point of the chapter.">
+        <DrawLab />
+        <Insights items={ROAD_INSIGHTS} />
+      </Lab>
+      <Lab n="??" title="Guess first" sub="Four numbers from the research behind this story. Slide to your guess, lock it in, see how far off you were.">
+        <QuizLab />
+      </Lab>
 
       <section className="gb-outro">
         <h2 className="gb-ch-title">The ledger</h2>
