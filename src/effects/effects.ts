@@ -47,7 +47,8 @@ export type EffectId =
   | 'airstrip'
   | 'uproar'
   | 'guitaratlas'
-  | 'greatbuild';
+  | 'greatbuild'
+  | 'salon';
 
 export interface EffectDef {
   id: EffectId;
@@ -474,6 +475,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['scrollytelling · d3-geo', '15 ports · 6 metros · 3 road networks', 'sourced, with checked figures marked'],
     ink: '#eb6834',
     wash: 'rgba(235, 104, 52, 0.10)',
+  },
+  {
+    id: 'salon',
+    name: 'Glass Houses: The Salon',
+    tagline: 'A group chat with the dead: philosophers argue about questions they never faced, and you throw the stones.',
+    blurb:
+      'Fourteen thinkers are added to group chats about today\'s questions. Vivekananda, Wollstonecraft, Rousseau, Aristotle and Mill on equal rights for women; Camus, Plato, Kant, Bentham and Oscar Wilde on same-sex marriage; Descartes, Lovelace, Leibniz, Turing and Bentham on whether an AI can suffer. You moderate: ask, press, or throw a stone, a documented fact from their own life set against what they wrote. Rousseau wrote the book on raising children and left his five at the foundling hospital; Mill championed liberty and spent 35 years at the East India Company; Bentham argued for decriminalisation in 1785 and never published it. Cracks and fog spread across each thinker\'s glass house, then you judge them, and finally yourself. Every message is badged: their own words (sourced), attributed, paraphrase, or imagined.',
+    spec: ['3 salons · 14 thinkers', 'every line badged and sourced', 'a familiar chat app, with portraits'],
+    ink: '#c76a2f',
+    wash: 'rgba(199, 106, 47, 0.10)',
   },
 ];
 

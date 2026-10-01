@@ -664,3 +664,15 @@ researcher's institution; the game itself is not a study.
 - Valdesolo, P., & DeSteno, D. (2007). Moral hypocrisy: Social groups and the flexibility of virtue. *Psychological Science*, 18(8).
 - Warner, S. L. (1965). Randomized response. *JASA*, 60(309).
 - Retracted, cited only as a warning: Shu, L. L., et al. (2012), *PNAS*; retracted 2021.
+
+---
+
+## Spin-off built: The Salon
+
+`docs/salon.md`, and on the site's Effects shelf as "Glass Houses: The
+Salon". The Glass Houses idea applied to the dead:
+- philosophers in a group chat about present-day questions;
+- you throw stones (documented facts from their lives);
+- cracks and fog on their houses;
+- a verdict, then a private mirror for the player.
+

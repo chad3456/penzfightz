@@ -1637,6 +1637,23 @@ marked.
 
 [The long version.](docs/great-build.md)
 
+## Glass Houses: The Salon
+
+A group chat with the dead. Philosophers argue about questions their
+century never faced:
+- Vivekananda, Wollstonecraft, Rousseau, Aristotle and Mill on equal rights
+  for women;
+- Camus, Plato, Kant, Bentham and Wilde on same-sex marriage;
+- Descartes, Lovelace, Leibniz, Turing and Bentham on whether an AI can
+  suffer.
+
+You moderate: ask, press, or throw a stone, a documented fact from their
+own life. Cracks spread across their glass houses. Then you judge them, and
+yourself. Every message is badged as their own words (sourced), attributed,
+paraphrase or imagined.
+
+[The long version.](docs/salon.md) · [The game it belongs to.](docs/glass-houses.md)
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

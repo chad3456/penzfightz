@@ -50,6 +50,7 @@ import { Airstrip } from './airstrip/Airstrip';
 import { Uproar } from './uproar/Uproar';
 import { GuitarAtlas } from './guitaratlas/GuitarAtlas';
 import { GreatBuild } from './greatbuild/GreatBuild';
+import { Salon } from './salon/Salon';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -275,6 +276,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'greatbuild') {
     return <GreatBuild onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'salon') {
+    return <Salon onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;
