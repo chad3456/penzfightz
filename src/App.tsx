@@ -52,6 +52,7 @@ import { GuitarAtlas } from './guitaratlas/GuitarAtlas';
 import { GreatBuild } from './greatbuild/GreatBuild';
 import { Salon } from './salon/Salon';
 import { HeirloomWall } from './heirloom/HeirloomWall';
+import { Mosaic } from './mosaic/Mosaic';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -283,6 +284,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'heirloom') {
     return <HeirloomWall onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'tesserae') {
+    return <Mosaic onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

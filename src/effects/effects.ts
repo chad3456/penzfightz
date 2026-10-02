@@ -49,7 +49,8 @@ export type EffectId =
   | 'guitaratlas'
   | 'greatbuild'
   | 'salon'
-  | 'heirloom';
+  | 'heirloom'
+  | 'tesserae';
 
 export interface EffectDef {
   id: EffectId;
@@ -496,6 +497,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['28 ideas · scale SVG elevations', 'day / evening lighting · your own photos', 'planner with drill points'],
     ink: '#a77a1f',
     wash: 'rgba(167, 122, 31, 0.10)',
+  },
+  {
+    id: 'tesserae',
+    name: 'Tesserae',
+    tagline: 'A mosaic of Ayodhya and Kurukshetra laid one tile at a time, starting with an eye: 7,446 tiles, all cut by code in the browser.',
+    blurb:
+      'It starts with an eye: nine tiles for the pupil (eight of black glass, one white marble catchlight), then a ring of gold. The eye turns out to be the sun, Surya, "the eye of Mitra, Varuna and Agni" in the Rigveda and the ancestor of Ayodhya\'s kings. Then the camera pulls back as the rest go down: lapis sky in courses that curve around it, the Pushpaka vimana coming home, the Himalaya, Ayodhya\'s walls, gate and temples on the Sarayu, and below a gold line, Krishna and Arjuna\'s chariot at Kurukshetra under the monkey banner. 7,446 tiles later the frame closes. The cartoon is drawn with canvas paths and cut by a weighted centroidal Voronoi tessellation. Every tile is turned to follow the drawing, roughened like hand-cut stone, and pressed into mortar over a red-ochre underdrawing. The gold catches a lamp that follows your pointer.',
+    spec: ['7,446 tiles · canvas 2D', 'weighted Voronoi + andamento', 'no images, no models'],
+    ink: '#d6a43a',
+    wash: 'rgba(214, 164, 58, 0.12)',
   },
 ];
 

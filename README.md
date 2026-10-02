@@ -1679,6 +1679,22 @@ You can load your own photos and every mockup uses them; they stay in the
 tab. A planner turns wall, sofa and painting sizes into drill points, and a
 shortlist prints as one brief per page. See `docs/heirloom-wall.md`.
 
+## Tesserae
+
+A mosaic laid one tessera at a time in the browser, with no image or video
+model. It starts with an eye: nine tiles for the pupil, then a ring of gold.
+The eye is the sun, and 7,446 tiles later there is Ayodhya on the Sarayu,
+with Krishna and Arjuna's chariot at Kurukshetra below it.
+
+The cartoon is drawn with canvas paths and cut by a weighted centroidal
+Voronoi tessellation in a Web Worker. Each tile:
+- follows the drawing's flow (andamento);
+- is roughened like hand-cut stone;
+- is pressed into mortar over a red-ochre sinopia.
+
+Gold glass catches a lamp that follows your pointer. See
+`docs/tesserae.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the
