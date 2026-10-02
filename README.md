@@ -1664,6 +1664,21 @@ paraphrase or imagined.
 
 [The long version.](docs/salon.md) · [The game it belongs to.](docs/glass-houses.md)
 
+## Heirloom Wall
+
+Twenty-eight buildable ways to hang three ancestral Nathdwara paintings
+(Shrinathji, a Pushtimarg acharya, and Krishna with a lotus garland) in a
+living room. Each idea:
+- is drawn to scale on a wall, with a sofa and a person for size;
+- switches between day and evening lighting;
+- comes with a point-by-point brief: layout, materials, the craftspeople who
+  make it, fixing, lighting, protecting the raised gold and kundan stones,
+  and a ballpark cost.
+
+You can load your own photos and every mockup uses them; they stay in the
+tab. A planner turns wall, sofa and painting sizes into drill points, and a
+shortlist prints as one brief per page. See `docs/heirloom-wall.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

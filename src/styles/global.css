@@ -9659,3 +9659,151 @@ button.card:hover:not(:disabled) {
   .gx-per { display: none; }
   .gx-row-l span { display: none; }
 }
+
+/* ───────────── Darshan Wall ───────────── */
+.dw-root {
+  color-scheme: light;
+  --dw-bg: #f5efe4; --dw-card: #fffbf3; --dw-ink: #1f1a14; --dw-ink2: #564d42; --dw-muted: #8a7f70; --dw-line: rgba(31, 26, 20, 0.13);
+  --dw-gold: #a77a1f; --dw-indigo: #26306b; --dw-accent: #b0462a; --dw-chip: #efe5d4;
+  position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: var(--dw-bg); color: var(--dw-ink);
+  font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; line-height: 1.5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) .dw-root {
+    color-scheme: dark;
+    --dw-bg: #15130f; --dw-card: #1f1c17; --dw-ink: #f1e9da; --dw-ink2: #c7bba7; --dw-muted: #94897a; --dw-line: rgba(241, 233, 218, 0.14);
+    --dw-gold: #e0b45a; --dw-indigo: #9aa6ef; --dw-accent: #ec8a65; --dw-chip: #2a261f;
+  }
+}
+:root[data-theme='dark'] .dw-root {
+  color-scheme: dark;
+  --dw-bg: #15130f; --dw-card: #1f1c17; --dw-ink: #f1e9da; --dw-ink2: #c7bba7; --dw-muted: #94897a; --dw-line: rgba(241, 233, 218, 0.14);
+  --dw-gold: #e0b45a; --dw-indigo: #9aa6ef; --dw-accent: #ec8a65; --dw-chip: #2a261f;
+}
+.dw-root--modal { overflow: hidden; }
+.dw-root button { font: inherit; color: inherit; cursor: pointer; }
+.dw-top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 10px 20px; background: color-mix(in srgb, var(--dw-bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--dw-line); }
+.dw-brand { font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 0.12em; font-size: 15px; color: var(--dw-gold); }
+.dw-top-r { margin-left: auto; }
+.dw-ghost { background: none; border: 1px solid var(--dw-line); border-radius: 999px; padding: 4px 12px; font-size: 15px !important; font-family: system-ui, sans-serif !important; }
+.dw-ghost:hover { border-color: var(--dw-gold); }
+.dw-hero { max-width: 1180px; margin: 0 auto; padding: 48px 20px 20px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; }
+.dw-kicker { font-family: 'Cinzel', serif; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dw-gold); margin: 0 0 8px; }
+.dw-h1 { font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(40px, 6vw, 72px); line-height: 1; margin: 0 0 16px; letter-spacing: 0.02em; }
+.dw-h2 { font-family: 'Cinzel', serif; font-weight: 600; font-size: clamp(24px, 3vw, 32px); margin: 0 0 10px; line-height: 1.15; }
+.dw-lede { font-size: 21px; color: var(--dw-ink2); margin: 0 0 12px; }
+.dw-lede span[lang] { font-family: 'Noto Serif Devanagari', serif; font-size: 0.85em; color: var(--dw-ink); }
+.dw-note { font-family: system-ui, sans-serif; font-size: 14px; color: var(--dw-muted); margin: 0; }
+.dw-trio { display: grid; grid-template-columns: 1fr 1.08fr 1fr; gap: 14px; align-items: end; }
+.dw-slot { position: relative; display: flex; flex-direction: column; gap: 2px; cursor: pointer; text-align: center; }
+.dw-slot input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.dw-painting { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); border-radius: 2px; }
+.dw-slot-name { font-weight: 600; font-size: 17px; margin-top: 8px; }
+.dw-slot-note { font-family: system-ui, sans-serif; font-size: 12.5px; color: var(--dw-muted); }
+.dw-slot-btn { align-self: center; margin-top: 6px; font-family: system-ui, sans-serif; font-size: 13px; padding: 4px 12px; border-radius: 999px; border: 1px dashed var(--dw-gold); color: var(--dw-gold); }
+.dw-slot:hover .dw-slot-btn, .dw-slot:focus-within .dw-slot-btn { background: var(--dw-gold); color: var(--dw-bg); border-style: solid; }
+.dw-gaze { max-width: 1180px; margin: 10px auto 0; padding: 18px 20px; display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: center; border-top: 1px solid var(--dw-line); border-bottom: 1px solid var(--dw-line); }
+.dw-gaze p { margin: 0; color: var(--dw-ink2); }
+.dw-gaze b { color: var(--dw-ink); }
+.dw-gaze-svg { width: 100%; height: auto; }
+.dw-gaze-svg text { font-family: system-ui, sans-serif; font-size: 18px; fill: var(--dw-ink2); }
+.dw-gaze-arrow { fill: none; stroke: var(--dw-gold); stroke-width: 3; stroke-dasharray: 6 6; }
+.dw-gaze-dot { fill: var(--dw-indigo); }
+.dw-controls { position: sticky; top: 49px; z-index: 4; max-width: 1180px; margin: 0 auto; padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; background: color-mix(in srgb, var(--dw-bg) 92%, transparent); backdrop-filter: blur(8px); font-family: system-ui, sans-serif; font-size: 14px; }
+.dw-seg { display: inline-flex; border: 1px solid var(--dw-line); border-radius: 999px; overflow: hidden; }
+.dw-seg button { background: none; border: 0; padding: 6px 14px; font-size: 14px !important; font-family: system-ui, sans-serif !important; }
+.dw-seg button.on { background: var(--dw-ink); color: var(--dw-bg); }
+.dw-check { display: inline-flex; gap: 6px; align-items: center; }
+.dw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.dw-chips button { background: var(--dw-chip); border: 1px solid transparent; border-radius: 999px; padding: 5px 12px; font-size: 13.5px !important; font-family: system-ui, sans-serif !important; }
+.dw-chips button.on { border-color: var(--dw-gold); background: color-mix(in srgb, var(--dw-gold) 18%, var(--dw-chip)); }
+.dw-range { display: inline-flex; flex-direction: column; gap: 2px; min-width: 200px; }
+.dw-range input { accent-color: var(--dw-gold); }
+.dw-grid { max-width: 1180px; margin: 0 auto; padding: 10px 20px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; }
+.dw-card { background: var(--dw-card); border: 1px solid var(--dw-line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+.dw-card-hit { border: 0; padding: 0; background: none; display: block; }
+.dw-mock { width: 100%; height: auto; display: block; }
+.dw-card-body { padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.dw-card-head { display: flex; align-items: baseline; gap: 10px; }
+.dw-card-head h3 { margin: 0; font-family: 'Cinzel', serif; font-size: 19px; font-weight: 600; line-height: 1.2; flex: 1; }
+.dw-num { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--dw-gold); }
+.dw-card-body > p { margin: 0; color: var(--dw-ink2); font-size: 17.5px; line-height: 1.4; }
+.dw-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-family: system-ui, sans-serif; font-size: 12.5px; color: var(--dw-muted); margin-top: auto; }
+.dw-meta span:first-child { color: var(--dw-ink); font-weight: 600; }
+.dw-star { background: none; border: 0; color: var(--dw-gold); font-size: 20px !important; padding: 0 2px; }
+.dw-star.on { color: var(--dw-accent); }
+.dw-more { align-self: flex-start; background: none; border: 0; padding: 0; color: var(--dw-accent); font-family: system-ui, sans-serif !important; font-size: 14px !important; font-weight: 600; }
+.dw-empty { grid-column: 1 / -1; text-align: center; color: var(--dw-muted); }
+.dw-basics, .dw-planner, .dw-short { max-width: 1180px; margin: 0 auto; padding: 36px 20px; border-top: 1px solid var(--dw-line); }
+.dw-basics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px 24px; }
+.dw-basic h4 { margin: 0 0 4px; font-family: 'Cinzel', serif; font-size: 16px; font-weight: 600; color: var(--dw-gold); }
+.dw-basic p { margin: 0; color: var(--dw-ink2); font-size: 17px; line-height: 1.45; }
+.dw-sub { font-family: system-ui, sans-serif; font-size: 14px; color: var(--dw-muted); margin: 0 0 14px; max-width: 760px; line-height: 1.5; }
+.dw-plan { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
+.dw-plan-in { display: grid; gap: 8px; font-family: system-ui, sans-serif; font-size: 13.5px; }
+.dw-field { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.dw-field--pair { flex-direction: column; align-items: stretch; gap: 2px; }
+.dw-field-in { display: inline-flex; align-items: center; gap: 4px; color: var(--dw-muted); }
+.dw-field input { width: 64px; padding: 4px 6px; border: 1px solid var(--dw-line); border-radius: 6px; background: var(--dw-card); color: var(--dw-ink); font: 14px 'IBM Plex Mono', monospace; }
+.dw-plan-svg { width: 100%; height: auto; display: block; background: var(--dw-card); border: 1px solid var(--dw-line); border-radius: 8px; }
+.dw-p-wall { fill: color-mix(in srgb, var(--dw-gold) 6%, var(--dw-card)); }
+.dw-p-sofa { fill: color-mix(in srgb, var(--dw-ink) 14%, transparent); }
+.dw-p-centre { stroke: var(--dw-accent); stroke-dasharray: 6 5; stroke-width: 1.4; }
+.dw-p-t { font: 13px system-ui, sans-serif; fill: var(--dw-accent); }
+.dw-p-frame { fill: #3a2414; }
+.dw-p-art { fill: #b5674b; }
+.dw-p-hook { fill: var(--dw-accent); stroke: var(--dw-card); stroke-width: 2; }
+.dw-p-floor { stroke: var(--dw-ink); stroke-width: 2; }
+.dw-plan-table { width: 100%; border-collapse: collapse; margin: 14px 0 10px; font-family: system-ui, sans-serif; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.dw-plan-table th, .dw-plan-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--dw-line); }
+.dw-plan-table th { color: var(--dw-muted); font-weight: 500; }
+.dw-warn { font-family: system-ui, sans-serif; font-size: 13.5px; color: var(--dw-accent); margin: 4px 0; }
+.dw-btn { font-family: system-ui, sans-serif !important; font-size: 14px !important; background: var(--dw-ink); color: var(--dw-bg) !important; border: 0; border-radius: 999px; padding: 8px 18px; margin-bottom: 20px; }
+.dw-foot { max-width: 1180px; margin: 0 auto; padding: 20px 20px 60px; font-family: system-ui, sans-serif; font-size: 13px; color: var(--dw-muted); border-top: 1px solid var(--dw-line); }
+.dw-modal { position: fixed; inset: 0; z-index: 20; background: rgba(10, 8, 6, 0.6); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.dw-sheet { background: var(--dw-bg); border-radius: 12px; width: min(1240px, 100%); max-height: 100%; overflow-y: auto; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); }
+.dw-sheet-bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--dw-bg); border-bottom: 1px solid var(--dw-line); font-family: system-ui, sans-serif; font-size: 14px; }
+.dw-sheet-bar .dw-star { font-size: 15px !important; font-family: system-ui, sans-serif !important; }
+.dw-sheet-sp { flex: 1; }
+.dw-brief { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; padding: 22px; }
+.dw-brief-art { position: sticky; top: 64px; align-self: start; }
+.dw-brief-art .dw-mock { border-radius: 8px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
+.dw-brief-tools { display: flex; gap: 14px; align-items: center; margin-top: 10px; font-family: system-ui, sans-serif; font-size: 14px; }
+.dw-brief-hook { font-size: 20px; color: var(--dw-ink2); margin: 0 0 14px; font-style: italic; }
+.dw-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.dw-facts div { background: var(--dw-card); border: 1px solid var(--dw-line); border-radius: 8px; padding: 8px 10px; display: flex; flex-direction: column; }
+.dw-facts span { font-family: system-ui, sans-serif; font-size: 11.5px; color: var(--dw-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.dw-facts b { font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; }
+.dw-points { list-style: none; margin: 0; padding: 0; counter-reset: dwp; display: grid; gap: 12px; }
+.dw-points li { counter-increment: dwp; display: grid; grid-template-columns: 28px 1fr; column-gap: 10px; font-size: 18px; line-height: 1.45; }
+.dw-points li::before { content: counter(dwp); grid-row: span 2; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--dw-bg); background: var(--dw-gold); width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; margin-top: 2px; }
+.dw-pk { font-family: 'Cinzel', serif; font-weight: 600; font-size: 13.5px; letter-spacing: 0.06em; color: var(--dw-gold); text-transform: uppercase; }
+.dw-brief--print { border-top: 1px solid var(--dw-line); padding: 22px 0; }
+@media (max-width: 900px) {
+  .dw-hero { grid-template-columns: 1fr; gap: 24px; padding-top: 28px; }
+  .dw-gaze { grid-template-columns: 1fr; }
+  .dw-plan { grid-template-columns: 1fr; }
+  .dw-brief { grid-template-columns: 1fr; padding: 16px; }
+  .dw-brief-art { position: static; }
+  .dw-facts { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .dw-root { font-size: 18px; }
+  .dw-hero, .dw-gaze, .dw-controls, .dw-grid, .dw-basics, .dw-planner, .dw-short, .dw-foot { padding-left: 16px; padding-right: 16px; }
+  .dw-grid { grid-template-columns: 1fr; }
+  .dw-controls { position: static; }
+  .dw-trio { gap: 8px; }
+  .dw-slot-name { font-size: 14px; }
+  .dw-slot-note { font-size: 11px; }
+  .dw-modal { padding: 0; }
+  .dw-sheet { border-radius: 0; height: 100%; }
+  .dw-plan-table { font-size: 12px; }
+  .dw-plan-table th, .dw-plan-table td { padding: 5px 4px; }
+}
+@media print {
+  .dw-root { position: static; overflow: visible; background: #fff; color: #000; }
+  .dw-root > *:not(.dw-short) { display: none !important; }
+  .dw-short .dw-btn, .dw-short .dw-sub { display: none; }
+  .dw-brief--print { break-after: page; grid-template-columns: 1fr; }
+  .dw-brief-art { position: static; }
+}

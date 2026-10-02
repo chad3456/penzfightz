@@ -48,7 +48,8 @@ export type EffectId =
   | 'uproar'
   | 'guitaratlas'
   | 'greatbuild'
-  | 'salon';
+  | 'salon'
+  | 'heirloom';
 
 export interface EffectDef {
   id: EffectId;
@@ -485,6 +486,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['3 salons · 14 thinkers', 'every line badged and sourced', 'a familiar chat app, with portraits'],
     ink: '#c76a2f',
     wash: 'rgba(199, 106, 47, 0.10)',
+  },
+  {
+    id: 'heirloom',
+    name: 'Heirloom Wall',
+    tagline: 'Twenty-eight buildable ways to hang three ancestral Nathdwara paintings, each drawn to scale on a living-room wall.',
+    blurb:
+      'Three Nathdwara paintings from an old family house (Shrinathji, a Pushtimarg acharya, and Krishna with a lotus garland) get a new wall. Every idea is drawn to scale, with a sofa and a person for size, and switches between day and evening light: haveli jharokhas, a pichwai backdrop, darshan shutters that open like the temple doors, a torana in the pink sandstone of the new Ram Mandir, thikri mirror-work, Molela terracotta, a turning three-sided pillar, a museum vitrine. Each comes with a point-by-point brief: materials, the craftspeople who make it, fixing, lighting, how the raised gold and kundan stones stay safe, and a ballpark cost. Load your own photos and every mockup uses them; a planner works out exactly where to drill.',
+    spec: ['28 ideas · scale SVG elevations', 'day / evening lighting · your own photos', 'planner with drill points'],
+    ink: '#a77a1f',
+    wash: 'rgba(167, 122, 31, 0.10)',
   },
 ];
 
