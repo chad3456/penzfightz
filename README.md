@@ -1716,6 +1716,23 @@ from the reference are reused. Worked example: `examples/ramanujan/`
 ("How Ramanujan tamed infinity"). Reference videos and renders go in
 `video-work/`, which is git-ignored.
 
+## The Leap to Lanka
+
+An interactive 3D flight across the ocean as Hanuman, from Mount Mahendra to
+the Ashoka grove, after the Sundara Kanda:
+- Mainaka rises from the sea;
+- Surasa's jaws widen as he grows, so he shrinks and darts through;
+- Simhika grips his shadow;
+- the day turns to moonlight over the golden city on Trikuta, until he
+  perches above Sita and gives her Rama's ring.
+
+The original, rigged Hanuman is drawn in two-tone print shading (orange lit,
+teal shadow, gold ornaments, cream sky) with custom shaders. Watch it as a
+film, fly it yourself (steer, boost, grow, shrink), or inspect the model in
+five poses. The model downloads as an animated `.glb`, and
+`unity/HanumanLeap/` holds a Unity setup (toon shader, flight controller,
+camera, procedural ocean). See `docs/leap-to-lanka.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

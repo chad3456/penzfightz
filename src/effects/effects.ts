@@ -50,7 +50,8 @@ export type EffectId =
   | 'greatbuild'
   | 'salon'
   | 'heirloom'
-  | 'tesserae';
+  | 'tesserae'
+  | 'leap';
 
 export interface EffectDef {
   id: EffectId;
@@ -507,6 +508,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['7,446 tiles · canvas 2D', 'weighted Voronoi + andamento', 'no images, no models'],
     ink: '#d6a43a',
     wash: 'rgba(214, 164, 58, 0.12)',
+  },
+  {
+    id: 'leap',
+    name: 'The Leap to Lanka',
+    tagline: 'Fly across the ocean as Hanuman, from Mount Mahendra to the Ashoka grove, in an interactive 3D world drawn in two-tone print shading.',
+    blurb:
+      'An original, fully rigged Hanuman (crown, kundala, streaming hair, dhoti and sash, a long tail and his gada) crosses a hundred yojanas of animated ocean, after the Sundara Kanda. Mainaka rises from the sea to offer rest. Surasa, mother of serpents, opens her mouth wider each time he grows, so he shrinks to a thumb\'s size and darts through. Simhika grips his shadow from a dark pool, and he tears free. Morning turns to dusk and moonlight over the golden city on Trikuta, until he settles in a shimshapa tree in the Ashoka grove above Sita, and gives her Rama\'s ring. Watch it as a film with cinematic cameras, or take the controls: steer, boost, grow and shrink. The model downloads as a rigged, animated .glb for Unity or Blender.',
+    spec: ['three.js · R3F · custom toon shaders', 'story film or free flight', 'rigged .glb export for Unity'],
+    ink: '#c35b24',
+    wash: 'rgba(195, 91, 36, 0.10)',
   },
 ];
 
