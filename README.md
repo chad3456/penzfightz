@@ -1733,6 +1733,21 @@ five poses. The model downloads as an animated `.glb`, and
 `unity/HanumanLeap/` holds a Unity setup (toon shader, flight controller,
 camera, procedural ocean). See `docs/leap-to-lanka.md`.
 
+## Hanuman in Flight
+
+A realistic, 38-second cinematic of Hanuman crossing the ocean at dawn,
+rendered live in the browser:
+- **The figure:** a sculpted, skinned body with short fur, physically based
+  skin, silk and gold.
+- **The sea:** a Gerstner-wave ocean that reflects a physically scattered
+  sky, with sun glitter and foam.
+- **The air:** cumulus clouds, bloom and haze.
+- **The film:** six shots (dawn flyover, chase, side tracking, face to face,
+  crane, the coast of Lanka). You can play, scrub or orbit freely.
+
+`scripts/flight/` renders it to video with title cards and a generated
+soundtrack. See `docs/hanuman-in-flight.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

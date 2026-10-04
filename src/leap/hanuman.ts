@@ -14,7 +14,7 @@ import { PAL, toon } from './toon';
 
 export type Rig = {
   root: THREE.Group;
-  body: THREE.Group;
+  body: THREE.Object3D;
   j: Record<string, THREE.Object3D>;
   chains: Record<string, THREE.Object3D[]>;
   mats: Record<string, THREE.ShaderMaterial>;
@@ -46,7 +46,8 @@ function mesh(geo: THREE.BufferGeometry, mat: THREE.Material, name: string, at?:
   return m;
 }
 function joint(name: string, parent: THREE.Object3D, at: [number, number, number]) {
-  const g = new THREE.Group();
+  // bones (not groups) so a skinned body can bind to the same hierarchy
+  const g = new THREE.Bone();
   g.name = name;
   g.position.set(...at);
   parent.add(g);
@@ -326,7 +327,7 @@ export function applyPose(rig: Rig, a: PoseState, from?: PoseState) {
     s.rotation.x = (i === 0 ? base : 0) + Math.sin(t * freq - i * 0.8) * amp * wind * (0.4 + i * 0.12);
     s.rotation.z = side + Math.sin(t * freq * 0.7 - i * 0.6) * amp * 0.5 * wind;
   });
-  ([['hairC', 0], ['hairL', 0.06], ['hairR', -0.06], ['hairL2', 0.12], ['hairR2', -0.12]] as const).forEach(([nm, sd]) => wave(rig.chains[nm], flying ? 0.2 : 0.4, 0.12, 6, sd));
+  ([['hairC', 0], ['hairL', 0.06], ['hairR', -0.06], ['hairL2', 0.12], ['hairR2', -0.12]] as const).forEach(([nm, sd]) => wave(rig.chains[nm], flying ? 1.25 : 0.4, 0.12, 6, sd));
   wave(rig.chains.sash, flying ? 0.25 : 0.15, 0.16, 7.5);
   wave(rig.chains.flapF, flying ? 0.1 : -0.04, 0.14, 8);
   wave(rig.chains.flapB, flying ? 0.3 : 0.06, 0.12, 7);

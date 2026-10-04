@@ -51,7 +51,8 @@ export type EffectId =
   | 'salon'
   | 'heirloom'
   | 'tesserae'
-  | 'leap';
+  | 'leap'
+  | 'flight';
 
 export interface EffectDef {
   id: EffectId;
@@ -518,6 +519,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · R3F · custom toon shaders', 'story film or free flight', 'rigged .glb export for Unity'],
     ink: '#c35b24',
     wash: 'rgba(195, 91, 36, 0.10)',
+  },
+  {
+    id: 'flight',
+    name: 'Hanuman in Flight',
+    tagline: 'A realistic cinematic of Hanuman crossing the ocean at dawn, rendered live in the browser.',
+    blurb:
+      'Thirty-eight seconds of flight over open sea toward Lanka, in six shots: low over the swell as he comes in from the horizon and passes overhead, a chase above the racing water, a tracking shot into the low sun, face to face with his hair and sash whipping, a rising crane over the empty ocean, and a coastline with a glint of gold. The body is one sculpted, skinned surface (a signed-distance figure turned into a mesh and bound to the same skeleton as The Leap to Lanka), with physically based skin, silk and gold. The sea is a Gerstner-wave surface that reflects a physically scattered dawn sky, with glitter, foam and light through the crests, under clouds, bloom and haze. Scrub it, jump between shots, or break the camera free and orbit him mid-flight.',
+    spec: ['three.js · PBR · Gerstner ocean · Preetham sky', 'sculpted skinned body', 'six-shot film · free camera'],
+    ink: '#f2c46d',
+    wash: 'rgba(242, 196, 109, 0.12)',
   },
 ];
 
