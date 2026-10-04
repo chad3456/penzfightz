@@ -15,3 +15,6 @@ test-results/
 # Source ebooks used only to verify quotes locally. Modern translations are
 # under copyright and must not be redistributed with the site.
 sources/
+
+# video-recipe skill: reference videos, frames and renders (third-party footage stays local)
+video-work/

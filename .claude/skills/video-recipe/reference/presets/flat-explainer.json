@@ -1,0 +1,20 @@
+{
+ "_note": "Genre preset for flat-vector science explainers: deep night backgrounds, saturated warm accents, soft gradients, rim light and glow, no outlines, heavy upper-case sans. A starting point used when no reference could be analysed; a real analysis replaces it.",
+ "palette": {
+  "bg": ["#141a3d", "#26205a"],
+  "ink": "#f6f1e7",
+  "accents": ["#ff8a3d", "#ffd166", "#3ccfe0", "#f2577d", "#8b6cf0"],
+  "highlight": "#fff4cf",
+  "shadow": "#0b0d22"
+ },
+ "outline": 0,
+ "shading": "soft",
+ "rimLight": true,
+ "glow": 0.85,
+ "grain": 0.035,
+ "vignette": 0.38,
+ "corner": 0.6,
+ "motion": { "energy": 0.55, "drift": 0.025, "float": 1 },
+ "pacing": { "meanShot": 4.5, "transitions": ["cut", "zoom"] },
+ "type": { "font": "'Rubik', 'Helvetica Neue', Arial, sans-serif", "weight": 800, "case": "upper" }
+}

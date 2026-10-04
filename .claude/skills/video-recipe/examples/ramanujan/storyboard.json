@@ -1,0 +1,869 @@
+{
+ "meta": {
+  "title": "How Ramanujan Tamed Infinity",
+  "width": 1280,
+  "fps": 30,
+  "captions": true,
+  "voOffset": 0.4,
+  "tail": 0.9,
+  "mood": "wonder",
+  "brief": "Animated explainer on how Ramanujan invented infinity. He didn't invent it, so the film says what he did: he tamed it."
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "dur": 7,
+   "mood": "wonder",
+   "transition": "cut",
+   "bg": {
+    "kind": "space",
+    "seed": 4
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "z": 1.12
+    }
+   },
+   "narration": "Infinity is the one number you can never reach. For two thousand years, mathematicians handled it with care, like a fire that could burn the whole house down.",
+   "elements": [
+    {
+     "type": "particles",
+     "x": 960,
+     "y": 520,
+     "n": 70,
+     "spread": 760,
+     "mode": "orbit",
+     "color": "a1",
+     "depth": 0.6
+    },
+    {
+     "type": "lemniscate",
+     "x": 960,
+     "y": 500,
+     "size": 420,
+     "at": 0.4,
+     "speed": 3.2,
+     "color": "a0",
+     "enter": "fade"
+    },
+    {
+     "type": "glow",
+     "x": 960,
+     "y": 500,
+     "r": 520,
+     "color": "a0",
+     "a": 0.5,
+     "enter": "fade",
+     "at": 2
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "dur": 4.5,
+   "mood": "wonder",
+   "transition": "zoom",
+   "bg": {
+    "kind": "space",
+    "seed": 9,
+    "stars": 200
+   },
+   "narration": "This is the story of a clerk from South India who picked it up, and played with it.",
+   "elements": [
+    {
+     "type": "title",
+     "x": 960,
+     "y": 470,
+     "text": "How Ramanujan tamed infinity",
+     "size": 86,
+     "sub": "Srinivasa Ramanujan · 1887 – 1920",
+     "enter": "pop",
+     "at": 0.3
+    },
+    {
+     "type": "lemniscate",
+     "x": 960,
+     "y": 760,
+     "size": 120,
+     "speed": 1.2,
+     "at": 0.8,
+     "color": "a1",
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "dur": 9,
+   "mood": "warm",
+   "transition": "cut",
+   "bg": {
+    "kind": "dusk",
+    "top": "bg",
+    "bottom": "a0/l10",
+    "sun": "a1",
+    "sunX": 0.72,
+    "layers": [
+     "a3/d45",
+     "bg2/d10",
+     "sh"
+    ]
+   },
+   "camera": {
+    "from": {
+     "x": -60,
+     "z": 1.0
+    },
+    "to": {
+     "x": 40,
+     "z": 1.08
+    }
+   },
+   "narration": "Srinivasa Ramanujan was born in 1887 and grew up in Kumbakonam, a temple town in South India. As a teenager he got hold of a book listing thousands of results with almost no proofs, and taught himself from it.",
+   "elements": [
+    {
+     "type": "temple",
+     "x": 1420,
+     "y": 860,
+     "w": 430,
+     "h": 640,
+     "color": "a0/d10",
+     "depth": 0.55,
+     "enter": "rise",
+     "at": 0.2
+    },
+    {
+     "type": "palm",
+     "x": 260,
+     "y": 900,
+     "h": 460,
+     "color": "sh",
+     "depth": 0.7,
+     "seed": 1,
+     "enter": "fade"
+    },
+    {
+     "type": "palm",
+     "x": 1820,
+     "y": 920,
+     "h": 380,
+     "color": "sh",
+     "depth": 0.7,
+     "seed": 2,
+     "enter": "fade"
+    },
+    {
+     "type": "figure",
+     "x": 760,
+     "y": 960,
+     "h": 430,
+     "skin": "skinMid",
+     "hair": "hairBlack",
+     "outfit": "white",
+     "trim": "a1",
+     "pose": "hold",
+     "prop": "book",
+     "enter": "rise",
+     "at": 0.8,
+     "seed": 1
+    },
+    {
+     "type": "particles",
+     "x": 900,
+     "y": 600,
+     "n": 30,
+     "spread": 500,
+     "mode": "rise",
+     "color": "a1",
+     "size": 4,
+     "at": 2,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "dur": 9,
+   "mood": "warm",
+   "transition": "cut",
+   "bg": {
+    "kind": "room",
+    "wall": "bg2",
+    "floor": "bg"
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "x": 80,
+     "z": 1.1
+    }
+   },
+   "narration": "He neglected every subject except mathematics and lost his college scholarship. By 1912 he was a clerk at the Madras Port Trust, filling notebooks at night.",
+   "elements": [
+    {
+     "type": "window",
+     "x": 380,
+     "y": 360,
+     "w": 300,
+     "h": 360,
+     "frame": "#efe6cf",
+     "depth": 0.6
+    },
+    {
+     "type": "figure",
+     "x": 480,
+     "y": 960,
+     "h": 420,
+     "skin": "skinMid",
+     "hair": "hairBlack",
+     "outfit": "white",
+     "trim": "a1",
+     "pose": "write",
+     "facing": "right",
+     "enter": "fade",
+     "seed": 1
+    },
+    {
+     "type": "notebook",
+     "x": 1260,
+     "y": 520,
+     "w": 860,
+     "h": 800,
+     "at": 1.2,
+     "gap": 1.3,
+     "size": 50,
+     "enter": "rise",
+     "lines": [
+      "1 + 1/2 + 1/4 + … = 2",
+      "√(1 + 2√(1 + 3√(1 + …))) = 3",
+      "π = 3.14159 26535 89793…",
+      "1 + 2 + 3 + 4 + … = ?"
+     ]
+    },
+    {
+     "type": "glow",
+     "x": 1260,
+     "y": 420,
+     "r": 600,
+     "color": "a1",
+     "a": 0.25,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "dur": 8,
+   "mood": "wonder",
+   "transition": "zoom",
+   "bg": {
+    "kind": "void",
+    "color": "bg",
+    "grid": true
+   },
+   "narration": "Some endless sums settle down. Add one, then a half, then a quarter, and keep halving forever. The total creeps up to exactly two, and never goes past it.",
+   "elements": [
+    {
+     "type": "equation",
+     "x": 960,
+     "y": 300,
+     "text": "1 + ½ + ¼ + ⅛ + … = 2",
+     "size": 96,
+     "at": 0.3,
+     "speed": 2.4,
+     "enter": "fade"
+    },
+    {
+     "type": "halves",
+     "x": 960,
+     "y": 600,
+     "w": 1300,
+     "h": 150,
+     "n": 8,
+     "at": 1.5,
+     "speed": 6,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "dur": 8,
+   "mood": "wonder",
+   "transition": "cut",
+   "bg": {
+    "kind": "space",
+    "seed": 21,
+    "stars": 160
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "z": 1.05
+    }
+   },
+   "narration": "He played with stranger infinities: square roots inside square roots, never ending. This one, which he set as a puzzle in 1911, comes out to exactly three.",
+   "elements": [
+    {
+     "type": "radical",
+     "x": 170,
+     "y": 560,
+     "size": 112,
+     "depth": 6,
+     "at": 0.4,
+     "speed": 5,
+     "result": "3",
+     "enter": "fade"
+    },
+    {
+     "type": "glow",
+     "x": 1500,
+     "y": 520,
+     "r": 300,
+     "color": "a2",
+     "a": 0.6,
+     "at": 5.5,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "dur": 6.5,
+   "mood": "tense",
+   "transition": "cut",
+   "bg": {
+    "kind": "void",
+    "color": "bg2/d20",
+    "grid": true
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "x": 260,
+     "y": -60,
+     "z": 0.92
+    }
+   },
+   "narration": "Other sums run away. One plus two plus three plus four just keeps growing, past any number you can name.",
+   "elements": [
+    {
+     "type": "equation",
+     "x": 960,
+     "y": 200,
+     "text": "1 + 2 + 3 + 4 + … → ∞",
+     "size": 90,
+     "at": 0.2,
+     "speed": 2,
+     "enter": "fade"
+    },
+    {
+     "type": "staircase",
+     "x": 240,
+     "y": 800,
+     "n": 22,
+     "bw": 62,
+     "unit": 24,
+     "at": 0.6,
+     "speed": 5,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "dur": 10,
+   "mood": "wonder",
+   "transition": "iris",
+   "bg": {
+    "kind": "gradient",
+    "top": "bg",
+    "bottom": "bg2"
+   },
+   "narration": "In 1913 he wrote to G. H. Hardy, a mathematician at Cambridge. Among pages of formulas was this line: one plus two plus three plus four, and so on, equals minus one twelfth.",
+   "elements": [
+    {
+     "type": "letter",
+     "x": 300,
+     "y": 560,
+     "w": 260,
+     "open": false,
+     "enter": "pop",
+     "at": 0.2,
+     "loop": "float",
+     "move": {
+      "at": 1,
+      "dur": 2.6,
+      "x": 1240,
+      "y": 480,
+      "s": 0.6
+     }
+    },
+    {
+     "type": "figure",
+     "x": 1500,
+     "y": 980,
+     "h": 440,
+     "skin": "skinLight",
+     "hair": "hairBrown",
+     "hairStyle": "swept",
+     "outfit": "white",
+     "jacket": "a2/d35",
+     "trim": "a3",
+     "pose": "hold",
+     "prop": "letter",
+     "facing": "left",
+     "enter": "slideR",
+     "at": 2.8,
+     "seed": 3
+    },
+    {
+     "type": "text",
+     "x": 1500,
+     "y": 420,
+     "text": "G. H. Hardy, Cambridge",
+     "size": 46,
+     "color": "a1",
+     "at": 3.4,
+     "enter": "fade"
+    },
+    {
+     "type": "equation",
+     "x": 760,
+     "y": 300,
+     "text": "1 + 2 + 3 + 4 + … = −1/12",
+     "size": 92,
+     "at": 6.2,
+     "speed": 2.4,
+     "box": "a0",
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "dur": 11,
+   "mood": "wonder",
+   "transition": "cut",
+   "bg": {
+    "kind": "space",
+    "seed": 33
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "z": 1.08
+    }
+   },
+   "narration": "It is not ordinary addition. Ramanujan had found a consistent way to give values to sums that blow up. The same minus one twelfth turns up today in physics, in string theory and in the Casimir effect.",
+   "elements": [
+    {
+     "type": "equation",
+     "x": 960,
+     "y": 240,
+     "text": "“1 + 2 + 3 + …”  ⟼  −1/12",
+     "size": 84,
+     "at": 0.3,
+     "speed": 2,
+     "enter": "fade"
+    },
+    {
+     "type": "text",
+     "x": 960,
+     "y": 340,
+     "text": "Ramanujan summation: a value, not a total",
+     "size": 42,
+     "color": "a1",
+     "weight": 500,
+     "at": 2.5,
+     "enter": "fade"
+    },
+    {
+     "type": "shape",
+     "kind": "rect",
+     "x": 800,
+     "y": 620,
+     "w": 28,
+     "h": 300,
+     "radius": 8,
+     "color": "a2",
+     "at": 5,
+     "enter": "rise"
+    },
+    {
+     "type": "shape",
+     "kind": "rect",
+     "x": 1120,
+     "y": 620,
+     "w": 28,
+     "h": 300,
+     "radius": 8,
+     "color": "a2",
+     "at": 5,
+     "enter": "rise"
+    },
+    {
+     "type": "particles",
+     "x": 960,
+     "y": 620,
+     "n": 26,
+     "spread": 130,
+     "mode": "drift",
+     "color": "a1",
+     "size": 4,
+     "at": 5.4,
+     "enter": "fade"
+    },
+    {
+     "type": "particles",
+     "x": 960,
+     "y": 660,
+     "n": 80,
+     "spread": 900,
+     "mode": "drift",
+     "color": "a3",
+     "size": 3,
+     "at": 5.4,
+     "enter": "fade",
+     "depth": 0.8
+    },
+    {
+     "type": "text",
+     "x": 960,
+     "y": 850,
+     "text": "two plates, empty space between",
+     "size": 36,
+     "color": "ink",
+     "weight": 500,
+     "at": 6.5,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "dur": 7,
+   "mood": "warm",
+   "transition": "whip",
+   "bg": {
+    "kind": "gradient",
+    "top": "bg",
+    "bottom": "a0/d10"
+   },
+   "narration": "Hardy invited him to England. In 1914 he sailed from Madras to Cambridge.",
+   "elements": [
+    {
+     "type": "journey",
+     "x": 960,
+     "y": 520,
+     "from": [
+      -640,
+      120
+     ],
+     "to": [
+      640,
+      -40
+     ],
+     "lift": -300,
+     "fromLabel": "Madras",
+     "toLabel": "Cambridge",
+     "at": 0.6,
+     "speed": 5.5,
+     "enter": "fade"
+    },
+    {
+     "type": "waves",
+     "x": 960,
+     "y": 900,
+     "color": "a2/d40",
+     "depth": 0.8
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "dur": 12,
+   "mood": "wonder",
+   "transition": "cut",
+   "bg": {
+    "kind": "gradient",
+    "top": "bg",
+    "bottom": "bg2"
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "y": -40,
+     "z": 1.06
+    }
+   },
+   "narration": "Working with Hardy, he found a formula for how many ways a whole number can be split into parts. Five can be split seven ways. Two hundred can be split almost four trillion ways, and their formula got it exactly right.",
+   "elements": [
+    {
+     "type": "chapel",
+     "x": 960,
+     "y": 1100,
+     "w": 1100,
+     "h": 300,
+     "color": "bg2/l10",
+     "lit": true,
+     "depth": 0.5,
+     "enter": "rise"
+    },
+    {
+     "type": "text",
+     "x": 960,
+     "y": 120,
+     "text": "the 7 ways to split 5",
+     "size": 44,
+     "color": "a1",
+     "weight": 500,
+     "at": 1.5,
+     "enter": "fade",
+     "out": 7.2
+    },
+    {
+     "type": "partitions",
+     "x": 960,
+     "y": 420,
+     "n": 5,
+     "cols": 7,
+     "dot": 26,
+     "at": 1.8,
+     "speed": 3.5,
+     "enter": "fade",
+     "out": 7.2
+    },
+    {
+     "type": "counter",
+     "x": 960,
+     "y": 380,
+     "from": "0",
+     "to": "3972999029388",
+     "label": "ways to split 200",
+     "size": 120,
+     "at": 7.6,
+     "speed": 2.6,
+     "enter": "pop"
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "dur": 7.5,
+   "mood": "wonder",
+   "transition": "zoom",
+   "bg": {
+    "kind": "space",
+    "seed": 41,
+    "stars": 180
+   },
+   "narration": "He also found formulas that race towards pi. In one of them, each new term adds about eight more correct digits.",
+   "elements": [
+    {
+     "type": "piSpiral",
+     "x": 960,
+     "y": 540,
+     "at": 0.3,
+     "speed": 6.5
+    },
+    {
+     "type": "text",
+     "x": 960,
+     "y": 540,
+     "text": "π",
+     "size": 150,
+     "color": "a1",
+     "weight": 800,
+     "enter": "pop",
+     "loop": "pulse"
+    }
+   ]
+  },
+  {
+   "id": "s13",
+   "dur": 13,
+   "mood": "sad",
+   "transition": "cut",
+   "bg": {
+    "kind": "room",
+    "wall": "bg2",
+    "floor": "bg"
+   },
+   "narration": "In England he fell seriously ill. When Hardy visited him in hospital, he said his taxi had a dull number, 1729. No, Ramanujan replied. It is the smallest number that is the sum of two cubes in two different ways.",
+   "elements": [
+    {
+     "type": "window",
+     "x": 1580,
+     "y": 340,
+     "w": 300,
+     "h": 380,
+     "frame": "#efe6cf",
+     "rain": true,
+     "depth": 0.6
+    },
+    {
+     "type": "taxi",
+     "x": 700,
+     "y": 760,
+     "w": 600,
+     "color": "a1",
+     "plate": "1729",
+     "enter": "slideL",
+     "at": 0.3,
+     "out": 6.8
+    },
+    {
+     "type": "cubes",
+     "x": 1000,
+     "y": 520,
+     "pairs": [
+      [
+       1,
+       12
+      ],
+      [
+       9,
+       10
+      ]
+     ],
+     "at": 7.4,
+     "speed": 3,
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s14",
+   "dur": 8,
+   "mood": "sad",
+   "transition": "fade",
+   "transitionDur": 1.2,
+   "bg": {
+    "kind": "dusk",
+    "top": "bg",
+    "bottom": "a0/d15",
+    "sun": "a0",
+    "sunX": 0.35,
+    "layers": [
+     "a3/d50",
+     "bg2/d15",
+     "sh"
+    ]
+   },
+   "camera": {
+    "from": {
+     "z": 1.05
+    },
+    "to": {
+     "z": 1.0
+    }
+   },
+   "narration": "He went home to India in 1919, and died the next year. He was thirty-two.",
+   "elements": [
+    {
+     "type": "temple",
+     "x": 1350,
+     "y": 900,
+     "w": 300,
+     "h": 450,
+     "color": "a0/d25",
+     "depth": 0.55,
+     "enter": "fade"
+    },
+    {
+     "type": "palm",
+     "x": 420,
+     "y": 940,
+     "h": 420,
+     "color": "sh",
+     "depth": 0.7,
+     "seed": 4
+    },
+    {
+     "type": "lemniscate",
+     "x": 960,
+     "y": 360,
+     "size": 160,
+     "speed": 3,
+     "at": 2,
+     "color": "hi",
+     "enter": "fade"
+    }
+   ]
+  },
+  {
+   "id": "s15",
+   "dur": 9,
+   "mood": "wonder",
+   "transition": "fade",
+   "bg": {
+    "kind": "space",
+    "seed": 7
+   },
+   "camera": {
+    "from": {
+     "z": 1.0
+    },
+    "to": {
+     "z": 1.1
+    }
+   },
+   "narration": "He did not invent infinity. He made it something you could count, measure and use. One of his notebooks, lost for decades, turned up in a Cambridge library in 1976, and mathematicians are still working through it.",
+   "elements": [
+    {
+     "type": "notebook",
+     "x": 960,
+     "y": 560,
+     "w": 640,
+     "h": 600,
+     "rot": 0.03,
+     "at": 0.4,
+     "gap": 0.5,
+     "size": 40,
+     "enter": "rise",
+     "out": 6.6,
+     "lines": [
+      "1729 = 1³ + 12³ = 9³ + 10³",
+      "p(200) = 3 972 999 029 388",
+      "1/π = (2√2/9801) Σ …",
+      "√(1 + 2√(1 + 3√…)) = 3"
+     ]
+    },
+    {
+     "type": "lemniscate",
+     "x": 960,
+     "y": 470,
+     "size": 300,
+     "speed": 2.4,
+     "at": 6.8,
+     "color": "a0",
+     "enter": "fade"
+    },
+    {
+     "type": "title",
+     "x": 960,
+     "y": 760,
+     "text": "Ramanujan",
+     "size": 110,
+     "sub": "1887 – 1920",
+     "at": 7.2,
+     "enter": "pop"
+    }
+   ]
+  }
+ ]
+}

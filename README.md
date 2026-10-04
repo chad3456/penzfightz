@@ -1695,6 +1695,27 @@ Voronoi tessellation in a Web Worker. Each tile:
 Gold glass catches a lamp that follows your pointer. See
 `docs/tesserae.md`.
 
+## video-recipe (a Claude Code skill)
+
+`.claude/skills/video-recipe/` takes a reference video apart and remakes
+its *format* for a new topic. Give it a YouTube link or a file plus a
+description of your video. It then:
+- **fetches** the reference with `yt-dlp`, or takes a local file;
+- **measures** it with `analyze.py`: shots and pacing, the palette and its
+  roles, how flat, outlined, glowing and grainy the surface is, camera moves,
+  and narration speed;
+- **writes contact sheets** for Claude to study by eye;
+- **writes** `recipe.md` and a `style.json` of engine tokens;
+- **storyboards** your description;
+- **renders** it from code with an original-shapes canvas engine, with
+  narration, an original generated score and captions;
+- **compares** the result against the reference.
+
+It learns style, not content: no frames, characters, logos, audio or text
+from the reference are reused. Worked example: `examples/ramanujan/`
+("How Ramanujan tamed infinity"). Reference videos and renders go in
+`video-work/`, which is git-ignored.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

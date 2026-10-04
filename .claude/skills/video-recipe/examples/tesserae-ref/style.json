@@ -1,0 +1,20 @@
+{
+ "_from": "analyze.py on a 42 s screen recording of this site's Tesserae mosaic page, refined by eye from contact_01.jpg",
+ "palette": {
+  "bg": ["#15120c", "#2b2417"],
+  "ink": "#f3ead8",
+  "accents": ["#d9a441", "#3f63a8", "#b0532e", "#e3cfa6", "#cb3a22"],
+  "highlight": "#fff1c9",
+  "shadow": "#0d0d0a"
+ },
+ "outline": 0,
+ "shading": "cel",
+ "rimLight": true,
+ "glow": 0.6,
+ "grain": 0.09,
+ "vignette": 0.5,
+ "corner": 0.2,
+ "motion": { "energy": 0.33, "drift": 0.012, "float": 0.4 },
+ "pacing": { "meanShot": 5, "transitions": ["fade", "cut"] },
+ "type": { "font": "Georgia, 'Times New Roman', serif", "weight": 700, "case": "upper" }
+}
