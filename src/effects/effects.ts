@@ -56,7 +56,8 @@ export type EffectId =
   | 'koi'
   | 'fournights'
   | 'orbitworks'
-  | 'pune411';
+  | 'pune411'
+  | 'witchworld';
 
 export interface EffectDef {
   id: EffectId;
@@ -573,6 +574,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['91k real buildings · 30k road pieces', 'traffic, police, 9 missions, 20 patya', 'day/night · monsoon · 3 radio stations'],
     ink: '#ffb347',
     wash: 'rgba(255, 179, 71, 0.10)',
+  },
+  {
+    id: 'witchworld',
+    name: 'Witchworld Weekly',
+    tagline: 'A witch from Witchworld visits Earth in 2026 and files ten dispatches: a hand-drawn magazine you can fly through.',
+    blurb:
+      'The Earth Issue of Witchworld Weekly, and the portfolio of its correspondent, Hazel Mothwick (347). Everything is drawn live with one wobbly felt-tip pen whose lines boil, and every word is hand-lettered by a single-stroke alphabet drawn in code. Fly her broom over a scribbled Earth with Parsnip the cat on the back, land at ten signs (the glowing mirrors, the self-checkout, the listening cylinder, a familiar that writes poems, wellness, the autumn in a cup, e-scooters, everyone dressed in black, delivery drones, monstera plants) and open each as a magazine spread whose picture you can poke. Collect the ten stamps, flip through the whole issue with horoscopes and classifieds, browse the portfolio, and write a postcard home that appears in her handwriting as you type, then send it by owl.',
+    spec: ['10 spreads · 10 stamps · 1 pen', 'fly · read · poke · post by owl', 'hand-lettered single-stroke alphabet'],
+    ink: '#1a1a1a',
+    wash: 'rgba(255, 255, 255, 0.10)',
   },
 ];
 

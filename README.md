@@ -1780,6 +1780,23 @@ Dostoevsky's *White Nights* as a painted film you scroll through:
 
 See `docs/four-nights.md`.
 
+## Witchworld Weekly
+
+*The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its
+correspondent, Hazel Mothwick (347), a witch visiting Earth from Witchworld.
+- **How it is drawn:** one wobbly felt-tip pen whose lines "boil". Every
+  word is lettered by a single-stroke alphabet drawn in code.
+- **Fly:** take her broom (with Parsnip the cat) over a scribbled Earth and
+  land at ten modern oddities: phones, self-checkouts, smart speakers, a
+  chatbot, wellness, the pumpkin latte, e-scooters, all-black fashion,
+  delivery drones and monstera plants.
+- **Read:** each stop opens a magazine spread with a picture you can poke.
+  Collect the stamps, flip the issue with horoscopes and classifieds, and
+  browse the portfolio grid.
+- **Post:** write a postcard home that appears in her handwriting as you
+  type, send it by owl, or save it as a PNG.
+- More in `docs/witchworld-weekly.md`.
+
 ## Pune 411
 
 An open-world driving game set in the real Pune:

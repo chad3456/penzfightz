@@ -10335,3 +10335,20 @@ button.card:hover:not(:disabled) {
   .p4-obj { top: 52px; font-size: 13px; }
   .p4-stick { bottom: 190px; }
 }
+
+/* ---------------------------------------------------------------- Witchworld Weekly */
+.ww { position: fixed; inset: 0; background: #fdfcf8; color: #141414; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+.ww-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: pointer; }
+.ww-hand { display: block; pointer-events: none; }
+.ww-nav { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; padding: 8px 12px; z-index: 3; }
+.ww-nav button, .ww-bar button, .ww-post button, .ww-go { background: transparent; border: 0; padding: 4px 6px; cursor: pointer; border-radius: 3px; }
+.ww-nav button.on { background: rgba(20,20,20,0.07); }
+.ww-nav button:hover, .ww-bar button:hover, .ww-post button:hover, .ww-go:hover { background: rgba(20,20,20,0.06); }
+.ww-nav button:focus-visible, .ww-bar button:focus-visible, .ww-post button:focus-visible { outline: 2px dashed #141414; }
+.ww-gap { flex: 1; }
+.ww-bar { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; z-index: 3; background: rgba(253,252,248,0.9); }
+.ww-bar button:disabled { opacity: 0.3; }
+.ww-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 3; max-width: calc(100vw - 24px); }
+.ww-post { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 3; width: min(520px, calc(100vw - 24px)); background: rgba(253,252,248,0.95); padding: 6px 8px; }
+.ww-post textarea { width: 100%; box-sizing: border-box; font: 14px/1.4 'IBM Plex Mono', ui-monospace, monospace; border: 1.5px solid #141414; border-radius: 3px; background: #fffefb; color: #141414; padding: 6px 8px; resize: none; }
+.ww-row { display: flex; gap: 10px; justify-content: flex-end; }
