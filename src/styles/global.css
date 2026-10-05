@@ -10231,3 +10231,107 @@ button.card:hover:not(:disabled) {
   .ow-budgets { grid-template-columns: 1fr 1fr 1fr; padding: 8px 12px; }
   .ow-poll-row { grid-template-columns: 90px 46px 1fr; }
 }
+
+/* ---------------------------------------------------------------- Pune 411 */
+.p4 { position: fixed; inset: 0; background: #14181b; color: #f4efe4; font-family: 'IBM Plex Mono', ui-monospace, monospace; overflow: hidden; user-select: none; -webkit-user-select: none; touch-action: none; }
+.p4-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.p4-title { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: radial-gradient(ellipse at 30% 20%, rgba(255,179,71,0.25), transparent 60%), linear-gradient(160deg, #1d1410 0%, #0e1418 70%); z-index: 20; overflow-y: auto; }
+.p4-title-in { max-width: 720px; width: 100%; }
+.p4-title h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 800; font-size: clamp(56px, 13vw, 132px); line-height: 0.9; margin: 6px 0 4px; letter-spacing: -0.02em; color: #fff3dc; text-shadow: 4px 4px 0 #c1121f; }
+.p4-title h1 span { color: #ffb347; text-shadow: 4px 4px 0 #4a1d0a; }
+.p4-kicker { text-transform: uppercase; letter-spacing: 0.22em; font-size: 12px; color: #ffb347; margin: 0; }
+.p4-mr { font-family: 'Noto Serif Devanagari', serif; font-size: 20px; color: #ffd8a8; margin: 4px 0 14px; }
+.p4-lede { font-size: 15px; line-height: 1.6; color: #e9e1d2; max-width: 62ch; }
+.p4-fine { font-size: 11.5px; color: #b9b0a0; line-height: 1.55; margin-top: 14px; }
+.p4-tip { font-size: 13px; color: #ffd8a8; }
+.p4-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.p4-col { display: flex; flex-direction: column; gap: 8px; }
+.p4-btn { font: 600 14px 'IBM Plex Mono', monospace; padding: 11px 18px; border-radius: 4px; border: 2px solid #f4efe4; background: transparent; color: #f4efe4; cursor: pointer; }
+.p4-btn:hover { background: rgba(255,255,255,0.08); }
+.p4-btn:disabled { opacity: 0.35; cursor: default; }
+.p4-primary { background: #ffb347; color: #1a1006; border-color: #ffb347; }
+.p4-primary:hover { background: #ffc46c; }
+.p4-ghost { border-color: rgba(244,239,228,0.35); color: #cfc6b5; }
+.p4-load { text-align: center; }
+.p4-bar { height: 8px; background: rgba(255,255,255,0.12); border-radius: 4px; overflow: hidden; margin: 22px auto 0; max-width: 420px; }
+.p4-bar i { display: block; height: 100%; background: linear-gradient(90deg, #c1121f, #ffb347); transition: width 0.3s; }
+.p4-tr { position: absolute; top: 12px; right: 14px; text-align: right; z-index: 5; text-shadow: 0 2px 3px rgba(0,0,0,0.8); }
+.p4-money { font: 800 28px 'Fraunces', Georgia, serif; color: #8fe39b; -webkit-text-stroke: 1px #0b2a10; }
+.p4-stars { display: flex; gap: 2px; justify-content: flex-end; margin: 4px 0; }
+.p4-stars svg { fill: rgba(0,0,0,0.35); stroke: rgba(255,255,255,0.5); stroke-width: 1.2; }
+.p4-stars svg.on { fill: #fff2b0; stroke: #3b2a00; }
+.p4-blink svg.on { animation: p4blink 0.6s steps(2) infinite; }
+@keyframes p4blink { 50% { fill: rgba(255,255,255,0.15); } }
+.p4-clock { font-size: 13px; color: #fff; }
+.p4-bl { position: absolute; left: 14px; bottom: 14px; z-index: 5; width: 180px; }
+.p4-mini { width: 180px; height: 180px; display: block; border-radius: 50%; box-shadow: 0 0 0 3px rgba(0,0,0,0.55), 0 4px 14px rgba(0,0,0,0.5); }
+.p4-health { height: 7px; margin: 8px 6px 0; background: rgba(0,0,0,0.5); border-radius: 4px; overflow: hidden; }
+.p4-health i { display: block; height: 100%; background: #5bd36b; }
+.p4-area { margin-top: 6px; text-shadow: 0 1px 3px #000; }
+.p4-area b { display: block; font: 700 17px 'Fraunces', Georgia, serif; color: #fff; }
+.p4-area span { font-size: 11.5px; color: #e8dcc6; }
+.p4-br { position: absolute; right: 16px; bottom: 16px; z-index: 5; text-align: right; text-shadow: 0 2px 3px rgba(0,0,0,0.85); }
+.p4-speed b { font: 800 44px 'Fraunces', Georgia, serif; color: #fff; }
+.p4-speed span { font-size: 12px; margin-left: 4px; }
+.p4-veh { font-size: 13px; color: #ffd8a8; }
+.p4-veh span { font-family: 'Noto Serif Devanagari', serif; margin-left: 6px; }
+.p4-radio { margin-top: 6px; font: 600 12px 'IBM Plex Mono', monospace; background: rgba(0,0,0,0.45); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 14px; padding: 5px 11px; cursor: pointer; }
+.p4-obj { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); z-index: 5; max-width: min(620px, calc(100vw - 32px)); text-align: center; background: rgba(10,10,12,0.62); padding: 8px 14px; border-radius: 6px; font-size: 14px; line-height: 1.45; }
+.p4-obj small { display: block; color: #ffb347; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; }
+.p4-obj b { display: block; font: 800 22px 'Fraunces', Georgia, serif; }
+.p4-obj b.hurry { color: #ff6b6b; }
+.p4-sub { position: absolute; left: 50%; bottom: 120px; transform: translateX(-50%); z-index: 6; max-width: min(760px, calc(100vw - 32px)); text-align: center; font-size: 15.5px; line-height: 1.5; text-shadow: 0 2px 4px #000, 0 0 2px #000; }
+.p4-sub b { color: #ffd23f; }
+.p4-sub-mr { font-family: 'Noto Serif Devanagari', serif; color: #ffd8a8; font-size: 17px; }
+.p4-prompt { position: absolute; left: 50%; bottom: 196px; transform: translateX(-50%); z-index: 6; background: rgba(0,0,0,0.72); border: 1px solid rgba(255,255,255,0.25); padding: 6px 12px; border-radius: 4px; font-size: 13px; }
+.p4-toast { position: absolute; left: 14px; top: 56px; z-index: 6; max-width: min(380px, calc(100vw - 32px)); background: rgba(0,0,0,0.7); border-left: 3px solid #ffb347; padding: 8px 12px; font-size: 13px; line-height: 1.4; }
+.p4-tl { position: absolute; left: 14px; top: 12px; z-index: 6; display: flex; gap: 8px; align-items: center; }
+.p4-mini-btn { font: 600 12px 'IBM Plex Mono', monospace; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.35); border-radius: 4px; padding: 6px 10px; cursor: pointer; }
+.p4-patya { font-family: 'Noto Serif Devanagari', serif; font-size: 13px; background: #fbfaf3; color: #111; padding: 3px 8px; border: 2px solid #111; }
+.p4-card { position: absolute; left: 50%; top: 32%; transform: translate(-50%, -50%); z-index: 8; text-align: center; padding: 14px 26px; background: rgba(0,0,0,0.55); border-radius: 6px; animation: p4in 0.4s ease-out; }
+.p4-card small { display: block; text-transform: uppercase; letter-spacing: 0.2em; font-size: 12px; }
+.p4-card b { display: block; font: 800 clamp(30px, 6vw, 52px) 'Fraunces', Georgia, serif; }
+.p4-card.ok b { color: #ffd23f; } .p4-card.bad b { color: #ff6b6b; }
+.p4-card span { font-size: 14px; }
+@keyframes p4in { from { opacity: 0; transform: translate(-50%, -40%); } }
+.p4-busted { position: absolute; inset: 0; display: grid; place-items: center; z-index: 9; font: 900 clamp(56px, 14vw, 150px) 'Fraunces', Georgia, serif; color: #6ec1ff; background: rgba(10,20,40,0.45); text-shadow: 4px 4px 0 #000; letter-spacing: 0.04em; }
+.p4-busted.wasted { color: #ff4d4d; background: rgba(40,10,10,0.5); }
+.p4-map { position: absolute; inset: 0; z-index: 12; background: #161b1f; }
+.p4-map canvas { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+.p4-map-bar { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 14px; background: linear-gradient(rgba(0,0,0,0.7), transparent); }
+.p4-map-bar b { font: 800 22px 'Fraunces', Georgia, serif; }
+.p4-map-bar span { font-size: 12px; color: #cfc6b5; flex: 1; min-width: 160px; }
+.p4-legend { position: absolute; left: 14px; bottom: 14px; font-size: 12px; background: rgba(0,0,0,0.6); padding: 8px 10px; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; max-width: calc(100vw - 28px); }
+.p4-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+.p4-legend .m { background: #ffd23f; } .p4-legend .f { background: #ff7b00; } .p4-legend .g { background: #ff9f1c; } .p4-legend .s { background: #3ddc97; } .p4-legend .p { background: #3b7bff; }
+.p4-pause { position: absolute; inset: 0; z-index: 15; background: rgba(8,10,12,0.78); display: grid; place-items: center; padding: 16px; overflow-y: auto; }
+.p4-pause-in { display: grid; grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); gap: 24px; max-width: 860px; width: 100%; }
+.p4-pause h2 { grid-column: 1 / -1; font: 800 40px 'Fraunces', Georgia, serif; margin: 0; }
+.p4-pause h2 span { font-family: 'Noto Serif Devanagari', serif; font-size: 22px; color: #ffb347; margin-left: 10px; }
+.p4-list h3 { margin: 0 0 8px; font: 700 18px 'Fraunces', Georgia, serif; }
+.p4-m { padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+.p4-m .mr { font-family: 'Noto Serif Devanagari', serif; color: #ffd8a8; }
+.p4-m small { display: block; color: #a9a091; }
+.p4-m.done b { text-decoration: line-through; color: #8fe39b; }
+.p4-help { display: block; max-width: 560px; }
+.p4-help table { border-collapse: collapse; width: 100%; font-size: 13px; margin: 12px 0; }
+.p4-help td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.p4-help td:first-child { color: #ffb347; white-space: nowrap; }
+.p4-touch { position: absolute; inset: auto 0 0 0; height: 0; z-index: 7; }
+.p4-stick { position: absolute; left: 22px; bottom: 210px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.25); touch-action: none; }
+.p4-stick i { position: absolute; left: 36px; top: 36px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+.p4-btns { position: absolute; right: 12px; bottom: 110px; display: grid; grid-template-columns: repeat(2, 72px); gap: 8px; }
+.p4-btns button { height: 56px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.45); color: #fff; font: 700 13px 'IBM Plex Mono', monospace; touch-action: none; }
+.p4-btns .gas { background: rgba(60,160,80,0.55); } .p4-btns .brk { background: rgba(180,50,40,0.55); } .p4-btns .act { background: rgba(255,179,71,0.6); color: #1a1006; }
+@media (max-width: 700px) {
+  .p4-bl { width: 130px; left: 10px; bottom: 10px; }
+  .p4-mini { width: 130px; height: 130px; }
+  .p4-money { font-size: 22px; }
+  .p4-pause-in { grid-template-columns: 1fr; }
+  .p4-sub { bottom: 170px; font-size: 14px; }
+  .p4-prompt { bottom: 240px; }
+  .p4-br { bottom: 300px; right: 12px; }
+  .p4-speed b { font-size: 32px; }
+  .p4-obj { top: 52px; font-size: 13px; }
+  .p4-stick { bottom: 190px; }
+}

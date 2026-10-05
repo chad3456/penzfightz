@@ -1780,6 +1780,22 @@ Dostoevsky's *White Nights* as a painted film you scroll through:
 
 See `docs/four-nights.md`.
 
+## Pune 411
+
+An open-world driving game set in the real Pune:
+- **The city:** a 10 × 8 km stretch of central Pune baked from map data. That is
+  91,000 building footprints, 30,000 road pieces with their one-way rules, the
+  flyovers and bridges, the Mula and the Mutha, the hills and the metro.
+- **Landmarks:** Shaniwar Wada, Dagdusheth, the station, Aga Khan Palace and
+  Parvati are modelled by hand at their real positions.
+- **Getting about:** walk, or ride and drive scooters, motorcycles, auto
+  rickshaws, cars, tempos and buses through traffic that keeps left.
+- **Things to do:** nine missions in real places, a wanted level, traffic
+  police who fine riders without helmets, twenty Puneri patya to find, a day
+  and night cycle, monsoon rain and three generated radio stations.
+- **Map data:** © OpenStreetMap contributors via Overture Maps. See
+  `docs/pune-411.md`.
+
 ## Orbit Works
 
 Build your own satellite and fly it:

@@ -55,7 +55,8 @@ export type EffectId =
   | 'flight'
   | 'koi'
   | 'fournights'
-  | 'orbitworks';
+  | 'orbitworks'
+  | 'pune411';
 
 export interface EffectDef {
   id: EffectId;
@@ -562,6 +563,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['6 missions · ~60 parts · 20+ checks', 'orbital mechanics, budgets, link and Δv', 'launch poll · live operations · anomalies'],
     ink: '#7fd4ff',
     wash: 'rgba(127, 212, 255, 0.10)',
+  },
+  {
+    id: 'pune411',
+    name: 'Pune 411',
+    tagline: 'An open-world driving game in the real Pune: the peths, Deccan, Camp, Koregaon Park, built street by street from map data.',
+    blurb:
+      'Ten by eight kilometres of central Pune, baked from OpenStreetMap (via Overture Maps) and real elevation: 91,000 building footprints, 30,000 road pieces with their one-way rules, flyovers and bridges, the Mula and the Mutha, Parvati and Vetal hills, the metro viaduct. Shaniwar Wada with its Delhi Darwaza, Dagdusheth, the station, Aga Khan Palace and Parvati temple stand where they stand. Walk, ride a scooter, drive an auto rickshaw, a car, a tempo or a bus; traffic keeps left, mostly two-wheelers, and honks. Nine missions across real places, a wanted level and the Pune police, traffic mamas fining helmetless riders, vada pav carts, garages, twenty Puneri patya to find, shops that shut from one to four, a day and night cycle, monsoon rain, three radio stations and a GPS that routes on the real road graph.',
+    spec: ['91k real buildings · 30k road pieces', 'traffic, police, 9 missions, 20 patya', 'day/night · monsoon · 3 radio stations'],
+    ink: '#ffb347',
+    wash: 'rgba(255, 179, 71, 0.10)',
   },
 ];
 
