@@ -54,7 +54,8 @@ export type EffectId =
   | 'leap'
   | 'flight'
   | 'koi'
-  | 'fournights';
+  | 'fournights'
+  | 'orbitworks';
 
 export interface EffectDef {
   id: EffectId;
@@ -551,6 +552,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['60 passages · Garnett translation', 'one painted panorama, four nights and a morning', 'silhouettes · handwritten letters · sound'],
     ink: '#8a4a52',
     wash: 'rgba(138, 74, 82, 0.10)',
+  },
+  {
+    id: 'orbitworks',
+    name: 'Orbit Works',
+    tagline: 'Design a satellite for a real kind of mission, check it like an engineer, launch it, and fly it through its first weeks in orbit.',
+    blurb:
+      'A satellite lab in six missions modelled on real programmes: a student CubeSat, a Landsat-style imager in sun-synchronous orbit, a Starlink-style broadband satellite that raises itself with Hall thrusters, a GPS/NavIC-style navigation satellite, a geostationary comsat that climbs from GTO, and a Hubble-style telescope. Pick from about sixty parts across ten subsystems, each explaining how it works and what it depends on. The design review computes the real first-cut budgets (mass, power with eclipse and degradation, battery depth of discharge, hot and cold thermal cases, pointing and momentum, link budget, Δv by the rocket equation, drag decay and the 5-year debris rule, radiation dose, launcher capacity, cost and reliability) and tells you how to fix what fails. Then sit in the launch director\'s chair for the go/no-go poll, ride the ascent on a 3D Earth with real coastlines, and run mission control: detumble, deploy, first contact, commissioning, ground passes, eclipses and the anomalies operators actually face.',
+    spec: ['6 missions · ~60 parts · 20+ checks', 'orbital mechanics, budgets, link and Δv', 'launch poll · live operations · anomalies'],
+    ink: '#7fd4ff',
+    wash: 'rgba(127, 212, 255, 0.10)',
   },
 ];
 

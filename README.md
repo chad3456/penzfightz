@@ -1780,6 +1780,22 @@ Dostoevsky's *White Nights* as a painted film you scroll through:
 
 See `docs/four-nights.md`.
 
+## Orbit Works
+
+Build your own satellite and fly it:
+- **Missions:** six, modelled on Landsat, Starlink, GPS/NavIC, GEO comsats,
+  Hubble and student CubeSats.
+- **Build:** about sixty parts that explain how they work and what they
+  depend on.
+- **Review:** an engineering design review that computes the real
+  first-cut budgets (power, thermal, pointing, link, Δv, drag, radiation,
+  launch and cost) and says how to fix what fails.
+- **Launch and operate:** a go/no-go launch poll, the ascent on a 3D Earth,
+  then mission control: detumble, deploy, first contact, commissioning, ground
+  passes, eclipses and anomalies to decide on.
+
+See `docs/orbit-works.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the
