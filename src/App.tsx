@@ -55,6 +55,7 @@ import { HeirloomWall } from './heirloom/HeirloomWall';
 import { Mosaic } from './mosaic/Mosaic';
 import { Leap } from './leap/Leap';
 import { Flight } from './flight/Flight';
+import { KoiPond } from './koi/KoiPond';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -295,6 +296,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'flight') {
     return <Flight onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'koi') {
+    return <KoiPond onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

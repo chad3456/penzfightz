@@ -1748,6 +1748,21 @@ rendered live in the browser:
 `scripts/flight/` renders it to video with title cards and a generated
 soundtrack. See `docs/hanuman-in-flight.md`.
 
+## The Koi Pond
+
+A realistic garden koi pond you can put your hand in, rendered live in the
+browser:
+- **The water:** a running ripple simulation that refracts the pebble floor,
+  sweeps caustics across it, and reflects the cherry, the maple and the sky.
+- **The koi:** ten real varieties, painted by code scale by scale. They
+  swim, school, come to your hand, rise to food and scatter at a splash.
+- **What you can add:** stones, food, leaves, lily pads, paper boats,
+  lanterns and new koi.
+- **Weather and time:** rain, a breeze, and day, dusk or night with lanterns
+  and fireflies.
+
+See `docs/koi-pond.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

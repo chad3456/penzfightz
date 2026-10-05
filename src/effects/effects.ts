@@ -52,7 +52,8 @@ export type EffectId =
   | 'heirloom'
   | 'tesserae'
   | 'leap'
-  | 'flight';
+  | 'flight'
+  | 'koi';
 
 export interface EffectDef {
   id: EffectId;
@@ -529,6 +530,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · PBR · Gerstner ocean · Preetham sky', 'sculpted skinned body', 'six-shot film · free camera'],
     ink: '#f2c46d',
     wash: 'rgba(242, 196, 109, 0.12)',
+  },
+  {
+    id: 'koi',
+    name: 'The Koi Pond',
+    tagline: 'A realistic garden koi pond you can put your hand in: ripple it, feed the koi, float leaves, lilies and paper boats, and bring on rain or night.',
+    blurb:
+      'A garden pond rendered live in the browser. The water is a running wave simulation: drag a finger through it and rings spread, bounce off the banks and sweep bright caustics across the pebble floor. Under it, the floor bends with refraction and fades into green depth, and above it the cherry, the maple and the sky reflect by Fresnel. Thirteen koi in ten real varieties (kohaku, sanke, showa, tancho, ogon, asagi, shusui, chagoi and more) are sculpted and painted by code, scale by scale. They swim with a wave that runs down their bodies, school loosely, come over to see your hand, rise to gulp food and scatter when a stone goes in. Toss stones, scatter food, drop leaves, float lily pads, paper boats and lanterns, add your own koi, and switch on rain, a breeze, dusk or night with lanterns and fireflies. All of it is procedural, with no images or models.',
+    spec: ['three.js · ripple sim + refraction', 'ten koi varieties with schooling AI', 'rain · breeze · day, dusk, night'],
+    ink: '#e0613a',
+    wash: 'rgba(224, 97, 58, 0.10)',
   },
 ];
 
