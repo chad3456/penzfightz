@@ -56,6 +56,7 @@ import { Mosaic } from './mosaic/Mosaic';
 import { Leap } from './leap/Leap';
 import { Flight } from './flight/Flight';
 import { KoiPond } from './koi/KoiPond';
+import { FourNights } from './fournights/FourNights';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -299,6 +300,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'koi') {
     return <KoiPond onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'fournights') {
+    return <FourNights onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

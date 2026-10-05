@@ -1763,6 +1763,23 @@ browser:
 
 See `docs/koi-pond.md`.
 
+## Four Nights and a Morning
+
+Dostoevsky's *White Nights* as a painted film you scroll through:
+- **The text:** 60 passages from Constance Garnett's (public domain)
+  translation, set beside one long, living view of Petersburg along the
+  water.
+- **The places:** the emptied streets and the waggons of furniture, the pink
+  house painted yellow, the fields beyond the gate, the canal, the bench and
+  the bridge.
+- **The visions:** his dreams drawn in light, and her history cut as 1840s
+  silhouettes in gilt ovals.
+- **The ending:** her letters written out in her hand, the rain, the bell
+  striking eleven, the moon and the yellow cloud, and his room in the
+  morning.
+
+See `docs/four-nights.md`.
+
 ## Watercolour, from blank paper
 
 Give it a photograph and it paints it: a pencil sketch drawn outward from the

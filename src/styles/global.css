@@ -9998,3 +9998,55 @@ button.card:hover:not(:disabled) {
   .kp-fish { top: auto; bottom: 96px; right: 12px; left: 12px; width: auto; }
   .kp-tray { bottom: 92px; max-height: 40vh; overflow-y: auto; }
 }
+
+/* ---------- Four Nights and a Morning (fn-) ---------- */
+.fn-root { position: fixed; inset: 0; overflow: hidden; background: #8d93b4; color: #2b2433; font-family: 'Cormorant Garamond', Georgia, serif; color-scheme: light; }
+.fn-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.fn-grain { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: 0.22; background-size: 200px 200px; }
+.fn-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 60% 45%, rgba(0,0,0,0) 55%, rgba(20,14,30,0.32) 100%); }
+.fn-scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.fn-scroll::-webkit-scrollbar { display: none; }
+.fn-section { position: relative; height: 130vh; height: 130dvh; }
+.fn-card { position: absolute; top: 50vh; top: 50dvh; left: max(16px, 5.5vw); transform: translateY(-50%); width: min(470px, 36vw); padding: 26px 30px 24px; background: linear-gradient(160deg, rgba(251,247,239,0.9), rgba(244,236,224,0.84)); border-radius: 2px; box-shadow: 0 18px 50px rgba(30,20,50,0.22), 0 1px 0 rgba(255,255,255,0.6) inset; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; will-change: opacity; }
+.fn-card::before { content: ''; position: absolute; inset: 7px; border: 1px solid rgba(150,110,70,0.22); pointer-events: none; }
+.fn-card p { margin: 0 0 0.75em; font-size: clamp(18px, 0.55vw + 13px, 23px); line-height: 1.48; text-wrap: pretty; hyphens: auto; }
+.fn-card p:last-child { margin-bottom: 0; }
+.fn-card p.fn-said { color: #3a2c3e; }
+.fn-ch { display: flex; align-items: baseline; gap: 12px; margin: 0 0 14px; font: 400 13px/1 'Cinzel', serif; letter-spacing: 0.28em; text-transform: uppercase; color: #8a4a52; }
+.fn-ch-num { font: italic 600 30px/1 'Cormorant Garamond', serif; letter-spacing: 0; color: #b0866a; }
+.fn-ch + p::first-letter { float: left; font: 600 3.3em/0.82 'Cormorant Garamond', serif; padding: 0.06em 0.08em 0 0; color: #8a4a52; }
+.fn-card--last p { font-size: clamp(22px, 1vw + 14px, 30px); font-style: italic; }
+.fn-end { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(138,74,82,0.25); font: 400 12px 'Cinzel', serif; letter-spacing: 0.3em; text-transform: uppercase; color: #8a4a52; }
+.fn-title { position: absolute; top: 27vh; top: 27dvh; left: 50%; transform: translate(-50%, -50%); width: min(760px, calc(100% - 32px)); text-align: center; opacity: 0; }
+.fn-title-kicker { font: 400 12px 'Cinzel', serif; letter-spacing: 0.4em; text-transform: uppercase; color: #6d4655; }
+.fn-title h1 { margin: 10px 0 4px; font: italic 600 clamp(58px, 9vw, 132px)/0.95 'Cormorant Garamond', serif; color: #2a2240; letter-spacing: -0.01em; text-shadow: 0 2px 30px rgba(255,236,220,0.75); }
+.fn-title-sub { margin: 0 0 18px; font: italic 400 clamp(20px, 1.6vw + 8px, 30px)/1.2 'Cormorant Garamond', serif; color: #4a3550; }
+.fn-title-note { margin: 0 auto; max-width: 520px; font-size: 18px; line-height: 1.45; color: #3b2f45; text-shadow: 0 1px 14px rgba(255,240,230,0.9); }
+.fn-cue { display: inline-block; margin-top: 26px; font: 400 11px 'Cinzel', serif; letter-spacing: 0.35em; text-transform: uppercase; color: #5a3f55; animation: fn-bob 2.4s ease-in-out infinite; }
+@keyframes fn-bob { 50% { transform: translateY(6px); opacity: 0.6; } }
+.fn-top { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 10px; padding: 12px 16px; pointer-events: none; }
+.fn-top > * { pointer-events: auto; }
+.fn-tools { display: flex; gap: 8px; margin-left: auto; }
+.fn-btn { font: 500 14px 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.04em; background: #2a2240; color: #f6efe4; border: 0; border-radius: 999px; padding: 8px 15px; cursor: pointer; white-space: nowrap; }
+.fn-btn--ghost { background: rgba(250,246,238,0.55); color: #2a2240; border: 1px solid rgba(42,34,64,0.18); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.fn-btn--ghost.on { background: #2a2240; color: #f6efe4; }
+.fn-btn:focus-visible, .fn-chapter:focus-visible, .fn-menu button:focus-visible { outline: 2px solid #b0866a; outline-offset: 2px; }
+.fn-chapter { display: flex; align-items: center; gap: 8px; font: 400 12px 'Cinzel', serif; letter-spacing: 0.25em; text-transform: uppercase; color: #2a2240; background: rgba(250,246,238,0.55); border: 1px solid rgba(42,34,64,0.18); border-radius: 999px; padding: 9px 14px; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.fn-chapter i { font-style: normal; font-size: 10px; }
+.fn-menu { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; min-width: 240px; padding: 8px; background: rgba(251,247,239,0.95); box-shadow: 0 18px 50px rgba(30,20,50,0.25); border-radius: 4px; }
+.fn-menu button { display: flex; gap: 14px; align-items: baseline; text-align: left; border: 0; background: transparent; padding: 10px 12px; font: 400 19px 'Cormorant Garamond', serif; color: #2a2240; cursor: pointer; border-radius: 2px; }
+.fn-menu button span { width: 26px; font: italic 600 18px 'Cormorant Garamond', serif; color: #b0866a; }
+.fn-menu button:hover, .fn-menu button.on { background: rgba(138,74,82,0.1); }
+.fn-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(42,34,64,0.12); pointer-events: none; }
+.fn-progress i { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, #b0866a, #8a4a52); transition: width 0.4s ease; }
+.fn-progress b { position: absolute; top: -3px; width: 1px; height: 9px; background: rgba(42,34,64,0.35); }
+@media (max-width: 760px), (max-aspect-ratio: 9/10) {
+  .fn-card { top: 73vh; top: 73dvh; left: 12px; right: 12px; width: auto; max-height: 50vh; max-height: 50dvh; overflow: hidden; padding: 18px 20px; }
+  .fn-card p { font-size: 17px; line-height: 1.42; }
+  .fn-ch-num { font-size: 24px; }
+  .fn-tools .fn-btn { padding: 7px 11px; font-size: 13px; }
+  .fn-chapter { padding: 8px 10px; letter-spacing: 0.15em; font-size: 10px; }
+  .fn-top { flex-wrap: wrap; }
+  .fn-title { top: 33vh; top: 33dvh; }
+  .fn-title-note { font-size: 16px; text-shadow: 0 0 12px rgba(250,240,232,1), 0 0 4px rgba(250,240,232,1); }
+}

@@ -53,7 +53,8 @@ export type EffectId =
   | 'tesserae'
   | 'leap'
   | 'flight'
-  | 'koi';
+  | 'koi'
+  | 'fournights';
 
 export interface EffectDef {
   id: EffectId;
@@ -540,6 +541,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['three.js · ripple sim + refraction', 'ten koi varieties with schooling AI', 'rain · breeze · day, dusk, night'],
     ink: '#e0613a',
     wash: 'rgba(224, 97, 58, 0.10)',
+  },
+  {
+    id: 'fournights',
+    name: 'Four Nights and a Morning',
+    tagline: 'Dostoevsky’s White Nights as a painted film you scroll through, in the words of the book.',
+    blurb:
+      'The whole of White Nights in sixty passages from Constance Garnett’s translation, each with its own painted scene on one long, living view of Petersburg along the water. The dreamer wanders the emptied city while waggons heaped with furniture leave for the summer villas, hears a little pink house complain that it is being painted yellow, walks out past the city gate into the fields, and comes back at ten along the canal, where a girl in a yellow hat is crying at the railing. Then four pale white nights on the embankment and the seat: his confession, with his dreams drawn in light over the canal; her history, cut as 1840s silhouettes in gilt ovals, from the grandmother’s pin to the bundle on the stairs; the letter sealed “Rosina”; the rain of the third day and the bell striking eleven; the fourth night, the moon and the yellow cloud, and the young man who stops and looks. It ends in his room, with rain on the glass and her letter written out in her hand. Every scene is painted by code, with no images: the sky, the façades, the cut-paper people, and the water that mirrors them.',
+    spec: ['60 passages · Garnett translation', 'one painted panorama, four nights and a morning', 'silhouettes · handwritten letters · sound'],
+    ink: '#8a4a52',
+    wash: 'rgba(138, 74, 82, 0.10)',
   },
 ];
 
