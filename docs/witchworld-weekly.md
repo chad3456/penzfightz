@@ -37,9 +37,69 @@ line of text here is original.
     paper cup, an e-scooter, a delivery drone, Reginald the owl, a monstera,
     candles, clouds, birds, the moon, the portal and the stamps.
 
+## The Agreeable City (the game)
+
+Hazel's second assignment, and what the cover now opens into. Earth, 2026: a
+city run by the Bureau of Agreement. Cameras watch every corner, the Kindly
+Uncle smiles from every screen, and the streets are full of people who have
+stopped agreeing. Hazel has to fit in, with a grey cap on and the hat in her
+bag, and nod when the screens say NOD, while she quietly saves the place.
+
+It is an original allegory about surveillance, protest and rewritten
+history. It names no real country, party or person, and it borrows none of
+Orwell's names or text. The Bureau owns the only red in the drawing, and
+Hazel's spells are the only gold.
+
+**Five districts** (`src/witch/orwell.ts`), each closed by a gate until its
+goals are done:
+
+1. **The Square of Consensus.** Nod twice when the screens call for it, and
+   knit a woolly sock over a camera.
+2. **Bread Street.** A march for affordable bread, its signs taped shut, with
+   shields in front. Unmute six signs and calm the march until its anger is
+   low.
+3. **The Records Office.** Clerks retype last week, and the originals blow
+   toward the Forgetting Chute. Catch eight true pages before they go in.
+4. **The Bridge.** A riot, with stones from one side and canisters from the
+   other, and a child, an old man and a dog in the middle. Turn ten missiles
+   into birds, put out every fire with marigolds, and calm both sides.
+5. **The Tower of the Kindly Uncle.** Fly up past the drones and turn the
+   Uncle's screen into a mirror. Every screen in the city then shows its own
+   street, and the city looks up.
+
+Each cleared district files a **dispatch** to the magazine.
+
+**Fitting in.**
+- **Suspicion** rises while a camera cone or a drone sees you:
+  - fast on the broom (38/s);
+  - slower in the witch hat (14/s);
+  - barely in the cap (2/s);
+  - at a quarter of the rate while you walk inside the march.
+- It falls when nobody is looking. At 100 Hazel is taken to Agreement Class,
+  then released at the start of the district.
+- Every 16–26 s the screens say **NOD** for 2.8 s. Missing it costs 26
+  suspicion.
+- Casting a spell while you are watched costs 26 suspicion too.
+
+**Ink.** It refills at 7 per second. To cast, click or tap a target within
+reach. The spells and their costs are:
+- the sock, 20;
+- unmute a sign, 14;
+- calm, 24;
+- bird, 9;
+- marigolds, 14;
+- turn a screen to the truth, 28.
+
+**Controls.**
+- Arrows or WASD walk; Space or ↑ goes up on the broom.
+- **B** or **F** for the broom, **H** for the hat or cap, **N** to nod.
+- Click to cast, and **Enter** or a tap to close a dispatch.
+- On phones there is an on-screen pad: ← ↑ ↓ →, Nod, Hat/Cap and
+  Broom/Land.
+
 ## What you can do
 
-- **Fly.**
+- **Earth notes (fly).** The original issue's world.
   - Use the arrows or WASD, or hold and drag on a phone.
   - The world is 9,200 units wide, with a parallax skyline. The sky turns to
     night toward the end.

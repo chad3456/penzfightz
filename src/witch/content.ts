@@ -140,11 +140,11 @@ export const SPREADS: Spread[] = [
 ];
 
 export const COVER_LINES = [
-  'Earth, 2026: a field guide',
-  'Why are they all looking down?',
-  'We try the autumn in a cup',
-  'Ten spells humans call apps',
-  'Parsnip reviews a laptop',
+  'Special report: the Agreeable City',
+  'Undercover: how to nod',
+  'Bread, not slogans',
+  'Who rescued yesterday?',
+  'The riot that sat down',
 ];
 
 export const HOROSCOPES: [string, string][] = [

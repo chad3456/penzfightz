@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { makePen, letter, line, measure, wrap } from './pen';
 import { Frame, bird, cloud, flying, house, moon, owl, portal, stamp, star, witch, cat, broom } from './art';
 import { ABOUT, CLASSIFIEDS, COVER_LINES, HOROSCOPES, SPREADS, type Spread } from './content';
+import { AgreeableCity, DISTRICTS } from './orwell';
 
 /**
  * WITCHWORLD WEEKLY — THE EARTH ISSUE, 2026. A magazine and the portfolio of
@@ -10,7 +11,7 @@ import { ABOUT, CLASSIFIEDS, COVER_LINES, HOROSCOPES, SPREADS, type Spread } fro
  * the stamps, read the issue, and post a card home by owl.
  */
 
-type View = 'cover' | 'fly' | 'issue' | 'about' | 'post';
+type View = 'cover' | 'play' | 'fly' | 'issue' | 'about' | 'post';
 const PAPER = '#fdfcf8';
 const WORLD_W = 9200;
 
@@ -41,6 +42,8 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
   const [near, setNear] = useState<Spread | null>(null);
   const state = useRef({ x: 300, y: 300, vx: 0, vy: 0, camX: 0, t: 0, poked: new Set<string>(), keys: new Set<string>(), aim: null as null | { x: number; y: number }, near: null as Spread | null, sentT: 0 });
   const hits = useRef<{ x: number; y: number; w: number; h: number; act: () => void }[]>([]);
+  const game = useRef<AgreeableCity>(null!);
+  const [playHud, setPlayHud] = useState({ broom: false, disguise: true, ended: false });
   const viewRef = useRef(view); viewRef.current = view;
   const openRef = useRef(open); openRef.current = open;
   const pageRef = useRef(page); pageRef.current = page;
@@ -268,6 +271,102 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
     };
 
     // ------------------------------------------------------------ the postcard
+    // ------------------------------------------------------------ the Agreeable City
+    let actx: AudioContext | null = null;
+    const blip = (f0: number, f1: number, dur: number, type: OscillatorType = 'triangle', vol = 0.06) => {
+      try {
+        if (!actx) actx = new AudioContext();
+        const t0 = actx.currentTime, o = actx.createOscillator(), gg = actx.createGain();
+        o.type = type; o.frequency.setValueAtTime(f0, t0); o.frequency.exponentialRampToValueAtTime(f1, t0 + dur);
+        gg.gain.setValueAtTime(vol, t0); gg.gain.exponentialRampToValueAtTime(0.0005, t0 + dur);
+        o.connect(gg).connect(actx.destination); o.start(t0); o.stop(t0 + dur + 0.02);
+      } catch { /* no audio */ }
+    };
+    const newGame = () => {
+      const G = new AgreeableCity();
+      G.sfx = (k) => {
+        if (k === 'zap') { blip(660, 1320, 0.25); blip(990, 1980, 0.2, 'sine', 0.03); }
+        else if (k === 'alarm') { blip(520, 520, 0.25, 'square', 0.04); window.setTimeout(() => blip(440, 440, 0.3, 'square', 0.04), 280); }
+        else if (k === 'nod') blip(300, 240, 0.15, 'sine', 0.05);
+        else if (k === 'page') blip(880, 1200, 0.12, 'sine', 0.05);
+        else if (k === 'clear') [523, 659, 784, 1047].forEach((f, i) => window.setTimeout(() => blip(f, f, 0.3, 'triangle', 0.05), i * 120));
+        else if (k === 'caught') blip(300, 120, 0.8, 'sawtooth', 0.04);
+      };
+      return G;
+    };
+    game.current = newGame();
+    let hudSync = 0;
+
+    const meter = (x: number, y: number, w: number, label: string, v: number, col: string, id: number) => {
+      pen.width = 1.5;
+      letter(pen, label, x, y, { size: 12, seed: id });
+      const by = y + 20;
+      g.fillStyle = col; g.fillRect(x + 2, by + 2, Math.max(0, (w - 4) * Math.min(1, v)), 10);
+      line(pen, [[x, by], [x + w, by], [x + w, by + 14], [x, by + 14]], id + 1, { close: true, w: 1.6 });
+      pen.width = 2.2;
+    };
+
+    const play = (t: number, dt: number) => {
+      const G = game.current;
+      const K = S.keys;
+      G.update(dt, { left: K.has('left'), right: K.has('right'), up: K.has('up'), down: K.has('down') });
+      const top = W < 700 ? 104 : 64;
+      G.draw(pen, W, H, top);
+      if (G.caughtT > 0) { G.drawCaught(pen, W, H, top); return; }
+      // HUD: where we are, what to do
+      let hudB = top;
+      if (!G.ended) {
+      const d = DISTRICTS[G.district], done = G.goalDone;
+      // goals wrap on narrow screens, so lay them out first and size the box to fit
+      const gw = Math.min(330, W * 0.5), gs = 11, gl16 = gs * 1.45;
+      const rows = d.goal.map((gl, i) => ({ text: `${done[i] ? '✓' : '·'} ${gl}`, n: wrap(`${done[i] ? '✓' : '·'} ${gl}`, gs, gw).length }));
+      const prog = G.progress(G.district), pn = wrap(prog, 10, gw).length;
+      const gh = rows.reduce((a, r) => a + r.n * gl16 + 4, 0) + pn * 14.5;
+      g.fillStyle = 'rgba(253,252,248,0.85)'; g.fillRect(8, top, Math.min(360, W * 0.55), 40 + gh); hudB = top + 40 + gh;
+      pen.width = 2;
+      letter(pen, `${G.district + 1}. ${d.name}`, 16, top + 6, { size: W < 700 ? 13 : 16, seed: 8000 + G.district, maxWidth: Math.min(340, W * 0.52) });
+      pen.width = 1.4;
+      let gy = top + 32;
+      rows.forEach((r, i) => { letter(pen, r.text, 18, gy, { size: gs, seed: 8100 + i, maxWidth: gw }); gy += r.n * gl16 + 4; });
+      letter(pen, prog, 18, gy + 2, { size: 10, seed: 8200, maxWidth: gw });
+      // meters
+      const mw = Math.min(170, W * 0.3), mx = W - mw - 14;
+      g.fillStyle = 'rgba(253,252,248,0.85)'; g.fillRect(mx - 8, top, mw + 16, 92);
+      meter(mx, top + 6, mw, G.seen ? 'SUSPICION — WATCHED!' : 'SUSPICION', G.sus / 100, 'rgba(192,57,43,0.75)', 8300);
+      meter(mx, top + 48, mw, 'INK', G.ink / 100, 'rgba(224,168,0,0.7)', 8310);
+      }
+      // the nod
+      if (G.nodWindow > 0) {
+        pen.ink = '#c0392b'; pen.width = 3;
+        letter(pen, G.nodded ? 'NODDED.' : W < 560 ? 'NOD NOW!' : 'NOD NOW!  (N)', W / 2, W < 900 ? hudB + 16 : top + 70, { size: Math.min(44, W / 12), align: 'center', seed: 8400 });
+        pen.ink = '#141414'; pen.width = 2.2;
+      }
+      // her thoughts
+      const say = G.says[G.says.length - 1];
+      if (say) {
+        const bw = Math.min(760, W - 30);
+        g.fillStyle = 'rgba(253,252,248,0.9)'; const sy = H - (W < 560 ? 168 : 118); g.fillRect((W - bw) / 2, sy, bw, 50);
+        pen.width = 1.6;
+        letter(pen, say.text, W / 2, sy + 6, { size: W < 700 ? 11 : 14, align: 'center', maxWidth: bw - 20, seed: 8500 + say.text.length, lineGap: 1.35 });
+        pen.width = 2.2;
+      }
+      // a dispatch to the magazine at the end of each district
+      if (G.card && G.cardT > 0 && (!G.ended || G.mirrorT > 7)) { // the last dispatch waits until the city has looked up
+        const cw = Math.min(620, W - 30), ch = 250, cx = (W - cw) / 2, cy = G.ended ? H - ch - 70 : Math.max(top + 40, H / 2 - ch / 2 - 30);
+        g.fillStyle = '#fffefb'; g.fillRect(cx, cy, cw, ch);
+        line(pen, [[cx, cy], [cx + cw, cy], [cx + cw, cy + ch], [cx, cy + ch]], 8600, { close: true, w: 2.4 });
+        pen.width = 1.4; letter(pen, `DISPATCH NO. ${G.card.n} · FILED TO WITCHWORLD WEEKLY`, cx + 18, cy + 14, { size: 11, seed: 8601 });
+        pen.width = 2.6; letter(pen, G.card.title, cx + 18, cy + 36, { size: 26, seed: 8602, maxWidth: cw - 36 });
+        pen.width = 1.5; letter(pen, G.card.body, cx + 18, cy + 84, { size: W < 700 ? 10 : 12, seed: 8603, maxWidth: cw - 36, lineGap: 1.5 });
+        letter(pen, 'TAP OR ENTER TO CARRY ON', cx + cw - 220, cy + ch - 24, { size: 10, seed: 8604 });
+        pen.width = 2.2;
+      }
+      if (G.ended && G.mirrorT > 7 && G.cardT <= 0) { pen.width = 1.6; letter(pen, 'TAP TO PLAY AGAIN', W / 2, H - 70, { size: 14, align: 'center', seed: 8700 }); pen.width = 2.2; }
+      hudSync -= dt;
+      if (hudSync <= 0) { hudSync = 0.25; setPlayHud((h) => (h.broom === G.broom && h.disguise === G.disguise && h.ended === G.ended ? h : { broom: G.broom, disguise: G.disguise, ended: G.ended })); }
+      void t;
+    };
+
     const post = (t: number, dt: number) => {
       // leave room under the card for the writing box
       const narrow = W < 700;
@@ -330,8 +429,9 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
       } else if (v === 'cover') {
         const h = Math.min(H - top - 52, (W - 20) * 1.25), w = h / 1.25;
         cover((W - w) / 2, top, w, h, t);
-        hit((W - w) / 2, top, w, h, () => setView('fly'));
-      } else if (v === 'fly') fly(t, dt);
+        hit((W - w) / 2, top, w, h, () => setView('play'));
+      } else if (v === 'play') play(t, dt);
+      else if (v === 'fly') fly(t, dt);
       else if (v === 'issue') {
         const p = PAGES[pageRef.current];
         const w = Math.min(W - mx * 2, 1300), h = Math.min(H - top - 70, W < 700 ? H - top - 70 : w * 0.62);
@@ -385,12 +485,22 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
         if (e.code === 'ArrowLeft') setPage((p) => Math.max(0, p - 1));
         return;
       }
+      if (viewRef.current === 'play') {
+        const G = game.current;
+        const k = KM[e.code]; if (k) { S.keys.add(k); e.preventDefault(); }
+        if (e.code === 'Space') { S.keys.add('up'); e.preventDefault(); }
+        if (e.code === 'KeyB' || e.code === 'KeyF') G.toggleBroom();
+        if (e.code === 'KeyH') G.toggleHat();
+        if (e.code === 'KeyN') G.nod();
+        if (e.code === 'Enter' && G.cardT > 0 && (!G.ended || G.mirrorT > 7)) G.cardT = 0;
+        return;
+      }
       if (viewRef.current === 'fly') {
         const k = KM[e.code]; if (k) { S.keys.add(k); e.preventDefault(); }
         if ((e.code === 'Space' || e.code === 'Enter') && S.near) { e.preventDefault(); if (S.near.id === 'post') setView('post'); else openSpread(S.near); }
       }
     };
-    const ku = (e: KeyboardEvent) => { const k = KM[e.code]; if (k) S.keys.delete(k); };
+    const ku = (e: KeyboardEvent) => { const k = KM[e.code]; if (k) S.keys.delete(k); if (e.code === 'Space') S.keys.delete('up'); };
     let downAt: { x: number; y: number; t: number } | null = null;
     const pd = (e: PointerEvent) => {
       const r = cv.getBoundingClientRect(); const x = e.clientX - r.left, y = e.clientY - r.top;
@@ -403,11 +513,18 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
       const r = cv.getBoundingClientRect(); const x = e.clientX - r.left, y = e.clientY - r.top;
       if (!downAt || Math.hypot(x - downAt.x, y - downAt.y) > 8 || performance.now() - downAt.t > 350) { downAt = null; return; }
       downAt = null;
+      if (viewRef.current === 'play' && !openRef.current) {
+        const G = game.current;
+        if (G.ended && G.mirrorT <= 7) return;
+        if (G.cardT > 0) { G.cardT = 0; return; }
+        if (G.ended) { game.current = newGame(); return; }
+        const wp = G.toWorld(x, y); G.cast(wp.x, wp.y); return;
+      }
       for (let i = hits.current.length - 1; i >= 0; i--) { const h = hits.current[i]; if (x >= h.x && x <= h.x + h.w && y >= h.y && y <= h.y + h.h) { h.act(); return; } }
     };
     window.addEventListener('keydown', kd); window.addEventListener('keyup', ku);
     cv.addEventListener('pointerdown', pd); window.addEventListener('pointermove', pm); window.addEventListener('pointerup', pu);
-    (window as unknown as { __witch: unknown }).__witch = { state: S, setView, openSpread, setPage };
+    (window as unknown as { __witch: unknown }).__witch = { state: S, setView, openSpread, setPage, game };
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', fit); window.removeEventListener('keydown', kd); window.removeEventListener('keyup', ku);
@@ -416,7 +533,7 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const NAV: [View, string][] = [['cover', 'Cover'], ['fly', 'Fly'], ['issue', 'Read the issue'], ['about', 'Portfolio'], ['post', 'Post an owl']];
+  const NAV: [View, string][] = [['cover', 'Cover'], ['play', 'The Agreeable City'], ['fly', 'Earth notes'], ['issue', 'Read the issue'], ['about', 'Portfolio'], ['post', 'Post an owl']];
   const download = () => {
     const cv = cvRef.current; if (!cv) return;
     const a = document.createElement('a'); a.download = 'postcard-from-earth.png'; a.href = cv.toDataURL('image/png'); a.click();
@@ -456,7 +573,21 @@ export function Witchworld({ onExit }: { onExit: () => void }) {
             : <Hand text="Arrows or WASD to fly · or hold and drag · land at the signs" size={13} seed={32} />}
         </div>
       )}
-      {!open && view === 'cover' && <div className="ww-hint"><Hand text="Tap the cover to fly to Earth" size={14} seed={33} /></div>}
+      {!open && view === 'play' && (
+        <div className="ww-pad">
+          <div className="ww-pad-l">
+            {([['left', '←'], ['up', '↑'], ['down', '↓'], ['right', '→']] as const).map(([k, l]) => (
+              <button key={k} onPointerDown={(e) => { e.preventDefault(); state.current.keys.add(k); }} onPointerUp={() => state.current.keys.delete(k)} onPointerLeave={() => state.current.keys.delete(k)} aria-label={k}><Hand text={l} size={18} seed={50} /></button>
+            ))}
+          </div>
+          <div className="ww-pad-r">
+            <button onClick={() => game.current?.nod()} aria-label="Nod (N)"><Hand text="Nod" size={15} seed={51} /></button>
+            <button onClick={() => game.current?.toggleHat()} aria-label="Hat or cap (H)"><Hand text={playHud.disguise ? 'Hat' : 'Cap'} size={15} seed={52} /></button>
+            <button onClick={() => game.current?.toggleBroom()} aria-label="Broom (B)"><Hand text={playHud.broom ? 'Land' : 'Broom'} size={15} seed={53} /></button>
+          </div>
+        </div>
+      )}
+      {!open && view === 'cover' && <div className="ww-hint"><Hand text="Tap the cover to go undercover" size={14} seed={33} /></div>}
       {!open && view === 'post' && (
         <div className="ww-post">
           <label htmlFor="ww-msg"><Hand text="Write your card" size={14} seed={41} /></label>

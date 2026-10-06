@@ -1800,6 +1800,13 @@ All 298 verses of the dialogue between King Janaka and the sage Ashtavakra.
 correspondent, Hazel Mothwick (347), a witch visiting Earth from Witchworld.
 - **How it is drawn:** one wobbly felt-tip pen whose lines "boil". Every
   word is lettered by a single-stroke alphabet drawn in code.
+- **The Agreeable City:** the cover opens a five-district game. Hazel has
+  to fit into a surveillance city run by the Bureau of Agreement: cap on, hat
+  hidden, nodding when the screens say NOD. Meanwhile she unmutes the taped-up
+  protest signs, rescues true pages from the Forgetting Chute, turns stones
+  and canisters into birds on a rioting bridge, and turns the Kindly Uncle's
+  screen into a mirror. It is an original allegory, with no real country,
+  party or person.
 - **Fly:** take her broom (with Parsnip the cat) over a scribbled Earth and
   land at ten modern oddities: phones, self-checkouts, smart speakers, a
   chatbot, wellness, the pumpkin latte, e-scooters, all-black fashion,

@@ -32,12 +32,19 @@ export type Pose = 'arms-up' | 'wave' | 'shrug' | 'point' | 'hold' | 'fly' | 'st
  * Hazel Mothwick, 347, field correspondent. Origin at her feet, about 220
  * units tall to the tip of her hat. t animates the hair and the hem.
  */
-export function witch(f: Frame, pose: Pose, t = 0, mouth: 'grin' | 'o' | 'flat' = 'grin') {
+export function witch(f: Frame, pose: Pose, t = 0, mouth: 'grin' | 'o' | 'flat' = 'grin', o: { disguise?: boolean; nod?: number } = {}) {
   const sway = sin(t * 2) * 2;
-  // hat: a tall cone that has given up near the top, and a brim like a plate
-  const hy = -212; // so that her boots are on y = 0
-  f.L([[-16, hy - 2], [-8, hy - 40], [-2, hy - 62], [4, hy - 72], [22 + sway, hy - 86], [10, hy - 66], [12, hy - 40], [18, hy]], 1);
-  f.L(arc(1, hy + 2, 62, 9, 0, Math.PI * 2, 30), 2, { close: true });
+  const hy = -212 + (o.nod ?? 0) * 6; // so that her boots are on y = 0; a nod dips the head
+  if (o.disguise) {
+    // undercover: the hat is folded in her bag; a regulation grey cap instead
+    f.L(smooth([[-15, hy + 6], [-12, hy - 6], [0, hy - 10], [13, hy - 6], [16, hy + 6]]), 1);
+    f.L([[-17, hy + 6], [26, hy + 4]], 2);
+    f.L([[-8, hy - 2], [-4, hy + 4]], 3, { w: 1.2 }); f.L([[2, hy - 4], [5, hy + 4]], 4, { w: 1.2 });
+  } else {
+    // hat: a tall cone that has given up near the top, and a brim like a plate
+    f.L([[-16, hy - 2], [-8, hy - 40], [-2, hy - 62], [4, hy - 72], [22 + sway, hy - 86], [10, hy - 66], [12, hy - 40], [18, hy]], 1);
+    f.L(arc(1, hy + 2, 62, 9, 0, Math.PI * 2, 30), 2, { close: true });
+  }
   // hair: long and stringy, out from under the brim
   for (let i = 0; i < 5; i++) {
     const side = i < 2 ? -1 : i < 4 ? 1 : -1;
@@ -52,8 +59,9 @@ export function witch(f: Frame, pose: Pose, t = 0, mouth: 'grin' | 'o' | 'flat' 
   else if (mouth === 'o') f.L(arc(1, hy + 38, 3.5, 4, 0, Math.PI * 2, 10), 24, { close: true });
   else f.L([[-5, hy + 38], [7, hy + 37]], 24);
   // neck and robe
-  const sh = hy + 54;
+  const sh = -212 + 54; // the body stays put when she nods
   f.L([[-4, hy + 47], [-6, sh]], 30); f.L([[5, hy + 47], [7, sh]], 31);
+  if (o.disguise) { f.L(smooth([[-16, sh + 2], [0, sh + 10], [17, sh + 2]]), 37); f.L([[-4, sh + 8], [-8, sh + 34]], 38); f.L([[-1, sh + 9], [2, sh + 32]], 39); }
   const hem = (i: number) => sin(t * 2.5 + i) * 3;
   f.L(smooth([[-18, sh + 4], [-26, sh + 60], [-36, sh + 110], [-44, sh + 146 + hem(1)]]), 32);
   f.L(smooth([[20, sh + 4], [28, sh + 60], [38, sh + 110], [46, sh + 146 + hem(2)]]), 33);
