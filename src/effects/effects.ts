@@ -61,7 +61,8 @@ export type EffectId =
   | 'ashtavakra'
   | 'chalisa'
   | 'ghar624'
-  | 'almari';
+  | 'almari'
+  | 'outrage';
 
 export interface EffectDef {
   id: EffectId;
@@ -628,6 +629,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['2,028 finishes · 12 collections', '15 fittings · 11 shutter profiles', '3D · elevations · cut list · ₹ estimate'],
     ink: '#86652a',
     wash: 'rgba(134, 101, 42, 0.12)',
+  },
+  {
+    id: 'outrage',
+    name: 'The Outrage Dividend',
+    tagline: 'A visual data essay on the protest, riot and grift economies in India and the world, with a live unrest tracker.',
+    blurb:
+      'How the street became a screen. A night crowd of a thousand heads turns into a phone as you scroll, then ten chapters follow the money and the anger. An interactive post shows how out-group and moral-emotional words multiply sharing, using the published effect sizes from two large studies. The protest economy: the farm agitation\u2019s ₹2,731 crore in lost tolls and a Supreme Court that said public roads cannot be held indefinitely. The riot paradox: NCRB rioting cases fell 39% from 2016 to 2022 while the flashpoints got bigger, and India led the world in internet shutdowns. The neighbourhood: Sri Lanka, Bangladesh, Nepal. The grift economy: ₹22,846 crore lost to cyber fraud in 2024, political ad money and FCRA. Hoffer, Nietzsche, Dostoevsky, Le Bon, Gandhi and Ambedkar on the men of words and the grammar of anarchy. A tracker with KPI tiles, charts, a flashpoint timeline and a sortable ledger, then a chapter on what the data does not say. Every number has a linked source.',
+    spec: ['10 chapters · 12 charts · tracker dashboard', 'NCRB · Access Now · I4C · ACLED · OHCHR', 'every figure sourced, with table views'],
+    ink: '#eb6834',
+    wash: 'rgba(235, 104, 52, 0.12)',
   },
 ];
 

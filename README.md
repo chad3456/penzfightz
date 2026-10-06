@@ -1848,6 +1848,31 @@ An open-world driving game set in the real Pune:
 - **Map data:** © OpenStreetMap contributors via Overture Maps. See
   `docs/pune-411.md`.
 
+## The Outrage Dividend
+
+A visual data essay on the protest, riot and grift economies, with India at the
+centre and the world around it:
+- **Opening:** a night crowd of a thousand heads gathers into a phone and its
+  feed as you scroll ("the street became a screen").
+- **Ten chapters:** the street and the screen; the price of a word; the
+  protest economy; the riot paradox; the neighbourhood; the grift economy;
+  the men of words; the tracker; what the data does not say; sources.
+- **Interactive post:** add out-group and moral-emotional words and see the
+  expected sharing multiply, using the published effect sizes from Rathje et
+  al. (PNAS 2021) and Brady et al. (PNAS 2017). It is labelled as an
+  illustration.
+- **Charts:** NCRB rioting cases, Access Now shutdowns for India and the
+  world, measured costs in ₹ crore, I4C cyber-fraud losses and complaints, and
+  a flashpoint timeline. Each chart has hover tooltips and a table view.
+- **Tracker:** switch between India, World and All, filter by type, see KPI
+  tiles with sparklines, and sort a ledger of incidents. Each incident opens
+  to show its trigger, a death-count note and linked sources.
+- **Quotations:** Hoffer, Nietzsche, Dostoevsky, Le Bon, Ambedkar's "Grammar
+  of Anarchy" and the Supreme Court's Shaheen Bagh ruling, plus a chapter of
+  counter-evidence.
+- **Sources:** every number is in `src/outrage/data.ts` with its source. See
+  `docs/outrage-dividend.md`.
+
 ## Orbit Works
 
 Build your own satellite and fly it:
