@@ -10557,3 +10557,9 @@ button.card:hover:not(:disabled) {
   .hc-btn { font-size: 13.5px; padding: 4px 8px; }
   .hc-badge { font-size: 12.5px; top: 6px; left: 6px; }
 }
+
+/* ───────── standalone apps in a frame ───────── */
+.appframe { position: fixed; inset: 0; z-index: 50; background: #f6f5f2; }
+.appframe__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.appframe__exit { position: absolute; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 2; background: rgba(27, 32, 30, 0.86); color: #fff; border: 0; border-radius: 999px; padding: 7px 14px; font: 500 13px system-ui, sans-serif; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+.appframe__exit:hover { background: #1b201e; }

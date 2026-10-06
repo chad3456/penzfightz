@@ -59,7 +59,9 @@ export type EffectId =
   | 'pune411'
   | 'witchworld'
   | 'ashtavakra'
-  | 'chalisa';
+  | 'chalisa'
+  | 'ghar624'
+  | 'almari';
 
 export interface EffectDef {
   id: EffectId;
@@ -606,6 +608,26 @@ export const EFFECTS: EffectDef[] = [
     spec: ['43 verses · 43 animated scenes', 'every word: Devanagari · roman · gloss', 'tanpura · dholak · manjira · bansuri, timed to the metre'],
     ink: '#f4b51c',
     wash: 'rgba(244, 181, 28, 0.12)',
+  },
+  {
+    id: 'ghar624',
+    name: 'Ghar 624',
+    tagline: 'A room-by-room 3D interior designer for a 624 sq ft 2BHK: kitchen, living room and two bedrooms, with a rough cost for each.',
+    blurb:
+      'Design a small flat room by room in 3D. The entrance opens into a kitchen with two black granite ottas, then a small living room, then two master bedrooms of about 12 by 13 feet. Each room can be resized in feet and seen at eye level, from the ceiling, as a dollhouse or from the top, by day or in the evening with the cove lights on. Choose POP false ceilings and their LED colour, fans, paint and a feature wall of wallpaper, texture or panelling, floors, TV units, bookshelves, sofa, rug and curtains, portraits (or your own photo), wardrobes, headboards, a mandir, and the kitchen\'s layout, granite, cabinets and backsplash. Designs are kept on the device, pictures save as PNG, and every room and the whole home get a rough rupee range. Everything is drawn with three.js; every texture is painted in code.',
+    spec: ['5 rooms · 624 sq ft', 'ceilings · walls · floors · furniture · mandir', 'rough ₹ estimate per room'],
+    ink: '#b07a3a',
+    wash: 'rgba(176, 122, 58, 0.12)',
+  },
+  {
+    id: 'almari',
+    name: 'Almari Studio',
+    tagline: 'A master-bedroom wardrobe designer: size it to your wall, fit out the inside, pick from 2,028 finishes, and get a cut list and estimate.',
+    blurb:
+      'Size the wardrobe to the wall in mm, cm or feet, with a loft and skirting, and it checks the ceiling, the wall, wide shutters, sheet height, hanging depth and the swing past the bed. Fit each bay from the floor up from fifteen fittings: long and short hanging, shelves, inner and outer drawers, a jewellery drawer, tie, trouser, shoe and saree pull-outs, a locker, a display and more. Choose hinged or sliding shutters in eleven profiles (shaker, fluted, glass, mirror, cane, arched…) and seven two-finish layouts, then handles. The 2,028 finishes are all painted in code, in twelve collections, each with its own code, hex colour, colour family and surface, plus 24 colour combinations and suggestions that go with your choice; photographs of real samples can be added. See it as a 3D bedroom with the doors opening, or as front and inside drawings with dimensions, and download a cut list and estimate.',
+    spec: ['2,028 finishes · 12 collections', '15 fittings · 11 shutter profiles', '3D · elevations · cut list · ₹ estimate'],
+    ink: '#86652a',
+    wash: 'rgba(134, 101, 42, 0.12)',
   },
 ];
 
