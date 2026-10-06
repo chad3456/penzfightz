@@ -58,7 +58,8 @@ export type EffectId =
   | 'orbitworks'
   | 'pune411'
   | 'witchworld'
-  | 'ashtavakra';
+  | 'ashtavakra'
+  | 'chalisa';
 
 export interface EffectDef {
   id: EffectId;
@@ -595,6 +596,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['298 verses · 20 chapters · 52 close readings', 'Sanskrit · IAST · metre · Hindi · English', 'tanpura recitation in the metre'],
     ink: '#e8b04a',
     wash: 'rgba(232, 176, 74, 0.10)',
+  },
+  {
+    id: 'chalisa',
+    name: 'श्री हनुमान चालीसा',
+    tagline: 'The whole Hanuman Chalisa, animated verse by verse like a pichwai come to life, with every word shown as it is sung and its meaning beneath it.',
+    blurb:
+      'All forty-three verses of Goswami Tulsidas\'s Hanuman Chalisa, the two opening dohas, the forty chaupais and the closing doha, each as its own animated painting in the manner of a Nathdwara pichwai and an Indian picture book: navy nights full of swirls, marigold and magenta, lotus ponds, cusped arches, white curling clouds. Each verse is staged foot by foot. The guru\'s pollen cleans a clouded mirror until Rama appears in it. A tiny Hanuman drops the ring to Sita, then grows huge with his tail aflame over Lanka. The baby takes the red sun for a fruit and swallows it, and the sky goes dark. He leaps the ocean with the ring in his mouth. Spirits flee at the name "Mahavir". A prisoner\'s beads count to a hundred until the chains fall away. Tulsidas writes on the ghats of Varanasi until the Lord\'s light settles in his heart. Every word is on screen as it is sung, with its romanisation and an English gloss beneath it, and the meaning of each verse is given in English or Hindi. Words are timed to their syllables, a light one one mātrā and a heavy one two, so each chaupai foot fills its sixteen mātrās. An original score plays under it: a tanpura drone, dholak and manjira in keherwa, and a bansuri that gives each syllable a note. There is also a reading view that sets out the whole text word by word. Every figure and scene is drawn in code.',
+    spec: ['43 verses · 43 animated scenes', 'every word: Devanagari · roman · gloss', 'tanpura · dholak · manjira · bansuri, timed to the metre'],
+    ink: '#f4b51c',
+    wash: 'rgba(244, 181, 28, 0.12)',
   },
 ];
 

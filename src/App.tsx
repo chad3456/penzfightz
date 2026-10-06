@@ -61,6 +61,7 @@ import { SatLab } from './sat/SatLab';
 import { Pune411 } from './pune/Pune411';
 import { Witchworld } from './witch/Witchworld';
 import { Ashtavakra } from './ashtavakra/Ashtavakra';
+import { Chalisa } from './chalisa/Chalisa';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
 import { roomFromUrl } from './arcade/room';
@@ -319,6 +320,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'ashtavakra') {
     return <Ashtavakra onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'chalisa') {
+    return <Chalisa onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'banter') {
     return <Banter onExit={toShelf} />;

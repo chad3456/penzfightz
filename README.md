@@ -1794,6 +1794,20 @@ All 298 verses of the dialogue between King Janaka and the sage Ashtavakra.
   syllable at the pace of its metre, then the meaning, then silence.
 - **Interface:** Hindi, English or both. More in `docs/ashtavakra-gita.md`.
 
+## Shri Hanuman Chalisa
+
+The complete Hanuman Chalisa of Goswami Tulsidas, animated verse by verse in a
+pichwai and picture-book style.
+- **Scenes:** each of the 43 verses has its own animated scene, drawn in code.
+- **Captions:** every word is shown as it is sung, with its romanisation and
+  an English gloss beneath it. The meaning of each verse is given in English or
+  Hindi.
+- **Timing:** words are timed to the metre (16 mātrās per chaupai foot).
+- **Score:** original, with tanpura, dholak and manjira in keherwa, and a
+  bansuri that gives each syllable a note.
+- **Reading view:** the whole text laid out word by word.
+- More in `docs/hanuman-chalisa.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

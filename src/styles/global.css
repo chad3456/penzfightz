@@ -10466,3 +10466,94 @@ button.card:hover:not(:disabled) {
 .ww-pad button { pointer-events: auto; background: rgba(253,252,248,0.92); border: 1.5px solid #141414; border-radius: 6px; padding: 4px 8px; margin: 2px; cursor: pointer; touch-action: none; }
 .ww-pad-l, .ww-pad-r { display: flex; flex-wrap: wrap; max-width: 50%; }
 @media (max-width: 560px) { .ww-pad-l { flex-wrap: nowrap; max-width: none; } .ww-pad-r { flex-direction: column; align-items: flex-end; } .ww-pad button { padding: 3px 6px; } }
+
+/* ───────── Shri Hanuman Chalisa (hc-) ───────── */
+.hc { position: fixed; inset: 0; z-index: 50; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; background: #0b1034; color: #f8ecd0; font-family: 'Cormorant Garamond', Georgia, serif; }
+.hc .dev { font-family: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif; }
+.hc-top { display: flex; align-items: center; gap: 12px; padding: 8px 14px; background: linear-gradient(90deg, #7c1d2e, #a7306f); border-bottom: 3px solid #f4b51c; }
+.hc-title { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
+.hc-title .dev { font-size: 22px; color: #ffd86a; }
+.hc-sub { font-size: 13px; letter-spacing: 0.06em; color: #f7d6c8; font-style: italic; }
+.hc-views { margin-left: auto; display: flex; border: 1px solid rgba(244,181,28,0.6); border-radius: 18px; overflow: hidden; }
+.hc-views button { background: transparent; color: #f8ecd0; border: 0; padding: 5px 14px; font: inherit; font-size: 15px; cursor: pointer; }
+.hc-views button.on { background: #f4b51c; color: #3a1020; }
+.hc-btn { background: rgba(255,255,255,0.08); color: #f8ecd0; border: 1px solid rgba(244,181,28,0.45); border-radius: 8px; padding: 5px 10px; font: inherit; font-size: 15px; cursor: pointer; white-space: nowrap; }
+.hc-btn:hover { background: rgba(244,181,28,0.2); }
+.hc-btn.on { background: rgba(244,181,28,0.28); }
+.hc-btn:focus-visible, .hc-w:focus-visible { outline: 2px solid #f4b51c; outline-offset: 2px; }
+.hc-stage { position: relative; min-height: 0; }
+.hc-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: pointer; }
+.hc-badge { position: absolute; left: 12px; top: 10px; background: rgba(11,16,52,0.72); border: 1px solid rgba(244,181,28,0.5); border-radius: 16px; padding: 3px 12px; font-size: 15px; pointer-events: none; }
+.hc-badge .dev { color: #ffd86a; }
+.hc-start { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 12px; background: radial-gradient(rgba(11,16,52,0.35), rgba(11,16,52,0.75)); text-align: center; padding: 16px; }
+.hc-start p { max-width: 520px; font-size: 18px; margin: 0; color: #f8ecd0; }
+.hc-play-big { display: grid; gap: 2px; background: #f4b51c; color: #3a1020; border: 3px solid #fff2c6; border-radius: 999px; padding: 14px 40px; font: inherit; font-size: 18px; cursor: pointer; box-shadow: 0 0 0 6px rgba(244,181,28,0.25); }
+.hc-play-big .dev { font-size: 34px; line-height: 1; }
+.hc-cap { background: linear-gradient(#141a4a, #0f1540); border-top: 2px solid rgba(244,181,28,0.5); padding: 8px 14px 6px; max-height: 38vh; overflow-y: auto; }
+.hc-lines { display: grid; gap: 4px; justify-items: center; }
+.hc-charan { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2px 6px; opacity: 0.55; transition: opacity 0.3s; }
+.hc-charan.act, .hc-charan.done { opacity: 1; }
+.hc-w { background: transparent; border: 0; color: inherit; font: inherit; cursor: pointer; display: grid; justify-items: center; padding: 1px 4px; border-radius: 6px; line-height: 1.15; }
+.hc-w .d { font-size: clamp(20px, 2.6vw, 30px); color: #f8ecd0; transition: color 0.15s; }
+.hc-w .r { font-size: 13px; font-style: italic; color: #cdbdf0; }
+.hc-w .g { font-size: 12.5px; color: #f7c890; max-width: 120px; text-align: center; }
+.hc-w.past .d { color: #ffd86a; }
+.hc-w.now { background: rgba(244,181,28,0.18); }
+.hc-w.now .d { color: #ff9a3c; text-shadow: 0 0 12px rgba(255,160,60,0.6); }
+.hc.mode-line .hc-w .d, .hc-cap.mode-line .hc-w .d { font-size: clamp(22px, 3vw, 34px); }
+.hc-danda { font-size: 26px; color: #f4b51c; align-self: center; }
+.hc-roman { font-style: italic; color: #cdbdf0; font-size: 16px; text-align: center; }
+.hc-mean { margin: 6px auto 2px; max-width: 900px; text-align: center; font-size: 17px; color: #f8ecd0; font-style: italic; }
+.hc-mean.dev { font-style: normal; font-size: 17px; }
+.hc-ctl { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: #0b1034; border-top: 1px solid rgba(244,181,28,0.25); flex-wrap: wrap; }
+.hc-pp { min-width: 46px; font-size: 18px; }
+.hc-bar { position: relative; flex: 1 1 200px; min-width: 140px; height: 18px; background: rgba(255,255,255,0.1); border-radius: 9px; cursor: pointer; touch-action: none; overflow: hidden; }
+.hc-fill { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, #d63a28, #f4b51c); }
+.hc-bar i { position: absolute; top: 5px; width: 3px; height: 8px; margin-left: -1px; background: rgba(255,255,255,0.45); border-radius: 2px; }
+.hc-bar i.d { background: #ffd86a; height: 12px; top: 3px; }
+.hc-time { font-variant-numeric: tabular-nums; font-size: 15px; min-width: 92px; text-align: center; }
+.hc-opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.hc-sel { background: #1c2a63; color: #f8ecd0; border: 1px solid rgba(244,181,28,0.45); border-radius: 8px; padding: 4px; font: inherit; }
+.hc-pop { position: absolute; inset: 0; background: rgba(5,8,30,0.6); display: grid; place-items: center; z-index: 5; padding: 16px; }
+.hc-pop-card { background: #fbf3df; color: #2a1020; border: 4px solid #f4b51c; border-radius: 14px; padding: 18px 22px; display: grid; gap: 6px; justify-items: center; max-width: 420px; text-align: center; }
+.hc-pop-card .big { font-size: 46px; color: #a7306f; }
+.hc-pop-card .r { font-style: italic; font-size: 20px; }
+.hc-pop-card .g { font-size: 20px; }
+.hc-pop-card .ctx { color: #6e3f22; font-size: 18px; }
+.hc-read { position: absolute; inset: 0; overflow-y: auto; background: #fbf3df; color: #2a1020; z-index: 6; padding: 0 16px 40px; }
+.hc-read-head { position: sticky; top: 0; background: linear-gradient(#fbf3df 85%, rgba(251,243,223,0)); padding: 14px 0 18px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; max-width: 1100px; margin: 0 auto; }
+.hc-read-head h2 { margin: 0; color: #a7306f; font-size: 30px; }
+.hc-read-head p { margin: 0; flex: 1 1 300px; font-size: 17px; }
+.hc-read .hc-btn { color: #3a1020; background: #f4d27a; border-color: #c98a20; }
+.hc-verse { max-width: 1100px; margin: 0 auto 16px; background: #fff8e8; border: 2px solid #e8c27a; border-left: 8px solid #d63a28; border-radius: 10px; padding: 10px 14px; }
+.hc-verse.doha { border-left-color: #a7306f; }
+.hc-verse header { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-bottom: 6px; font-size: 16px; color: #6e3f22; }
+.hc-verse header .dev { color: #a7306f; font-size: 20px; }
+.hc-verse header .hc-btn { margin-left: auto; }
+.hc-row { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 4px 0; border-bottom: 1px dashed #e8c27a; }
+.hc-cell { display: grid; justify-items: center; min-width: 64px; padding: 2px 6px; line-height: 1.2; text-align: center; }
+.hc-cell .d { font-size: 24px; color: #2a1020; }
+.hc-cell .r { font-size: 14px; font-style: italic; color: #6a4a8a; }
+.hc-cell .g { font-size: 13.5px; color: #8a3a24; max-width: 130px; }
+.hc-verse .en { margin: 8px 0 2px; font-size: 18px; font-style: italic; }
+.hc-verse .hi { margin: 2px 0; font-size: 17px; color: #4a2a1a; }
+.hc-credit { max-width: 1100px; margin: 20px auto; font-size: 15px; color: #6e3f22; font-style: italic; }
+@media (max-width: 760px) and (orientation: portrait) {
+  .hc { grid-template-rows: auto auto minmax(0, 1fr) auto; }
+  .hc-stage { aspect-ratio: 16 / 9; width: 100%; }
+  .hc-cap { max-height: none; }
+}
+@media (max-width: 760px) {
+  .hc-top { padding: 6px 10px; gap: 8px; }
+  .hc-sub { display: none; }
+  .hc-title .dev { font-size: 18px; }
+  .hc-cap { max-height: 42vh; padding: 6px 8px; }
+  .hc-w .g { font-size: 11px; max-width: 86px; }
+  .hc-w .r { font-size: 11.5px; }
+  .hc-mean { font-size: 15px; }
+  .hc-ctl { gap: 6px; padding: 6px 8px; }
+  .hc-time { min-width: 0; font-size: 13px; }
+  .hc-opts { width: 100%; justify-content: center; }
+  .hc-btn { font-size: 13.5px; padding: 4px 8px; }
+  .hc-badge { font-size: 12.5px; top: 6px; left: 6px; }
+}
