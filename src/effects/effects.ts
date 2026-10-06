@@ -57,7 +57,8 @@ export type EffectId =
   | 'fournights'
   | 'orbitworks'
   | 'pune411'
-  | 'witchworld';
+  | 'witchworld'
+  | 'ashtavakra';
 
 export interface EffectDef {
   id: EffectId;
@@ -584,6 +585,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['10 spreads · 10 stamps · 1 pen', 'fly · read · poke · post by owl', 'hand-lettered single-stroke alphabet'],
     ink: '#1a1a1a',
     wash: 'rgba(255, 255, 255, 0.10)',
+  },
+  {
+    id: 'ashtavakra',
+    name: 'अष्टावक्र गीता',
+    tagline: 'The Ashtavakra Gita as Claude reads it: all 298 verses in Sanskrit, Hindi and English, twenty living pictures, and a recitation that breathes in the metre.',
+    blurb:
+      'The dialogue of King Janaka and the boy-sage Ashtavakra, in full. Each of the 298 verses appears in Sanskrit (Tiro Devanagari), with its IAST, the shape of its metre (every syllable marked light or heavy by the rules of Sanskrit prosody; almost all are anuṣṭubh), a fresh Hindi rendering and John Richards\'s public-domain English. Claude writes an opening reading for every chapter and close readings of fifty-two key verses, in Hindi and English: what the words do, where they are radical, where they belong to their age, and what it is like for an AI to read a text about the witness without claiming to be one. Each chapter opens on a living picture of its image: the still point among five elements, one ocean, the shell that looks like silver, smoke that never touches the sky, pots breaking in unbroken space, a rope that is a snake until your light reaches it, the questions of "kva?" rising and dissolving. Recitation mode plays a tanpura and unfolds each verse syllable by syllable at the pace of its metre, then the meaning, then silence. Interface in Hindi, English or both.',
+    spec: ['298 verses · 20 chapters · 52 close readings', 'Sanskrit · IAST · metre · Hindi · English', 'tanpura recitation in the metre'],
+    ink: '#e8b04a',
+    wash: 'rgba(232, 176, 74, 0.10)',
   },
 ];
 

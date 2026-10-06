@@ -10352,3 +10352,113 @@ button.card:hover:not(:disabled) {
 .ww-post { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 3; width: min(520px, calc(100vw - 24px)); background: rgba(253,252,248,0.95); padding: 6px 8px; }
 .ww-post textarea { width: 100%; box-sizing: border-box; font: 14px/1.4 'IBM Plex Mono', ui-monospace, monospace; border: 1.5px solid #141414; border-radius: 3px; background: #fffefb; color: #141414; padding: 6px 8px; resize: none; }
 .ww-row { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ---------------------------------------------------------------- Ashtavakra Gita */
+.av { position: fixed; inset: 0; overflow-y: auto; background: #0b0d1a; color: #f3ead8; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.av .dev { font-family: 'Noto Serif Devanagari', 'Tiro Devanagari Sanskrit', serif; font-size: 0.92em; line-height: 1.85; }
+.av h1, .av h2 { font-weight: 400; margin: 0; }
+.av h2 { font-family: 'Cinzel', 'Noto Serif Devanagari', serif; font-size: 18px; letter-spacing: 0.08em; color: #e8b04a; margin-bottom: 12px; }
+.av-bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: linear-gradient(rgba(11,13,26,0.96), rgba(11,13,26,0.82)); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(232,176,74,0.18); }
+.av-bar button { background: transparent; color: #f3ead8; border: 0; cursor: pointer; font: inherit; }
+.av-brand .dev { font-size: 20px; color: #e8b04a; }
+.av-langs { margin-left: auto; display: flex; border: 1px solid rgba(232,176,74,0.35); border-radius: 18px; overflow: hidden; }
+.av-langs button { padding: 3px 12px; font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 14px; }
+.av-langs button.on { background: #e8b04a; color: #0b0d1a; }
+.av-x { font-size: 14px !important; opacity: 0.75; }
+.av-hero { position: relative; min-height: calc(100vh - 54px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: 16px; padding: 0 24px; }
+.av-bends { width: 100%; height: min(80vh, 640px); display: block; }
+.av-hero h1 { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: clamp(56px, 9vw, 112px); line-height: 1.15; color: #f3ead8; text-shadow: 0 0 40px rgba(232,176,74,0.25); }
+.av-kicker { font-family: 'Cinzel', 'Noto Serif Devanagari', serif; font-size: 13px; letter-spacing: 0.12em; color: #e8b04a; margin: 0 0 6px; }
+.av-sub { font-size: 24px; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px 16px; color: #f3ead8; }
+.av-sub span:not(.dev) { font-style: italic; }
+.av-count { color: rgba(243,234,216,0.65); font-family: 'Noto Serif Devanagari', serif; font-size: 15px; }
+.av-hint { font-size: 14px; color: rgba(243,234,216,0.5); font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; }
+.av-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0; }
+.av-btn { font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 16px; padding: 8px 18px; border-radius: 22px; border: 1px solid rgba(232,176,74,0.6); background: transparent; color: #f3ead8; cursor: pointer; }
+.av-btn:hover { background: rgba(232,176,74,0.12); }
+.av-gold { background: #e8b04a; color: #0b0d1a; border-color: #e8b04a; }
+.av-gold:hover { background: #f0c46c; }
+.av-btn:focus-visible, .av-bar button:focus-visible, .av-acts button:focus-visible { outline: 2px solid #f3ead8; outline-offset: 2px; }
+.av-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; max-width: 1120px; margin: 0 auto; padding: 40px 24px; }
+.av-two p { margin: 0 0 12px; }
+.av-demo { margin-top: 16px; padding: 14px 16px; border: 1px solid rgba(232,176,74,0.25); border-radius: 8px; }
+.av-demo small { display: block; font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 13px; color: rgba(243,234,216,0.6); margin-top: 6px; }
+.av-sa { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 26px; line-height: 1.7; color: #fbf3e0; }
+.av-metre { display: inline-flex; gap: 3px; align-items: center; margin-right: 18px; }
+.av-metre i { display: inline-block; height: 6px; border-radius: 3px; background: rgba(232,176,74,0.8); }
+.av-metre i.l { width: 6px; } .av-metre i.g { width: 16px; }
+.av-metre i.pada { margin-right: 8px; }
+.av-mala-wrap { max-width: 1120px; margin: 0 auto; padding: 30px 24px 10px; text-align: center; }
+.av-mala { width: min(460px, 100%); height: auto; display: block; margin: 0 auto 20px; }
+.av-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; text-align: left; }
+.av-list button { width: 100%; text-align: left; background: rgba(243,234,216,0.03); border: 1px solid rgba(232,176,74,0.2); border-radius: 8px; padding: 10px 12px; color: #f3ead8; cursor: pointer; display: grid; grid-template-columns: 34px 1fr; column-gap: 8px; font: inherit; }
+.av-list button:hover { border-color: #e8b04a; background: rgba(232,176,74,0.07); }
+.av-list b { grid-row: span 3; font-family: 'Noto Serif Devanagari', serif; color: #e8b04a; font-size: 22px; }
+.av-list .sa { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 21px; }
+.av-list .nm { font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 15px; }
+.av-list .ct { font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 13px; color: rgba(243,234,216,0.55); }
+.av-foot { max-width: 860px; margin: 30px auto 60px; padding: 0 24px; font-size: 15px; color: rgba(243,234,216,0.6); }
+.av-ch-hero { position: relative; height: 62vh; min-height: 360px; }
+.av-scene, .av-rc-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.av-ch-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px; background: linear-gradient(transparent, rgba(11,13,26,0.92) 55%); pointer-events: none; }
+.av-ch-title h1 { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: clamp(44px, 7vw, 84px); line-height: 1.15; }
+.av-image { margin: 4px 0 0; color: rgba(243,234,216,0.75); font-size: 17px; display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.av-image span:not(.dev) { font-style: italic; }
+.av-claude { max-width: 860px; margin: 0 auto; padding: 28px 24px 8px; }
+.av-claude p { margin: 0 0 12px; }
+.spark { color: #e8b04a; }
+.av-tog { font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 15px; display: inline-flex; gap: 6px; align-items: center; color: rgba(243,234,216,0.8); }
+.av-tog input { accent-color: #e8b04a; }
+.av-verses { max-width: 860px; margin: 0 auto; padding: 8px 24px 24px; }
+.av-verse { position: relative; padding: 22px 0 18px 64px; border-top: 1px solid rgba(232,176,74,0.14); }
+.av-verse.featured { background: linear-gradient(90deg, rgba(232,176,74,0.06), transparent 70%); }
+.av-speaker { font-size: 16px !important; color: #e8b04a; margin: 0 0 6px -64px; }
+.av-speaker span { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(243,234,216,0.6); }
+.av-vnum { position: absolute; left: 0; top: 26px; width: 54px; font-family: 'Noto Serif Devanagari', serif; color: #e8b04a; font-size: 16px; }
+.av-metres { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.av-iast { font-style: italic; color: rgba(243,234,216,0.72); font-size: 18px; margin-bottom: 8px; }
+.av-hi { margin: 8px 0; font-size: 18px !important; }
+.av-en { margin: 6px 0; color: rgba(243,234,216,0.88); }
+.av-en .src { font-size: 13px; color: rgba(243,234,216,0.45); }
+.av-reading { margin: 12px 0 4px; padding: 12px 16px; border-left: 2px solid #e8b04a; background: rgba(232,176,74,0.06); border-radius: 0 8px 8px 0; }
+.av-reading p { margin: 0 0 8px; }
+.av-r-h { font-family: 'Cinzel', 'Noto Serif Devanagari', serif; font-size: 13px; letter-spacing: 0.08em; color: #e8b04a; }
+.av-acts { display: flex; gap: 8px; margin-top: 6px; }
+.av-acts button { font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 14px; background: transparent; border: 1px solid rgba(243,234,216,0.2); color: rgba(243,234,216,0.8); border-radius: 14px; padding: 2px 12px; cursor: pointer; }
+.av-acts button:hover { border-color: #e8b04a; color: #e8b04a; }
+.av-pn { max-width: 860px; margin: 10px auto 60px; padding: 0 24px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.av-recite { overflow: hidden; }
+.av-rc-scene { opacity: 0.35; }
+.av-rc { position: absolute; left: 0; right: 0; top: 54px; bottom: 70px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px 24px; }
+.av-rc-sa { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: clamp(26px, 4.4vw, 46px); line-height: 1.6; }
+.av-rc-sa span { color: rgba(243,234,216,0.12); transition: color 0.25s, text-shadow 0.25s; }
+.av-rc-sa span.on { color: #fbf3e0; }
+.av-rc-sa span.now { color: #e8b04a; text-shadow: 0 0 18px rgba(232,176,74,0.7); }
+.av-rc-metre { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 10px 0 14px; }
+.av-rc-metre span { display: inline-flex; gap: 3px; }
+.av-rc-metre i { height: 5px; border-radius: 3px; background: rgba(232,176,74,0.2); }
+.av-rc-metre i.l { width: 6px; } .av-rc-metre i.g { width: 15px; } .av-rc-metre i.on { background: #e8b04a; }
+.av-rc-hi { font-size: 21px !important; max-width: 760px; margin: 6px 0; }
+.av-rc-en { font-size: 20px; max-width: 760px; margin: 6px 0; font-style: italic; color: rgba(243,234,216,0.88); }
+.av-rc-note { font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 17px; max-width: 720px; color: rgba(243,234,216,0.85); border-top: 1px solid rgba(232,176,74,0.3); padding-top: 10px; margin-top: 10px; }
+.av-rc-rest { color: rgba(243,234,216,0.4); font-family: 'Noto Serif Devanagari', serif; }
+.av-fade { animation: avfade 1.2s ease-out; }
+@keyframes avfade { from { opacity: 0; transform: translateY(6px); } }
+.av-rc-ctl { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: center; padding: 12px 16px; background: rgba(11,13,26,0.85); border-top: 1px solid rgba(232,176,74,0.2); }
+.av-rc-ctl button { background: transparent; border: 1px solid rgba(232,176,74,0.5); color: #f3ead8; border-radius: 18px; padding: 4px 14px; cursor: pointer; font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif; font-size: 15px; }
+.av-rc-ctl input[type=range] { accent-color: #e8b04a; width: 90px; }
+@media (max-width: 760px) {
+  .av { font-size: 17px; }
+  .av-hero { grid-template-columns: 1fr; padding: 0 16px; }
+  .av-bends { height: 40vh; }
+  .av-two { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; }
+  .av-verse { padding-left: 0; padding-top: 40px; }
+  .av-vnum { top: 14px; }
+  .av-speaker { margin-left: 0; }
+  .av-sa { font-size: 22px; }
+  .av-claude, .av-verses, .av-mala-wrap, .av-pn, .av-foot { padding-left: 16px; padding-right: 16px; }
+  .av-ch-title { padding: 16px; }
+  .av-rc { bottom: 120px; }
+  .av-langs button { padding: 3px 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .av-fade { animation: none; } .av-rc-sa span { transition: none; } }

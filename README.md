@@ -1780,6 +1780,20 @@ Dostoevsky's *White Nights* as a painted film you scroll through:
 
 See `docs/four-nights.md`.
 
+## अष्टावक्र गीता — the Ashtavakra Gita as Claude reads it
+
+All 298 verses of the dialogue between King Janaka and the sage Ashtavakra.
+- **Every verse:** Sanskrit (Tiro Devanagari), IAST, and the shape of its
+  metre (each syllable marked light or heavy by the rules of Sanskrit
+  prosody), with a fresh Hindi rendering and John Richards's public-domain
+  English.
+- **Claude's reading:** an opening reading for each of the 20 chapters and
+  close readings of 52 key verses, in Hindi and English.
+- **Pictures:** a living picture for each chapter's central image.
+- **Recitation mode:** a tanpura plays while each verse unfolds syllable by
+  syllable at the pace of its metre, then the meaning, then silence.
+- **Interface:** Hindi, English or both. More in `docs/ashtavakra-gita.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

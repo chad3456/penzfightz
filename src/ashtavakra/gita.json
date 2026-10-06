@@ -1,0 +1,3364 @@
+{
+"chapters": {
+"1": {
+"title": "Saksi",
+"subtitle": "Vision of the Self as the All-pervading Witness"
+},
+"2": {
+"title": "Ascaryam",
+"subtitle": "Marvel of the Infinite Self Beyond Nature"
+},
+"3": {
+"title": "Atmadvaita",
+"subtitle": "Self in All and All in the Self"
+},
+"4": {
+"title": "Sarvamatma",
+"subtitle": "Knower and the Non-knower of the Self"
+},
+"5": {
+"title": "Laya",
+"subtitle": "Stages of Dissolution of Consciousness"
+},
+"6": {
+"title": "Prakrteh Parah",
+"subtitle": "Irrelevance of Dissolution of Consciousness"
+},
+"7": {
+"title": "Santa",
+"subtitle": "Tranquil and Boundless Ocean of the Self"
+},
+"8": {
+"title": "Moksa",
+"subtitle": "Bondage and Freedom"
+},
+"9": {
+"title": "Nirveda",
+"subtitle": "Indifference"
+},
+"10": {
+"title": "Vairagya",
+"subtitle": "Dispassion"
+},
+"11": {
+"title": "Cidrupa",
+"subtitle": "Self as Pure and Radiant Intelligence"
+},
+"12": {
+"title": "Svabhava",
+"subtitle": "Ascent of Contemplation"
+},
+"13": {
+"title": "Yathasukham",
+"subtitle": "Transcendent Bliss"
+},
+"14": {
+"title": "Isvara",
+"subtitle": "Natural Dissolution of the Mind"
+},
+"15": {
+"title": "Tattvam",
+"subtitle": "Unborn Self or Brahman"
+},
+"16": {
+"title": "Svasthya",
+"subtitle": "Self-Abidance through Obliteration of the World"
+},
+"17": {
+"title": "Kaivalya",
+"subtitle": "Absolute Aloneness of the Self"
+},
+"18": {
+"title": "Jivanmukti",
+"subtitle": "Way and Goal of Natural Samadhi"
+},
+"19": {
+"title": "Svamahima",
+"subtitle": "Majesty of the Self"
+},
+"20": {
+"title": "Akincanabhava",
+"subtitle": "Transcendence of the Self"
+}
+},
+"verses": [
+{
+"id": "1.1",
+"c": 1,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"कथं ज्ञानमवाप्नोति कथं मुक्तिर्भविष्यति।",
+"वैराग्यं च कथं प्राप्तमेतद् ब्रूहि मम प्रभो॥"
+],
+"en": "How is one to acquire knowledge? How is one to attain liberation? And how is one to reach dispassion? Tell me this, sir."
+},
+{
+"id": "1.2",
+"c": 1,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"मुक्तिमिच्छसि चेत्तात विषयान् विषवत्त्यज।",
+"क्षमार्जवदयातोषसत्यं पीयूषवद् भज॥"
+],
+"en": "If you are seeking liberation, my son, avoid the objects of the senses like poison and cultivate tolerance, sincerity, compassion, contentment, and truthfulness as the antidote."
+},
+{
+"id": "1.3",
+"c": 1,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"न पृथ्वी न जलं नाग्निर्न वायुर्द्यौर्न वा भवान्।",
+"एषां साक्षिणमात्मानं चिद्रूपं विद्धि मुक्तये॥"
+],
+"en": "You do not consist of any of the elements — earth, water, fire, air, or even ether. To be liberated, know yourself as consisting of consciousness, the witness of these."
+},
+{
+"id": "1.4",
+"c": 1,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"यदि देहं पृथक् कृत्य चिति विश्राम्य तिष्ठसि।",
+"अधुनैव सुखी शान्तो बन्धमुक्तो भविष्यसि॥"
+],
+"en": "If only you will remain resting in consciousness, seeing yourself as distinct from the body, then even now you will become happy, peaceful and free from bonds."
+},
+{
+"id": "1.5",
+"c": 1,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"न त्वं विप्रादिको वर्णः नाश्रमी नाक्षगोचरः।",
+"असङ्गोऽसि निराकारो विश्वसाक्षी सुखी भव॥"
+],
+"en": "You do not belong to the brahmin or any other caste, you are not at any stage, nor are you anything that the eye can see. You are unattached and formless, the witness of everything — so be happy."
+},
+{
+"id": "1.6",
+"c": 1,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"धर्माधर्मौ सुखं दुःखं मानसानि न ते विभो।",
+"न कर्तासि न भोक्तासि मुक्त एवासि सर्वदा॥"
+],
+"en": "Righteousness and unrighteousness, pleasure and pain are purely of the mind and are no concern of yours. You are neither the doer nor the reaper of the consequences, so you are always free."
+},
+{
+"id": "1.7",
+"c": 1,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"एको द्रष्टासि सर्वस्य मुक्तप्रायोऽसि सर्वदा।",
+"अयमेव हि ते बन्धो द्रष्टारं पश्यसीतरम्॥"
+],
+"en": "You are the one witness of everything and are always completely free. The cause of your bondage is that you see the witness as something other than this."
+},
+{
+"id": "1.8",
+"c": 1,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"अहं कर्तेत्यहंमानमहाकृष्णाहिदंशितः।",
+"नाहं कर्तेति विश्वासामृतं पीत्वा सुखी भव॥"
+],
+"en": "Since you have been bitten by the black snake, the opinion about yourself that “I am the doer,” drink the antidote of faith in the fact that “I am not the doer,” and be happy."
+},
+{
+"id": "1.9",
+"c": 1,
+"n": 9,
+"sp": "ashtavakra",
+"sa": [
+"एको विशुद्धबोधोऽहं इति निश्चयवह्निना।",
+"प्रज्वाल्याज्ञानगहनं वीतशोकः सुखी भव॥"
+],
+"en": "Burn down the forest of ignorance with the fire of the understanding that “I am the one pure awareness,” and be happy and free from distress."
+},
+{
+"id": "1.10",
+"c": 1,
+"n": 10,
+"sp": "ashtavakra",
+"sa": [
+"यत्र विश्वमिदं भाति कल्पितं रज्जुसर्पवत्।",
+"आनंदपरमानन्दः स बोधस्त्वं सुखं चर॥"
+],
+"en": "That in which all this — imagined like the snake in a rope — appears: that joy, supreme joy, and awareness is what you are, so be happy."
+},
+{
+"id": "1.11",
+"c": 1,
+"n": 11,
+"sp": "ashtavakra",
+"sa": [
+"मुक्ताभिमानी मुक्तो हि बद्धो बद्धाभिमान्यपि।",
+"किवदन्तीह सत्येयं या मतिः सा गतिर्भवेत्॥"
+],
+"en": "If one thinks of oneself as free, one is free, and if one thinks of oneself as bound, one is bound. Here this saying is true, “Thinking makes it so.”"
+},
+{
+"id": "1.12",
+"c": 1,
+"n": 12,
+"sp": "ashtavakra",
+"sa": [
+"आत्मा साक्षी विभुः पूर्ण एको मुक्तश्चिदक्रियः।",
+"असंगो निःस्पृहः शान्तो भ्रमात्संसारवानिव॥"
+],
+"en": "Your real nature is as the one perfect, free, and actionless consciousness, the all-pervading witness — unattached to anything, desireless and at peace. It is from illusion that you seem to be involved in samsara."
+},
+{
+"id": "1.13",
+"c": 1,
+"n": 13,
+"sp": "ashtavakra",
+"sa": [
+"कूटस्थं बोधमद्वैतमात्मानं परिभावय।",
+"आभासोऽहं भ्रमं मुक्त्वा भावं बाह्यमथान्तरम्॥"
+],
+"en": "Meditate on yourself as motionless awareness, free from any dualism, giving up the mistaken idea that you are just a derivative consciousness or anything external or internal."
+},
+{
+"id": "1.14",
+"c": 1,
+"n": 14,
+"sp": "ashtavakra",
+"sa": [
+"देहाभिमानपाशेन चिरं बद्धोऽसि पुत्रक।",
+"बोधोऽहं ज्ञानखड्गेन तन्निष्कृत्य सुखी भव॥"
+],
+"en": "You have long been trapped in the snare of identification with the body. Sever it with the knife of knowledge that “I am awareness,” and be happy, my son."
+},
+{
+"id": "1.15",
+"c": 1,
+"n": 15,
+"sp": "ashtavakra",
+"sa": [
+"निःसंगो निष्क्रियोऽसि त्वं स्वप्रकाशो निरंजनः।",
+"अयमेव हि ते बन्धः समाधिमनुतिष्ठति॥"
+],
+"en": "You are really unbound and actionless, self-illuminating and spotless already. The cause of your bondage is that you are still resorting to stilling the mind."
+},
+{
+"id": "1.16",
+"c": 1,
+"n": 16,
+"sp": "ashtavakra",
+"sa": [
+"त्वया व्याप्तमिदं विश्वं त्वयि प्रोतं यथार्थतः।",
+"शुद्धबुद्धस्वरूपस्त्वं मा गमः क्षुद्रचित्तताम्॥"
+],
+"en": "All of this is really filled by you and strung out in you, for what you consist of is pure awareness — so don’t be small-minded."
+},
+{
+"id": "1.17",
+"c": 1,
+"n": 17,
+"sp": "ashtavakra",
+"sa": [
+"निरपेक्षो निर्विकारो निर्भरः शीतलाशयः।",
+"अगाधबुद्धिरक्षुब्धो भव चिन्मात्रवासनः॥"
+],
+"en": "You are unconditioned and changeless, formless and immovable, unfathomable awareness, unperturbable: so hold to nothing but consciousness."
+},
+{
+"id": "1.18",
+"c": 1,
+"n": 18,
+"sp": "ashtavakra",
+"sa": [
+"साकारमनृतं विद्धि निराकारं तु निश्चलं।",
+"एतत्तत्त्वोपदेशेन न पुनर्भवसंभवः॥"
+],
+"en": "Recognise that the apparent is unreal, while the unmanifest is abiding. Through this initiation into truth you will escape falling into unreality again."
+},
+{
+"id": "1.19",
+"c": 1,
+"n": 19,
+"sp": "ashtavakra",
+"sa": [
+"यथैवादर्शमध्यस्थे रूपेऽन्तः परितस्तु सः।",
+"तथैवाऽस्मिन् शरीरेऽन्तः परितः परमेश्वरः॥"
+],
+"en": "Just as a mirror exists everywhere both within and apart from its reflected images, so the Supreme Lord exists everywhere within and apart from this body."
+},
+{
+"id": "1.20",
+"c": 1,
+"n": 20,
+"sp": "ashtavakra",
+"sa": [
+"एकं सर्वगतं व्योम बहिरन्तर्यथा घटे।",
+"नित्यं निरन्तरं ब्रह्म सर्वभूतगणे तथा॥"
+],
+"en": "Just as one and the same all-pervading space exists within and without a jar, so the eternal, everlasting God exists in the totality of things."
+},
+{
+"id": "2.1",
+"c": 2,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"अहो निरंजनः शान्तो बोधोऽहं प्रकृतेः परः।",
+"एतावंतमहं कालं मोहेनैव विडम्बितः॥"
+],
+"en": "Truly I am spotless and at peace, the awareness beyond natural causality. All this time I have been afflicted by delusion."
+},
+{
+"id": "2.2",
+"c": 2,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"यथा प्रकाशयाम्येको देहमेनं तथा जगत्।",
+"अतो मम जगत्सर्वमथवा न च किंचन॥"
+],
+"en": "As I alone give light to this body, so I do to the world. As a result the whole world is mine, or alternatively nothing is."
+},
+{
+"id": "2.3",
+"c": 2,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"सशरीरमहो विश्वं परित्यज्य मयाऽधुना।",
+"कुतश्चित् कौशलादेव परमात्मा विलोक्यते॥"
+],
+"en": "So now that I have abandoned the body and everything else, by good fortune my true self becomes apparent."
+},
+{
+"id": "2.4",
+"c": 2,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"यथा न तोयतो भिन्नास्तरंगाः फेनबुद्बुदाः।",
+"आत्मनो न तथा भिन्नं विश्वमात्मविनिर्गतम्॥"
+],
+"en": "Waves, foam, and bubbles do not differ from water. In the same way, all this which has emanated from oneself is no other than oneself."
+},
+{
+"id": "2.5",
+"c": 2,
+"n": 5,
+"sp": "janaka",
+"sa": [
+"तंतुमात्रो भवेदेव पटो यद्वद्विचारितः।",
+"आत्मतन्मात्रमेवेदं तद्वद्विश्वं विचारितम्॥"
+],
+"en": "When you analyse it, cloth is found to be just thread. In the same way, when all this is analysed it is found to be no other than oneself."
+},
+{
+"id": "2.6",
+"c": 2,
+"n": 6,
+"sp": "janaka",
+"sa": [
+"यथैवेक्षुरसे क्लृप्ता तेन व्याप्तैव शर्करा।",
+"तथा विश्वं मयि क्लृप्तं मया व्याप्तं निरन्तरम्॥"
+],
+"en": "The sugar produced from the juice of the sugarcane is permeated throughout with the same taste. In the same way, all this, produced out of me, is completely permeated with myself."
+},
+{
+"id": "2.7",
+"c": 2,
+"n": 7,
+"sp": "janaka",
+"sa": [
+"आत्माऽज्ञानाज्जगद्भाति आत्मज्ञानान्न भासते।",
+"रज्जवज्ञानादहिर्भाति तज्ज्ञानाद्भासते न हि॥"
+],
+"en": "From ignorance of oneself, the world appears, and by knowledge of oneself it appears no longer. From ignorance of the rope it appears to be a snake, and by knowledge of it it does so no longer."
+},
+{
+"id": "2.8",
+"c": 2,
+"n": 8,
+"sp": "janaka",
+"sa": [
+"प्रकाशो मे निजं रूपं नातिरिक्तोऽस्म्यहं ततः।",
+"यदा प्रकाशते विश्वं तदाऽहंभास एव हि॥"
+],
+"en": "Shining is my essential nature, and I am nothing other than that. When the world shines forth, it is only me that is shining forth."
+},
+{
+"id": "2.9",
+"c": 2,
+"n": 9,
+"sp": "janaka",
+"sa": [
+"अहो विकल्पितं विश्वमज्ञानान्मयि भासते।",
+"रूप्यं शुक्तौ फणी रज्जौ वारि सूर्यकरे यथा॥"
+],
+"en": "All this appears in me imagined due to ignorance, just as a snake appears in the rope, the mirage of water in the sunlight, and silver in mother of pearl."
+},
+{
+"id": "2.10",
+"c": 2,
+"n": 10,
+"sp": "janaka",
+"sa": [
+"मत्तो विनिर्गतं विश्वं मय्येव लयमेष्यति।",
+"मृदि कुम्भो जले वीचिः कनके कटकं यथा॥"
+],
+"en": "All this, which has originated out of me, is resolved back into me too, like a jug back into clay, a wave into water, and a bracelet into gold."
+},
+{
+"id": "2.11",
+"c": 2,
+"n": 11,
+"sp": "janaka",
+"sa": [
+"अहो अहं नमो मह्यं विनाशो यस्य नास्ति मे।",
+"ब्रह्मादिस्तंबपर्यन्तं जगन्नाशोऽपि तिष्ठतः॥"
+],
+"en": "How wonderful I am! Glory to me, for whom there is no destruction, remaining even beyond the destruction of the world from Brahma down to the last clump of grass."
+},
+{
+"id": "2.12",
+"c": 2,
+"n": 12,
+"sp": "janaka",
+"sa": [
+"अहो अहं नमो मह्यं एकोऽहं देहवानपि।",
+"क्वचिन्न गन्ता नागन्ता व्याप्य विश्वमवस्थितः॥"
+],
+"en": "How wonderful I am! Glory to me, solitary even though with a body, neither going or coming anywhere, I who abide forever, filling all that is."
+},
+{
+"id": "2.13",
+"c": 2,
+"n": 13,
+"sp": "janaka",
+"sa": [
+"अहो अहं नमो मह्यं दक्षो नास्तीह मत्समः।",
+"असंस्पृश्य शरीरेण येन विश्वं चिरं धृतम्॥"
+],
+"en": "How wonderful I am! Glory to me! There is no one so clever as me! I who have borne all that is forever, without even touching it with my body!"
+},
+{
+"id": "2.14",
+"c": 2,
+"n": 14,
+"sp": "janaka",
+"sa": [
+"अहो अहं नमो मह्यं यस्य मे नास्ति किंचन।",
+"अथवा यस्य मे सर्वं यद् वाङ्मनसगोचरम्॥"
+],
+"en": "How wonderful I am! Glory to me! I who possess nothing at all, or alternatively possess everything that speech and mind can refer to."
+},
+{
+"id": "2.15",
+"c": 2,
+"n": 15,
+"sp": "janaka",
+"sa": [
+"ज्ञानं ज्ञेयं तथा ज्ञाता त्रितयं नास्ति वास्तवं।",
+"अज्ञानाद् भाति यत्रेदं सोऽहमस्मि निरंजनः॥"
+],
+"en": "Knowledge, what is to be known, and the knower — these three do not exist in reality. I am the spotless reality in which they appear because of ignorance."
+},
+{
+"id": "2.16",
+"c": 2,
+"n": 16,
+"sp": "janaka",
+"sa": [
+"द्वैतमूलमहो दुःखं नान्यत्तस्याऽस्ति भेषजं।",
+"दृश्यमेतन् मृषा सर्वं एकोऽहं चिद्रसोमलः॥"
+],
+"en": "Truly dualism is the root of suffering. There is no other remedy for it than the realisation that all this that we see is unreal, and that I am the one stainless reality, consisting of consciousness."
+},
+{
+"id": "2.17",
+"c": 2,
+"n": 17,
+"sp": "janaka",
+"sa": [
+"बोधमात्रोऽहमज्ञानाद् उपाधिः कल्पितो मया।",
+"एवं विमृशतो नित्यं निर्विकल्पे स्थितिर्मम॥"
+],
+"en": "I am pure awareness though through ignorance I have imagined myself to have additional attributes. By continually reflecting like this, my dwelling place is in the Unimagined."
+},
+{
+"id": "2.18",
+"c": 2,
+"n": 18,
+"sp": "janaka",
+"sa": [
+"न मे बन्धोऽस्ति मोक्षो वा भ्रान्तिः शान्तो निराश्रया।",
+"अहो मयि स्थितं विश्वं वस्तुतो न मयि स्थितम्॥"
+],
+"en": "For me here is neither bondage nor liberation. The illusion has lost its basis and ceased. Truly all this exists in me, though ultimately it does not even exist in me."
+},
+{
+"id": "2.19",
+"c": 2,
+"n": 19,
+"sp": "janaka",
+"sa": [
+"सशरीरमिदं विश्वं न किंचिदिति निश्चितं।",
+"शुद्धचिन्मात्र आत्मा च तत्कस्मिन् कल्पनाधुना॥"
+],
+"en": "Recognising that all this and my body too are nothing, while my true self is nothing but pure consciousness, what is there left for the imagination to work on now?"
+},
+{
+"id": "2.20",
+"c": 2,
+"n": 20,
+"sp": "janaka",
+"sa": [
+"शरीरं स्वर्गनरकौ बन्धमोक्षौ भयं तथा।",
+"कल्पनामात्रमेवैतत् किं मे कार्यं चिदात्मनः॥"
+],
+"en": "The body, heaven and hell, bondage and liberation, and fear too, all this is pure imagination. What is there left to do for me whose very nature is consciousness?"
+},
+{
+"id": "2.21",
+"c": 2,
+"n": 21,
+"sp": "janaka",
+"sa": [
+"अहो जनसमूहेऽपि न द्वैतं पश्यतो मम।",
+"अरण्यमिव संवृत्तं क्व रतिं करवाण्यहम्॥"
+],
+"en": "I do not even see dualism in a crowd of people, so what do I gain if it is replaced by a desert?"
+},
+{
+"id": "2.22",
+"c": 2,
+"n": 22,
+"sp": "janaka",
+"sa": [
+"नाहं देहो न मे देहो जीवो नाहमहं हि चित्।",
+"अयमेव हि मे बन्ध आसीद्या जीविते स्पृहा॥"
+],
+"en": "I am not the body, nor is the body mine. I am not a living being. I am consciousness. It was my thirst for living that was my bondage."
+},
+{
+"id": "2.23",
+"c": 2,
+"n": 23,
+"sp": "janaka",
+"sa": [
+"अहो भुवनकल्लोलैर्विचित्रैर्द्राक् समुत्थितं।",
+"मय्यनंतमहांभोधौ चित्तवाते समुद्यते॥"
+],
+"en": "Truly it is in the infinite ocean of myself, that, stimulated by the colourful waves of the world, everything suddenly arises in the wind of consciousness."
+},
+{
+"id": "2.24",
+"c": 2,
+"n": 24,
+"sp": "janaka",
+"sa": [
+"मय्यनंतमहांभोधौ चित्तवाते प्रशाम्यति।",
+"अभाग्याज्जीववणिजो जगत्पोतो विनश्वरः॥"
+],
+"en": "In the infinite ocean of myself, the wind of thought subsides, and the world boat of the living-being traders is wrecked by lack of goods."
+},
+{
+"id": "2.25",
+"c": 2,
+"n": 25,
+"sp": "janaka",
+"sa": [
+"मय्यनन्तमहांभोधावाश्चर्यं जीववीचयः।",
+"उद्यन्ति घ्नन्ति खेलन्ति प्रविशन्ति स्वभावतः॥"
+],
+"en": "How wonderful it is that in the infinite ocean of myself the waves of living beings arise, collide, play, and disappear, in accordance with their nature."
+},
+{
+"id": "3.1",
+"c": 3,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"अविनाशिनमात्मानं एकं विज्ञाय तत्त्वतः।",
+"तवात्मज्ञानस्य धीरस्य कथमर्थार्जने रतिः॥"
+],
+"en": "Knowing yourself as truly one and indestructible, how could a wise man possessing self-knowledge like you feel any pleasure in acquiring wealth?"
+},
+{
+"id": "3.2",
+"c": 3,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"आत्माज्ञानादहो प्रीतिर्विषयभ्रमगोचरे।",
+"शुक्तेरज्ञानतो लोभो यथा रजतविभ्रमे॥"
+],
+"en": "Truly, when one does not know oneself, one takes pleasure in the objects of mistaken perception, just as greed arises for the mistaken silver in one who does not know mother of pearl for what it is."
+},
+{
+"id": "3.3",
+"c": 3,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"विश्वं स्फुरति यत्रेदं तरङ्गा इव सागरे।",
+"सोऽहमस्मीति विज्ञाय किं दीन इव धावसि॥"
+],
+"en": "All this wells up like waves in the sea. Recognising, “I am That,” why run around like someone in need?"
+},
+{
+"id": "3.4",
+"c": 3,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"श्रुत्वापि शुद्धचैतन्य आत्मानमतिसुन्दरं।",
+"उपस्थेऽत्यन्तसंसक्तो मालिन्यमधिगच्छति॥"
+],
+"en": "After hearing of oneself as pure consciousness and the supremely beautiful, is one to go on lusting after sordid sexual objects?"
+},
+{
+"id": "3.5",
+"c": 3,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"सर्वभूतेषु चात्मानं सर्वभूतानि चात्मनि।",
+"मुनेर्जानत आश्चर्यं ममत्वमनुवर्तते॥"
+],
+"en": "When the sage has realised that he himself is in all beings, and all beings are in him, it is astonishing that the sense of individuality should be able to continue."
+},
+{
+"id": "3.6",
+"c": 3,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"आस्थितः परमाद्वैतं मोक्षार्थेऽपि व्यवस्थितः।",
+"आश्चर्यं कामवशगो विकलः केलिशिक्षया॥"
+],
+"en": "It is astonishing that a man who has reached the supreme nondual state and is intent on the benefits of liberation should still be subject to lust and in bondage to sexual activity."
+},
+{
+"id": "3.7",
+"c": 3,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"उद्भूतं ज्ञानदुर्मित्रमवधार्यातिदुर्बलः।",
+"आश्चर्यं काममाकाङ्क्षेत् कालमन्तमनुश्रितः॥"
+],
+"en": "It is astonishing that one already very debilitated, and knowing very well that its arousal is the enemy of knowledge, should still hanker after sensuality, even when approaching his last days."
+},
+{
+"id": "3.8",
+"c": 3,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"इहामुत्र विरक्तस्य नित्यानित्यविवेकिनः।",
+"आश्चर्यं मोक्षकामस्य मोक्षाद् एव विभीषिका॥"
+],
+"en": "It is astonishing that one who is unattached to the things of this world or the next, who discriminates between the permanent and the impermanent, and who longs for liberation, should still be afraid of liberation."
+},
+{
+"id": "3.9",
+"c": 3,
+"n": 9,
+"sp": "ashtavakra",
+"sa": [
+"धीरस्तु भोज्यमानोऽपि पीड्यमानोऽपि सर्वदा।",
+"आत्मानं केवलं पश्यन् न तुष्यति न कुप्यति॥"
+],
+"en": "Whether feted or tormented, the wise man is always aware of his supreme self-nature and is neither pleased nor disappointed."
+},
+{
+"id": "3.10",
+"c": 3,
+"n": 10,
+"sp": "ashtavakra",
+"sa": [
+"चेष्टमानं शरीरं स्वं पश्यत्यन्यशरीरवत्।",
+"संस्तवे चापि निन्दायां कथं क्षुभ्येत् महाशयः॥"
+],
+"en": "The great-souled person sees even his own body in action as if it were someone else’s, so how should he be disturbed by praise or blame?"
+},
+{
+"id": "3.11",
+"c": 3,
+"n": 11,
+"sp": "ashtavakra",
+"sa": [
+"मायामात्रमिदं विश्वं पश्यन् विगतकौतुकः।",
+"अपि सन्निहिते मृत्यौ कथं त्रस्यति धीरधीः॥"
+],
+"en": "Seeing this world as pure illusion, and devoid of any interest in it, how should the strong-minded person feel fear, even at the approach of death?"
+},
+{
+"id": "3.12",
+"c": 3,
+"n": 12,
+"sp": "ashtavakra",
+"sa": [
+"निःस्पृहं मानसं यस्य नैराश्येऽपि महात्मनः।",
+"तस्यात्मज्ञानतृप्तस्य तुलना केन जायते॥"
+],
+"en": "Who can be compared to the great-souled person whose mind is free from desire even in disappointment, and who has found satisfaction in self-knowledge?"
+},
+{
+"id": "3.13",
+"c": 3,
+"n": 13,
+"sp": "ashtavakra",
+"sa": [
+"स्वभावाद् एव जानानो दृश्यमेतन्न किंचन।",
+"इदं ग्राह्यमिदं त्याज्यं स किं पश्यति धीरधीः॥"
+],
+"en": "How should a strong-minded person who knows that what he sees is by its very nature nothing, consider one thing to be grasped and another to be rejected?"
+},
+{
+"id": "3.14",
+"c": 3,
+"n": 14,
+"sp": "ashtavakra",
+"sa": [
+"अंतस्त्यक्तकषायस्य निर्द्वन्द्वस्य निराशिषः।",
+"यदृच्छयागतो भोगो न दुःखाय न तुष्टये॥"
+],
+"en": "An object of enjoyment that comes of itself is neither painful nor pleasurable for someone who has eliminated attachment, and who is free from dualism and from desire."
+},
+{
+"id": "4.1",
+"c": 4,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"हन्तात्मज्ञस्य धीरस्य खेलतो भोगलीलया।",
+"न हि संसारवाहीकैर्मूढैः सह समानता॥"
+],
+"en": "The wise person of self-knowledge, playing the game of worldly enjoyment, bears no resemblance whatever to samsara’s bewildered beasts of burden."
+},
+{
+"id": "4.2",
+"c": 4,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"यत् पदं प्रेप्सवो दीनाः शक्राद्याः सर्वदेवताः।",
+"अहो तत्र स्थितो योगी न हर्षमुपगच्छति॥"
+],
+"en": "Truly the yogi feels no excitement even at being established in that state which all the Devas from Indra down yearn for disconsolately."
+},
+{
+"id": "4.3",
+"c": 4,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"तज्ज्ञस्य पुण्यपापाभ्यां स्पर्शो ह्यन्तर्न जायते।",
+"न ह्याकाशस्य धूमेन दृश्यमानापि सङ्गतिः॥"
+],
+"en": "He who has known That is untouched within by good deeds or bad, just as space is not touched by smoke, however much it may appear to be."
+},
+{
+"id": "4.4",
+"c": 4,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"आत्मैवेदं जगत्सर्वं ज्ञातं येन महात्मना।",
+"यदृच्छया वर्तमानं तं निषेद्धुं क्षमेत कः॥"
+],
+"en": "Who can prevent the great-souled person who has known this whole world as himself from living as he pleases?"
+},
+{
+"id": "4.5",
+"c": 4,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"आब्रह्मस्तंबपर्यन्ते भूतग्रामे चतुर्विधे।",
+"विज्ञस्यैव हि सामर्थ्यमिच्छानिच्छाविवर्जने॥"
+],
+"en": "Of all four categories of beings, from Brahma down to the last clump of grass, only the man of knowledge is capable of eliminating desire and aversion."
+},
+{
+"id": "4.6",
+"c": 4,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"आत्मानमद्वयं कश्चिज्जानाति जगदीश्वरं।",
+"यद् वेत्ति तत्स कुरुते न भयं तस्य कुत्रचित्॥"
+],
+"en": "Rare is the man who knows himself as the nondual Lord of the world, and he who knows this is not afraid of anything."
+},
+{
+"id": "5.1",
+"c": 5,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"न ते संगोऽस्ति केनापि किं शुद्धस्त्यक्तुमिच्छसि।",
+"संघातविलयं कुर्वन्नेवमेव लयं व्रज॥"
+],
+"en": "You are not bound by anything. What does a pure person like you need to renounce? Putting the complex organism to rest, you can find peace."
+},
+{
+"id": "5.2",
+"c": 5,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"उदेति भवतो विश्वं वारिधेरिव बुद्बुदः।",
+"इति ज्ञात्वैकमात्मानं एवमेव लयं व्रज॥"
+],
+"en": "All this arises out of you, like a bubble out of the sea. Knowing yourself like this to be but one, you can find peace."
+},
+{
+"id": "5.3",
+"c": 5,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"प्रत्यक्षमप्यवस्तुत्वाद् विश्वं नास्त्यमले त्वयि।",
+"रज्जुसर्प इव व्यक्तं एवमेव लयं व्रज॥"
+],
+"en": "In spite of being in front of your eyes, all this, being insubstantial, does not exist in you, spotless as you are. It is an appearance like the snake in a rope, so you can find peace."
+},
+{
+"id": "5.4",
+"c": 5,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"समदुःखसुखः पूर्ण आशानैराश्ययोः समः।",
+"समजीवितमृत्युः सन्नेवमेव लयं व्रज॥"
+],
+"en": "Equal in pain and in pleasure, equal in hope and in disappointment, equal in life and in death, and complete as you are, you can find peace."
+},
+{
+"id": "6.1",
+"c": 6,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"आकाशवदनन्तोऽहं घटवत् प्राकृतं जगत्।",
+"इति ज्ञानं तथैतस्य न त्यागो न ग्रहो लयः॥"
+],
+"en": "I am infinite like space, and the natural world is like a jar. To know this is knowledge, and then there is neither renunciation, acceptance, or cessation of it."
+},
+{
+"id": "6.2",
+"c": 6,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"महोदधिरिवाहं स प्रपंचो वीचिसन्निभः।",
+"इति ज्ञानं तथैतस्य न त्यागो न ग्रहो लयः॥"
+],
+"en": "I am like the ocean, and the multiplicity of objects is comparable to a wave. To know this is knowledge, and then there is neither renunciation, acceptance or cessation of it."
+},
+{
+"id": "6.3",
+"c": 6,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"अहं स शुक्तिसङ्काशो रूप्यवद् विश्वकल्पना।",
+"इति ज्ञानं तथैतस्य न त्यागो न ग्रहो लयः॥"
+],
+"en": "I am like the mother of pearl, and the imagined world is like the silver. To know this is knowledge, and then there is neither renunciation, acceptance, or cessation of it."
+},
+{
+"id": "6.4",
+"c": 6,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"अहं वा सर्वभूतेषु सर्वभूतान्यथो मयि।",
+"इति ज्ञानं तथैतस्य न त्यागो न ग्रहो लयः॥"
+],
+"en": "Alternatively, I am in all beings, and all beings are in me. To know this is knowledge, and then there is neither renunciation, acceptance, or cessation of it."
+},
+{
+"id": "7.1",
+"c": 7,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"मय्यनंतमहांभोधौ विश्वपोत इतस्ततः।",
+"भ्रमति स्वांतवातेन न ममास्त्यसहिष्णुता॥"
+],
+"en": "In the infinite ocean of myself the world boat drifts here and there, moved by its own inner wind. I am not put out by that."
+},
+{
+"id": "7.2",
+"c": 7,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"मय्यनंतमहांभोधौ जगद्वीचिः स्वभावतः।",
+"उदेतु वास्तमायातु न मे वृद्धिर्न च क्षतिः॥"
+],
+"en": "Whether the world wave of its own nature rises or disappears in the infinite ocean of myself, I neither gain nor lose anything by that."
+},
+{
+"id": "7.3",
+"c": 7,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"मय्यनंतमहांभोधौ विश्वं नाम विकल्पना।",
+"अतिशांतो निराकार एतदेवाहमास्थितः॥"
+],
+"en": "It is in the infinite ocean of myself that the mind-creation called the world takes place. I am supremely peaceful and formless, and I remain as such."
+},
+{
+"id": "7.4",
+"c": 7,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"नात्मा भावेषु नो भावस्तत्रानन्ते निरंजने।",
+"इत्यसक्तोऽस्पृहः शान्त एतदेवाहमास्थितः॥"
+],
+"en": "My true nature is not contained in objects, nor does any object exist in it, for it is infinite and spotless. So it is unattached, desireless and at peace, and I remain as such."
+},
+{
+"id": "7.5",
+"c": 7,
+"n": 5,
+"sp": "janaka",
+"sa": [
+"अहो चिन्मात्रमेवाहं इन्द्रजालोपमं जगत्।",
+"अतो मम कथं कुत्र हेयोपादेयकल्पना॥"
+],
+"en": "I am pure consciousness, and the world is like a magician’s show. How could I imagine there is anything there to take up or reject?"
+},
+{
+"id": "8.1",
+"c": 8,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"तदा बन्धो यदा चित्तं किञ्चिद् वाञ्छति शोचति।",
+"किंचिन् मुञ्चति गृह्णाति किंचिद् हृष्यति कुप्यति॥"
+],
+"en": "Bondage is when the mind longs for something, grieves about something, rejects something, holds on to something, is pleased about something or displeased about something."
+},
+{
+"id": "8.2",
+"c": 8,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"तदा मुक्तिर्यदा चित्तं न वाञ्छति न शोचति।",
+"न मुञ्चति न गृह्णाति न हृष्यति न कुप्यति॥"
+],
+"en": "Liberation is when the mind does not long for anything, grieve about anything, reject anything, or hold on to anything, and is not pleased about anything or displeased about anything."
+},
+{
+"id": "8.3",
+"c": 8,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"तदा बन्धो यदा चित्तं सक्तं कास्वपि दृष्टिषु।",
+"तदा मोक्षो यदा चित्तमसक्तं सर्वदृष्टिषु॥"
+],
+"en": "Bondage is when the mind is tangled in one of the senses, and liberation is when the mind is not tangled in any of the senses."
+},
+{
+"id": "8.4",
+"c": 8,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"यदा नाहं तदा मोक्षो यदाहं बन्धनं तदा।",
+"मत्वेति हेलया किंचिन्मा गृहाण विमुंच मा॥"
+],
+"en": "When there is no “me,” that is liberation, and when there is “me” there is bondage. Consider this carefully, and neither hold on to anything nor reject anything."
+},
+{
+"id": "9.1",
+"c": 9,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"कृताकृते च द्वन्द्वानि कदा शान्तानि कस्य वा।",
+"एवं ज्ञात्वेह निर्वेदाद् भव त्यागपरोऽव्रती॥"
+],
+"en": "Knowing when the dualism of things done and undone has been put to rest, or the person for whom they occur has, then you can here and now go beyond renunciation and obligations by indifference to such things."
+},
+{
+"id": "9.2",
+"c": 9,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"कस्यापि तात धन्यस्य लोकचेष्टावलोकनात्।",
+"जीवितेच्छा बुभुक्षा च बुभुत्सोपशमं गताः॥"
+],
+"en": "Rare indeed, my son, is the lucky man whose observation of the world’s behaviour has led to the extinction of his thirst for living, thirst for pleasure, and thirst for knowledge."
+},
+{
+"id": "9.3",
+"c": 9,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"अनित्यं सर्वमेवेदं तापत्रयदूषितं।",
+"असारं निन्दितं हेयमिति निश्चित्य शाम्यति॥"
+],
+"en": "All this is transient and spoiled by the three sorts of pain. Knowing it to be insubstantial, ignoble, and fit only for rejection, one attains peace."
+},
+{
+"id": "9.4",
+"c": 9,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"कोऽसौ कालो वयः किं वा यत्र द्वन्द्वानि नो नृणां।",
+"तान्युपेक्ष्य यथाप्राप्तवर्ती सिद्धिमवाप्नुयात्॥"
+],
+"en": "When was that age or time of life when the dualism of extremes did not exist for men? Abandoning them, a person who is happy to take whatever comes attains perfection."
+},
+{
+"id": "9.5",
+"c": 9,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"नाना मतं महर्षीणां साधूनां योगिनां तथा।",
+"दृष्ट्वा निर्वेदमापन्नः को न शाम्यति मानवः॥"
+],
+"en": "Who does not end up with indifference to such things and attain peace when he has seen the differences of opinions among the great sages, saints, and yogis?"
+},
+{
+"id": "9.6",
+"c": 9,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"कृत्वा मूर्तिपरिज्ञानं चैतन्यस्य न किं गुरुः।",
+"निर्वेदसमतायुक्त्या यस्तारयति संसृतेः॥"
+],
+"en": "Is he not a guru who, endowed with dispassion and equanimity, achieves full knowledge of the nature of consciousness, and leads others out of samsara?"
+},
+{
+"id": "9.7",
+"c": 9,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"पश्य भूतविकारांस्त्वं भूतमात्रान् यथार्थतः।",
+"तत्क्षणाद् बन्धनिर्मुक्तः स्वरूपस्थो भविष्यसि॥"
+],
+"en": "If you would just see the transformations of the elements as nothing more than the elements, then you would immediately be freed from all bonds and established in your own nature."
+},
+{
+"id": "9.8",
+"c": 9,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"वासना एव संसार इति सर्वा विमुंच ताः।",
+"तत्त्यागो वासनात्यागात्स्थितिरद्य यथा तथा॥"
+],
+"en": "One’s desires are samsara. Knowing this, abandon them. The renunciation of them is the renunciation of it. Now you can remain as you are."
+},
+{
+"id": "10.1",
+"c": 10,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"विहाय वैरिणं काममर्थं चानर्थसंकुलं।",
+"धर्ममप्येतयोर्हेतुं सर्वत्रानादरं कुरु॥"
+],
+"en": "Abandon desire, the enemy, along with gain, itself so full of loss, and the good deeds which are the cause of the other two — practice indifference to everything."
+},
+{
+"id": "10.2",
+"c": 10,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"स्वप्नेन्द्रजालवत् पश्य दिनानि त्रीणि पंच वा।",
+"मित्रक्षेत्रधनागारदारदायादिसंपदः॥"
+],
+"en": "Look on such things as land, friends, money, property, wife, and bequests as nothing but a dream or a magician’s show lasting three or five days."
+},
+{
+"id": "10.3",
+"c": 10,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"यत्र यत्र भवेत्तृष्णा संसारं विद्धि तत्र वै।",
+"प्रौढवैराग्यमाश्रित्य वीततृष्णः सुखी भव॥"
+],
+"en": "Wherever a desire occurs, see samsara in it. Establishing yourself in firm dispassion, be free of passion and happy."
+},
+{
+"id": "10.4",
+"c": 10,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"तृष्णामात्रात्मको बन्धस्तन्नाशो मोक्ष उच्यते।",
+"भवासंसक्तिमात्रेण प्राप्तितुष्टिर्मुहुर्मुहुः॥"
+],
+"en": "The essential nature of bondage is nothing other than desire, and its elimination is known as liberation. It is simply by not being attached to changing things that the everlasting joy of attainment is reached."
+},
+{
+"id": "10.5",
+"c": 10,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"त्वमेकश्चेतनः शुद्धो जडं विश्वमसत्तथा।",
+"अविद्यापि न किंचित्सा का बुभुत्सा तथापि ते॥"
+],
+"en": "You are one, conscious and pure, while all this is inert non-being. Ignorance itself is nothing, so what is the point of wanting to understand?"
+},
+{
+"id": "10.6",
+"c": 10,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"राज्यं सुताः कलत्राणि शरीराणि सुखानि च।",
+"संसक्तस्यापि नष्टानि तव जन्मनि जन्मनि॥"
+],
+"en": "Kingdoms, children, wives, bodies, pleasures — these have all been lost to you life after life, attached to them though you were."
+},
+{
+"id": "10.7",
+"c": 10,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"अलमर्थेन कामेन सुकृतेनापि कर्मणा।",
+"एभ्यः संसारकान्तारे न विश्रान्तमभून् मनः॥"
+],
+"en": "Enough of wealth, sensuality, and good deeds. In the forest of samsara the mind has never found satisfaction in these."
+},
+{
+"id": "10.8",
+"c": 10,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"कृतं न कति जन्मानि कायेन मनसा गिरा।",
+"दुःखमायासदं कर्म तदद्याप्युपरम्यताम्॥"
+],
+"en": "How many births have you not done hard and painful labour with body, mind, and speech. Now at last, stop!"
+},
+{
+"id": "11.1",
+"c": 11,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"भावाभावविकारश्च स्वभावादिति निश्चयी।",
+"निर्विकारो गतक्लेशः सुखेनैवोपशाम्यति॥"
+],
+"en": "Unmoved and undistressed, realising that being, non-being and change are of the very nature of things, one easily finds peace."
+},
+{
+"id": "11.2",
+"c": 11,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"ईश्वरः सर्वनिर्माता नेहान्य इति निश्चयी।",
+"अन्तर्गलितसर्वाशः शान्तः क्वापि न सज्जते॥"
+],
+"en": "At peace, having shed all desires within, and realising that nothing exists here but the Lord, the Creator of all things, one is no longer attached to anything."
+},
+{
+"id": "11.3",
+"c": 11,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"आपदः संपदः काले दैवादेवेति निश्चयी।",
+"तृप्तः स्वस्थेन्द्रियो नित्यं न वाञ्छति न शोचति॥"
+],
+"en": "Realising that misfortune and fortune come in their own time from fortune, one is contented, one’s senses under control, and does not like or dislike."
+},
+{
+"id": "11.4",
+"c": 11,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"सुखदुःखे जन्ममृत्यू दैवादेवेति निश्चयी।",
+"साध्यादर्शी निरायासः कुर्वन्नपि न लिप्यते॥"
+],
+"en": "Realising that pleasure and pain, birth and death are from destiny, and that one’s desires cannot be achieved, one remains inactive, and even when acting does not get attached."
+},
+{
+"id": "11.5",
+"c": 11,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"चिन्तया जायते दुःखं नान्यथेहेति निश्चयी।",
+"तया हीनः सुखी शान्तः सर्वत्र गलितस्पृहः॥"
+],
+"en": "Realising that suffering arises from nothing other than thought, dropping all desires one rids oneself of it, and is happy and at peace everywhere."
+},
+{
+"id": "11.6",
+"c": 11,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"नाहं देहो न मे देहो बोधोऽहमिति निश्चयी।",
+"कैवल्यं इव संप्राप्तो न स्मरत्यकृतं कृतम्॥"
+],
+"en": "Realising, “I am not the body, nor is the body mine. I am awareness,” one attains the supreme state and no longer remembers things done or undone."
+},
+{
+"id": "11.7",
+"c": 11,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"आब्रह्मस्तंबपर्यन्तं अहमेवेति निश्चयी।",
+"निर्विकल्पः शुचिः शान्तः प्राप्ताप्राप्तविनिर्वृतः॥"
+],
+"en": "Realising, “I alone exist, from Brahma down to the last clump of grass,” one becomes free from uncertainty, pure, at peace, and unconcerned about what has been attained or not."
+},
+{
+"id": "11.8",
+"c": 11,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"नाश्चर्यमिदं विश्वं न किंचिदिति निश्चयी।",
+"निर्वासनः स्फूर्तिमात्रो न किंचिदिव शाम्यति॥"
+],
+"en": "Realising that all this varied and wonderful world is nothing, one becomes pure receptivity, free from inclinations, and as if nothing existed, one finds peace."
+},
+{
+"id": "12.1",
+"c": 12,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"कायकृत्यासहः पूर्वं ततो वाग्विस्तरासहः।",
+"अथ चिन्तासहस्तस्माद् एवमेवाहमास्थितः॥"
+],
+"en": "First of all I was averse to physical activity, then to lengthy speech, and finally to thought itself, which is why I am now established."
+},
+{
+"id": "12.2",
+"c": 12,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"प्रीत्यभावेन शब्दादेरदृश्यत्वेन चात्मनः।",
+"विक्षेपैकाग्रहृदय एवमेवाहमास्थितः॥"
+],
+"en": "In the absence of delight in sound and the other senses, and by the fact that I am myself not an object of the senses, my mind is focused and free from distraction — which is why I am now established."
+},
+{
+"id": "12.3",
+"c": 12,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"समाध्यासादिविक्षिप्तौ व्यवहारः समाधये।",
+"एवं विलोक्य नियमं एवमेवाहमास्थितः॥"
+],
+"en": "Owing to the distraction of such things as wrong identification, one is driven to strive for mental stillness. Recognising this pattern I am now established."
+},
+{
+"id": "12.4",
+"c": 12,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"हेयोपादेयविरहाद् एवं हर्षविषादयोः।",
+"अभावादद्य हे ब्रह्मन् एवमेवाहमास्थितः॥"
+],
+"en": "By relinquishing the sense of rejection and acceptance, and with pleasure and disappointment ceasing today, brahmin — I am now established."
+},
+{
+"id": "12.5",
+"c": 12,
+"n": 5,
+"sp": "janaka",
+"sa": [
+"आश्रमानाश्रमं ध्यानं चित्तस्वीकृतवर्जनं।",
+"विकल्पं मम वीक्ष्यैतैरेवमेवाहमास्थितः॥"
+],
+"en": "Life in a community, then going beyond such a state, meditation and the elimination of mind-made objects — by means of these I have seen my error, and I am now established."
+},
+{
+"id": "12.6",
+"c": 12,
+"n": 6,
+"sp": "janaka",
+"sa": [
+"कर्मानुष्ठानमज्ञानाद् यथैवोपरमस्तथा।",
+"बुध्वा सम्यगिदं तत्त्वं एवमेवाहमास्थितः॥"
+],
+"en": "Just as the performance of actions is due to ignorance, so their abandonment is too. By fully recognising this truth, I am now established."
+},
+{
+"id": "12.7",
+"c": 12,
+"n": 7,
+"sp": "janaka",
+"sa": [
+"अचिंत्यं चिंत्यमानोऽपि चिन्तारूपं भजत्यसौ।",
+"त्यक्त्वा तद्भावनं तस्माद् एवमेवाहमास्थितः॥"
+],
+"en": "Trying to think the unthinkable, is doing something unnatural to thought. Abandoning such a practice therefore, I am now established."
+},
+{
+"id": "12.8",
+"c": 12,
+"n": 8,
+"sp": "janaka",
+"sa": [
+"एवमेव कृतं येन स कृतार्थो भवेदसौ।",
+"एवमेव स्वभावो यः स कृतार्थो भवेदसौ॥"
+],
+"en": "He who has achieved this has achieved the goal of life. He who is of such a nature has done what has to be done."
+},
+{
+"id": "13.1",
+"c": 13,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"अकिंचनभवं स्वास्थ्यं कौपीनत्वेऽपि दुर्लभं।",
+"त्यागादाने विहायास्मादहमासे यथासुखम्॥"
+],
+"en": "The inner freedom of having nothing is hard to achieve, even with just a loin-cloth, but I live as I please, abandoning both renunciation and acquisition."
+},
+{
+"id": "13.2",
+"c": 13,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"कुत्रापि खेदः कायस्य जिह्वा कुत्रापि खेद्यते।",
+"मनः कुत्रापि तत्त्यक्त्वा पुरुषार्थे स्थितः सुखम्॥"
+],
+"en": "Sometimes one experiences distress because of one’s body, sometimes because of one’s speech, and sometimes because of one’s mind. Abandoning all of these, I live as I please in the goal of human life."
+},
+{
+"id": "13.3",
+"c": 13,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"कृतं किमपि नैव स्याद् इति संचिन्त्य तत्त्वतः।",
+"यदा यत्कर्तुमायाति तत् कृत्वासे यथासुखम्॥"
+],
+"en": "Recognising that in reality no action is ever committed, I live as I please, just doing what presents itself to be done."
+},
+{
+"id": "13.4",
+"c": 13,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"कर्मनैष्कर्म्यनिर्बन्धभावा देहस्थयोगिनः।",
+"संयोगायोगविरहादहमासे यथासुखम्॥"
+],
+"en": "Yogis who identify themselves with their bodies are insistent on fulfilling and avoiding certain actions, but I live as I please abandoning attachment and rejection."
+},
+{
+"id": "13.5",
+"c": 13,
+"n": 5,
+"sp": "janaka",
+"sa": [
+"अर्थानर्थौ न मे स्थित्या गत्या न शयनेन वा।",
+"तिष्ठन् गच्छन् स्वपन् तस्मादहमासे यथासुखम्॥"
+],
+"en": "No benefit or loss comes to me by standing, walking or lying down, so consequently I live as I please whether standing, walking or sleeping."
+},
+{
+"id": "13.6",
+"c": 13,
+"n": 6,
+"sp": "janaka",
+"sa": [
+"स्वपतो नास्ति मे हानिः सिद्धिर्यत्नवतो न वा।",
+"नाशोल्लासौ विहायास्मदहमासे यथासुखम्॥"
+],
+"en": "I lose nothing by sleeping and gain nothing by effort, so consequently I live as I please, abandoning success and failure."
+},
+{
+"id": "13.7",
+"c": 13,
+"n": 7,
+"sp": "janaka",
+"sa": [
+"सुखादिरूपा नियमं भावेष्वालोक्य भूरिशः।",
+"शुभाशुभे विहायास्मादहमासे यथासुखम्॥"
+],
+"en": "Continually observing the drawbacks of such things as pleasant objects, I live as I please, abandoning the pleasant and unpleasant."
+},
+{
+"id": "14.1",
+"c": 14,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"प्रकृत्या शून्यचित्तो यः प्रमादाद् भावभावनः।",
+"निद्रितो बोधित इव क्षीणसंस्मरणो हि सः॥"
+],
+"en": "He who by nature is empty-minded, and who thinks of things only unintentionally, is freed from deliberate remembering like one awakened from a dream."
+},
+{
+"id": "14.2",
+"c": 14,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"क्व धनानि क्व मित्राणि क्व मे विषयदस्यवः।",
+"क्व शास्त्रं क्व च विज्ञानं यदा मे गलिता स्पृहा॥"
+],
+"en": "When my desire has been eliminated, I have no wealth, friends, robbers, senses, scriptures or knowledge."
+},
+{
+"id": "14.3",
+"c": 14,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"विज्ञाते साक्षिपुरुषे परमात्मनि चेश्वरे।",
+"नैराश्ये बंधमोक्षे च न चिंता मुक्तये मम॥"
+],
+"en": "Realising my supreme self-nature in the Person of the Witness, the Lord, and the state of desirelessness in bondage or liberation, I feel no inclination for liberation."
+},
+{
+"id": "14.4",
+"c": 14,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"अंतर्विकल्पशून्यस्य बहिः स्वच्छन्दचारिणः।",
+"भ्रान्तस्येव दशास्तास्तास्तादृशा एव जानते॥"
+],
+"en": "The various states of one who is free of uncertainty within, and who outwardly wanders about as he pleases like an idiot, can only be known by someone in the same condition."
+},
+{
+"id": "15.1",
+"c": 15,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"यथातथोपदेशेन कृतार्थः सत्त्वबुद्धिमान्।",
+"आजीवमपि जिज्ञासुः परस्तत्र विमुह्यति॥"
+],
+"en": "While a man of pure intelligence may achieve the goal by the most casual of instruction, another may seek knowledge all his life and still remain bewildered."
+},
+{
+"id": "15.2",
+"c": 15,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"मोक्षो विषयवैरस्यं बन्धो वैषयिको रसः।",
+"एतावदेव विज्ञानं यथेच्छसि तथा कुरु॥"
+],
+"en": "Liberation is distaste for the objects of the senses. Bondage is love of the senses. This is knowledge. Now do as you wish."
+},
+{
+"id": "15.3",
+"c": 15,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"वाग्मिप्राज्ञामहोद्योगं जनं मूकजडालसं।",
+"करोति तत्त्वबोधोऽयमतस्त्यक्तो बुभुक्षुभिः॥"
+],
+"en": "This awareness of the truth makes an eloquent, clever and energetic man dumb, stupid and lazy, so it is avoided by those whose aim is enjoyment."
+},
+{
+"id": "15.4",
+"c": 15,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"न त्वं देहो न ते देहो भोक्ता कर्ता न वा भवान्।",
+"चिद्रूपोऽसि सदा साक्षी निरपेक्षः सुखं चर॥"
+],
+"en": "You are not the body, nor is the body yours, nor are you the doer of actions or the reaper of their consequences. You are eternally pure consciousness, the witness, in need of nothing — so live happily."
+},
+{
+"id": "15.5",
+"c": 15,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"रागद्वेषौ मनोधर्मौ न मनस्ते कदाचन।",
+"निर्विकल्पोऽसि बोधात्मा निर्विकारः सुखं चर॥"
+],
+"en": "Desire and anger are objects of the mind, but the mind is not yours, nor ever has been. You are choiceless awareness itself and unchanging — so live happily."
+},
+{
+"id": "15.6",
+"c": 15,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"सर्वभूतेषु चात्मानं सर्वभूतानि चात्मनि।",
+"विज्ञाय निरहंकारो निर्ममस्त्वं सुखी भव॥"
+],
+"en": "Recognising oneself in all beings, and all beings in oneself, be happy, free from the sense of responsibility and free from preoccupation with “me.”"
+},
+{
+"id": "15.7",
+"c": 15,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"विश्वं स्फुरति यत्रेदं तरंगा इव सागरे।",
+"तत्त्वमेव न सन्देहश्चिन्मूर्ते विज्वरो भव॥"
+],
+"en": "Your nature is the consciousness, in which the whole world wells up, like waves in the sea. That is what you are, without any doubt, so be free of disturbance."
+},
+{
+"id": "15.8",
+"c": 15,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"श्रद्धस्व तात श्रद्धस्व नात्र मोहं कुरुष्व भोः।",
+"ज्ञानस्वरूपो भगवानात्मा त्वं प्रकृतेः परः॥"
+],
+"en": "Have faith, my son, have faith. Don’t let yourself be deluded in this. You are yourself the Lord, whose very nature is knowledge, and you are beyond natural causation."
+},
+{
+"id": "15.9",
+"c": 15,
+"n": 9,
+"sp": "ashtavakra",
+"sa": [
+"गुणैः संवेष्टितो देहस्तिष्ठत्यायाति याति च।",
+"आत्मा न गंता नागंता किमेनमनुशोचसि॥"
+],
+"en": "The body invested with the senses stands still, and comes and goes. You yourself neither come nor go, so why bother about them?"
+},
+{
+"id": "15.10",
+"c": 15,
+"n": 10,
+"sp": "ashtavakra",
+"sa": [
+"देहस्तिष्ठतु कल्पान्तं गच्छत्वद्यैव वा पुनः।",
+"क्व वृद्धिः क्व च वा हानिस्तव चिन्मात्ररूपिणः॥"
+],
+"en": "Let the body last to the end of the Age, or let it come to an end right now. What have you gained or lost, who consist of pure consciousness?"
+},
+{
+"id": "15.11",
+"c": 15,
+"n": 11,
+"sp": "ashtavakra",
+"sa": [
+"त्वय्यनंतमहांभोधौ विश्ववीचिः स्वभावतः।",
+"उदेतु वास्तमायातु न ते वृद्धिर्न वा क्षतिः॥"
+],
+"en": "Let the world wave rise or subside according to its own nature in you, the great ocean. It is no gain or loss to you."
+},
+{
+"id": "15.12",
+"c": 15,
+"n": 12,
+"sp": "ashtavakra",
+"sa": [
+"तात चिन्मात्ररूपोऽसि न ते भिन्नमिदं जगत्।",
+"अतः कस्य कथं कुत्र हेयोपादेयकल्पना॥"
+],
+"en": "My son, you consist of pure consciousness, and the world is not separate from you. So who is to accept or reject it, and how, and why?"
+},
+{
+"id": "15.13",
+"c": 15,
+"n": 13,
+"sp": "ashtavakra",
+"sa": [
+"एकस्मिन्नव्यये शान्ते चिदाकाशेऽमले त्वयि।",
+"कुतो जन्म कुतो कर्म कुतोऽहंकार एव च॥"
+],
+"en": "How can there be either birth, karma, or responsibility in that one unchanging, peaceful, unblemished, and infinite consciousness which is you?"
+},
+{
+"id": "15.14",
+"c": 15,
+"n": 14,
+"sp": "ashtavakra",
+"sa": [
+"यत्त्वं पश्यसि तत्रैकस्त्वमेव प्रतिभाससे।",
+"किं पृथक् भासते स्वर्णात् कटकांगदनूपुरम्॥"
+],
+"en": "Whatever you see, it is you alone manifest in it. How can bracelets, armlets and anklets be different from the gold they are made of?"
+},
+{
+"id": "15.15",
+"c": 15,
+"n": 15,
+"sp": "ashtavakra",
+"sa": [
+"अयं सोऽहमयं नाहं विभागमिति संत्यज।",
+"सर्वमात्मेति निश्चित्य निःसङ्कल्पः सुखी भव॥"
+],
+"en": "Giving up such distinctions as “He is what I am,” and “I am not that,” recognise that “Everything is myself,” and be without distinction and happy."
+},
+{
+"id": "15.16",
+"c": 15,
+"n": 16,
+"sp": "ashtavakra",
+"sa": [
+"तवैवाज्ञानतो विश्वं त्वमेकः परमार्थतः।",
+"त्वत्तोऽन्यो नास्ति संसारी नासंसारी च कश्चन॥"
+],
+"en": "It is through your ignorance that all this exists. In reality you alone exist. Apart from you there is no one within or beyond samsara."
+},
+{
+"id": "15.17",
+"c": 15,
+"n": 17,
+"sp": "ashtavakra",
+"sa": [
+"भ्रान्तिमात्रमिदं विश्वं न किंचिदिति निश्चयी।",
+"निर्वासनः स्फूर्तिमात्रो न किंचिदिव शाम्यति॥"
+],
+"en": "Knowing that all this is just an illusion, one becomes free of desire, pure receptivity, and at peace, as if nothing existed."
+},
+{
+"id": "15.18",
+"c": 15,
+"n": 18,
+"sp": "ashtavakra",
+"sa": [
+"एक एव भवांभोधावासीदस्ति भविष्यति।",
+"न ते बन्धोऽस्ति मोक्षो वा कृत्यकृत्यः सुखं चर॥"
+],
+"en": "Only one thing has existed, exists and will exist in the ocean of being. You have no bondage or liberation. Live happily and fulfilled."
+},
+{
+"id": "15.19",
+"c": 15,
+"n": 19,
+"sp": "ashtavakra",
+"sa": [
+"मा सङ्कल्पविकल्पाभ्यां चित्तं क्षोभय चिन्मय।",
+"उपशाम्य सुखं तिष्ठ स्वात्मन्यानन्दविग्रहे॥"
+],
+"en": "Being pure consciousness, do not disturb your mind with thoughts of for and against. Be at peace and remain happily in yourself, the essence of joy."
+},
+{
+"id": "15.20",
+"c": 15,
+"n": 20,
+"sp": "ashtavakra",
+"sa": [
+"त्यजैव ध्यानं सर्वत्र मा किंचिद् हृदि धारय।",
+"आत्मा त्वं मुक्त एवासि किं विमृश्य करिष्यसि॥"
+],
+"en": "Give up meditation completely but don’t let the mind hold on to anything. You are free by nature, so what will you achieve by forcing the mind?"
+},
+{
+"id": "16.1",
+"c": 16,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"आचक्ष्व शृणु वा तात नानाशास्त्राण्यनेकशः।",
+"तथापि न तव स्वास्थ्यं सर्वविस्मरणाद् ऋते॥"
+],
+"en": "My son, you may recite or listen to countless scriptures, but you will not be established within until you can forget everything."
+},
+{
+"id": "16.2",
+"c": 16,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"भोगं कर्म समाधिं वा कुरु विज्ञ तथापि ते।",
+"चित्तं निरस्तसर्वाशामत्यर्थं रोचयिष्यति॥"
+],
+"en": "You may, as a learned man, indulge in wealth, activity, and meditation, but your mind will still long for that which is the cessation of desire, and beyond all goals."
+},
+{
+"id": "16.3",
+"c": 16,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"आयासात्सकलो दुःखी नैनं जानाति कश्चन।",
+"अनेनैवोपदेशेन धन्यः प्राप्नोति निर्वृतिम्॥"
+],
+"en": "Everyone is in pain because of their striving to achieve something, but no one realises it. By no more than this instruction, the fortunate one attains tranquillity."
+},
+{
+"id": "16.4",
+"c": 16,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"व्यापारे खिद्यते यस्तु निमेषोन्मेषयोरपि।",
+"तस्यालस्य धुरीणस्य सुखं नन्यस्य कस्यचित्॥"
+],
+"en": "Happiness belongs to no one but that supremely lazy man for whom even opening and closing his eyes is a bother."
+},
+{
+"id": "16.5",
+"c": 16,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"इदं कृतमिदं नेति द्वंद्वैर्मुक्तं यदा मनः।",
+"धर्मार्थकाममोक्षेषु निरपेक्षं तदा भवेत्॥"
+],
+"en": "When the mind is freed from such pairs of opposites as, “I have done this,” and “I have not done that,” it becomes indifferent to merit, wealth, sensuality and liberation."
+},
+{
+"id": "16.6",
+"c": 16,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"विरक्तो विषयद्वेष्टा रागी विषयलोलुपः।",
+"ग्रहमोक्षविहीनस्तु न विरक्तो न रागवान्॥"
+],
+"en": "One man is abstemious and averse to the senses, another is greedy and attached to them, but he who is free from both taking and rejecting is neither abstemious nor greedy."
+},
+{
+"id": "16.7",
+"c": 16,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"हेयोपादेयता तावत्संसारविटपांकुरः।",
+"स्पृहा जीवति यावद् वै निर्विचारदशास्पदम्॥"
+],
+"en": "So long as desire, the state of lack of discrimination, remains, the sense of revulsion and attraction will remain, which is the root and branch of samsara."
+},
+{
+"id": "16.8",
+"c": 16,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"प्रवृत्तौ जायते रागो निर्वृत्तौ द्वेष एव हि।",
+"निर्द्वन्द्वो बालवद् धीमान् एवमेव व्यवस्थितः॥"
+],
+"en": "Desire springs from usage, and aversion from abstension, but the wise man is free from the pairs of opposites like a child, and becomes established."
+},
+{
+"id": "16.9",
+"c": 16,
+"n": 9,
+"sp": "ashtavakra",
+"sa": [
+"हातुमिच्छति संसारं रागी दुःखजिहासया।",
+"वीतरागो हि निर्दुःखस्तस्मिन्नपि न खिद्यति॥"
+],
+"en": "The passionate man wants to eliminate samsara so as to avoid pain, but the dispassionate man is free from pain and feels no distress even in it."
+},
+{
+"id": "16.10",
+"c": 16,
+"n": 10,
+"sp": "ashtavakra",
+"sa": [
+"यस्याभिमानो मोक्षेऽपि देहेऽपि ममता तथा।",
+"न च ज्ञानी न वा योगी केवलं दुःखभागसौ॥"
+],
+"en": "He who is proud about even liberation or his own body, and feels them his own, is neither a seer nor a yogi. He is still just a sufferer."
+},
+{
+"id": "16.11",
+"c": 16,
+"n": 11,
+"sp": "ashtavakra",
+"sa": [
+"हरो यद्युपदेष्टा ते हरिः कमलजोऽपि वा।",
+"तथापि न तव स्वास्थ्यं सर्वविस्मरणादृते॥"
+],
+"en": "If even Shiva, Vishnu, or the lotus-born Brahma were your instructor, until you have forgotten everything you cannot be established within."
+},
+{
+"id": "17.1",
+"c": 17,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"तेन ज्ञानफलं प्राप्तं योगाभ्यासफलं तथा।",
+"तृप्तः स्वच्छेन्द्रियो नित्यं एकाकी रमते तु यः॥"
+],
+"en": "He who is content, with purified senses, and always enjoys solitude, has gained the fruit of knowledge and the fruit of the practice of yoga too."
+},
+{
+"id": "17.2",
+"c": 17,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"न कदाचिज्जगत्यस्मिन् तत्त्वज्ञा हन्त खिद्यति।",
+"यत एकेन तेनेदं पूर्णं ब्रह्माण्डमण्डलम्॥"
+],
+"en": "The knower of truth is never distressed in this world, for the whole round world is full of himself alone."
+},
+{
+"id": "17.3",
+"c": 17,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"न जातु विषयाः केऽपि स्वारामं हर्षयन्त्यमी।",
+"सल्लकीपल्लवप्रीतमिवेभं निंबपल्लवाः॥"
+],
+"en": "None of these senses please a man who has found satisfaction within, just as Nimba leaves do not please the elephant that has acquired the taste for Sallaki leaves."
+},
+{
+"id": "17.4",
+"c": 17,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"यस्तु भोगेषु भुक्तेषु न भवत्यधिवासिता।",
+"अभुक्तेषु निराकांक्षी तदृशो भवदुर्लभः॥"
+],
+"en": "The man is rare who is not attached to the things he has enjoyed, and does not hanker after the things he has not enjoyed."
+},
+{
+"id": "17.5",
+"c": 17,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"बुभुक्षुरिह संसारे मुमुक्षुरपि दृश्यते।",
+"भोगमोक्षनिराकांक्षी विरलो हि महाशयः॥"
+],
+"en": "Those who desire pleasure and those who desire liberation are both found in samsara, but the great-souled man who desires neither pleasure nor liberation is rare indeed."
+},
+{
+"id": "17.6",
+"c": 17,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"धर्मार्थकाममोक्षेषु जीविते मरणे तथा।",
+"कस्याप्युदारचित्तस्य हेयोपादेयता न हि॥"
+],
+"en": "It is only the noble-minded who is free from attraction or repulsion to religion, wealth, sensuality, and life and death too."
+},
+{
+"id": "17.7",
+"c": 17,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"वांछा न विश्वविलये न द्वेषस्तस्य च स्थितौ।",
+"यथा जीविकया तस्माद् धन्य आस्ते यथा सुखम्॥"
+],
+"en": "He feels no desire for the elimination of all this, nor anger at its continuing, so the fortunate man lives happily with whatever sustinence presents itself."
+},
+{
+"id": "17.8",
+"c": 17,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"कृतार्थोऽनेन ज्ञानेनेत्येवं गलितधीः कृती।",
+"पश्यन् शृण्वन् स्पृशन् जिघ्रन् अश्नन्नस्ते यथा सुखम्॥"
+],
+"en": "Thus fulfilled through this knowledge, contented, and with the thinking mind emptied, he lives happily just seeing, hearing, feeling, smelling, and tasting."
+},
+{
+"id": "17.9",
+"c": 17,
+"n": 9,
+"sp": "ashtavakra",
+"sa": [
+"शून्या दृष्टिर्वृथा चेष्टा विकलानीन्द्रियाणि च।",
+"न स्पृहा न विरक्तिर्वा क्षीणसंसारसागरे॥"
+],
+"en": "In him for whom the ocean of samsara has dried up, there is neither attachment or aversion. His gaze is vacant, his behaviour purposeless, and his senses inactive."
+},
+{
+"id": "17.10",
+"c": 17,
+"n": 10,
+"sp": "ashtavakra",
+"sa": [
+"न जगर्ति न निद्राति नोन्मीलति न मीलति।",
+"अहो परदशा क्वापि वर्तते मुक्तचेतसः॥"
+],
+"en": "Surely the supreme state is everywhere for the liberated mind. He is neither awake nor asleep, and neither opens nor closes his eyes."
+},
+{
+"id": "17.11",
+"c": 17,
+"n": 11,
+"sp": "ashtavakra",
+"sa": [
+"सर्वत्र दृश्यते स्वस्थः सर्वत्र विमलाशयः।",
+"समस्तवासना मुक्तो मुक्तः सर्वत्र राजते॥"
+],
+"en": "The liberated man is resplendent everywhere, free from all desires. Everywhere he appears self-possessed and pure of heart."
+},
+{
+"id": "17.12",
+"c": 17,
+"n": 12,
+"sp": "ashtavakra",
+"sa": [
+"पश्यन् शृण्वन् स्पृशन् जिघ्रन् अश्नन् गृह्णन् वदन् व्रजन्।",
+"ईहितानीहितैर्मुक्तो मुक्त एव महाशयः॥"
+],
+"en": "Seeing, hearing, feeling, smelling, tasting, speaking, and walking about, the great-souled man who is freed from trying to achieve or avoid anything is free indeed."
+},
+{
+"id": "17.13",
+"c": 17,
+"n": 13,
+"sp": "ashtavakra",
+"sa": [
+"न निन्दति न च स्तौति न हृष्यति न कुप्यति।",
+"न ददाति न गृह्णाति मुक्तः सर्वत्र नीरसः॥"
+],
+"en": "The liberated man is free from desires everywhere. He neither blames, praises, rejoices, is disappointed, gives, nor takes."
+},
+{
+"id": "17.14",
+"c": 17,
+"n": 14,
+"sp": "ashtavakra",
+"sa": [
+"सानुरागां स्त्रियं दृष्ट्वा मृत्युं वा समुपस्थितं।",
+"अविह्वलमनाः स्वस्थो मुक्त एव महाशयः॥"
+],
+"en": "When a great-souled one is unperturbed in mind, and equally self-possessed at either the sight of a woman inflamed with desire or at approaching death, he is truly liberated."
+},
+{
+"id": "17.15",
+"c": 17,
+"n": 15,
+"sp": "ashtavakra",
+"sa": [
+"सुखे दुःखे नरे नार्यां संपत्सु विपत्सु च।",
+"विशेषो नैव धीरस्य सर्वत्र समदर्शिनः॥"
+],
+"en": "There is no distinction between pleasure and pain, man and woman, success and failure for the wise man who looks on everything as equal."
+},
+{
+"id": "17.16",
+"c": 17,
+"n": 16,
+"sp": "ashtavakra",
+"sa": [
+"न हिंसा नैव कारुण्यं नौद्धत्यं न च दीनता।",
+"नाश्चर्यं नैव च क्षोभः क्षीणसंसरणे नरे॥"
+],
+"en": "There is no aggression nor compassion, no pride nor humility, no wonder nor confusion for the man whose days of samsara are over."
+},
+{
+"id": "17.17",
+"c": 17,
+"n": 17,
+"sp": "ashtavakra",
+"sa": [
+"न मुक्तो विषयद्वेष्टा न वा विषयलोलुपः।",
+"असंसक्तमना नित्यं प्राप्ताप्राप्तमुपाश्नुते॥"
+],
+"en": "The liberated man is not averse to the senses nor is he attached to them. He enjoys hinself continually with an unattached mind in both success and failure."
+},
+{
+"id": "17.18",
+"c": 17,
+"n": 18,
+"sp": "ashtavakra",
+"sa": [
+"समाधानसमाधानहिताहितविकल्पनाः।",
+"शून्यचित्तो न जानाति कैवल्यमिव संस्थितः॥"
+],
+"en": "One established in the Absolute state with an empty mind does not know the alternatives of inner stillness and lack of inner stillness, and of good and evil."
+},
+{
+"id": "17.19",
+"c": 17,
+"n": 19,
+"sp": "ashtavakra",
+"sa": [
+"निर्ममो निरहंकारो न किंचिदिति निश्चितः।",
+"अन्तर्गलितसर्वाशः कुर्वन्नपि करोति न॥"
+],
+"en": "A man free of “me” and “mine” and of a sense of responsibility, aware that “Nothing exists,” with all desires extinguished within, does not act even in acting."
+},
+{
+"id": "17.20",
+"c": 17,
+"n": 20,
+"sp": "ashtavakra",
+"sa": [
+"मनःप्रकाशसंमोह स्वप्नजाड्यविवर्जितः।",
+"दशां कामपि संप्राप्तो भवेद् गलितमानसः॥"
+],
+"en": "He whose thinking mind is dissolved achieves the indescribable state and is free from the mental display of delusion, dream, and ignorance."
+},
+{
+"id": "18.1",
+"c": 18,
+"n": 1,
+"sp": "ashtavakra",
+"sa": [
+"यस्य बोधोदये तावत्स्वप्नवद् भवति भ्रमः।",
+"तस्मै सुखैकरूपाय नमः शान्ताय तेजसे॥"
+],
+"en": "Praise be to That by the awareness of which delusion itself becomes dream-like, to that which is pure happiness, peace, and light."
+},
+{
+"id": "18.2",
+"c": 18,
+"n": 2,
+"sp": "ashtavakra",
+"sa": [
+"अर्जयित्वाखिलान् अर्थान् भोगानाप्नोति पुष्कलान्।",
+"न हि सर्वपरित्याजमन्तरेण सुखी भवेत्॥"
+],
+"en": "One may get all sorts of pleasure by the acquisition of various objects of enjoyment, but one cannot be happy except by the renunciation of everything."
+},
+{
+"id": "18.3",
+"c": 18,
+"n": 3,
+"sp": "ashtavakra",
+"sa": [
+"कर्तव्यदुःखमार्तण्डज्वाला दग्धान्तरात्मनः।",
+"कुतः प्रशमपीयूषधारासारमृते सुखम्॥"
+],
+"en": "How can there be happiness, for one who has been burnt inside by the blistering sun of the pain of thinking that there are things that still need doing, without the rain of the nectar of peace?"
+},
+{
+"id": "18.4",
+"c": 18,
+"n": 4,
+"sp": "ashtavakra",
+"sa": [
+"भवोऽयं भावनामात्रो न किंचित् परमर्थतः।",
+"नास्त्यभावः स्वभावनां भावाभावविभाविनाम्॥"
+],
+"en": "This existence is just imagination. It is nothing in reality, but there is no non-being for natures that know how to distinguish being from non-being."
+},
+{
+"id": "18.5",
+"c": 18,
+"n": 5,
+"sp": "ashtavakra",
+"sa": [
+"न दूरं न च संकोचाल्लब्धमेवात्मनः पदं।",
+"निर्विकल्पं निरायासं निर्विकारं निरंजनम्॥"
+],
+"en": "The realm of one’s self is not far away, nor can it be achieved by the addition of limitations to its nature. It is unimaginable, effortless, unchanging, and spotless."
+},
+{
+"id": "18.6",
+"c": 18,
+"n": 6,
+"sp": "ashtavakra",
+"sa": [
+"व्यामोहमात्रविरतौ स्वरूपादानमात्रतः।",
+"वीतशोका विराजन्ते निरावरणदृष्टयः॥"
+],
+"en": "By the simple elimination of delusion and the recognition of one’s true nature, those whose vision is unclouded live free from sorrow."
+},
+{
+"id": "18.7",
+"c": 18,
+"n": 7,
+"sp": "ashtavakra",
+"sa": [
+"समस्तं कल्पनामात्रमात्मा मुक्तः सनातनः।",
+"इति विज्ञाय धीरो हि किमभ्यस्यति बालवत्॥"
+],
+"en": "Knowing everything as just imagination, and himself as eternally free, how should the wise man behave like a fool?"
+},
+{
+"id": "18.8",
+"c": 18,
+"n": 8,
+"sp": "ashtavakra",
+"sa": [
+"आत्मा ब्रह्मेति निश्चित्य भावाभावौ च कल्पितौ।",
+"निष्कामः किं विजानाति किं ब्रूते च करोति किम्॥"
+],
+"en": "Knowing himself to be God, and being and non-being just imagination, what should the man free from desire learn, say, or do?"
+},
+{
+"id": "18.9",
+"c": 18,
+"n": 9,
+"sp": "ashtavakra",
+"sa": [
+"अयं सोऽहमयं नाहं इति क्षीणा विकल्पना।",
+"सर्वमात्मेति निश्चित्य तूष्णींभूतस्य योगिनः॥"
+],
+"en": "Considerations like “I am this” or “I am not this” are finished for the yogi who has gone silent realising “Everything is myself.”"
+},
+{
+"id": "18.10",
+"c": 18,
+"n": 10,
+"sp": "ashtavakra",
+"sa": [
+"न विक्षेपो न चैकाग्र्यं नातिबोधो न मूढता।",
+"न सुखं न च वा दुःखं उपशान्तस्य योगिनः॥"
+],
+"en": "For the yogi who has found peace, there is no distraction or one-pointedness, no higher knowledge or ignorance, no pleasure and no pain."
+},
+{
+"id": "18.11",
+"c": 18,
+"n": 11,
+"sp": "ashtavakra",
+"sa": [
+"स्वाराज्ये भैक्षवृत्तौ च लाभालाभे जने वने।",
+"निर्विकल्पस्वभावस्य न विशेषोऽस्ति योगिनः॥"
+],
+"en": "The dominion of heaven or beggary, gain or loss, life among men or in the forest, these make no difference to a yogi whose nature it is to be free from distinctions."
+},
+{
+"id": "18.12",
+"c": 18,
+"n": 12,
+"sp": "ashtavakra",
+"sa": [
+"क्व धर्मः क्व च वा कामः क्व चार्थः क्व विवेकिता।",
+"इदं कृतमिदं नेति द्वन्द्वैर्मुक्तस्य योगिनः॥"
+],
+"en": "There are no religious obligations, wealth, sensuality, or discrimination for a yogi free from such opposites as “I have done this,” and “I have not done that.”"
+},
+{
+"id": "18.13",
+"c": 18,
+"n": 13,
+"sp": "ashtavakra",
+"sa": [
+"कृत्यं किमपि नैवास्ति न कापि हृदि रंजना।",
+"यथा जीवनमेवेह जीवन्मुक्तस्य योगिनः॥"
+],
+"en": "There is nothing needing to be done or any attachment in his heart for the yogi liberated while still alive. Things will last just to the end of life."
+},
+{
+"id": "18.14",
+"c": 18,
+"n": 14,
+"sp": "ashtavakra",
+"sa": [
+"क्व मोहः क्व च वा विश्वं क्व तद् ध्यानं क्व मुक्तता।",
+"सर्वसंकल्पसीमायां विश्रान्तस्य महात्मनः॥"
+],
+"en": "There is no delusion, world, meditation on That, or liberation for the pacified great soul. All these things are just the realm of imagination."
+},
+{
+"id": "18.15",
+"c": 18,
+"n": 15,
+"sp": "ashtavakra",
+"sa": [
+"येन विश्वमिदं दृष्टं स नास्तीति करोतु वै।",
+"निर्वासनः किं कुरुते पश्यन्नपि न पश्यति॥"
+],
+"en": "He by whom all this is seen may well make out it doesn’t exist, but what is the desireless one to do? Even in seeing it he does not see it."
+},
+{
+"id": "18.16",
+"c": 18,
+"n": 16,
+"sp": "ashtavakra",
+"sa": [
+"येन दृष्टं परं ब्रह्म सोऽहं ब्रह्मेति चिन्तयेत्।",
+"किं चिन्तयति निश्चिन्तो द्वितीयं यो न पश्यति॥"
+],
+"en": "He by whom the Supreme Brahma is seen may think “I am Brahma,” but what is he to think who is without thought, and who sees no duality?"
+},
+{
+"id": "18.17",
+"c": 18,
+"n": 17,
+"sp": "ashtavakra",
+"sa": [
+"दृष्टो येनात्मविक्षेपो निरोधं कुरुते त्वसौ।",
+"उदारस्तु न विक्षिप्तः साध्याभावात्करोति किम्॥"
+],
+"en": "He by whom inner distraction is seen may put an end to it, but the noble one is not distracted. When there is nothing to achieve what is he to do?"
+},
+{
+"id": "18.18",
+"c": 18,
+"n": 18,
+"sp": "ashtavakra",
+"sa": [
+"धीरो लोकविपर्यस्तो वर्तमानोऽपि लोकवत्।",
+"नो समाधिं न विक्षेपं न लोपं स्वस्य पश्यति॥"
+],
+"en": "The wise man, unlike the worldly man, does not see inner stillness, distraction, or fault in himself, even when living like a worldly man."
+},
+{
+"id": "18.19",
+"c": 18,
+"n": 19,
+"sp": "ashtavakra",
+"sa": [
+"भावाभावविहीनो यस्तृप्तो निर्वासनो बुधः।",
+"नैव किंचित्कृतं तेन लोकदृष्ट्या विकुर्वता॥"
+],
+"en": "Nothing is done by him who is free from being and non-being, who is contented, desireless, and wise, even if in the world’s eyes he does act."
+},
+{
+"id": "18.20",
+"c": 18,
+"n": 20,
+"sp": "ashtavakra",
+"sa": [
+"प्रवृत्तौ वा निवृत्तौ वा नैव धीरस्य दुर्ग्रहः।",
+"यदा यत्कर्तुमायाति तत्कृत्वा तिष्ठते सुखम्॥"
+],
+"en": "The wise man who just goes on doing what presents itself for him to do, encounters no difficulty in either activity or inactivity."
+},
+{
+"id": "18.21",
+"c": 18,
+"n": 21,
+"sp": "ashtavakra",
+"sa": [
+"निर्वासनो निरालंबः स्वच्छन्दो मुक्तबन्धनः।",
+"क्षिप्तः संस्कारवातेन चेष्टते शुष्कपर्णवत्॥"
+],
+"en": "He who is desireless, self-reliant, independent, and free of bonds functions like a dead leaf blown about by the wind of causality."
+},
+{
+"id": "18.22",
+"c": 18,
+"n": 22,
+"sp": "ashtavakra",
+"sa": [
+"असंसारस्य तु क्वापि न हर्षो न विषादिता।",
+"स शीतलमना नित्यं विदेह इव राजते॥"
+],
+"en": "There is neither joy nor sorrow for one who has transcended samsara. With a peaceful mind he lives as if without a body."
+},
+{
+"id": "18.23",
+"c": 18,
+"n": 23,
+"sp": "ashtavakra",
+"sa": [
+"कुत्रापि न जिहासास्ति नाशो वापि न कुत्रचित्।",
+"आत्मारामस्य धीरस्य शीतलाच्छतरात्मनः॥"
+],
+"en": "He whose joy is in himself, and who is peaceful and pure within has no desire for renunciation or sense of loss in anything."
+},
+{
+"id": "18.24",
+"c": 18,
+"n": 24,
+"sp": "ashtavakra",
+"sa": [
+"प्रकृत्या शून्यचित्तस्य कुर्वतोऽस्य यदृच्छया।",
+"प्राकृतस्येव धीरस्य न मानो नावमानता॥"
+],
+"en": "For the man with a naturally empty mind, doing just as he pleases, there is no such thing as pride or false humility, as there is for the natural man."
+},
+{
+"id": "18.25",
+"c": 18,
+"n": 25,
+"sp": "ashtavakra",
+"sa": [
+"कृतं देहेन कर्मेदं न मया शुद्धरूपिणा।",
+"इति चिन्तानुरोधी यः कुर्वन्नपि करोति न॥"
+],
+"en": "“This action was done by the body but not by me.” The pure-natured person thinking like this is not acting even when acting."
+},
+{
+"id": "18.26",
+"c": 18,
+"n": 26,
+"sp": "ashtavakra",
+"sa": [
+"अतद्वादीव कुरुते न भवेदपि बालिशः।",
+"जीवन्मुक्तः सुखी श्रीमान् संसरन्नपि शोभते॥"
+],
+"en": "He who acts without being able to say why, but is not thereby a fool, he is one liberated while still alive, happy and blessed. He is happy even in samsara."
+},
+{
+"id": "18.27",
+"c": 18,
+"n": 27,
+"sp": "ashtavakra",
+"sa": [
+"नानाविचारसुश्रान्तो धीरो विश्रान्तिमागतः।",
+"न कल्पते न जानाति न शृणोति न पश्यति॥"
+],
+"en": "He who has had enough of endless considerations and has attained peace, does not think, know, hear, or see."
+},
+{
+"id": "18.28",
+"c": 18,
+"n": 28,
+"sp": "ashtavakra",
+"sa": [
+"असमाधेरविक्षेपान् न मुमुक्षुर्न चेतरः।",
+"निश्चित्य कल्पितं पश्यन् ब्रह्मैवास्ते महाशयः॥"
+],
+"en": "He who is beyond mental stillness and distraction does not desire either liberation or its opposite. Recognising that things are just constructions of the imagination, that great soul lives as God here and now."
+},
+{
+"id": "18.29",
+"c": 18,
+"n": 29,
+"sp": "ashtavakra",
+"sa": [
+"यस्यान्तः स्यादहंकारो न करोति करोति सः।",
+"निरहंकारधीरेण न किंचिदकृतं कृतम्॥"
+],
+"en": "He who feels responsibility within, acts even when doing nothing, but there is no sense of done or undone for the wise man who is free from the sense of responsibility."
+},
+{
+"id": "18.30",
+"c": 18,
+"n": 30,
+"sp": "ashtavakra",
+"sa": [
+"नोद्विग्नं न च सन्तुष्टमकर्तृ स्पन्दवर्जितं।",
+"निराशं गतसन्देहं चित्तं मुक्तस्य राजते॥"
+],
+"en": "The mind of the liberated man is not upset or pleased. It shines unmoving, desireless, and free from doubt."
+},
+{
+"id": "18.31",
+"c": 18,
+"n": 31,
+"sp": "ashtavakra",
+"sa": [
+"निर्ध्यातुं चेष्टितुं वापि यच्चित्तं न प्रवर्तते।",
+"निर्निमित्तमिदं किंतु निर्ध्यायेति विचेष्टते॥"
+],
+"en": "He whose mind does not set out to meditate or act, still meditates and acts but without an object."
+},
+{
+"id": "18.32",
+"c": 18,
+"n": 32,
+"sp": "ashtavakra",
+"sa": [
+"तत्त्वं यथार्थमाकर्ण्य मन्दः प्राप्नोति मूढतां।",
+"अथवा याति संकोचममूढः कोऽपि मूढवत्॥"
+],
+"en": "A stupid man is bewildered when he hears the ultimate truth, while even a clever man is humbled by it just like the fool."
+},
+{
+"id": "18.33",
+"c": 18,
+"n": 33,
+"sp": "ashtavakra",
+"sa": [
+"एकाग्रता निरोधो वा मूढैरभ्यस्यते भृशं।",
+"धीराः कृत्यं न पश्यन्ति सुप्तवत्स्वपदे स्थिताः॥"
+],
+"en": "The ignorant make a great effort to practise one-pointedness and the stopping of thought, while the wise see nothing to be done and remain in themselves like those asleep."
+},
+{
+"id": "18.34",
+"c": 18,
+"n": 34,
+"sp": "ashtavakra",
+"sa": [
+"अप्रयत्नात् प्रयत्नाद् वा मूढो नाप्नोति निर्वृतिं।",
+"तत्त्वनिश्चयमात्रेण प्राज्ञो भवति निर्वृतः॥"
+],
+"en": "The stupid man does not attain cessation whether he acts or abandons action, while the wise man finds peace within simply by knowing the truth."
+},
+{
+"id": "18.35",
+"c": 18,
+"n": 35,
+"sp": "ashtavakra",
+"sa": [
+"शुद्धं बुद्धं प्रियं पूर्णं निष्प्रपंचं निरामयं।",
+"आत्मानं तं न जानन्ति तत्राभ्यासपरा जनाः॥"
+],
+"en": "People cannot come to know themselves by practices — pure awareness, clear, complete, beyond multiplicity, and faultless though they are."
+},
+{
+"id": "18.36",
+"c": 18,
+"n": 36,
+"sp": "ashtavakra",
+"sa": [
+"नाप्नोति कर्मणा मोक्षं विमूढोऽभ्यासरूपिणा।",
+"धन्यो विज्ञानमात्रेण मुक्तस्तिष्ठत्यविक्रियः॥"
+],
+"en": "The stupid man does not achieve liberation even through regular practice, but the fortunate remains free and actionless simply by understanding."
+},
+{
+"id": "18.37",
+"c": 18,
+"n": 37,
+"sp": "ashtavakra",
+"sa": [
+"मूढो नाप्नोति तद् ब्रह्म यतो भवितुमिच्छति।",
+"अनिच्छन्नपि धीरो हि परब्रह्मस्वरूपभाक्॥"
+],
+"en": "The stupid does not attain Godhead because he wants it, while the wise man enjoys the Supreme Godhead without even wanting it."
+},
+{
+"id": "18.38",
+"c": 18,
+"n": 38,
+"sp": "ashtavakra",
+"sa": [
+"निराधारा ग्रहव्यग्रा मूढाः संसारपोषकाः।",
+"एतस्यानर्थमूलस्य मूलच्छेदः कृतो बुधैः॥"
+],
+"en": "Even when living without any support and eager for achievement, the stupid are still nourishing samsara, while the wise have cut at the very root of its unhappiness."
+},
+{
+"id": "18.39",
+"c": 18,
+"n": 39,
+"sp": "ashtavakra",
+"sa": [
+"न शान्तिं लभते मूढो यतः शमितुमिच्छति।",
+"धीरस्तत्त्वं विनिश्चित्य सर्वदा शान्तमानसः॥"
+],
+"en": "The stupid man does not find peace because he desires it, while the wise man discriminating the truth is always peaceful minded."
+},
+{
+"id": "18.40",
+"c": 18,
+"n": 40,
+"sp": "ashtavakra",
+"sa": [
+"क्वात्मनो दर्शनं तस्य यद् दृष्टमवलंबते।",
+"धीरास्तं तं न पश्यन्ति पश्यन्त्यात्मानमव्ययम्॥"
+],
+"en": "How can there be self-knowledge for him whose knowledge depends on what he sees? The wise do not see this and that, but see themselves as infinite."
+},
+{
+"id": "18.41",
+"c": 18,
+"n": 41,
+"sp": "ashtavakra",
+"sa": [
+"क्व निरोधो विमूढस्य यो निर्बन्धं करोति वै।",
+"स्वारामस्यैव धीरस्य सर्वदासावकृत्रिमः॥"
+],
+"en": "How can there be cessation of thought for the misguided who is striving for it? Yet it is there always naturally for the wise man delighting in himself."
+},
+{
+"id": "18.42",
+"c": 18,
+"n": 42,
+"sp": "ashtavakra",
+"sa": [
+"भावस्य भावकः कश्चिन् न किंचिद् भावकोपरः।",
+"उभयाभावकः कश्चिद् एवमेव निराकुलः॥"
+],
+"en": "Some think that something exists, and others that nothing does. Rare is the man who does not think either, and is thereby free from distraction."
+},
+{
+"id": "18.43",
+"c": 18,
+"n": 43,
+"sp": "ashtavakra",
+"sa": [
+"शुद्धमद्वयमात्मानं भावयन्ति कुबुद्धयः।",
+"न तु जानन्ति संमोहाद्यावज्जीवमनिर्वृताः॥"
+],
+"en": "Those of weak intelligence think of themselves as pure nonduality, but because of their delusion do not really know this, and so remain unfulfilled all their lives."
+},
+{
+"id": "18.44",
+"c": 18,
+"n": 44,
+"sp": "ashtavakra",
+"sa": [
+"मुमुक्षोर्बुद्धिरालंबमन्तरेण न विद्यते।",
+"निरालंबैव निष्कामा बुद्धिर्मुक्तस्य सर्वदा॥"
+],
+"en": "The mind of the man seeking liberation can find no resting place within, but the mind of the liberated man is always free from desire by the very fact of being without a resting place."
+},
+{
+"id": "18.45",
+"c": 18,
+"n": 45,
+"sp": "ashtavakra",
+"sa": [
+"विषयद्वीपिनो वीक्ष्य चकिताः शरणार्थिनः।",
+"विशन्ति झटिति क्रोडं निरोधैकाग्रसिद्धये॥"
+],
+"en": "Seeing the tigers of the senses, the frightened refuge-seekers at once enter the cave in search of cessation of thought and one-pointedness."
+},
+{
+"id": "18.46",
+"c": 18,
+"n": 46,
+"sp": "ashtavakra",
+"sa": [
+"निर्वासनं हरिं दृष्ट्वा तूष्णीं विषयदन्तिनः।",
+"पलायन्ते न शक्तास्ते सेवन्ते कृतचाटवः॥"
+],
+"en": "Seeing the desireless lion, the elephants of the senses silently run away, or, if that is impossible, serve him like courtiers."
+},
+{
+"id": "18.47",
+"c": 18,
+"n": 47,
+"sp": "ashtavakra",
+"sa": [
+"न मुक्तिकारिकां धत्ते निःशङ्को युक्तमानसः।",
+"पश्यन् शृण्वन् स्पृशन् जिघ्रन्नश्नन्नास्ते यथासुखम्॥"
+],
+"en": "The man who is free from doubts and whose mind is free does not bother about means of liberation. Whether seeing, hearing, feeling, smelling, or tasting, he lives at ease."
+},
+{
+"id": "18.48",
+"c": 18,
+"n": 48,
+"sp": "ashtavakra",
+"sa": [
+"वस्तुश्रवणमात्रेण शुद्धबुद्धिर्निराकुलः।",
+"नैवाचारमनाचारमौदास्यं वा प्रपश्यति॥"
+],
+"en": "He whose mind is pure and undistracted from just hearing of the Truth does not see anything to do or anything to avoid or even a cause for indifference."
+},
+{
+"id": "18.49",
+"c": 18,
+"n": 49,
+"sp": "ashtavakra",
+"sa": [
+"यदा यत्कर्तुमायाति तदा तत्कुरुते ऋजुः।",
+"शुभं वाप्यशुभं वापि तस्य चेष्टा हि बालवत्॥"
+],
+"en": "The upright person does whatever presents itself to be done, good or bad, for his actions are like those of a child."
+},
+{
+"id": "18.50",
+"c": 18,
+"n": 50,
+"sp": "ashtavakra",
+"sa": [
+"स्वातंत्र्यात्सुखमाप्नोति स्वातंत्र्याल्लभते परं।",
+"स्वातंत्र्यान्निर्वृतिं गच्छेत्स्वातंत्र्यात् परमं पदम्॥"
+],
+"en": "By inner freedom one attains happiness, by inner freedom one reaches the Supreme, by inner freedom one comes to absence of thought, by inner freedom to the Ultimate State."
+},
+{
+"id": "18.51",
+"c": 18,
+"n": 51,
+"sp": "ashtavakra",
+"sa": [
+"अकर्तृत्वमभोक्तृत्वं स्वात्मनो मन्यते यदा।",
+"तदा क्षीणा भवन्त्येव समस्ताश्चित्तवृत्तयः॥"
+],
+"en": "When one sees oneself as neither the doer nor the reaper of the consequences, then all mind waves come to an end."
+},
+{
+"id": "18.52",
+"c": 18,
+"n": 52,
+"sp": "ashtavakra",
+"sa": [
+"उच्छृंखलाप्यकृतिका स्थितिर्धीरस्य राजते।",
+"न तु सस्पृहचित्तस्य शान्तिर्मूढस्य कृत्रिमा॥"
+],
+"en": "The spontaneous unassuming behaviour of the wise is noteworthy, but not the deliberate purposeful stillness of the fool."
+},
+{
+"id": "18.53",
+"c": 18,
+"n": 53,
+"sp": "ashtavakra",
+"sa": [
+"विलसन्ति महाभोगैर्विशन्ति गिरिगह्वरान्।",
+"निरस्तकल्पना धीरा अबद्धा मुक्तबुद्धयः॥"
+],
+"en": "The wise who are rid of imagination, unbound and with unfettered awareness, may enjoy themselves in the midst of many goods, or alternatively go off to mountain caves."
+},
+{
+"id": "18.54",
+"c": 18,
+"n": 54,
+"sp": "ashtavakra",
+"sa": [
+"श्रोत्रियं देवतां तीर्थमङ्गनां भूपतिं प्रियं।",
+"दृष्ट्वा संपूज्य धीरस्य न कापि हृदि वासना॥"
+],
+"en": "There is no attachment in the heart of a wise man whether he sees or pays homage to a learned brahmin, a celestial being, a holy place, a woman, a king or a friend."
+},
+{
+"id": "18.55",
+"c": 18,
+"n": 55,
+"sp": "ashtavakra",
+"sa": [
+"भृत्यैः पुत्रैः कलत्रैश्च दौहित्रैश्चापि गोत्रजैः।",
+"विहस्य धिक्कृतो योगी न याति विकृतिं मनाक्॥"
+],
+"en": "A yogi is not in the least put out even when humiliated by the ridicule of servants, sons, wives, grandchildren, or other relatives."
+},
+{
+"id": "18.56",
+"c": 18,
+"n": 56,
+"sp": "ashtavakra",
+"sa": [
+"सन्तुष्टोऽपि न सन्तुष्टः खिन्नोऽपि न च खिद्यते।",
+"तस्याश्चर्यदशां तां तादृशा एव जानते॥"
+],
+"en": "Even when pleased he is not pleased, not suffering even when in pain. Only those like him can know the wonderful state of such a man."
+},
+{
+"id": "18.57",
+"c": 18,
+"n": 57,
+"sp": "ashtavakra",
+"sa": [
+"कर्तव्यतैव संसारो न तां पश्यन्ति सूरयः।",
+"शून्याकारा निराकारा निर्विकारा निरामयाः॥"
+],
+"en": "It is the feeling that there is something that needs to be achieved which is samsara. The wise who are of the form of emptiness, formless, unchanging, and spotless see nothing of the sort."
+},
+{
+"id": "18.58",
+"c": 18,
+"n": 58,
+"sp": "ashtavakra",
+"sa": [
+"अकुर्वन्नपि संक्षोभाद् व्यग्रः सर्वत्र मूढधीः।",
+"कुर्वन्नपि तु कृत्यानि कुशलो हि निराकुलः॥"
+],
+"en": "Even when doing nothing the fool is agitated by restlessness, while a skillful man remains undisturbed even when doing what there is to do."
+},
+{
+"id": "18.59",
+"c": 18,
+"n": 59,
+"sp": "ashtavakra",
+"sa": [
+"सुखमास्ते सुखं शेते सुखमायाति याति च।",
+"सुखं वक्ति सुखं भुंक्ते व्यवहारेऽपि शान्तधीः॥"
+],
+"en": "Happy he stands, happy he sits, happy sleeps, and happy he comes and goes. Happy he speaks and happy he eats. This is the life of a man at peace."
+},
+{
+"id": "18.60",
+"c": 18,
+"n": 60,
+"sp": "ashtavakra",
+"sa": [
+"स्वभावाद्यस्य नैवार्तिर्लोकवद् व्यवहारिणः।",
+"महाहृद इवाक्षोभ्यो गतक्लेशः स शोभते॥"
+],
+"en": "He who of his very nature feels no unhappiness in his daily life like worldly people, remains undisturbed like a great lake, cleared of defilement."
+},
+{
+"id": "18.61",
+"c": 18,
+"n": 61,
+"sp": "ashtavakra",
+"sa": [
+"निवृत्तिरपि मूढस्य प्रवृत्ति रुपजायते।",
+"प्रवृत्तिरपि धीरस्य निवृत्तिफलभागिनी॥"
+],
+"en": "Even abstention from action has the effect of action in a fool, while even the action of the wise man brings the fruits of inaction."
+},
+{
+"id": "18.62",
+"c": 18,
+"n": 62,
+"sp": "ashtavakra",
+"sa": [
+"परिग्रहेषु वैराग्यं प्रायो मूढस्य दृश्यते।",
+"देहे विगलिताशस्य क्व रागः क्व विरागता॥"
+],
+"en": "A fool often shows aversion towards his belongings, but for him whose attachment to the body has dropped away, there is neither attachment nor aversion."
+},
+{
+"id": "18.63",
+"c": 18,
+"n": 63,
+"sp": "ashtavakra",
+"sa": [
+"भावनाभावनासक्ता दृष्टिर्मूढस्य सर्वदा।",
+"भाव्यभावनया सा तु स्वस्थस्यादृष्टिरूपिणी॥"
+],
+"en": "The mind of the fool is always caught in thinking or not thinking, but the wise man’s is of the nature of no thought because he thinks what is appropriate."
+},
+{
+"id": "18.64",
+"c": 18,
+"n": 64,
+"sp": "ashtavakra",
+"sa": [
+"सर्वारंभेषु निष्कामो यश्चरेद् बालवन् मुनिः।",
+"न लेपस्तस्य शुद्धस्य क्रियमाणोऽपि कर्मणि॥"
+],
+"en": "For the seer who behaves like a child, without desire in all actions, there is no attachment for such a pure one even in the work he does."
+},
+{
+"id": "18.65",
+"c": 18,
+"n": 65,
+"sp": "ashtavakra",
+"sa": [
+"स एव धन्य आत्मज्ञः सर्वभावेषु यः समः।",
+"पश्यन् शृण्वन् स्पृशन् जिघ्रन् अश्नन्निस्तर्षमानसः॥"
+],
+"en": "Blessed is he who knows himself and is the same in all states, with a mind free from craving whether he is seeing, hearing, feeling, smelling, or tasting."
+},
+{
+"id": "18.66",
+"c": 18,
+"n": 66,
+"sp": "ashtavakra",
+"sa": [
+"क्व संसारः क्व चाभासः क्व साध्यं क्व च साधनं।",
+"आकाशस्येव धीरस्य निर्विकल्पस्य सर्वदा॥"
+],
+"en": "There is no one subject to samsara, no sense of individuality, no goal or means to the goal in the eyes of the wise man who is always free from imagination and unchanging like space."
+},
+{
+"id": "18.67",
+"c": 18,
+"n": 67,
+"sp": "ashtavakra",
+"sa": [
+"स जयत्यर्थसंन्यासी पूर्णस्वरसविग्रहः।",
+"अकृत्रिमोऽनवच्छिन्ने समाधिर्यस्य वर्तते॥"
+],
+"en": "Glorious is he who has abandoned all goals and is the incarnation of the satisfaction, which is his very nature, and whose inner focus on the Unconditioned is quite spontaneous."
+},
+{
+"id": "18.68",
+"c": 18,
+"n": 68,
+"sp": "ashtavakra",
+"sa": [
+"बहुनात्र किमुक्तेन ज्ञाततत्त्वो महाशयः।",
+"भोगमोक्षनिराकांक्षी सदा सर्वत्र नीरसः॥"
+],
+"en": "In brief, the great-souled man who has come to know the Truth is without desire for either pleasure or liberation, and is always and everywhere free from attachment."
+},
+{
+"id": "18.69",
+"c": 18,
+"n": 69,
+"sp": "ashtavakra",
+"sa": [
+"महदादि जगद्द्वैतं नाममात्रविजृंभितं।",
+"विहाय शुद्धबोधस्य किं कृत्यमवशिष्यते॥"
+],
+"en": "What remains to be done by the man who is pure awareness and has abandoned everything that can be expressed in words from the highest heaven to the earth itself?"
+},
+{
+"id": "18.70",
+"c": 18,
+"n": 70,
+"sp": "ashtavakra",
+"sa": [
+"भ्रमभृतमिदं सर्वं किंचिन्नास्तीति निश्चयी।",
+"अलक्ष्यस्फुरणः शुद्धः स्वभावेनैव शाम्यति॥"
+],
+"en": "The pure man who has experienced the Indescribable attains peace by virtue of his very nature, realising that all this is nothing but illusion, and that nothing is."
+},
+{
+"id": "18.71",
+"c": 18,
+"n": 71,
+"sp": "ashtavakra",
+"sa": [
+"शुद्धस्फुरणरूपस्य दृश्यभावमपश्यतः।",
+"क्व विधिः क्व वैराग्यं क्व त्यागः क्व शमोऽपि वा॥"
+],
+"en": "There are no rules, dispassion, renunciation, or meditation for one who is pure receptivity by nature, and admits no knowable form of being."
+},
+{
+"id": "18.72",
+"c": 18,
+"n": 72,
+"sp": "ashtavakra",
+"sa": [
+"स्फुरतोऽनन्तरूपेण प्रकृतिं च न पश्यतः।",
+"क्व बन्धः क्व च वा मोक्षः क्व हर्षः क्व विषादिता॥"
+],
+"en": "For him who shines with the radiance of Infinity and is not subject to natural causality there is neither bondage, liberation, pleasure, nor pain."
+},
+{
+"id": "18.73",
+"c": 18,
+"n": 73,
+"sp": "ashtavakra",
+"sa": [
+"बुद्धिपर्यन्तसंसारे मायामात्रं विवर्तते।",
+"निर्ममो निरहंकारो निष्कामः शोभते बुधः॥"
+],
+"en": "Pure illusion reigns in samsara which will continue until self-realisation, but the enlightened man lives in the beauty of freedom from me and mine, from the sense of responsibility and from any attachment."
+},
+{
+"id": "18.74",
+"c": 18,
+"n": 74,
+"sp": "ashtavakra",
+"sa": [
+"अक्षयं गतसन्तापमात्मानं पश्यतो मुनेः।",
+"क्व विद्या च क्व वा विश्वं क्व देहोऽहं ममेति वा॥"
+],
+"en": "For the seer who knows himself as imperishable and beyond pain there is neither knowledge, a world, nor the sense that I am the body or the body mine."
+},
+{
+"id": "18.75",
+"c": 18,
+"n": 75,
+"sp": "ashtavakra",
+"sa": [
+"निरोधादीनि कर्माणि जहाति जडधीर्यदि।",
+"मनोरथान् प्रलापांश्च कर्तुमाप्नोत्यतत्क्षणात्॥"
+],
+"en": "No sooner does a man of low intelligence give up activities like the elimination of thought than he falls into mind racing and chatter."
+},
+{
+"id": "18.76",
+"c": 18,
+"n": 76,
+"sp": "ashtavakra",
+"sa": [
+"मन्दः श्रुत्वापि तद्वस्तु न जहाति विमूढतां।",
+"निर्विकल्पो बहिर्यत्नादन्तर्विषयलालसः॥"
+],
+"en": "A fool does not get rid of his stupidity even on hearing the truth. He may appear outwardly free from imaginations, but inside he is still hankering after the senses."
+},
+{
+"id": "18.77",
+"c": 18,
+"n": 77,
+"sp": "ashtavakra",
+"sa": [
+"ज्ञानाद् गलितकर्मा यो लोकदृष्ट्यापि कर्मकृत्।",
+"नाप्नोत्यवसरं कर्तुं वक्तुमेव न किंचन॥"
+],
+"en": "Though in the eyes of the world he is active, the man who has shed action through knowledge finds no means of doing or speaking anything."
+},
+{
+"id": "18.78",
+"c": 18,
+"n": 78,
+"sp": "ashtavakra",
+"sa": [
+"क्व तमः क्व प्रकाशो वा हानं क्व च न किंचन।",
+"निर्विकारस्य धीरस्य निरातंकस्य सर्वदा॥"
+],
+"en": "For the wise man who is always unchanging and fearless there is neither darkness nor light nor destruction nor anything."
+},
+{
+"id": "18.79",
+"c": 18,
+"n": 79,
+"sp": "ashtavakra",
+"sa": [
+"क्व धैर्यं क्व विवेकित्वं क्व निरातंकतापि वा।",
+"अनिर्वाच्यस्वभावस्य निःस्वभावस्य योगिनः॥"
+],
+"en": "There is neither fortitude, prudence, nor courage for the yogi whose nature is beyond description and free of individuality."
+},
+{
+"id": "18.80",
+"c": 18,
+"n": 80,
+"sp": "ashtavakra",
+"sa": [
+"न स्वर्गो नैव नरको जीवन्मुक्तिर्न चैव हि।",
+"बहुनात्र किमुक्तेन योगदृष्ट्या न किंचन॥"
+],
+"en": "There is neither heaven nor hell nor even liberation during life. In a nutshell, in the sight of the seer nothing exists at all."
+},
+{
+"id": "18.81",
+"c": 18,
+"n": 81,
+"sp": "ashtavakra",
+"sa": [
+"नैव प्रार्थयते लाभं नालाभेनानुशोचति।",
+"धीरस्य शीतलं चित्तममृतेनैव पूरितम्॥"
+],
+"en": "He neither longs for possessions nor grieves at their absence. The calm mind of the sage is full of the nectar of immortality."
+},
+{
+"id": "18.82",
+"c": 18,
+"n": 82,
+"sp": "ashtavakra",
+"sa": [
+"न शान्तं स्तौति निष्कामो न दुष्टमपि निन्दति।",
+"समदुःखसुखस्तृप्तः किंचित् कृत्यं न पश्यति॥"
+],
+"en": "The dispassionate man does not praise the good or blame the wicked. Content and equal in pain and pleasure, he sees nothing that needs doing."
+},
+{
+"id": "18.83",
+"c": 18,
+"n": 83,
+"sp": "ashtavakra",
+"sa": [
+"धीरो न द्वेष्टि संसारमात्मानं न दिदृक्षति।",
+"हर्षामर्षविनिर्मुक्तो न मृतो न च जीवति॥"
+],
+"en": "The wise man is not averse to samsara, nor does he seek to know himself. Free from pleasure and impatience, he is not dead and he is not alive."
+},
+{
+"id": "18.84",
+"c": 18,
+"n": 84,
+"sp": "ashtavakra",
+"sa": [
+"निःस्नेहः पुत्रदारादौ निष्कामो विषयेषु च।",
+"निश्चिन्तः स्वशरीरेऽपि निराशः शोभते बुधः॥"
+],
+"en": "The wise man excels by being free from anticipation, without attachment to such things as children or wives, free from desire for the senses, and not even concerned about his own body."
+},
+{
+"id": "18.85",
+"c": 18,
+"n": 85,
+"sp": "ashtavakra",
+"sa": [
+"तुष्टिः सर्वत्र धीरस्य यथापतितवर्तिनः।",
+"स्वच्छन्दं चरतो देशान् यत्रस्तमितशायिनः॥"
+],
+"en": "The wise man, who lives on whatever happens to come to him, roams wherever he pleases, and sleeps wherever the sun happens to set, is at peace everywhere."
+},
+{
+"id": "18.86",
+"c": 18,
+"n": 86,
+"sp": "ashtavakra",
+"sa": [
+"पततूदेतु वा देहो नास्य चिन्ता महात्मनः।",
+"स्वभावभूमिविश्रान्तिविस्मृताशेषसंसृतेः॥"
+],
+"en": "Whether his body rises or falls, the great-souled one gives it no thought, having forgotten all about samsara in coming to rest on the ground of his true nature."
+},
+{
+"id": "18.87",
+"c": 18,
+"n": 87,
+"sp": "ashtavakra",
+"sa": [
+"अकिंचनः कामचारो निर्द्वन्द्वश्छिन्नसंशयः।",
+"असक्तः सर्वभावेषु केवलो रमते बुधः॥"
+],
+"en": "The wise man has the joy of being complete in himself and without possessions, acting as he pleases, free from duality and rid of doubts, and without attachment to any creature."
+},
+{
+"id": "18.88",
+"c": 18,
+"n": 88,
+"sp": "ashtavakra",
+"sa": [
+"निर्ममः शोभते धीरः समलोष्टाश्मकांचनः।",
+"सुभिन्नहृदयग्रन्थिर्विनिर्धूतरजस्तमः॥"
+],
+"en": "The wise man excels in being without the sense of “me”. Earth, a stone, or gold are the same to him. The knots of his heart have been rent asunder, and he is freed from greed and blindness."
+},
+{
+"id": "18.89",
+"c": 18,
+"n": 89,
+"sp": "ashtavakra",
+"sa": [
+"सर्वत्रानवधानस्य न किंचिद् वासना हृदि।",
+"मुक्तात्मनो वितृप्तस्य तुलना केन जायते॥"
+],
+"en": "Who can compare with that contented, liberated soul who pays no regard to anything and has no desire left in his heart?"
+},
+{
+"id": "18.90",
+"c": 18,
+"n": 90,
+"sp": "ashtavakra",
+"sa": [
+"जानन्नपि न जानाति पश्यन्नपि न पश्यति।",
+"ब्रुवन्नपि न च ब्रूते कोऽन्यो निर्वासनादृते॥"
+],
+"en": "Who but the upright man without desire knows without knowing, sees without seeing, and speaks without speaking?"
+},
+{
+"id": "18.91",
+"c": 18,
+"n": 91,
+"sp": "ashtavakra",
+"sa": [
+"भिक्षुर्वा भूपतिर्वापि यो निष्कामः स शोभते।",
+"भावेषु गलिता यस्य शोभनाशोभना मतिः॥"
+],
+"en": "Beggar or king, he excels who is without desire, and whose opinion of things is rid of “good” and “bad.”"
+},
+{
+"id": "18.92",
+"c": 18,
+"n": 92,
+"sp": "ashtavakra",
+"sa": [
+"क्व स्वाच्छन्द्यं क्व संकोचः क्व वा तत्त्वविनिश्चयः।",
+"निर्व्याजार्जवभूतस्य चरितार्थस्य योगिनः॥"
+],
+"en": "There is neither dissolute behaviour nor virtue, nor even discrimination of the truth for the sage who has reached the goal and is the very embodiment of guileless sincerity."
+},
+{
+"id": "18.93",
+"c": 18,
+"n": 93,
+"sp": "ashtavakra",
+"sa": [
+"आत्मविश्रान्तितृप्तेन निराशेन गतार्तिना।",
+"अन्तर्यदनुभूयेत तत् कथं कस्य कथ्यते॥"
+],
+"en": "That which is experienced within by one who is desireless and free from pain, and content to rest in himself — how could it be described, and of whom?"
+},
+{
+"id": "18.94",
+"c": 18,
+"n": 94,
+"sp": "ashtavakra",
+"sa": [
+"सुप्तोऽपि न सुषुप्तौ च स्वप्नेऽपि शयितो न च।",
+"जागरेऽपि न जागर्ति धीरस्तृप्तः पदे पदे॥"
+],
+"en": "The wise man who is contented in all circumstances is not asleep even in deep sleep, nor sleeping in a dream, nor waking when he is awake."
+},
+{
+"id": "18.95",
+"c": 18,
+"n": 95,
+"sp": "ashtavakra",
+"sa": [
+"ज्ञः सचिन्तोऽपि निश्चिन्तः सेन्द्रियोऽपि निरिन्द्रियः।",
+"सुबुद्धिरपि निर्बुद्धिः साहंकारोऽनहङ्कृतिः॥"
+],
+"en": "The seer is without thoughts even when thinking, without senses among the senses, without understanding even in understanding, and without a sense of responsibility even in the ego."
+},
+{
+"id": "18.96",
+"c": 18,
+"n": 96,
+"sp": "ashtavakra",
+"sa": [
+"न सुखी न च वा दुःखी न विरक्तो न संगवान्।",
+"न मुमुक्षुर्न वा मुक्ता न किंचिन्न च किंचन॥"
+],
+"en": "Neither happy nor unhappy, neither detached nor attached, neither seeking liberation nor liberated, he is neither something nor nothing."
+},
+{
+"id": "18.97",
+"c": 18,
+"n": 97,
+"sp": "ashtavakra",
+"sa": [
+"विक्षेपेऽपि न विक्षिप्तः समाधौ न समाधिमान्।",
+"जाड्येऽपि न जडो धन्यः पाण्डित्येऽपि न पण्डितः॥"
+],
+"en": "Not distracted in distraction, in mental stillness not poised, in stupidity not stupid, that blessed one is not even wise in his wisdom."
+},
+{
+"id": "18.98",
+"c": 18,
+"n": 98,
+"sp": "ashtavakra",
+"sa": [
+"मुक्तो यथास्थितिस्वस्थः कृतकर्तव्यनिर्वृतः।",
+"समः सर्वत्र वैतृष्ण्यान्न स्मरत्यकृतं कृतम्॥"
+],
+"en": "The liberated man is self-possessed in all circumstances and free from the idea of “done” and “still to do.” He is the same wherever he is and without greed. He does not dwell on what he has done or not done."
+},
+{
+"id": "18.99",
+"c": 18,
+"n": 99,
+"sp": "ashtavakra",
+"sa": [
+"न प्रीयते वन्द्यमानो निन्द्यमानो न कुप्यति।",
+"नैवोद्विजति मरणे जीवने नाभिनन्दति॥"
+],
+"en": "He is not pleased when praised nor upset when blamed. He is not afraid of death nor attached to life."
+},
+{
+"id": "18.100",
+"c": 18,
+"n": 100,
+"sp": "ashtavakra",
+"sa": [
+"न धावति जनाकीर्णं नारण्यं उपशान्तधीः।",
+"यथातथा यत्रतत्र सम एवावतिष्ठते॥"
+],
+"en": "A man at peace does not run off to popular resorts or to the forest. Whatever and wherever, he remains the same."
+},
+{
+"id": "19.1",
+"c": 19,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"तत्त्वविज्ञानसन्दंशमादाय हृदयोदरात्।",
+"नानाविधपरामर्शशल्योद्धारः कृतो मया॥"
+],
+"en": "Using the tweezers of the knowledge of the truth I have managed to extract the painful thorn of endless opinions from the recesses of my heart."
+},
+{
+"id": "19.2",
+"c": 19,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"क्व धर्मः क्व च वा कामः क्व चार्थः क्व विवेकिता।",
+"क्व द्वैतं क्व च वाऽद्वैतं स्वमहिम्नि स्थितस्य मे॥"
+],
+"en": "For me, established in my own glory, there are no religious obligations, sensuality, possessions, philosophy, duality, or even nonduality."
+},
+{
+"id": "19.3",
+"c": 19,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"क्व भूतं क्व भविष्यद् वा वर्तमानमपि क्व वा।",
+"क्व देशः क्व च वा नित्यं स्वमहिम्नि स्थितस्य मे॥"
+],
+"en": "For me established in my own glory, there is no past, future, or present. There is no space or even eternity."
+},
+{
+"id": "19.4",
+"c": 19,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"क्व चात्मा क्व च वानात्मा क्व शुभं क्वाशुभं तथा।",
+"क्व चिन्ता क्व च वाचिन्ता स्वमहिम्नि स्थितस्य मे॥"
+],
+"en": "For me established in my own glory, there is no self or non-self, no good or evil, no thought or even absence of thought."
+},
+{
+"id": "19.5",
+"c": 19,
+"n": 5,
+"sp": "janaka",
+"sa": [
+"क्व स्वप्नः क्व सुषुप्तिर्वा क्व च जागरणं तथा।",
+"क्व तुरियं भयं वापि स्वमहिम्नि स्थितस्य मे॥"
+],
+"en": "For me established in my own glory, there is no dreaming or deep sleep, no waking nor fourth state beyond them, and certainly no fear."
+},
+{
+"id": "19.6",
+"c": 19,
+"n": 6,
+"sp": "janaka",
+"sa": [
+"क्व दूरं क्व समीपं वा बाह्यं क्वाभ्यन्तरं क्व वा।",
+"क्व स्थूलं क्व च वा सूक्ष्मं स्वमहिम्नि स्थितस्य मे॥"
+],
+"en": "For me established in my own glory, there is nothing far away and nothing near, nothing within or without, nothing large and nothing small."
+},
+{
+"id": "19.7",
+"c": 19,
+"n": 7,
+"sp": "janaka",
+"sa": [
+"क्व मृत्युर्जीवितं वा क्व लोकाः क्वास्य क्व लौकिकं।",
+"क्व लयः क्व समाधिर्वा स्वमहिम्नि स्थितस्य मे॥"
+],
+"en": "For me established in my own glory, there is no life or death, no worlds or things of this world, no distraction and no stillness of mind."
+},
+{
+"id": "19.8",
+"c": 19,
+"n": 8,
+"sp": "janaka",
+"sa": [
+"अलं त्रिवर्गकथया योगस्य कथयाप्यलं।",
+"अलं विज्ञानकथया विश्रान्तस्य ममात्मनि॥"
+],
+"en": "For me remaining in myself, there is no need for talk of the three goals of life, of yoga or of knowledge."
+},
+{
+"id": "20.1",
+"c": 20,
+"n": 1,
+"sp": "janaka",
+"sa": [
+"क्व भूतानि क्व देहो वा क्वेन्द्रियाणि क्व वा मनः।",
+"क्व शून्यं क्व च नैराश्यं मत्स्वरूपे निरंजने॥"
+],
+"en": "In my unblemished nature there are no elements, no body, no faculties, no mind. There is no void and no despair."
+},
+{
+"id": "20.2",
+"c": 20,
+"n": 2,
+"sp": "janaka",
+"sa": [
+"क्व शास्त्रं क्वात्मविज्ञानं क्व वा निर्विषयं मनः।",
+"क्व तृप्तिः क्व वितृष्णत्वं गतद्वन्द्वस्य मे सदा॥"
+],
+"en": "For me, free from the sense of dualism, there are no scriptures, no self-knowledge, no mind free from an object, no satisfaction and no freedom from desire."
+},
+{
+"id": "20.3",
+"c": 20,
+"n": 3,
+"sp": "janaka",
+"sa": [
+"क्व विद्या क्व च वाविद्या क्वाहं क्वेदं मम क्व वा।",
+"क्व बन्धः क्व च वा मोक्षः स्वरूपस्य क्व रूपिता॥"
+],
+"en": "There is no knowledge or ignorance, no “me,” “this,” or “mine,” no bondage, no liberation, and no property of self-nature."
+},
+{
+"id": "20.4",
+"c": 20,
+"n": 4,
+"sp": "janaka",
+"sa": [
+"क्व प्रारब्धानि कर्माणि जीवन्मुक्तिरपि क्व वा।",
+"क्व तद् विदेहकैवल्यं निर्विशेषस्य सर्वदा॥"
+],
+"en": "For him who is always free from individual characteristics there is no antecedent causal action, no liberation during life, and no fulfilment at death."
+},
+{
+"id": "20.5",
+"c": 20,
+"n": 5,
+"sp": "janaka",
+"sa": [
+"क्व कर्ता क्व च वा भोक्ता निष्क्रियं स्फुरणं क्व वा।",
+"क्वापरोक्षं फलं वा क्व निःस्वभावस्य मे सदा॥"
+],
+"en": "For me, free from individuality, there is no doer and no reaper of the consequences, no cessation of action, no arising of thought, no immediate object, and no idea of results."
+},
+{
+"id": "20.6",
+"c": 20,
+"n": 6,
+"sp": "janaka",
+"sa": [
+"क्व लोकं क्व मुमुक्षुर्वा क्व योगी ज्ञानवान् क्व वा।",
+"क्व बद्धः क्व च वा मुक्तः स्वस्वरूपेऽहमद्वये॥"
+],
+"en": "There is no world, no seeker for liberation, no yogi, no seer, no one bound and no one liberated. I remain in my own nondual nature."
+},
+{
+"id": "20.7",
+"c": 20,
+"n": 7,
+"sp": "janaka",
+"sa": [
+"क्व सृष्टिः क्व च संहारः क्व साध्यं क्व च साधनं।",
+"क्व साधकः क्व सिद्धिर्वा स्वस्वरूपेऽहमद्वये॥"
+],
+"en": "There is no emanation or return, no goal, means, seeker or achievement. I remain in my own nondual nature."
+},
+{
+"id": "20.8",
+"c": 20,
+"n": 8,
+"sp": "janaka",
+"sa": [
+"क्व प्रमाता प्रमाणं वा क्व प्रमेयं क्व च प्रमा।",
+"क्व किंचित् क्व न किंचिद् वा सर्वदा विमलस्य मे॥"
+],
+"en": "For me who am forever unblemished, there is no assessor, no standard, nothing to assess, and no assessment."
+},
+{
+"id": "20.9",
+"c": 20,
+"n": 9,
+"sp": "janaka",
+"sa": [
+"क्व विक्षेपः क्व चैकाग्र्यं क्व निर्बोधः क्व मूढता।",
+"क्व हर्षः क्व विषादो वा सर्वदा निष्क्रियस्य मे॥"
+],
+"en": "For me who am forever actionless, there is no distraction or one-pointedness of mind, no lack of understanding, no stupidity, no joy and no sorrow."
+},
+{
+"id": "20.10",
+"c": 20,
+"n": 10,
+"sp": "janaka",
+"sa": [
+"क्व चैष व्यवहारो वा क्व च सा परमार्थता।",
+"क्व सुखं क्व च वा दुःखं निर्विमर्शस्य मे सदा॥"
+],
+"en": "For me who am always free from deliberations there is neither conventional truth nor absolute truth, no happiness and no suffering."
+},
+{
+"id": "20.11",
+"c": 20,
+"n": 11,
+"sp": "janaka",
+"sa": [
+"क्व माया क्व च संसारः क्व प्रीतिर्विरतिः क्व वा।",
+"क्व जीवः क्व च तद्ब्रह्म सर्वदा विमलस्य मे॥"
+],
+"en": "For me who am forever pure there is no illusion, no samsara, no attachment or detachment, no living organism, and no God."
+},
+{
+"id": "20.12",
+"c": 20,
+"n": 12,
+"sp": "janaka",
+"sa": [
+"क्व प्रवृत्तिर्निर्वृत्तिर्वा क्व मुक्तिः क्व च बन्धनं।",
+"कूटस्थनिर्विभागस्य स्वस्थस्य मम सर्वदा॥"
+],
+"en": "For me who am forever unmovable and indivisible, established in myself, there is no activity or inactivity, no liberation and no bondage."
+},
+{
+"id": "20.13",
+"c": 20,
+"n": 13,
+"sp": "janaka",
+"sa": [
+"क्वोपदेशः क्व वा शास्त्रं क्व शिष्यः क्व च वा गुरुः।",
+"क्व चास्ति पुरुषार्थो वा निरुपाधेः शिवस्य मे॥"
+],
+"en": "For me who am blessed and without limitation, there is no initiation or scripture, no disciple or teacher, and no goal of human life."
+},
+{
+"id": "20.14",
+"c": 20,
+"n": 14,
+"sp": "janaka",
+"sa": [
+"क्व चास्ति क्व च वा नास्ति क्वास्ति चैकं क्व च द्वयं।",
+"बहुनात्र किमुक्तेन किंचिन्नोत्तिष्ठते मम॥"
+],
+"en": "There is no being or non-being, no unity or dualism. What more is there to say? There is nothing outside of me."
+}
+]
+}
