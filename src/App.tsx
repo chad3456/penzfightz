@@ -62,6 +62,7 @@ import { Pune411 } from './pune/Pune411';
 import { Witchworld } from './witch/Witchworld';
 import { Ashtavakra } from './ashtavakra/Ashtavakra';
 import { Outrage } from './outrage/Outrage';
+import { Jellynoor } from './jelly/Jellynoor';
 import { Chalisa } from './chalisa/Chalisa';
 import { AppFrame } from './apps/AppFrame';
 import type { EffectId } from './effects/effects';
@@ -328,6 +329,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'ghar624') {
     return <AppFrame src="/apps/ghar-624/index.html" title="Ghar 624" onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'jelly') {
+    return <Jellynoor onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'outrage') {
     return <Outrage onExit={toShelf} />;

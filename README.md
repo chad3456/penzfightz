@@ -1873,6 +1873,35 @@ centre and the world around it:
 - **Sources:** every number is in `src/outrage/data.ts` with its source. See
   `docs/outrage-dividend.md`.
 
+## Jellynoor
+
+A hill station set in jelly: a small tea estate where the terraced slopes, the
+bushes, the cow, the tin roofs and everyone who lives there are made of the
+same soft stuff.
+
+- **It all wobbles.** One shader makes opaque jelly read as lit from inside,
+  and every object carries a spring. Hop, and the rows shake; brush past a
+  bush and it leans away from you; ring the temple bell and the whole yard
+  rocks.
+- **A day's work, eighteen jobs.** Plant saplings in the empty plots, water
+  the bushes that have gone pale, pull weeds, prune the ones grown above the
+  plucking table, and pluck two leaves and a bud wherever a flush is standing
+  proud — the morning leaf is worth the most.
+- **Follow the leaf.** Weigh the basket in at the muster shed, spread it on
+  the withering troughs, roll it, fire it in the drier, pack it into chests at
+  twelve kilos a chest.
+- **And the rest of it.** Milk the cow, feed the hens, brew chai and serve it,
+  split and stack firewood, hang the washing, sweep the yard, ring the bell at
+  dawn, light the lamps at dusk, turn in after dark.
+- **A garden that grows.** Two thousand bushes, each with its own age, water,
+  weeds and flush, planted in rows that follow the contours because the
+  terraces are cut into the height field itself.
+- **Nine villagers** work the same round beside you all day and go home when
+  it gets dark. Mist sits in the valley until the sun burns it off, and the
+  rain comes over the ridge most afternoons.
+- Everything is drawn in code — no models, no textures, no sound files. See
+  `docs/jellynoor.md`.
+
 ## Orbit Works
 
 Build your own satellite and fly it:

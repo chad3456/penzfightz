@@ -62,7 +62,8 @@ export type EffectId =
   | 'chalisa'
   | 'ghar624'
   | 'almari'
-  | 'outrage';
+  | 'outrage'
+  | 'jelly';
 
 export interface EffectDef {
   id: EffectId;
@@ -639,6 +640,16 @@ export const EFFECTS: EffectDef[] = [
     spec: ['10 chapters · 12 charts · tracker dashboard', 'NCRB · Access Now · I4C · ACLED · OHCHR', 'every figure sourced, with table views'],
     ink: '#eb6834',
     wash: 'rgba(235, 104, 52, 0.12)',
+  },
+  {
+    id: 'jelly',
+    name: 'Jellynoor',
+    tagline: 'A 3D hill station where everything is made of jelly, and everybody spends the day at the tea estate\u2019s chores.',
+    blurb:
+      'A small tea estate up in the hills, set in jelly. The terraced slopes, the bushes, the cow, the tin roofs and every person on the hill are made of the same soft stuff, and all of it wobbles: hop, and the rows shake; brush past a bush and it leans away from you; ring the temple bell and the whole yard rocks. There is a day\u2019s work to get through. Carry saplings out to the empty plots and plant them, water the bushes that have gone pale, pull the weeds, prune the ones grown above the plucking table, and pluck two leaves and a bud wherever a flush is standing proud \u2014 the morning leaf is worth the most. Take the full basket down to the scale at the muster shed, then follow the leaf through the factory: spread it on the withering troughs, roll it, fire it in the drier, and pack it into chests at twelve kilos a chest. In between there is a cow to milk and feed, hens to scatter grain for, chai to brew and pour, firewood to split and stack, washing to hang, the yard to sweep, the bell to ring at dawn and the lamps to light at dusk. Nine villagers work the same round beside you all day and go home when it gets dark. The mist sits in the valley until the sun burns it off, the rain comes over the ridge most afternoons, and the whole estate is drawn in code, lit by one shader that makes opaque jelly look lit from inside.',
+    spec: ['18 chores \u00b7 a tea garden that grows', 'terraced hills \u00b7 mist \u00b7 rain \u00b7 a day and night', 'everything wobbles, including the ground'],
+    ink: '#ff7fa8',
+    wash: 'rgba(255, 127, 168, 0.13)',
   },
 ];
 
