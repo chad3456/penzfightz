@@ -12,7 +12,7 @@ import { deity, aureole } from '../pichwai/frontal';
 import { VISHNU, KRISHNA_ICON, LAKSHMI, NARASIMHA, VISHVARUPA, avatar, garuda, om } from '../pichwai/cast';
 import { emblem, emblemFor, reclining, weaponWheel, type EmblemKey } from '../pichwai/emblems';
 import { border, cows, night, cartouche } from '../pichwai/paint';
-import { chantSyllables, dn, type NameSpan } from '../pichwai/work';
+import { dn, iastToDev, type NameSpan } from '../pichwai/work';
 import type { Beat, Scene } from '../pichwai/stage';
 import { VISHNU_WORK } from './text';
 
@@ -27,17 +27,6 @@ const SPOT: [number, number][] = Array.from({ length: 1000 }, (_, k) => {
 const HUES = [C.gold, C.marigold, C.pink, C.white, C.sky, C.lime, C.fire2, C.lav, C.peach];
 export const spotOf = (n: number) => SPOT[clamp(n - 1, 0, 999)];
 
-/** The names' Devanagari, cut from the chanted syllables of their verse. */
-const devCache = new Map<string, string[]>();
-function namesDev(id: string, lines: string[], names: NameSpan[]) {
-  let d = devCache.get(id);
-  if (!d) {
-    const syl = lines.flatMap((l) => chantSyllables(l));
-    d = names.map((nm) => syl.slice(nm.from, nm.to).map((s) => s.dev).join('').replace(/[ऽ\s]+$/, ''));
-    devCache.set(id, d);
-  }
-  return d;
-}
 const emCache = new Map<number, EmblemKey>();
 export function emblemOf(nm: NameSpan): EmblemKey {
   let e = emCache.get(nm.n);
@@ -45,14 +34,27 @@ export function emblemOf(nm: NameSpan): EmblemKey {
   return e;
 }
 
-function lights(g: G, lit: number, cur: NameSpan[], nc: number[], t: number) {
-  // unlit: faint seeds
+/** The lit and unlit lamps up to `lit`, painted once into a layer and reused. */
+let layer: { lit: number; cv: HTMLCanvasElement } | null = null;
+function lampLayer(lit: number) {
+  if (layer && layer.lit === lit) return layer.cv;
+  const cv = layer?.cv ?? document.createElement('canvas');
+  cv.width = 1600; cv.height = 900;
+  const g = cv.getContext('2d')!;
+  g.clearRect(0, 0, 1600, 900);
   g.fillStyle = 'rgba(255,240,210,0.16)';
   for (let k = lit; k < 1000; k++) { const [x, y] = SPOT[k]; g.fillRect(x - 1.5, y - 1.5, 3, 3); }
-  // lit: small lamps, coloured by their shloka's turn
-  for (let k = 0; k < lit; k++) {
-    const [x, y] = SPOT[k], tw = 0.75 + 0.25 * Math.sin(t * 2 + k * 1.7);
-    g.globalAlpha = tw; circle(g, x, y, 6.5, HUES[Math.floor(k / 9) % HUES.length], 'rgba(40,20,10,0.7)', 1);
+  for (let k = 0; k < lit; k++) { const [x, y] = SPOT[k]; circle(g, x, y, 6.5, HUES[Math.floor(k / 9) % HUES.length], 'rgba(40,20,10,0.7)', 1); }
+  layer = { lit, cv };
+  return cv;
+}
+
+function lights(g: G, lit: number, cur: NameSpan[], nc: number[], t: number) {
+  g.drawImage(lampLayer(lit), 0, 0);
+  // a few lamps flicker at a time
+  for (let i = 0; i < Math.min(lit, 24); i++) {
+    const k = Math.floor((i * 97 + Math.floor(t * 0.7) * 131) % lit), [x, y] = SPOT[k];
+    g.globalAlpha = 0.5 * Math.max(0, Math.sin(t * 2 + i)); g.fillStyle = C.white; star4(g, x, y, 5);
   }
   g.globalAlpha = 1;
   // this verse's names, blooming as they are chanted
@@ -146,13 +148,12 @@ export const mandala: Scene = (g, b) => {
   g.save(); g.globalAlpha = k; form(g, now, t, b); g.restore();
 
   // the name being chanted, in its cartouche, with its emblem and number
-  const devs = namesDev(v.id, v.lines, names);
   const i = b.ni >= 0 ? b.ni : names.findIndex((_, j) => b.nc[j] > 0 && b.nc[j] < 1);
   const last = (() => { for (let j = names.length - 1; j >= 0; j--) if (b.nc[j] >= 1) return j; return -1; })();
   const show = i >= 0 ? i : last;
   if (show >= 0) {
     const nm = names[show], a = clamp(b.d - b.t - 0.2);
-    cartouche(g, devs[show], CX + 40, 92, 46, { alpha: a, w: 420 });
+    cartouche(g, iastToDev(nm.name), CX + 40, 92, 46, { alpha: a, w: 420 });
     g.save(); g.globalAlpha = a;
     emblem(g, emblemOf(nm), CX - 230, 92, 0.78, t);
     devText(g, dn(nm.n), CX + 300, 92, 34, C.gold);

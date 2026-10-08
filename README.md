@@ -1808,6 +1808,49 @@ pichwai and picture-book style.
 - **Reading view:** the whole text laid out word by word.
 - More in `docs/hanuman-chalisa.md`.
 
+## Shri Vishnu Sahasranama, painted
+
+The Vishnu Sahasranama chanted whole, about 35 minutes, and painted as a
+moving pichwai.
+
+- **The opening:** Bhishma on his bed of arrows at Kurukshetra, answering
+  Yudhishthira, then the eight meditation verses, each its own painting.
+- **The thousand names:**
+  - The Lord stands in the form the shloka calls up.
+  - A sunflower spiral of a thousand lights fills round him, one for each
+    name, lit as it is chanted.
+  - Each name gets a cartouche with its number, an emblem and its meaning.
+  - Over the 108 shlokas the night turns to dawn.
+- **Captions:** every syllable in Devanagari and roman, the speaker named, a
+  new English translation of every verse.
+- **Score:** a synthesised chant score of tanpura, a choir singing each
+  syllable on its vowel, bells and the conch.
+- **Reading view:** every verse, with all thousand names and their meanings.
+- More in `docs/vishnu-sahasranama-pichwai.md`.
+
+## Shrimad Bhagavad Gita, painted
+
+All 701 verses of the Bhagavad Gita chanted in Sanskrit, about 2¼ hours, with
+a new English translation and about a hundred painted tableaux.
+
+- **The story:**
+  - Dhritarashtra and Sanjaya in the palace;
+  - the armies and the conches;
+  - the chariot between the armies;
+  - Arjuna's despair;
+  - the cosmic form and the mouths of Time;
+  - Arjuna rising.
+- **The teaching:** the chariot stands aside while a roundel paints what
+  Krishna is saying: clothes cast off, the tortoise, the lamp in a windless
+  place, the ocean filled by rivers, pearls on a thread, the tree with its
+  roots above.
+- **Chapter cards and colophons:** each chapter is announced (अथ
+  प्रथमोऽध्यायः) and closed with its colophon.
+- **Captions:** the speaker is named on every verse.
+- **The player:** the same as the Sahasranama's, with a chapter menu, your
+  place kept, and a reading view of the whole text.
+- More in `docs/bhagavad-gita-pichwai.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

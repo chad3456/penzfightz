@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { Arcade } from './arcade/Arcade';
 import { Ahmedabad } from './ahmedabad/Ahmedabad';
 import { Ride } from './ride/Ride';
@@ -65,6 +65,9 @@ import { Outrage } from './outrage/Outrage';
 import { Jellynoor } from './jelly/Jellynoor';
 import { Chalisa } from './chalisa/Chalisa';
 import { VishnuFilm } from './vishnu/VishnuFilm';
+
+// the Gita carries its whole text, so it loads only when opened
+const GitaFilm = lazy(() => import('./gita/GitaFilm'));
 import { AppFrame } from './apps/AppFrame';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
@@ -330,6 +333,13 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'ghar624') {
     return <AppFrame src="/apps/ghar-624/index.html" title="Ghar 624" onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'gita') {
+    return (
+      <Suspense fallback={<div className="pw pw-gita pw-loading"><span className="dev">श्रीमद्भगवद्गीता</span></div>}>
+        <GitaFilm onExit={toShelf} />
+      </Suspense>
+    );
   }
   if (shell === 'effect' && effect === 'vishnu1000') {
     return <VishnuFilm onExit={toShelf} />;

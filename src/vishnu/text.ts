@@ -136,14 +136,30 @@ const fold = (s: string) => s.toLowerCase().replace(/[^a-zāīūṛṝḷṅñ�
  * count as the same letter. One letter in, one letter out, so positions in
  * the skeleton are positions in the syllable stream.
  */
-const SKEL: Record<string, string> = { d: 't', g: 'k', b: 'p', j: 'c', ḍ: 'ṭ', ṃ: 'm', ṅ: 'n', ñ: 'n', ṇ: 'n' };
-const skel = (s: string) => [...s].map((c) => SKEL[c] ?? c).join('');
+const SKEL: Record<string, string> = { d: 't', g: 'k', b: 'p', j: 'c', ḍ: 'ṭ', ṃ: 'm', ṅ: 'n', ñ: 'n', ṇ: 'n', ś: 's', ṣ: 's' };
+/**
+ * The skeleton of a romanised string, with a map back to positions in the
+ * original. Visarga is dropped, since sandhi turns it into s, r or o.
+ */
+function skelMap(s: string): { k: string; at: number[] } {
+  let k = ''; const at: number[] = [];
+  [...s].forEach((c, i) => {
+    if (c === 'ḥ') return;
+    const m = SKEL[c] ?? c;
+    k += m; at.push(i);
+  });
+  return { k, at };
+}
+const skel = (s: string) => skelMap(s).k;
 
 /** The stem we look for: the name without its case ending or its last letter, which sandhi may change. */
 function stem(name: string) {
   const f = skel(fold(name).replace(/(aḥ|āḥ|iḥ|īḥ|uḥ|ūḥ|ḥ|ṃ|m)$/, ''));
   return f.length > 3 ? f.slice(0, -1) : f;
 }
+
+/** How many names had to be placed by their neighbours (for checking). */
+export let namesSkipped = 0;
 
 /**
  * Walk the stotram verses in order, find each of the thousand names in turn
@@ -157,9 +173,10 @@ export function placeNames(verses: { lines: string[] }[]): NameSpan[][] {
   let n = 0;
   verses.forEach((v, vi) => {
     const syl = v.lines.flatMap((l) => chantSyllables(l));
-    const starts: number[] = []; let acc = '';
-    syl.forEach((s) => { starts.push(acc.length); acc += skel(fold(s.rom)); });
-    const sylAt = (pos: number) => { let k = 0; while (k + 1 < starts.length && starts[k + 1] <= pos) k++; return k; };
+    const starts: number[] = []; let raw = '';
+    syl.forEach((s) => { starts.push(raw.length); raw += fold(s.rom); });
+    const { k: acc, at } = skelMap(raw);
+    const sylAt = (pos: number) => { const r = at[Math.min(pos, at.length - 1)] ?? 0; let k = 0; while (k + 1 < starts.length && starts[k + 1] <= r) k++; return k; };
     const find = (m: number, cur: number) => {
       if (m >= MEANINGS.length) return -1;
       const st = stem(MEANINGS[m][0]);
@@ -185,6 +202,7 @@ export function placeNames(verses: { lines: string[] }[]): NameSpan[][] {
         p = find(n + d, cur);
         if (p >= 0) {
           const k = sylAt(p);
+          namesSkipped += d;
           for (let e = 0; e < d; e++) found.push({ n: n + e, k: Math.max(found.length ? found[found.length - 1].k : 0, k - (d - e)) });
           n += d; skipped = true; break;
         }

@@ -68,13 +68,14 @@ export function buildTimeline(work: Work): Timeline {
       const lines: LineT[] = [];
       let t = 1.0;
       // the speaker's line is chanted whenever the voice changes
-      if (v.speaker && v.speaker.dev !== lastWho) {
+      if (v.speaker && v.speaker.dev !== lastWho && !v.inline) {
         const L = lineTimes(v.speaker.dev, t, m, true);
         lines.push(L); t += L.dur + 0.45;
       }
       if (v.speaker) lastWho = v.speaker.dev;
       v.lines.forEach((ln, li) => {
-        const L = lineTimes(ln, t, m);
+        // a speaker named inside the verse ("अर्जुन उवाच") is styled as one
+        const L = lineTimes(ln, t, m, /उवाच$/.test(ln.trim()));
         lines.push(L);
         const mid = v.lines.length >= 4 && li === Math.floor(v.lines.length / 2) - 1;
         t += L.dur + (li === v.lines.length - 1 ? 0 : mid ? 0.55 : 0.3);

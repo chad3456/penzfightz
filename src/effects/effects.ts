@@ -664,6 +664,17 @@ export const EFFECTS: EffectDef[] = [
     wash: 'rgba(91, 140, 255, 0.13)',
   },
 
+  {
+    id: 'gita',
+    name: 'श्रीमद्भगवद्गीता',
+    tagline: 'The whole Bhagavad Gita, all 701 verses, chanted in Sanskrit with a new English translation and painted as a moving pichwai.',
+    blurb:
+      'All eighteen chapters of the Bhagavad Gita, chanted syllable by syllable from Dhritarashtra\u2019s first question to Sanjaya\u2019s last word, about two hours and fifteen minutes, with every verse painted in the manner of a Nathdwara pichwai. Each chapter opens on a card that chants its name (\u0905\u0925 \u092a\u094d\u0930\u0925\u092e\u094b\u093d\u0927\u094d\u092f\u093e\u092f\u0903) and closes on its colophon. The story is told in full: the blind king asking in his palace while Sanjaya sees the field with divine sight, the armies drawn up, the roll call of the conches, Krishna driving the chariot between the armies, Arjuna\u2019s bow slipping from his hand. When Krishna teaches, the chariot stands at the side and a great roundel paints what he is saying: worn clothes cast off for new ones, the self that weapons cannot cut or fire burn, the tortoise drawing in its limbs, the ocean that the rivers fill without moving it, the lamp in a windless place, the boat blown off course by the wind. The set pieces have their own paintings: the wheel of sacrifice, the avatars age after age, all things strung on him like pearls on a thread, the bright path and the dark path, a leaf, a flower, a fruit and a little water offered to Shrinathji, the gallery of his glories, the light of a thousand suns, the mouths of Time swallowing the warriors, the tree with its roots in the sky, the three qualities, and at the end Arjuna rising with his bow. Every syllable lights as it is chanted, in Devanagari and roman, with the speaker named, and an English translation of all 701 verses written for this page sits beneath. A chant score plays under it: a tanpura drone, a choir that sings each syllable on its own vowel, a bansuri, bells and the conch. Your place is kept, and there is a reading view of the whole text, chapter by chapter.',
+    spec: ['18 chapters · 701 verses · ~2¼ hours', 'Devanagari · roman · a new English translation', 'about 100 painted tableaux · chant, flute, conch'],
+    ink: '#ec7322',
+    wash: 'rgba(236, 115, 34, 0.12)',
+  },
+
 ];
 
 export const EFFECT_BY_ID = Object.fromEntries(EFFECTS.map((e) => [e.id, e])) as Record<

@@ -211,7 +211,7 @@ export function Film({ work, scenes, chant, onExit, extra, readExtra, className 
           </div>
         )}
         {extra?.(seg, cap)}
-        {verse && showEn && <p className="pw-en">{verse.speaker && <b>{verse.speaker.en}: </b>}{verse.en}</p>}
+        {verse && showEn && <p className="pw-en">{verse.speaker && !verse.inline && <b>{verse.speaker.en}: </b>}{verse.en}</p>}
         {seg.kind === 'close' && <p className="pw-en">{work.credit}</p>}
       </section>
 

@@ -30,6 +30,8 @@ export interface WVerse {
   arg?: string | number;
   kind?: 'verse' | 'colophon' | 'invocation' | 'line';
   names?: NameSpan[];
+  /** The speaker is named inside the verse (as one of its lines), not chanted before it. */
+  inline?: boolean;
 }
 
 export interface Section {
@@ -111,3 +113,33 @@ export const dn = devNum;
 
 /** An id-safe hash of a string, to seed a tableau's variations. */
 export function seedOf(s: string) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+/* ───────── roman (IAST) to Devanagari ───────── */
+
+const V_IND: Record<string, string> = { a: 'अ', ā: 'आ', i: 'इ', ī: 'ई', u: 'उ', ū: 'ऊ', ṛ: 'ऋ', ṝ: 'ॠ', ḷ: 'ऌ', e: 'ए', ai: 'ऐ', o: 'ओ', au: 'औ' };
+const V_SIGN: Record<string, string> = { a: '', ā: 'ा', i: 'ि', ī: 'ी', u: 'ु', ū: 'ू', ṛ: 'ृ', ṝ: 'ॄ', ḷ: 'ॢ', e: 'े', ai: 'ै', o: 'ो', au: 'ौ' };
+const CONS: Record<string, string> = {
+  kh: 'ख', gh: 'घ', ch: 'छ', jh: 'झ', ṭh: 'ठ', ḍh: 'ढ', th: 'थ', dh: 'ध', ph: 'फ', bh: 'भ',
+  k: 'क', g: 'ग', ṅ: 'ङ', c: 'च', j: 'ज', ñ: 'ञ', ṭ: 'ट', ḍ: 'ड', ṇ: 'ण', t: 'त', d: 'द', n: 'न', p: 'प', b: 'ब', m: 'म',
+  y: 'य', r: 'र', l: 'ल', v: 'व', ś: 'श', ṣ: 'ष', s: 'स', h: 'ह',
+};
+
+/** Write a romanised (IAST) Sanskrit word in Devanagari: Viśvam → विश्वम्. */
+export function iastToDev(s: string): string {
+  const w = s.normalize('NFC').toLowerCase().replace(/-/g, '');
+  let out = '', i = 0, pending = false; // pending: a consonant waiting for its vowel
+  const take = (tbl: Record<string, string>) => { for (const n of [2, 1]) { const k = w.slice(i, i + n); if (tbl[k] !== undefined) { i += n; return tbl[k]; } } return undefined; };
+  while (i < w.length) {
+    const ch = w[i];
+    if (ch === ' ') { if (pending) out += '्'; pending = false; out += ' '; i++; continue; }
+    if (ch === 'ṃ') { if (pending) out += '्'; pending = false; out += 'ं'; i++; continue; }
+    if (ch === 'ḥ') { if (pending) out += '्'; pending = false; out += 'ः'; i++; continue; }
+    const v = take(V_SIGN);
+    if (v !== undefined) { const key = w.slice(i - (v === 'ै' || v === 'ौ' ? 2 : 1), i); out += pending ? v : V_IND[key] ?? ''; pending = false; continue; }
+    const c = take(CONS);
+    if (c !== undefined) { if (pending) out += '्'; out += c; pending = true; continue; }
+    i++; // anything else is dropped
+  }
+  if (pending) out += '्';
+  return out;
+}

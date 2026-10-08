@@ -11047,3 +11047,5 @@ button.card:hover:not(:disabled) {
   .pw-verse .dev { font-size: 18.5px; }
 }
 @media (prefers-reduced-motion: reduce) { .pw-line, .pw-line .dev span { transition: none; } }
+.pw-loading { display: grid; place-items: center; }
+.pw-loading .dev { font-size: 34px; color: var(--pw-hi); opacity: 0.8; }
