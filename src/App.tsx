@@ -64,6 +64,7 @@ import { Ashtavakra } from './ashtavakra/Ashtavakra';
 import { Outrage } from './outrage/Outrage';
 import { Jellynoor } from './jelly/Jellynoor';
 import { Chalisa } from './chalisa/Chalisa';
+import { VishnuFilm } from './vishnu/VishnuFilm';
 import { AppFrame } from './apps/AppFrame';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
@@ -329,6 +330,9 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'ghar624') {
     return <AppFrame src="/apps/ghar-624/index.html" title="Ghar 624" onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'vishnu1000') {
+    return <VishnuFilm onExit={toShelf} />;
   }
   if (shell === 'effect' && effect === 'jelly') {
     return <Jellynoor onExit={toShelf} />;

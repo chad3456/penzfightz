@@ -63,7 +63,9 @@ export type EffectId =
   | 'ghar624'
   | 'almari'
   | 'outrage'
-  | 'jelly';
+  | 'jelly'
+  | 'vishnu1000'
+  | 'gita';
 
 export interface EffectDef {
   id: EffectId;
@@ -651,6 +653,17 @@ export const EFFECTS: EffectDef[] = [
     ink: '#ff7fa8',
     wash: 'rgba(255, 127, 168, 0.13)',
   },
+  {
+    id: 'vishnu1000',
+    name: 'श्रीविष्णुसहस्रनाम',
+    tagline: 'The Vishnu Sahasranama chanted whole and painted as a moving pichwai: every one of the thousand names lights up as it is sung, with its meaning.',
+    blurb:
+      'The Vishnu Sahasranama from the Mahabharata\u2019s Anushasana Parva, chanted from the first invocation to the last verse of the phalashruti, about thirty-five minutes, and painted as it goes in the manner of a Nathdwara pichwai. It opens at Kurukshetra at dusk: Bhishma lies on his bed of arrows, Yudhishthira and his brothers come with Krishna to ask him who the one god is and what the highest dharma is, and Bhishma begins. The eight meditation verses follow, each its own painting: the Lord on a pearl throne by the ocean of milk under clouds raining nectar; the cosmic body with the earth for feet and the sun and moon for eyes; the Lord asleep on Shesha with Brahma rising on a lotus from his navel; Krishna under the parijata tree. Then the thousand names. The Lord stands at the centre in whatever form the shloka calls up \u2014 reclining on the serpent, Krishna among the cows, Narasimha, Vamana, Rama, the cosmic form \u2014 and round him a sunflower spiral of a thousand lights fills from the centre outward, one for each name, lit at the moment it is chanted. Each name is painted in a cartouche with its number and an emblem, and its meaning shows under the verse. Over the 108 shlokas the night sky turns slowly to dawn. The closing verses are painted too: the sick healed and the bound set free, everything held within Vasudeva, Parvati asking Shiva on Kailasa and Shiva answering \u201cRama, Rama, Rama\u201d, the ten avatars age after age. Every syllable is lit as it is chanted, in Devanagari and roman, with an English translation of every verse written for this page. A chant score plays under it: a tanpura drone, a choir that sings each syllable on its own vowel, bells and the conch. There is a reading view with all thousand names and their meanings.',
+    spec: ['1000 names, each lit as it is chanted', '183 verses · Devanagari · roman · English', 'tanpura · choir on the vowels · conch'],
+    ink: '#5b8cff',
+    wash: 'rgba(91, 140, 255, 0.13)',
+  },
+
 ];
 
 export const EFFECT_BY_ID = Object.fromEntries(EFFECTS.map((e) => [e.id, e])) as Record<
