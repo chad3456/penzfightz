@@ -8,14 +8,14 @@
 import { C, type G, circle, ellipse, fs, line, smooth, stroke2, poly, lerp, rng, floretP, dotsP, stripeP, star4, flame, mountain, curl, lotus } from './kit';
 
 export type Limb = [number, number];
-export type ItemKind = 'mace' | 'bow' | 'flag' | 'veena' | 'mala' | 'ring' | 'lamp' | 'book' | 'lotus' | 'trident' | 'kalash' | 'cymbal' | 'quill' | 'herb' | 'mountain' | 'noose' | 'pot' | 'arrow' | 'sword' | 'conch' | 'chakra' | 'paduka' | 'scroll';
+export type ItemKind = 'mace' | 'bow' | 'flag' | 'veena' | 'mala' | 'ring' | 'lamp' | 'book' | 'lotus' | 'trident' | 'kalash' | 'cymbal' | 'quill' | 'herb' | 'mountain' | 'noose' | 'pot' | 'arrow' | 'sword' | 'conch' | 'chakra' | 'paduka' | 'scroll' | 'flute' | 'whip' | 'axe' | 'plough' | 'umbrella' | 'spear' | 'shield' | 'reins';
 export interface Item { k: ItemKind; a?: number; s?: number; glow?: number }
 export interface Pose { lean?: number; head?: number; root?: number; fa?: Limb; ba?: Limb; fl?: Limb; bl?: Limb; legs?: 'legs' | 'lotus' | 'none'; namaste?: boolean }
 export interface Look {
   head: 'man' | 'woman' | 'monkey' | 'monkeyW' | 'sage' | 'demon' | 'child' | 'ghost';
   skin: string; faceCol?: string;
   hair?: string; hairStyle?: 'long' | 'bun' | 'jata' | 'braid' | 'short' | 'wild' | 'none' | 'curly';
-  crown?: 'mukut' | 'small' | 'turban' | 'none' | 'veil' | 'jata' | 'spiky' | 'tiara';
+  crown?: 'mukut' | 'small' | 'turban' | 'none' | 'veil' | 'jata' | 'spiky' | 'tiara' | 'peacock' | 'helmet';
   crownCol?: string; turban?: string;
   dhoti?: string; dhotiFg?: string; border?: string;
   scarf?: string; scarfFg?: string;
@@ -333,8 +333,20 @@ function drawHead(g: G, f: Fig, t: number) {
   else humanHead(g, f, skin, eye, t);
   // crowns and headgear
   const cc = f.crownCol ?? C.gold;
-  if (f.crown === 'mukut' || f.crown === 'small') {
-    const H = f.crown === 'mukut' ? 54 : 34;
+  if (f.crown === 'peacock') {
+    // Krishna: a small crown with a peacock feather tucked in, swaying
+    g.save(); g.translate(-2, -28); g.rotate(-0.45 + Math.sin(t * 1.2) * 0.06);
+    line(g, [[0, 0], [0, -62]], '#4f6b2a', 1.8);
+    for (let i = 0; i < 12; i++) { const yy = -8 - i * 4.4; line(g, [[0, yy], [-10, yy - 7]], '#3f8a4a', 1.1); line(g, [[0, yy], [10, yy - 7]], '#3f8a4a', 1.1); }
+    ellipse(g, 0, -60, 10, 14, 0, '#2c7a5a', C.ink, 1.2); ellipse(g, 0, -59, 6.5, 9.5, 0, C.gold, null); ellipse(g, 0, -58, 4, 6, 0, '#1d4fa0', null); circle(g, 0, -57.5, 2, C.ink);
+    g.restore();
+  }
+  if (f.crown === 'helmet') {
+    g.beginPath(); g.moveTo(-17, -10); g.bezierCurveTo(-22, -40, 22, -44, 20, -12); g.closePath(); fs(g, '#9aa4ad', C.ink, 2);
+    line(g, [[-17, -14], [20, -15]], C.gold, 3.4); g.beginPath(); g.moveTo(2, -40); g.quadraticCurveTo(-18, -60, -30, -40); fs(g, null, C.vermilion, 4);
+  }
+  if (f.crown === 'mukut' || f.crown === 'small' || f.crown === 'peacock') {
+    const H = f.crown === 'mukut' ? 54 : f.crown === 'peacock' ? 26 : 34;
     g.beginPath(); g.moveTo(-15, -14); g.lineTo(-12, -24); g.lineTo(-6, -24 - H * 0.7); g.quadraticCurveTo(2, -24 - H * 1.05, 8, -24 - H * 0.7); g.lineTo(16, -22); g.lineTo(19, -15); g.closePath();
     fs(g, cc, C.ink, 2.2);
     line(g, [[-14, -18], [19, -19]], C.vermilion, 4);
@@ -523,6 +535,14 @@ function drawItem(g: G, it: Item, x: number, y: number, t: number, f: Fig) {
     case 'conch': { g.beginPath(); g.moveTo(-10, 10); g.quadraticCurveTo(-18, -20, 0, -30); g.quadraticCurveTo(16, -20, 10, 10); g.closePath(); fs(g, C.white, C.ink, 1.6); curl(g, 0, -10, 8, 1.2, 1, 0); g.strokeStyle = C.ink; g.lineWidth = 1.2; g.stroke(); break; }
     case 'chakra': { g.save(); g.translate(0, -30); g.rotate(t * 3); circle(g, 0, 0, 18, C.gold, C.ink, 2); for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; line(g, [[0, 0], [Math.cos(a) * 16, Math.sin(a) * 16]], C.vermilion, 2); } g.restore(); break; }
     case 'paduka': { for (const dx of [-12, 12]) { ellipse(g, dx, 0, 8, 22, 0, C.gold, C.ink, 1.6); circle(g, dx, -10, 3, C.vermilion); } break; }
+    case 'flute': { g.beginPath(); g.rect(-4, -110, 8, 130); fs(g, '#8a5a2a', C.ink, 1.4); for (let i = 0; i < 6; i++) circle(g, 0, -92 + i * 11, 1.8, C.ink); for (const p of [-104, 14]) line(g, [[-4, p], [4, p]], C.gold, 3); g.fillStyle = C.vermilion; g.beginPath(); g.moveTo(3, 16); g.quadraticCurveTo(14, 34, 8, 50); g.quadraticCurveTo(2, 34, 0, 16); g.fill(); break; }
+    case 'whip': { line(g, [[0, 20], [0, -50]], C.brown, 3); g.beginPath(); g.moveTo(0, -50); g.quadraticCurveTo(30 + Math.sin(t * 3) * 6, -70, 54, -40 + Math.sin(t * 4) * 8); fs(g, null, C.ink, 1.6); break; }
+    case 'reins': { line(g, [[0, 0], [70, -10 + Math.sin(t * 2) * 3], [150, 6]], C.brown, 2.4, true); break; }
+    case 'axe': { line(g, [[0, 40], [0, -80]], C.brown, 4); g.beginPath(); g.moveTo(0, -80); g.quadraticCurveTo(30, -88, 34, -58); g.quadraticCurveTo(20, -56, 0, -52); g.closePath(); fs(g, '#dfe4e8', C.ink, 1.8); break; }
+    case 'plough': { line(g, [[0, 50], [0, -70]], C.brown, 4); g.beginPath(); g.moveTo(0, -70); g.lineTo(-22, -52); g.lineTo(-28, -70); g.closePath(); fs(g, '#c9cfd4', C.ink, 1.8); break; }
+    case 'umbrella': { line(g, [[0, 30], [0, -110]], C.brown, 3); g.beginPath(); g.moveTo(-50, -100); g.quadraticCurveTo(0, -150, 50, -100); g.quadraticCurveTo(0, -112, -50, -100); fs(g, '#e7c98c', C.ink, 1.8); for (let i = -2; i <= 2; i++) line(g, [[0, -126], [i * 24, -104]], C.brown, 1.2); break; }
+    case 'spear': { line(g, [[0, 50], [0, -150]], C.brown, 3); g.beginPath(); g.moveTo(0, -172); g.lineTo(7, -148); g.lineTo(-7, -148); g.closePath(); fs(g, '#dfe4e8', C.ink, 1.2); circle(g, 0, -146, 4, C.vermilion); break; }
+    case 'shield': { circle(g, 0, 0, 22, C.maroon, C.ink, 2); circle(g, 0, 0, 15, null, C.gold, 2); for (let i = 0; i < 4; i++) { const a = (i / 4) * Math.PI * 2 + 0.78; circle(g, Math.cos(a) * 10, Math.sin(a) * 10, 2.6, C.gold); } break; }
   }
   g.restore(); void f;
 }
