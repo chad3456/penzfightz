@@ -1877,6 +1877,11 @@ after hand-hatched illustration.
 - **The listening list:** Gujarati garba and Bengali Pujo songs for each
   night, linked to YouTube searches.
 - More in `docs/navadurga.md`.
+- **The reel:** *Maa Durga’s Valour*, one minute and vertical, cut on a
+  120-bpm dhaak from the gallery’s own drawings: the gods’ light, the
+  weapons, Mahisha’s shapes, हुं, Kali, Raktabija, the Mothers and the nine
+  portraits. `node scripts/render-durga-reel.mjs` writes the MP4; more in
+  `docs/durga-reel.md`.
 
 ## Witchworld Weekly
 

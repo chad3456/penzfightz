@@ -32,7 +32,7 @@ const CELLS: number[][] = [[4, 3, 2, -1, 4, 5], [5, 4, 3, 2, 1, 2], [2, 4, 5, 7,
 export interface Hit { t: number; kind: 'bass' | 'slap' | 'clap' | 'stick' | 'gong' | 'conch' | 'ulu' | 'tap'; step: number }
 
 export class Utsav {
-  ctx: AudioContext | null = null;
+  ctx: BaseAudioContext | null = null;
   private out!: GainNode;
   private verb!: ConvolverNode;
   private wet!: GainNode;
@@ -51,9 +51,15 @@ export class Utsav {
   /** Recent strokes, for the dancers to answer. */
   hits: Hit[] = [];
 
+  /** A fixed tempo, overriding the quickening (used by the reel's score). */
+  fixedBpm = 0;
+
   private ensure() {
     if (this.ctx) return this.ctx;
-    const ctx = new AudioContext();
+    return this.use(new AudioContext());
+  }
+  /** Build the mixing graph on a context — a live one, or an offline one to render a score. */
+  use(ctx: BaseAudioContext) {
     this.ctx = ctx;
     this.out = ctx.createGain(); this.out.gain.value = 0.8;
     const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4;
@@ -118,13 +124,16 @@ export class Utsav {
     this.drone = { stop: () => { const n = ctx.currentTime; g.gain.setTargetAtTime(0, n, 0.3); os.forEach((o) => o.stop(n + 1.5)); } };
   }
 
-  bpm() { const [a, b] = PAT[this.mode].bpm; return (a + (b - a) * this.heat) * this.speed; }
+  bpm() { if (this.fixedBpm) return this.fixedBpm; const [a, b] = PAT[this.mode].bpm; return (a + (b - a) * this.heat) * this.speed; }
   /** Seconds per step (an eighth note). */
   stepDur() { return 60 / this.bpm() / 2; }
 
-  private tick = () => {
+  private tick = () => { this.fill(this.ctx!.currentTime + 0.12); };
+
+  /** Schedule every stroke up to `horizon` seconds. */
+  fill(horizon: number) {
     const ctx = this.ctx!; const P = PAT[this.mode];
-    while (this.nextT < ctx.currentTime + 0.12) {
+    while (this.nextT < horizon) {
       const t = this.nextT, s = this.step % P.steps;
       const push = (kind: Hit['kind']) => this.hits.push({ t, kind, step: s });
       if (P.bass.includes(s)) { this.bass(t, s === 0 ? 1 : 0.8); push('bass'); }
@@ -148,10 +157,12 @@ export class Utsav {
       }
     }
     const now = ctx.currentTime; this.hits = this.hits.filter((h) => h.t > now - 2);
-  };
+  }
+  /** For an offline score: start the pattern of `mode` at time t. */
+  cue(mode: Mode, t: number) { this.mode = mode; this.step = 0; this.bar = 0; this.heat = 0; this.nextT = t; }
 
   async start(mode?: Mode) {
-    const ctx = this.ensure();
+    const ctx = this.ensure() as AudioContext;
     if (mode) this.mode = mode;
     await ctx.resume();
     if (!this.playing) {
@@ -163,7 +174,7 @@ export class Utsav {
   }
   setMode(m: Mode) { this.mode = m; this.step = 0; this.bar = 0; this.heat = 0; if (this.ctx) this.nextT = this.ctx.currentTime + 0.05; }
   stop() { this.playing = false; clearInterval(this.timer); this.drone?.stop(); this.drone = null; }
-  close() { this.stop(); void this.ctx?.close(); this.ctx = null; }
+  close() { this.stop(); void (this.ctx as AudioContext | null)?.close?.(); this.ctx = null; }
 
   /** The listener joins in. */
   tap(kind?: Hit['kind']) {

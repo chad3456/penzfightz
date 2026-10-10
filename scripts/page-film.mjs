@@ -20,14 +20,18 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const FF = process.env.FFMPEG
   || '/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2';
 
-export async function renderPageFilm({ dir, global, out, height = 1080, fps = 30 }) {
+export async function renderPageFilm({ dir, url, global, out, height = 1080, fps = 30, crf = 18 }) {
   const here = path.dirname(fileURLToPath(import.meta.url));
-  const page = pathToFileURL(path.join(here, '..', 'public', dir, 'index.html')).href + '?render';
+  // a film is either a static page in public/<dir>, or any page by `url` (one served by Vite, say)
+  const page = url ?? pathToFileURL(path.join(here, '..', 'public', dir, 'index.html')).href + '?render';
 
   const b = await chromium.launch({ executablePath: process.env.CHROME || '/opt/pw-browsers/chromium' });
   const p = await b.newPage({ viewport: { width: 400, height: 300 } });
   p.on('pageerror', (e) => { throw e; });
   await p.goto(page, { waitUntil: 'load' });
+  // a film that has fonts or pictures to load first says so with a `ready` promise
+  await p.waitForFunction((G) => !!window[G], global);
+  await p.evaluate((G) => window[G].ready, global);
 
   // a film says how big it is drawn (1920 × 1080 unless it says otherwise, 1080 × 1920 for a reel)
   const { duration, fw, fh } = await p.evaluate((G) => {
@@ -44,7 +48,7 @@ export async function renderPageFilm({ dir, global, out, height = 1080, fps = 30
     window.__film = window[G];
   }, { W: width, H: height, G: global });
 
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `${dir}-`));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `${dir ?? global}-`));
   const wav = path.join(tmp, 'score.wav');
   const b64 = await p.evaluate(async () => {
     const s = await window.__film.synth(48000);
@@ -60,7 +64,7 @@ export async function renderPageFilm({ dir, global, out, height = 1080, fps = 30
     '-hide_banner', '-loglevel', 'error', '-y',
     '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', 'pipe:0',
     '-i', wav,
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p',
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', String(crf), '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '192k', '-shortest',
     out,
   ], { stdio: ['pipe', 'inherit', 'inherit'] });

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maa Durga’s Valour — reel</title>
+  <link rel="stylesheet" href="/fonts-sacred/fonts.css" />
+  <style>
+    html, body { margin: 0; height: 100%; background: #0b0a14; color: #f7e9cc; font: 15px/1.4 system-ui, sans-serif; }
+    main { height: 100%; display: grid; place-items: center; gap: 10px; grid-template-rows: 1fr auto; padding: 12px 16px; box-sizing: border-box; }
+    canvas { height: min(calc(100vh - 90px), calc((100vw - 32px) * 16 / 9)); aspect-ratio: 9 / 16; background: #000; border-radius: 10px; box-shadow: 0 10px 40px #0008; }
+    .bar { display: flex; gap: 10px; align-items: center; width: min(100%, 520px); }
+    button { background: #c8282a; color: #fff; border: 0; border-radius: 6px; padding: 8px 14px; font-weight: 700; cursor: pointer; }
+    input[type=range] { flex: 1; }
+    #msg { min-width: 7ch; text-align: right; font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <main>
+    <canvas id="c" width="1080" height="1920"></canvas>
+    <div class="bar"><button id="play" disabled>Preparing…</button><input id="seek" type="range" min="0" max="60" step="0.01" value="0" /><span id="msg">0.0s</span></div>
+  </main>
+  <script type="module">
+    import * as R from '/src/navadurga/reel.ts';
+    const c = document.getElementById('c'), g = c.getContext('2d');
+    const play = document.getElementById('play'), seek = document.getElementById('seek'), msg = document.getElementById('msg');
+    const render = new URLSearchParams(location.search).has('render');
+    window.DURGA = { ...R, ready: (async () => {
+      await document.fonts.load('bold 40px "Liberation Sans"').catch(() => {});
+      await Promise.all(['700 40px Cinzel', '40px "Tiro Devanagari Sanskrit"'].map((f) => document.fonts.load(f, 'दुर्गा DURGA')));
+      await document.fonts.ready;
+      if (!render) await R.warm();
+    })() };
+    await window.DURGA.ready;
+    if (render) { window.done = true; } else {
+      let ac = null, src = null, buf = null, t0 = 0, at = 0, playing = false;
+      const draw = (t) => { R.frame(g, Math.min(t, R.DURATION - 1e-3)); seek.value = t; msg.textContent = t.toFixed(1) + 's'; };
+      draw(0); play.disabled = false; play.textContent = 'Play';
+      const stop = () => { if (src) { src.onended = null; src.stop(); src = null; } playing = false; play.textContent = 'Play'; };
+      play.onclick = async () => {
+        if (playing) { at = ac.currentTime - t0; stop(); return; }
+        ac ??= new AudioContext();
+        if (!buf) { play.textContent = 'Scoring…'; const s = await R.synth(ac.sampleRate); buf = ac.createBuffer(2, s.L.length, s.sr); buf.copyToChannel(s.L, 0); buf.copyToChannel(s.R, 1); }
+        if (at >= R.DURATION - 0.05) at = 0;
+        src = ac.createBufferSource(); src.buffer = buf; src.connect(ac.destination); src.start(0, at); t0 = ac.currentTime - at;
+        src.onended = () => { at = 0; stop(); draw(0); };
+        playing = true; play.textContent = 'Pause';
+        const loop = () => { if (!playing) return; draw(ac.currentTime - t0); requestAnimationFrame(loop); }; loop();
+      };
+      seek.oninput = () => { const t = +seek.value; if (playing) { stop(); at = t; play.onclick(); } else { at = t; draw(t); } };
+    }
+  </script>
+</body>
+</html>
