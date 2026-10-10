@@ -1851,6 +1851,33 @@ a new English translation and about a hundred painted tableaux.
   place kept, and a reading view of the whole text.
 - More in `docs/bhagavad-gita-pichwai.md`.
 
+## नवदुर्गा — Nine Nights of the Goddess
+
+A small Navaratri gallery in pen, ballpoint, crayon and chalk, drawn in code
+after hand-hatched illustration.
+
+- **The nine forms:** one portrait for each night, each in its own manner:
+  - patterned sun-rays on ochre with a quilt of nine moons;
+  - blue ballpoint fans;
+  - crayon on taped scraps;
+  - gold on night paper;
+  - and more.
+- **The wall:** the portraits hang on a gallery wall with brass plaques.
+  Each opens into a viewing room with a label telling her story, what she
+  holds and rides, and her mantra.
+- **Her battles:** six stories from the Devi Mahatmya that you play:
+  - wake Vishnu so he can kill Madhu and Kaitabha;
+  - arm the goddess and meet every shape Mahisha takes;
+  - burn Smoke-eyes with हुं;
+  - draw Kali out of a frown;
+  - catch Raktabija's blood before it lands;
+  - take the Mothers back into the One.
+- **The music room:** garba, dandiya, dhaak and dhunuchi, synthesised live
+  with dancers on the beat. You can clap or drum along.
+- **The listening list:** Gujarati garba and Bengali Pujo songs for each
+  night, linked to YouTube searches.
+- More in `docs/navadurga.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

@@ -65,7 +65,8 @@ export type EffectId =
   | 'outrage'
   | 'jelly'
   | 'vishnu1000'
-  | 'gita';
+  | 'gita'
+  | 'navadurga';
 
 export interface EffectDef {
   id: EffectId;
@@ -673,6 +674,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['18 chapters · 701 verses · ~2¼ hours', 'Devanagari · roman · a new English translation', 'about 100 painted tableaux · chant, flute, conch'],
     ink: '#ec7322',
     wash: 'rgba(236, 115, 34, 0.12)',
+  },
+
+  {
+    id: 'navadurga',
+    name: 'नवदुर्गा · Nine Nights',
+    tagline: 'A small gallery for Navaratri: the nine forms of Durga in pen, ballpoint, crayon and chalk, six of her battles to play your way through, and a music room of garba, dandiya and dhaak.',
+    blurb:
+      'One goddess, nine nights, nine forms, hung on a gallery wall with brass labels: Shailaputri in hatched pen on ochre under a sunrise of patterned rays, with a quilt of nine moons beneath; Brahmacharini in blue and red ballpoint under rings of fans; Chandraghanta in crayon on taped scraps of paper, her bell ringing; Kushmanda smiling the cosmic egg into being in gold on night paper; Skandamata on a lotus with her son in her lap; Katyayani in cream on rust with the buffalo fleeing; Kalaratri in chalk on indigo, breathing fire; Mahagauri in grey pencil and gold; and Siddhidatri in every manner at once. Step up to a painting and its label tells her story, what she holds, what she rides and her mantra. Then go into her battles from the Devi Mahatmya and take part in each: tap Brahma to sing so the goddess of sleep leaves Vishnu, and drag her out of him; send out each god\u2019s light until it becomes a woman, put their weapons in her hands, and meet every shape Mahisha takes — noose for the buffalo, sword for the lion, arrows for the man, sword again for the elephant; hold the syllable \u0939\u0941\u0902 and burn Smoke-eyes to ash; frown her brow until Kali springs out of it; catch every drop of Raktabija\u2019s blood in Chamunda\u2019s mouth before it can stand up as another demon; and draw the seven Mothers back into the One. Last, the music room: a garba circle turning round the lit pot and quickening as it goes, dandiya pairs striking sticks, and for the Bengali Pujo the dhaki with his plumed drum, the kansar gong, conch, ulu and dhunuchi dancers swinging smoking pots before the goddess — all synthesised as you listen, and you can clap or strike along — with a listening list for each night of Gujarati garba and Bengali Pujo songs, from the Mahalaya dawn broadcast to the immersion.',
+    spec: ['9 portraits in 9 hand-drawn manners', '6 playable battles from the Devi Mahatmya', 'garba · dandiya · dhaak · dhunuchi, synthesised'],
+    ink: '#b8402a',
+    wash: 'rgba(184, 64, 42, 0.12)',
   },
 
 ];
