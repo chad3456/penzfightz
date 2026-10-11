@@ -6,5 +6,6 @@ import { MASLOW } from './maslow';
 import { SPOTLIGHT } from './spotlight';
 import { SURVIVOR } from './survivor';
 import { FENCE } from './fence';
+import { TERRITORY } from './territory';
 
-export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE];
+export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY];

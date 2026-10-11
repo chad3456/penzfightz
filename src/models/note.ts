@@ -47,7 +47,8 @@ export function titlePanel(g: G, p: Panel) {
   g.beginPath(); g.rect(p.x + 7, p.y + 7, p.w, h); g.fillStyle = ink; g.fill();
   g.beginPath(); g.rect(p.x, p.y, p.w, h); inkFill(g, paper, 2.6, ink);
   g.fillStyle = ink; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
-  g.font = `600 58px ${CINZEL}`; g.fillText(p.title, p.x + pad, p.y + pad + 48);
+  let ts = 58; g.font = `600 ${ts}px ${CINZEL}`; while (g.measureText(p.title).width > p.w - pad * 2 && ts > 30) { ts -= 2; g.font = `600 ${ts}px ${CINZEL}`; }
+  g.fillText(p.title, p.x + pad, p.y + pad + 48);
   g.font = `italic 30px ${SERIF}`; let y = wrap(g, p.def, p.x + pad, p.y + pad + 64 + 26, p.w - pad * 2, 38);
   g.fillStyle = p.accent ?? '#a9302a'; g.font = `600 19px ${CINZEL}`; y = wrap(g, p.credit.toUpperCase(), p.x + pad, y + 10, p.w - pad * 2, 26);
   return p.y + h;
