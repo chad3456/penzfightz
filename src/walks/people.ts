@@ -11,7 +11,7 @@
  * Units are about a centimetre on a 170 cm figure: a standing figure is
  * about 96 units tall.
  */
-import { type G, type Pt, type Part, group, INK, shade, TAU, D, ellipse, ln, rng, pick, SKIN, HAIR, C } from './kit';
+import { type G, type Pt, type Part, group, INK, shade, TAU, D, ellipse, ln, rng, pick, rounded, SKIN, HAIR, C } from './kit';
 
 export type HairStyle = 'short' | 'buzz' | 'long' | 'bob' | 'ponytail' | 'bun' | 'afro' | 'curly' | 'bald' | 'balding' | 'braids' | 'hijab' | 'locs' | 'side';
 export type TopKind = 'tee' | 'shirt' | 'sweater' | 'hoodie' | 'jacket' | 'scrubs' | 'blouse' | 'tank' | 'coat' | 'dress' | 'vest';
@@ -23,7 +23,11 @@ export interface Look {
   shoes: string;
   fem?: boolean; build?: number; height?: number; age?: 'kid' | 'teen' | 'adult' | 'old';
   beard?: boolean | 'stubble' | 'mustache'; glasses?: string | boolean;
-  hat?: { kind: 'cap' | 'beanie' | 'hardhat' | 'cowboy' | 'bucket' | 'headphones' | 'band' | 'mortar'; color: string; tassel?: string };
+  hat?: { kind: 'cap' | 'beanie' | 'hardhat' | 'cowboy' | 'bucket' | 'headphones' | 'band' | 'mortar' | 'helmet' | 'shako'; color: string; tassel?: string };
+  /** vertical stripes on the top (a referee, a sailor) */
+  stripes?: string;
+  /** a number on the chest */
+  number?: string;
   bag?: { kind: 'backpack' | 'tote' | 'messenger'; color: string };
   apron?: string; lanyard?: string; scarf?: string; socks?: string;
   /** the cloth of a hijab */
@@ -397,6 +401,14 @@ export function person(g: G, f: Fig): Joints {
       group(g, [{ k: 'blob', pts: [[Hc[0] - hx * 1.04, Hc[1] - 1.6], [Hc[0] - hx * 0.5, Hc[1] - hy * 1.05], [Hc[0] + hx * 0.5, Hc[1] - hy * 1.05], [Hc[0] + hx * 1.04, Hc[1] - 1.8]] }], c, lw);
       group(g, [{ k: 'poly', pts: [[Hc[0], Hc[1] - hy * 1.45], [Hc[0] + hx * 1.6, Hc[1] - hy * 1.05], [Hc[0], Hc[1] - hy * 0.72], [Hc[0] - hx * 1.6, Hc[1] - hy * 1.05]] }], c, lw);
       const tc = L.hat.tassel ?? C.mustard; g.save(); g.strokeStyle = tc; g.lineWidth = lw * 1.6; g.beginPath(); g.moveTo(Hc[0], Hc[1] - hy * 1.05); g.lineTo(Hc[0] + hx * 1.3, Hc[1] - hy * 0.95); g.lineTo(Hc[0] + hx * 1.35, Hc[1] - hy * 0.3); g.stroke(); g.restore();
+    } else if (hk === 'helmet') {
+      group(g, [{ k: 'blob', pts: [[Hc[0] - hx * 1.18, Hc[1] + 2.5], [Hc[0] - hx * 1.15, Hc[1] - hy * 0.7], [Hc[0] - hx * 0.2, Hc[1] - hy * 1.22], [Hc[0] + hx * 0.9, Hc[1] - hy * 0.85], [Hc[0] + hx * 1.15, Hc[1] - 0.6], [Hc[0] + hx * 0.5, Hc[1] - 0.8], [Hc[0] - hx * 0.5, Hc[1] + 1], [Hc[0] - hx * 0.6, Hc[1] + 4]] }], c, lw);
+      if (!back) { g.save(); g.strokeStyle = '#9aa0a6'; g.lineWidth = lw * 1.4; const fx = Hc[0] + st * hx * 0.5; g.beginPath(); g.moveTo(fx - hx * 0.55, Hc[1] + 1.2); g.lineTo(fx + hx * 0.75, Hc[1] + 1.2); g.moveTo(fx - hx * 0.45, Hc[1] + 3.4); g.lineTo(fx + hx * 0.65, Hc[1] + 3.4); g.moveTo(fx + 0.2, Hc[1] + 0.4); g.lineTo(fx + 0.2, Hc[1] + 4.6); g.stroke(); g.restore(); }
+      g.save(); g.strokeStyle = '#fbfaf5'; g.lineWidth = lw * 1.6; g.beginPath(); g.moveTo(Hc[0] - hx * 0.2, Hc[1] - hy * 1.2); g.quadraticCurveTo(Hc[0] - hx * 0.9, Hc[1] - hy * 0.9, Hc[0] - hx * 1.1, Hc[1] - 1); g.stroke(); g.restore();
+    } else if (hk === 'shako') {
+      group(g, [{ k: 'poly', pts: [[Hc[0] - hx * 0.95, Hc[1] - 1], [Hc[0] - hx * 0.85, Hc[1] - hy * 1.9], [Hc[0] + hx * 0.85, Hc[1] - hy * 1.9], [Hc[0] + hx * 0.95, Hc[1] - 1]], r: 1 }], c, lw);
+      group(g, [{ k: 'poly', pts: [[Hc[0] - hx * 1.0, Hc[1] - 2.2], [Hc[0] + hx * 1.0, Hc[1] - 2.2], [Hc[0] + hx * 1.0, Hc[1] - 0.6], [Hc[0] - hx * 1.0, Hc[1] - 0.6]], r: 0.4 }], '#2b2b30', lw);
+      group(g, [{ k: 'ell', x: Hc[0], y: Hc[1] - hy * 2.25, rx: 1.6, ry: 3.4 }], L.hat.tassel ?? '#fbfaf5', lw);
     } else if (hk === 'band') {
       group(g, [{ k: 'poly', pts: [[Hc[0] - hx * 1.06, Hc[1] - 2.4], [Hc[0] + hx * 1.06, Hc[1] - 3.2], [Hc[0] + hx * 1.06, Hc[1] - 1.4], [Hc[0] - hx * 1.06, Hc[1] - 0.6]], r: 0.5 }], c, lw);
     }
@@ -446,6 +458,14 @@ export function person(g: G, f: Fig): Joints {
   // torso
   const tb = tk === 'shirt' || tk === 'blouse' ? 1 : tk === 'jacket' || tk === 'hoodie' ? 3 : tk === 'coat' ? 4 : 0.5;
   group(g, [{ k: 'poly', pts: torsoPts(tb), r: 4.2 }], top, lw);
+  if (L.stripes || L.number) {
+    g.save(); rounded(g, torsoPts(tb), 4.2); g.clip();
+    if (L.stripes) { g.fillStyle = L.stripes; for (let x = -16; x < 18; x += 4) g.fillRect(x + st * 1.4, N[1] - 4, 2, P[1] - N[1] + 10); }
+    if (L.number && !back) { g.fillStyle = '#fbfaf5'; g.strokeStyle = INK; g.lineWidth = lw * 0.6; g.font = `bold 10px ${'Arial'}`; g.textAlign = 'center'; g.textBaseline = 'middle'; const nx = (N[0] + P[0]) / 2 + st * 2, ny = (N[1] + P[1]) / 2 - 2; g.strokeText(L.number, nx, ny); g.fillText(L.number, nx, ny); }
+    if (L.number && back) { g.fillStyle = '#fbfaf5'; g.font = `bold 12px ${'Arial'}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(L.number, (N[0] + P[0]) / 2, (N[1] + P[1]) / 2 - 2); }
+    g.restore();
+    g.save(); rounded(g, torsoPts(tb), 4.2); g.lineWidth = lw; g.strokeStyle = INK; g.stroke(); g.restore();
+  }
   if (back && L.bag?.kind === 'backpack') group(g, [{ k: 'poly', pts: [[N[0] - TWs * 0.7, N[1] + 4], [N[0] + TWs * 0.7, N[1] + 4], [P[0] + TWh * 0.75, P[1] - 5], [P[0] - TWh * 0.75, P[1] - 5]], r: 3 }], L.bag.color, lw);
   // torso details
   if (!back) {
