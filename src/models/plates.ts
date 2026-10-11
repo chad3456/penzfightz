@@ -2,5 +2,6 @@
 import { type Plate } from '../walks/stage';
 import { ICEBERG } from './iceberg';
 import { CONTROL } from './control';
+import { MASLOW } from './maslow';
 
-export const MODELS: Plate[] = [ICEBERG, CONTROL];
+export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW];
