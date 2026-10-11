@@ -248,8 +248,9 @@ export function person(g: G, f: Fig): Joints {
       const jaw = (a: number): Pt => [Hc[0] + Math.cos(a) * hx * (1 - 0.16 * Math.sin(a)) * 0.99 + st * 1.5 * Math.sin(a), Hc[1] + Math.sin(a) * hy * 0.99];
       for (let i = 0; i <= 12; i++) { const a = 0.05 + (i / 12) * (Math.PI - 0.1); bp.push(jaw(a)); }
       const mxx = Hc[0] + fc + st * 1.5, myy = Hc[1] + 4.3 * hs;
-      bp.push([Hc[0] - hx * 0.86 + fc * 0.2, Hc[1] + 1.2], [mxx - 2.6, myy - 0.6], [mxx - 1.4, myy - 1.6], [mxx + 1.6, myy - 1.6], [mxx + 2.8, myy - 0.4], [Hc[0] + hx * 0.9 + st, Hc[1] + 1.4]);
+      bp.push([Hc[0] - hx * 0.86 + fc * 0.2, Hc[1] + 1.2], [mxx - 2.4, myy + 1.0], [mxx, myy + 1.5], [mxx + 2.6, myy + 1.0], [Hc[0] + hx * 0.9 + st, Hc[1] + 1.4]);
       g.save(); g.globalAlpha = L.beard === 'stubble' ? 0.22 : 1; group(g, [{ k: 'poly', pts: bp, r: 1.2 }], L.hair, L.beard === 'stubble' ? 0 : lw); g.restore();
+      if (L.beard === true) group(g, [{ k: 'blob', pts: [[mxx - 2.6, myy - 0.2], [mxx, myy - 1.6], [mxx + 2.8, myy - 0.2], [mxx, myy - 0.5]] }], L.hair, lw * 0.8);
     }
     // the face
     if (!back) {
