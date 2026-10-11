@@ -5,6 +5,7 @@ import { BROWNSTONE } from './brownstone';
 import { NIGHTSHIFT } from './nightshift';
 import { QUAD } from './quad';
 import { AQUARIUM } from './aquarium';
+import { LAUNDROMAT } from './laundromat';
 
-export const PLATES: Plate[] = [LIBRARY, BROWNSTONE, NIGHTSHIFT, QUAD, AQUARIUM];
+export const PLATES: Plate[] = [LIBRARY, BROWNSTONE, NIGHTSHIFT, QUAD, AQUARIUM, LAUNDROMAT];
 export type { Plate, Who } from './stage';
