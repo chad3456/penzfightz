@@ -6,10 +6,13 @@
  * they are; hover or tap to meet them.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PLATES, type Plate, type Who } from './plates';
+import { PLATES as WALKS, type Plate, type Who } from './plates';
 
 const RES = 2;
 type View = { k: 'wall' } | { k: 'plate'; i: number };
+
+/** What a gallery is: its plates, its words, and what its hotspots are called. */
+export interface GalleryConfig { plates: Plate[]; title: string; sub: string; heading: string; intro: string; prefix: string; noun: string; markLabel: string; listLabel: string; hint: string }
 
 /* ───────── painting, cached ───────── */
 
@@ -60,12 +63,13 @@ function Thumb({ p, onOpen }: { p: Plate; onOpen: () => void }) {
   );
 }
 
-function Wall({ go }: { go: (v: View) => void }) {
+function Wall({ go, cfg }: { go: (v: View) => void; cfg: GalleryConfig }) {
+  const PLATES = cfg.plates;
   return (
     <div className="wl-wall">
       <header className="wl-intro">
-        <h2>Walks of Life</h2>
-        <p>Eight scenes of American life, drawn line by line in code, in the clean-ink, flat-colour manner of editorial illustration. Everyone in them has a story: open a plate, then hover over or tap anyone to meet them.</p>
+        <h2>{cfg.heading}</h2>
+        <p>{cfg.intro}</p>
       </header>
       <div className="wl-grid">
         {PLATES.map((p, i) => <Thumb key={p.key} p={p} onOpen={() => go({ k: 'plate', i })} />)}
@@ -76,7 +80,8 @@ function Wall({ go }: { go: (v: View) => void }) {
 
 /* ───────── the viewer ───────── */
 
-function Viewer({ i, go }: { i: number; go: (v: View) => void }) {
+function Viewer({ i, go, cfg }: { i: number; go: (v: View) => void; cfg: GalleryConfig }) {
+  const PLATES = cfg.plates;
   const p = PLATES[i];
   const painted = usePainted(() => getBig(p), [p.key]);
   const box = useRef<HTMLDivElement>(null);
@@ -136,14 +141,14 @@ function Viewer({ i, go }: { i: number; go: (v: View) => void }) {
     window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k);
   }, [i, go, sel, zoomAt, size]);
 
-  const download = () => { if (!painted) return; painted.c.toBlob((b) => { if (!b) return; const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `walks-of-life-${p.key}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }, 'image/png'); };
+  const download = () => { if (!painted) return; painted.c.toBlob((b) => { if (!b) return; const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `${cfg.prefix}-${p.key}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }, 'image/png'); };
   const shown = sel ?? hover;
 
   return (
     <div className="wl-viewer">
       <div className="wl-bar">
         <button onClick={() => go({ k: 'wall' })}>← All plates</button>
-        <div className="wl-name"><strong>{p.title}</strong><span>{p.place} · {who.length} people</span></div>
+        <div className="wl-name"><strong>{p.title}</strong><span>{p.place} · {who.length} {cfg.noun}</span></div>
         <div className="wl-tools">
           <button onClick={() => go({ k: 'plate', i: (i + PLATES.length - 1) % PLATES.length })} aria-label="Previous plate">‹</button>
           <span className="wl-count">{i + 1} / {PLATES.length}</span>
@@ -151,8 +156,8 @@ function Viewer({ i, go }: { i: number; go: (v: View) => void }) {
           <button onClick={() => zoomAt(1 / 1.4, size.w / 2, size.h / 2)} aria-label="Zoom out">−</button>
           <button onClick={() => zoomAt(1.4, size.w / 2, size.h / 2)} aria-label="Zoom in">+</button>
           <button onClick={reset}>Fit</button>
-          <button className={marks ? 'on' : ''} onClick={() => setMarks((m) => !m)} aria-pressed={marks}>Mark people</button>
-          <button className={list ? 'on' : ''} onClick={() => setList((m) => !m)} aria-pressed={list}>Who’s here</button>
+          <button className={marks ? 'on' : ''} onClick={() => setMarks((m) => !m)} aria-pressed={marks}>{cfg.markLabel}</button>
+          <button className={list ? 'on' : ''} onClick={() => setList((m) => !m)} aria-pressed={list}>{cfg.listLabel}</button>
           <button onClick={download} disabled={!painted}>Download</button>
         </div>
       </div>
@@ -174,7 +179,7 @@ function Viewer({ i, go }: { i: number; go: (v: View) => void }) {
               <p>{who[shown].line}</p>
             </aside>
           )}
-          <p className="wl-hint">Drag to look around · scroll or pinch to zoom · hover or tap anyone</p>
+          <p className="wl-hint">{cfg.hint}</p>
         </div>
         {list && (
           <ol className="wl-list">
@@ -188,7 +193,8 @@ function Viewer({ i, go }: { i: number; go: (v: View) => void }) {
 
 /* ───────── the room ───────── */
 
-export default function WalksOfLife({ onExit }: { onExit: () => void }) {
+export function Gallery({ cfg, onExit }: { cfg: GalleryConfig; onExit: () => void }) {
+  const PLATES = cfg.plates;
   const [view, setView] = useState<View>(() => { const k = new URLSearchParams(location.search).get('plate'); const i = PLATES.findIndex((p) => p.key === k); return i >= 0 ? { k: 'plate', i } : { k: 'wall' }; });
   const go = useCallback((v: View) => { setView(v); window.scrollTo(0, 0); }, []);
   useEffect(() => { loadFonts(); }, []);
@@ -196,9 +202,19 @@ export default function WalksOfLife({ onExit }: { onExit: () => void }) {
     <div className={`wl${view.k === 'plate' ? ' wl--view' : ''}`}>
       <header className="wl-top">
         <button className="wl-exit" onClick={onExit}>← Exit</button>
-        <div className="wl-title"><span>Walks of Life</span><em>American scenes in ink and flat colour</em></div>
+        <div className="wl-title"><span>{cfg.title}</span><em>{cfg.sub}</em></div>
       </header>
-      {view.k === 'wall' ? <Wall go={go} /> : <Viewer i={view.i} go={go} />}
+      {view.k === 'wall' ? <Wall go={go} cfg={cfg} /> : <Viewer i={view.i} go={go} cfg={cfg} />}
     </div>
   );
+}
+
+const WALKS_CFG: GalleryConfig = {
+  plates: WALKS, title: 'Walks of Life', sub: 'American scenes in ink and flat colour', heading: 'Walks of Life',
+  intro: 'Eight scenes of American life, drawn line by line in code, in the clean-ink, flat-colour manner of editorial illustration. Everyone in them has a story: open a plate, then hover over or tap anyone to meet them.',
+  prefix: 'walks-of-life', noun: 'people', markLabel: 'Mark people', listLabel: 'Who’s here', hint: 'Drag to look around · scroll or pinch to zoom · hover or tap anyone',
+};
+
+export default function WalksOfLife({ onExit }: { onExit: () => void }) {
+  return <Gallery cfg={WALKS_CFG} onExit={onExit} />;
 }

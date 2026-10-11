@@ -178,7 +178,7 @@ export function wallClock(g: G, I: Iso, wall: 'x' | 'y', c: number, u: number, z
 export function wallText(g: G, I: Iso, wall: 'x' | 'y', c: number, u: number, z: number, text: string, size: number, font: string, col = INK) {
   withPlane(g, I, wall, c, (gg) => {
     gg.translate(u, z); gg.scale(wall === 'x' ? -1 : 1, -1);
-    gg.font = `${size}px ${font}`; gg.fillStyle = col; gg.textAlign = 'center'; gg.textBaseline = 'middle'; gg.fillText(text, 0, 0);
+    const m = /^((?:italic |bold |\d00 )*)(.*)$/.exec(font)!; gg.font = `${m[1]}${size}px ${m[2]}`; gg.fillStyle = col; gg.textAlign = 'center'; gg.textBaseline = 'middle'; gg.fillText(text, 0, 0);
   });
 }
 /** A floor of square tiles in two colours, with fine joints. */
