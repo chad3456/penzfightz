@@ -165,9 +165,11 @@ export function person(g: G, f: Fig): Joints {
   else if ((f.anchor ?? 'seat') === 'seat') oy = -3.5;
 
   g.save();
+  // joints are reported in the caller's coordinates, whatever the canvas's own scale
+  const base = g.getTransform(), inv = base.inverse();
   g.translate(f.x, f.y); if (f.rot) g.rotate(f.rot); g.scale(fwd * f.s, f.s); g.translate(0, oy);
   const M = g.getTransform();
-  const u = (x: number, y: number): Pt => { const p = M.transformPoint({ x, y }); return [p.x, p.y]; };
+  const u = (x: number, y: number): Pt => { const p = inv.transformPoint(M.transformPoint({ x, y })); return [p.x, p.y]; };
 
   const sleeve = L.topKind === 'tank' || L.topKind === 'vest' ? 'none' : L.sleeve ?? (L.topKind === 'tee' || L.topKind === 'scrubs' ? 'short' : 'long');
   const top = L.top, bottom = L.bottom;
@@ -492,14 +494,14 @@ export function person(g: G, f: Fig): Joints {
   if (!back) {
     if (L.bag?.kind === 'tote') { /* drawn by the hold hook if wanted */ }
     head();
-    if (f.hold) { g.save(); g.setTransform(1, 0, 0, 1, 0, 0); f.hold(g, J); g.restore(); }
+    if (f.hold) { g.save(); g.setTransform(base); f.hold(g, J); g.restore(); }
     arm(sN, eN, hN);
   } else {
     arm(sN, eN, hN);
     head();
-    if (f.hold) { g.save(); g.setTransform(1, 0, 0, 1, 0, 0); f.hold(g, J); g.restore(); }
+    if (f.hold) { g.save(); g.setTransform(base); f.hold(g, J); g.restore(); }
   }
-  if (f.over) { g.save(); g.setTransform(1, 0, 0, 1, 0, 0); f.over(g, J); g.restore(); }
+  if (f.over) { g.save(); g.setTransform(base); f.over(g, J); g.restore(); }
   g.restore();
   return J;
 }

@@ -11174,3 +11174,65 @@ button.card:hover:not(:disabled) {
   .nd-story { font-size: 16.5px; }
 }
 @media (prefers-reduced-motion: reduce) { .nd-frame, .nd-bcard { transition: none; } }
+
+/* ───────── Walks of Life ───────── */
+.wl { --wl-paper: #f6f1e3; --wl-ink: #1f1a17; --wl-soft: #6b625a; --wl-accent: #d9493f; min-height: 100vh; background: var(--wl-paper); color: var(--wl-ink); font-family: "Cormorant Garamond", Georgia, serif; display: flex; flex-direction: column; }
+.wl button { font: inherit; color: inherit; cursor: pointer; }
+.wl-top { display: flex; align-items: center; gap: 16px; padding: 10px 18px; border-bottom: 1.5px solid var(--wl-ink); background: #fbf8ee; }
+.wl-exit { background: none; border: 1.5px solid var(--wl-ink); border-radius: 999px; padding: 4px 14px; font-size: 16px; }
+.wl-title { display: flex; flex-direction: column; line-height: 1.05; }
+.wl-title span { font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 22px; letter-spacing: 0.02em; }
+.wl-title em { font-size: 16px; color: var(--wl-soft); }
+.wl-wall { padding: 28px 22px 60px; max-width: 1400px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+.wl-intro { max-width: 760px; margin: 0 0 26px; }
+.wl-intro h2 { font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5vw, 46px); margin: 0 0 8px; }
+.wl-intro p { font-size: 20px; line-height: 1.4; margin: 0; color: #3a332d; }
+.wl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 34px 28px; }
+.wl-piece { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.wl-frame { position: relative; display: block; width: 100%; padding: 0; border: 1.5px solid var(--wl-ink); background: #ece5d2; box-shadow: 6px 6px 0 var(--wl-ink); transition: transform .15s, box-shadow .15s; overflow: hidden; }
+.wl-frame:hover, .wl-frame:focus-visible { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--wl-ink); }
+.wl-frame canvas { display: block; width: 100%; height: 100%; }
+.wl-piece figcaption { display: flex; flex-direction: column; gap: 2px; padding-top: 4px; }
+.wl-piece strong { font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 22px; }
+.wl-place { font-style: italic; font-size: 17px; color: var(--wl-soft); }
+.wl-blurb { font-size: 17px; line-height: 1.35; color: #3a332d; }
+.wl-wait { position: absolute; inset: 0; display: grid; place-items: center; font-style: italic; color: var(--wl-soft); font-size: 18px; pointer-events: none; }
+.wl-wait.big { font-size: 22px; }
+.wl--view { height: 100vh; height: 100dvh; overflow: hidden; }
+.wl-viewer { flex: 1 1 0; display: flex; flex-direction: column; min-height: 0; }
+.wl-bar { display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid rgba(31,26,23,0.25); flex-wrap: wrap; background: #fbf8ee; }
+.wl-bar > button, .wl-tools button { background: #fff; border: 1.5px solid var(--wl-ink); border-radius: 6px; padding: 3px 10px; font-size: 16px; min-height: 32px; }
+.wl-tools button.on { background: var(--wl-ink); color: #fbf8ee; }
+.wl-tools button:disabled { opacity: 0.4; cursor: default; }
+.wl-name { display: flex; flex-direction: column; line-height: 1.05; margin-right: auto; }
+.wl-name strong { font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 20px; }
+.wl-name span { font-style: italic; color: var(--wl-soft); font-size: 15px; }
+.wl-tools { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.wl-count { font-size: 15px; color: var(--wl-soft); min-width: 3.4em; text-align: center; }
+.wl-main { flex: 1 1 0; display: flex; min-height: 0; overflow: hidden; }
+.wl-stage { position: relative; flex: 1; overflow: hidden; background: #2a2622; touch-action: none; cursor: grab; }
+.wl-stage:active { cursor: grabbing; }
+.wl-layer { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.wl-layer canvas { display: block; }
+.wl-spot { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.wl-spot.marked { box-shadow: 0 0 0 calc(2px / var(--z)) rgba(255,255,255,0.9), 0 0 0 calc(4px / var(--z)) rgba(217,73,63,0.85); }
+.wl-spot.on, .wl-spot:focus-visible { box-shadow: 0 0 0 calc(3px / var(--z)) #fff, 0 0 0 calc(6px / var(--z)) var(--wl-accent); outline: none; }
+.wl-card { position: absolute; left: 16px; bottom: 44px; width: min(420px, calc(100% - 32px)); background: #fbf8ee; border: 1.5px solid var(--wl-ink); box-shadow: 5px 5px 0 var(--wl-ink); padding: 12px 16px 14px; pointer-events: none; }
+.wl-card strong { font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 20px; }
+.wl-card p { margin: 4px 0 0; font-size: 18px; line-height: 1.35; }
+.wl-hint { position: absolute; right: 12px; bottom: 8px; margin: 0; font-size: 14px; font-style: italic; color: rgba(255,255,255,0.75); pointer-events: none; }
+.wl-list { margin: 0; padding: 8px 10px 20px 34px; width: 260px; overflow-y: auto; border-left: 1px solid rgba(31,26,23,0.25); background: #fbf8ee; font-size: 17px; }
+.wl-list li { margin: 2px 0; }
+.wl-list button { background: none; border: 0; padding: 2px 0; text-align: left; }
+.wl-list button.on, .wl-list button:hover { color: var(--wl-accent); text-decoration: underline; }
+@media (max-width: 720px) {
+  .wl-top { padding: 8px 10px; }
+  .wl-wall { padding: 18px 16px 40px; }
+  .wl-intro p { font-size: 18px; }
+  .wl-bar { padding: 6px 10px; gap: 6px; }
+  .wl-tools button { padding: 2px 8px; font-size: 15px; }
+  .wl-main { flex-direction: column; }
+  .wl-list { width: auto; max-height: 34vh; border-left: 0; border-top: 1px solid rgba(31,26,23,0.25); }
+  .wl-card { bottom: 36px; }
+  .wl-hint { display: none; }
+}

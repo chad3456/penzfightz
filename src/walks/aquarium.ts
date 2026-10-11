@@ -21,7 +21,8 @@ function paint(g: G, who: Who[]) {
   g.fillStyle = 'rgba(220,80,60,0.6)'; g.fillRect(1500, 120, 90, 34); g.fillStyle = 'rgba(255,230,220,0.9)'; g.font = `bold 22px ${SANS}`; g.textAlign = 'center'; g.fillText('EXIT', 1545, 145);
 
   /* the visitors, drawn on their own layer so the water can light them */
-  const P = document.createElement('canvas'); P.width = W; P.height = H; const pg = P.getContext('2d')!;
+  const K = g.getTransform().a;
+  const P = document.createElement('canvas'); P.width = Math.round(W * K); P.height = Math.round(H * K); const pg = P.getContext('2d')!; pg.scale(K, K);
   const back: V[] = [
     { x: 600, ground: 1500, s: 7.0, turn: 0.22, look: look(801, { fem: true, skin: SKIN[4], hair: HAIR.black, style: 'long', topKind: 'jacket', top: '#c9433a', inner: C.white, bottom: C.denim, glasses: true, lanyard: C.teal }), pose: { ...POSES.cradle, armF: [30, 140], head: 6 }, mood: 'smile', who: ['Ms. Begay, 34', 'Second-grade teacher, Navajo, from Gallup. Has counted to twenty-three eleven times since the bus. The answer has been twenty-three every time, and she will count again.'], hold: (gg, J) => { const cx = (J.hN[0] + J.hF[0]) / 2, cy = (J.hN[1] + J.hF[1]) / 2; gg.beginPath(); gg.rect(cx - 30, cy - 46, 60, 80); inkFill(gg, '#9a5b34', 4); gg.beginPath(); gg.rect(cx - 24, cy - 38, 48, 66); inkFill(gg, '#fbfaf5', 3); gg.fillStyle = 'rgba(31,26,23,0.45)'; for (let i = 0; i < 6; i++) gg.fillRect(cx - 18, cy - 30 + i * 10, 28, 3); } },
     { x: 1190, ground: 1510, s: 7.0, turn: -0.18, look: look(802, { fem: false, skin: SKIN[1], hair: HAIR.black, style: 'short', topKind: 'hoodie', top: '#5c6f86', bottom: C.khaki, glasses: true }), pose: { ...POSES.standFront, armN: [-20, -10], armF: [30, 70] }, mood: 'open', who: ['Hiro, 41', 'Chaperone dad. Took the day off from the hospital lab. Knows more about sharks than the volunteer and is being extremely polite about it.'] },
@@ -43,7 +44,7 @@ function paint(g: G, who: Who[]) {
   const R = rng(9); pg.strokeStyle = 'rgba(200,245,255,0.28)'; pg.lineWidth = 6;
   for (let i = 0; i < 30; i++) { const x = R() * W, y = 700 + R() * 900, w = 60 + R() * 120; pg.beginPath(); pg.moveTo(x, y); pg.bezierCurveTo(x + w * 0.3, y - 14, x + w * 0.6, y + 14, x + w, y); pg.stroke(); }
   pg.restore();
-  g.drawImage(P, 0, 0);
+  g.drawImage(P, 0, 0, W, H);
   // hotspots
   for (const v of [...back, ...front]) { const kid = v.look.age === 'kid'; const hy = v.ground - v.s * (kid ? 56 : 88); who.push({ x: v.x, y: hy, r: v.s * (kid ? 18 : 16), name: v.who[0], line: v.who[1] }); }
 

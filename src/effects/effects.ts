@@ -66,7 +66,8 @@ export type EffectId =
   | 'jelly'
   | 'vishnu1000'
   | 'gita'
-  | 'navadurga';
+  | 'navadurga'
+  | 'walks';
 
 export interface EffectDef {
   id: EffectId;
@@ -685,6 +686,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['9 portraits in 9 hand-drawn manners', '6 playable battles from the Devi Mahatmya', 'garba · dandiya · dhaak · dhunuchi, synthesised'],
     ink: '#b8402a',
     wash: 'rgba(184, 64, 42, 0.12)',
+  },
+
+  {
+    id: 'walks',
+    name: 'Walks of Life',
+    tagline: 'Eight scenes of American life drawn in code, in clean ink and flat colour, with a story for every one of the 190 people in them.',
+    blurb:
+      'A gallery of large illustrations made entirely in code, in the manner of editorial ligne claire: one even ink line round everything, flat colour inside it, isometric cutaways, dollhouse sections, a one-ink print and a pastel. A public library\u2019s reading room on a Tuesday afternoon, with story time on the round rug and a man finishing all of Steinbeck. A Brooklyn brownstone cut open floor by floor on a Sunday evening, from the pigeons on the roof to the band in the basement and the 2 train underneath. The night shift at 3 a.m., printed in one ink on orange: a diner, an ER, a parcel hub and a bakery. A campus quad in September, with a tour walking backwards and a graduate posing for her mother. A second-grade field trip seen from inside the aquarium\u2019s big tank. A laundromat in pastel, with its cat. A California pier on a Saturday morning, from the fishermen at the rail to the surfers in the break. And a small town\u2019s Friday night football game under the lights. Open any plate, zoom in, and hover over or tap anyone to read who they are: the librarian, the trucker, the respiratory therapist on her break, the tour guide who has never tripped. Every figure is built from a pose by forward kinematics, dressed and drawn in groups so the seams vanish, and every plate can be downloaded at full size.',
+    spec: ['8 plates · about 190 people, each with a story', 'isometric · cutaway · one-ink · pastel', 'zoom, pan, hover to meet them, download'],
+    ink: '#d9493f',
+    wash: 'rgba(217, 73, 63, 0.12)',
   },
 
 ];

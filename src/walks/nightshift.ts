@@ -42,7 +42,8 @@ function duotone(g: G, w: number, h: number) {
 
 function paint(g0: G, who: Who[]) {
   // draw the trench in colour on its own canvas, then print it
-  const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d')!;
+  const K = g0.getTransform().a;
+  const cv = document.createElement('canvas'); cv.width = Math.round(W * K); cv.height = Math.round(H * K); const g = cv.getContext('2d')!; g.scale(K, K);
   const I = new Iso(600, 196, 0.68);
   const sc = new Scene(g);
 
@@ -196,11 +197,11 @@ function paint(g0: G, who: Who[]) {
   sc.draw();
 
   // print it in one ink
-  duotone(g, W, H);
+  duotone(g, cv.width, cv.height);
 
   /* the solid block, over everything outside the trench (its near walls hide what is behind them) */
   g0.fillStyle = `rgb(${ORANGE.join(',')})`; g0.fillRect(0, 0, W, H);
-  g0.drawImage(cv, 0, 0);
+  g0.drawImage(cv, 0, 0, W, H);
   // the top surface: everything but the trench mouth at height HT
   g0.save(); g0.beginPath(); g0.rect(0, 0, W, H);
   for (const [a, b, w, d] of RECTS) { const p = [I.p(a, b, HT), I.p(a + w, b, HT), I.p(a + w, b + d, HT), I.p(a, b + d, HT)]; g0.moveTo(...p[0]); g0.lineTo(...p[3]); g0.lineTo(...p[2]); g0.lineTo(...p[1]); g0.closePath(); }

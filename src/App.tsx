@@ -69,6 +69,7 @@ import { VishnuFilm } from './vishnu/VishnuFilm';
 // the Gita carries its whole text, so it loads only when opened
 const GitaFilm = lazy(() => import('./gita/GitaFilm'));
 const Navadurga = lazy(() => import('./navadurga/Navadurga'));
+const WalksOfLife = lazy(() => import('./walks/WalksOfLife'));
 import { AppFrame } from './apps/AppFrame';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
@@ -334,6 +335,13 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'ghar624') {
     return <AppFrame src="/apps/ghar-624/index.html" title="Ghar 624" onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'walks') {
+    return (
+      <Suspense fallback={<div className="wl"><span className="wl-wait big">Walks of Life</span></div>}>
+        <WalksOfLife onExit={toShelf} />
+      </Suspense>
+    );
   }
   if (shell === 'effect' && effect === 'navadurga') {
     return (

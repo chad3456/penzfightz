@@ -1883,6 +1883,16 @@ after hand-hatched illustration.
   portraits. `node scripts/render-durga-reel.mjs` writes the MP4; more in
   `docs/durga-reel.md`.
 
+## Walks of Life
+
+Eight large illustrations of American life drawn in code, in clean ink and flat
+colour: a public library's reading room, a Brooklyn brownstone cut open floor by
+floor, the night shift at 3 a.m. printed in one ink on orange, a campus quad, a
+field trip seen from inside the aquarium's big tank, a laundromat in pastel, a
+California pier, and a small town's Friday night football game. About 190 people,
+each with a story you can read by hovering over or tapping them; zoom, pan, and
+download any plate at full size. More in `docs/walks-of-life.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its
