@@ -2,6 +2,7 @@
 import { type Plate } from './stage';
 import { LIBRARY } from './library';
 import { BROWNSTONE } from './brownstone';
+import { NIGHTSHIFT } from './nightshift';
 
-export const PLATES: Plate[] = [LIBRARY, BROWNSTONE];
+export const PLATES: Plate[] = [LIBRARY, BROWNSTONE, NIGHTSHIFT];
 export type { Plate, Who } from './stage';
