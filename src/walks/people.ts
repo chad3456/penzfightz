@@ -182,6 +182,14 @@ export function person(g: G, f: Fig): Joints {
   const arm = (s: Pt, e: Pt, h: Pt) => {
     const [sk, cl] = armParts(s, e, h);
     group(g, sk, skin, lw);
+    // close up, the hand gets fingers: three short creases toward its tip
+    if (f.s > 2.6) {
+      const ang = Math.atan2(h[0] - e[0], h[1] - e[1]), hc = add(h, [(h[0] - e[0]) * 0.16, (h[1] - e[1]) * 0.16]);
+      g.save(); g.translate(hc[0], hc[1]); g.rotate(-ang); g.strokeStyle = INK; g.lineWidth = lw * 0.7; g.lineCap = 'round';
+      for (const dx of [-0.9, 0, 0.9]) { g.beginPath(); g.moveTo(dx * bw, 1.2 * bw); g.lineTo(dx * bw * 1.1, 2.7 * bw); g.stroke(); }
+      g.beginPath(); g.ellipse(-2.2 * bw, -0.2, 0.9, 1.5, 0.5, 0, TAU); g.fillStyle = skin; g.fill(); g.stroke();
+      g.restore();
+    }
     if (cl.length) group(g, cl, L.topKind === 'jacket' || L.topKind === 'coat' ? top : top, lw);
   };
   /* leg parts */
@@ -222,8 +230,8 @@ export function person(g: G, f: Fig): Joints {
     // ears
     const ears: Part[] = [];
     if (!back && L.style !== 'hijab') {
-      if (st < 0.5) { ears.push({ k: 'ell', x: Hc[0] - hx * 0.98 + fc * 0.3, y: Hc[1] + 0.8, rx: 1.3, ry: 2 }); }
-      ears.push({ k: 'ell', x: Hc[0] - (st < 0.5 ? -hx * 0.98 : hx * (0.6 + 0.25 * (1 - st))), y: Hc[1] + 1.3, rx: 1.05, ry: 1.9 });
+      if (st < 0.5) { ears.push({ k: 'ell', x: Hc[0] - hx * 0.97 + fc * 0.3, y: Hc[1] + 1.0, rx: 0.95, ry: 1.7 }); }
+      ears.push(st < 0.5 ? { k: 'ell', x: Hc[0] + hx * 0.97 + fc * 0.3, y: Hc[1] + 1.0, rx: 0.95, ry: 1.7 } : { k: 'ell', x: Hc[0] - hx * (0.6 + 0.25 * (1 - st)), y: Hc[1] + 1.3, rx: 1.05, ry: 1.9 });
     }
     // jaw
     const pts: Pt[] = [];
@@ -295,7 +303,7 @@ export function person(g: G, f: Fig): Joints {
     hairCap();
     if (!back && ['short', 'buzz', 'balding', 'bald', 'side', 'ponytail', 'bun', 'curly'].includes(L.style) && !(L.hat && L.hat.kind === 'beanie')) {
       group(g, ears, skin, lw);
-      g.save(); g.strokeStyle = INK; g.lineWidth = lw * 0.7; for (const e of ears) if (e.k === 'ell') { g.beginPath(); g.arc(e.x + 0.2, e.y, 0.8, -1.2, 1.2); g.stroke(); } g.restore();
+      g.save(); g.strokeStyle = INK; g.lineWidth = lw * 0.7; for (const e of ears) if (e.k === 'ell') { g.beginPath(); g.arc(e.x + (e.x < Hc[0] ? 0.2 : -0.2), e.y, 0.55, e.x < Hc[0] ? -1.1 : Math.PI - 1.1, e.x < Hc[0] ? 1.1 : Math.PI + 1.1); g.stroke(); } g.restore();
     }
     hat();
   };
