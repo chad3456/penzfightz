@@ -231,3 +231,33 @@ export function dog(g: G, x: number, y: number, s: number, dir: 1 | -1, col: str
   }
   g.restore();
 }
+
+/** A tree: a trunk and a crown of overlapping round clumps, with a flat shadow. */
+export function isoTree(g: G, I: Iso, x: number, y: number, h: number, r: number, lw: number, seed = 1, o: { leaf?: string; leaf2?: string; trunk?: string } = {}) {
+  const R = rng(seed), leaf = o.leaf ?? '#5f9a4a', leaf2 = o.leaf2 ?? '#4a8040', trunk = o.trunk ?? '#7a5236';
+  const [bx, by] = I.p(x, y, 0), [tx, ty] = I.p(x, y, h * 0.62);
+  g.beginPath(); g.moveTo(bx - 9 * I.s * 1.6, by); g.quadraticCurveTo(bx - 6 * I.s * 1.6, (by + ty) / 2, tx - 5 * I.s, ty); g.lineTo(tx + 5 * I.s, ty); g.quadraticCurveTo(bx + 6 * I.s * 1.6, (by + ty) / 2, bx + 9 * I.s * 1.6, by); g.closePath(); inkFill(g, trunk, lw);
+  const [cx, cy] = I.p(x, y, h * 0.78), rp = r * I.s;
+  const clumps: [number, number, number][] = [];
+  for (let i = 0; i < 9; i++) { const a = (i / 9) * TAU + R() * 0.4, d = rp * (0.45 + R() * 0.3); clumps.push([cx + Math.cos(a) * d * 1.05, cy + Math.sin(a) * d * 0.72 - rp * 0.05, rp * (0.42 + R() * 0.18)]); }
+  clumps.push([cx, cy - rp * 0.25, rp * 0.6]);
+  clumps.sort((a, b) => a[1] - b[1]);
+  // a single silhouette, then a darker underside, then highlight clumps
+  g.beginPath(); for (const [px, py, pr] of clumps) { g.moveTo(px + pr, py); g.arc(px, py, pr, 0, TAU); } g.lineWidth = lw * 2; g.strokeStyle = INK; g.stroke();
+  g.fillStyle = leaf; g.fill();
+  g.save(); g.beginPath(); for (const [px, py, pr] of clumps) { g.moveTo(px + pr, py); g.arc(px, py, pr, 0, TAU); } g.clip();
+  g.fillStyle = leaf2; for (const [px, py, pr] of clumps) { g.beginPath(); g.arc(px + pr * 0.25, py + pr * 0.35, pr * 0.85, 0, TAU); g.fill(); }
+  g.fillStyle = leaf; for (const [px, py, pr] of clumps) { g.beginPath(); g.arc(px - pr * 0.12, py - pr * 0.15, pr * 0.72, 0, TAU); g.fill(); }
+  g.strokeStyle = 'rgba(31,26,23,0.55)'; g.lineWidth = lw * 0.6; for (const [px, py, pr] of clumps) { g.beginPath(); g.arc(px - pr * 0.12, py - pr * 0.15, pr * 0.72, Math.PI * 0.1, Math.PI * 0.9); g.stroke(); }
+  g.restore();
+}
+/** A flat iso shadow for a tree, cast toward +x+y a little. */
+export function treeShadow(g: G, I: Iso, x: number, y: number, r: number, col = 'rgba(30,60,20,0.28)') {
+  onPlane(g, I, 'z', 0, (gg) => gg.ellipse(x + r * 0.35, y + r * 0.55, r * 0.95, r * 0.8, 0, 0, TAU)); g.fillStyle = col; g.fill();
+}
+/** A park bench along x or y. */
+export function bench(g: G, I: Iso, x: number, y: number, along: 'x' | 'y', lw: number, wood = '#b9824e') {
+  const L = 150;
+  if (along === 'x') { for (const lx of [x + 8, x + L - 14]) box(g, I, lx, y, 0, 6, 40, 42, { top: C.char, left: C.char, right: C.black, lw }); box(g, I, x, y, 42, L, 42, 5, { top: wood, left: shade(wood, -0.2), right: shade(wood, -0.3), lw }); box(g, I, x, y - 2, 47, L, 5, 38, { top: wood, left: shade(wood, -0.1), right: shade(wood, -0.25), lw }); }
+  else { for (const ly of [y + 8, y + L - 14]) box(g, I, x, ly, 0, 40, 6, 42, { top: C.char, left: C.char, right: C.black, lw }); box(g, I, x, y, 42, 42, L, 5, { top: wood, left: shade(wood, -0.2), right: shade(wood, -0.3), lw }); box(g, I, x - 2, y, 47, 5, L, 38, { top: wood, left: shade(wood, -0.25), right: shade(wood, -0.1), lw }); }
+}

@@ -23,7 +23,7 @@ export interface Look {
   shoes: string;
   fem?: boolean; build?: number; height?: number; age?: 'kid' | 'teen' | 'adult' | 'old';
   beard?: boolean | 'stubble' | 'mustache'; glasses?: string | boolean;
-  hat?: { kind: 'cap' | 'beanie' | 'hardhat' | 'cowboy' | 'bucket' | 'headphones' | 'band'; color: string };
+  hat?: { kind: 'cap' | 'beanie' | 'hardhat' | 'cowboy' | 'bucket' | 'headphones' | 'band' | 'mortar'; color: string; tassel?: string };
   bag?: { kind: 'backpack' | 'tote' | 'messenger'; color: string };
   apron?: string; lanyard?: string; scarf?: string; socks?: string;
   /** the cloth of a hijab */
@@ -385,6 +385,10 @@ export function person(g: G, f: Fig): Joints {
     } else if (hk === 'headphones') {
       g.save(); g.strokeStyle = INK; g.lineWidth = 2.2 + lw * 2; g.beginPath(); g.ellipse(Hc[0] - st * 1.5, Hc[1], hx * 1.12, hy * 1.12, 0, Math.PI * 1.05, Math.PI * 1.95); g.stroke(); g.strokeStyle = c; g.lineWidth = 2.2; g.stroke(); g.restore();
       group(g, [{ k: 'ell', x: Hc[0] - hx * (st > 0.5 ? 0.35 : 1.0), y: Hc[1] + 0.8, rx: 1.9, ry: 2.8 }], c, lw);
+    } else if (hk === 'mortar') {
+      group(g, [{ k: 'blob', pts: [[Hc[0] - hx * 1.04, Hc[1] - 1.6], [Hc[0] - hx * 0.5, Hc[1] - hy * 1.05], [Hc[0] + hx * 0.5, Hc[1] - hy * 1.05], [Hc[0] + hx * 1.04, Hc[1] - 1.8]] }], c, lw);
+      group(g, [{ k: 'poly', pts: [[Hc[0], Hc[1] - hy * 1.45], [Hc[0] + hx * 1.6, Hc[1] - hy * 1.05], [Hc[0], Hc[1] - hy * 0.72], [Hc[0] - hx * 1.6, Hc[1] - hy * 1.05]] }], c, lw);
+      const tc = L.hat.tassel ?? C.mustard; g.save(); g.strokeStyle = tc; g.lineWidth = lw * 1.6; g.beginPath(); g.moveTo(Hc[0], Hc[1] - hy * 1.05); g.lineTo(Hc[0] + hx * 1.3, Hc[1] - hy * 0.95); g.lineTo(Hc[0] + hx * 1.35, Hc[1] - hy * 0.3); g.stroke(); g.restore();
     } else if (hk === 'band') {
       group(g, [{ k: 'poly', pts: [[Hc[0] - hx * 1.06, Hc[1] - 2.4], [Hc[0] + hx * 1.06, Hc[1] - 3.2], [Hc[0] + hx * 1.06, Hc[1] - 1.4], [Hc[0] - hx * 1.06, Hc[1] - 0.6]], r: 0.5 }], c, lw);
     }
