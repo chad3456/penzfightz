@@ -8,5 +8,6 @@ import { SURVIVOR } from './survivor';
 import { FENCE } from './fence';
 import { TERRITORY } from './territory';
 import { ZONES } from './zones';
+import { EISENHOWER } from './eisenhower';
 
-export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY, ZONES];
+export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY, ZONES, EISENHOWER];
