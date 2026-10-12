@@ -20,7 +20,7 @@ let fontsReady: Promise<void> | null = null;
 function loadFonts() {
   if (!fontsReady) {
     fontsReady = (async () => {
-      if (!document.querySelector('link[data-wl-fonts]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/fonts-sacred/fonts.css'; l.dataset.wlFonts = '1'; document.head.appendChild(l); }
+      if (!document.querySelector('link[data-wl-fonts]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/fonts-sacred/fonts.css'; l.dataset.wlFonts = '1'; const loaded = new Promise((r) => { l.onload = r; l.onerror = r; setTimeout(r, 4000); }); document.head.appendChild(l); await loaded; }
       await Promise.all(['600 40px Cinzel', 'italic 30px "Cormorant Garamond"', '400 30px "Cormorant Garamond"'].map((f) => document.fonts.load(f).catch(() => [])));
     })();
   }

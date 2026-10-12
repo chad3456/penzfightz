@@ -1893,6 +1893,15 @@ California pier, and a small town's Friday night football game. About 190 people
 each with a story you can read by hovering over or tapping them; zoom, pan, and
 download any plate at full size. More in `docs/walks-of-life.md`.
 
+## Mind Maps
+
+Ten psychological and mental models drawn as scenes in the *Walks of Life*
+manner: Satir's iceberg, the circles of control, Maslow's house of needs, the
+spotlight effect, survivorship bias in Abraham Wald's hangar, Chesterton's
+fence, the map and the territory, the comfort, learning and panic zones, the
+Eisenhower matrix, and the sunk cost fallacy in a cinema. Numbered notes with
+sources open on hover or tap. More in `docs/mind-maps.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

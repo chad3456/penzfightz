@@ -67,7 +67,8 @@ export type EffectId =
   | 'vishnu1000'
   | 'gita'
   | 'navadurga'
-  | 'walks';
+  | 'walks'
+  | 'mindmaps';
 
 export interface EffectDef {
   id: EffectId;
@@ -697,6 +698,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['8 plates · about 190 people, each with a story', 'isometric · cutaway · one-ink · pastel', 'zoom, pan, hover to meet them, download'],
     ink: '#d9493f',
     wash: 'rgba(217, 73, 63, 0.12)',
+  },
+
+  {
+    id: 'mindmaps',
+    name: 'Mind Maps',
+    tagline: 'Ten psychological and mental models drawn as scenes in clean ink and flat colour, with numbered notes that explain each part and where the idea comes from.',
+    blurb:
+      'A companion gallery to Walks of Life: ten ideas from psychology and decision-making, each drawn as a large scene rather than a diagram. Virginia Satir\u2019s iceberg, with behaviour on the tip and coping, feelings, beliefs, expectations, yearnings and the self in layers beneath the water. The Stoic circles of control as an isometric garden ringed by the things we can only watch. Maslow\u2019s hierarchy as a stepped house of five floors. The spotlight effect in a lecture hall, seen from the lectern. Survivorship bias in Abraham Wald\u2019s hangar, with the planes that never came back outside the door. Chesterton\u2019s fence on a country road, with the reason just over the rise. The map that is not the territory, beside the land that has moved on. Comfort, learning and panic as an island, its shallows and the storm. The Eisenhower matrix as four rooms of one house. And the sunk cost fallacy in a cinema, an hour into a terrible film. Every plate carries numbered callouts and a key; hover or tap a number for the fuller explanation and its source, zoom anywhere, and download any plate at full size.',
+    spec: ['10 models · 51 numbered notes with sources', 'iceberg · rings · house · hangar · island · rooms', 'zoom, pan, hover to read, download'],
+    ink: '#3f9a96',
+    wash: 'rgba(63, 154, 150, 0.12)',
   },
 
 ];

@@ -9,5 +9,6 @@ import { FENCE } from './fence';
 import { TERRITORY } from './territory';
 import { ZONES } from './zones';
 import { EISENHOWER } from './eisenhower';
+import { SUNKCOST } from './sunkcost';
 
-export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY, ZONES, EISENHOWER];
+export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY, ZONES, EISENHOWER, SUNKCOST];
