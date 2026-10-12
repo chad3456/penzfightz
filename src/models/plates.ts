@@ -7,5 +7,6 @@ import { SPOTLIGHT } from './spotlight';
 import { SURVIVOR } from './survivor';
 import { FENCE } from './fence';
 import { TERRITORY } from './territory';
+import { ZONES } from './zones';
 
-export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY];
+export const MODELS: Plate[] = [ICEBERG, CONTROL, MASLOW, SPOTLIGHT, SURVIVOR, FENCE, TERRITORY, ZONES];
