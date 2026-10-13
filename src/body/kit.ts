@@ -90,6 +90,10 @@ export function treeGeo(segs: Branch[], radial = 8) {
   return mergeGeometries(gs.map((g) => g.toNonIndexed()), false)!;
 }
 export { mergeGeometries, mergeVertices };
+/** merge anything: drops uvs, un-indexes, and makes sure there are normals */
+export function merge(gs: THREE.BufferGeometry[]) {
+  return mergeGeometries(gs.map((g) => { const n = g.index ? g.toNonIndexed() : g.clone(); n.deleteAttribute('uv'); if (!n.attributes.normal) n.computeVertexNormals(); for (const k of Object.keys(n.attributes)) if (!['position', 'normal'].includes(k)) n.deleteAttribute(k); return n; }), false)!;
+}
 
 /** Points on a sphere, evenly (Fibonacci). */
 export function fibSphere(n: number, r = 1) { const out: THREE.Vector3[] = []; const ga = Math.PI * (3 - Math.sqrt(5)); for (let i = 0; i < n; i++) { const y = 1 - (i / (n - 1 || 1)) * 2, rr = Math.sqrt(1 - y * y), th = ga * i; out.push(V(Math.cos(th) * rr * r, y * r, Math.sin(th) * rr * r)); } return out; }
