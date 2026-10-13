@@ -55,12 +55,12 @@ export function Anchor({ id, position = [0, 0, 0] as [number, number, number], i
 }
 
 /** A material that glows when its part is selected (and pulses gently). */
-export function useHi(id: string | string[], color: string, o: { rough?: number; metal?: number; clear?: number; opacity?: number; trans?: number; sheen?: number; emissive?: string; ei?: number; side?: THREE.Side; flat?: boolean } = {}) {
+export function useHi(id: string | string[], color: string, o: { rough?: number; metal?: number; clear?: number; opacity?: number; trans?: number; sheen?: number; emissive?: string; ei?: number; side?: THREE.Side; flat?: boolean; vc?: boolean } = {}) {
   const S = useScene();
   const ids = Array.isArray(id) ? id : [id];
-  const m = useMemo(() => new THREE.MeshPhysicalMaterial({ color, roughness: o.rough ?? 0.45, metalness: o.metal ?? 0, clearcoat: o.clear ?? 0.35, clearcoatRoughness: 0.3, sheen: o.sheen ?? 0, sheenColor: new THREE.Color(color).offsetHSL(0, -0.1, 0.25), transmission: o.trans ?? 0, thickness: 0.6, transparent: (o.opacity ?? 1) < 1, opacity: o.opacity ?? 1, depthWrite: (o.opacity ?? 1) >= 1, emissive: new THREE.Color(o.emissive ?? color), emissiveIntensity: o.ei ?? 0, side: o.side ?? THREE.FrontSide, flatShading: !!o.flat }),
+  const m = useMemo(() => new THREE.MeshPhysicalMaterial({ color, roughness: o.rough ?? 0.45, metalness: o.metal ?? 0, clearcoat: o.clear ?? 0.35, clearcoatRoughness: 0.3, sheen: o.sheen ?? 0, sheenColor: new THREE.Color(color).offsetHSL(0, -0.1, 0.25), transmission: o.trans ?? 0, thickness: 0.6, transparent: (o.opacity ?? 1) < 1, opacity: o.opacity ?? 1, depthWrite: (o.opacity ?? 1) >= 1, emissive: new THREE.Color(o.emissive ?? color), emissiveIntensity: o.ei ?? 0, side: o.side ?? THREE.FrontSide, flatShading: !!o.flat, vertexColors: !!o.vc }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [color, o.opacity, o.rough, o.metal, o.trans, o.emissive, o.side, o.flat]);
+    [color, o.opacity, o.rough, o.metal, o.trans, o.emissive, o.side, o.flat, o.vc]);
   const base = o.ei ?? 0, cur = useRef(base);
   useFrame(({ clock }) => {
     const on = S.sel !== null && ids.includes(S.sel), dim = S.sel !== null && !on;

@@ -21,6 +21,7 @@ const ENGINES: Record<string, ReturnType<typeof L>> = {
   virus: L(() => import('./engines/virus')),
   heart: L(() => import('./engines/heart')),
   micro: L(() => import('./engines/micro')),
+  brain: L(() => import('./engines/brain')),
 };
 
 type View = { k: 'home' } | { k: 'ch'; id: ChapterId } | { k: 'topic'; id: string };

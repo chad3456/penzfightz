@@ -1,5 +1,9 @@
 import type { Topic } from '../types';
 export const TEST: Topic[] = [
+  { id: 'b1', ch: 'brain', title: 'lobes', sub: 't', kind: 'brain', body: 'x', p: { lobes: true, still: true }, view: [-1, 0.35, 0.5], parts: [{ id: 'frontal', label: 'Frontal', text: '' }, { id: 'cerebellum', label: 'Cerebellum', text: '' }] },
+  { id: 'b2', ch: 'brain', title: 'glass', sub: 't', kind: 'brain', body: 'x', p: { mode: 'glass', still: true, deep: ['hippocampus', 'amygdala', 'thalamus', 'ventricles', 'caudate', 'putamen', 'callosum', 'fornix'] }, view: [-1, 0.35, 0.5], parts: [{ id: 'hippocampus', label: 'Hippocampus', text: '' }, { id: 'thalamus', label: 'Thalamus', text: '' }] },
+  { id: 'b3', ch: 'brain', title: 'slice', sub: 't', kind: 'brain', body: 'x', p: { mode: 'slice', still: true }, view: [-0.3, 0.3, 1], parts: [{ id: 'grey', label: 'Grey', text: '' }, { id: 'white', label: 'White', text: '' }] },
+  { id: 'b4', ch: 'brain', title: 'half', sub: 't', kind: 'brain', body: 'x', p: { mode: 'half', still: true, deep: ['callosum', 'thalamus', 'pituitary', 'hypothalamus'] }, view: [-1, 0.1, 0.05], parts: [{ id: 'callosum', label: 'CC', text: '' }] },
   { id: 'blood-cells', ch: 'blood', title: 'Blood test', sub: 't', kind: 'micro', body: 'x', p: { bg: 'vessel', fit: [0, 0, 0, 2.4], actors: [
     { k: 'rbc', n: 40, spread: [5, 1.8, 1.8], id: 'rbc' }, { k: 'neutrophil', at: [0.5, 0.2, 0.6], id: 'wbc' }, { k: 'lymph', at: [-1.2, -0.6, 0.4], id: 'lymph' }, { k: 'platelet', n: 12, spread: [4, 1.5, 1.5], id: 'platelet' }, { k: 'plasma', n: 80, spread: [5, 2, 2], color: '#f2c97a' } ] },
     parts: [{ id: 'rbc', label: 'Red cell', text: '' }, { id: 'wbc', label: 'Neutrophil', text: '' }, { id: 'lymph', label: 'Lymphocyte', text: '' }, { id: 'platelet', label: 'Platelets', text: '' }] },
