@@ -27,6 +27,13 @@ function Backdrop({ bg }: { bg: string }) {
   return null;
 }
 
+/** eases the shared step value toward the chosen step, every frame */
+function Follower({ ctx }: { ctx: SceneCtx }) {
+  const live = useRef(ctx); live.current = ctx;
+  useFrame((_, dt) => { const c = live.current; c.st.current += (c.stage - c.st.current) * Math.min(1, dt * 2.6); });
+  return null;
+}
+
 type OC = { target: THREE.Vector3; update: () => void; addEventListener: (e: string, f: () => void) => void; removeEventListener: (e: string, f: () => void) => void; autoRotate: boolean };
 
 /** Frames the model when it arrives and flies to the chosen part. */
@@ -79,6 +86,7 @@ export function Stage3D({ ctx, children, bg = '#0c1626', view = [0.35, 0.22, 1],
   return (
     <Canvas dpr={[1, 2]} camera={{ fov: 38, position: [0, 0, 8] }} gl={{ antialias: false, powerPreference: 'high-performance', preserveDrawingBuffer: true }} onPointerMissed={() => ctx.setSel(null)}>
       <Backdrop bg={bg} />
+      <Follower ctx={ctx} />
       <hemisphereLight args={['#dfe9ff', '#2a1c1c', 0.55]} />
       <directionalLight position={[4, 6, 5]} intensity={2.1} color="#fff4e6" />
       <directionalLight position={[-6, -2, -4]} intensity={1.1} color="#8fb8ff" />

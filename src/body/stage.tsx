@@ -72,10 +72,4 @@ export function useHi(id: string | string[], color: string, o: { rough?: number;
   return m;
 }
 
-/** Smoothly follow the stage; returns a ref read in useFrame. */
-export function useStageFollower() {
-  const S = useScene();
-  useFrame((_, dt) => { S.st.current += (S.stage - S.st.current) * Math.min(1, dt * 2.6); });
-  return S.st;
-}
 export type { Part };
