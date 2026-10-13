@@ -71,6 +71,7 @@ const GitaFilm = lazy(() => import('./gita/GitaFilm'));
 const Navadurga = lazy(() => import('./navadurga/Navadurga'));
 const WalksOfLife = lazy(() => import('./walks/WalksOfLife'));
 const MindMaps = lazy(() => import('./models/MindMaps'));
+const BodyAtlas = lazy(() => import('./body/Atlas'));
 import { AppFrame } from './apps/AppFrame';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
@@ -336,6 +337,13 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'ghar624') {
     return <AppFrame src="/apps/ghar-624/index.html" title="Ghar 624" onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'body') {
+    return (
+      <Suspense fallback={<div className="ba"><span className="ba-wait">Body Atlas</span></div>}>
+        <BodyAtlas onExit={toShelf} />
+      </Suspense>
+    );
   }
   if (shell === 'effect' && effect === 'mindmaps') {
     return (

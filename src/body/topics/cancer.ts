@@ -20,7 +20,7 @@ export const CANCER: Topic[] = [
 
   t('cancer-mutation', 'A mutation in a cancer gene', 'One letter, a switch stuck on', 'dna', { mode: 'mutation', mut: 'sub', still: true, n: 40 },
     'Genes that control cell division come in two kinds. Proto-oncogenes, such as RAS, are accelerators; a mutation can jam them on, turning them into oncogenes. Tumour suppressor genes, such as TP53 and RB1, are brakes; both copies usually have to be lost for the brake to fail.\n\nA single changed base pair can be enough to alter the protein. Here one pair swaps; step through to see it change.',
-    [['mutation', 'The mutated base pair', 'A substitution: one letter for another.'], ['backbone', 'DNA backbone', ''], ['base', 'Bases', 'A–T and G–C pairs.']],
+    [['mutation', 'The mutated base pair', 'A substitution: one letter for another.'], ['backbone', 'DNA backbone', 'Sugar–phosphate chain.'], ['base', 'Bases', 'A–T and G–C pairs.']],
     { steps: [['Normal', 'The original sequence.'], ['Mutated', 'One base pair changes.']], q: 'oncogenes tumor suppressor genes RAS TP53' }),
 
   t('tumour-growth', 'How a tumour grows', 'From a few cells to a mass', 'micro',
@@ -44,13 +44,13 @@ export const CANCER: Topic[] = [
       { k: 'platelet', id: 'platelets', at: [[-1.2, -1.0, 0.3], [-1.2, -1.0, 0.3], [0.8, 0, 0], [2.0, -1.0, 0.3], [2.0, -1.0, 0.3]], n: 6, spread: 0.3, o: [0, 0, 1, 1, 0] },
       { k: 'cancer', id: 'secondary', at: [2.2, -2.6, 0.3], n: 6, spread: 0.4, s: [0.01, 0.01, 0.01, 0.01, 0.45] }] },
     'Most cancer deaths are caused not by the first tumour but by its spread. To metastasise, a cell must break away, squeeze into a blood or lymph vessel, survive the journey (often cloaked in platelets), stick to a vessel wall somewhere else, squeeze out, and grow in a foreign organ.\n\nEach step is hard, so only a tiny fraction of the cells that escape succeed. Different cancers favour different destinations: breast and prostate cancers often go to bone, colon cancer to the liver.',
-    [['tumour', 'Primary tumour', ''], ['ctc', 'Circulating tumour cell', 'Travelling in the blood.'], ['platelets', 'Platelet cloak', 'Shields it from immune cells.'], ['secondary', 'Secondary tumour', 'A metastasis.'], ['wall', 'Vessel wall', 'Crossed twice.']],
+    [['tumour', 'Primary tumour', 'The original cancer.'], ['ctc', 'Circulating tumour cell', 'Travelling in the blood.'], ['platelets', 'Platelet cloak', 'Shields it from immune cells.'], ['secondary', 'Secondary tumour', 'A metastasis.'], ['wall', 'Vessel wall', 'Crossed twice.']],
     { steps: [['Invade', 'Cells loosen and move.'], ['Enter', 'They cross into a vessel.'], ['Travel', 'Carried in the blood.'], ['Exit', 'They stick and squeeze out.'], ['Colonise', 'A new tumour grows.']], q: 'metastatic cascade circulating tumor cells' }),
 
   t('microenvironment', 'The tumour microenvironment', 'A tumour is not just cancer cells', 'micro',
     { bg: 'tissue', actors: [{ k: 'cancer', id: 'cancer', at: [0, 0, 0], n: 12, spread: 0.9, s: 0.5 }, { k: 'macrophage', id: 'macrophage', at: [0, 0, 0], n: 3, spread: 1.4, s: 0.55 }, { k: 'lymph', id: 'tcell', at: [1.8, 0.2, 0.5], n: 4, spread: 0.5, s: 0.55 }, { k: 'cell', id: 'fibroblast', at: [0, -0.4, 0], n: 4, spread: [2, 0.2, 1.4], s: 0.6, color: '#e8c8a8' }, { k: 'arrow', id: 'vessel', path: [[-2.8, -0.5, -0.6], [-1, -0.2, -0.3], [0.6, 0, -0.4]], color: '#d1363a' }] },
     'A tumour is an organ of sorts: cancer cells live alongside fibroblasts that lay down tough tissue, immune cells, and blood vessels. Many of these normal cells are co-opted: tumour-associated macrophages release growth signals, and fibroblasts build barriers that keep T cells out.\n\nWhether T cells can get into a tumour (“hot” versus “cold” tumours) strongly predicts how well it will respond to immunotherapy.',
-    [['cancer', 'Cancer cells', ''], ['macrophage', 'Tumour-associated macrophages', 'Often help the tumour.'], ['tcell', 'T cells', 'Often held at the edge.'], ['fibroblast', 'Cancer-associated fibroblasts', 'Build stiff surrounding tissue.'], ['vessel', 'Blood vessel', '']],
+    [['cancer', 'Cancer cells', 'Tumour cells.'], ['macrophage', 'Tumour-associated macrophages', 'Often help the tumour.'], ['tcell', 'T cells', 'Often held at the edge.'], ['fibroblast', 'Cancer-associated fibroblasts', 'Build stiff surrounding tissue.'], ['vessel', 'Blood vessel', 'Brings blood and oxygen.']],
     { q: 'tumor microenvironment immune infiltration hot cold' }),
 
   t('checkpoint-inhibitors', 'Immune checkpoint drugs', 'Releasing the brakes on T cells', 'micro',
@@ -72,7 +72,7 @@ export const CANCER: Topic[] = [
   t('chemotherapy', 'Chemotherapy', 'Hitting dividing cells', 'micro',
     { bg: 'tissue', actors: [NORMAL(14), { k: 'cancer', id: 'cancer', at: [0, 0.1, 0], n: 16, spread: 0.8, s: [0.55, 0.55, 0.35], o: [1, 1, 0.3] }, { k: 'pill', id: 'drug', at: [[0, 2.4, 0], [0, 0.6, 0], [0, 0.2, 0]], n: 20, spread: 1.3, s: 0.35 }, { k: 'fragment', id: 'dead', at: [0, 0.1, 0], n: 18, spread: 0.9, o: [0, 0, 1], color: '#b06a96' }] },
     'Most traditional chemotherapy drugs damage DNA or the machinery of cell division, so they hit cells that divide often. Cancer cells are especially vulnerable because they divide rapidly and often have broken DNA repair.\n\nBut some healthy cells also divide quickly: hair follicles, the gut lining, bone marrow. That causes hair loss, nausea, mouth sores and low blood counts. Treatment is given in cycles so healthy tissue can recover between doses.',
-    [['drug', 'Chemotherapy drug', ''], ['cancer', 'Cancer cells', 'Killed in greater numbers.'], ['normal', 'Normal cells', 'Mostly survive.'], ['dead', 'Dying cells', 'Cleared by the body.']],
+    [['drug', 'Chemotherapy drug', 'Blocks its target.'], ['cancer', 'Cancer cells', 'Killed in greater numbers.'], ['normal', 'Normal cells', 'Mostly survive.'], ['dead', 'Dying cells', 'Cleared by the body.']],
     { steps: [['Before', 'A tumour in normal tissue.'], ['Dose', 'The drug reaches all cells.'], ['Effect', 'Dividing cancer cells die.']], q: 'chemotherapy mechanism cell cycle side effects' }),
 
   t('radiotherapy', 'Radiotherapy', 'Breaking DNA with focused energy', 'micro',
@@ -88,7 +88,7 @@ export const CANCER: Topic[] = [
       { k: 'mol', id: 'signal', at: [[0, -2.0, 0], [0, -2.0, 0], [0, -2.0, 0]], n: 20, spread: [1.5, 0.3, 1], color: '#ffd25a', o: [1, 1, 0] },
       { k: 'pill', id: 'drug', at: [[-2.4, 1.2, 0], [-0.1, -0.2, 0.2], [-0.1, -0.2, 0.2]], n: 2, spread: [1.4, 0.1, 0.4], s: 0.6, color: '#ffffff' }] },
     'Some cancers depend on a single overactive protein, often a receptor or enzyme switched on by a mutation. Targeted drugs block that protein specifically: imatinib shuts down the BCR-ABL enzyme in chronic myeloid leukaemia, trastuzumab blocks the HER2 receptor in some breast cancers, and EGFR inhibitors treat lung cancers with EGFR mutations.\n\nTesting the tumour for the target first is essential. Responses can be dramatic, but cancers often evolve resistance, so new drugs and combinations keep being developed.',
-    [['receptor', 'Overactive receptor', 'Sends constant growth signals.'], ['signal', 'Growth signals', 'Shut off by the drug.'], ['drug', 'Targeted drug', 'Fits one protein.'], ['membrane', 'Cell membrane', '']],
+    [['receptor', 'Overactive receptor', 'Sends constant growth signals.'], ['signal', 'Growth signals', 'Shut off by the drug.'], ['drug', 'Targeted drug', 'Fits one protein.'], ['membrane', 'Cell membrane', 'The cell’s outer boundary.']],
     { steps: [['Signalling', 'The receptor is stuck on.'], ['Drug binds', 'It blocks the receptor.'], ['Silenced', 'Growth signals stop.']], q: 'targeted cancer therapy imatinib HER2 EGFR' }),
 
   t('avoiding-death', 'Escaping cell death', 'Apoptosis and how cancer avoids it', 'cell', { mode: 'apoptosis', still: true },
@@ -98,13 +98,13 @@ export const CANCER: Topic[] = [
 
   t('telomeres-cancer', 'Telomeres and immortal cells', 'Counting divisions', 'dna', { mode: 'telomere', still: true },
     'The ends of each chromosome are capped by telomeres, thousands of repeats of the sequence TTAGGG. Every time a normal cell divides, its telomeres shorten slightly; when they get too short, the cell stops dividing. This limits how many times most cells can divide (about 50, the Hayflick limit).\n\nAbout 90% of cancers switch on telomerase, an enzyme that rebuilds telomeres, letting them divide indefinitely. Elizabeth Blackburn, Carol Greider and Jack Szostak won the 2009 Nobel Prize for this work.',
-    [['telomere', 'Telomeres', 'Protective caps that shorten with each division.'], ['chromatid', 'Chromatids', ''], ['centromere', 'Centromere', '']],
+    [['telomere', 'Telomeres', 'Protective caps that shorten with each division.'], ['chromatid', 'Chromatids', 'One of two identical copies.'], ['centromere', 'Centromere', 'Holds the sister chromatids together.']],
     { view: [0.2, 0.2, 1], steps: [['Young cell', 'Long telomeres.'], ['Many divisions', 'Shorter.'], ['Critical', 'Very short: division stops, unless telomerase rebuilds them.'], ['Senescence', 'The cell retires.']], q: 'telomerase cancer replicative immortality' }),
 
   t('warburg', 'Cancer metabolism', 'The Warburg effect', 'micro',
     { bg: 'void', actors: [{ k: 'cancer', id: 'cancer', at: [0.8, 0, 0], s: 1.5 }, { k: 'cell', id: 'normal', at: [-1.6, 0, 0], s: 1.2 }, { k: 'mol', id: 'glucose', at: [[0.8, 2.2, 0], [0.8, 1.0, 0], [0.8, 0.1, 0]], n: 30, spread: 0.7, color: '#7fe0ff', s: 0.7 }, { k: 'mol', at: [[-1.6, 2.2, 0], [-1.6, 1.2, 0], [-1.6, 0.4, 0]], n: 6, spread: 0.6, color: '#7fe0ff', s: 0.7 }, { k: 'mol', id: 'lactate', at: [[0.8, 0, 0], [1.6, -0.6, 0], [2.6, -1.4, 0]], n: 20, spread: 0.5, color: '#ff9d6b', s: 0.6, o: [0, 1, 1] }] },
     'In the 1920s Otto Warburg noticed that tumours gulp glucose and turn much of it into lactate even when oxygen is plentiful, rather than burning it fully in their mitochondria. This is wasteful for energy but may help supply the building blocks dividing cells need.\n\nThe hunger for glucose is exploited in PET scans: a radioactive glucose look-alike (FDG) is injected and lights up tumours that take up large amounts.',
-    [['cancer', 'Cancer cell', 'Takes up glucose fast.'], ['normal', 'Normal cell', 'Takes up less and burns it fully.'], ['glucose', 'Glucose', ''], ['lactate', 'Lactate', 'Released, acidifying the tumour surroundings.']],
+    [['cancer', 'Cancer cell', 'Takes up glucose fast.'], ['normal', 'Normal cell', 'Takes up less and burns it fully.'], ['glucose', 'Glucose', 'The cell’s main fuel.'], ['lactate', 'Lactate', 'Released, acidifying the tumour surroundings.']],
     { steps: [['Uptake', 'Glucose arrives.'], ['Fermentation', 'Cancer cells ferment it.'], ['Lactate', 'Lactate is exported.']], q: 'Warburg effect aerobic glycolysis FDG-PET' }),
 
   t('colorectal-cancer', 'From polyp to bowel cancer', 'A slow sequence, and a chance to catch it', 'organ', { mode: 'colon', polyp: true, still: true },
@@ -125,7 +125,7 @@ export const CANCER: Topic[] = [
 
   t('brca', 'Inherited cancer risk', 'BRCA and DNA repair', 'dna', { mode: 'mutation', mut: 'del', still: true, n: 40 },
     'About 5 to 10% of cancers are strongly linked to an inherited fault. BRCA1 and BRCA2 genes make proteins that repair broken DNA. People born with one faulty copy have a much higher lifetime risk of breast and ovarian cancer, and some others, because losing the second copy in a cell disables repair.\n\nKnowing about the fault allows screening, preventive surgery, and treatment with PARP inhibitors, drugs that exploit the broken repair to kill cancer cells.',
-    [['mutation', 'Inherited fault', 'Here a deleted stretch.'], ['base', 'Bases', ''], ['backbone', 'Backbone', '']],
+    [['mutation', 'Inherited fault', 'Here a deleted stretch.'], ['base', 'Bases', 'The letters of the code.'], ['backbone', 'Backbone', 'Sugar–phosphate chain.']],
     { steps: [['Normal', 'Both gene copies work.'], ['One fault', 'A deletion inherited from a parent.']], q: 'BRCA1 BRCA2 homologous recombination PARP inhibitors' }),
 
   t('cervical-screening', 'HPV and cervical cancer', 'A preventable cancer', 'virus', { shape: 'icosa', r: 0.95, envelope: false, color: '#e8a0c0', genome: 'circular', genomeColor: '#4fb3d9', seed: 2 },

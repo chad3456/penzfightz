@@ -64,6 +64,7 @@ export default function Atlas({ onExit }: { onExit: () => void }) {
   const [view, setView] = useState<View>(readView);
   const [q, setQ] = useState('');
   const go = useCallback((v: View) => { setView(v); writeView(v); setQ(''); window.scrollTo(0, 0); }, []);
+  useEffect(() => { (window as unknown as { __go?: (id: string) => void }).__go = (id: string) => { (window as unknown as { ready?: boolean }).ready = false; go({ k: 'topic', id }); }; }, [go]);
   const hits = useMemo(() => (q.trim().length > 1 ? TOPICS.filter((t) => match(t, q.trim())).slice(0, 60) : null), [q]);
   return (
     <div className={`ba${view.k === 'topic' ? ' ba--topic' : ''}`}>

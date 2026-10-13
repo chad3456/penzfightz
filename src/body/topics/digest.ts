@@ -42,7 +42,7 @@ export const DIGEST: Topic[] = [
 
   t('liver', 'The liver', 'The body’s chemical factory', 'organ', { mode: 'liver', still: true },
     'The liver is the largest internal organ, weighing about 1.5 kg. It receives blood from two sources: oxygen-rich blood from the hepatic artery, and nutrient-rich blood straight from the gut through the portal vein.\n\nIt carries out hundreds of jobs: storing sugar as glycogen and releasing it between meals, making blood proteins and clotting factors, processing fats and cholesterol, breaking down drugs, alcohol and toxins, recycling old red cells, and making bile. It can regrow from as little as a quarter of its mass.',
-    [['right', 'Right lobe', 'The larger lobe.'], ['left', 'Left lobe', ''], ['portal', 'Portal vein', 'Brings about 75% of its blood, from the gut.'], ['artery', 'Hepatic artery', 'Brings oxygen-rich blood.'], ['duct', 'Bile duct', 'Carries bile to the intestine.'], ['gallbladder', 'Gallbladder', 'Stores bile.'], ['ivc', 'Inferior vena cava', 'Blood leaves through the hepatic veins into it.']],
+    [['right', 'Right lobe', 'The larger lobe.'], ['left', 'Left lobe', 'The smaller lobe.'], ['portal', 'Portal vein', 'Brings about 75% of its blood, from the gut.'], ['artery', 'Hepatic artery', 'Brings oxygen-rich blood.'], ['duct', 'Bile duct', 'Carries bile to the intestine.'], ['gallbladder', 'Gallbladder', 'Stores bile.'], ['ivc', 'Inferior vena cava', 'Blood leaves through the hepatic veins into it.']],
     { view: F, q: 'liver function regeneration portal circulation' }),
 
   t('liver-lobule', 'The liver lobule', 'A hexagon of liver cells', 'organ', { mode: 'lobule', still: true },
@@ -57,7 +57,7 @@ export const DIGEST: Topic[] = [
 
   t('cirrhosis', 'Cirrhosis', 'A liver scarred into nodules', 'organ', { mode: 'liver', cirrhosis: true, still: true },
     'Cirrhosis is the end stage of long-term liver injury from alcohol, viral hepatitis or fatty liver disease. Repeated damage and repair lay down bands of scar tissue, and surviving cells regrow in lumps (nodules), giving the liver a knobbly surface.\n\nScarring blocks blood flow through the liver, raising pressure in the portal vein, which can cause fluid in the abdomen and bleeding veins in the oesophagus. The liver gradually loses its ability to do its jobs. Treating the cause can halt it; a transplant may be needed.',
-    [['right', 'Nodular liver', 'Shrunken and firm.'], ['portal', 'Portal vein', 'Pressure rises (portal hypertension).'], ['ivc', 'Vena cava', '']],
+    [['right', 'Nodular liver', 'Shrunken and firm.'], ['portal', 'Portal vein', 'Pressure rises (portal hypertension).'], ['ivc', 'Vena cava', 'Returns blood to the heart.']],
     { view: F, q: 'cirrhosis fibrosis portal hypertension review' }),
 
   t('gallstones', 'Bile and gallstones', 'Breaking up fat', 'organ', { mode: 'liver', still: true },

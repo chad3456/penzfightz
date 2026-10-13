@@ -12,7 +12,7 @@ export const GENES: Topic[] = [
 
   t('base-pairing', 'Base pairing', 'A with T, G with C', 'dna', { still: true, seq: 'AATTGGCCATGCATGCGGCCTTAA', n: 24 },
     'The bases fit together in only two ways because of their shapes and the hydrogen bonds they can form: adenine pairs with thymine, guanine with cytosine. So each strand carries the full information for the other.\n\nThat simple rule is the basis of copying DNA, reading genes into RNA, and almost every DNA technology, from PCR to sequencing to CRISPR guides.',
-    [['pair', 'Base pair', 'One small (pyrimidine) plus one large (purine) base, so every rung is the same width.'], ['base', 'Bases', ''], ['backbone', 'Backbones', '']],
+    [['pair', 'Base pair', 'One small (pyrimidine) plus one large (purine) base, so every rung is the same width.'], ['base', 'Bases', 'The letters of the code.'], ['backbone', 'Backbones', 'Sugar–phosphate chain.']],
     { view: F, q: 'Watson-Crick base pairing hydrogen bonds' }),
 
   t('replication', 'DNA replication', 'Copying 3 billion letters', 'dna', { mode: 'replication', still: true, fit: [0, -0.5, 0, 3.6] },
@@ -32,17 +32,17 @@ export const GENES: Topic[] = [
 
   t('genetic-code', 'The genetic code', '64 codons, 20 amino acids', 'dna', { mode: 'translation', still: true, fit: [0, 0.4, 0, 3.4] },
     'With four letters in groups of three there are 64 possible codons. Sixty-one code for the 20 amino acids, so most amino acids have several codons; three mean stop. AUG means both methionine and start.\n\nThe code is almost universal: the same codons mean the same amino acids in bacteria, plants and people, which is strong evidence of common descent, and why a human gene can be made into protein by bacteria, as with insulin.',
-    [['codon', 'Codon', 'Read without gaps or overlaps.'], ['mrna', 'mRNA', ''], ['trna', 'tRNA', 'Matches codon to amino acid.'], ['chain', 'Protein chain', '']],
+    [['codon', 'Codon', 'Read without gaps or overlaps.'], ['mrna', 'mRNA', 'The message read by ribosomes.'], ['trna', 'tRNA', 'Matches codon to amino acid.'], ['chain', 'Protein chain', 'The growing protein.']],
     { view: F, steps: [['AUG', 'Start: methionine.'], ['Next codon', 'Each adds one amino acid.'], ['Redundancy', 'Several codons can mean the same amino acid.'], ['Chain', 'The sequence decides the protein.'], ['Stop', 'UAA, UAG or UGA end it.']], q: 'genetic code universality codon table' }),
 
   t('point-mutation', 'Point mutations', 'One letter changed', 'dna', { mode: 'mutation', mut: 'sub', still: true, n: 40 },
     'A point mutation changes a single base pair. Its effect depends on where it falls. It may make no difference (a silent change, since several codons mean the same amino acid), swap one amino acid for another (as in sickle cell disease), or create a premature stop codon that cuts the protein short.\n\nMutations arise from copying errors, chemicals, radiation and natural decay of DNA. Most are repaired; those in egg and sperm can be inherited; those in body cells can contribute to cancer.',
-    [['mutation', 'Changed base pair', ''], ['base', 'Bases', ''], ['backbone', 'Backbone', '']],
+    [['mutation', 'Changed base pair', 'The changed DNA.'], ['base', 'Bases', 'The letters of the code.'], ['backbone', 'Backbone', 'Sugar–phosphate chain.']],
     { view: F, steps: [['Original', 'The correct sequence.'], ['Mutated', 'One base pair differs.']], q: 'point mutation missense nonsense silent' }),
 
   t('frameshift', 'Insertions and deletions', 'Shifting the reading frame', 'dna', { mode: 'mutation', mut: 'ins', still: true, n: 40 },
     'Because the code is read in threes, inserting or deleting a number of bases that is not a multiple of three shifts every codon downstream: THE CAT ATE THE RAT becomes THE CAA TAT ETH ERA T. The result is usually a garbled, shortened protein.\n\nFrameshifts cause many inherited diseases, including some forms of cystic fibrosis and Duchenne muscular dystrophy. The commonest cystic fibrosis mutation, though, deletes exactly three bases, removing one amino acid without a frameshift.',
-    [['mutation', 'Inserted bases', ''], ['base', 'Downstream codons', 'All read wrongly after the insertion.'], ['backbone', 'Backbone', '']],
+    [['mutation', 'Inserted bases', 'The changed DNA.'], ['base', 'Downstream codons', 'All read wrongly after the insertion.'], ['backbone', 'Backbone', 'Sugar–phosphate chain.']],
     { view: F, steps: [['Original', 'In frame.'], ['Insertion', 'Extra bases shift the frame.']], q: 'frameshift mutation insertion deletion disease' }),
 
   t('chromatin', 'Chromatin', 'How 2 metres of DNA fits in a nucleus', 'dna', { mode: 'chromatin', still: true },
@@ -62,12 +62,12 @@ export const GENES: Topic[] = [
 
   t('down-syndrome', 'Down syndrome', 'An extra chromosome 21', 'dna', { mode: 'karyotype', trisomy: 21, sex: 'XX', still: true },
     'Down syndrome is caused by a third copy of chromosome 21 (trisomy 21), usually from an error when chromosomes separate during the making of the egg. The chance rises with maternal age.\n\nThe extra copies of genes lead to characteristic features, learning disability of varying degree, and higher rates of heart defects, thyroid problems and early Alzheimer’s disease. Life expectancy has risen dramatically, to around 60 years in many countries.',
-    [['extra', 'Third chromosome 21', ''], ['autosome', 'Other chromosomes', 'In normal pairs.'], ['sex', 'Sex chromosomes', 'XX here.']],
+    [['extra', 'Third chromosome 21', 'The additional copy.'], ['autosome', 'Other chromosomes', 'In normal pairs.'], ['sex', 'Sex chromosomes', 'XX here.']],
     { view: [0, 0, 1], q: 'Down syndrome trisomy 21 review' }),
 
   t('crispr', 'CRISPR gene editing', 'Molecular scissors with a guide', 'dna', { mode: 'crispr', still: true, fit: [0, 0.3, 0, 3.4] },
     'CRISPR began as a bacterial immune system against viruses. Cas9 is an enzyme that carries a short guide RNA; it scans DNA, and where the guide matches (next to a short tag sequence called PAM), it unwinds the helix and cuts both strands.\n\nThe cell then repairs the cut, and scientists can use that repair to disable a gene or write in a new sequence. Jennifer Doudna and Emmanuelle Charpentier won the 2020 Nobel Prize, and the first CRISPR therapy, for sickle cell disease and beta-thalassaemia, was approved in 2023.',
-    [['cas9', 'Cas9', 'The cutting enzyme.'], ['guide', 'Guide RNA', 'About 20 bases matching the target.'], ['pam', 'PAM site', 'NGG next to the target.'], ['cut', 'Double-strand cut', ''], ['dna', 'Target DNA', '']],
+    [['cas9', 'Cas9', 'The cutting enzyme.'], ['guide', 'Guide RNA', 'About 20 bases matching the target.'], ['pam', 'PAM site', 'NGG next to the target.'], ['cut', 'Double-strand cut', 'Where Cas9 cuts both strands.'], ['dna', 'Target DNA', 'The target sequence.']],
     { view: F, steps: [['Search', 'Cas9 scans the DNA.'], ['Match', 'The guide pairs with the target.'], ['Cut', 'Both strands are cut.'], ['Repair', 'The cell rejoins the ends, sometimes with an edit.']], q: 'CRISPR Cas9 mechanism genome editing therapy', refs: ['jinek2012'] }),
 
   t('pcr', 'PCR', 'Copying DNA billions of times', 'dna', { mode: 'pcr', still: true },
@@ -77,7 +77,7 @@ export const GENES: Topic[] = [
 
   t('epigenetics', 'Epigenetics', 'Marks on the DNA', 'dna', { mode: 'methyl', still: true, seq: 'ACGTCGACGGCATCGCGTTACGCGATCG', n: 40 },
     'Epigenetic marks change how genes are used without changing the sequence. The best known is DNA methylation: a small chemical group added to cytosines, usually where C is followed by G. Methylated stretches near a gene’s start tend to keep it switched off.\n\nThese marks are copied when cells divide, which is how a liver cell stays a liver cell. They shift with age and environment, and abnormal methylation is common in cancer. How far they pass between generations in humans is still debated.',
-    [['methyl', 'Methyl groups', 'Shown as pink dots.'], ['base', 'Cytosines', 'The usual site.'], ['backbone', 'DNA', '']],
+    [['methyl', 'Methyl groups', 'Shown as pink dots.'], ['base', 'Cytosines', 'The usual site.'], ['backbone', 'DNA', 'Sugar–phosphate chain.']],
     { view: F, q: 'DNA methylation epigenetic regulation gene silencing' }),
 
   t('splicing', 'RNA splicing', 'Cutting out the gaps', 'dna', { mode: 'splicing', still: true },
@@ -87,12 +87,12 @@ export const GENES: Topic[] = [
 
   t('protein-folding', 'Protein folding', 'From chain to shape', 'dna', { mode: 'protein', still: true, fit: [0, 0, 0, 2.2] },
     'A protein starts as a string of amino acids, but works only when folded into a precise 3D shape. Parts of the chain curl into spirals (alpha helices) or zig-zag sheets (beta sheets), and these pack together, with water-hating parts buried inside.\n\nShape decides function: an enzyme’s active site, a receptor’s binding pocket. Misfolded proteins can clump, as in Alzheimer’s and Parkinson’s. Predicting shape from sequence was a 50-year problem until AlphaFold largely solved it in 2020.',
-    [['protein', 'Protein chain', 'Coloured from start (blue) to end (red).'], ['helix', 'Alpha helix', ''], ['sheet', 'Beta strand', ''], ['site', 'Active site', 'Where the work is done.']],
+    [['protein', 'Protein chain', 'Coloured from start (blue) to end (red).'], ['helix', 'Alpha helix', 'A spiral section of the chain.'], ['sheet', 'Beta strand', 'A flat, pleated section.'], ['site', 'Active site', 'Where the work is done.']],
     { view: F, steps: [['Unfolded', 'A straight chain.'], ['Folding', 'Helices and strands form.'], ['Packing', 'They come together.'], ['Folded', 'A working shape.']], q: 'protein folding structure prediction AlphaFold', refs: ['jumper2021'] }),
 
   t('telomeres', 'Telomeres and ageing', 'Chromosome caps that wear down', 'dna', { mode: 'telomere', still: true },
     'Telomeres are long runs of the repeat TTAGGG at chromosome ends, bound by protective proteins. Because DNA copying cannot reach the very end of a strand, telomeres shorten a little with every division.\n\nShort telomeres are associated with ageing, and when they get critically short cells stop dividing. Stem cells and egg and sperm precursors use telomerase to keep theirs long. Rare inherited telomere faults cause early bone marrow failure and lung scarring.',
-    [['telomere', 'Telomere', ''], ['chromatid', 'Chromatids', ''], ['centromere', 'Centromere', '']],
+    [['telomere', 'Telomere', 'Protective end cap.'], ['chromatid', 'Chromatids', 'One of two identical copies.'], ['centromere', 'Centromere', 'Holds the sister chromatids together.']],
     { view: F, steps: [['Young', 'Long telomeres.'], ['Dividing', 'Shortening.'], ['Old', 'Short.'], ['Senescent', 'Division stops.']], q: 'telomere length ageing telomerase' }),
 
   t('mitochondrial-dna', 'Mitochondrial DNA', 'A second genome, from mother', 'dna', { mode: 'circle', still: true },
@@ -102,6 +102,6 @@ export const GENES: Topic[] = [
 
   t('sex-chromosomes', 'X and Y', 'Sex chromosomes', 'dna', { mode: 'karyotype', sex: 'XX', still: true },
     'The X chromosome is large and carries about 800 protein-coding genes; the Y is small, with fewer than 100, including SRY, which starts development of testes. In XX cells, one X is switched off early in development (X-inactivation), so both sexes have one active X.\n\nBecause males have only one X, faults in X-linked genes, such as those causing haemophilia or red–green colour blindness, show up far more often in males.',
-    [['sex', 'Sex chromosomes', 'Here XX.'], ['autosome', 'Autosomes', '']],
+    [['sex', 'Sex chromosomes', 'Here XX.'], ['autosome', 'Autosomes', 'Non-sex chromosomes.']],
     { view: [0, 0, 1], q: 'X inactivation Y chromosome SRY' }),
 ];

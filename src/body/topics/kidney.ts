@@ -37,7 +37,7 @@ export const KIDNEY: Topic[] = [
 
   t('bladder', 'The bladder', 'A stretchy store', 'organ', { mode: 'bladder', still: true },
     'The bladder is a hollow bag of muscle (the detrusor) lined with a stretchy layer that folds when empty. As it fills, stretch sensors signal the brain; the first urge comes at about 150 to 250 ml, and it can hold about 400 to 600 ml.\n\nTwo sphincters keep it shut: an internal one controlled automatically and an external one under voluntary control. When you decide to go, the brain relaxes the sphincters and contracts the detrusor. Move the slider to fill it.',
-    [['bladder', 'Detrusor muscle', 'Contracts to empty the bladder.'], ['urine', 'Urine', ''], ['ureter', 'Ureters', 'Enter at an angle that acts as a valve against backflow.'], ['sphincter', 'Sphincter', 'Keeps urine in.'], ['urethra', 'Urethra', 'The exit.']],
+    [['bladder', 'Detrusor muscle', 'Contracts to empty the bladder.'], ['urine', 'Urine', 'Stored until it is passed.'], ['ureter', 'Ureters', 'Enter at an angle that acts as a valve against backflow.'], ['sphincter', 'Sphincter', 'Keeps urine in.'], ['urethra', 'Urethra', 'The exit.']],
     { view: F, controls: [ctl('fill', 'Fullness', 0, 1, 0.6, 0.05)], q: 'bladder physiology micturition control' }),
 
   t('dialysis', 'Dialysis', 'An artificial kidney', 'micro',

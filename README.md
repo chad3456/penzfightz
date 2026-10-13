@@ -1902,6 +1902,17 @@ fence, the map and the territory, the comfort, learning and panic zones, the
 Eisenhower matrix, and the sunk cost fallacy in a cinema. Numbered notes with
 sources open on hover or tap. More in `docs/mind-maps.md`.
 
+## Body Atlas
+
+How the human body works, in 321 interactive 3D models across eighteen
+chapters: the whole body, heart, blood vessels, blood, brain, neurons and
+nerves, lungs, digestion and liver, kidneys, the immune system, viruses,
+bacteria, cancer, the cell, DNA and genes, bones and muscle, the senses and
+skin, and hormones. Every model is procedural (no 3D files): turn it, tap a
+numbered part to fly to it, step through processes, move sliders that change
+it, and follow references checked against PubMed. For learning, not medical
+advice. More in `docs/body-atlas.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

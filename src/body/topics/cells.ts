@@ -47,12 +47,12 @@ export const CELLS: Topic[] = [
 
   t('meiosis', 'Meiosis', 'Making eggs and sperm', 'cell', { mode: 'meiosis', still: true },
     'Meiosis is a special division that halves the chromosome number, from 46 to 23, so that egg and sperm together restore 46. It takes two divisions. In the first, matching chromosomes from mother and father pair up, swap segments (crossing over) and separate; in the second, sister chromatids separate, as in mitosis.\n\nCrossing over and the random sorting of chromosomes mean every egg and sperm is genetically unique. The animation shows the first division in simplified form.',
-    [['chromosome', 'Chromosome pairs', 'One from each parent.'], ['spindle', 'Spindle', ''], ['membrane', 'Cell', 'Divides twice, giving four cells.'], ['centrosome', 'Poles', '']],
+    [['chromosome', 'Chromosome pairs', 'One from each parent.'], ['spindle', 'Spindle', 'Microtubules that pull chromosomes.'], ['membrane', 'Cell', 'Divides twice, giving four cells.'], ['centrosome', 'Poles', 'Organises the spindle.']],
     { view: V3, steps: [['Interphase', 'DNA copied.'], ['Pairing', 'Matching chromosomes pair and cross over.'], ['Line up', 'Pairs line up at the middle.'], ['Separate', 'Each pair is split.'], ['Divide', 'Two cells; a second division follows.']], q: 'meiosis crossing over recombination aneuploidy' }),
 
   t('apoptosis', 'Apoptosis', 'Programmed cell death', 'cell', { mode: 'apoptosis', still: true },
     'Every day tens of billions of cells in your body die on purpose. In apoptosis, a cell activates enzymes called caspases that dismantle it from inside: it shrinks, its DNA is chopped up, the membrane bulges into blebs, and it breaks into neat packages that neighbouring cells and macrophages swallow, without spilling contents or causing inflammation.\n\nApoptosis sculpts the developing body (it separates fingers in the embryo) and removes damaged or infected cells.',
-    [['cell', 'Dying cell', ''], ['nucleus', 'Fragmenting nucleus', ''], ['bleb', 'Blebs', ''], ['body', 'Apoptotic bodies', 'Eaten by phagocytes.']],
+    [['cell', 'Dying cell', 'The whole cell.'], ['nucleus', 'Fragmenting nucleus', 'Holds the DNA.'], ['bleb', 'Blebs', 'Bulges of the membrane.'], ['body', 'Apoptotic bodies', 'Eaten by phagocytes.']],
     { view: V3, steps: [['Healthy', 'A normal cell.'], ['Signal', 'A death signal activates caspases.'], ['Blebbing', 'The cell shrinks and blebs.'], ['Fragments', 'It packages itself for removal.']], q: 'apoptosis caspases mechanism development' }),
 
   t('endocytosis', 'Endocytosis', 'How cells swallow things', 'cell', { mode: 'endocytosis', still: true },
@@ -62,12 +62,12 @@ export const CELLS: Topic[] = [
 
   t('atp-synthase', 'ATP synthase', 'A rotary motor that makes energy', 'cell', { mode: 'atp', still: true },
     'ATP synthase is one of the smallest motors in nature. Protons flowing through its membrane part (Fo) spin a rotor, which turns a stalk inside the head (F1). The turning stalk squeezes the head’s three catalytic sites in turn, forcing ADP and phosphate together into ATP.\n\nEach full turn makes three ATP. Your body makes, and uses up, roughly its own weight in ATP every day.',
-    [['fo', 'Fo rotor', 'Turned by protons.'], ['f1', 'F1 head', 'Makes ATP.'], ['stalk', 'Central stalk', 'Transfers the rotation.'], ['proton', 'Protons', 'Flow down their gradient.'], ['membrane', 'Inner mitochondrial membrane', '']],
+    [['fo', 'Fo rotor', 'Turned by protons.'], ['f1', 'F1 head', 'Makes ATP.'], ['stalk', 'Central stalk', 'Transfers the rotation.'], ['proton', 'Protons', 'Flow down their gradient.'], ['membrane', 'Inner mitochondrial membrane', 'The cell’s outer boundary.']],
     { view: [0.3, 0.2, 1], q: 'ATP synthase rotary mechanism' }),
 
   t('cell-types', 'Kinds of cells', 'Same genes, different jobs', 'cell', { mode: 'types', still: true },
     'There are a few hundred cell types in the body, and almost all carry the same DNA. They differ in which genes they switch on, which gives them very different shapes and jobs.\n\nNeurons grow long wires; red cells lose their nucleus to make room for haemoglobin; muscle cells fuse into long fibres with many nuclei; fat cells are mostly a single droplet of fat; sperm are built to swim, and the egg is one of the largest cells in the body.',
-    [['neuron', 'Neuron', ''], ['rbc', 'Red blood cell', ''], ['muscle', 'Muscle fibre', ''], ['epithelial', 'Epithelial cell', 'Lines surfaces.'], ['fat', 'Fat cell', ''], ['sperm', 'Sperm', ''], ['egg', 'Egg', 'About 0.1 mm, just visible to the eye.'], ['osteocyte', 'Bone cell', ''], ['photoreceptor', 'Rod cell', 'Detects light.']],
+    [['neuron', 'Neuron', 'Sends electrical signals.'], ['rbc', 'Red blood cell', 'Carries oxygen.'], ['muscle', 'Muscle fibre', 'Many cells fused into one long fibre.'], ['epithelial', 'Epithelial cell', 'Lines surfaces.'], ['fat', 'Fat cell', 'Stores energy as a single fat droplet.'], ['sperm', 'Sperm', 'Swims with its tail.'], ['egg', 'Egg', 'About 0.1 mm, just visible to the eye.'], ['osteocyte', 'Bone cell', 'Lives inside bone and senses strain.'], ['photoreceptor', 'Rod cell', 'Detects light.']],
     { view: [0, 0.15, 1], q: 'human cell types atlas' }),
 
   t('stem-cells', 'Stem cells', 'Cells that can become other cells', 'micro',
@@ -87,7 +87,7 @@ export const CELLS: Topic[] = [
       { k: 'mol', id: 'ligand', at: [[0, 1.6, 0], [0, 0.4, 0], [0, -0.25, 0], [0, -0.25, 0]], s: 1.4, color: '#ffd25a' },
       { k: 'mol', id: 'cascade', at: [[0, -2.3, 0], [0, -2.3, 0], [0, -2.3, 0], [0.2, -3.2, 0]], n: 20, spread: [1.2, 0.5, 0.8], color: '#7fe0ff', o: [0, 0, 0.5, 1], s: 0.8 }] },
     'Cells talk with chemical messages: hormones, growth factors, neurotransmitters. Most cannot cross the membrane, so they bind a receptor protein on the surface whose shape fits them. Binding changes the receptor’s shape on the inside, which sets off a relay of proteins inside the cell, amplifying the signal, and ends by changing what the cell does, often which genes it switches on.\n\nAbout a third of all medicines act on one family of receptors alone, the G-protein-coupled receptors.',
-    [['ligand', 'Signal molecule', 'Here a hormone.'], ['receptor', 'Receptor', 'Spans the membrane.'], ['cascade', 'Signal cascade', 'Relay proteins inside the cell.'], ['membrane', 'Membrane', '']],
+    [['ligand', 'Signal molecule', 'Here a hormone.'], ['receptor', 'Receptor', 'Spans the membrane.'], ['cascade', 'Signal cascade', 'Relay proteins inside the cell.'], ['membrane', 'Membrane', 'The cell’s outer boundary.']],
     { steps: [['Signal', 'The messenger arrives.'], ['Binding', 'It fits the receptor.'], ['Activation', 'The receptor changes shape.'], ['Response', 'A cascade carries the message inward.']], q: 'signal transduction receptor GPCR drug targets' }),
 
   t('cell-scale', 'How small is a cell?', 'Cells, bacteria and viruses to scale', 'micro',

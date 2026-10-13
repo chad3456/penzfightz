@@ -68,7 +68,8 @@ export type EffectId =
   | 'gita'
   | 'navadurga'
   | 'walks'
-  | 'mindmaps';
+  | 'mindmaps'
+  | 'body';
 
 export interface EffectDef {
   id: EffectId;
@@ -709,6 +710,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['10 models · 51 numbered notes with sources', 'iceberg · rings · house · hangar · island · rooms', 'zoom, pan, hover to read, download'],
     ink: '#3f9a96',
     wash: 'rgba(63, 154, 150, 0.12)',
+  },
+
+  {
+    id: 'body',
+    name: 'Body Atlas',
+    tagline: 'How the human body works, in 321 interactive 3D models: the heart, brain, blood and vessels, lungs, the immune system, thirty viruses, cancer, the cell and DNA.',
+    blurb:
+      'An atlas of the human body built entirely from procedural 3D models, in eighteen chapters. A heart that beats, opens into four chambers with valves snapping shut and blood moving through, or turns to glass to show its electrical system firing; a folded brain with its lobes, deep structures and slices of grey and white matter; arteries opened lengthwise as plaque grows and ruptures; lungs that breathe, alveoli trading oxygen for carbon dioxide; T cells killing cancer cells, antibodies coating viruses, complement punching holes in bacteria; thirty viruses from SARS-CoV-2 to the bacteriophage, each with its own spikes, shell and genome and a cutaway slider; a double helix that unzips, copies itself, is read into RNA and cut by CRISPR; a cutaway cell, mitochondria, mitosis step by step; bones, joints, the sarcomere sliding; the eye focusing, the cochlea tuning to pitch, skin in layers; and the hormones that coordinate it all. Turn any model, tap a numbered part to fly to it and read what it does, step through processes, move sliders that change the model, and follow PubMed links to the research. For learning, not medical advice.',
+    spec: ['321 models · 18 chapters', 'heart · brain · vessels · immune · viruses · cancer · cell · DNA', 'turn, tap parts, step through, sliders, PubMed links'],
+    ink: '#e0474c',
+    wash: 'rgba(224, 71, 76, 0.12)',
   },
 
 ];
