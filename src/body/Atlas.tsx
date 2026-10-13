@@ -6,7 +6,7 @@
  * zoom in, tap a numbered part to fly to it and read what it does, step
  * through a process, and move sliders that change the model.
  */
-import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
+import { lazy, useCallback, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
 import * as THREE from 'three';
 import { CHAPTERS, CHAPTER } from './chapters';
 import { TOPICS } from './topics';
@@ -161,6 +161,7 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
   const st = useRef(0);
   const anchors = useMemo(() => new Map<string, THREE.Object3D>(), []);
   const stages = t.steps?.length ?? 0;
+  useEffect(() => { (window as unknown as { __anchors?: () => string[] }).__anchors = () => [...anchors.keys()]; }, [anchors]);
   useEffect(() => {
     if (!playing || !stages) return;
     const h = setInterval(() => setStage((s) => { if (s + 1 >= stages) { setPlaying(false); return s; } return s + 1; }), 3800);
@@ -217,7 +218,7 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
           {t.parts.map((p, i) => (
             <li key={p.id} className={sel === p.id ? 'on' : ''}>
               <button onClick={() => setSel(sel === p.id ? null : p.id)}><span>{i + 1}</span><b>{p.label}</b></button>
-              {sel === p.id && <p>{p.text}</p>}
+              {sel === p.id && p.text && <p>{p.text}</p>}
             </li>
           ))}
         </ol>
@@ -225,7 +226,7 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
         <h2>Read further</h2>
         <ul className="ba-refs">
           {(t.refs ?? []).map((k) => REFS[k]).filter(Boolean).map((r, i) => (
-            <li key={i}>{r.cite} {r.pmid && <a href={`https://pubmed.ncbi.nlm.nih.gov/${r.pmid}/`} target="_blank" rel="noreferrer">PubMed {r.pmid}</a>}{!r.pmid && r.url && <a href={r.url} target="_blank" rel="noreferrer">link</a>}</li>
+            <li key={i}>{r.cite} {r.pmid && <a href={`https://pubmed.ncbi.nlm.nih.gov/${r.pmid}/`} target="_blank" rel="noreferrer">PubMed {r.pmid}</a>}{!r.pmid && r.url && <a href={r.url} target="_blank" rel="noreferrer">{r.url.includes('doi.org') ? 'DOI' : 'PubMed'}</a>}</li>
           ))}
           <li><a href={`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(t.q ?? t.title)}`} target="_blank" rel="noreferrer">Search PubMed for “{t.q ?? t.title}”</a></li>
         </ul>
@@ -235,7 +236,6 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
           {idx < list.length - 1 && <button onClick={() => go({ k: 'topic', id: list[idx + 1].id })}>{list[idx + 1].title} ›</button>}
         </div>
       </article>
-      <Suspense fallback={null} />
     </main>
   );
 }

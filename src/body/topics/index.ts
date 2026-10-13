@@ -1,10 +1,21 @@
 import type { Topic } from '../types';
+import { BODY } from './body';
 import { HEART } from './heart';
 import { VESSELS } from './vessels';
 import { BLOOD } from './blood';
 import { BRAIN } from './brain';
 import { NERVES } from './nerves';
+import { LUNGS } from './lungs';
+import { DIGEST } from './digest';
+import { KIDNEY } from './kidney';
+import { IMMUNE } from './immune';
 import { VIRUSES } from './viruses';
-import { TEST } from './test';
+import { BACTERIA } from './bacteria';
+import { CANCER } from './cancer';
+import { CELLS } from './cells';
+import { GENES } from './genes';
+import { BONES } from './bones';
+import { SENSES } from './senses';
+import { HORMONES } from './hormones';
 
-export const TOPICS: Topic[] = [...HEART, ...VESSELS, ...BLOOD, ...BRAIN, ...NERVES, ...VIRUSES, ...TEST];
+export const TOPICS: Topic[] = [...BODY, ...HEART, ...VESSELS, ...BLOOD, ...BRAIN, ...NERVES, ...LUNGS, ...DIGEST, ...KIDNEY, ...IMMUNE, ...VIRUSES, ...BACTERIA, ...CANCER, ...CELLS, ...GENES, ...BONES, ...SENSES, ...HORMONES];
