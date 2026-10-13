@@ -25,6 +25,8 @@ const ENGINES: Record<string, ReturnType<typeof L>> = {
   neuron: L(() => import('./engines/neuron')),
   dna: L(() => import('./engines/dna')),
   cell: L(() => import('./engines/cell')),
+  lungs: L(() => import('./engines/lungs')),
+  vessel: L(() => import('./engines/vessel')),
 };
 
 type View = { k: 'home' } | { k: 'ch'; id: ChapterId } | { k: 'topic'; id: string };
