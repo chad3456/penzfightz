@@ -30,7 +30,7 @@ function Backdrop({ bg }: { bg: string }) {
 type OC = { target: THREE.Vector3; update: () => void; addEventListener: (e: string, f: () => void) => void; removeEventListener: (e: string, f: () => void) => void; autoRotate: boolean };
 
 /** Frames the model when it arrives and flies to the chosen part. */
-function Rig({ model, view, sel, anchors, spin, reset }: { model: React.RefObject<THREE.Group | null>; view: [number, number, number]; sel: string | null; anchors: Map<string, THREE.Object3D>; spin: boolean; reset: number }) {
+function Rig({ model, view, sel, anchors, spin, reset, fit }: { model: React.RefObject<THREE.Group | null>; view: [number, number, number]; sel: string | null; anchors: Map<string, THREE.Object3D>; spin: boolean; reset: number; fit?: [number, number, number, number] }) {
   const { camera, controls, size } = useThree() as unknown as { camera: THREE.PerspectiveCamera; controls: OC | null; size: { width: number; height: number } };
   const home = useRef<{ pos: THREE.Vector3; tgt: THREE.Vector3; r: number } | null>(null);
   const goal = useRef<{ pos: THREE.Vector3; tgt: THREE.Vector3 } | null>(null);
@@ -54,14 +54,14 @@ function Rig({ model, view, sel, anchors, spin, reset }: { model: React.RefObjec
     if (!controls) return;
     controls.autoRotate = spin && !sel;
     if (!home.current && model.current && ++frames.current > 2) {
-      const box = new THREE.Box3().setFromObject(model.current);
-      if (box.isEmpty()) return;
-      const s = box.getBoundingSphere(new THREE.Sphere());
+      let s: THREE.Sphere;
+      if (fit) s = new THREE.Sphere(new THREE.Vector3(fit[0], fit[1], fit[2]), fit[3]);
+      else { const box = new THREE.Box3().setFromObject(model.current); if (box.isEmpty()) return; s = box.getBoundingSphere(new THREE.Sphere()); }
       const aspect = size.width / Math.max(1, size.height), fov = (camera.fov * Math.PI) / 180;
-      const fit = s.radius / Math.sin(Math.min(fov, 2 * Math.atan(Math.tan(fov / 2) * aspect)) / 2);
+      const dist = s.radius / Math.sin(Math.min(fov, 2 * Math.atan(Math.tan(fov / 2) * aspect)) / 2);
       const dir = new THREE.Vector3(...view).normalize();
-      home.current = { pos: s.center.clone().addScaledVector(dir, fit * 1.04), tgt: s.center.clone(), r: s.radius };
-      camera.near = s.radius / 100; camera.far = s.radius * 60; camera.updateProjectionMatrix();
+      home.current = { pos: s.center.clone().addScaledVector(dir, dist * 1.04), tgt: s.center.clone(), r: s.radius };
+      camera.near = s.radius / 100; camera.far = s.radius * 80; camera.updateProjectionMatrix();
       camera.position.copy(home.current.pos); controls.target.copy(s.center); controls.update();
       (window as unknown as { ready?: boolean }).ready = true;
     }
@@ -73,7 +73,7 @@ function Rig({ model, view, sel, anchors, spin, reset }: { model: React.RefObjec
   return null;
 }
 
-export function Stage3D({ ctx, children, bg = '#0c1626', view = [0.35, 0.22, 1], spin, reset, glow = 0.55 }: { ctx: SceneCtx; children: ReactNode; bg?: string; view?: [number, number, number]; spin: boolean; reset: number; glow?: number }) {
+export function Stage3D({ ctx, children, bg = '#0c1626', view = [0.35, 0.22, 1], spin, reset, glow = 0.55, fit }: { ctx: SceneCtx; children: ReactNode; bg?: string; view?: [number, number, number]; spin: boolean; reset: number; glow?: number; fit?: [number, number, number, number] }) {
   const model = useRef<THREE.Group>(null);
   const v = useMemo(() => view, [view]);
   return (
@@ -94,7 +94,7 @@ export function Stage3D({ ctx, children, bg = '#0c1626', view = [0.35, 0.22, 1],
         </Suspense>
       </Ctx.Provider>
       <OrbitControls makeDefault enableDamping dampingFactor={0.08} autoRotateSpeed={0.6} minDistance={0.05} maxDistance={400} />
-      <Rig model={model} view={v} sel={ctx.sel} anchors={ctx.anchors} spin={spin} reset={reset} />
+      <Rig model={model} view={v} sel={ctx.sel} anchors={ctx.anchors} spin={spin} reset={reset} fit={fit} />
       <EffectComposer multisampling={4} enableNormalPass={false}>
         <Bloom mipmapBlur luminanceThreshold={0.82} luminanceSmoothing={0.2} intensity={glow} />
         <Vignette offset={0.3} darkness={0.6} />

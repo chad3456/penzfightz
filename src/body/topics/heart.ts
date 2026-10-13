@@ -1,0 +1,7 @@
+import type { Topic } from '../types';
+
+export const HEART: Topic[] = [
+  { id: 'heart-outside', ch: 'heart', title: 'The heart from outside', sub: 'test', kind: 'heart', p: { mode: 'outside', veins: true, still: true }, view: [0.1, 0.05, 1], body: 'x', parts: [{ id: 'lv', label: 'Left ventricle', text: '' }, { id: 'rv', label: 'Right ventricle', text: '' }, { id: 'aorta', label: 'Aorta', text: '' }, { id: 'pa', label: 'Pulmonary trunk', text: '' }, { id: 'lad', label: 'LAD', text: '' }], controls: [{ id: 'bpm', label: 'Heart rate', min: 40, max: 180, value: 64, unit: ' bpm' }] },
+  { id: 'heart-section', ch: 'heart', title: 'Four chambers', sub: 'test', kind: 'heart', p: { mode: 'section', flow: true, still: true }, view: [-0.05, 0.25, 1], body: 'x', parts: [{ id: 'lv', label: 'Left ventricle', text: '' }, { id: 'rv', label: 'Right ventricle', text: '' }, { id: 'ra', label: 'RA', text: '' }, { id: 'la', label: 'LA', text: '' }, { id: 'mitral', label: 'Mitral', text: '' }, { id: 'tricuspid', label: 'Tricuspid', text: '' }, { id: 'aortic', label: 'Aortic valve', text: '' }, { id: 'pulmonary', label: 'Pulm valve', text: '' }] },
+  { id: 'heart-conduction', ch: 'heart', title: 'Conduction', sub: 'test', kind: 'heart', p: { mode: 'conduction' }, body: 'x', parts: [{ id: 'sa', label: 'SA node', text: '' }, { id: 'av', label: 'AV node', text: '' }, { id: 'his', label: 'His', text: '' }, { id: 'purkinje', label: 'Purkinje', text: '' }] },
+];

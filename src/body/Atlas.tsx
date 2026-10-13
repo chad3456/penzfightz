@@ -19,6 +19,8 @@ type EngineProps = { p: Record<string, unknown>; t: Topic };
 const L = (f: () => Promise<{ default: ComponentType<never> }>) => lazy(f as () => Promise<{ default: ComponentType<EngineProps> }>);
 const ENGINES: Record<string, ReturnType<typeof L>> = {
   virus: L(() => import('./engines/virus')),
+  heart: L(() => import('./engines/heart')),
+  micro: L(() => import('./engines/micro')),
 };
 
 type View = { k: 'home' } | { k: 'ch'; id: ChapterId } | { k: 'topic'; id: string };
@@ -142,7 +144,7 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
   const [stage, setStage] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [labels, setLabels] = useState(true);
-  const [spin, setSpin] = useState(true);
+  const [spin, setSpin] = useState(!t.p?.still);
   const [reset, setReset] = useState(0);
   const [rail, setRail] = useState(false);
   const [ctl, setCtl] = useState<Record<string, number>>(() => Object.fromEntries((t.controls ?? []).map((k) => [k.id, k.value])));
@@ -165,7 +167,7 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
         <ol>{list.map((x) => <li key={x.id}><button className={x.id === t.id ? 'on' : ''} onClick={() => { setRail(false); go({ k: 'topic', id: x.id }); }}>{x.title}</button></li>)}</ol>
       </aside>
       <section className="ba-stage">
-        <Stage3D ctx={ctx} bg={t.bg} view={t.view} spin={spin && !playing} reset={reset}>
+        <Stage3D ctx={ctx} bg={t.bg} view={t.view} spin={spin && !playing} reset={reset} fit={t.p?.fit as [number, number, number, number] | undefined}>
           {Eng ? <Eng p={t.p ?? {}} t={t} /> : <Missing />}
         </Stage3D>
         <div className="ba-tools">
