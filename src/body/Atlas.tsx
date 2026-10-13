@@ -28,6 +28,7 @@ const ENGINES: Record<string, ReturnType<typeof L>> = {
   lungs: L(() => import('./engines/lungs')),
   vessel: L(() => import('./engines/vessel')),
   body: L(() => import('./engines/body')),
+  organ: L(() => import('./engines/organs')),
 };
 
 type View = { k: 'home' } | { k: 'ch'; id: ChapterId } | { k: 'topic'; id: string };
