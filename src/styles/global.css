@@ -11243,9 +11243,9 @@ button.card:hover:not(:disabled) {
 .ba button:focus-visible, .ba input:focus-visible, .ba a:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .ba a { color: #8fd3ff; }
 .ba-top { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 14px; padding: 9px 16px; background: rgba(7, 13, 23, 0.86); backdrop-filter: blur(10px); border-bottom: 1px solid var(--ba-line); }
-.ba-exit { border: 1px solid var(--ba-line) !important; border-radius: 999px; padding: 5px 13px !important; color: var(--ba-soft) !important; }
+.ba-exit { border: 1px solid var(--ba-line) !important; border-radius: 999px; padding: 5px 13px !important; white-space: nowrap; flex-shrink: 0; color: var(--ba-soft) !important; }
 .ba-exit:hover { color: var(--ba-ink) !important; }
-.ba-brand { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; text-align: left; }
+.ba-brand { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; text-align: left; white-space: nowrap; flex-shrink: 0; }
 .ba-brand b { font-family: Fraunces, Georgia, serif; font-weight: 650; font-size: 20px; letter-spacing: 0.01em; }
 .ba-brand em { font-style: normal; font-size: 12px; color: var(--ba-soft); }
 .ba-search { margin-left: auto; flex: 0 1 320px; }
