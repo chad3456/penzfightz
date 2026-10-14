@@ -20,7 +20,7 @@ export const VESSELS: Topic[] = [
     [['valve', 'Valve cusps', 'Open as blood flows toward the heart, close against backflow.'], ['media', 'Thin muscle layer', 'Veins can expand to hold extra blood.'], ['adventitia', 'Outer coat', 'Usually the thickest layer in a vein.'], ['lumen', 'Lumen', 'Wide, slow-moving blood.']],
     { view: SIDE, q: 'venous valves calf muscle pump' }),
 
-  t('capillary', 'Capillaries', 'Where the exchange happens', 'vessel', { mode: 'capillary', still: true },
+  t('capillary', 'Capillaries', 'Where the exchange happens', 'vessel', { mode: 'capillary', still: true, fit: [0, 0, 0, 3] },
     'Capillaries are the smallest vessels, about 5 to 10 micrometres wide: so narrow that red blood cells pass through in single file, often folding to fit. Their wall is a single layer of endothelial cells.\n\nOxygen, carbon dioxide, glucose and wastes cross that thin wall by diffusion. Hardly any cell in the body is more than a few cells away from a capillary.',
     [['endothelium', 'Single-cell wall', 'Thin enough for gases to diffuse across in a fraction of a second.'], ['rbc', 'Red cells in single file', 'Their flexible shape lets them squeeze through.'], ['lumen', 'Lumen', 'Barely wider than a red cell.']],
     { view: SIDE, facts: ['A red cell spends about one second in a capillary, long enough to unload its oxygen.'], q: 'capillary exchange diffusion endothelium' }),
@@ -76,7 +76,7 @@ export const VESSELS: Topic[] = [
     [['valve', 'Failing valve', 'Cusps no longer meet.'], ['lumen', 'Pooling blood', 'Flows back toward the foot.'], ['media', 'Stretched wall', 'Thin and dilated.']],
     { view: SIDE, steps: [['Healthy', 'Valves close against backflow.'], ['Leak', 'One valve fails.'], ['Stretch', 'Pressure widens the vein and more valves fail.']], q: 'varicose veins chronic venous insufficiency treatment' }),
 
-  t('angioplasty', 'Balloon and stent', 'Step by step', 'vessel', { mode: 'stent', still: true },
+  t('angioplasty', 'Balloon and stent', 'Step by step', 'vessel', { mode: 'stent', still: true, fit: [0, 0, 0, 3] },
     'A guide wire is threaded through the narrowed artery. A catheter carrying a folded balloon wrapped in a crimped stent follows it. Inflating the balloon squashes the plaque and expands the stent against the wall; the balloon is then deflated and withdrawn, leaving the stent as scaffolding.\n\nThe same idea is used in arteries of the heart, legs, kidneys and neck.',
     [['balloon', 'Balloon', 'Inflated for a few seconds at high pressure.'], ['stent', 'Stent', 'Stays in place; tissue grows over it within weeks.'], ['plaque', 'Plaque', 'Compressed into the wall.']],
     { view: SIDE, steps: [['Narrowed', 'Plaque restricts flow.'], ['Wire and balloon', 'The catheter is positioned.'], ['Inflate', 'The balloon expands the stent.'], ['Open', 'The balloon is removed; the stent holds the artery open.']], q: 'balloon angioplasty stent restenosis' }),

@@ -147,6 +147,9 @@ function Missing() {
   return <mesh><icosahedronGeometry args={[1, 2]} /><meshStandardMaterial color="#567" wireframe /></mesh>;
 }
 
+// Micro scenes on a tissue floor or membrane frame the cells, not the whole floor.
+const MICRO_FIT: Record<string, [number, number, number, number]> = { tissue: [0, -0.4, 0, 2.6], membrane: [0, -0.8, 0, 2.8] };
+
 function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
   const c = CHAPTER[t.ch];
   const list = useMemo(() => TOPICS.filter((x) => x.ch === t.ch), [t.ch]);
@@ -179,7 +182,7 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
         <ol>{list.map((x) => <li key={x.id}><button className={x.id === t.id ? 'on' : ''} onClick={() => { setRail(false); go({ k: 'topic', id: x.id }); }}>{x.title}</button></li>)}</ol>
       </aside>
       <section className="ba-stage">
-        <Stage3D ctx={ctx} bg={t.bg} view={t.view} spin={spin && !playing} reset={reset} fit={t.p?.fit as [number, number, number, number] | undefined}>
+        <Stage3D ctx={ctx} bg={t.bg} view={t.view} spin={spin && !playing} reset={reset} fit={(t.p?.fit as [number, number, number, number] | undefined) ?? MICRO_FIT[t.kind === 'micro' ? t.bg ?? '' : '']}>
           {Eng ? <Eng p={t.p ?? {}} t={t} /> : <Missing />}
         </Stage3D>
         <div className="ba-tools">

@@ -31,6 +31,7 @@ function spikeGeo(kind: SpikeKind, len: number) {
   else if (kind === 'fiber') { gs.push(stalk(len, 0.012)); const s = new THREE.SphereGeometry(0.045, 10, 8); s.translate(0, len + 0.03, 0); gs.push(s); }
   else if (kind === 'mushroom') { gs.push(stalk(len * 0.55, 0.025)); const s = new THREE.SphereGeometry(0.07, 12, 8, 0, TAU, 0, Math.PI / 2); s.translate(0, len * 0.55, 0); gs.push(s); }
   else if (kind === 'pin') { gs.push(stalk(len * 0.85, 0.018)); const b = new THREE.BoxGeometry(0.07, 0.03, 0.07); b.translate(0, len * 0.88, 0); gs.push(b); }
+  if (!gs.length) return new THREE.BufferGeometry();
   return mergeGeometries(gs.map((g) => g.toNonIndexed()))!;
 }
 
@@ -95,7 +96,7 @@ export default function Virus({ p }: { p: VirusP }) {
     if (shape === 'icosa') { const g = new THREE.IcosahedronGeometry(r, 0); return g; }
     if (shape === 'rod' || shape === 'filament') { const L = shape === 'filament' ? r * 5 : r * 4, rr = shape === 'filament' ? r * 0.28 : r * 0.42; const pts = Array.from({ length: 12 }, (_, i) => V(shape === 'filament' ? Math.sin((-L / 2 + (i / 11) * L) * 0.6) * 0.3 : 0, -L / 2 + (i / 11) * L, 0)); return varTube(curve(pts), 80, 24, (t) => rr * Math.min(1, Math.sqrt(Math.min(t, 1 - t) * 40))); }
     if (shape === 'bullet') { const L = r * 2.2, rr = r * 0.42; const pts: THREE.Vector2[] = []; for (let i = 0; i <= 24; i++) { const y = -L / 2 + (i / 24) * (L - rr); pts.push(new THREE.Vector2(rr, y)); } for (let i = 1; i <= 12; i++) { const a = (i / 12) * Math.PI / 2; pts.push(new THREE.Vector2(rr * Math.cos(a), L / 2 - rr + rr * Math.sin(a))); } pts.unshift(new THREE.Vector2(0, -L / 2)); return new THREE.LatheGeometry(pts, 32); }
-    if (shape === 'brick') { const g = new THREE.BoxGeometry(r * 2, r * 1.5, r * 1.1, 24, 18, 14); const pos = g.attributes.position as THREE.BufferAttribute; for (let i = 0; i < pos.count; i++) { const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i); const v = V(x / r, y / (r * 0.75), z / (r * 0.55)); const k = 0.82 + 0.18 / Math.max(0.5, v.length()); pos.setXYZ(i, x * k, y * k, z * k); } g.computeVertexNormals(); return displace(g, (q) => 0.04 * r * Math.abs(Math.sin(q.x * 9) * Math.sin(q.z * 9 + q.y * 3))); }
+    if (shape === 'brick') { const g = new THREE.SphereGeometry(r, 64, 48); g.scale(1.25, 0.95, 0.75); return displace(g, (q) => 0.05 * r * Math.pow(Math.abs(Math.sin(q.x * 7 + Math.sin(q.y * 5) * 0.8) * Math.sin(q.z * 7 + q.y * 4)), 0.6)); }
     return new THREE.IcosahedronGeometry(r, 1);
   }, [shape, r, seed, p.bumpy]);
 

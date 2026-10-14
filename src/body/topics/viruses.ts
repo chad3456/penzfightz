@@ -171,7 +171,7 @@ export const VIRUSES: Topic[] = [
     { controls: [CUT], q: 'Epstein-Barr virus multiple sclerosis risk', refs: ['bjornevik2022'] }),
 
   t('tmv', 'Tobacco mosaic virus', 'The first virus ever discovered', 'virus',
-    { shape: 'rod', r: 0.55, envelope: false, color: '#9ad04f', spikes: S(0, 'none'), genome: 'rna', genomeColor: '#f28c3a' },
+    { shape: 'rod', r: 0.55, envelope: false, color: '#9ad04f', genome: 'rna', genomeColor: '#f28c3a' },
     'A rigid rod 300 nanometres long and 18 wide: about 2,130 identical protein subunits stacked in a helix around a single coil of RNA. It infects tobacco and other plants, mottling their leaves.\n\nIn the 1890s, Dmitri Ivanovsky and Martinus Beijerinck showed that the cause of tobacco mosaic disease passed through filters that stopped bacteria. That was the beginning of virology.',
     [['capsid', 'Helical protein coat', 'Identical subunits wound in a helix: a self-assembling structure.'],
       ['genome', 'RNA', 'About 6,400 bases, held in a groove between the protein turns.']],

@@ -11,7 +11,7 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Anchor, useCtl, useHi, useScene } from '../stage';
-import { capsule, ellipsoid, mesh, nearest, smax, smin, tube, cached, type SDF, type Vec } from '../sdf';
+import { capsule, ellipsoid, mesh, sphere, nearest, smax, smin, tube, cached, type SDF, type Vec } from '../sdf';
 import { V, fbm, curve, varTube, tree, treeGeo, PAL, rng } from '../kit';
 
 export interface HeartP {
@@ -67,7 +67,7 @@ function setCut(kind: 'four' | 'base') { if (kind === 'base') { CUT_N = new THRE
 function sectionField(wall: number, vsd: boolean, asd: boolean): SDF {
   const outer = outerField(wall), lv = LV_IN(wall);
   const lum = [lumen(AORTA, 0.075), lumen(PA, 0.065), lumen(SVC, 0.065), lumen(IVC, 0.065), lumen(LPA, 0.06), lumen(RPA, 0.06), ...PVS.map((p) => lumen(p, 0.05))];
-  const holeV = capsule([-0.1, -0.15, 0.25], [-0.1, -0.15, 0.25], 0.13), holeA = capsule([-0.3, 0.6, -0.2], [-0.3, 0.6, -0.2], 0.13);
+  const holeV = sphere([-0.1, -0.15, 0.25], 0.13), holeA = sphere([-0.3, 0.6, -0.2], 0.13);
   return (x, y, z) => {
     let cav = Math.min(lv(x, y, z), RV_IN(x, y, z), RA_IN(x, y, z), LA_IN(x, y, z));
     for (const l of lum) cav = Math.min(cav, l(x, y, z));
