@@ -178,9 +178,13 @@ function TopicView({ t, go }: { t: Topic; go: (v: View) => void }) {
   return (
     <main className={`ba-view${rail ? ' rail-open' : ''}`} style={{ ['--c' as string]: c.color }}>
       <aside className="ba-rail" aria-label={`${c.title} topics`}>
-        <button className="ba-rail-head" onClick={() => go({ k: 'ch', id: c.id })}><span aria-hidden>{c.icon}</span>{c.title}</button>
+        <div className="ba-rail-top">
+          <button className="ba-rail-head" onClick={() => go({ k: 'ch', id: c.id })}><span aria-hidden>{c.icon}</span>{c.title}</button>
+          <button className="ba-rail-x ba-only-m" aria-label="Close topic list" onClick={() => setRail(false)}>✕</button>
+        </div>
         <ol>{list.map((x) => <li key={x.id}><button className={x.id === t.id ? 'on' : ''} onClick={() => { setRail(false); go({ k: 'topic', id: x.id }); }}>{x.title}</button></li>)}</ol>
       </aside>
+      {rail && <div className="ba-scrim" onClick={() => setRail(false)} aria-hidden />}
       <section className="ba-stage">
         <Stage3D ctx={ctx} bg={t.bg} view={t.view} spin={spin && !playing} reset={reset} fit={(t.p?.fit as [number, number, number, number] | undefined) ?? MICRO_FIT[t.kind === 'micro' ? t.bg ?? '' : '']}>
           {Eng ? <Eng p={t.p ?? {}} t={t} /> : <Missing />}
