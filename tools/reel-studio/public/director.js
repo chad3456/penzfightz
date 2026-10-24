@@ -80,7 +80,7 @@ export function compile(plan, opts = {}) {
         case 'tvphoto':
           Object.assign(out, { bg: nextBg(), win: { img: s.photo.file, fx, frame: 'tv', box: [12, 16, 76, 50], cam: 'push' } });
           if (H) out.items.push(headline(H, style || 'hot', 50, 8));
-          st(s.stickers, [[84, 62, 10], [80, 12, -6]]);
+          st(s.stickers, [[84, 62, 10], [17, 62, -8]]);
           break;
         case 'polaroid':
           Object.assign(out, { bg: nextBg(), win: false });
