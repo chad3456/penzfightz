@@ -69,7 +69,8 @@ export type EffectId =
   | 'navadurga'
   | 'walks'
   | 'mindmaps'
-  | 'body';
+  | 'body'
+  | 'aura';
 
 export interface EffectDef {
   id: EffectId;
@@ -721,6 +722,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['321 models · 18 chapters', 'heart · brain · vessels · immune · viruses · cancer · cell · DNA', 'turn, tap parts, step through, sliders, PubMed links'],
     ink: '#e0474c',
     wash: 'rgba(224, 71, 76, 0.12)',
+  },
+
+  {
+    id: 'aura',
+    name: 'Aura FX',
+    tagline: 'Drop in any clip and get a vertical aura edit: a new look on every cut and beat, aura glows around the person, freeze-frame cut-outs, captions and an aura meter. Edit anything, then export.',
+    blurb:
+      'A video editor for aura-farming reels that runs entirely in your browser; your clip is never uploaded. It listens for the beat, finds the cuts, and finds the person in every shot with a small segmentation model running on your device. Then it reframes the clip to 9:16 around them and builds a first edit: a different look on every cut and every other downbeat, chosen from twenty-three, from golden and neon aura glows that trace the person, thermal, comic halftone and pencil sketch to VHS, glitch, matrix rain, god rays, lightning on the beat, rising embers, noir that keeps the reds, oil paint, kaleido and 16mm film. Zoom punches and white flashes land on the beat, hits shake the frame, a freeze-frame cuts the person out over a spinning sunburst, captions slam in, and an aura meter fills to MAX. Change the look of any segment from live thumbnails, split and merge segments, follow the person or keep the whole frame, add big text, aura pops, captions and freezes at the playhead, tune the punch, and export a vertical video with your original sound.',
+    spec: ['23 looks · beat-synced punches, flashes, shake', 'person-tracked 9:16 · aura glows · freeze cut-outs', 'runs on your device · exports MP4 with your audio'],
+    ink: '#ff2fb2',
+    wash: 'rgba(255, 47, 178, 0.12)',
   },
 
 ];
