@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reel Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%98%85%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="studio.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="star" aria-hidden="true">★</span><b>Reel Studio</b><em>collage explainers on anything</em></div>
+  <div class="proj">
+    <label class="sr" for="projSel">Project</label>
+    <select id="projSel"></select>
+    <button id="newBtn" class="pill">+ New reel</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<main class="app">
+  <section class="work">
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="sources" aria-selected="true">1 · Topic & sources</button>
+      <button role="tab" data-tab="board">2 · Storyboard</button>
+      <button role="tab" data-tab="photos">3 · Photos</button>
+    </nav>
+
+    <!-- 1. topic and sources -->
+    <div class="tab" id="tab-sources">
+      <div class="card">
+        <label class="lab" for="topic">What is the reel about?</label>
+        <input id="topic" class="big" placeholder="e.g. how Mary Shelley wrote Frankenstein">
+        <div class="row">
+          <div class="grow"><label class="lab" for="angle">Angle (optional)</label><input id="angle" placeholder="myth-buster, history, the science behind it…"></div>
+        </div>
+        <div class="row">
+          <div><span class="lab">Length</span><div class="seg" id="lenSeg"><button data-v="30">30s</button><button data-v="45">45s</button><button data-v="60">60s</button><button data-v="90">90s</button></div></div>
+          <div><span class="lab">Photo look</span><div class="seg" id="lookSeg"><button data-v="archival">Archival</button><button data-v="pop">Pop</button><button data-v="clean">Clean</button></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Add sources <small>the script is written from these</small></h3>
+        <div class="add">
+          <div class="addrow"><input id="urlIn" placeholder="Paste a web link (article, blog, .epub link)"><button id="urlBtn" class="pill">Add link</button></div>
+          <div class="addrow">
+            <button id="wikiBtn" class="pill ghost">＋ Wikipedia article for the topic</button>
+            <button id="researchBtn" class="pill ghost">🔎 Research the web with Claude</button>
+          </div>
+          <label class="drop" id="epubDrop"><input type="file" id="epubIn" accept=".epub,application/epub+zip" hidden><span>📚 Drop an <b>EPUB</b> book here or click to choose. Its chapters and pictures become sources.</span></label>
+          <details class="notes"><summary>Paste notes or text</summary><textarea id="notesIn" rows="5" placeholder="Anything: your notes, a transcript, quotes you checked…"></textarea><button id="notesBtn" class="pill">Add notes</button></details>
+        </div>
+        <ul class="sources" id="sourceList"></ul>
+      </div>
+
+      <div class="card go">
+        <div class="gobtns">
+          <button id="writeBtn" class="pill hot">✨ Write the script</button>
+          <button id="ownBtn" class="pill ghost">✍️ Use my own narration</button>
+        </div>
+        <p class="hint" id="writeHint"></p>
+        <div class="job" id="writeJob" hidden></div>
+      </div>
+    </div>
+
+    <!-- 2. storyboard -->
+    <div class="tab" id="tab-board" hidden>
+      <div class="boardhead">
+        <p class="hint">Edit what is said and what each shot shows. Changes save and preview as you type.</p>
+        <button id="addLineBtn" class="pill ghost">＋ Add a line</button>
+      </div>
+      <div id="board" class="board"></div>
+    </div>
+
+    <!-- 3. photos -->
+    <div class="tab" id="tab-photos" hidden>
+      <div class="card">
+        <h3>Find archival photos <small>open collections only: public domain, CC0, CC BY</small></h3>
+        <div class="addrow"><input id="photoQ" placeholder="e.g. Mary Shelley portrait, Lake Geneva 1816"><button id="photoGo" class="pill">Search</button></div>
+        <div class="provs" id="provs"></div>
+        <p class="hint" id="photoMsg"></p>
+        <div class="grid" id="photoResults"></div>
+      </div>
+      <div class="card">
+        <h3>Your photo library <small>used in this reel; credits are written for you</small></h3>
+        <label class="drop small"><input type="file" id="photoUp" accept="image/jpeg,image/png,image/webp" multiple hidden><span>⬆️ Upload your own photos</span></label>
+        <div class="grid" id="library"></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="preview">
+    <div class="phone"><div class="screen" id="screen"><iframe id="stage" title="Reel preview" src="/engine/reel.html"></iframe><div class="empty" id="emptyMsg">Write a script to see your reel here</div></div></div>
+    <div class="transport">
+      <button id="playBtn" class="round" aria-label="Play">▶</button>
+      <input type="range" id="scrub" min="0" max="60" step="0.01" value="0" aria-label="Position">
+      <span id="clock">0:00</span>
+    </div>
+    <div class="actions">
+      <button id="voiceBtn" class="pill ghost">🎙️ Record voice</button>
+      <button id="renderBtn" class="pill hot">🎬 Render video</button>
+      <label class="tiny"><input type="checkbox" id="draftChk"> quick draft (half size)</label>
+    </div>
+    <div class="job" id="mediaJob" hidden></div>
+    <div class="result" id="result" hidden></div>
+  </aside>
+</main>
+
+<!-- photo picker for one shot -->
+<dialog id="picker">
+  <form method="dialog" class="pickhead"><h3>Choose a photo</h3><button class="x" aria-label="Close">✕</button></form>
+  <div class="addrow"><input id="pickQ" placeholder="search archival collections"><button id="pickGo" class="pill" type="button">Search</button></div>
+  <p class="hint" id="pickMsg"></p>
+  <h4>Library</h4><div class="grid" id="pickLib"></div>
+  <h4>Search results</h4><div class="grid" id="pickRes"></div>
+  <div class="pickfoot"><label>Effect <select id="pickFx"></select></label><label>Frame <select id="pickFrame"></select></label><button id="pickNone" class="pill ghost" type="button">No photo</button></div>
+</dialog>
+
+<!-- your own narration -->
+<dialog id="own">
+  <form method="dialog" class="pickhead"><h3>Your narration</h3><button class="x" aria-label="Close">✕</button></form>
+  <p class="hint">Write or paste what the host should say. One sentence becomes one line; the studio plans the shots, headlines, stickers and photos.</p>
+  <textarea id="ownText" rows="12" placeholder="Hey! In 1816 a cold, rainy summer trapped five friends in a villa on Lake Geneva…"></textarea>
+  <div class="pickfoot"><button id="ownGo" class="pill hot" type="button">Plan the shots</button></div>
+</dialog>
+
+<script type="module" src="studio.js"></script>
+</body>
+</html>

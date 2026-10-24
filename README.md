@@ -1926,6 +1926,17 @@ bubblegum-pop score and sound effects. The first one explains Rob
 Henderson's "luxury beliefs". It lives in `.claude/skills/collage-reel/`
 (`SKILL.md` for the script format, `recipe.md` for the style).
 
+**Reel Studio** (`npm run reel-studio`, then http://localhost:4417) is the
+app for it: give a topic, add web links, Wikipedia, EPUB books (their
+pictures become photos) or notes, and let Claude research and write a
+fact-checked script (with `ANTHROPIC_API_KEY`), or paste your own
+narration. Edit every shot in a storyboard with a live phone preview, search
+archival photos from Wikimedia Commons, the Library of Congress, the Met, the
+Art Institute of Chicago, Openverse and NASA, give them halftone, sepia, riso
+or VHS looks in polaroid, washi-tape, torn-paper or CRT frames, then record
+the voice and render. Credits are written for you. More in
+`tools/reel-studio/README.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

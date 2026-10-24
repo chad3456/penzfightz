@@ -11,6 +11,8 @@ Topic in, MP4 out. You write one JSON script; the scripts fetch what is needed f
 script.json -> assets.py (stickers) -> voice.py (narration + word times) -> render.mjs --stills -> render.mjs (film)
 ```
 
+For an app with sources (web, Wikipedia, EPUB), Claude research and writing, archival photo search and a storyboard editor, run **Reel Studio**: `npm run reel-studio` (see `tools/reel-studio/README.md`).
+
 One command does all of it: `scripts/make.sh SCRIPT.json video-work/<slug> [--stills]`.
 The style itself is described in `recipe.md`. A full example is in `examples/luxury-beliefs.json`.
 
@@ -62,8 +64,8 @@ The style itself is described in `recipe.md`. A full example is in `examples/lux
 
 | Field | Values |
 |---|---|
-| `scene` | `room`, `campus`, `city`, `suburb`, `street`, `stage`, `vintage`, `dream`, `sky`, `paper`, or a colour such as `"#8a6a4c"`. Use `img: "photo.jpg"` instead of `scene` for the user's own picture. |
-| `frame` | `white`, `pink`, `navy`, `mat` or `none`. |
+| `scene` | `room`, `campus`, `city`, `suburb`, `street`, `stage`, `vintage`, `dream`, `sky`, `paper`, or a colour such as `"#8a6a4c"`. Use `img: "photo.jpg"` (with an optional `fx`, as for `photo` items) instead of `scene` for a photo. |
+| `frame` | `white`, `pink`, `navy`, `mat`, `tape`, `tv` (CRT bezel with scanlines) or `none`. |
 | `box` | `main` (default), `tall`, `top`, `bottom`, `inset`, `mid`, `full`, or `[x, y, w, h]` in %. |
 | `cam` | `push`, `pull`, `up`, `down`, `left`, `right` or `still`. |
 
@@ -83,6 +85,7 @@ All coordinates are percentages of the 1080 × 1920 frame, and `x`/`y` is the it
 | stamp | `{ "k": "stamp", "t": "...", "color" }`. Slams on with a thud. |
 | bars | `{ "k": "bars", "bars": [{ "label", "v", "color" }] }`. Growing columns. |
 | pola | `{ "k": "pola", "scene" or "img", "cap" }`. A Polaroid. |
+| photo | `{ "k": "photo", "src": "file.jpg", "fx", "frame", "cap", size }`. An archival photo baked once with an effect (`none`, `faded`, `sepia`, `bw`, `duotone`, `pinkwash`, `halftone`, `riso`, `vhs`; vintage looks add grain, scratches and dust) in a paper frame (`polaroid`, `tape`, `torn`, `cutout`, `stamp`, `white`, `tv`, `plain`), with a slow Ken Burns zoom. |
 | doodle | `{ "k": "doodle", "shape": "circle", "arrow" or "underline", "color" }`. A hand-drawn mark. |
 | img | `{ "k": "img", "src": "file.png", size }`. One of your own images. |
 

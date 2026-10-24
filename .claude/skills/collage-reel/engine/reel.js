@@ -88,6 +88,7 @@
     stickerCache[src] = { url, ratio: c.height / c.width };
     return stickerCache[src];
   }
+  function mediaSrc(f) { return /^(data:|https?:|\/)/.test(f) ? f : (opts.media || '') + f; }
   function stickerSrc(e) { return /[./]/.test(e) && /\.(png|webp|jpe?g|gif)$/i.test(e) ? (opts.media || '') + e : (opts.stickers || '') + slug(e) + '.png'; }
 
   // ---------- building a shot ----------
@@ -102,7 +103,8 @@
   }
 
   function sceneHTML(win) {
-    if (win.img) return `<img src="${(opts.media || '') + win.img}">`;
+    if (win._url) return `<img src="${win._url}">`;
+    if (win.img) return `<img src="${mediaSrc(win.img)}">`;
     const name = win.scene || 'room';
     if (name.startsWith('#')) return A.scenes.solid({ color: name });
     const f = A.scenes[name] || A.scenes.room;
@@ -132,7 +134,7 @@
     const x = (it.x ?? 50) * W / 100, y = (it.y ?? 20) * H / 100;
     const rec = { el, it, k, x, y, r: it.r ?? 0, s: it.s ?? 1, at: startOf(sh, it.at, idx), inn: it.in, idle: it.idle };
     if (k === 'sticker') {
-      const st = await bakeSticker(stickerSrc(it.e), it.edge ?? 12);
+      const st = await bakeSticker(stickerSrc(it.e), it.edge ?? 12).catch((e) => { console.warn(e.message); return { url: 'data:image/gif;base64,R0lGODlhAQABAAAAACw=', ratio: 1 }; });
       const w = (it.size ?? 300) * (R.meta?.stickerScale ?? 1.2);
       el.classList.add('stk'); el.style.width = w + 'px';
       el.innerHTML = `<img src="${st.url}">`;
@@ -181,6 +183,11 @@
       el.classList.add('pola'); const w = it.size ?? 460; el.style.width = w + 'px'; el.style.height = w * 1.18 + 'px';
       el.innerHTML = `<div class="ph">${it.img ? `<img src="${(opts.media || '') + it.img}" style="width:100%;height:100%;object-fit:cover">` : uniq((A.scenes[it.scene] || A.scenes.sky)(it))}</div><div class="cap">${esc(it.cap || '')}</div>`;
       rec.inn = rec.inn || 'drop'; rec.idle = rec.idle ?? true; rec.sfx = 'pop';
+    } else if (k === 'photo') {
+      // an archival photo with an effect and a paper frame, baked once
+      const ph = await window.REEL_PHOTO.bake(mediaSrc(it.src), { fx: it.fx || 'faded', frame: it.frame || 'polaroid', cap: it.cap, inks: it.inks, archival: it.archival, seed: idx + sh._i * 17 }).catch((e) => { console.warn(e.message); return { url: 'data:image/gif;base64,R0lGODlhAQABAAAAACw=' }; });
+      el.innerHTML = `<img src="${ph.url}" style="width:${it.size ?? 560}px;display:block">`;
+      rec.inn = rec.inn || (it.frame === 'cutout' ? 'pop' : 'drop'); rec.idle = rec.idle ?? false; rec.kb = it.kb ?? true; rec.sfx = 'pop';
     } else if (k === 'img') {
       el.innerHTML = `<img src="${(opts.media || '') + it.src}" style="width:${it.size ?? 500}px;display:block;${it.round ? 'border-radius:24px;' : ''}">`;
       rec.inn = rec.inn || 'pop';
@@ -204,8 +211,11 @@
     root.innerHTML = bgHTML(sh);
     const wins = [];
     const win = sh.win === false ? null : Object.assign({ scene: SCENES[sh._i % SCENES.length] }, sh.win || {});
+    const win2 = sh.win2 ? Object.assign({}, sh.win2) : null;
+    for (const w of [win, win2]) if (w && w.img) w._url = (await window.REEL_PHOTO.bake(mediaSrc(w.img), { fx: w.fx || 'none', frame: 'none', inks: w.inks, archival: w.archival, max: 1400, seed: sh._i }).catch((e) => { console.warn(e.message); return { url: null }; })).url;
+    for (const w of [win, win2]) if (w && w.img && !w._url) { delete w.img; w.scene = 'paper'; }
     if (win) wins.push(winEl(sh, win, 0));
-    if (sh.win2) wins.push(winEl(sh, sh.win2, 3));
+    if (win2) wins.push(winEl(sh, win2, 3));
     wins.forEach((w) => root.appendChild(w.el));
     const items = [];
     for (const [i, it] of (sh.items || []).entries()) {
@@ -244,7 +254,8 @@
     let bob = 0, wig = 0;
     if (rec.idle) { const ph = rec.x * 0.013 + rec.y * 0.007; bob = Math.sin(T * 2.2 + ph) * 9; wig = Math.sin(T * 1.7 + ph * 2) * 3; }
     rec.el.style.opacity = e.o;
-    rec.el.style.transform = `translate(-50%,-50%) translate(${e.dx}px,${e.dy + bob}px) rotate(${rec.r + e.rot + wig}deg) scale(${rec.s * e.sx})`;
+    const kb = rec.kb ? 1 + 0.06 * clamp(lt / Math.max(0.5, sh._t1 - sh._t0)) : 1;
+    rec.el.style.transform = `translate(-50%,-50%) translate(${e.dx}px,${e.dy + bob}px) rotate(${rec.r + e.rot + wig}deg) scale(${rec.s * e.sx * kb})`;
     const t = lt - rec.at;
     if (rec.reveal === 'words') {
       const ws = rec.el.querySelectorAll('.w');
@@ -327,7 +338,11 @@
     if (hostEl.dataset.kind !== want && !R.meta?.host?.image) { hostEl.innerHTML = HOST.build(want === 'full'); hostEl.dataset.kind = want; }
   }
 
-  async function load(reel, v, o = {}) {
+  // loads run one at a time; a frame asked for mid-load is simply skipped
+  let chain = Promise.resolve(), loading = false;
+  function load(reel, v, o = {}) { chain = chain.catch(() => {}).then(() => doLoad(reel, v, o)).finally(() => { loading = false; }); return chain; }
+  async function doLoad(reel, v, o = {}) {
+    loading = true; cur = -1;
     R = reel; voice = v; opts = o;
     stage.innerHTML = '';
     buildTimeline();
@@ -346,10 +361,12 @@
     for (const sh of shots) if (sh.cut !== false && sh._i > 0) events.push({ t: sh._t0, kind: 'cut' });
     const jc = R.meta?.jumpCut ?? 1.25;
     for (const sh of shots) { const d = sh._t1 - sh._t0, n = jc > 0 && sh.jump !== false ? Math.max(1, Math.round(d / jc)) : 1; for (let k = 1; k < n; k++) events.push({ t: sh._t0 + (k * d) / n, kind: 'cut' }); }
+    loading = false;
     return { total, fps, shots: shots.map((s) => ({ i: s._i, line: s._line, t0: s._t0, t1: s._t1, words: s._words.map((w) => w.w).join(' ') })), events, lines: R.lines.map((l) => ({ t0: l._t0, dur: l._v.dur })) };
   }
 
   function seek(T) {
+    if (loading || !shots.length) return;
     let i = shots.findIndex((s) => T >= s._t0 && T < s._t1);
     if (i < 0) i = T < 0 ? 0 : shots.length - 1;
     const sh = shots[i];
