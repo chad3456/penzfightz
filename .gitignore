@@ -20,3 +20,7 @@ sources/
 video-work/
 walks-of-life-prints/
 mind-maps-prints/
+
+# Python bytecode
+__pycache__/
+*.pyc
