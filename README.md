@@ -1913,6 +1913,19 @@ numbered part to fly to it, step through processes, move sliders that change
 it, and follow references checked against PubMed. For learning, not medical
 advice. More in `docs/body-atlas.md`.
 
+## Collage reels
+
+A generator for one-minute vertical explainer reels on any topic, in a
+pastel scrapbook-collage style: candy-stripe and gingham backdrops under giant
+pink stars, a white-framed clip window, glossy die-cut stickers, a cut-out
+bobblehead host behind a laptop, loud mixed-font words and fast cuts. You
+write a short JSON script; it fetches the stickers (Microsoft Fluent 3D emoji,
+MIT) and a narrator voice (Piper, LibriTTS, CC BY 4.0), times every word,
+renders 1080 x 1920 frames in a headless browser and mixes in an original
+bubblegum-pop score and sound effects. The first one explains Rob
+Henderson's "luxury beliefs". It lives in `.claude/skills/collage-reel/`
+(`SKILL.md` for the script format, `recipe.md` for the style).
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

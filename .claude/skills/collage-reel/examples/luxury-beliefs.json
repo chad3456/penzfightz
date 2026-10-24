@@ -1,0 +1,1303 @@
+{
+ "meta": {
+  "title": "Luxury Beliefs",
+  "brief": "how Luxury Belief, coined by Rob Henderson, explained in this reel style",
+  "fps": 30,
+  "lead": 0.25,
+  "gap": 0.16,
+  "tail": 1.8,
+  "voice": {
+   "speaker": 60,
+   "speed": 1.0
+  },
+  "music": {
+   "bpm": 116,
+   "key": "F"
+  },
+  "sources": [
+   "Rob Henderson, 'Luxury beliefs' essays (New York Post and Quillette, 2019) and Troubled (2024)",
+   "Thorstein Veblen, The Theory of the Leisure Class (1899)"
+  ]
+ },
+ "lines": [
+  {
+   "say": "Hey! Rich people stopped flexing with stuff.",
+   "shots": [
+    {
+     "w": 1,
+     "bg": "sky",
+     "win": false,
+     "host": "center",
+     "items": [
+      {
+       "t": "hey",
+       "style": "bold",
+       "size": 230,
+       "x": 50,
+       "y": 15
+      }
+     ]
+    },
+    {
+     "w": 3,
+     "bg": "tv",
+     "win": false,
+     "host": "center",
+     "items": [
+      {
+       "t": "rich people",
+       "style": "neon",
+       "size": 170,
+       "x": 50,
+       "y": 17
+      },
+      {
+       "e": "money bag",
+       "x": 76,
+       "y": 74,
+       "size": 330,
+       "r": 8,
+       "at": 0.15
+      },
+      {
+       "e": "gem stone",
+       "x": 22,
+       "y": 70,
+       "size": 220,
+       "r": -10,
+       "at": 0.3
+      }
+     ]
+    },
+    {
+     "bg": "stripes:pink",
+     "win": {
+      "scene": "city",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "flexing\nwith stuff",
+       "style": "caps",
+       "size": 150,
+       "x": 50,
+       "y": 16
+      },
+      {
+       "e": "handbag",
+       "x": 78,
+       "y": 40,
+       "size": 300,
+       "r": 10,
+       "at": "w0"
+      },
+      {
+       "e": "shopping bags",
+       "x": 30,
+       "y": 44,
+       "size": 320,
+       "r": -8,
+       "at": "w2"
+      },
+      {
+       "e": "gem stone",
+       "x": 70,
+       "y": 64,
+       "size": 220,
+       "r": 14,
+       "at": "w3"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "So what are they flexing instead? Beliefs.",
+   "shots": [
+    {
+     "w": 6,
+     "bg": "gingham:pink",
+     "win": {
+      "scene": "#8a6a4c",
+      "cam": "still"
+     },
+     "items": [
+      {
+       "t": "flexing instead?",
+       "style": "type",
+       "size": 120,
+       "x": 50,
+       "y": 38,
+       "w": 72
+      },
+      {
+       "e": "thinking face",
+       "x": 72,
+       "y": 18,
+       "size": 300,
+       "r": 8,
+       "at": 0.1
+      }
+     ]
+    },
+    {
+     "bg": "check:pink",
+     "win": {
+      "scene": "stage",
+      "cam": "push"
+     },
+     "flash": true,
+     "items": [
+      {
+       "t": "beliefs.",
+       "style": "huge",
+       "size": 240,
+       "x": 50,
+       "y": 34
+      },
+      {
+       "e": "sparkles",
+       "x": 22,
+       "y": 18,
+       "size": 220,
+       "at": 0.1
+      },
+      {
+       "e": "sparkles",
+       "x": 80,
+       "y": 52,
+       "size": 200,
+       "r": 20,
+       "at": 0.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Luxury beliefs. A term coined by Rob Henderson in 2019.",
+   "speak": "Luxury beliefs. A term coined by Rob Henderson, in twenty nineteen.",
+   "shots": [
+    {
+     "w": 2,
+     "bg": "stripes:lilac",
+     "win": {
+      "scene": "dream",
+      "cam": "up"
+     },
+     "items": [
+      {
+       "t": "Luxury\nBeliefs",
+       "style": "script",
+       "size": 210,
+       "x": 50,
+       "y": 24
+      },
+      {
+       "e": "crown",
+       "x": 70,
+       "y": 9,
+       "size": 230,
+       "r": 12,
+       "at": 0.15
+      },
+      {
+       "e": "gem stone",
+       "x": 24,
+       "y": 50,
+       "size": 200,
+       "r": -12,
+       "at": 0.3
+      }
+     ]
+    },
+    {
+     "bg": "grid:pink",
+     "win": false,
+     "items": [
+      {
+       "k": "tag",
+       "t": "coined by",
+       "x": 50,
+       "y": 15,
+       "size": 54,
+       "r": -3,
+       "at": "w2"
+      },
+      {
+       "t": "Rob Henderson",
+       "style": "ink",
+       "size": 150,
+       "x": 50,
+       "y": 26,
+       "w": 86,
+       "mark": "#e3ff3b",
+       "at": "w4"
+      },
+      {
+       "e": "page with curl",
+       "x": 74,
+       "y": 48,
+       "size": 260,
+       "r": 12,
+       "at": "w5"
+      },
+      {
+       "e": "light bulb",
+       "x": 28,
+       "y": 46,
+       "size": 230,
+       "r": -10,
+       "at": "w6"
+      }
+     ],
+     "w": 6
+    },
+    {
+     "bg": "stripes:green",
+     "win": {
+      "scene": "#e8458f",
+      "cam": "push"
+     },
+     "flash": true,
+     "items": [
+      {
+       "k": "count",
+       "n": "2019",
+       "label": "first\nessays",
+       "size": 250,
+       "x": 50,
+       "y": 30
+      },
+      {
+       "e": "sparkles",
+       "x": 24,
+       "y": 14,
+       "size": 200,
+       "at": 0.1
+      },
+      {
+       "e": "page with curl",
+       "x": 76,
+       "y": 52,
+       "size": 260,
+       "r": 12,
+       "at": 0.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "He grew up in foster care, then made it to Yale.",
+   "shots": [
+    {
+     "w": 6,
+     "bg": "gingham:pink",
+     "win": false,
+     "items": [
+      {
+       "k": "pola",
+       "scene": "suburb",
+       "cap": "growing up",
+       "size": 560,
+       "x": 52,
+       "y": 30,
+       "r": -4,
+       "at": 0.05
+      },
+      {
+       "t": "foster care",
+       "style": "hot",
+       "size": 140,
+       "x": 54,
+       "y": 56,
+       "at": "w4"
+      },
+      {
+       "e": "house",
+       "x": 82,
+       "y": 12,
+       "size": 220,
+       "r": 10,
+       "at": 0.25
+      }
+     ]
+    },
+    {
+     "bg": "stripes:green",
+     "win": {
+      "scene": "campus",
+      "cam": "up"
+     },
+     "items": [
+      {
+       "t": "Yale",
+       "style": "huge",
+       "size": 260,
+       "x": 50,
+       "y": 14,
+       "at": "w4"
+      },
+      {
+       "e": "graduation cap",
+       "x": 76,
+       "y": 52,
+       "size": 300,
+       "r": 12,
+       "at": "w4"
+      },
+      {
+       "e": "books",
+       "x": 82,
+       "y": 30,
+       "size": 220,
+       "r": -8,
+       "at": "w2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "And there he noticed something weird.",
+   "shots": [
+    {
+     "bg": "grid:blue",
+     "win": {
+      "scene": "room",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "something\nweird",
+       "style": "hot",
+       "size": 150,
+       "x": 50,
+       "y": 15,
+       "at": "w4"
+      },
+      {
+       "e": "face with monocle",
+       "x": 62,
+       "y": 44,
+       "size": 420,
+       "r": 6,
+       "at": "w2"
+      },
+      {
+       "e": "eyes",
+       "x": 26,
+       "y": 34,
+       "size": 220,
+       "r": -10,
+       "at": 0.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Back in 1899, Thorstein Veblen said the rich show off with expensive things.",
+   "speak": "Back in eighteen ninety-nine, Thorstein Veblen said the rich show off with expensive things.",
+   "shots": [
+    {
+     "w": 3,
+     "bg": "plaid:pink",
+     "win": {
+      "scene": "vintage",
+      "cam": "pull"
+     },
+     "items": [
+      {
+       "t": "back in",
+       "style": "script",
+       "size": 150,
+       "x": 50,
+       "y": 16
+      },
+      {
+       "t": "1899",
+       "style": "huge",
+       "size": 300,
+       "x": 50,
+       "y": 30,
+       "color": "#fff3dc",
+       "at": "w2"
+      }
+     ]
+    },
+    {
+     "w": 2,
+     "bg": "stripes:lilac",
+     "win": {
+      "scene": "vintage",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "Thorstein\nVeblen",
+       "style": "caps",
+       "size": 140,
+       "x": 50,
+       "y": 17
+      },
+      {
+       "k": "tag",
+       "t": "The Theory of the Leisure Class",
+       "size": 44,
+       "x": 52,
+       "y": 36,
+       "r": -2,
+       "at": 0.2
+      },
+      {
+       "e": "scroll",
+       "x": 70,
+       "y": 56,
+       "size": 300,
+       "r": 14,
+       "at": 0.15
+      },
+      {
+       "e": "books",
+       "x": 34,
+       "y": 58,
+       "size": 240,
+       "r": -6,
+       "at": 0.3
+      }
+     ]
+    },
+    {
+     "bg": "check:pink",
+     "win": {
+      "scene": "city",
+      "cam": "up"
+     },
+     "items": [
+      {
+       "t": "conspicuous\nconsumption",
+       "style": "neon",
+       "size": 118,
+       "x": 50,
+       "y": 15
+      },
+      {
+       "e": "money with wings",
+       "x": 28,
+       "y": 34,
+       "size": 260,
+       "r": -10,
+       "at": "w2"
+      },
+      {
+       "e": "bottle with popping cork",
+       "x": 76,
+       "y": 36,
+       "size": 280,
+       "r": 12,
+       "at": "w4"
+      }
+     ],
+     "w": 5
+    },
+    {
+     "bg": "grid:pink",
+     "win": {
+      "scene": "stage",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "expensive\nthings",
+       "style": "huge",
+       "size": 170,
+       "x": 50,
+       "y": 16
+      },
+      {
+       "e": "handbag",
+       "x": 66,
+       "y": 40,
+       "size": 260,
+       "r": -4,
+       "at": "w0"
+      },
+      {
+       "e": "gem stone",
+       "x": 40,
+       "y": 36,
+       "size": 200,
+       "r": 10,
+       "at": "w1"
+      },
+      {
+       "e": "crown",
+       "x": 30,
+       "y": 56,
+       "size": 240,
+       "r": -10,
+       "at": "w2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "But now everyone can get a nice phone, so stuff stopped working as a flex.",
+   "shots": [
+    {
+     "w": 3,
+     "bg": "grid:pink",
+     "win": {
+      "scene": "room",
+      "cam": "left"
+     },
+     "items": [
+      {
+       "t": "everyone",
+       "style": "bold",
+       "size": 170,
+       "x": 50,
+       "y": 20,
+       "at": "w2"
+      },
+      {
+       "e": "woman technologist",
+       "x": 32,
+       "y": 44,
+       "size": 300,
+       "r": -6,
+       "at": "w1"
+      },
+      {
+       "e": "person shrugging",
+       "x": 70,
+       "y": 46,
+       "size": 300,
+       "r": 6,
+       "at": "w2"
+      }
+     ]
+    },
+    {
+     "w": 5,
+     "bg": "grid:blue",
+     "win": {
+      "scene": "room",
+      "cam": "left"
+     },
+     "items": [
+      {
+       "t": "a nice phone",
+       "style": "neon",
+       "size": 140,
+       "x": 50,
+       "y": 14,
+       "at": "w2"
+      },
+      {
+       "e": "mobile phone",
+       "x": 30,
+       "y": 38,
+       "size": 250,
+       "r": -14,
+       "at": "w1"
+      },
+      {
+       "e": "mobile phone",
+       "x": 52,
+       "y": 44,
+       "size": 250,
+       "r": 4,
+       "at": "w2"
+      },
+      {
+       "e": "mobile phone",
+       "x": 74,
+       "y": 38,
+       "size": 250,
+       "r": 16,
+       "at": "w3"
+      }
+     ]
+    },
+    {
+     "bg": "stripes:pink",
+     "win": {
+      "scene": "#e8458f",
+      "cam": "still"
+     },
+     "items": [
+      {
+       "t": "stuff stopped\nworking as a flex",
+       "style": "caps",
+       "size": 112,
+       "x": 50,
+       "y": 22
+      },
+      {
+       "k": "stamp",
+       "t": "not a flex",
+       "size": 96,
+       "x": 52,
+       "y": 44,
+       "r": -10,
+       "color": "#ffffff",
+       "at": "w5"
+      },
+      {
+       "e": "cross mark",
+       "x": 76,
+       "y": 60,
+       "size": 220,
+       "r": 10,
+       "at": "w5"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "The new status symbol? Your opinions.",
+   "shots": [
+    {
+     "w": 4,
+     "bg": "tv",
+     "win": false,
+     "host": "center",
+     "items": [
+      {
+       "t": "new status\nsymbol?",
+       "style": "neon",
+       "size": 150,
+       "x": 50,
+       "y": 18
+      },
+      {
+       "e": "crown",
+       "x": 24,
+       "y": 72,
+       "size": 250,
+       "r": -12,
+       "at": 0.15
+      },
+      {
+       "e": "trophy",
+       "x": 78,
+       "y": 72,
+       "size": 250,
+       "r": 10,
+       "at": 0.3
+      }
+     ]
+    },
+    {
+     "bg": "gingham:pink",
+     "win": {
+      "scene": "stage",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "opinions",
+       "style": "huge",
+       "size": 180,
+       "x": 50,
+       "y": 14,
+       "at": "w1"
+      },
+      {
+       "k": "bubble",
+       "t": "hot take incoming",
+       "side": "l",
+       "x": 42,
+       "y": 32,
+       "at": 0.15
+      },
+      {
+       "k": "bubble",
+       "t": "so brave",
+       "side": "r",
+       "x": 64,
+       "y": 41,
+       "at": 0.45
+      },
+      {
+       "k": "bubble",
+       "t": "agreed, obviously",
+       "side": "l",
+       "x": 44,
+       "y": 50,
+       "at": 0.75
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "A luxury belief is an idea that wins status for the upper class at very little cost to them,",
+   "shots": [
+    {
+     "bg": "grid:pink",
+     "win": false,
+     "items": [
+      {
+       "k": "def",
+       "word": "luxury belief",
+       "pos": "noun",
+       "def": "an idea that wins status for the upper class at very little cost to them",
+       "x": 50,
+       "y": 33,
+       "w": 84,
+       "at": 0.05
+      },
+      {
+       "e": "gem stone",
+       "x": 84,
+       "y": 13,
+       "size": 200,
+       "r": 14,
+       "at": 0.3
+      },
+      {
+       "e": "glowing star",
+       "x": 80,
+       "y": 57,
+       "size": 200,
+       "r": -10,
+       "at": "w8"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "while often costing people with less.",
+   "shots": [
+    {
+     "bg": "stripes:green",
+     "win": {
+      "scene": "#fffaf0",
+      "cam": "still"
+     },
+     "items": [
+      {
+       "t": "who pays?",
+       "style": "pink",
+       "size": 150,
+       "x": 50,
+       "y": 12
+      },
+      {
+       "k": "bars",
+       "bars": [
+        {
+         "label": "upper\nclass",
+         "v": 1,
+         "color": "#b9a2e6"
+        },
+        {
+         "label": "people\nwith less",
+         "v": 6,
+         "color": "#e8458f"
+        }
+       ],
+       "h": 640,
+       "x": 56,
+       "y": 46,
+       "at": 0.05
+      },
+      {
+       "e": "money with wings",
+       "x": 84,
+       "y": 26,
+       "size": 200,
+       "r": 12,
+       "at": "w2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Henderson's example: saying marriage doesn't matter,",
+   "shots": [
+    {
+     "bg": "plaid:pink",
+     "win": false,
+     "items": [
+      {
+       "k": "note",
+       "lines": [
+        "example #1:",
+        "\"marriage doesn't",
+        "really matter\""
+       ],
+       "per": 0.6,
+       "x": 52,
+       "y": 31,
+       "w": 78,
+       "r": -2,
+       "at": 0.05
+      },
+      {
+       "e": "ring",
+       "x": 80,
+       "y": 55,
+       "size": 230,
+       "r": 12,
+       "at": "w3"
+      },
+      {
+       "e": "face with rolling eyes",
+       "x": 22,
+       "y": 9,
+       "size": 200,
+       "r": -10,
+       "at": "w4"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "while the people saying it are the most likely to marry.",
+   "shots": [
+    {
+     "w": 5,
+     "bg": "grid:blue",
+     "win": {
+      "scene": "city",
+      "cam": "right"
+     },
+     "items": [
+      {
+       "t": "the people\nsaying it",
+       "style": "bold",
+       "size": 150,
+       "x": 50,
+       "y": 16
+      },
+      {
+       "e": "clinking glasses",
+       "x": 70,
+       "y": 46,
+       "size": 300,
+       "r": 10,
+       "at": 0.15
+      }
+     ]
+    },
+    {
+     "bg": "stripes:pink",
+     "win": {
+      "scene": "stage",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "most likely\nto marry",
+       "style": "script",
+       "size": 150,
+       "x": 50,
+       "y": 16,
+       "at": "w2"
+      },
+      {
+       "e": "wedding",
+       "x": 50,
+       "y": 46,
+       "size": 440,
+       "at": "w3"
+      },
+      {
+       "e": "ring",
+       "x": 80,
+       "y": 30,
+       "size": 200,
+       "r": 14,
+       "at": "w5"
+      },
+      {
+       "e": "sparkles",
+       "x": 22,
+       "y": 36,
+       "size": 180,
+       "r": -10,
+       "at": "w5"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Or “defund the police”, said from a safe neighborhood.",
+   "shots": [
+    {
+     "w": 4,
+     "bg": "grid:pink",
+     "win": {
+      "scene": "city",
+      "cam": "push",
+      "seed": 3
+     },
+     "items": [
+      {
+       "k": "bubble",
+       "t": "defund the police!",
+       "side": "r",
+       "size": 58,
+       "x": 56,
+       "y": 22,
+       "at": "w1"
+      },
+      {
+       "e": "police car",
+       "x": 34,
+       "y": 46,
+       "size": 330,
+       "r": -8,
+       "at": 0.1
+      },
+      {
+       "e": "megaphone",
+       "x": 76,
+       "y": 48,
+       "size": 240,
+       "r": 12,
+       "at": "w1"
+      }
+     ]
+    },
+    {
+     "bg": "stripes:green",
+     "win": {
+      "scene": "suburb",
+      "cam": "push"
+     },
+     "items": [
+      {
+       "t": "a safe\nneighborhood",
+       "style": "hand",
+       "size": 150,
+       "x": 50,
+       "y": 13,
+       "at": "w2"
+      },
+      {
+       "e": "house with garden",
+       "x": 72,
+       "y": 50,
+       "size": 300,
+       "r": 8,
+       "at": "w3"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Henderson argues poorer areas would carry the risk.",
+   "shots": [
+    {
+     "bg": "check:pink",
+     "win": {
+      "scene": "street",
+      "cam": "up"
+     },
+     "items": [
+      {
+       "t": "poorer areas\ncarry the risk",
+       "style": "caps",
+       "size": 120,
+       "x": 50,
+       "y": 18,
+       "at": "w2"
+      },
+      {
+       "k": "tag",
+       "t": "his argument",
+       "size": 46,
+       "x": 50,
+       "y": 7,
+       "r": -2,
+       "at": 0.05
+      },
+      {
+       "e": "warning",
+       "x": 70,
+       "y": 50,
+       "size": 270,
+       "r": 10,
+       "at": "w5"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Critics push back: the label gets slapped on any view people dislike.",
+   "shots": [
+    {
+     "w": 3,
+     "bg": "grid:blue",
+     "win": {
+      "scene": "#22306b",
+      "cam": "still"
+     },
+     "items": [
+      {
+       "t": "but...",
+       "style": "huge",
+       "size": 240,
+       "x": 50,
+       "y": 22
+      },
+      {
+       "t": "critics push back",
+       "style": "neon",
+       "size": 100,
+       "x": 50,
+       "y": 36,
+       "at": "w1"
+      },
+      {
+       "e": "face with rolling eyes",
+       "x": 66,
+       "y": 56,
+       "size": 300,
+       "r": 8,
+       "at": 0.15
+      }
+     ]
+    },
+    {
+     "bg": "stripes:lilac",
+     "win": {
+      "scene": "paper",
+      "cam": "still"
+     },
+     "items": [
+      {
+       "e": "hot beverage",
+       "x": 30,
+       "y": 20,
+       "size": 220,
+       "r": -8,
+       "at": 0.05
+      },
+      {
+       "e": "bubble tea",
+       "x": 72,
+       "y": 22,
+       "size": 220,
+       "r": 10,
+       "at": 0.1
+      },
+      {
+       "e": "laptop",
+       "x": 34,
+       "y": 46,
+       "size": 240,
+       "r": 6,
+       "at": 0.15
+      },
+      {
+       "e": "books",
+       "x": 74,
+       "y": 52,
+       "size": 220,
+       "r": -6,
+       "at": 0.2
+      },
+      {
+       "k": "stamp",
+       "t": "luxury belief",
+       "size": 64,
+       "x": 32,
+       "y": 26,
+       "r": -12,
+       "at": "w3"
+      },
+      {
+       "k": "stamp",
+       "t": "luxury belief",
+       "size": 64,
+       "x": 70,
+       "y": 30,
+       "r": 9,
+       "at": "w5"
+      },
+      {
+       "k": "stamp",
+       "t": "luxury belief",
+       "size": 64,
+       "x": 36,
+       "y": 52,
+       "r": 6,
+       "at": "w6"
+      },
+      {
+       "k": "stamp",
+       "t": "luxury belief",
+       "size": 64,
+       "x": 72,
+       "y": 58,
+       "r": -8,
+       "at": "w7"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "So here's a better test: who pays if this idea is wrong?",
+   "shots": [
+    {
+     "w": 5,
+     "bg": "gingham:pink",
+     "win": {
+      "scene": "#8a6a4c",
+      "cam": "still"
+     },
+     "items": [
+      {
+       "t": "a better test",
+       "style": "type",
+       "size": 130,
+       "x": 50,
+       "y": 36,
+       "w": 76,
+       "at": "w1"
+      },
+      {
+       "e": "light bulb",
+       "x": 74,
+       "y": 17,
+       "size": 260,
+       "r": 10,
+       "at": 0.1
+      }
+     ]
+    },
+    {
+     "bg": "stripes:pink",
+     "win": false,
+     "flash": true,
+     "items": [
+      {
+       "t": "who pays",
+       "style": "huge",
+       "size": 190,
+       "x": 50,
+       "y": 20
+      },
+      {
+       "t": "if this idea\nis wrong?",
+       "style": "hot",
+       "size": 120,
+       "x": 50,
+       "y": 36,
+       "at": "w2"
+      },
+      {
+       "e": "money with wings",
+       "x": 24,
+       "y": 56,
+       "size": 240,
+       "r": -12,
+       "at": "w1"
+      },
+      {
+       "e": "credit card",
+       "x": 76,
+       "y": 54,
+       "size": 240,
+       "r": 12,
+       "at": "w3"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "Follow for more ideas that explain the world.",
+   "shots": [
+    {
+     "bg": "sky",
+     "win": false,
+     "host": "center",
+     "flash": true,
+     "items": [
+      {
+       "t": "follow\nfor more",
+       "style": "hand",
+       "size": 190,
+       "x": 50,
+       "y": 16
+      },
+      {
+       "e": "red heart",
+       "x": 22,
+       "y": 68,
+       "size": 220,
+       "r": -12,
+       "at": "w2"
+      },
+      {
+       "e": "glowing star",
+       "x": 80,
+       "y": 66,
+       "size": 220,
+       "r": 12,
+       "at": "w4"
+      },
+      {
+       "e": "sparkles",
+       "x": 78,
+       "y": 33,
+       "size": 180,
+       "r": 0,
+       "at": "w6"
+      }
+     ],
+     "w": 3
+    },
+    {
+     "bg": "stripes:pink",
+     "win": {
+      "scene": "dream",
+      "cam": "up"
+     },
+     "items": [
+      {
+       "t": "ideas that\nexplain\nthe world",
+       "style": "caps",
+       "size": 130,
+       "x": 50,
+       "y": 20
+      },
+      {
+       "e": "light bulb",
+       "x": 28,
+       "y": 46,
+       "size": 260,
+       "r": -10,
+       "at": "w0"
+      },
+      {
+       "e": "glowing star",
+       "x": 74,
+       "y": 48,
+       "size": 240,
+       "r": 10,
+       "at": "w3"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Collage reel</title>
+<link rel="stylesheet" href="reel.css">
+</head><body>
+<div id="stage"></div>
+<script src="scenes.js"></script>
+<script src="host.js"></script>
+<script src="reel.js"></script>
+<script>
+// Live preview: reel.html?reel=path/to/reel.json&voice=path/to/voice.json&audio=path/to/film.m4a
+(async () => {
+  const q = new URLSearchParams(location.search);
+  if (!q.get('reel')) return;
+  const reel = await (await fetch(q.get('reel'))).json();
+  const voice = q.get('voice') ? await (await fetch(q.get('voice'))).json() : null;
+  const info = await REEL.load(reel, voice, { stickers: q.get('stickers') || '', media: q.get('media') || '' });
+  const st = document.getElementById('stage');
+  const fit = () => { const k = Math.min(innerWidth / 1080, innerHeight / 1920); st.style.transform = `scale(${k})`; };
+  fit(); addEventListener('resize', fit);
+  const au = q.get('audio') ? new Audio(q.get('audio')) : null;
+  let t0 = performance.now();
+  const go = () => { t0 = performance.now(); if (au) { au.currentTime = 0; au.play(); } };
+  addEventListener('click', go); go();
+  const tick = () => { const t = au ? au.currentTime : ((performance.now() - t0) / 1000) % info.total; REEL.seek(t); requestAnimationFrame(tick); };
+  tick();
+})();
+</script>
+</body></html>
