@@ -1937,6 +1937,17 @@ or VHS looks in polaroid, washi-tape, torn-paper or CRT frames, then record
 the voice and render. Credits are written for you. More in
 `tools/reel-studio/README.md`.
 
+## Aura FX
+
+A command-line tool that turns any clip into a vertical "aura farming" reel:
+it finds the shots and the beat, cuts the person out with a local
+segmentation model, reframes to 9:16 around them, and grades each segment
+with one of 22 Photoshop-style looks (golden and neon aura rims, thermal,
+comic halftone, pencil sketch, VHS, glitch, matrix rain, god rays,
+lightning, embers, noir red, kaleido, film and more), with beat punches,
+flashes, shake, freeze-frame cut-outs, captions and an aura meter, keeping
+the original audio. More in `tools/aura-fx/README.md`.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its
