@@ -1951,10 +1951,17 @@ the original audio. More in `tools/aura-fx/README.md`.
 The same thing runs **on the site**: Effects → **Aura FX**. Drop in a video and
 the page finds the beat (Web Audio), the cuts and the person (a 4.7 MB U²-Net-p
 model running in the browser through onnxruntime-web), then builds a first
-edit you can change: pick any of 23 looks per segment from live thumbnails,
+edit you can change: pick any of 33 looks per segment from live thumbnails,
 split or merge segments, follow the person or keep the whole frame, add big
 text, aura pops, captions and freeze-frame cut-outs at the playhead, and tune
-the beat punch. Looks run as WebGL2 shaders; export renders every frame and
+the beat punch. The print and hand-drawn looks are CMYK and one-ink halftone,
+single tone, thermal rainbow, night vision, a comic book with Ben-Day dots and
+POW!/BAM! bursts on the downbeats, ink doodle on notebook paper, neon doodle,
+pencil scribble and chalkboard. A colour picker sets the ink of the one-colour
+looks. Doodles can go on any look (Ink, Neon or Chalk): a scribbled outline
+traced from the person's mask, a crown, stars, hearts, motion lines and a
+handwritten "aura" arrow, redrawn ten times a second so the lines boil. Looks
+run as WebGL2 shaders; export renders every frame and
 encodes it with WebCodecs into an MP4 (H.264, with the clip's own sound), or
 records in real time where WebCodecs is missing. The video never leaves the
 device. Code in `src/aura/`.

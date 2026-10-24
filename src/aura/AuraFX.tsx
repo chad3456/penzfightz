@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { analyze } from './analyze';
 import { canExportFrames, exportFrames } from './exporter';
-import { LOOKS, lookOf } from './looks';
+import { DISPLAY, LOOKS, lookOf, type Doodle } from './looks';
 import { drawOverlays, loadFonts, OUT_H, OUT_W } from './overlay';
-import { autoPlan, frameState, newId, segmentAt, shuffleLooks, type Analysis, type AuraEvent, type Plan } from './plan';
+import { autoPlan, burstsOf, doodleOf, frameState, newId, segmentAt, shuffleLooks, type Analysis, type AuraEvent, type Plan } from './plan';
 import { AuraRenderer } from './renderer';
 
 type Stage = 'pick' | 'analyze' | 'edit';
@@ -337,12 +337,28 @@ export default function AuraFX({ onExit }: { onExit: () => void }) {
                   <button onClick={() => { const n = Math.min(plan.segments.length - 1, sel + 1); setSel(n); seekTo(plan.segments[n].t0 + 0.05); }} aria-label="Next segment">›</button>
                 </div>
                 <div className="af-looks">
-                  {LOOKS.map((L) => (
+                  {DISPLAY.map((id) => lookOf(id)).map((L) => (
                     <button key={L.id} className={`af-look${seg.look === L.id ? ' on' : ''}`} onClick={() => setSeg({ look: L.id })} title={L.name}>
                       <span style={{ backgroundImage: thumbs[L.id] ? `url(${thumbs[L.id]})` : `linear-gradient(135deg, ${L.swatch[0]}, ${L.swatch[1]})` }} />
                       <em>{L.name}{L.mask && !a.masks ? ' *' : ''}</em>
                     </button>
                   ))}
+                </div>
+                {lookOf(seg.look).tint && (
+                  <div className="af-row af-tints">
+                    <span className="af-label">Colour</span>
+                    {['#ff2fb2', '#ff3b30', '#ffb800', '#7dff5a', '#2bd8ff', '#3b6bff', '#a23cff', '#ffffff'].map((c) => (
+                      <button key={c} className={`af-tint${(seg.tint ?? lookOf(seg.look).tint) === c ? ' on' : ''}`} style={{ background: c }} onClick={() => setSeg({ tint: c })} aria-label={`Colour ${c}`} />
+                    ))}
+                    <input type="color" value={seg.tint ?? lookOf(seg.look).tint} onChange={(e) => setSeg({ tint: e.target.value })} aria-label="Pick any colour" />
+                  </div>
+                )}
+                <div className="af-row">
+                  <span className="af-label">Doodles</span>
+                  <div className="af-seg2">
+                    {(['off', 'ink', 'neon', 'chalk'] as Doodle[]).map((d) => <button key={d} className={doodleOf(seg) === d ? 'on' : ''} onClick={() => setSeg({ doodle: d })}>{{ off: 'Off', ink: 'Ink', neon: 'Neon', chalk: 'Chalk' }[d]}</button>)}
+                  </div>
+                  <label className="af-check"><input type="checkbox" checked={burstsOf(seg)} onChange={(e) => setSeg({ bursts: e.target.checked })} /> POW! bursts</label>
                 </div>
                 <div className="af-row">
                   <div className="af-seg2"><button className={seg.frame === 'crop' ? 'on' : ''} onClick={() => setSeg({ frame: 'crop' })}>Follow person</button><button className={seg.frame === 'fit' ? 'on' : ''} onClick={() => setSeg({ frame: 'fit' })}>Whole frame</button></div>

@@ -78,6 +78,7 @@ in vec2 vUv; out vec4 o;
 uniform sampler2D uFrame, uBlur, uBlur2, uMask, uMaskN, uMaskW;
 uniform int uLook;
 uniform float uTime, uP, uPulse, uSeed, uFreeze, uHasMask, uFlashAdd;
+uniform vec3 uTint;
 uniform vec2 uRes;
 ${MAP}
 
@@ -181,6 +182,59 @@ vec3 freezeShot(vec2 uv) {
   float edge = step(0.12, maskAt(uMaskN, uv));
   vec3 outc = mix(bg, vec3(1.0), edge);
   return mix(outc, subj, m);
+}
+
+
+// ---------- print, ink and doodle helpers ----------
+vec3 lifted(vec3 c) { return pow(clamp(c * 1.8, 0.0, 1.0), vec3(0.8)); }
+mat2 rot2(float a) { float c = cos(a), s = sin(a); return mat2(c, s, -s, c); }
+float sobel(vec2 uv, float px, float gain) {
+  vec2 t = px / uRes; float gx = 0.0, gy = 0.0;
+  for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+    float v = lum(clamp(texture(uFrame, uv + vec2(i, j) * t).rgb * gain, 0.0, 1.0));
+    gx += v * float(i) * (j == 0 ? 2.0 : 1.0); gy += v * float(j) * (i == 0 ? 2.0 : 1.0);
+  }
+  return length(vec2(gx, gy));
+}
+float hatch(vec2 fc, float a, float sp, float w, float wob) {
+  vec2 p = rot2(a) * fc;
+  float y = p.y + sin(p.x * 0.045 + wob) * 1.6;
+  return smoothstep(w, w - 0.9, abs(mod(y, sp) - sp * 0.5));
+}
+vec3 iron(float t) {
+  vec3 a = vec3(0.0, 0.0, 0.05), b = vec3(0.22, 0.0, 0.6), c = vec3(0.78, 0.0, 0.55), d = vec3(1.0, 0.36, 0.0), e = vec3(1.0, 0.82, 0.0), f = vec3(1.0, 1.0, 0.92);
+  t = clamp(t, 0.0, 1.0);
+  if (t < 0.2) return mix(a, b, t / 0.2);
+  if (t < 0.4) return mix(b, c, (t - 0.2) / 0.2);
+  if (t < 0.6) return mix(c, d, (t - 0.4) / 0.2);
+  if (t < 0.8) return mix(d, e, (t - 0.6) / 0.2);
+  return mix(e, f, (t - 0.8) / 0.2);
+}
+vec3 cmykScreen(vec2 fc) {
+  vec3 col = vec3(0.97, 0.95, 0.89);
+  float cell = 9.0;
+  float angs[4] = float[](0.2618, 1.309, 0.0, 0.7854);
+  vec3 inks[4] = vec3[](vec3(0.0, 0.62, 0.9), vec3(0.92, 0.05, 0.52), vec3(1.0, 0.92, 0.0), vec3(0.08, 0.07, 0.1));
+  for (int i = 0; i < 4; i++) {
+    mat2 R = rot2(angs[i]);
+    vec2 p = R * fc;
+    vec2 cc = (floor(p / cell) + 0.5) * cell;
+    vec3 sm = lifted(texture(uFrame, (transpose(R) * cc) / uRes).rgb);
+    float k = 1.0 - max(max(sm.r, sm.g), sm.b);
+    vec3 cmy = (1.0 - sm - k) / (1.0 - k + 1e-3);
+    float amt = i == 0 ? cmy.x : i == 1 ? cmy.y : i == 2 ? cmy.z : k;
+    float rad = sqrt(clamp(amt, 0.0, 1.0)) * cell * 0.62;
+    col *= mix(vec3(1.0), inks[i], smoothstep(rad + 0.8, rad - 0.8, length(p - cc)));
+  }
+  return col;
+}
+vec3 monoScreen(vec2 fc, vec3 ink) {
+  float cell = 10.0;
+  mat2 R = rot2(0.7854);
+  vec2 p = R * fc; vec2 cc = (floor(p / cell) + 0.5) * cell;
+  float l = curve1(lum(lifted(texture(uFrame, (transpose(R) * cc) / uRes).rgb)), 1.25, 0.45);
+  float rad = sqrt(1.0 - l) * cell * 0.7;
+  return mix(vec3(0.97, 0.95, 0.9), ink, smoothstep(rad + 0.8, rad - 0.8, length(p - cc)));
 }
 
 void main() {
@@ -302,6 +356,76 @@ void main() {
     r = screen(clamp(r, 0.0, 1.0), leak) * vig(uv, 0.6);
   } else if (L == 21) {
     r = 1.0 - curve(c, 1.2, 0.5);
+  } else if (L == 23) {
+    r = cmykScreen(fc) + grain(fc, 1.0) * 0.03;
+  } else if (L == 24) {
+    r = monoScreen(fc, uTint) + grain(fc, 1.0) * 0.03;
+  } else if (L == 25) {
+    float l = curve1(lum(lifted(c)), 1.3, 0.45);
+    r = mix(uTint * 0.07, uTint, smoothstep(0.0, 0.55, l));
+    r = mix(r, vec3(1.0), smoothstep(0.62, 1.0, l) * 0.85) + bloom(uv, 0.45) * uTint * 0.7 + grain(fc, 1.0) * 0.04;
+    r *= vig(uv, 0.45);
+  } else if (L == 26) {
+    float l = pow(clamp(lum(mix(c, texture(uBlur, uv).rgb, 0.35)) * 1.9, 0.0, 1.0), 0.75);
+    if (uHasMask > 0.5) l = clamp(l * 0.6 + m * 0.3 + maskAt(uMaskW, uv) * 0.15, 0.0, 1.0);
+    r = iron(l) + grain(fc, 2.0) * 0.03;
+  } else if (L == 27) {
+    float l = pow(clamp(lum(c) * 2.8, 0.0, 1.0), 0.75) + (hash(fc * 0.5 + uSeed) - 0.5) * 0.18;
+    r = vec3(0.12, 1.0, 0.28) * l + bloom(uv, 0.35) * vec3(0.2, 1.0, 0.3) * 0.8;
+    if (mod(fc.y, 3.0) < 1.0) r *= 0.8;
+    vec2 d = (uv - 0.5) * vec2(uRes.x / uRes.y, 1.0);
+    r *= smoothstep(0.62, 0.42, length(d)) * 0.9 + 0.1;
+  } else if (L == 28) {
+    vec3 lc = pow(clamp(texture(uFrame, uv + vec2(2.0, -1.0) / uRes).rgb * 2.0, 0.0, 1.0), vec3(0.75));
+    vec3 h = rgb2hsv(lc); h.y = clamp(h.y * 1.6 + 0.08, 0.0, 1.0); h.z = max(floor(h.z * 4.0 + 0.5) / 4.0, 0.22) * 1.08;
+    vec3 fl = hsv2rgb(h);
+    float ink = smoothstep(0.34, 0.6, sobel(uv, 2.0, 2.0)) * (0.55 + 0.45 * m);
+    float cell = 7.0; vec2 g = mod(fc, cell) - cell * 0.5;
+    if (h.z > 0.3 && h.z < 0.8) fl = mix(fl, fl * 0.7 + vec3(0.95, 0.1, 0.25) * 0.2, step(length(g), cell * 0.32) * 0.65);
+    if (h.z < 0.3) fl *= mix(1.0, 0.4, hatch(fc, 0.785, 6.0, 1.3, 0.0));
+    r = fl * (1.0 - ink) * vec3(1.0, 0.97, 0.9) + grain(fc, 1.0) * 0.03;
+    float e = min(min(fc.x, uRes.x - fc.x), min(fc.y, uRes.y - fc.y));
+    if (e < 22.0) r = e < 12.0 ? vec3(0.97, 0.96, 0.92) : vec3(0.04);
+  } else if (L == 29 || L == 31 || L == 32) {
+    float boil = floor(uTime * 10.0);
+    vec2 jit = (vec2(hash1(boil), hash1(boil + 3.0)) - 0.5) * 2.5 / uRes;
+    float edge = smoothstep(0.12, 0.3, sobel(uv + jit, 1.5, 2.2));
+    vec3 lc = lifted(c);
+    float l = curve1(lum(lc), 1.25, 0.45);
+    float wob = boil * 1.7;
+    if (L == 29) {                      // ink on notebook paper, the person filled in with marker
+      vec3 paper = vec3(0.98, 0.96, 0.9);
+      if (mod(fc.y, 36.0) < 1.3) paper = vec3(0.74, 0.84, 0.95);
+      if (abs(fc.x - 80.0) < 1.3) paper = vec3(0.95, 0.58, 0.64);
+      vec3 hs = rgb2hsv(lc); hs.y = clamp(hs.y * 1.4 + 0.15, 0.0, 1.0); hs.z = 0.55 + floor(hs.z * 3.0) / 6.0;
+      float streak = 0.75 + 0.25 * step(0.35, fract((fc.x * 0.7 + fc.y) / 11.0 + hash1(floor((fc.x * 0.7 + fc.y) / 11.0)) * 0.3));
+      vec3 marker = hsv2rgb(hs) * streak;
+      r = mix(paper, paper * marker, m * 0.85);
+      float sh = l < 0.36 ? hatch(fc, 0.785, 7.0, 1.0, wob) : 0.0;
+      if (l < 0.18) sh = max(sh, hatch(fc, -0.785, 7.0, 1.0, wob));
+      vec3 inkc = vec3(0.08, 0.1, 0.28);
+      r = mix(r, inkc, max(edge, sh * 0.85));
+    } else if (L == 31) {               // coloured pencil scribble
+      vec3 paper = vec3(0.97, 0.94, 0.87) - hash(floor(fc / 2.0)) * 0.04;
+      vec3 hs = rgb2hsv(lc); hs.y = clamp(hs.y * 1.5 + 0.2, 0.0, 1.0); hs.z = clamp(hs.z * 0.8 + 0.25, 0.0, 1.0);
+      vec3 pencil = hsv2rgb(hs);
+      float d = 1.0 - l;
+      float cov = hatch(fc, 0.5, 5.0, 1.4 * d + 0.2, wob) * step(0.15, d);
+      cov = max(cov, hatch(fc, -0.9, 6.0, 1.3 * d, wob + 1.0) * step(0.45, d));
+      cov = max(cov, hatch(fc, 1.4, 4.5, 1.2 * d, wob + 2.0) * step(0.7, d));
+      r = mix(paper, pencil * (0.55 + 0.45 * (1.0 - d)), cov * 0.9);
+      r = mix(r, vec3(0.12, 0.1, 0.14), edge * 0.85);
+    } else {                            // chalk on a board
+      vec3 board = vec3(0.09, 0.16, 0.13) + (hash(floor(fc / 6.0)) - 0.5) * 0.02 + texture(uBlur2, uv).rgb * 0.05;
+      float grainy = step(0.3, hash(fc * 0.7 + boil));
+      float lines = edge * grainy;
+      float sh = l > 0.55 ? hatch(fc, 0.6, 8.0, 1.1, wob) : 0.0;
+      if (l > 0.75) sh = max(sh, hatch(fc, -0.6, 8.0, 1.1, wob));
+      r = mix(board, uTint, clamp(lines + sh * grainy * 0.7, 0.0, 1.0) * 0.9);
+    }
+  } else if (L == 30) {
+    r = sat(curve(c, 1.3, 0.4), 0.25) * (0.22 + 0.5 * m) + rimWide(uv) * uTint * (0.35 + 0.35 * uPulse);
+    r *= vig(uv, 0.55);
   } else {
     r = sat(curve(c, 1.08, 0.45), 1.08);
   }

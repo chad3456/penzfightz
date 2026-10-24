@@ -27,6 +27,7 @@ export interface FrameParams {
   chroma: number;
   flash: number;
   letterbox: boolean;
+  tint: [number, number, number];
 }
 
 interface Target { fb: WebGLFramebuffer; tex: WebGLTexture; w: number; h: number }
@@ -181,7 +182,7 @@ export class AuraRenderer {
       gl.uniform1i(u.uMask, 3); gl.uniform1i(u.uMaskN, 4); gl.uniform1i(u.uMaskW, 5);
       gl.uniform1i(u.uLook, f.look);
       gl.uniform1f(u.uTime, f.time); gl.uniform1f(u.uP, f.p); gl.uniform1f(u.uPulse, f.pulse); gl.uniform1f(u.uSeed, f.seed);
-      gl.uniform1f(u.uFreeze, f.freeze ? 1 : 0); gl.uniform1f(u.uHasMask, hasMask ? 1 : 0); gl.uniform1f(u.uFlashAdd, f.flashAdd);
+      gl.uniform3f(u.uTint, f.tint[0], f.tint[1], f.tint[2]); gl.uniform1f(u.uFreeze, f.freeze ? 1 : 0); gl.uniform1f(u.uHasMask, hasMask ? 1 : 0); gl.uniform1f(u.uFlashAdd, f.flashAdd);
       gl.uniform2f(u.uRes, WORK_W, WORK_H);
     }, [frame.tex, b1.tex, b2.tex, ...mt]);
     // 5. beat motion to the canvas

@@ -1,7 +1,7 @@
-import { LOOK_INDEX, LOOKS, lookOf } from './looks';
+import { LOOK_INDEX, LOOKS, lookOf, type Doodle } from './looks';
 import type { FrameParams } from './renderer';
 
-export interface Segment { t0: number; t1: number; look: string; frame: 'crop' | 'fit'; shake?: boolean; letterbox?: boolean }
+export interface Segment { t0: number; t1: number; look: string; frame: 'crop' | 'fit'; shake?: boolean; letterbox?: boolean; tint?: string; doodle?: Doodle; bursts?: boolean }
 export interface AuraEvent { id: string; t: number; dur: number; kind: 'freeze' | 'text'; text: string; style?: 'impact' | 'aura' | 'caption'; y?: number; size?: number; glow?: string }
 export interface Plan { segments: Segment[]; events: AuraEvent[]; meter: boolean; punch: number; downbeatPunch: number; flashCuts: boolean; shake: boolean }
 
@@ -15,9 +15,12 @@ export interface Analysis {
 }
 
 let uid = 0;
+export function hexToRgb(h: string): [number, number, number] { const n = parseInt(h.replace('#', '').padEnd(6, '0').slice(0, 6), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; }
+export const doodleOf = (s: Segment): Doodle => s.doodle ?? lookOf(s.look).doodle ?? 'off';
+export const burstsOf = (s: Segment) => s.bursts ?? !!lookOf(s.look).bursts;
 export const newId = () => `e${Date.now().toString(36)}${(uid++).toString(36)}`;
 
-const ROTATION = ['film', 'teal_orange', 'cyberpunk', 'noir_red', 'glitch', 'comic', 'golden_aura', 'neon_aura', 'purple_haze', 'green_rays', 'sketch', 'storm', 'embers', 'noir', 'oil', 'dream', 'vhs', 'infrared', 'thermal', 'kaleido', 'matrix'];
+const ROTATION = ['film', 'teal_orange', 'comic_book', 'cyberpunk', 'neon_doodle', 'noir_red', 'glitch', 'halftone', 'golden_aura', 'single_tone', 'neon_aura', 'doodle', 'purple_haze', 'thermal_rainbow', 'green_rays', 'scribble', 'storm', 'embers', 'halftone_mono', 'noir', 'night_vision', 'oil', 'chalk', 'dream', 'vhs', 'infrared', 'thermal', 'kaleido', 'matrix', 'sketch'];
 const PHRASES = ['UNBOTHERED', 'MAIN CHARACTER', 'SILENT. DANGEROUS.', 'NO WORDS NEEDED', 'BUILT DIFFERENT', 'FINAL BOSS', 'AURA'];
 
 // A first edit for any clip: a look per shot (long shots change on downbeats),
@@ -136,6 +139,7 @@ export function frameState(plan: Plan, a: Analysis, t: number, frameNo: number, 
       look: LOOK_INDEX[look.id], time: t, p: lt / dur, pulse, seed: frameNo,
       freeze: !!freeze, hold: !!freeze && wasFreeze?.id !== freeze.id, flashAdd: storm,
       zoom, center: [0.5, seg.frame === 'fit' ? 0.5 : 1 - cy], shift, rgb, chroma, flash, letterbox: !!seg.letterbox,
+      tint: hexToRgb(seg.tint ?? look.tint ?? '#ff2fb2'),
     },
   };
 }

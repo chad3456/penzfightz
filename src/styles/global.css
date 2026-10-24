@@ -11437,3 +11437,8 @@ button.card:hover:not(:disabled) {
   .af-events li { grid-template-columns: auto 1fr auto; }
   .af-events li .af-kind, .af-events li label { grid-column: span 1; }
 }
+.af-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--af-soft); margin-right: 2px; }
+.af-tints { gap: 6px; }
+.af-tint { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.25); padding: 0; }
+.af-tint.on { border-color: #fff; box-shadow: 0 0 0 2px var(--af-hot); }
+.af-tints input[type='color'] { width: 34px; height: 28px; border: 0; background: transparent; padding: 0; cursor: pointer; }

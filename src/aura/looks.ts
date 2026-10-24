@@ -1,12 +1,16 @@
 // The looks, in the order the shader knows them. `mask` looks use the person
 // mask (they still work without one, around the centre of the frame);
 // `layer` asks the 2D overlay for particles or lightning.
+export type Doodle = 'off' | 'ink' | 'neon' | 'chalk';
 export interface Look {
   id: string;
   name: string;
   mask?: boolean;
   layer?: 'embers' | 'lightning';
   swatch: [string, string];
+  tint?: string; // looks drawn in one colour you can change
+  doodle?: Doodle; // hand-drawn doodles on by default
+  bursts?: boolean; // comic sound-effect bursts on the beat
 }
 
 export const LOOKS: Look[] = [
@@ -33,6 +37,22 @@ export const LOOKS: Look[] = [
   { id: 'film', name: '16mm Film', swatch: ['#3b2a1a', '#f0c58a'] },
   { id: 'invert', name: 'Negative', swatch: ['#e8f4ff', '#0a1a33'] },
   { id: 'clean', name: 'Clean', swatch: ['#444', '#ccc'] },
+  { id: 'halftone', name: 'Halftone CMYK', swatch: ['#00a0e6', '#eb0d85'] },
+  { id: 'halftone_mono', name: 'Halftone Mono', tint: '#ff2fb2', swatch: ['#f7f2e6', '#ff2fb2'] },
+  { id: 'single_tone', name: 'Single Tone', tint: '#ff2fb2', swatch: ['#1a0612', '#ff2fb2'] },
+  { id: 'thermal_rainbow', name: 'Thermal Rainbow', mask: true, swatch: ['#3a0090', '#ffd400'] },
+  { id: 'night_vision', name: 'Night Vision', swatch: ['#021204', '#5dff6a'] },
+  { id: 'comic_book', name: 'Comic Book', bursts: true, swatch: ['#ffe14d', '#e3262f'] },
+  { id: 'doodle', name: 'Ink Doodle', mask: true, doodle: 'ink', swatch: ['#f7f3e8', '#14183d'] },
+  { id: 'neon_doodle', name: 'Neon Doodle', mask: true, doodle: 'neon', tint: '#ff3df2', swatch: ['#09030f', '#ff3df2'] },
+  { id: 'scribble', name: 'Pencil Scribble', mask: true, doodle: 'ink', swatch: ['#f6efe0', '#e8572a'] },
+  { id: 'chalk', name: 'Chalkboard', mask: true, doodle: 'chalk', tint: '#f4f1e8', swatch: ['#13221b', '#f4f1e8'] },
 ];
+
+// how the picker lists them: related looks side by side
+export const DISPLAY = ['teal_orange', 'single_tone', 'noir', 'noir_red', 'cyberpunk', 'purple_haze', 'golden_aura', 'neon_aura', 'neon_doodle',
+  'doodle', 'scribble', 'chalk', 'sketch', 'comic_book', 'comic', 'halftone', 'halftone_mono', 'oil',
+  'thermal', 'thermal_rainbow', 'night_vision', 'infrared', 'matrix', 'green_rays', 'storm', 'embers',
+  'vhs', 'glitch', 'film', 'dream', 'kaleido', 'invert', 'clean'];
 export const LOOK_INDEX: Record<string, number> = Object.fromEntries(LOOKS.map((l, i) => [l.id, i]));
 export const lookOf = (id: string) => LOOKS[LOOK_INDEX[id] ?? 0];
