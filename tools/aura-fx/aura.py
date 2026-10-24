@@ -473,7 +473,8 @@ def overlays(img, t, fi, plan, info, pulse):
         st = e.get('style', 'impact')
         if st == 'impact':
             rg = text_rgba(e['text'].replace(' ', '\n') if len(e['text']) > 11 else e['text'], int(e.get('size', 150)), FONT_BIG, (255, 255, 255), tuple(e.get('glow', (255, 40, 180))), stroke=3)
-            sc = 1.6 - 0.6 * min(1, lt / 0.12) + 0.04 * pulse
+            fitk = min(1.0, W * 0.86 / max(1, rg[1].shape[1] - int(e.get('size', 150))))  # never wider than the frame
+            sc = fitk * (1.3 - 0.3 * min(1, lt / 0.12) + 0.03 * pulse)
             a = min(1, lt / 0.06) * min(1, (e['dur'] - lt) / 0.2)
             jit = (np.random.default_rng(fi).uniform(-5, 5, 2) if lt < 0.25 else (0, 0))
             img = paste(img, rg, W / 2 + jit[0], H * e.get('y', 0.5) + jit[1], scale=sc, alpha=a)
@@ -622,11 +623,11 @@ def main():
         segs = list(ex.map(work, jobs))
     print(f'  frames done in {time.time() - t0:.0f}s')
     lst = os.path.join(a.out, '_segs.txt')
-    open(lst, 'w').write('\n'.join(f"file '{s}'" for s in segs))
+    open(lst, 'w').write('\n'.join(f"file '{os.path.abspath(s)}'" for s in segs))
     out = os.path.join(a.out, a.name)
     tw, th = plan.get('size', [1080, 1920])
     subprocess.run([ffmpeg(), '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-ss', str(a.t0), '-t', str((f1 - f0) / fps), '-i', path,
-                    '-map', '0:v', '-map', '1:a?', '-vf', f'scale={tw}:{th}:flags=lanczos,unsharp=5:5:0.6', '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
+                    '-map', '0:v', '-map', '1:a?', '-vf', f'scale={tw}:{th}:flags=lanczos,unsharp=5:5:0.6', '-c:v', 'libx264', '-preset', 'medium', '-crf', str(plan.get('crf', 21)),
                     '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out], check=True)
     for s in segs:
         os.remove(s)

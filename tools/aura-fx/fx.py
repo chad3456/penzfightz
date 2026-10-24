@@ -171,7 +171,9 @@ def golden_aura(img, c):
     hfield = flow_noise(m.shape[0] // 4, m.shape[1] // 4, c.t * 1.4, scale=0.048)
     dx = cv2.resize(hfield, (m.shape[1], m.shape[0]))
     ys, xs = np.mgrid[0:m.shape[0], 0:m.shape[1]].astype(np.float32)
-    flame = cv2.remap(r, xs + dx * 10, ys + 22 + dx * 14 + 18 * np.sin(c.t * 3), cv2.INTER_LINEAR)  # licks upward
+    mx = (xs + dx * 10).astype(np.float32)
+    my = (ys + 22 + dx * 14 + 18 * math.sin(c.t * 3)).astype(np.float32)
+    flame = cv2.remap(r, mx, my, cv2.INTER_LINEAR)  # licks upward
     glow = np.maximum(r, flame * 0.85)[..., None] * np.array([0.25, 0.75, 1.0], np.float32)
     out = out + glow * (0.9 + 0.5 * c.pulse)
     out = bloom(out, 0.55, 0.9, 30, (0.4, 0.75, 1.0))
