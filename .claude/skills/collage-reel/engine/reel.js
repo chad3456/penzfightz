@@ -277,12 +277,12 @@
   function camTransform(kind, p) {
     const e = ease.io(p);
     switch (kind) {
-      case 'push': return `scale(${1 + 0.09 * e})`;
-      case 'pull': return `scale(${1.09 - 0.09 * e})`;
-      case 'up': return `translateY(${3 - 6 * e}%) scale(1.07)`;
-      case 'down': return `translateY(${-3 + 6 * e}%) scale(1.07)`;
-      case 'left': return `translateX(${3 - 6 * e}%) scale(1.07)`;
-      case 'right': return `translateX(${-3 + 6 * e}%) scale(1.07)`;
+      case 'push': return `scale(${1 + 0.14 * e})`;
+      case 'pull': return `scale(${1.14 - 0.14 * e})`;
+      case 'up': return `translateY(${5 - 10 * e}%) scale(1.12)`;
+      case 'down': return `translateY(${-5 + 10 * e}%) scale(1.12)`;
+      case 'left': return `translateX(${5 - 10 * e}%) scale(1.12)`;
+      case 'right': return `translateX(${-5 + 10 * e}%) scale(1.12)`;
       default: return 'none';
     }
   }
@@ -344,6 +344,8 @@
     await document.fonts.ready;
     events.sort((a, b) => a.t - b.t);
     for (const sh of shots) if (sh.cut !== false && sh._i > 0) events.push({ t: sh._t0, kind: 'cut' });
+    const jc = R.meta?.jumpCut ?? 1.25;
+    for (const sh of shots) { const d = sh._t1 - sh._t0, n = jc > 0 && sh.jump !== false ? Math.max(1, Math.round(d / jc)) : 1; for (let k = 1; k < n; k++) events.push({ t: sh._t0 + (k * d) / n, kind: 'cut' }); }
     return { total, fps, shots: shots.map((s) => ({ i: s._i, line: s._line, t0: s._t0, t1: s._t1, words: s._words.map((w) => w.w).join(' ') })), events, lines: R.lines.map((l) => ({ t0: l._t0, dur: l._v.dur })) };
   }
 
@@ -352,8 +354,17 @@
     if (i < 0) i = T < 0 ? 0 : shots.length - 1;
     const sh = shots[i];
     if (i !== cur) { if (cur >= 0) shots[cur]._root.classList.remove('on'); sh._root.classList.add('on'); cur = i; }
-    const lt = T - sh._t0, p = clamp(lt / Math.max(0.01, sh._t1 - sh._t0));
+    const lt = T - sh._t0, dur = Math.max(0.01, sh._t1 - sh._t0), p = clamp(lt / dur);
     for (const w of sh._wins) w.cam.style.transform = camTransform(w.kind, p);
+    // jump cuts: long shots alternate between a wide and a punched-in framing,
+    // and every cut lands with a small settle, like a talking-head edit
+    const every = R.meta?.jumpCut ?? 1.25;
+    const parts = every > 0 && sh.jump !== false ? Math.max(1, Math.round(dur / every)) : 1;
+    const k = Math.min(parts - 1, Math.floor(lt / (dur / parts)));
+    const since = lt - k * (dur / parts);
+    const zoom = (k % 2 ? 1.12 : 1) * (1 + 0.035 * (1 - ease.out(clamp(since / 0.22))));
+    sh._root.style.transformOrigin = k % 4 === 3 ? '62% 30%' : '45% 34%';
+    sh._root.style.transform = zoom === 1 ? 'none' : `scale(${zoom.toFixed(4)})`;
     const st = sh._root.querySelector('.stars');
     if (st) st.style.transform = `translate(${Math.sin(T * 0.4) * 18}px, ${-(T * 14) % 60}px) rotate(${Math.sin(T * 0.3) * 1.5}deg)`;
     const tun = sh._root.querySelector('.tunnel');

@@ -157,7 +157,7 @@ if (vo.length) {
 }
 let mapA = null;
 if (music && vo.length) {
-  filters.push('[vo]asplit=2[vo1][vo2]', '[1:a]aresample=48000,volume=0.42[m]', '[m][vo2]sidechaincompress=threshold=0.03:ratio=5:attack=20:release=350[md]', '[2:a]aresample=48000,volume=0.5[fx]', '[md][vo1][fx]amix=inputs=3:normalize=0,alimiter=limit=0.95[a]');
+  filters.push('[vo]asplit=2[vo1][vo2]', '[1:a]aresample=48000,volume=0.42[m]', '[m][vo2]sidechaincompress=threshold=0.03:ratio=5:attack=20:release=350[md]', '[2:a]aresample=48000,volume=0.5[fx]', '[md][vo1][fx]amix=inputs=3:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[a]');
   mapA = '[a]';
 } else if (vo.length) mapA = '[vo]';
 else if (music) { filters.push('[1:a][2:a]amix=inputs=2:normalize=0[a]'); mapA = '[a]'; }
