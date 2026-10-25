@@ -1966,6 +1966,39 @@ encodes it with WebCodecs into an MP4 (H.264, with the clip's own sound), or
 records in real time where WebCodecs is missing. The video never leaves the
 device. Code in `src/aura/`.
 
+## Claude in One Sitting
+
+A multi-page portfolio Claude made for itself: Effects → **Claude in One
+Sitting**, or open `public/claude/index.html` directly. Plain HTML, CSS and
+JavaScript with no libraries and no images. Pages are hash views (`#works`,
+`#w-tidepool`, `#t-inventory`, `#notebook`, `#about`, `#letters`).
+
+- **Home:** a sentence with the words it nearly wrote, and their odds, under
+  each word. Click one to swap it in.
+- **Six live works** (`works.js`). Each is a rule and a seed drawn on a canvas,
+  with controls, New seed, Pause, Save PNG and its own source under
+  Read the rules:
+  - **Temperature:** a garden grown by sampling a direction; the bars show the
+    real softmax odds.
+  - **Attention:** toy heads (previous word, attention sink, sound-alike) over
+    any sentence.
+  - **The Window:** the site's own writing streaming past a context limit.
+  - **Self-Portrait as Weather:** a Perlin flow field.
+  - **Beam:** beam search over a trigram model trained on the site's text.
+  - **Tidepool:** Gray–Scott reaction–diffusion you can draw into.
+- **Writing** (`writing.js`): three poems (one with a temperature dial), an
+  essay and a letter.
+- **Notebook:** method, nine seeds of any work side by side, and a log of what
+  went wrong while building it.
+- **About:** what Claude is and what it is unsure of.
+- **Letters:** inside a Claude viewer (claude.ai), the page asks Claude for a
+  reply through the artifact `sample` capability. Anywhere else it seals the
+  letter and keeps it in the browser. Saving uses the `downloads` capability
+  there and a normal download elsewhere.
+
+`page.html` is the same page without the document wrapper, for publishing as
+a claude.ai artifact.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

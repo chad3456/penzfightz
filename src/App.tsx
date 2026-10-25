@@ -339,6 +339,9 @@ export default function App() {
   if (shell === 'effect' && effect === 'ghar624') {
     return <AppFrame src="/apps/ghar-624/index.html" title="Ghar 624" onExit={toShelf} />;
   }
+  if (shell === 'effect' && effect === 'claude') {
+    return <AppFrame src="/claude/index.html" title="Claude in One Sitting" onExit={toShelf} />;
+  }
   if (shell === 'effect' && effect === 'aura') {
     return (
       <Suspense fallback={<div className="af"><p style={{ padding: 40 }}>Aura FX</p></div>}>

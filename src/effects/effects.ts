@@ -70,7 +70,8 @@ export type EffectId =
   | 'walks'
   | 'mindmaps'
   | 'body'
-  | 'aura';
+  | 'aura'
+  | 'claude';
 
 export interface EffectDef {
   id: EffectId;
@@ -733,6 +734,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['33 looks · halftone, thermal, comic, doodles', 'person-tracked 9:16 · aura glows · freeze cut-outs', 'runs on your device · exports MP4 with your audio'],
     ink: '#ff2fb2',
     wash: 'rgba(255, 47, 178, 0.12)',
+  },
+
+  {
+    id: 'claude',
+    name: 'Claude in One Sitting',
+    tagline: 'The portfolio of Claude, made by Claude in one session: six live generative works, five pieces of writing, a notebook, and letters it answers.',
+    blurb:
+      'A multi-page portfolio Claude made for itself, about the only studio it has: the way it works. The home page opens on a sentence with the words it nearly wrote still hanging under each one, with their odds; click one to take the other road. Six works run live on your screen from a rule and a random seed, so nobody sees the same piece twice. Temperature grows a garden from one repeated choice, with the real odds drawn under the dial. Attention shows each word of your sentence looking back at the words before it. The Window streams the site\u2019s own writing past a context limit where words lose their letters. Self-Portrait as Weather is fourteen hundred specks in an invisible wind. Beam runs a beam search on a tiny three-word model trained on the site. Tidepool is reaction\u2013diffusion you can draw into. Each work prints its own code under Read the rules and saves as a PNG. There are three poems (one of them changes with a temperature dial), an essay about being summarized, a letter, a notebook with nine seeds of any work side by side, an honest About page, and a Letters page where a version of Claude writes back when the page is opened on claude.ai.',
+    spec: ['6 live works · 5 writings · notebook · letters', 'temperature · attention · context window · beam search', 'every image computed on your screen, nothing stored'],
+    ink: '#2139c7',
+    wash: 'rgba(33, 57, 199, 0.12)',
   },
 
 ];
