@@ -71,7 +71,8 @@ export type EffectId =
   | 'mindmaps'
   | 'body'
   | 'aura'
-  | 'claude';
+  | 'claude'
+  | 'dating';
 
 export interface EffectDef {
   id: EffectId;
@@ -745,6 +746,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['6 live works · 5 writings · notebook · letters', 'temperature · attention · context window · beam search', 'every image computed on your screen, nothing stored'],
     ink: '#2139c7',
     wash: 'rgba(33, 57, 199, 0.12)',
+  },
+
+  {
+    id: 'dating',
+    name: 'The Dating Ledger',
+    tagline: 'A sourced research tracker on the rise and fall of online dating, and how the same forces play out differently in the US, UK, Japan, India, China, South Korea and Switzerland.',
+    blurb:
+      'Every figure on this page links to the study, survey or company result it came from, and is labelled by how firmly it is confirmed: in the source\u2019s own words, as reported by the press, or unconfirmed; one switch hides everything that is not confirmed in the source. The rise: the share of US adults who have used a dating app went from 11% in 2013 to 30% by 2019, and online became the most common way US couples met. The fall: fewer people paying for Tinder and Bumble, and Ofcom\u2019s first recorded drop in UK app use. Culture contrasts: apps tie with the office as the top way Japanese newlyweds met, while only about one Indian woman in twenty chose her own husband, from 96% in Manipur to under 1% in Rajasthan; marriages keep falling in China but recovered in South Korea; men and women answer the same questions very differently. Then fourteen strange or striking findings you can search, with their caveats, a timeline from Match.com to Bumble\u2019s 2026 reset, and a curation log.',
+    spec: ['91 sourced figures · 7 countries', 'rise · fall · culture contrasts · strange findings', 'every number linked and labelled by how firmly it is confirmed'],
+    ink: '#c2185b',
+    wash: 'rgba(194, 24, 91, 0.12)',
   },
 
 ];

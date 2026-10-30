@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Dating Ledger</title>
+<meta name="description" content="A sourced research tracker on the rise and fall of online dating and how it differs across countries.">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg: #f6f4f1; --color-panel: #ffffff; --color-fg: #1d1b20; --color-fg-muted: #6a6570; --color-border-line: #e3dfe6;
+    --color-ok: #2f8a4c; --color-warn: #b7791f; --color-bad: #c43c3c;
+    --dl-s1: #c2185b; --dl-s2: #3f51b5; --dl-s3: #00897b; --dl-s4: #f08c00; --dl-s5: #7b1fa2; --dl-s6: #546e7a; --dl-s7: #6d8f00; --dl-s8: #8d6e63;
+    --cds-chart-grid: #ece8ef; --cds-chart-axis: #b9b3bf; --cds-chart-muted: #c9c3cf; --cds-chart-status-critical: #c43c3c; --cds-chart-reference: #8a8490;
+    --cds-surface-popover: #ffffff; --cds-border: #e3dfe6; --cds-text-secondary: #6a6570; --cds-shadow-popover: 0 6px 24px rgba(20, 10, 30, .12);
+    --cds-radius: 10px; --cds-pad-xs: .35rem; --cds-pad-sm: .6rem; --cds-pad-md: 1rem; --cds-pad-lg: 1.25rem; --cds-pad-xl: 2rem;
+    --cds-gap-xs: .4rem; --cds-gap-sm: .7rem; --cds-gap-md: 1rem; --cds-gap-lg: 1.5rem; --cds-gap-xl: 2.5rem;
+    --cds-font-size-caption: .8125rem; --cds-font-size-body: .9375rem; --cds-font-size-heading: 1.0625rem; --cds-font-size-title: 1.75rem; --cds-font-weight-medium: 600;
+    --cds-dur-slow: .4s; --cds-ease-out: cubic-bezier(.2, .7, .2, 1);
+    --font-anthropic-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-anthropic-serif: ui-serif, "Iowan Old Style", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --color-bg: #141217; --color-panel: #1d1a21; --color-fg: #efebf2; --color-fg-muted: #a39dab; --color-border-line: #332e39;
+      --color-ok: #5fc27e; --color-warn: #e0a84a; --color-bad: #ef6b6b;
+      --dl-s1: #f06292; --dl-s2: #8c9eff; --dl-s3: #4db6ac; --dl-s4: #ffb74d; --dl-s5: #ce93d8; --dl-s6: #90a4ae; --dl-s7: #aed581; --dl-s8: #bcaaa4;
+      --cds-chart-grid: #2a2630; --cds-chart-axis: #4a4452; --cds-chart-muted: #4f4857; --cds-chart-status-critical: #ef6b6b; --cds-chart-reference: #8a8490;
+      --cds-surface-popover: #26222b; --cds-border: #3a3441; --cds-text-secondary: #a39dab; --cds-shadow-popover: 0 6px 24px rgba(0, 0, 0, .5);
+    }
+  }
+  body { margin: 0; background: var(--color-bg); color: var(--color-fg); font: 400 var(--cds-font-size-body)/1.5 var(--font-anthropic-sans); }
+  #dash-root { padding: 1.5rem max(16px, 4vw) 4rem; }
+  .dash-skeleton { position: relative; color: transparent !important; }
+  .dash-skeleton::after { content: ""; position: absolute; inset: 0; border-radius: var(--cds-radius); background: var(--cds-chart-grid); opacity: .7; }
+  .dl-snapshot { max-width: 78rem; margin: 0 auto 1rem; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+</style>
+<script src="d3.min.js"></script>
+<script src="dash-shim.js"></script>
+</head>
+<body>
+<div id="dash-root">
+<p class="dl-snapshot">A copy of the tracker on this site. Its figures come from the data files next to this page and are refreshed when they are updated.</p>
+<meta name="dash-one-writer">
+<style>
+  .dl { max-width: 78rem; margin-inline: auto; display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); }
+  .dl-head { display: grid; gap: var(--cds-gap-sm); padding-block: var(--cds-pad-md) 0; }
+  .dl-eyebrow { margin: 0; font-size: var(--cds-font-size-caption); letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .dl-title { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.6); line-height: 1.05; text-wrap: balance; }
+  .dl-lede { margin: 0; max-width: 46rem; font-size: var(--cds-font-size-heading); line-height: 1.45; text-wrap: pretty; }
+  .dl .dl-lede b, .dl .dl-sec-note b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .dl-meta { margin: 0; display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); align-items: center; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .dl-meta b { color: var(--color-fg); font-variant-numeric: tabular-nums; }
+  .dl-strict { display: inline-flex; gap: var(--cds-gap-xs); align-items: center; cursor: pointer; }
+  .dl-nav { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+  .dl-nav a { font-size: var(--cds-font-size-caption); color: var(--color-fg); text-decoration: none; border: 1px solid var(--color-border-line); border-radius: 999px; padding: var(--cds-pad-xs) var(--cds-pad-sm); }
+  .dl-nav a:hover { border-color: var(--color-fg-muted); }
+  .dl-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: var(--cds-gap-md); }
+  .dl-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .dl-tile-label { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.35; }
+  .dl .dl-tile-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .dl-tile-foot { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+  .dl-sec { display: grid; gap: var(--cds-gap-md); scroll-margin-top: 1rem; }
+  .dl-sec-head { display: grid; gap: var(--cds-gap-xs); max-width: 48rem; }
+  .dl-sec-kicker { margin: 0; font-size: var(--cds-font-size-caption); letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .dl-sec-title { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.15; text-wrap: balance; }
+  .dl-sec-note { margin: 0; line-height: 1.5; color: var(--color-fg); }
+  .dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+  .dl-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+  .dl-card-wide { grid-column: 1 / -1; }
+  .dl-card-title { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); line-height: 1.3; }
+  .dl-card-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.45; }
+  .dl-chart { position: relative; min-height: 15rem; }
+  .dl-chart-short { min-height: 11rem; }
+  .dl-svg { display: block; overflow: visible; }
+  .dl-svg text { font-family: var(--font-anthropic-sans); font-size: 12px; fill: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+  .dl-svg .dl-strong { fill: var(--color-fg); font-weight: 600; }
+  .dl-svg .dl-label { fill: var(--color-fg); }
+  .dl-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); margin-top: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .dl-legend span { display: inline-flex; gap: .4em; align-items: center; }
+  .dl-legend i { width: .7rem; height: .7rem; border-radius: 2px; display: inline-block; }
+  .dl-legend i.dl-hollow { border: 2px solid currentColor; background: transparent; border-radius: 50%; }
+  .dl-tip { position: absolute; z-index: 3; pointer-events: none; max-width: 17rem; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); line-height: 1.4; }
+  .dl-tip p { margin: 0; }
+  .dl-tip .dl-tip-k { color: var(--cds-text-secondary); }
+  .dl-tip .dl-tip-v { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .dl-src { list-style: none; margin: 0; padding: var(--cds-pad-sm) 0 0; border-top: 1px solid var(--color-border-line); display: grid; gap: .3rem; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .dl-src li { display: flex; gap: .45rem; align-items: baseline; min-width: 0; }
+  .dl-src a { color: var(--color-fg); text-decoration-color: var(--color-border-line); text-underline-offset: 2px; overflow-wrap: anywhere; }
+  .dl-dot { flex: none; width: .5rem; height: .5rem; border-radius: 50%; display: inline-block; transform: translateY(-.05rem); }
+  .dl-dot-ok { background: var(--color-ok); }
+  .dl-dot-press { background: var(--color-warn); }
+  .dl-dot-un { background: var(--color-bad); }
+  .dl-key { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .dl-key span { display: inline-flex; gap: .4rem; align-items: center; }
+  .dl-tools { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; }
+  .dl-search { flex: 1 1 14rem; min-width: 0; font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); }
+  .dl-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+  .dl-chips button { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: transparent; border: 1px solid var(--color-border-line); border-radius: 999px; padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+  .dl-chips button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+  .dl-finds { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--cds-gap-md); min-height: 12rem; }
+  .dl-find { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; min-width: 0; }
+  .dl-find-fig { margin: 0; font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); line-height: 1.1; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .dl-find-title { margin: 0; font-weight: var(--cds-font-weight-medium); line-height: 1.3; }
+  .dl-find-text { margin: 0; line-height: 1.45; }
+  .dl-find-meta, .dl-find-cav { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.4; }
+  .dl-find-src { font-size: var(--cds-font-size-caption); display: flex; gap: .45rem; align-items: baseline; }
+  .dl-find-src a { color: var(--color-fg); text-underline-offset: 2px; overflow-wrap: anywhere; }
+  .dl-empty { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .dl-time { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; min-height: 10rem; }
+  .dl-time li { display: grid; grid-template-columns: 4.2rem 1rem minmax(0, 1fr); gap: 0 var(--cds-gap-sm); align-items: start; }
+  .dl-time-year { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); font-variant-numeric: tabular-nums; padding-block: .1rem; }
+  .dl-time-rail { position: relative; align-self: stretch; }
+  .dl-time-rail::before { content: ""; position: absolute; left: calc(50% - 1px); top: 0; bottom: 0; width: 2px; background: var(--color-border-line); }
+  .dl-time-rail i { position: absolute; left: calc(50% - .35rem); top: .45rem; width: .7rem; height: .7rem; border-radius: 50%; }
+  .dl-time-body { padding-bottom: var(--cds-pad-md); display: grid; gap: .15rem; }
+  .dl-time-body p { margin: 0; line-height: 1.4; }
+  .dl-time-kind { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .dl-time-body a { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-underline-offset: 2px; }
+  .dl-table-box { overflow: auto; max-height: 24rem; }
+  .dl-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); }
+  .dl-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm) var(--cds-pad-xs) 0; border-bottom: 1px solid var(--color-border-line); }
+  .dl-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm) var(--cds-pad-xs) 0; border-bottom: 1px solid var(--color-border-line); vertical-align: top; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  .dl-failed { margin: 0; min-height: inherit; display: flex; align-items: center; justify-content: center; gap: .5rem; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .dl-failed span { width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  @media (prefers-reduced-motion: no-preference) {
+    .dl-find, .dl-svg { animation: dl-in var(--cds-dur-slow) var(--cds-ease-out) both; }
+    @keyframes dl-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<div class="dl">
+  <header class="dl-head" id="top">
+    <p class="dl-eyebrow">Research tracker · curated weekly</p>
+    <h1 class="dl-title">The Dating Ledger</h1>
+    <p class="dl-lede">Meeting online became the most common way US couples met (<b data-draw="kpi" data-source="how_met" data-field="pct" data-where="id=us-online-2017" data-fmt="pct">—</b> in 2017). Since then the paying side of the apps has been shrinking: Tinder’s average payers are <b data-draw="kpi" data-source="tinder_change" data-field="change_pct" data-row="0" data-fmt="signedpct">—</b> from their peak, and the UK’s biggest apps lost users for the first time in 2024.</p>
+    <p class="dl-meta"><span>Last curated <b data-draw="last-date" data-source="tracker_log" data-field="date">—</b></span><span><b data-draw="kpi" data-source="data_points" data-field="n" data-row="0" data-fmt="int">—</b> sourced data points</span><label class="dl-strict"><input type="checkbox" class="dl-strict-box" id="dl-strict"> Show only figures confirmed in the original source</label></p>
+    <div class="dl-key" aria-label="How firmly each figure is confirmed">
+      <span><i class="dl-dot dl-dot-ok"></i>Confirmed in source: the study or report’s own words were checked</span>
+      <span><i class="dl-dot dl-dot-press"></i>Reported by press: a named study, as quoted by a news or data site</span>
+      <span><i class="dl-dot dl-dot-un"></i>Unconfirmed: a secondary summary that could not be checked against the study</span>
+    </div>
+    <nav class="dl-nav" aria-label="Sections">
+      <a href="#rise">The rise</a><a href="#fall">The fall</a><a href="#culture">Culture contrasts</a><a href="#research">Strange findings</a><a href="#timeline">Timeline</a><a href="#log">Curation log</a>
+    </nav>
+  </header>
+
+  <section class="dl-tiles" aria-label="Headline figures">
+    <div class="dl-tile" id="tile-usage">
+      <p class="dl-tile-label">US adults who have ever used a dating site or app</p>
+      <b class="dl-tile-value" data-draw="kpi" data-source="us_usage" data-field="pct" data-where="id=all-2022" data-fmt="pct">—</b>
+      <p class="dl-tile-foot">2022 · Pew Research Center</p>
+    </div>
+    <div class="dl-tile" id="tile-met">
+      <p class="dl-tile-label">US heterosexual couples who met online</p>
+      <b class="dl-tile-value" data-draw="kpi" data-source="how_met" data-field="pct" data-where="id=us-online-2017" data-fmt="pct">—</b>
+      <p class="dl-tile-foot">Couples who met in 2017 · HCMST</p>
+    </div>
+    <div class="dl-tile" id="tile-tinder">
+      <p class="dl-tile-label">Tinder average payers, latest year</p>
+      <b class="dl-tile-value" data-draw="kpi" data-source="tinder_change" data-field="latest_m" data-row="0" data-fmt="m">—</b>
+      <p class="dl-tile-foot"><span data-draw="kpi" data-source="tinder_change" data-field="change_pct" data-row="0" data-fmt="signedpct">—</span> from the peak year</p>
+    </div>
+    <div class="dl-tile" id="tile-bumble">
+      <p class="dl-tile-label">Bumble paying users, change on a year earlier</p>
+      <b class="dl-tile-value" data-draw="kpi-latest" data-app="Bumble" data-source="app_payers" data-field="yoy_pct" data-fmt="signedpct">—</b>
+      <p class="dl-tile-foot"><span data-draw="kpi-latest" data-app="Bumble" data-source="app_payers" data-field="period" data-fmt="raw">—</span> · company results</p>
+    </div>
+    <div class="dl-tile" id="tile-uk">
+      <p class="dl-tile-label">UK Tinder users lost in a year</p>
+      <b class="dl-tile-value" data-draw="kpi" data-source="uk_apps" data-field="change" data-where="id=tinder" data-fmt="int">—</b>
+      <p class="dl-tile-foot">May 2023 to May 2024 · Ofcom</p>
+    </div>
+    <div class="dl-tile" id="tile-burnout">
+      <p class="dl-tile-label">US app users who feel burnout at least sometimes</p>
+      <b class="dl-tile-value" data-draw="kpi" data-source="society" data-field="pct" data-where="id=us-burnout-all" data-fmt="pct">—</b>
+      <p class="dl-tile-foot">2024 · Forbes Health / OnePoll</p>
+    </div>
+  </section>
+
+  <section class="dl-sec" id="rise">
+    <div class="dl-sec-head">
+      <p class="dl-sec-kicker">The rise</p>
+      <h2 class="dl-sec-title">From a niche to the main way people meet</h2>
+      <p class="dl-sec-note">The share of Americans who had tried online dating roughly tripled in under a decade, then levelled off. Among couples who met in 2017, online was the leading way to meet.</p>
+    </div>
+    <div class="dl-grid">
+      <article class="dl-card" id="card-usage">
+        <h3 class="dl-card-title">US adults who have ever used a dating site or app</h3>
+        <p class="dl-card-note">Share of each group, by survey year. Hover a point for its source.</p>
+        <div class="dl-chart" data-draw="usage-trend" data-source="us_usage"></div>
+        <ul class="dl-src" data-draw="src" data-source="us_usage" data-only="trend"></ul>
+      </article>
+      <article class="dl-card" id="card-groups">
+        <h3 class="dl-card-title">Who has tried it, 2022</h3>
+        <p class="dl-card-note">Share of US adults in each group who have ever used a dating site or app.</p>
+        <div class="dl-chart" data-draw="usage-groups" data-source="us_usage"></div>
+        <ul class="dl-src" data-draw="src" data-source="us_usage" data-only="2022"></ul>
+      </article>
+      <article class="dl-card dl-card-wide" id="card-met">
+        <h3 class="dl-card-title">How US couples met</h3>
+        <p class="dl-card-note">Share of couples who met in each year, by how they met. Hollow points are secondary figures not confirmed against the study.</p>
+        <div class="dl-chart" data-draw="met-trend" data-source="how_met"></div>
+        <ul class="dl-src" data-draw="src" data-source="how_met" data-only="us"></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="dl-sec" id="fall">
+    <div class="dl-sec-head">
+      <p class="dl-sec-kicker">The fall</p>
+      <h2 class="dl-sec-title">Fewer people paying, and the first drop in users</h2>
+      <p class="dl-sec-note">The decline shows up first in money: fewer people paying for Tinder and Bumble. In the UK, Ofcom recorded the first fall in use of the biggest apps, while the total number of adults visiting any dating service stayed broadly flat.</p>
+    </div>
+    <div class="dl-grid">
+      <article class="dl-card" id="card-tinder">
+        <h3 class="dl-card-title">Tinder average payers</h3>
+        <p class="dl-card-note">Millions of people paying in an average month, by year.</p>
+        <div class="dl-chart" data-draw="tinder-bars" data-source="app_payers"></div>
+        <ul class="dl-src" data-draw="src" data-source="app_payers" data-only="Tinder"></ul>
+      </article>
+      <article class="dl-card" id="card-bumble">
+        <h3 class="dl-card-title">Bumble paying users</h3>
+        <p class="dl-card-note">Millions, by quarter, with the change on a year earlier.</p>
+        <div class="dl-chart" data-draw="bumble-line" data-source="app_payers"></div>
+        <ul class="dl-src" data-draw="src" data-source="app_payers" data-only="Bumble"></ul>
+      </article>
+      <article class="dl-card" id="card-uk">
+        <h3 class="dl-card-title">UK users lost, May 2023 to May 2024</h3>
+        <p class="dl-card-note">Change in monthly UK adult users of each app.</p>
+        <div class="dl-chart dl-chart-short" data-draw="uk-bars" data-source="uk_apps"></div>
+        <ul class="dl-src" data-draw="src" data-source="uk_apps"></ul>
+      </article>
+      <article class="dl-card" id="card-burnout">
+        <h3 class="dl-card-title">Dating-app burnout, US users, 2024</h3>
+        <p class="dl-card-note">Share who feel burnt out at least sometimes. A commissioned poll, not a peer-reviewed study.</p>
+        <div class="dl-chart dl-chart-short" data-draw="burnout-bars" data-source="society"></div>
+        <ul class="dl-src" data-draw="src" data-source="society" data-only="burnout"></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="dl-sec" id="culture">
+    <div class="dl-sec-head">
+      <p class="dl-sec-kicker">Culture contrasts</p>
+      <h2 class="dl-sec-title">The same forces land differently in each country</h2>
+      <p class="dl-sec-note">Apps now match the office as Japan’s top way to meet a spouse, while in India most women still do not choose their husband themselves. Marriages are falling in China and recovering in South Korea. Young men and women report very different love lives.</p>
+    </div>
+    <div class="dl-grid">
+      <article class="dl-card dl-card-wide" id="card-countries">
+        <h3 class="dl-card-title">Meeting online, country by country</h3>
+        <p class="dl-card-note">Latest share of couples who met online or through an app. Each survey counts a different group, named under each bar, so compare them with care.</p>
+        <div class="dl-chart" data-draw="country-bars" data-source="how_met"></div>
+        <ul class="dl-src" data-draw="src" data-source="how_met" data-only="online"></ul>
+      </article>
+      <article class="dl-card" id="card-marriages">
+        <h3 class="dl-card-title">Marriages, indexed to 2013</h3>
+        <p class="dl-card-note">Marriages registered each year, where 2013 = 100. Hover for the counts.</p>
+        <div class="dl-chart" data-draw="marriage-lines" data-source="marriage_index"></div>
+        <ul class="dl-src" data-draw="src" data-source="marriages"></ul>
+      </article>
+      <article class="dl-card" id="card-india">
+        <h3 class="dl-card-title">India: women who chose their husband on their own</h3>
+        <p class="dl-card-note">India Human Development Survey, 2011–12. The national share hides huge regional gaps.</p>
+        <div class="dl-chart" data-draw="india-bars" data-source="how_met"></div>
+        <ul class="dl-src" data-draw="src" data-source="how_met" data-only="India"></ul>
+      </article>
+      <article class="dl-card" id="card-gender">
+        <h3 class="dl-card-title">Men and women, same question</h3>
+        <p class="dl-card-note">Where a survey asked men and women the same thing, their answers side by side.</p>
+        <div class="dl-chart" data-draw="gender-dumbbell" data-source="society"></div>
+        <ul class="dl-src" data-draw="src" data-source="society" data-only="gender"></ul>
+      </article>
+      <article class="dl-card" id="card-then">
+        <h3 class="dl-card-title">Then and now</h3>
+        <p class="dl-card-note">The same measure in an earlier and a later survey.</p>
+        <div class="dl-chart" data-draw="then-now" data-source="society"></div>
+        <ul class="dl-src" data-draw="src" data-source="society" data-only="change"></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="dl-sec" id="research">
+    <div class="dl-sec-head">
+      <p class="dl-sec-kicker">Strange findings</p>
+      <h2 class="dl-sec-title">What the studies actually found</h2>
+      <p class="dl-sec-note">Each card is one result, with how firmly it is confirmed and what to be careful of. Search, or pick a theme.</p>
+    </div>
+    <div class="dl-tools">
+      <input class="dl-search" id="dl-search" type="search" placeholder="Search the findings" aria-label="Search the findings">
+      <div class="dl-chips" data-draw="themes" data-source="findings" role="group" aria-label="Theme"></div>
+    </div>
+    <div class="dl-finds" data-draw="finds" data-source="findings"></div>
+  </section>
+
+  <section class="dl-sec" id="timeline">
+    <div class="dl-sec-head">
+      <p class="dl-sec-kicker">Timeline</p>
+      <h2 class="dl-sec-title">Three decades of meeting online</h2>
+    </div>
+    <article class="dl-card">
+      <ol class="dl-time" data-draw="timeline" data-source="timeline"></ol>
+    </article>
+  </section>
+
+  <section class="dl-sec" id="log">
+    <div class="dl-sec-head">
+      <p class="dl-sec-kicker">Curation log</p>
+      <h2 class="dl-sec-title">What each weekly run added</h2>
+      <p class="dl-sec-note">A scheduled Claude run searches for new studies and data each week, adds what it can source, and records it here. Figures are only ever added with a link to where they came from.</p>
+    </div>
+    <article class="dl-card">
+      <div class="dl-table-box">
+        <table class="dl-table" data-source="tracker_log" data-row-key="id">
+          <thead><tr><th data-field="id">Edition</th><th data-field="added">Rows added</th><th data-field="note">What changed</th></tr></thead>
+          <tbody data-draw="log"></tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+</div>
+
+<script>
+  // Worked-out figures, each from the datasets named in its inputs
+  dash.calc('tinder_change', {
+    inputs: ['app_payers'],
+    title: 'Tinder payers versus peak',
+    description: 'Change in Tinder average payers from the peak year to the latest year.',
+    fn: (app_payers) => {
+      const t = app_payers.filter((r) => r.app === 'Tinder');
+      const peak = t.reduce((a, b) => (Number(b.payers_m) > Number(a.payers_m) ? b : a));
+      const last = t.reduce((a, b) => (Number(b.sort) > Number(a.sort) ? b : a));
+      return [{ peak_period: peak.period, peak_m: Number(peak.payers_m), latest_period: last.period, latest_m: Number(last.payers_m), change_pct: Math.round(((last.payers_m - peak.payers_m) / peak.payers_m) * 1000) / 10 }];
+    },
+  });
+  dash.calc('marriage_index', {
+    inputs: ['marriages'],
+    title: 'Marriages indexed to the first year',
+    description: 'Each country’s registered marriages divided by its earliest year in the data, times 100.',
+    fn: (marriages) => {
+      const first = {};
+      marriages.forEach((r) => { if (!first[r.country] || Number(r.year) < Number(first[r.country].year)) first[r.country] = r; });
+      return marriages.map((r) => ({ id: r.id, country: r.country, year: Number(r.year), marriages: Number(r.marriages), index: Math.round((Number(r.marriages) / Number(first[r.country].marriages)) * 1000) / 10, base_year: Number(first[r.country].year) }));
+    },
+  });
+  dash.calc('data_points', {
+    inputs: ['us_usage', 'how_met', 'app_payers', 'uk_apps', 'society', 'marriages', 'findings', 'timeline'],
+    title: 'Sourced data points',
+    description: 'Rows across every research dataset on the page.',
+    fn: (us_usage, how_met, app_payers, uk_apps, society, marriages, findings, timeline) => [{ n: us_usage.length + how_met.length + app_payers.length + uk_apps.length + society.length + marriages.length + findings.length + timeline.length }],
+  });
+</script>
+
+<script>
+  // Shared helpers for the drawings
+  (() => {
+    const DL = (window.DL = {});
+    const CONF = 'Confirmed in source', PRESS = 'Reported by press';
+    DL.dotClass = (s) => (s === CONF ? 'dl-dot-ok' : s === PRESS ? 'dl-dot-press' : 'dl-dot-un');
+    DL.strict = () => !!dash.params().strict;
+    DL.rows = (id) => {
+      const r = dash.data(id).data || [];
+      return DL.strict() ? r.filter((x) => x.status === CONF) : r;
+    };
+    DL.num = (v) => (v == null || v === '' ? null : Number(v));
+    DL.fmt = (v, kind) => {
+      if (v == null || v === '' || (typeof v === 'number' && isNaN(v))) return '—';
+      const n = Number(v);
+      if (kind === 'raw') return String(v);
+      if (kind === 'int') return (n < 0 ? '−' : '') + d3.format(',')(Math.abs(n));
+      if (kind === 'm') return d3.format('.1f')(n) + 'M';
+      if (kind === 'signedpct') return (n > 0 ? '+' : n < 0 ? '−' : '') + d3.format('.1~f')(Math.abs(n)) + '%';
+      if (kind === 'pct') return (n < 1 ? d3.format('.2~f')(n) : d3.format('.1~f')(n)) + '%';
+      return String(v);
+    };
+    // the box shows a skeleton while loading and one line if a source failed; true when every source is ready
+    DL.ready = (el, ids) => {
+      const st = ids.map((id) => dash.data(id).status);
+      if (st.every((s) => s === 'ok')) { el.classList.remove('dash-skeleton'); return true; }
+      el.replaceChildren();
+      if (st.some((s) => s === 'error' || s === 'missing' || s === 'declined')) {
+        el.classList.remove('dash-skeleton');
+        const p = document.createElement('p'); p.className = 'dl-failed';
+        p.append(document.createElement('span'), 'Failed to load'); el.append(p);
+      } else el.classList.add('dash-skeleton');
+      return false;
+    };
+    DL.empty = (el, text) => { const p = document.createElement('p'); p.className = 'dl-empty'; p.textContent = text; el.append(p); };
+    DL.tip = (box) => {
+      const t = document.createElement('div'); t.className = 'dl-tip'; t.hidden = true; box.append(t);
+      return {
+        show(ev, lines) {
+          t.replaceChildren(...lines.map(([cls, text]) => { const p = document.createElement('p'); p.className = cls; p.textContent = text; return p; }));
+          t.hidden = false;
+          const b = box.getBoundingClientRect(), tw = t.offsetWidth, th = t.offsetHeight;
+          let x = ev.clientX - b.left + 12, y = ev.clientY - b.top - th - 10;
+          if (x + tw > b.width) x = Math.max(0, ev.clientX - b.left - tw - 12);
+          if (y < 0) y = ev.clientY - b.top + 14;
+          t.style.left = x + 'px'; t.style.top = y + 'px';
+        },
+        hide() { t.hidden = true; },
+      };
+    };
+    DL.rowTip = (label, value, r) => [['dl-tip-k', label], ['dl-tip-v', value], ['dl-tip-k', r.source + (r.status ? ' · ' + r.status : '')]];
+    DL.svg = (el, w, h) => d3.select(el).append('svg').attr('class', 'dl-svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).attr('role', 'img');
+    DL.textWidth = (svg, strings, cls) => {
+      const g = svg.append('g').attr('opacity', 0);
+      const w = d3.max(strings.map((s) => g.append('text').attr('class', cls || null).text(s).node().getComputedTextLength())) || 0;
+      g.remove(); return w;
+    };
+    DL.legend = (el, items) => {
+      const div = document.createElement('div'); div.className = 'dl-legend';
+      items.forEach(([name, color, hollow]) => {
+        const s = document.createElement('span'), i = document.createElement('i');
+        if (hollow) { i.className = 'dl-hollow'; i.style.color = color; } else i.style.background = color;
+        s.append(i, name); div.append(s);
+      });
+      el.append(div);
+    };
+    // spread labels apart vertically so none overlap
+    DL.spread = (items, gap, lo, hi) => {
+      items.sort((a, b) => a.y - b.y);
+      for (let i = 1; i < items.length; i++) if (items[i].y - items[i - 1].y < gap) items[i].y = items[i - 1].y + gap;
+      const over = items.length ? items[items.length - 1].y - hi : 0;
+      if (over > 0) items.forEach((it) => (it.y -= over));
+      items.forEach((it) => (it.y = Math.max(lo, it.y)));
+      return items;
+    };
+    // lines over time: series [{name, color, dashed, hollow, pts: [{x, y, row}]}]
+    DL.lines = (el, series, o) => {
+      el.replaceChildren();
+      series = series.filter((s) => s.pts.length);
+      if (!series.length) { DL.empty(el, 'No figures match the current filter.'); return; }
+      const tip = DL.tip(el);
+      const W = Math.max(300, el.clientWidth || 600), H = o.h || 240;
+      const svg = DL.svg(el, W, H);
+      const all = series.flatMap((s) => s.pts);
+      const yMax = o.yMax || d3.max(all, (p) => p.y) * 1.12;
+      const y = d3.scaleLinear([0, yMax], [H - 24, 10]).nice();
+      const yt = y.ticks(4);
+      const left = DL.textWidth(svg, yt.map(o.yTick)) + 10;
+      const ends = series.map((s) => o.fmt(s.pts[s.pts.length - 1].y));
+      const right = DL.textWidth(svg, ends, 'dl-strong') + 14;
+      const xd = o.xDomain || d3.extent(all, (p) => p.x);
+      const x = d3.scaleLinear(xd, [left, W - right]);
+      svg.append('g').selectAll('line').data(yt).join('line').attr('x1', left).attr('x2', W - right).attr('y1', (d) => y(d)).attr('y2', (d) => y(d)).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('g').selectAll('text').data(yt).join('text').attr('x', left - 8).attr('y', (d) => y(d) + 4).attr('text-anchor', 'end').text(o.yTick);
+      const xt = (o.xTicks || x.ticks(5)).filter((v) => v >= xd[0] && v <= xd[1]);
+      const xtW = DL.textWidth(svg, xt.map(o.xTick));
+      const room = (W - right - left) / Math.max(1, xt.length);
+      const step = Math.max(1, Math.ceil((xtW + 10) / room));
+      svg.append('g').selectAll('text').data(xt.filter((_, i) => i % step === 0)).join('text').attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').text(o.xTick);
+      svg.append('line').attr('x1', left).attr('x2', W - right).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+      const line = d3.line().x((p) => x(p.x)).y((p) => y(p.y));
+      series.forEach((s) => {
+        if (s.pts.length > 1) svg.append('path').attr('d', line(s.pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('stroke-dasharray', s.dashed ? '5 4' : null);
+        s.pts.forEach((p) => {
+          svg.append('circle').attr('cx', x(p.x)).attr('cy', y(p.y)).attr('r', 4).attr('fill', s.hollow ? 'var(--color-panel)' : s.color).attr('stroke', s.color).attr('stroke-width', 2);
+          svg.append('circle').attr('cx', x(p.x)).attr('cy', y(p.y)).attr('r', 13).attr('fill', 'transparent').style('cursor', 'default')
+            .on('mousemove', (ev) => tip.show(ev, DL.rowTip(`${s.name} · ${o.xTick(p.x)}`, o.fmt(p.y), p.row))).on('mouseleave', tip.hide);
+        });
+      });
+      const labs = DL.spread(series.map((s, i) => { const p = s.pts[s.pts.length - 1]; return { x: x(p.x), y: y(p.y), t: ends[i], c: s.color }; }), 14, 10, H - 24);
+      labs.forEach((l) => svg.append('text').attr('class', 'dl-strong').attr('x', l.x + 8).attr('y', l.y + 4).style('fill', l.c).text(l.t));
+      DL.legend(el, series.map((s) => [s.name, s.color, s.hollow]));
+    };
+    // horizontal bars, label above each bar: items [{label, sub, value, text, row, color}]
+    DL.hbars = (el, items, o = {}) => {
+      el.replaceChildren();
+      if (!items.length) { DL.empty(el, 'No figures match the current filter.'); return; }
+      const tip = DL.tip(el);
+      const W = Math.max(280, el.clientWidth || 500), rowH = 44, H = items.length * rowH + 4;
+      const svg = DL.svg(el, W, H);
+      const right = DL.textWidth(svg, items.map((d) => d.text), 'dl-strong') + 10;
+      const max = o.max || d3.max(items, (d) => Math.abs(d.value)) || 1;
+      const x = d3.scaleLinear([0, max], [0, W - right]);
+      items.forEach((d, i) => {
+        const y0 = i * rowH;
+        svg.append('text').attr('class', 'dl-label').attr('x', 0).attr('y', y0 + 14).text(d.label);
+        if (d.sub) svg.append('text').attr('x', DL.textWidth(svg, [d.label], 'dl-label') + 6).attr('y', y0 + 14).text(d.sub);
+        svg.append('rect').attr('x', 0).attr('y', y0 + 20).attr('width', W - right).attr('height', 14).attr('rx', 3).attr('fill', 'var(--cds-chart-grid)').attr('opacity', 0.5);
+        svg.append('rect').attr('x', 0).attr('y', y0 + 20).attr('width', Math.max(2, x(Math.abs(d.value)))).attr('height', 14).attr('rx', 3).attr('fill', d.color || dash.colors[0])
+          .attr('fill-opacity', d.row.status === 'Unconfirmed' ? 0.35 : 1);
+        svg.append('text').attr('class', 'dl-strong').attr('x', x(Math.abs(d.value)) + 6).attr('y', y0 + 31).text(d.text);
+        svg.append('rect').attr('x', 0).attr('y', y0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+          .on('mousemove', (ev) => tip.show(ev, DL.rowTip(d.label + (d.sub ? ' ' + d.sub : ''), d.text, d.row))).on('mouseleave', tip.hide);
+      });
+    };
+    // two values per row on one 0–100 scale: items [{label, a: {v, row}, b: {v, row}}]
+    DL.dumbbell = (el, items, o) => {
+      el.replaceChildren();
+      if (!items.length) { DL.empty(el, 'No figures match the current filter.'); return; }
+      const tip = DL.tip(el);
+      const W = Math.max(280, el.clientWidth || 500), rowH = 50, H = items.length * rowH + 4;
+      const svg = DL.svg(el, W, H);
+      const pad = 34, x = d3.scaleLinear([0, 100], [pad, W - pad]);
+      items.forEach((d, i) => {
+        const y0 = i * rowH, cy = y0 + 32;
+        svg.append('text').attr('class', 'dl-label').attr('x', 0).attr('y', y0 + 13).text(d.label);
+        svg.append('line').attr('x1', x(0)).attr('x2', x(100)).attr('y1', cy).attr('y2', cy).attr('stroke', 'var(--cds-chart-grid)');
+        svg.append('line').attr('x1', x(d.a.v)).attr('x2', x(d.b.v)).attr('y1', cy).attr('y2', cy).attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+        if (o.arrow) {
+          const dir = Math.sign(d.b.v - d.a.v) || 1;
+          svg.append('path').attr('d', `M${x(d.b.v) - dir * 9},${cy - 5}L${x(d.b.v) - dir * 3},${cy}L${x(d.b.v) - dir * 9},${cy + 5}`).attr('fill', 'none').attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 2);
+        }
+        [['a', d.a, o.aColor, d.a.v <= d.b.v ? -1 : 1], ['b', d.b, o.bColor, d.b.v < d.a.v ? -1 : 1]].forEach(([k, p, c, side]) => {
+          svg.append('circle').attr('cx', x(p.v)).attr('cy', cy).attr('r', 6).attr('fill', c);
+          svg.append('text').attr('class', 'dl-strong').attr('x', x(p.v) + side * 10).attr('y', cy + 4).attr('text-anchor', side < 0 ? 'end' : 'start').style('fill', c).text(DL.fmt(p.v, 'pct'));
+          svg.append('circle').attr('cx', x(p.v)).attr('cy', cy).attr('r', 14).attr('fill', 'transparent')
+            .on('mousemove', (ev) => tip.show(ev, DL.rowTip(`${d.label} · ${p.name}`, DL.fmt(p.v, 'pct'), p.row))).on('mouseleave', tip.hide);
+        });
+      });
+      DL.legend(el, o.legend);
+    };
+  })();
+</script>
+
+<script>
+  // Header figures and the strict filter
+  const pickRow = (rows, el) => {
+    if (el.dataset.where) { const i = el.dataset.where.indexOf('='); const k = el.dataset.where.slice(0, i), v = decodeURIComponent(el.dataset.where.slice(i + 1)); return rows.find((r) => String(r[k]) === v); }
+    if (el.dataset.row != null) return rows[Number(el.dataset.row)];
+    return null;
+  };
+  dash.draw('kpi', (el) => {
+    const d = dash.data(el.dataset.source);
+    if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const r = pickRow(d.data || [], el);
+    el.textContent = r ? DL.fmt(r[el.dataset.field], el.dataset.fmt) : '—';
+  });
+  dash.draw('kpi-latest', (el) => {
+    const d = dash.data(el.dataset.source);
+    if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const rows = (d.data || []).filter((r) => r.app === el.dataset.app);
+    if (!rows.length) { el.textContent = '—'; return; }
+    const r = rows.reduce((a, b) => (Number(b.sort) > Number(a.sort) ? b : a));
+    el.dataset.where = 'id=' + encodeURIComponent(r.id);
+    el.textContent = DL.fmt(r[el.dataset.field], el.dataset.fmt);
+  });
+  dash.draw('last-date', (el) => {
+    const d = dash.data('tracker_log');
+    if (d.status !== 'ok' || !(d.data || []).length) { el.textContent = '—'; return; }
+    const r = d.data.reduce((a, b) => (String(b.date) > String(a.date) ? b : a));
+    el.dataset.where = 'id=' + encodeURIComponent(r.id);
+    el.textContent = d3.utcFormat('%-d %B %Y')(new Date(r.date + 'T00:00:00Z'));
+  });
+  document.querySelectorAll('.dl-strict-box').forEach((box) => box.addEventListener('change', () => dash.setParams({ strict: box.checked })));
+  document.querySelectorAll('.dl-search').forEach((inp) => inp.addEventListener('input', () => dash.setParams({ q: inp.value.trim() || null })));
+  dash.onData(() => {
+    document.querySelectorAll('.dl-strict-box').forEach((box) => (box.checked = !!dash.params().strict));
+    document.querySelectorAll('.dl-search').forEach((inp) => { if (inp !== document.activeElement) inp.value = dash.params().q || ''; });
+  });
+  const goTo = () => { const el = document.getElementById(location.hash.slice(1)); if (el) { el.scrollIntoView(); dash.setLink(el.id); } };
+  document.querySelectorAll('.dl-nav a').forEach((a) => a.addEventListener('click', (ev) => { const el = document.getElementById(a.getAttribute('href').slice(1)); if (el) { ev.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); dash.setLink(el.id); } }));
+  setTimeout(goTo, 400);
+</script>
+
+<script>
+  // Sources listed under each chart
+  const SRC_FILTERS = {
+    trend: (r) => ['All adults', 'Ages 18–24', 'Ages 55–64'].includes(r.group),
+    2022: (r) => Number(r.year) === 2022,
+    us: (r) => r.country === 'United States',
+    online: (r) => /online|apps/i.test(r.measure),
+    India: (r) => r.country === 'India',
+    Tinder: (r) => r.app === 'Tinder',
+    Bumble: (r) => r.app === 'Bumble',
+    burnout: (r) => /burnout/i.test(r.measure),
+    gender: (r) => /\b(men|women)\b/i.test(r.group),
+    change: () => true,
+  };
+  dash.draw('src', (el) => {
+    el.replaceChildren();
+    if (dash.data(el.dataset.source).status !== 'ok') return;
+    const f = SRC_FILTERS[el.dataset.only] || (() => true);
+    const seen = new Map();
+    DL.rows(el.dataset.source).filter(f).forEach((r) => { const k = r.source + '|' + r.url; if (!seen.has(k)) seen.set(k, r); });
+    seen.forEach((r) => {
+      const li = document.createElement('li'), dot = document.createElement('i'), a = document.createElement('a');
+      dot.className = 'dl-dot ' + DL.dotClass(r.status); dot.title = r.status;
+      a.href = r.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.source;
+      li.append(dot, a); el.append(li);
+    });
+  });
+</script>
+
+<script>
+  // The rise
+  dash.draw('usage-trend', (el) => {
+    if (!DL.ready(el, ['us_usage'])) return;
+    const rows = DL.rows('us_usage');
+    const groups = ['All adults', 'Ages 18–24', 'Ages 55–64'];
+    const series = groups.map((g, i) => ({ name: g, color: dash.colors[i], pts: rows.filter((r) => r.group === g).map((r) => ({ x: Number(r.year), y: Number(r.pct), row: r })).sort((a, b) => a.x - b.x) }));
+    DL.lines(el, series, { yMax: 40, fmt: (v) => DL.fmt(v, 'pct'), yTick: (v) => v + '%', xTick: (v) => String(v), xTicks: d3.range(2013, 2023, 1), xDomain: [2013, 2022] });
+  });
+  dash.draw('usage-groups', (el) => {
+    if (!DL.ready(el, ['us_usage'])) return;
+    const items = DL.rows('us_usage').filter((r) => Number(r.year) === 2022)
+      .sort((a, b) => b.pct - a.pct)
+      .map((r) => ({ label: r.group, value: Number(r.pct), text: DL.fmt(r.pct, 'pct'), row: r, color: r.group === 'All adults' ? 'var(--cds-chart-muted)' : dash.colors[0] }));
+    DL.hbars(el, items, { max: 100 });
+  });
+  dash.draw('met-trend', (el) => {
+    if (!DL.ready(el, ['how_met'])) return;
+    const rows = DL.rows('how_met').filter((r) => r.country === 'United States');
+    const byKey = d3.group(rows, (r) => r.measure + ' · ' + (/same-sex/i.test(r.who) ? 'same-sex couples' : 'heterosexual couples'));
+    let i = 0;
+    const series = [...byKey].map(([name, rs]) => ({
+      name, color: dash.colors[i++ % 8], hollow: rs.every((r) => r.status === 'Unconfirmed'),
+      pts: rs.map((r) => ({ x: Number(r.year), y: Number(r.pct), row: r })).sort((a, b) => a.x - b.x),
+    }));
+    DL.lines(el, series, { h: 260, yMax: 70, fmt: (v) => DL.fmt(v, 'pct'), yTick: (v) => v + '%', xTick: (v) => String(v), xTicks: [1995, 2000, 2005, 2009, 2013, 2017], xDomain: [1995, 2017] });
+  });
+
+  // The fall
+  dash.draw('tinder-bars', (el) => {
+    if (!DL.ready(el, ['app_payers'])) return;
+    el.replaceChildren();
+    const rows = DL.rows('app_payers').filter((r) => r.app === 'Tinder').sort((a, b) => a.sort - b.sort);
+    if (!rows.length) { DL.empty(el, 'No figures match the current filter.'); return; }
+    const tip = DL.tip(el);
+    const W = Math.max(280, el.clientWidth || 500), H = 230;
+    const svg = DL.svg(el, W, H);
+    const x = d3.scaleBand(rows.map((r) => r.period), [0, W]).padding(0.3);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => Number(r.payers_m)) * 1.18], [H - 22, 6]);
+    const peak = rows.reduce((a, b) => (Number(b.payers_m) > Number(a.payers_m) ? b : a));
+    const last = rows[rows.length - 1];
+    rows.forEach((r) => {
+      const bw = Math.min(32, x.bandwidth()), bx = x(r.period) + (x.bandwidth() - bw) / 2;
+      const c = r === last ? dash.colors[0] : r === peak ? dash.colors[1] : 'var(--cds-chart-muted)';
+      svg.append('rect').attr('x', bx).attr('y', y(r.payers_m)).attr('width', bw).attr('height', y(0) - y(r.payers_m)).attr('rx', 3).attr('fill', c);
+      svg.append('text').attr('class', 'dl-strong').attr('x', bx + bw / 2).attr('y', y(r.payers_m) - 6).attr('text-anchor', 'middle').text(DL.fmt(r.payers_m, 'm'));
+      svg.append('text').attr('x', bx + bw / 2).attr('y', H - 6).attr('text-anchor', 'middle').text(r.period);
+      svg.append('rect').attr('x', x(r.period)).attr('y', 0).attr('width', x.bandwidth()).attr('height', H).attr('fill', 'transparent')
+        .on('mousemove', (ev) => tip.show(ev, DL.rowTip('Tinder · ' + r.period, DL.fmt(r.payers_m, 'm') + ' average payers', r))).on('mouseleave', tip.hide);
+    });
+    svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    DL.legend(el, [['Peak year', dash.colors[1]], ['Latest year', dash.colors[0]]]);
+  });
+  dash.draw('bumble-line', (el) => {
+    if (!DL.ready(el, ['app_payers'])) return;
+    const rows = DL.rows('app_payers').filter((r) => r.app === 'Bumble').sort((a, b) => a.sort - b.sort);
+    const label = new Map(rows.map((r) => [Number(r.sort), r.period]));
+    DL.lines(el, [{ name: 'Bumble paying users', color: dash.colors[0], pts: rows.map((r) => ({ x: Number(r.sort), y: Number(r.payers_m), row: r })) }], {
+      yMax: 4.5, fmt: (v) => DL.fmt(v, 'm'), yTick: (v) => v + 'M', xTick: (v) => label.get(v) || '', xTicks: rows.map((r) => Number(r.sort)),
+      xDomain: rows.length > 1 ? [Number(rows[0].sort), Number(rows[rows.length - 1].sort)] : [Number(rows[0]?.sort || 0) - 0.25, Number(rows[0]?.sort || 0) + 0.25],
+    });
+    // year-on-year change for each quarter, under the chart
+    const div = document.createElement('div'); div.className = 'dl-legend';
+    rows.forEach((r) => { const s = document.createElement('span'); s.textContent = `${r.period}: ${DL.fmt(r.yoy_pct, 'signedpct')} on a year earlier`; div.append(s); });
+    el.append(div);
+  });
+  dash.draw('uk-bars', (el) => {
+    if (!DL.ready(el, ['uk_apps'])) return;
+    const items = DL.rows('uk_apps').sort((a, b) => a.change - b.change).map((r) => ({ label: r.app, value: Number(r.change), text: DL.fmt(r.change, 'int'), row: r, color: 'var(--cds-chart-status-critical)' }));
+    DL.hbars(el, items);
+  });
+  dash.draw('burnout-bars', (el) => {
+    if (!DL.ready(el, ['society'])) return;
+    const items = DL.rows('society').filter((r) => /burnout/i.test(r.measure)).map((r, i) => ({ label: r.group, value: Number(r.pct), text: DL.fmt(r.pct, 'pct'), row: r, color: i === 0 ? dash.colors[0] : 'var(--cds-chart-muted)' }));
+    DL.hbars(el, items, { max: 100 });
+  });
+</script>
+
+<script>
+  // Culture contrasts
+  dash.draw('country-bars', (el) => {
+    if (!DL.ready(el, ['how_met'])) return;
+    const rows = DL.rows('how_met').filter((r) => /online|apps/i.test(r.measure));
+    const latest = [...d3.group(rows, (r) => r.country + '|' + r.who + '|' + r.measure).values()]
+      .map((rs) => rs.reduce((a, b) => (Number(b.year) > Number(a.year) ? b : a)));
+    const countries = [...new Set(latest.map((r) => r.country))];
+    const items = latest.sort((a, b) => b.pct - a.pct).map((r) => ({
+      label: r.country, sub: `· ${r.who.toLowerCase()}, ${r.year}`, value: Number(r.pct), text: DL.fmt(r.pct, 'pct') + (r.note && /at least/i.test(r.note) ? '+' : ''), row: r,
+      color: dash.colors[countries.indexOf(r.country) % 8],
+    }));
+    DL.hbars(el, items, { max: 100 });
+  });
+  dash.draw('marriage-lines', (el) => {
+    if (!DL.ready(el, ['marriage_index'])) return;
+    const all = dash.data('marriage_index').data || [];
+    const keep = new Set(DL.rows('marriages').map((r) => r.id));
+    const rows = all.filter((r) => keep.has(r.id));
+    const byC = d3.group(rows, (r) => r.country);
+    let i = 0;
+    const series = [...byC].map(([c, rs]) => ({
+      name: c, color: dash.colors[i++ % 8],
+      pts: rs.map((r) => ({ x: r.year, y: r.index, row: { ...r, source: `${d3.format(',')(r.marriages)} marriages · ${(dash.data('marriages').data || []).find((m) => m.id === r.id)?.source || ''}`, status: (dash.data('marriages').data || []).find((m) => m.id === r.id)?.status } })).sort((a, b) => a.x - b.x),
+    }));
+    const years = rows.map((r) => r.year);
+    DL.lines(el, series, { yMax: 110, fmt: (v) => d3.format('.0f')(v), yTick: (v) => String(v), xTick: (v) => String(v), xTicks: d3.range(d3.min(years) || 2013, (d3.max(years) || 2024) + 1, 1), xDomain: [d3.min(years) || 2013, d3.max(years) || 2024] });
+  });
+  dash.draw('india-bars', (el) => {
+    if (!DL.ready(el, ['how_met'])) return;
+    const items = DL.rows('how_met').filter((r) => r.country === 'India').sort((a, b) => b.pct - a.pct)
+      .map((r) => ({ label: r.who.replace(/^Women, /, '').replace(/^Women$/, 'All women'), sub: /chose/i.test(r.measure) ? '' : `· ${r.measure.toLowerCase()}`, value: Number(r.pct), text: DL.fmt(r.pct, 'pct'), row: r, color: /chose/i.test(r.measure) ? dash.colors[2] : 'var(--cds-chart-muted)' }));
+    DL.hbars(el, items, { max: 100 });
+  });
+  const isWomen = (g) => /women/i.test(g);
+  const isMen = (g) => !isWomen(g) && /\bmen\b/i.test(g);
+  dash.draw('gender-dumbbell', (el) => {
+    if (!DL.ready(el, ['society'])) return;
+    const rows = DL.rows('society');
+    const pairs = d3.group(rows.filter((r) => isWomen(r.group) || isMen(r.group)), (r) => r.country + '|' + r.measure + '|' + r.period);
+    const latestPer = new Map();
+    pairs.forEach((rs, k) => {
+      const m = rs.find((r) => isMen(r.group)), w = rs.find((r) => isWomen(r.group));
+      if (!m || !w) return;
+      const key = m.country + '|' + m.measure;
+      if (!latestPer.has(key) || String(m.period) > String(latestPer.get(key).m.period)) latestPer.set(key, { m, w });
+    });
+    const items = [...latestPer.values()].map(({ m, w }) => ({
+      label: `${m.measure} · ${m.country === 'United States' ? 'US' : m.country}, ${m.period}`,
+      a: { v: Number(m.pct), row: m, name: m.group }, b: { v: Number(w.pct), row: w, name: w.group },
+    }));
+    DL.dumbbell(el, items, { aColor: dash.colors[0], bColor: dash.colors[1], legend: [['Men', dash.colors[0]], ['Women', dash.colors[1]]] });
+  });
+  dash.draw('then-now', (el) => {
+    if (!DL.ready(el, ['society'])) return;
+    const groups = d3.group(DL.rows('society'), (r) => r.country + '|' + r.measure + '|' + r.group);
+    const items = [];
+    groups.forEach((rs) => {
+      if (rs.length < 2) return;
+      const s = rs.slice().sort((a, b) => String(a.period).localeCompare(String(b.period)));
+      const a = s[0], b = s[s.length - 1];
+      items.push({ label: `${a.measure} · ${a.group}, ${a.country === 'United States' ? 'US' : a.country}`, a: { v: Number(a.pct), row: a, name: a.period }, b: { v: Number(b.pct), row: b, name: b.period } });
+    });
+    DL.dumbbell(el, items, { arrow: true, aColor: 'var(--cds-chart-muted)', bColor: dash.colors[0], legend: [['Earlier survey', 'var(--cds-chart-muted)'], ['Later survey', dash.colors[0]]] });
+  });
+</script>
+
+<script>
+  // Findings, timeline and log
+  dash.draw('themes', (el) => {
+    el.replaceChildren();
+    if (dash.data('findings').status !== 'ok') return;
+    const themes = ['All', ...new Set((dash.data('findings').data || []).map((r) => r.theme))];
+    const cur = dash.params().theme || 'All';
+    themes.forEach((t) => {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = t;
+      b.setAttribute('aria-pressed', String(t === cur));
+      b.addEventListener('click', () => dash.setParams({ theme: t === 'All' ? null : t }));
+      el.append(b);
+    });
+  });
+  dash.draw('finds', (el) => {
+    if (!DL.ready(el, ['findings'])) return;
+    el.replaceChildren();
+    const theme = dash.params().theme, q = (dash.params().q || '').toLowerCase();
+    const rows = DL.rows('findings').filter((r) => (!theme || r.theme === theme) && (!q || [r.title, r.finding, r.place, r.source, r.theme].join(' ').toLowerCase().includes(q)))
+      .sort((a, b) => Number(b.year) - Number(a.year));
+    if (!rows.length) { DL.empty(el, 'No findings match. Clear the search or pick another theme.'); return; }
+    rows.forEach((r) => {
+      const card = document.createElement('article'); card.className = 'dl-find';
+      const add = (tag, cls, text) => { if (!text) return null; const n = document.createElement(tag); n.className = cls; n.textContent = text; card.append(n); return n; };
+      add('p', 'dl-find-fig', r.figure);
+      add('h3', 'dl-find-title', r.title);
+      add('p', 'dl-find-text', r.finding);
+      add('p', 'dl-find-meta', [r.place, r.year, r.theme].filter(Boolean).join(' · '));
+      if (r.caveat) add('p', 'dl-find-cav', 'Caveat: ' + r.caveat);
+      const src = document.createElement('p'); src.className = 'dl-find-src';
+      const dot = document.createElement('i'); dot.className = 'dl-dot ' + DL.dotClass(r.status); dot.title = r.status;
+      const a = document.createElement('a'); a.href = r.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.source;
+      src.append(dot, a); card.append(src);
+      el.append(card);
+    });
+  });
+  const KIND_COLOR = { Launch: 0, Industry: 3, Milestone: 2, Decline: 1 };
+  dash.draw('timeline', (el) => {
+    if (!DL.ready(el, ['timeline'])) return;
+    el.replaceChildren();
+    const rows = DL.rows('timeline').slice().sort((a, b) => Number(a.year) - Number(b.year));
+    if (!rows.length) { DL.empty(el, 'No events match the current filter.'); return; }
+    rows.forEach((r, i) => {
+      const li = document.createElement('li');
+      const yr = document.createElement('span'); yr.className = 'dl-time-year'; yr.textContent = i > 0 && rows[i - 1].year === r.year ? '' : String(r.year);
+      const rail = document.createElement('span'); rail.className = 'dl-time-rail';
+      const dot = document.createElement('i'); dot.style.background = dash.colors[(KIND_COLOR[r.kind] ?? 4) % 8]; rail.append(dot);
+      const body = document.createElement('div'); body.className = 'dl-time-body';
+      const ev = document.createElement('p'); ev.textContent = r.event;
+      const kind = document.createElement('p'); kind.className = 'dl-time-kind'; kind.textContent = r.kind;
+      const a = document.createElement('a'); a.href = r.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.source + ' · ' + r.status;
+      body.append(kind, ev, a);
+      li.append(yr, rail, body); el.append(li);
+    });
+  });
+  dash.draw('log', (tb) => {
+    tb.replaceChildren();
+    const d = dash.data('tracker_log');
+    if (d.status !== 'ok') return;
+    (d.data || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).forEach((r) => {
+      const tr = document.createElement('tr');
+      [r.id, d3.format(',')(Number(r.added)), r.note].forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.append(td); });
+      tb.append(tr);
+    });
+  });
+</script>
+
+</div>
+</body>
+</html>

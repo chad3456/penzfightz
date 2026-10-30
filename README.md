@@ -1999,6 +1999,24 @@ JavaScript with no libraries and no images. Pages are hash views (`#works`,
 `page.html` is the same page without the document wrapper, for publishing as
 a claude.ai artifact.
 
+## The Dating Ledger
+
+A sourced research tracker on the rise and fall of online dating: Effects →
+**The Dating Ledger**, or `public/dating-ledger/index.html`. It covers the
+rise (US usage, how couples met), the fall (Tinder and Bumble payers, Ofcom's
+UK user losses, burnout), culture contrasts (US, UK, Japan, India, China, South
+Korea, Switzerland), searchable research findings, a timeline and a curation
+log. Every row in `data/*.json` carries its source, a link, and how firmly it
+is confirmed (in the source's own words, reported by press, or unconfirmed);
+a switch hides everything not confirmed in the source.
+
+The page is the same one the claude.ai Dashboard version of the tracker
+serves. `dash-shim.js` stands in for that dashboard's runtime (datasets,
+calculations, drawings, filters) and reads the JSON files next to it, and
+`d3.min.js` is d3 7.9.0 (ISC, `LICENSE-d3.txt`). The claude.ai version is
+curated weekly by a scheduled Claude run; to refresh this copy, replace the
+files in `data/` with the tracker's current ones.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

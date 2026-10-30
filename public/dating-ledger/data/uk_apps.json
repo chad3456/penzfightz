@@ -1,0 +1,42 @@
+[
+ {
+  "id": "tinder",
+  "app": "Tinder",
+  "change": -600000,
+  "period": "May 2023 to May 2024",
+  "source": "Ofcom Online Nation 2024",
+  "url": "https://www.itv.com/news/2024-11-28/are-we-falling-out-of-love-with-dating-apps",
+  "status": "Confirmed in source",
+  "note": "About 5% of its UK users"
+ },
+ {
+  "id": "bumble",
+  "app": "Bumble",
+  "change": -368000,
+  "period": "May 2023 to May 2024",
+  "source": "Ofcom Online Nation 2024",
+  "url": "https://www.itv.com/news/2024-11-28/are-we-falling-out-of-love-with-dating-apps",
+  "status": "Confirmed in source",
+  "note": "A Feb 2025 Ofcom release gives about 300,000"
+ },
+ {
+  "id": "hinge",
+  "app": "Hinge",
+  "change": -131000,
+  "period": "May 2023 to May 2024",
+  "source": "Ofcom Online Nation 2024",
+  "url": "https://www.itv.com/news/2024-11-28/are-we-falling-out-of-love-with-dating-apps",
+  "status": "Confirmed in source",
+  "note": ""
+ },
+ {
+  "id": "grindr",
+  "app": "Grindr",
+  "change": -11000,
+  "period": "May 2023 to May 2024",
+  "source": "Ofcom Online Nation 2024",
+  "url": "https://www.itv.com/news/2024-11-28/are-we-falling-out-of-love-with-dating-apps",
+  "status": "Confirmed in source",
+  "note": ""
+ }
+]

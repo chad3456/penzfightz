@@ -1,0 +1,123 @@
+[
+ {
+  "id": "tinder-2020",
+  "app": "Tinder",
+  "period": "2020",
+  "sort": 2020,
+  "payers_m": 8.9,
+  "yoy_pct": null,
+  "source": "Match Group filings, via Tinder statistics site",
+  "url": "https://mazeoflove.com/tinder/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "tinder-2021",
+  "app": "Tinder",
+  "period": "2021",
+  "sort": 2021,
+  "payers_m": 10.6,
+  "yoy_pct": 16,
+  "source": "Match Group filings, via Tinder statistics site (+16% from Match 2021 results)",
+  "url": "https://mazeoflove.com/tinder/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "tinder-2022",
+  "app": "Tinder",
+  "period": "2022",
+  "sort": 2022,
+  "payers_m": 10.8,
+  "yoy_pct": null,
+  "source": "Match Group filings, via Tinder statistics site (another source: 10.9M)",
+  "url": "https://mazeoflove.com/tinder/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "tinder-2023",
+  "app": "Tinder",
+  "period": "2023",
+  "sort": 2023,
+  "payers_m": 10.4,
+  "yoy_pct": null,
+  "source": "Match Group 10-K, via secondary summary",
+  "url": "https://prioridata.com/data/tinder-statistics/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "tinder-2024",
+  "app": "Tinder",
+  "period": "2024",
+  "sort": 2024,
+  "payers_m": 9.7,
+  "yoy_pct": null,
+  "source": "Match Group 10-K, via secondary summary",
+  "url": "https://prioridata.com/data/tinder-statistics/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "tinder-2025",
+  "app": "Tinder",
+  "period": "2025",
+  "sort": 2025,
+  "payers_m": 9.0,
+  "yoy_pct": null,
+  "source": "Match Group 10-K, via secondary summary",
+  "url": "https://prioridata.com/data/tinder-statistics/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "bumble-q2-2025",
+  "app": "Bumble",
+  "period": "Q2 2025",
+  "sort": 2025.25,
+  "payers_m": 3.8,
+  "yoy_pct": -8.7,
+  "source": "Bumble Q2 2025 results, via press",
+  "url": "https://www.barchart.com/story/news/3674837/bumble-nasdaqbmbl-reports-q2-cy2026-in-line-with-expectations-but-stock-drops",
+  "status": "Reported by press"
+ },
+ {
+  "id": "bumble-q3-2025",
+  "app": "Bumble",
+  "period": "Q3 2025",
+  "sort": 2025.5,
+  "payers_m": 3.57,
+  "yoy_pct": -16,
+  "source": "Bumble Q3 2025 results, via press",
+  "url": "https://business.mammothtimes.com/mammothtimes/article/stockstory-2025-11-5-bumbles-nasdaqbmbl-q3-earnings-results-revenue-in-line-with-expectations-but-stock-drops",
+  "status": "Reported by press"
+ },
+ {
+  "id": "bumble-q1-2026",
+  "app": "Bumble",
+  "period": "Q1 2026",
+  "sort": 2026.0,
+  "payers_m": 3.2,
+  "yoy_pct": -21.1,
+  "source": "Bumble Q1 2026 results, via press (one source: 3.17M)",
+  "url": "https://ppc.land/bumbles-paying-users-fall-21-but-profits-jump-165-in-q1-2026/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "bumble-q2-2026",
+  "app": "Bumble",
+  "period": "Q2 2026",
+  "sort": 2026.25,
+  "payers_m": 3.16,
+  "yoy_pct": -16.4,
+  "source": "Bumble Q2 2026 results, via press",
+  "url": "https://www.barchart.com/story/news/3674837/bumble-nasdaqbmbl-reports-q2-cy2026-in-line-with-expectations-but-stock-drops",
+  "status": "Reported by press"
+ },
+ {
+  "id": "hinge-q4-2023",
+  "app": "Hinge",
+  "period": "Q4 2023",
+  "sort": 2023.75,
+  "payers_m": 1.4,
+  "yoy_pct": 33,
+  "source": "Match Group Q4 2023 results, via Bloomberg",
+  "url": "https://www.bloomberg.com/news/articles/2024-01-30/match-reports-decline-in-paying-tinder-users-announces-buyback",
+  "status": "Reported by press"
+ }
+]

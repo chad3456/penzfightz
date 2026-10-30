@@ -1,0 +1,92 @@
+[
+ {
+  "id": "match-1995",
+  "year": 1995,
+  "event": "Match.com launches (April 1995)",
+  "kind": "Launch",
+  "source": "Timeline of online dating services",
+  "url": "https://www.datingnews.com/daters-pulse/timeline-of-how-online-dating-has-changed/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "mg-2009",
+  "year": 2009,
+  "event": "IAC bundles its dating sites into Match Group",
+  "kind": "Industry",
+  "source": "Business Insider",
+  "url": "https://businessinsider.in/tech/news/how-tinder-and-hinge-owner-match-group-grew-to-have-the-countryaposs-biggest-monopoly-on-online-dating-but-let-bumble-get-away/amp_slidelist/80672547.cms",
+  "status": "Reported by press"
+ },
+ {
+  "id": "grindr-2009",
+  "year": 2009,
+  "event": "Grindr launches",
+  "kind": "Launch",
+  "source": "Timeline of online dating services",
+  "url": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Timeline_of_online_dating_services",
+  "status": "Reported by press"
+ },
+ {
+  "id": "tinder-2012",
+  "year": 2012,
+  "event": "Tinder and Hinge launch within months of each other",
+  "kind": "Launch",
+  "source": "Timeline of online dating services",
+  "url": "https://www.datingnews.com/daters-pulse/timeline-of-how-online-dating-has-changed/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "online-2013",
+  "year": 2013,
+  "event": "Meeting online passes meeting through friends for US heterosexual couples",
+  "kind": "Milestone",
+  "source": "Rosenfeld, Thomas & Hausen, PNAS 2019",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/31431531/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "bumble-2014",
+  "year": 2014,
+  "event": "Bumble launches; women send the first message (December 2014)",
+  "kind": "Launch",
+  "source": "Timeline of online dating services",
+  "url": "https://www.datingnews.com/daters-pulse/timeline-of-how-online-dating-has-changed/",
+  "status": "Reported by press"
+ },
+ {
+  "id": "pew-2019",
+  "year": 2019,
+  "event": "3 in 10 US adults have used a dating site or app",
+  "kind": "Milestone",
+  "source": "Pew Research Center 2020",
+  "url": "https://www.pewresearch.org/internet/2020/02/06/the-virtues-and-downsides-of-online-dating/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "tinder-q1-2024",
+  "year": 2024,
+  "event": "Tinder posts its sixth straight quarterly fall in payers",
+  "kind": "Decline",
+  "source": "Bloomberg",
+  "url": "https://www.bloomberg.com/news/articles/2024-05-07/match-posts-sixth-straight-decline-in-tinder-users-shares-fall",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "ofcom-2024",
+  "year": 2024,
+  "event": "Ofcom reports the first fall in UK dating-app use",
+  "kind": "Decline",
+  "source": "Ofcom Online Nation 2024",
+  "url": "https://www.itv.com/news/2024-11-28/are-we-falling-out-of-love-with-dating-apps",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "bumble-2026",
+  "year": 2026,
+  "event": "Bumble calls its 21% payer fall a deliberate reset",
+  "kind": "Decline",
+  "source": "PPC Land",
+  "url": "https://ppc.land/bumbles-paying-users-fall-21-but-profits-jump-165-in-q1-2026/",
+  "status": "Reported by press"
+ }
+]

@@ -1,0 +1,128 @@
+[
+ {
+  "id": "all-2013",
+  "year": 2013,
+  "group": "All adults",
+  "pct": 11,
+  "source": "Pew Research Center, 2016 report (2013 survey)",
+  "url": "https://techcrunch.com/?p=1275298",
+  "status": "Reported by press"
+ },
+ {
+  "id": "all-2015",
+  "year": 2015,
+  "group": "All adults",
+  "pct": 15,
+  "source": "Pew Research Center, Feb 2016 (survey Jun–Jul 2015, n=2,001)",
+  "url": "https://www.pewresearch.org/internet/2016/02/11/15-percent-of-american-adults-have-used-online-dating-sites-or-mobile-dating-apps/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "all-2019",
+  "year": 2019,
+  "group": "All adults",
+  "pct": 30,
+  "source": "Pew Research Center, Feb 2020",
+  "url": "https://www.pewresearch.org/internet/2020/02/06/the-virtues-and-downsides-of-online-dating/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "all-2022",
+  "year": 2022,
+  "group": "All adults",
+  "pct": 30,
+  "source": "Pew Research Center, Feb 2023 (survey Jul 2022)",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "1824-2013",
+  "year": 2013,
+  "group": "Ages 18–24",
+  "pct": 10,
+  "source": "Pew Research Center, 2016 report",
+  "url": "https://techcrunch.com/?p=1275298",
+  "status": "Reported by press"
+ },
+ {
+  "id": "1824-2015",
+  "year": 2015,
+  "group": "Ages 18–24",
+  "pct": 27,
+  "source": "Pew Research Center, 2016 report",
+  "url": "https://techcrunch.com/?p=1275298",
+  "status": "Reported by press"
+ },
+ {
+  "id": "5564-2013",
+  "year": 2013,
+  "group": "Ages 55–64",
+  "pct": 6,
+  "source": "Pew Research Center, 2016 report",
+  "url": "https://techcrunch.com/?p=1275298",
+  "status": "Reported by press"
+ },
+ {
+  "id": "5564-2015",
+  "year": 2015,
+  "group": "Ages 55–64",
+  "pct": 12,
+  "source": "Pew Research Center, 2016 report",
+  "url": "https://techcrunch.com/?p=1275298",
+  "status": "Reported by press"
+ },
+ {
+  "id": "u30-2022",
+  "year": 2022,
+  "group": "Under 30",
+  "pct": 53,
+  "source": "Pew Research Center, Feb 2023",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "3049-2022",
+  "year": 2022,
+  "group": "Ages 30–49",
+  "pct": 37,
+  "source": "Pew Research Center, Feb 2023",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "65p-2022",
+  "year": 2022,
+  "group": "65 and older",
+  "pct": 13,
+  "source": "Pew Research Center, Feb 2023",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "men-2022",
+  "year": 2022,
+  "group": "Men",
+  "pct": 34,
+  "source": "Pew Research Center, Feb 2023",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "lgb-2022",
+  "year": 2022,
+  "group": "Lesbian, gay or bisexual",
+  "pct": 51,
+  "source": "Pew Research Center, 2023",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ },
+ {
+  "id": "straight-2022",
+  "year": 2022,
+  "group": "Straight",
+  "pct": 28,
+  "source": "Pew Research Center, 2023",
+  "url": "https://www.pewresearch.org/short-reads/2023/02/02/key-findings-about-online-dating-in-the-u-s/",
+  "status": "Confirmed in source"
+ }
+]
