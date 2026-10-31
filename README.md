@@ -2017,6 +2017,34 @@ calculations, drawings, filters) and reads the JSON files next to it, and
 curated weekly by a scheduled Claude run; to refresh this copy, replace the
 files in `data/` with the tracker's current ones.
 
+## Twelve-Point Compass
+
+A political values test on twelve axes: Effects → **Twelve-Point Compass**
+(`src/compass/`). It is original work. The model, the 72 statements, the 16
+families of thought and the 89 leader profiles were written for this site,
+inspired by the idea of multi-axis political tests rather than copied from any
+one of them.
+
+- **Model** (`model.ts`): twelve axes in four groups.
+  - Economy: Ownership, Redistribution, Trade.
+  - State: Liberty, Power, Centralism.
+  - Society: Morality, Faith, Belonging.
+  - World: Sovereignty, Force, Planet.
+- **Scoring:** six statements per axis, three pointing to each pole, so
+  agreeing with everything scores 50 everywhere. Each axis scores 0–100.
+  Similarity is 100 minus 1.25 × the RMS distance between two results.
+- **Leaders** (`leaders.ts`): current heads of the largest countries, including
+  leaders chosen in 2026's elections (offices checked 31 October 2026), recent
+  leaders, opposition and movement figures, and 20th-century leaders, dictators
+  included. Each is placed from their record in office. Every record line is a
+  dated event tagged with the axes it informs, and each profile says how long a
+  record it rests on.
+- **Page** (`Compass.tsx`): the test (keyboard shortcuts, resume, skip), the
+  result (bars, radar, nearest families, nearest and furthest leaders, share
+  code), a leader directory with filters, profiles with evidence under each
+  axis, compare (you, any leader or family, two at a time), axis definitions,
+  method, and a history kept in the browser.
+
 ## Witchworld Weekly
 
 *The Earth Issue, 2026.* A hand-drawn magazine and the portfolio of its

@@ -73,6 +73,7 @@ const WalksOfLife = lazy(() => import('./walks/WalksOfLife'));
 const MindMaps = lazy(() => import('./models/MindMaps'));
 const BodyAtlas = lazy(() => import('./body/Atlas'));
 const AuraFX = lazy(() => import('./aura/AuraFX'));
+const Compass = lazy(() => import('./compass/Compass'));
 import { AppFrame } from './apps/AppFrame';
 import type { EffectId } from './effects/effects';
 import { isGameId, type GameId } from './arcade/games';
@@ -344,6 +345,13 @@ export default function App() {
   }
   if (shell === 'effect' && effect === 'claude') {
     return <AppFrame src="/claude/index.html" title="Claude in One Sitting" onExit={toShelf} />;
+  }
+  if (shell === 'effect' && effect === 'compass') {
+    return (
+      <Suspense fallback={<div className="tp"><p style={{ padding: 40 }}>Twelve-Point Compass</p></div>}>
+        <Compass onExit={toShelf} />
+      </Suspense>
+    );
   }
   if (shell === 'effect' && effect === 'aura') {
     return (

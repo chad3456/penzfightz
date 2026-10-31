@@ -72,7 +72,8 @@ export type EffectId =
   | 'body'
   | 'aura'
   | 'claude'
-  | 'dating';
+  | 'dating'
+  | 'compass';
 
 export interface EffectDef {
   id: EffectId;
@@ -757,6 +758,17 @@ export const EFFECTS: EffectDef[] = [
     spec: ['91 sourced figures · 7 countries', 'rise · fall · culture contrasts · strange findings', 'every number linked and labelled by how firmly it is confirmed'],
     ink: '#c2185b',
     wash: 'rgba(194, 24, 91, 0.12)',
+  },
+
+  {
+    id: 'compass',
+    name: 'Twelve-Point Compass',
+    tagline: 'A political values test on twelve axes, and 89 world leaders, past and present, placed on the same axes from what they did in power.',
+    blurb:
+      'Seventy-two statements, six on each of twelve axes in four groups: the economy (ownership, redistribution, trade), the state (liberty, how power is checked, centralism), society (morality, faith, belonging) and the world (sovereignty, force, the planet). Half the statements on every axis point each way, so nothing rewards agreeing. Your result shows where you sit on each axis, the shape of your views, your nearest families of political thought, and the leaders whose records are closest to and furthest from your answers. Every leader, from Roosevelt, Thatcher, Mao and Mandela to the heads of government chosen in 2026\u2019s elections, has a profile with the laws, decisions and wars behind each placement, marked by how long a record it rests on. Compare yourself with any leader or family of thought, or two leaders with each other, read how every axis is defined, and keep your past results in this browser.',
+    spec: ['72 statements · 12 axes · 16 families of thought', '89 leaders placed from their records, offices checked 31 Oct 2026', 'compare, history, shareable result codes'],
+    ink: '#1b5fae',
+    wash: 'rgba(27, 95, 174, 0.12)',
   },
 
 ];
