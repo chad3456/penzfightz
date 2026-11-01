@@ -1,0 +1,254 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "us",
+  "name": "United States",
+  "region": "Americas",
+  "system": "Federal presidential republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 70
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 35
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 85
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 62
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 40
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 25
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 55
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 55
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 72
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 85
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 72
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 20
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 37.8
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 23.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 52.9
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 36.7
+    },
+    "nearest8valuesIdeology": "Moderate Conservatism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "rpop",
+      "name": "Right-wing populism",
+      "similarity": 78
+    },
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "similarity": 77
+    },
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "similarity": 75
+    }
+  ],
+  "laws": [
+    {
+      "year": "1791",
+      "law": "First Amendment bars an established religion and protects free speech",
+      "axes": [
+        "Faith",
+        "Liberty"
+      ]
+    },
+    {
+      "year": "1951",
+      "law": "22nd Amendment limits presidents to two terms",
+      "axes": [
+        "Power"
+      ]
+    },
+    {
+      "year": "2015",
+      "law": "Same-sex marriage legal nationwide (Obergefell v. Hodges)",
+      "axes": [
+        "Morality"
+      ]
+    },
+    {
+      "year": "2022",
+      "law": "Supreme Court returned abortion law to the states (Dobbs)",
+      "axes": [
+        "Morality",
+        "Centralism"
+      ]
+    },
+    {
+      "year": "2025",
+      "law": "Broad tariffs on most trading partners; withdrawal from WHO and Paris agreement",
+      "axes": [
+        "Trade",
+        "Sovereignty",
+        "Planet"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Marriage legal (2015)",
+    "deathPenalty": "In use",
+    "conscription": "None",
+    "abortion": "Varies by region",
+    "religionAndState": "Secular: no established religion (First Amendment)",
+    "nuclearWeapons": "yes",
+    "nato": true,
+    "eu": false,
+    "note": "Abortion law set state by state since 2022."
+  },
+  "militarySpending": {
+    "v": 3.4,
+    "label": "Military spending, share of GDP",
+    "year": 2024,
+    "source": "SIPRI 2024 data, as reported by Voronoi",
+    "url": "https://www.voronoiapp.com/military/Military-Spending-as-a-Share-of-GDP-by-Country-5073",
+    "status": "Reported by press"
+  },
+  "onlineDating": {
+    "v": 39,
+    "label": "Heterosexual couples who met online",
+    "year": 2017,
+    "source": "Rosenfeld, Thomas & Hausen, PNAS 2019",
+    "url": "https://web.stanford.edu/~mrosenfe/Rosenfeld_et_al_Disintermediating_Friends.pdf",
+    "status": "Confirmed in source"
+  },
+  "leaders": [
+    {
+      "id": "trump",
+      "name": "Donald Trump",
+      "role": "President of the United States",
+      "years": "2017–2021, 2025–",
+      "tag": "Right-wing populism",
+      "school": "America First"
+    },
+    {
+      "id": "biden",
+      "name": "Joe Biden",
+      "role": "President of the United States",
+      "years": "2021–2025",
+      "tag": "Social liberalism",
+      "school": "American liberalism"
+    },
+    {
+      "id": "obama",
+      "name": "Barack Obama",
+      "role": "President of the United States",
+      "years": "2009–2017",
+      "tag": "Social liberalism",
+      "school": "American liberalism"
+    },
+    {
+      "id": "sanders",
+      "name": "Bernie Sanders",
+      "role": "US Senator for Vermont",
+      "years": "2007–",
+      "tag": "Democratic socialism",
+      "school": "Democratic socialism"
+    },
+    {
+      "id": "fdr",
+      "name": "Franklin D. Roosevelt",
+      "role": "President of the United States",
+      "years": "1933–1945",
+      "tag": "Social liberalism",
+      "school": "New Deal liberalism"
+    },
+    {
+      "id": "reagan",
+      "name": "Ronald Reagan",
+      "role": "President of the United States",
+      "years": "1981–1989",
+      "tag": "Conservatism",
+      "school": "Reaganism"
+    },
+    {
+      "id": "musk",
+      "name": "Elon Musk",
+      "role": "Businessman; led the Department of Government Efficiency in 2025",
+      "years": "2024–",
+      "tag": "Conservatism",
+      "school": "Tech right"
+    },
+    {
+      "id": "schwarzenegger",
+      "name": "Arnold Schwarzenegger",
+      "role": "Governor of California",
+      "years": "2003–2011",
+      "tag": "Centrism",
+      "school": "Moderate Republicanism"
+    }
+  ]
+}

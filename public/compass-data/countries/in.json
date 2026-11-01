@@ -1,0 +1,215 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "in",
+  "name": "India",
+  "region": "Asia",
+  "system": "Federal parliamentary republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 60
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 50
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 68
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 65
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 55
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 65
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 68
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 72
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 75
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 58
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 60
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 40
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 47.3
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 35.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 39.3
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 33.3
+    },
+    "nearest8valuesIdeology": "Right-Wing Populism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "similarity": 89
+    },
+    {
+      "id": "rpop",
+      "name": "Right-wing populism",
+      "similarity": 85
+    },
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "similarity": 83
+    }
+  ],
+  "laws": [
+    {
+      "year": "2017",
+      "law": "National Goods and Services Tax",
+      "axes": [
+        "Ownership",
+        "Centralism"
+      ]
+    },
+    {
+      "year": "2018",
+      "law": "Supreme Court decriminalised same-sex relations",
+      "axes": [
+        "Morality"
+      ]
+    },
+    {
+      "year": "2019",
+      "law": "Jammu and Kashmir’s special status revoked",
+      "axes": [
+        "Centralism"
+      ]
+    },
+    {
+      "year": "2019",
+      "law": "Citizenship Amendment Act",
+      "axes": [
+        "Belonging",
+        "Faith"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Not recognised",
+    "deathPenalty": "In use",
+    "conscription": "None",
+    "abortion": "Broad grounds",
+    "religionAndState": "Secular republic (since 1976 amendment)",
+    "nuclearWeapons": "yes",
+    "nato": false,
+    "eu": false,
+    "note": "Same-sex relations decriminalised in 2018; marriage not recognised."
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "modi",
+      "name": "Narendra Modi",
+      "role": "Prime Minister of India",
+      "years": "2014–",
+      "tag": "National conservatism",
+      "school": "Hindu nationalism"
+    },
+    {
+      "id": "rahul",
+      "name": "Rahul Gandhi",
+      "role": "Leader of the Opposition in the Lok Sabha",
+      "years": "2024–",
+      "tag": "Social democracy",
+      "school": "Congress centre-left"
+    },
+    {
+      "id": "gandhi",
+      "name": "Mahatma Gandhi",
+      "role": "Leader of the Indian independence movement",
+      "years": "1915–1948",
+      "tag": "Green politics",
+      "school": "Gandhism: non-violence and village self-rule"
+    },
+    {
+      "id": "nehru",
+      "name": "Jawaharlal Nehru",
+      "role": "Prime Minister of India",
+      "years": "1947–1964",
+      "tag": "Democratic socialism",
+      "school": "Nehruvian socialism"
+    },
+    {
+      "id": "indira",
+      "name": "Indira Gandhi",
+      "role": "Prime Minister of India",
+      "years": "1966–1977, 1980–1984",
+      "tag": "Left-wing populism",
+      "school": "Indira’s Congress socialism"
+    },
+    {
+      "id": "vajpayee",
+      "name": "Atal Bihari Vajpayee",
+      "role": "Prime Minister of India",
+      "years": "1996, 1998–2004",
+      "tag": "Conservatism",
+      "school": "Moderate Hindu nationalism"
+    }
+  ]
+}

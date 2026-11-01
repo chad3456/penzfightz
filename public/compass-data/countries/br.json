@@ -1,0 +1,165 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "br",
+  "name": "Brazil",
+  "region": "Americas",
+  "system": "Federal presidential republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 42
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 72
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 58
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 52
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 35
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 35
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 50
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 45
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 40
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 35
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 30
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 52
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 64.3
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 65
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 57.8
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 52.3
+    },
+    "nearest8valuesIdeology": "Liberalism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "socdem",
+      "name": "Social democracy",
+      "similarity": 83
+    },
+    {
+      "id": "chrdem",
+      "name": "Christian democracy",
+      "similarity": 82
+    },
+    {
+      "id": "lpop",
+      "name": "Left-wing populism",
+      "similarity": 80
+    }
+  ],
+  "laws": [
+    {
+      "year": "2003",
+      "law": "Bolsa Família cash transfers",
+      "axes": [
+        "Redistribution"
+      ]
+    },
+    {
+      "year": "2013",
+      "law": "Same-sex marriage through a National Justice Council ruling",
+      "axes": [
+        "Morality"
+      ]
+    },
+    {
+      "year": "2025",
+      "law": "Congress loosened environmental licensing",
+      "axes": [
+        "Planet"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Marriage legal (2013)",
+    "deathPenalty": "Abolished for ordinary crimes",
+    "conscription": "In law; mostly volunteers",
+    "abortion": "Restricted",
+    "religionAndState": "Secular",
+    "nuclearWeapons": "no",
+    "nato": false,
+    "eu": false
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "lula",
+      "name": "Luiz Inácio Lula da Silva",
+      "role": "President of Brazil",
+      "years": "2003–2010, 2023–",
+      "tag": "Social democracy",
+      "school": "Lulism (Workers’ Party)"
+    }
+  ]
+}

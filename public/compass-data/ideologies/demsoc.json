@@ -1,0 +1,220 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "demsoc",
+  "name": "Democratic socialism",
+  "description": "Public ownership and a large welfare state, won through elections.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 20
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 88
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 60
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 30
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 20
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 50
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 25
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 20
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 30
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 35
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 20
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 80
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 81.6
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 71.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 71.3
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 78.3
+    },
+    "nearest8valuesIdeology": "Libertarian Socialism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "petro",
+      "name": "Gustavo Petro",
+      "role": "President of Colombia",
+      "years": "2022–2026",
+      "tag": "Democratic socialism",
+      "school": "Colombian progressive left"
+    },
+    {
+      "id": "sanders",
+      "name": "Bernie Sanders",
+      "role": "US Senator for Vermont",
+      "years": "2007–",
+      "tag": "Democratic socialism",
+      "school": "Democratic socialism"
+    },
+    {
+      "id": "attlee",
+      "name": "Clement Attlee",
+      "role": "Prime Minister of the United Kingdom",
+      "years": "1945–1951",
+      "tag": "Democratic socialism",
+      "school": "Labour democratic socialism"
+    },
+    {
+      "id": "gorbachev",
+      "name": "Mikhail Gorbachev",
+      "role": "Leader of the Soviet Union",
+      "years": "1985–1991",
+      "tag": "Democratic socialism",
+      "school": "Reform communism"
+    },
+    {
+      "id": "nehru",
+      "name": "Jawaharlal Nehru",
+      "role": "Prime Minister of India",
+      "years": "1947–1964",
+      "tag": "Democratic socialism",
+      "school": "Nehruvian socialism"
+    },
+    {
+      "id": "allende",
+      "name": "Salvador Allende",
+      "role": "President of Chile",
+      "years": "1970–1973",
+      "tag": "Democratic socialism",
+      "school": "Chilean road to socialism"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Bernie Sanders",
+      "similarity": 92
+    },
+    {
+      "name": "Gustavo Petro",
+      "similarity": 87
+    },
+    {
+      "name": "Luiz Inácio Lula da Silva",
+      "similarity": 85
+    },
+    {
+      "name": "Greta Thunberg",
+      "similarity": 85
+    },
+    {
+      "name": "Lee Jae-myung",
+      "similarity": 84
+    },
+    {
+      "name": "Pedro Sánchez",
+      "similarity": 83
+    },
+    {
+      "name": "Joe Biden",
+      "similarity": 83
+    },
+    {
+      "name": "Rahul Gandhi",
+      "similarity": 82
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Spain",
+      "similarity": 80
+    },
+    {
+      "name": "Portugal",
+      "similarity": 78
+    },
+    {
+      "name": "Brazil",
+      "similarity": 77
+    },
+    {
+      "name": "South Africa",
+      "similarity": 77
+    },
+    {
+      "name": "Norway",
+      "similarity": 77
+    },
+    {
+      "name": "Mexico",
+      "similarity": 76
+    },
+    {
+      "name": "Canada",
+      "similarity": 74
+    },
+    {
+      "name": "France",
+      "similarity": 73
+    }
+  ]
+}

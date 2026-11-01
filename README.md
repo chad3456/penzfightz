@@ -2019,11 +2019,11 @@ files in `data/` with the tracker's current ones.
 
 ## Twelve-Point Compass
 
-A political values test on twelve axes: Effects → **Twelve-Point Compass**
-(`src/compass/`). It is original work. The model, the 72 statements, the 16
-families of thought and the 89 leader profiles were written for this site,
-inspired by the idea of multi-axis political tests rather than copied from any
-one of them.
+Two political values tests and a reference of leaders, countries and families
+of thought on shared axes: Effects → **Twelve-Point Compass** (`src/compass/`).
+The Compass model, its 72 statements, the 19 families of thought, the leader
+and country placements were written for this site. The 8values test is
+included under its MIT licence.
 
 - **Model** (`model.ts`): twelve axes in four groups.
   - Economy: Ownership, Redistribution, Trade.
@@ -2033,17 +2033,32 @@ one of them.
 - **Scoring:** six statements per axis, three pointing to each pole, so
   agreeing with everything scores 50 everywhere. Each axis scores 0–100.
   Similarity is 100 minus 1.25 × the RMS distance between two results.
-- **Leaders** (`leaders.ts`): current heads of the largest countries, including
-  leaders chosen in 2026's elections (offices checked 31 October 2026), recent
-  leaders, opposition and movement figures, and 20th-century leaders, dictators
-  included. Each is placed from their record in office. Every record line is a
-  dated event tagged with the axes it informs, and each profile says how long a
-  record it rests on.
-- **Page** (`Compass.tsx`): the test (keyboard shortcuts, resume, skip), the
-  result (bars, radar, nearest families, nearest and furthest leaders, share
-  code), a leader directory with filters, profiles with evidence under each
-  axis, compare (you, any leader or family, two at a time), axis definitions,
-  method, and a history kept in the browser.
+- **Cues:** every statement has a plain-language explanation and a real
+  country example for agreeing and for disagreeing. `trivia.ts` holds three
+  documented facts per axis, shown during the test.
+- **Tags:** your result's tag is the nearest family of thought. Each leader
+  carries an editorial family tag and the school they are known by
+  (`TAGS` in `leaders.ts`). The result lists everyone sharing your tag.
+- **8values** (`eightvalues-data.ts`, `eightvalues.ts`): the original 70
+  statements, scoring, label bands and 52 ideologies (MIT, © 2020 8values).
+  `project12` maps any twelve-axis placement onto the four 8values axes, so
+  leaders and countries can be compared with an 8values result.
+- **Leaders** (`leaders.ts`): 93 entries: current heads of government
+  (offices checked 31 October 2026), recent and historical leaders, and public
+  figures with a documented political record.
+- **Countries** (`countries.ts`): 44 countries placed from the laws in force,
+  each with dated laws tagged by axis and legal facts (same-sex couples, death
+  penalty, military service, abortion, religion and state, nuclear weapons,
+  NATO/EU). Military spending and online-dating shares appear only where a
+  source was found, each marked with how it was confirmed.
+- **Page** (`Compass.tsx`): both tests, results, leaders, countries,
+  ideologies, charts (any axis against any axis, military, nationalism,
+  online dating, a law matrix), compare up to four, axes, method and history.
+  The page is its own scroll container because the site's body does not scroll.
+- **JSON** (`public/compass-data/`): `index.json`, `leaders.json`,
+  `military-reference.json`, `countries/<id>.json` and
+  `ideologies/<family>.json`. Regenerate with
+  `node_modules/.bin/rolldown scripts/compass-export.ts --platform node --format esm --file /tmp/compass-export.mjs && node /tmp/compass-export.mjs`.
 
 ## Witchworld Weekly
 

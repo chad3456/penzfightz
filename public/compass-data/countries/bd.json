@@ -1,0 +1,159 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "bd",
+  "name": "Bangladesh",
+  "region": "Asia",
+  "system": "Unitary parliamentary republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 55
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 45
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 55
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 70
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 62
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 75
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 78
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 85
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 65
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 48
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 40
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 45
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 46
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 49
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 32.7
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 27.3
+    },
+    "nearest8valuesIdeology": "Right-Wing Populism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "similarity": 81
+    },
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "similarity": 79
+    },
+    {
+      "id": "rpop",
+      "name": "Right-wing populism",
+      "similarity": 77
+    }
+  ],
+  "laws": [
+    {
+      "year": "2024",
+      "law": "Mass protests ended Sheikh Hasina’s government",
+      "axes": [
+        "Power"
+      ]
+    },
+    {
+      "year": "2026",
+      "law": "BNP won the February election; Awami League barred from contesting",
+      "axes": [
+        "Power"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Same-sex relations a crime",
+    "deathPenalty": "In use",
+    "conscription": "None",
+    "abortion": "Restricted",
+    "religionAndState": "Islam is the state religion, alongside a commitment to equal rights for other faiths",
+    "nuclearWeapons": "no",
+    "nato": false,
+    "eu": false,
+    "note": "Menstrual regulation, an early-pregnancy procedure, is permitted."
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "tarique",
+      "name": "Tarique Rahman",
+      "role": "Prime Minister of Bangladesh",
+      "years": "2026–",
+      "tag": "Conservatism",
+      "school": "Bangladeshi nationalism (BNP)"
+    }
+  ]
+}

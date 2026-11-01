@@ -1,0 +1,159 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "vn",
+  "name": "Vietnam",
+  "region": "Asia",
+  "system": "One-party socialist state",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 30
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 50
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 30
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 90
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 95
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 88
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 55
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 8
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 70
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 45
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 62
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 40
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 57
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 41
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 8.2
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 59
+    },
+    "nearest8valuesIdeology": "National Totalitarianism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "anticol",
+      "name": "Anti-colonial socialism",
+      "similarity": 76
+    },
+    {
+      "id": "develop",
+      "name": "Developmental authoritarianism",
+      "similarity": 75
+    },
+    {
+      "id": "authnat",
+      "name": "Authoritarian nationalism",
+      "similarity": 74
+    }
+  ],
+  "laws": [
+    {
+      "year": "1986",
+      "law": "Đổi Mới market reforms",
+      "axes": [
+        "Ownership",
+        "Trade"
+      ]
+    },
+    {
+      "year": "2015",
+      "law": "Ban on same-sex weddings lifted, though they are not recognised",
+      "axes": [
+        "Morality"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Not recognised",
+    "deathPenalty": "In use",
+    "conscription": "Compulsory",
+    "abortion": "On request",
+    "religionAndState": "Party-state; religions state-regulated",
+    "nuclearWeapons": "no",
+    "nato": false,
+    "eu": false
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "ho",
+      "name": "Ho Chi Minh",
+      "role": "President of North Vietnam",
+      "years": "1945–1969",
+      "tag": "Marxism–Leninism",
+      "school": "Ho Chi Minh Thought"
+    }
+  ]
+}

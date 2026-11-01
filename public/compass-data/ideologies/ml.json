@@ -1,0 +1,244 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "ml",
+  "name": "Marxism–Leninism",
+  "description": "One-party rule and a state-owned, planned economy.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 5
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 65
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 85
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 95
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 98
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 95
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 40
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 5
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 60
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 80
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 80
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 25
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 80.5
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 26.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 3.7
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 60
+    },
+    "nearest8valuesIdeology": "Stalinism/Maoism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "xi",
+      "name": "Xi Jinping",
+      "role": "General Secretary of the Communist Party and President of China",
+      "years": "2012–",
+      "tag": "Marxism–Leninism",
+      "school": "Xi Jinping Thought"
+    },
+    {
+      "id": "kim",
+      "name": "Kim Jong Un",
+      "role": "Supreme Leader of North Korea",
+      "years": "2011–",
+      "tag": "Marxism–Leninism",
+      "school": "Juche"
+    },
+    {
+      "id": "lenin",
+      "name": "Vladimir Lenin",
+      "role": "Leader of Soviet Russia",
+      "years": "1917–1924",
+      "tag": "Marxism–Leninism",
+      "school": "Leninism"
+    },
+    {
+      "id": "stalin",
+      "name": "Joseph Stalin",
+      "role": "Leader of the Soviet Union",
+      "years": "1924–1953",
+      "tag": "Marxism–Leninism",
+      "school": "Stalinism"
+    },
+    {
+      "id": "mao",
+      "name": "Mao Zedong",
+      "role": "Chairman of the Chinese Communist Party",
+      "years": "1949–1976",
+      "tag": "Marxism–Leninism",
+      "school": "Maoism"
+    },
+    {
+      "id": "deng",
+      "name": "Deng Xiaoping",
+      "role": "Paramount leader of China",
+      "years": "1978–1989",
+      "tag": "Marxism–Leninism",
+      "school": "Socialism with Chinese characteristics"
+    },
+    {
+      "id": "castro",
+      "name": "Fidel Castro",
+      "role": "Leader of Cuba",
+      "years": "1959–2008",
+      "tag": "Marxism–Leninism",
+      "school": "Castroism"
+    },
+    {
+      "id": "tito",
+      "name": "Josip Broz Tito",
+      "role": "President of Yugoslavia",
+      "years": "1945–1980",
+      "tag": "Marxism–Leninism",
+      "school": "Titoism"
+    },
+    {
+      "id": "ho",
+      "name": "Ho Chi Minh",
+      "role": "President of North Vietnam",
+      "years": "1945–1969",
+      "tag": "Marxism–Leninism",
+      "school": "Ho Chi Minh Thought"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Mao Zedong",
+      "similarity": 89
+    },
+    {
+      "name": "Ho Chi Minh",
+      "similarity": 87
+    },
+    {
+      "name": "Fidel Castro",
+      "similarity": 86
+    },
+    {
+      "name": "Joseph Stalin",
+      "similarity": 85
+    },
+    {
+      "name": "Gamal Abdel Nasser",
+      "similarity": 83
+    },
+    {
+      "name": "Nicolás Maduro",
+      "similarity": 82
+    },
+    {
+      "name": "Vladimir Lenin",
+      "similarity": 82
+    },
+    {
+      "name": "Indira Gandhi",
+      "similarity": 79
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Venezuela",
+      "similarity": 81
+    },
+    {
+      "name": "China",
+      "similarity": 79
+    },
+    {
+      "name": "North Korea",
+      "similarity": 77
+    },
+    {
+      "name": "Vietnam",
+      "similarity": 72
+    },
+    {
+      "name": "Russia",
+      "similarity": 66
+    },
+    {
+      "name": "Turkey",
+      "similarity": 64
+    },
+    {
+      "name": "Egypt",
+      "similarity": 64
+    },
+    {
+      "name": "Ethiopia",
+      "similarity": 62
+    }
+  ]
+}

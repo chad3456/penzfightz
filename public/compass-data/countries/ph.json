@@ -1,0 +1,166 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "ph",
+  "name": "Philippines",
+  "region": "Asia",
+  "system": "Unitary presidential republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 58
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 45
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 45
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 65
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 55
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 60
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 80
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 78
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 55
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 45
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 55
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 40
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 43.7
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 48.3
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 40
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 27.3
+    },
+    "nearest8valuesIdeology": "Moderate Conservatism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "similarity": 86
+    },
+    {
+      "id": "chrdem",
+      "name": "Christian democracy",
+      "similarity": 82
+    },
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "similarity": 80
+    }
+  ],
+  "laws": [
+    {
+      "year": "2006",
+      "law": "Death penalty abolished",
+      "axes": [
+        "Liberty"
+      ]
+    },
+    {
+      "year": "2016",
+      "law": "Rodrigo Duterte’s “war on drugs” began",
+      "axes": [
+        "Liberty"
+      ]
+    },
+    {
+      "year": "2025",
+      "law": "Duterte arrested and handed to the International Criminal Court",
+      "axes": [
+        "Sovereignty"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Not recognised",
+    "deathPenalty": "Abolished",
+    "conscription": "None",
+    "abortion": "Banned",
+    "religionAndState": "Separation of church and state",
+    "nuclearWeapons": "no",
+    "nato": false,
+    "eu": false,
+    "note": "Divorce is not legal for most citizens."
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "marcos",
+      "name": "Ferdinand Marcos Jr.",
+      "role": "President of the Philippines",
+      "years": "2022–",
+      "tag": "Conservatism",
+      "school": "Philippine conservatism"
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "lpop",
+  "name": "Left-wing populism",
+  "description": "The people against elites, with redistribution and economic sovereignty.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 25
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 80
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 72
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 45
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 55
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 60
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 40
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 35
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 50
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 70
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 30
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 50
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 77
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 50
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 48.5
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 58.3
+    },
+    "nearest8valuesIdeology": "Democratic Socialism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "sheinbaum",
+      "name": "Claudia Sheinbaum",
+      "role": "President of Mexico",
+      "years": "2024–",
+      "tag": "Left-wing populism",
+      "school": "Fourth Transformation (Morena)"
+    },
+    {
+      "id": "maduro",
+      "name": "Nicolás Maduro",
+      "role": "President of Venezuela",
+      "years": "2013–2026",
+      "tag": "Left-wing populism",
+      "school": "Chavismo"
+    },
+    {
+      "id": "indira",
+      "name": "Indira Gandhi",
+      "role": "Prime Minister of India",
+      "years": "1966–1977, 1980–1984",
+      "tag": "Left-wing populism",
+      "school": "Indira’s Congress socialism"
+    },
+    {
+      "id": "chavez",
+      "name": "Hugo Chávez",
+      "role": "President of Venezuela",
+      "years": "1999–2013",
+      "tag": "Left-wing populism",
+      "school": "Chavismo"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Claudia Sheinbaum",
+      "similarity": 87
+    },
+    {
+      "name": "Salvador Allende",
+      "similarity": 84
+    },
+    {
+      "name": "Lee Jae-myung",
+      "similarity": 81
+    },
+    {
+      "name": "Rahul Gandhi",
+      "similarity": 79
+    },
+    {
+      "name": "Julius Nyerere",
+      "similarity": 79
+    },
+    {
+      "name": "Gustavo Petro",
+      "similarity": 78
+    },
+    {
+      "name": "Luiz Inácio Lula da Silva",
+      "similarity": 77
+    },
+    {
+      "name": "Cyril Ramaphosa",
+      "similarity": 77
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Mexico",
+      "similarity": 83
+    },
+    {
+      "name": "Brazil",
+      "similarity": 80
+    },
+    {
+      "name": "South Africa",
+      "similarity": 79
+    },
+    {
+      "name": "Italy",
+      "similarity": 74
+    },
+    {
+      "name": "Japan",
+      "similarity": 72
+    },
+    {
+      "name": "Colombia",
+      "similarity": 72
+    },
+    {
+      "name": "India",
+      "similarity": 71
+    },
+    {
+      "name": "France",
+      "similarity": 71
+    }
+  ]
+}

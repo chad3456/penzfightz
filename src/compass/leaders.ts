@@ -9,7 +9,7 @@
  */
 import type { AxisId, Vec } from './model';
 
-export type Era = 'current' | 'recent' | 'historical' | 'figure';
+export type Era = 'current' | 'recent' | 'historical' | 'figure' | 'public';
 export type Region = 'Americas' | 'Europe' | 'Asia' | 'Middle East' | 'Africa' | 'Oceania';
 export interface RecordItem { y: string; t: string; ax: AxisId[] }
 export interface Leader {
@@ -26,6 +26,9 @@ export interface Leader {
   confidence: 'high' | 'medium' | 'low';
   note?: string;
   wiki: string;
+  /** family of thought (FAMILIES id) and the specific school or label it is known by */
+  fam: string;
+  school: string;
 }
 
 export const CHECKED = '31 October 2026';
@@ -35,12 +38,13 @@ export const ERAS: { id: Era; name: string }[] = [
   { id: 'recent', name: 'Left office since 2020' },
   { id: 'historical', name: 'Historical' },
   { id: 'figure', name: 'Opposition and movement leaders' },
+  { id: 'public', name: 'Public figures' },
 ];
 
 const L = (
   id: string, name: string, country: string, region: Region, era: Era, role: string, years: string,
   summary: string, v: Vec, confidence: Leader['confidence'], wiki: string, record: [string, string, AxisId[]][], note?: string,
-): Leader => ({ id, name, country, region, era, role, years, summary, v, confidence, wiki, note, record: record.map(([y, t, ax]) => ({ y, t, ax })) });
+): Leader => ({ id, name, country, region, era, role, years, summary, v, confidence, wiki, note, fam: '', school: '', record: record.map(([y, t, ax]) => ({ y, t, ax })) });
 
 export const LEADERS: Leader[] = [
   // ---------------------------------------------------------------- in office
@@ -804,4 +808,71 @@ export const LEADERS: Leader[] = [
       ['2003', 'Joined the invasion of Iraq', ['force']],
       ['2004', 'Civil partnerships for same-sex couples', ['values']],
     ]),
+
+  // ------------------------------------------------------- public figures
+  L('musk', 'Elon Musk', 'United States', 'Americas', 'public', 'Businessman; led the Department of Government Efficiency in 2025', '2024–',
+    'Tesla and SpaceX chief who became a major political donor, led a federal cost-cutting drive in 2025 and backs right-wing parties abroad.',
+    [88, 20, 45, 50, 55, 45, 65, 45, 70, 75, 55, 45], 'low', 'Elon_Musk', [
+      ['2024', 'Became the largest donor to Donald Trump’s presidential campaign', []],
+      ['2025', 'Led the Department of Government Efficiency’s drive to cut federal jobs and spending', ['econ', 'welfare']],
+      ['2025', 'Publicly backed Germany’s AfD before the February election', ['nation']],
+      ['2025', 'Announced a new “America Party” after breaking with Trump', []],
+    ], 'Placed from public political actions and statements, not office.'),
+  L('thunberg', 'Greta Thunberg', 'Sweden', 'Europe', 'public', 'Climate activist', '2018–',
+    'Began a solo school strike for the climate at 15 that grew into a global youth movement; has since campaigned on Gaza as well.',
+    [30, 75, 50, 25, 15, 35, 15, 10, 15, 20, 5, 98], 'low', 'Greta_Thunberg', [
+      ['2018', 'Started the school strike for the climate outside Sweden’s parliament', ['eco']],
+      ['2019', 'Addressed the UN Climate Action Summit', ['eco', 'world']],
+      ['2025', 'Detained by Israel while sailing with a flotilla towards Gaza', ['force']],
+    ], 'Placed from public campaigning, not office.'),
+  L('schwarzenegger', 'Arnold Schwarzenegger', 'United States', 'Americas', 'public', 'Governor of California', '2003–2011',
+    'Actor turned Republican governor who signed California’s landmark climate law and governed as a social moderate.',
+    [65, 45, 30, 50, 25, 40, 35, 35, 40, 30, 50, 75], 'medium', 'Arnold_Schwarzenegger', [
+      ['2003', 'Elected governor in the recall of Gray Davis', []],
+      ['2006', 'Signed the Global Warming Solutions Act capping California’s emissions', ['eco']],
+    ]),
+  L('malala', 'Malala Yousafzai', 'Pakistan', 'Asia', 'public', 'Education activist', '2009–',
+    'Shot by the Taliban in 2012 for campaigning for girls’ schooling; the youngest Nobel Peace Prize laureate.',
+    [45, 70, 45, 30, 20, 45, 30, 50, 30, 20, 15, 60], 'low', 'Malala_Yousafzai', [
+      ['2012', 'Shot by the Pakistani Taliban for campaigning for girls’ education', ['liberty']],
+      ['2014', 'Awarded the Nobel Peace Prize at 17', []],
+    ], 'Placed from public campaigning, not office.'),
 ];
+
+/** Ideology tags: [family of thought, the school it is known by]. Editorial. */
+const TAGS: Record<string, [string, string]> = {
+  trump: ['rpop', 'America First'], xi: ['ml', 'Xi Jinping Thought'], modi: ['natcon', 'Hindu nationalism'], putin: ['authnat', 'Putinism'],
+  zelensky: ['centrist', 'Liberal centrism'], lula: ['socdem', 'Lulism (Workers’ Party)'], sheinbaum: ['lpop', 'Fourth Transformation (Morena)'],
+  milei: ['libertarian', 'Anarcho-capitalism'], carney: ['centrist', 'Liberal centrism'], burnham: ['socdem', 'Labour soft left'],
+  macron: ['centrist', 'Liberal centrism'], merz: ['chrdem', 'Christian democracy (CDU)'], meloni: ['natcon', 'Brothers of Italy conservatism'],
+  sanchez: ['socdem', 'Social democracy (PSOE)'], takaichi: ['natcon', 'LDP right'], 'lee-jm': ['soclib', 'Korean liberalism'],
+  prabowo: ['rpop', 'Indonesian nationalism'], erdogan: ['authnat', 'Islamic conservatism (AKP)'], mbs: ['develop', 'Absolute monarchy, Vision 2030'],
+  ramaphosa: ['socdem', 'ANC social democracy'], tinubu: ['conservative', 'APC conservatism'], sisi: ['develop', 'Military-led state'],
+  abiy: ['develop', 'Medemer (Prosperity Party)'], albanese: ['socdem', 'Labor social democracy'], kim: ['ml', 'Juche'],
+  netanyahu: ['natcon', 'Likud nationalism'], tusk: ['centrist', 'Liberal conservatism'], marcos: ['conservative', 'Philippine conservatism'],
+  bukele: ['rpop', 'Bukelism'], kast: ['natcon', 'Chilean conservative right'], fujimori: ['rpop', 'Fujimorism'],
+  espriella: ['rpop', 'Hard-right populism'], tarique: ['conservative', 'Bangladeshi nationalism (BNP)'], anutin: ['conservative', 'Royalist conservatism'],
+  shehbaz: ['conservative', 'Muslim League conservatism'], magyar: ['chrdem', 'Pro-EU centre-right (Tisza)'], jetten: ['soclib', 'Social liberalism (D66)'],
+  vdl: ['chrdem', 'European Christian democracy'], starmer: ['socdem', 'Labour centrism'], orban: ['natcon', 'Illiberal democracy'],
+  petro: ['demsoc', 'Colombian progressive left'], maduro: ['lpop', 'Chavismo'], khamenei: ['theocracy', 'Islamic Republic (velayat-e faqih)'],
+  biden: ['soclib', 'American liberalism'], obama: ['soclib', 'American liberalism'], merkel: ['chrdem', 'Christian democracy (CDU)'],
+  ardern: ['socdem', 'Labour social democracy'], abe: ['conservative', 'LDP conservatism'], sanders: ['demsoc', 'Democratic socialism'],
+  lepen: ['rpop', 'National Rally'], navalny: ['classlib', 'Liberal nationalism'], imran: ['rpop', 'Islamic welfare populism (PTI)'],
+  rahul: ['socdem', 'Congress centre-left'], fdr: ['soclib', 'New Deal liberalism'], churchill: ['conservative', 'Imperial conservatism'],
+  attlee: ['demsoc', 'Labour democratic socialism'], degaulle: ['natcon', 'Gaullism'], adenauer: ['chrdem', 'Christian democracy'],
+  thatcher: ['conservative', 'Thatcherism'], reagan: ['conservative', 'Reaganism'], gorbachev: ['demsoc', 'Reform communism'],
+  lenin: ['ml', 'Leninism'], stalin: ['ml', 'Stalinism'], mao: ['ml', 'Maoism'], deng: ['ml', 'Socialism with Chinese characteristics'],
+  gandhi: ['green', 'Gandhism: non-violence and village self-rule'], nehru: ['demsoc', 'Nehruvian socialism'], indira: ['lpop', 'Indira’s Congress socialism'],
+  vajpayee: ['conservative', 'Moderate Hindu nationalism'], mandela: ['socdem', 'ANC non-racialism'], nasser: ['anticol', 'Nasserism (Arab socialism)'],
+  ataturk: ['authnat', 'Kemalism'], lky: ['develop', 'Singapore developmental state'], castro: ['ml', 'Castroism'],
+  allende: ['demsoc', 'Chilean road to socialism'], pinochet: ['develop', 'Military dictatorship with free-market reforms'], peron: ['authnat', 'Peronism'],
+  franco: ['authnat', 'Francoism (National Catholicism)'], mussolini: ['fascism', 'Italian Fascism'], hitler: ['fascism', 'Nazism'],
+  tito: ['ml', 'Titoism'], ho: ['ml', 'Ho Chi Minh Thought'], nyerere: ['anticol', 'Ujamaa (African socialism)'], sankara: ['anticol', 'Sankarism'],
+  bengurion: ['socdem', 'Labour Zionism'], khomeini: ['theocracy', 'Khomeinism'], palme: ['socdem', 'Swedish social democracy'],
+  chavez: ['lpop', 'Chavismo'], blair: ['centrist', 'Third Way'], musk: ['conservative', 'Tech right'],
+  thunberg: ['green', 'Climate activism'], schwarzenegger: ['centrist', 'Moderate Republicanism'], malala: ['soclib', 'Rights and education activism'],
+};
+for (const l of LEADERS) {
+  const t = TAGS[l.id];
+  if (t) { l.fam = t[0]; l.school = t[1]; }
+}

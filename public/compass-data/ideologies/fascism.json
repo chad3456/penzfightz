@@ -1,0 +1,188 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "fascism",
+  "name": "Fascism",
+  "description": "Total state power fused with ethnic nationalism, militarism and the cult of a leader.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 35
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 42
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 88
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 99
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 99
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 96
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 88
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 55
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 99
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 96
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 97
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 30
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 57
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 2.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 1.5
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 29
+    },
+    "nearest8valuesIdeology": "National Totalitarianism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "mussolini",
+      "name": "Benito Mussolini",
+      "role": "Dictator of Italy",
+      "years": "1922–1943",
+      "tag": "Fascism",
+      "school": "Italian Fascism"
+    },
+    {
+      "id": "hitler",
+      "name": "Adolf Hitler",
+      "role": "Dictator of Germany",
+      "years": "1933–1945",
+      "tag": "Fascism",
+      "school": "Nazism"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Benito Mussolini",
+      "similarity": 95
+    },
+    {
+      "name": "Adolf Hitler",
+      "similarity": 94
+    },
+    {
+      "name": "Vladimir Putin",
+      "similarity": 87
+    },
+    {
+      "name": "Francisco Franco",
+      "similarity": 83
+    },
+    {
+      "name": "Kim Jong Un",
+      "similarity": 79
+    },
+    {
+      "name": "Ali Khamenei",
+      "similarity": 78
+    },
+    {
+      "name": "Abdel Fattah el-Sisi",
+      "similarity": 76
+    },
+    {
+      "name": "Ruhollah Khomeini",
+      "similarity": 76
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Russia",
+      "similarity": 88
+    },
+    {
+      "name": "Iran",
+      "similarity": 78
+    },
+    {
+      "name": "North Korea",
+      "similarity": 78
+    },
+    {
+      "name": "Turkey",
+      "similarity": 76
+    },
+    {
+      "name": "Egypt",
+      "similarity": 76
+    },
+    {
+      "name": "Venezuela",
+      "similarity": 73
+    },
+    {
+      "name": "Saudi Arabia",
+      "similarity": 72
+    },
+    {
+      "name": "China",
+      "similarity": 70
+    }
+  ]
+}

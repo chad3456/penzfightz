@@ -1,0 +1,175 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "tr",
+  "name": "Turkey",
+  "region": "Middle East",
+  "system": "Unitary presidential republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 48
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 50
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 55
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 85
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 85
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 85
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 78
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 72
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 75
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 62
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 72
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 30
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 51.4
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 30.3
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 15
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 26.7
+    },
+    "nearest8valuesIdeology": "Fascism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "develop",
+      "name": "Developmental authoritarianism",
+      "similarity": 89
+    },
+    {
+      "id": "authnat",
+      "name": "Authoritarian nationalism",
+      "similarity": 85
+    },
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "similarity": 84
+    }
+  ],
+  "laws": [
+    {
+      "year": "2004",
+      "law": "Death penalty abolished",
+      "axes": [
+        "Liberty"
+      ]
+    },
+    {
+      "year": "2017",
+      "law": "Executive presidency created by referendum",
+      "axes": [
+        "Power",
+        "Centralism"
+      ]
+    },
+    {
+      "year": "2021",
+      "law": "Withdrew from the Istanbul Convention",
+      "axes": [
+        "Morality",
+        "Sovereignty"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Not recognised",
+    "deathPenalty": "Abolished",
+    "conscription": "Compulsory",
+    "abortion": "On request",
+    "religionAndState": "Constitutionally secular (laik); state directorate runs mosques",
+    "nuclearWeapons": "no",
+    "nato": true,
+    "eu": false
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "erdogan",
+      "name": "Recep Tayyip Erdoğan",
+      "role": "President of Turkey",
+      "years": "2014– (Prime Minister 2003–2014)",
+      "tag": "Authoritarian nationalism",
+      "school": "Islamic conservatism (AKP)"
+    },
+    {
+      "id": "ataturk",
+      "name": "Mustafa Kemal Atatürk",
+      "role": "President of Turkey",
+      "years": "1923–1938",
+      "tag": "Authoritarian nationalism",
+      "school": "Kemalism"
+    }
+  ]
+}

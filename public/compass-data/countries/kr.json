@@ -1,0 +1,166 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "kr",
+  "name": "South Korea",
+  "region": "Asia",
+  "system": "Unitary presidential republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 62
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 50
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 45
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 52
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 30
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 60
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 60
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 35
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 82
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 40
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 62
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 45
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 44.1
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 38.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 56.2
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 50
+    },
+    "nearest8valuesIdeology": "Centrist",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "similarity": 85
+    },
+    {
+      "id": "chrdem",
+      "name": "Christian democracy",
+      "similarity": 81
+    },
+    {
+      "id": "centrist",
+      "name": "Centrism",
+      "similarity": 78
+    }
+  ],
+  "laws": [
+    {
+      "year": "2019",
+      "law": "Constitutional Court struck down the abortion ban",
+      "axes": [
+        "Morality"
+      ]
+    },
+    {
+      "year": "2024",
+      "law": "December martial-law decree reversed by parliament within hours",
+      "axes": [
+        "Power"
+      ]
+    },
+    {
+      "year": "2025",
+      "law": "President Yoon removed from office by the Constitutional Court",
+      "axes": [
+        "Power"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Not recognised",
+    "deathPenalty": "Not used in practice",
+    "conscription": "Compulsory",
+    "abortion": "On request",
+    "religionAndState": "Secular",
+    "nuclearWeapons": "no",
+    "nato": false,
+    "eu": false,
+    "note": "No executions since 1997. Abortion ban struck down in 2019 and lapsed in 2021."
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "lee-jm",
+      "name": "Lee Jae-myung",
+      "role": "President of South Korea",
+      "years": "2025–",
+      "tag": "Social liberalism",
+      "school": "Korean liberalism"
+    }
+  ]
+}

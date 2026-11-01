@@ -1,0 +1,260 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "conservative",
+  "name": "Conservatism",
+  "description": "Markets, tradition, order and gradual change.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 72
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 35
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 40
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 62
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 30
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 55
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 72
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 60
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 62
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 50
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 62
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 35
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 32.4
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 42
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 52.7
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 34.3
+    },
+    "nearest8valuesIdeology": "Moderate Conservatism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "tinubu",
+      "name": "Bola Tinubu",
+      "role": "President of Nigeria",
+      "years": "2023–",
+      "tag": "Conservatism",
+      "school": "APC conservatism"
+    },
+    {
+      "id": "marcos",
+      "name": "Ferdinand Marcos Jr.",
+      "role": "President of the Philippines",
+      "years": "2022–",
+      "tag": "Conservatism",
+      "school": "Philippine conservatism"
+    },
+    {
+      "id": "tarique",
+      "name": "Tarique Rahman",
+      "role": "Prime Minister of Bangladesh",
+      "years": "2026–",
+      "tag": "Conservatism",
+      "school": "Bangladeshi nationalism (BNP)"
+    },
+    {
+      "id": "anutin",
+      "name": "Anutin Charnvirakul",
+      "role": "Prime Minister of Thailand",
+      "years": "2025–",
+      "tag": "Conservatism",
+      "school": "Royalist conservatism"
+    },
+    {
+      "id": "shehbaz",
+      "name": "Shehbaz Sharif",
+      "role": "Prime Minister of Pakistan",
+      "years": "2022–2023, 2024–",
+      "tag": "Conservatism",
+      "school": "Muslim League conservatism"
+    },
+    {
+      "id": "abe",
+      "name": "Shinzo Abe",
+      "role": "Prime Minister of Japan",
+      "years": "2006–2007, 2012–2020",
+      "tag": "Conservatism",
+      "school": "LDP conservatism"
+    },
+    {
+      "id": "churchill",
+      "name": "Winston Churchill",
+      "role": "Prime Minister of the United Kingdom",
+      "years": "1940–1945, 1951–1955",
+      "tag": "Conservatism",
+      "school": "Imperial conservatism"
+    },
+    {
+      "id": "thatcher",
+      "name": "Margaret Thatcher",
+      "role": "Prime Minister of the United Kingdom",
+      "years": "1979–1990",
+      "tag": "Conservatism",
+      "school": "Thatcherism"
+    },
+    {
+      "id": "reagan",
+      "name": "Ronald Reagan",
+      "role": "President of the United States",
+      "years": "1981–1989",
+      "tag": "Conservatism",
+      "school": "Reaganism"
+    },
+    {
+      "id": "vajpayee",
+      "name": "Atal Bihari Vajpayee",
+      "role": "Prime Minister of India",
+      "years": "1996, 1998–2004",
+      "tag": "Conservatism",
+      "school": "Moderate Hindu nationalism"
+    },
+    {
+      "id": "musk",
+      "name": "Elon Musk",
+      "role": "Businessman; led the Department of Government Efficiency in 2025",
+      "years": "2024–",
+      "tag": "Conservatism",
+      "school": "Tech right"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Atal Bihari Vajpayee",
+      "similarity": 92
+    },
+    {
+      "name": "Bola Tinubu",
+      "similarity": 90
+    },
+    {
+      "name": "Shinzo Abe",
+      "similarity": 90
+    },
+    {
+      "name": "Friedrich Merz",
+      "similarity": 87
+    },
+    {
+      "name": "Ferdinand Marcos Jr.",
+      "similarity": 87
+    },
+    {
+      "name": "Giorgia Meloni",
+      "similarity": 86
+    },
+    {
+      "name": "Keiko Fujimori",
+      "similarity": 86
+    },
+    {
+      "name": "Tarique Rahman",
+      "similarity": 86
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Chile",
+      "similarity": 87
+    },
+    {
+      "name": "Philippines",
+      "similarity": 86
+    },
+    {
+      "name": "South Korea",
+      "similarity": 85
+    },
+    {
+      "name": "Nigeria",
+      "similarity": 85
+    },
+    {
+      "name": "Italy",
+      "similarity": 84
+    },
+    {
+      "name": "India",
+      "similarity": 83
+    },
+    {
+      "name": "Japan",
+      "similarity": 82
+    },
+    {
+      "name": "Poland",
+      "similarity": 82
+    }
+  ]
+}

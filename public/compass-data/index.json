@@ -1,0 +1,327 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "countries": [
+    {
+      "id": "us",
+      "name": "United States",
+      "file": "countries/us.json"
+    },
+    {
+      "id": "cn",
+      "name": "China",
+      "file": "countries/cn.json"
+    },
+    {
+      "id": "in",
+      "name": "India",
+      "file": "countries/in.json"
+    },
+    {
+      "id": "ru",
+      "name": "Russia",
+      "file": "countries/ru.json"
+    },
+    {
+      "id": "gb",
+      "name": "United Kingdom",
+      "file": "countries/gb.json"
+    },
+    {
+      "id": "fr",
+      "name": "France",
+      "file": "countries/fr.json"
+    },
+    {
+      "id": "de",
+      "name": "Germany",
+      "file": "countries/de.json"
+    },
+    {
+      "id": "jp",
+      "name": "Japan",
+      "file": "countries/jp.json"
+    },
+    {
+      "id": "br",
+      "name": "Brazil",
+      "file": "countries/br.json"
+    },
+    {
+      "id": "ca",
+      "name": "Canada",
+      "file": "countries/ca.json"
+    },
+    {
+      "id": "it",
+      "name": "Italy",
+      "file": "countries/it.json"
+    },
+    {
+      "id": "es",
+      "name": "Spain",
+      "file": "countries/es.json"
+    },
+    {
+      "id": "au",
+      "name": "Australia",
+      "file": "countries/au.json"
+    },
+    {
+      "id": "kr",
+      "name": "South Korea",
+      "file": "countries/kr.json"
+    },
+    {
+      "id": "mx",
+      "name": "Mexico",
+      "file": "countries/mx.json"
+    },
+    {
+      "id": "id",
+      "name": "Indonesia",
+      "file": "countries/id.json"
+    },
+    {
+      "id": "tr",
+      "name": "Turkey",
+      "file": "countries/tr.json"
+    },
+    {
+      "id": "sa",
+      "name": "Saudi Arabia",
+      "file": "countries/sa.json"
+    },
+    {
+      "id": "za",
+      "name": "South Africa",
+      "file": "countries/za.json"
+    },
+    {
+      "id": "ng",
+      "name": "Nigeria",
+      "file": "countries/ng.json"
+    },
+    {
+      "id": "eg",
+      "name": "Egypt",
+      "file": "countries/eg.json"
+    },
+    {
+      "id": "ar",
+      "name": "Argentina",
+      "file": "countries/ar.json"
+    },
+    {
+      "id": "il",
+      "name": "Israel",
+      "file": "countries/il.json"
+    },
+    {
+      "id": "ir",
+      "name": "Iran",
+      "file": "countries/ir.json"
+    },
+    {
+      "id": "ua",
+      "name": "Ukraine",
+      "file": "countries/ua.json"
+    },
+    {
+      "id": "pl",
+      "name": "Poland",
+      "file": "countries/pl.json"
+    },
+    {
+      "id": "se",
+      "name": "Sweden",
+      "file": "countries/se.json"
+    },
+    {
+      "id": "nl",
+      "name": "Netherlands",
+      "file": "countries/nl.json"
+    },
+    {
+      "id": "ch",
+      "name": "Switzerland",
+      "file": "countries/ch.json"
+    },
+    {
+      "id": "sg",
+      "name": "Singapore",
+      "file": "countries/sg.json"
+    },
+    {
+      "id": "pk",
+      "name": "Pakistan",
+      "file": "countries/pk.json"
+    },
+    {
+      "id": "hu",
+      "name": "Hungary",
+      "file": "countries/hu.json"
+    },
+    {
+      "id": "cl",
+      "name": "Chile",
+      "file": "countries/cl.json"
+    },
+    {
+      "id": "co",
+      "name": "Colombia",
+      "file": "countries/co.json"
+    },
+    {
+      "id": "ph",
+      "name": "Philippines",
+      "file": "countries/ph.json"
+    },
+    {
+      "id": "kp",
+      "name": "North Korea",
+      "file": "countries/kp.json"
+    },
+    {
+      "id": "no",
+      "name": "Norway",
+      "file": "countries/no.json"
+    },
+    {
+      "id": "pt",
+      "name": "Portugal",
+      "file": "countries/pt.json"
+    },
+    {
+      "id": "dk",
+      "name": "Denmark",
+      "file": "countries/dk.json"
+    },
+    {
+      "id": "vn",
+      "name": "Vietnam",
+      "file": "countries/vn.json"
+    },
+    {
+      "id": "th",
+      "name": "Thailand",
+      "file": "countries/th.json"
+    },
+    {
+      "id": "ve",
+      "name": "Venezuela",
+      "file": "countries/ve.json"
+    },
+    {
+      "id": "bd",
+      "name": "Bangladesh",
+      "file": "countries/bd.json"
+    },
+    {
+      "id": "et",
+      "name": "Ethiopia",
+      "file": "countries/et.json"
+    }
+  ],
+  "ideologies": [
+    {
+      "id": "demsoc",
+      "name": "Democratic socialism",
+      "file": "ideologies/demsoc.json"
+    },
+    {
+      "id": "socdem",
+      "name": "Social democracy",
+      "file": "ideologies/socdem.json"
+    },
+    {
+      "id": "soclib",
+      "name": "Social liberalism",
+      "file": "ideologies/soclib.json"
+    },
+    {
+      "id": "centrist",
+      "name": "Centrism",
+      "file": "ideologies/centrist.json"
+    },
+    {
+      "id": "classlib",
+      "name": "Classical liberalism",
+      "file": "ideologies/classlib.json"
+    },
+    {
+      "id": "libertarian",
+      "name": "Libertarianism",
+      "file": "ideologies/libertarian.json"
+    },
+    {
+      "id": "chrdem",
+      "name": "Christian democracy",
+      "file": "ideologies/chrdem.json"
+    },
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "file": "ideologies/conservative.json"
+    },
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "file": "ideologies/natcon.json"
+    },
+    {
+      "id": "rpop",
+      "name": "Right-wing populism",
+      "file": "ideologies/rpop.json"
+    },
+    {
+      "id": "lpop",
+      "name": "Left-wing populism",
+      "file": "ideologies/lpop.json"
+    },
+    {
+      "id": "green",
+      "name": "Green politics",
+      "file": "ideologies/green.json"
+    },
+    {
+      "id": "anarchism",
+      "name": "Anarchism",
+      "file": "ideologies/anarchism.json"
+    },
+    {
+      "id": "develop",
+      "name": "Developmental authoritarianism",
+      "file": "ideologies/develop.json"
+    },
+    {
+      "id": "ml",
+      "name": "Marxism–Leninism",
+      "file": "ideologies/ml.json"
+    },
+    {
+      "id": "theocracy",
+      "name": "Theocracy",
+      "file": "ideologies/theocracy.json"
+    },
+    {
+      "id": "authnat",
+      "name": "Authoritarian nationalism",
+      "file": "ideologies/authnat.json"
+    },
+    {
+      "id": "anticol",
+      "name": "Anti-colonial socialism",
+      "file": "ideologies/anticol.json"
+    },
+    {
+      "id": "fascism",
+      "name": "Fascism",
+      "file": "ideologies/fascism.json"
+    }
+  ],
+  "files": {
+    "leaders": "leaders.json"
+  }
+}

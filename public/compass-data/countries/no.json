@@ -1,0 +1,151 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "no",
+  "name": "Norway",
+  "region": "Europe",
+  "system": "Unitary parliamentary monarchy",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 52
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 82
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 35
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 30
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 8
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 35
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 12
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 15
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 48
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 22
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 55
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 70
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 62
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 58.3
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 78.6
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 81
+    },
+    "nearest8valuesIdeology": "Social Libertarianism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "soclib",
+      "name": "Social liberalism",
+      "similarity": 86
+    },
+    {
+      "id": "socdem",
+      "name": "Social democracy",
+      "similarity": 85
+    },
+    {
+      "id": "centrist",
+      "name": "Centrism",
+      "similarity": 80
+    }
+  ],
+  "laws": [
+    {
+      "year": "1990",
+      "law": "Government Pension Fund (oil fund) created",
+      "axes": [
+        "Ownership",
+        "Redistribution"
+      ]
+    },
+    {
+      "year": "2015",
+      "law": "Conscription extended to women",
+      "axes": [
+        "Force",
+        "Morality"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Marriage legal (2009)",
+    "deathPenalty": "Abolished",
+    "conscription": "Compulsory",
+    "abortion": "On request",
+    "religionAndState": "Church of Norway is the national church; no longer a state church since 2012",
+    "nuclearWeapons": "no",
+    "nato": true,
+    "eu": false
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": []
+}

@@ -1,0 +1,212 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "authnat",
+  "name": "Authoritarian nationalism",
+  "description": "A strong leader and a strong state built around the nation, with elections and courts kept weak.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 40
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 55
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 72
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 88
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 90
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 90
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 68
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 45
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 88
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 78
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 75
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 25
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 59
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 19.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 10.9
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 37.3
+    },
+    "nearest8valuesIdeology": "Autocracy",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "putin",
+      "name": "Vladimir Putin",
+      "role": "President of Russia",
+      "years": "2000–2008, 2012– (Prime Minister 1999–2000, 2008–2012)",
+      "tag": "Authoritarian nationalism",
+      "school": "Putinism"
+    },
+    {
+      "id": "erdogan",
+      "name": "Recep Tayyip Erdoğan",
+      "role": "President of Turkey",
+      "years": "2014– (Prime Minister 2003–2014)",
+      "tag": "Authoritarian nationalism",
+      "school": "Islamic conservatism (AKP)"
+    },
+    {
+      "id": "ataturk",
+      "name": "Mustafa Kemal Atatürk",
+      "role": "President of Turkey",
+      "years": "1923–1938",
+      "tag": "Authoritarian nationalism",
+      "school": "Kemalism"
+    },
+    {
+      "id": "peron",
+      "name": "Juan Perón",
+      "role": "President of Argentina",
+      "years": "1946–1955, 1973–1974",
+      "tag": "Authoritarian nationalism",
+      "school": "Peronism"
+    },
+    {
+      "id": "franco",
+      "name": "Francisco Franco",
+      "role": "Dictator of Spain",
+      "years": "1939–1975",
+      "tag": "Authoritarian nationalism",
+      "school": "Francoism (National Catholicism)"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Abdel Fattah el-Sisi",
+      "similarity": 87
+    },
+    {
+      "name": "Vladimir Putin",
+      "similarity": 86
+    },
+    {
+      "name": "Nicolás Maduro",
+      "similarity": 85
+    },
+    {
+      "name": "Charles de Gaulle",
+      "similarity": 84
+    },
+    {
+      "name": "Juan Perón",
+      "similarity": 84
+    },
+    {
+      "name": "Benito Mussolini",
+      "similarity": 84
+    },
+    {
+      "name": "Recep Tayyip Erdoğan",
+      "similarity": 83
+    },
+    {
+      "name": "Mohammed bin Salman",
+      "similarity": 83
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Russia",
+      "similarity": 86
+    },
+    {
+      "name": "Turkey",
+      "similarity": 85
+    },
+    {
+      "name": "Venezuela",
+      "similarity": 84
+    },
+    {
+      "name": "Egypt",
+      "similarity": 83
+    },
+    {
+      "name": "China",
+      "similarity": 81
+    },
+    {
+      "name": "Ethiopia",
+      "similarity": 77
+    },
+    {
+      "name": "India",
+      "similarity": 76
+    },
+    {
+      "name": "Saudi Arabia",
+      "similarity": 76
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "cn",
+  "name": "China",
+  "region": "Asia",
+  "system": "One-party socialist state",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 30
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 50
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 62
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 92
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 96
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 90
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 62
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 8
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 78
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 58
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 68
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 50
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 60.2
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 32
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 6.6
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 60
+    },
+    "nearest8valuesIdeology": "National Totalitarianism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "anticol",
+      "name": "Anti-colonial socialism",
+      "similarity": 82
+    },
+    {
+      "id": "authnat",
+      "name": "Authoritarian nationalism",
+      "similarity": 81
+    },
+    {
+      "id": "ml",
+      "name": "Marxism–Leninism",
+      "similarity": 79
+    }
+  ],
+  "laws": [
+    {
+      "year": "2015",
+      "law": "Made in China 2025 industrial plan",
+      "axes": [
+        "Ownership",
+        "Trade"
+      ]
+    },
+    {
+      "year": "2018",
+      "law": "Presidential term limits removed",
+      "axes": [
+        "Power"
+      ]
+    },
+    {
+      "year": "2020",
+      "law": "Hong Kong National Security Law",
+      "axes": [
+        "Liberty",
+        "Centralism"
+      ]
+    },
+    {
+      "year": "2020",
+      "law": "Pledged carbon neutrality by 2060",
+      "axes": [
+        "Planet"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Not recognised",
+    "deathPenalty": "In use",
+    "conscription": "In law; mostly volunteers",
+    "abortion": "On request",
+    "religionAndState": "Officially atheist party-state; religions state-regulated",
+    "nuclearWeapons": "yes",
+    "nato": false,
+    "eu": false
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "xi",
+      "name": "Xi Jinping",
+      "role": "General Secretary of the Communist Party and President of China",
+      "years": "2012–",
+      "tag": "Marxism–Leninism",
+      "school": "Xi Jinping Thought"
+    },
+    {
+      "id": "mao",
+      "name": "Mao Zedong",
+      "role": "Chairman of the Chinese Communist Party",
+      "years": "1949–1976",
+      "tag": "Marxism–Leninism",
+      "school": "Maoism"
+    },
+    {
+      "id": "deng",
+      "name": "Deng Xiaoping",
+      "role": "Paramount leader of China",
+      "years": "1978–1989",
+      "tag": "Marxism–Leninism",
+      "school": "Socialism with Chinese characteristics"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "anarchism",
+  "name": "Anarchism",
+  "description": "No state and no bosses: voluntary, local cooperation.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 15
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 70
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 40
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 0
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 0
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 0
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 10
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 5
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 5
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 30
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 5
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 75
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 73.8
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 86.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 100
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 86.7
+    },
+    "nearest8valuesIdeology": "Libertarian Socialism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [],
+  "closestLeaders": [
+    {
+      "name": "Greta Thunberg",
+      "similarity": 80
+    },
+    {
+      "name": "Pedro Sánchez",
+      "similarity": 75
+    },
+    {
+      "name": "Olof Palme",
+      "similarity": 71
+    },
+    {
+      "name": "Andy Burnham",
+      "similarity": 69
+    },
+    {
+      "name": "Bernie Sanders",
+      "similarity": 69
+    },
+    {
+      "name": "Nelson Mandela",
+      "similarity": 69
+    },
+    {
+      "name": "Rob Jetten",
+      "similarity": 68
+    },
+    {
+      "name": "Malala Yousafzai",
+      "similarity": 68
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Spain",
+      "similarity": 72
+    },
+    {
+      "name": "Canada",
+      "similarity": 67
+    },
+    {
+      "name": "Norway",
+      "similarity": 67
+    },
+    {
+      "name": "Portugal",
+      "similarity": 67
+    },
+    {
+      "name": "Netherlands",
+      "similarity": 63
+    },
+    {
+      "name": "Germany",
+      "similarity": 61
+    },
+    {
+      "name": "Brazil",
+      "similarity": 61
+    },
+    {
+      "name": "South Africa",
+      "similarity": 61
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "sa",
+  "name": "Saudi Arabia",
+  "region": "Middle East",
+  "system": "Absolute monarchy",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 45
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 55
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 45
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 95
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 98
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 95
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 90
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 98
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 85
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 62
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 72
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 15
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 54
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 27
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 3.7
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 9
+    },
+    "nearest8valuesIdeology": "Nazism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "theocracy",
+      "name": "Theocracy",
+      "similarity": 84
+    },
+    {
+      "id": "develop",
+      "name": "Developmental authoritarianism",
+      "similarity": 80
+    },
+    {
+      "id": "authnat",
+      "name": "Authoritarian nationalism",
+      "similarity": 76
+    }
+  ],
+  "laws": [
+    {
+      "year": "1992",
+      "law": "Basic Law of Governance",
+      "axes": [
+        "Faith",
+        "Power"
+      ]
+    },
+    {
+      "year": "2016",
+      "law": "Vision 2030; religious police lose arrest powers",
+      "axes": [
+        "Ownership",
+        "Faith"
+      ]
+    },
+    {
+      "year": "2018",
+      "law": "Women allowed to drive",
+      "axes": [
+        "Morality"
+      ]
+    },
+    {
+      "year": "2011",
+      "law": "Nitaqat quotas for employing Saudi nationals",
+      "axes": [
+        "Belonging"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Same-sex relations a crime",
+    "deathPenalty": "In use",
+    "conscription": "None",
+    "abortion": "Restricted",
+    "religionAndState": "Islam; the Quran and Sunnah are the constitution",
+    "nuclearWeapons": "no",
+    "nato": false,
+    "eu": false
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "mbs",
+      "name": "Mohammed bin Salman",
+      "role": "Crown Prince and Prime Minister of Saudi Arabia",
+      "years": "2017– (Prime Minister 2022–)",
+      "tag": "Developmental authoritarianism",
+      "school": "Absolute monarchy, Vision 2030"
+    }
+  ]
+}

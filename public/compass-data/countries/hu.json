@@ -1,0 +1,182 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "hu",
+  "name": "Hungary",
+  "region": "Europe",
+  "system": "Unitary parliamentary republic",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 52
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 48
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 52
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 62
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 55
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 80
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 78
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 65
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 82
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 50
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 40
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 40
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 48.4
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 42.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 38.3
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 32.3
+    },
+    "nearest8valuesIdeology": "Moderate Conservatism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "nearestFamilies": [
+    {
+      "id": "natcon",
+      "name": "National conservatism",
+      "similarity": 84
+    },
+    {
+      "id": "conservative",
+      "name": "Conservatism",
+      "similarity": 80
+    },
+    {
+      "id": "rpop",
+      "name": "Right-wing populism",
+      "similarity": 80
+    }
+  ],
+  "laws": [
+    {
+      "year": "2011",
+      "law": "New constitution (Fundamental Law)",
+      "axes": [
+        "Power"
+      ]
+    },
+    {
+      "year": "2015",
+      "law": "Border fence against migrants",
+      "axes": [
+        "Belonging"
+      ]
+    },
+    {
+      "year": "2021",
+      "law": "Law restricting LGBT content for minors",
+      "axes": [
+        "Morality",
+        "Liberty"
+      ]
+    },
+    {
+      "year": "2025",
+      "law": "Pride marches banned",
+      "axes": [
+        "Liberty"
+      ]
+    }
+  ],
+  "facts": {
+    "sameSexCouples": "Civil unions only (2009)",
+    "deathPenalty": "Abolished",
+    "conscription": "Suspended",
+    "abortion": "On request",
+    "religionAndState": "Secular, with Christian references in the constitution",
+    "nuclearWeapons": "no",
+    "nato": true,
+    "eu": true,
+    "note": "Placement reflects laws passed under Orbán; a new government took office in May 2026."
+  },
+  "militarySpending": null,
+  "onlineDating": null,
+  "leaders": [
+    {
+      "id": "magyar",
+      "name": "Péter Magyar",
+      "role": "Prime Minister of Hungary",
+      "years": "2026–",
+      "tag": "Christian democracy",
+      "school": "Pro-EU centre-right (Tisza)"
+    },
+    {
+      "id": "orban",
+      "name": "Viktor Orbán",
+      "role": "Prime Minister of Hungary",
+      "years": "1998–2002, 2010–2026",
+      "tag": "National conservatism",
+      "school": "Illiberal democracy"
+    }
+  ]
+}
