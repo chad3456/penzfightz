@@ -102,19 +102,19 @@
   },
   "nearestFamilies": [
     {
+      "id": "moderate",
+      "name": "Moderate",
+      "similarity": 87
+    },
+    {
+      "id": "lohiaite",
+      "name": "Lohiaite socialism",
+      "similarity": 86
+    },
+    {
       "id": "socdem",
       "name": "Social democracy",
       "similarity": 85
-    },
-    {
-      "id": "chrdem",
-      "name": "Christian democracy",
-      "similarity": 81
-    },
-    {
-      "id": "centrist",
-      "name": "Centrism",
-      "similarity": 80
     }
   ],
   "laws": [

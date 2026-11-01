@@ -107,14 +107,14 @@
       "similarity": 85
     },
     {
+      "id": "moderate",
+      "name": "Moderate",
+      "similarity": 85
+    },
+    {
       "id": "chrdem",
       "name": "Christian democracy",
       "similarity": 81
-    },
-    {
-      "id": "centrist",
-      "name": "Centrism",
-      "similarity": 78
     }
   ],
   "laws": [

@@ -8,8 +8,9 @@
  * v order: econ, welfare, trade, liberty, power, center, values, faith, nation, world, force, eco
  */
 import type { AxisId, Vec } from './model';
+import { INDIA_PEOPLE } from './india-people';
 
-export type Era = 'current' | 'recent' | 'historical' | 'figure' | 'public';
+export type Era = 'current' | 'recent' | 'historical' | 'figure' | 'public' | 'indpol' | 'indpub';
 export type Region = 'Americas' | 'Europe' | 'Asia' | 'Middle East' | 'Africa' | 'Oceania';
 export interface RecordItem { y: string; t: string; ax: AxisId[] }
 export interface Leader {
@@ -39,6 +40,8 @@ export const ERAS: { id: Era; name: string }[] = [
   { id: 'historical', name: 'Historical' },
   { id: 'figure', name: 'Opposition and movement leaders' },
   { id: 'public', name: 'Public figures' },
+  { id: 'indpol', name: 'Indian politics' },
+  { id: 'indpub', name: 'Indian public life' },
 ];
 
 const L = (
@@ -841,7 +844,7 @@ export const LEADERS: Leader[] = [
 
 /** Ideology tags: [family of thought, the school it is known by]. Editorial. */
 const TAGS: Record<string, [string, string]> = {
-  trump: ['rpop', 'America First'], xi: ['ml', 'Xi Jinping Thought'], modi: ['natcon', 'Hindu nationalism'], putin: ['authnat', 'Putinism'],
+  trump: ['rpop', 'America First'], xi: ['ml', 'Xi Jinping Thought'], modi: ['hindutva', 'Hindutva (BJP)'], putin: ['authnat', 'Putinism'],
   zelensky: ['centrist', 'Liberal centrism'], lula: ['socdem', 'Lulism (Workers’ Party)'], sheinbaum: ['lpop', 'Fourth Transformation (Morena)'],
   milei: ['libertarian', 'Anarcho-capitalism'], carney: ['centrist', 'Liberal centrism'], burnham: ['socdem', 'Labour soft left'],
   macron: ['centrist', 'Liberal centrism'], merz: ['chrdem', 'Christian democracy (CDU)'], meloni: ['natcon', 'Brothers of Italy conservatism'],
@@ -862,8 +865,8 @@ const TAGS: Record<string, [string, string]> = {
   attlee: ['demsoc', 'Labour democratic socialism'], degaulle: ['natcon', 'Gaullism'], adenauer: ['chrdem', 'Christian democracy'],
   thatcher: ['conservative', 'Thatcherism'], reagan: ['conservative', 'Reaganism'], gorbachev: ['demsoc', 'Reform communism'],
   lenin: ['ml', 'Leninism'], stalin: ['ml', 'Stalinism'], mao: ['ml', 'Maoism'], deng: ['ml', 'Socialism with Chinese characteristics'],
-  gandhi: ['green', 'Gandhism: non-violence and village self-rule'], nehru: ['demsoc', 'Nehruvian socialism'], indira: ['lpop', 'Indira’s Congress socialism'],
-  vajpayee: ['conservative', 'Moderate Hindu nationalism'], mandela: ['socdem', 'ANC non-racialism'], nasser: ['anticol', 'Nasserism (Arab socialism)'],
+  gandhi: ['gandhian', 'Gandhism: non-violence and village self-rule'], nehru: ['nehruvian', 'Nehruvian socialism'], indira: ['nehruvian', 'Indira’s Congress socialism'],
+  vajpayee: ['hindutva', 'Moderate Hindutva (BJP)'], mandela: ['socdem', 'ANC non-racialism'], nasser: ['anticol', 'Nasserism (Arab socialism)'],
   ataturk: ['authnat', 'Kemalism'], lky: ['develop', 'Singapore developmental state'], castro: ['ml', 'Castroism'],
   allende: ['demsoc', 'Chilean road to socialism'], pinochet: ['develop', 'Military dictatorship with free-market reforms'], peron: ['authnat', 'Peronism'],
   franco: ['authnat', 'Francoism (National Catholicism)'], mussolini: ['fascism', 'Italian Fascism'], hitler: ['fascism', 'Nazism'],
@@ -872,6 +875,7 @@ const TAGS: Record<string, [string, string]> = {
   chavez: ['lpop', 'Chavismo'], blair: ['centrist', 'Third Way'], musk: ['conservative', 'Tech right'],
   thunberg: ['green', 'Climate activism'], schwarzenegger: ['centrist', 'Moderate Republicanism'], malala: ['soclib', 'Rights and education activism'],
 };
+LEADERS.push(...INDIA_PEOPLE);
 for (const l of LEADERS) {
   const t = TAGS[l.id];
   if (t) { l.fam = t[0]; l.school = t[1]; }

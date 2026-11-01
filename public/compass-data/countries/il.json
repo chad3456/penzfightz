@@ -102,6 +102,11 @@
   },
   "nearestFamilies": [
     {
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
+      "similarity": 83
+    },
+    {
       "id": "natcon",
       "name": "National conservatism",
       "similarity": 81
@@ -110,11 +115,6 @@
       "id": "conservative",
       "name": "Conservatism",
       "similarity": 79
-    },
-    {
-      "id": "rpop",
-      "name": "Right-wing populism",
-      "similarity": 77
     }
   ],
   "laws": [

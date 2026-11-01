@@ -11679,3 +11679,6 @@ input.tp-input { flex: 1 1 14rem; }
 .tp-stancerow__name { text-align: left; font-family: var(--narrow); }
 .tp-stancerow .tp-hbar__track { height: 12px; }
 @media (max-width: 560px) { .tp-stancerow { grid-template-columns: minmax(0, 7rem) minmax(0, 1fr) 2rem; } }
+.tp-pick { min-width: 0; max-width: 100%; }
+.tp-pick select { min-width: 0; width: 100%; text-overflow: ellipsis; }
+.tp-testcard--india { border-top: 4px solid #e07b39; }

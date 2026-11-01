@@ -1,0 +1,204 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "nehruvian",
+  "name": "Nehruvian socialism",
+  "description": "A planned, state-led economy, secularism, a strong union and non-alignment abroad.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 25
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 70
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 75
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 40
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 35
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 72
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 35
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 15
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 45
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 55
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 30
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 40
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 72.8
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 56.7
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 57.3
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 63.3
+    },
+    "nearest8valuesIdeology": "Democratic Socialism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "nehru",
+      "name": "Jawaharlal Nehru",
+      "role": "Prime Minister of India",
+      "years": "1947–1964",
+      "tag": "Nehruvian socialism",
+      "school": "Nehruvian socialism"
+    },
+    {
+      "id": "indira",
+      "name": "Indira Gandhi",
+      "role": "Prime Minister of India",
+      "years": "1966–1977, 1980–1984",
+      "tag": "Nehruvian socialism",
+      "school": "Indira’s Congress socialism"
+    },
+    {
+      "id": "shastri",
+      "name": "Lal Bahadur Shastri",
+      "role": "Prime Minister of India",
+      "years": "1964–1966",
+      "tag": "Nehruvian socialism",
+      "school": "Congress"
+    },
+    {
+      "id": "azad",
+      "name": "Maulana Abul Kalam Azad",
+      "role": "Education Minister",
+      "years": "1947–1958",
+      "tag": "Nehruvian socialism",
+      "school": "Composite nationalism"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Salvador Allende",
+      "similarity": 92
+    },
+    {
+      "name": "Jawaharlal Nehru",
+      "similarity": 88
+    },
+    {
+      "name": "Claudia Sheinbaum",
+      "similarity": 85
+    },
+    {
+      "name": "V. P. Singh",
+      "similarity": 85
+    },
+    {
+      "name": "Sonia Gandhi",
+      "similarity": 84
+    },
+    {
+      "name": "Mallikarjun Kharge",
+      "similarity": 84
+    },
+    {
+      "name": "Kanhaiya Kumar",
+      "similarity": 84
+    },
+    {
+      "name": "Sitaram Yechury",
+      "similarity": 84
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Mexico",
+      "similarity": 81
+    },
+    {
+      "name": "South Africa",
+      "similarity": 80
+    },
+    {
+      "name": "Brazil",
+      "similarity": 78
+    },
+    {
+      "name": "France",
+      "similarity": 75
+    },
+    {
+      "name": "Japan",
+      "similarity": 72
+    },
+    {
+      "name": "Italy",
+      "similarity": 72
+    },
+    {
+      "name": "Colombia",
+      "similarity": 72
+    },
+    {
+      "name": "South Korea",
+      "similarity": 71
+    }
+  ]
+}

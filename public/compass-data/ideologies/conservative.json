@@ -173,20 +173,100 @@
       "school": "Reaganism"
     },
     {
-      "id": "vajpayee",
-      "name": "Atal Bihari Vajpayee",
-      "role": "Prime Minister of India",
-      "years": "1996, 1998–2004",
-      "tag": "Conservatism",
-      "school": "Moderate Hindu nationalism"
-    },
-    {
       "id": "musk",
       "name": "Elon Musk",
       "role": "Businessman; led the Department of Government Efficiency in 2025",
       "years": "2024–",
       "tag": "Conservatism",
       "school": "Tech right"
+    },
+    {
+      "id": "gadkari",
+      "name": "Nitin Gadkari",
+      "role": "Union Minister of Road Transport",
+      "years": "2014–",
+      "tag": "Conservatism",
+      "school": "BJP pragmatism"
+    },
+    {
+      "id": "sitharaman",
+      "name": "Nirmala Sitharaman",
+      "role": "Union Finance Minister",
+      "years": "2019–",
+      "tag": "Conservatism",
+      "school": "BJP"
+    },
+    {
+      "id": "jaishankar",
+      "name": "S. Jaishankar",
+      "role": "Union External Affairs Minister",
+      "years": "2019–",
+      "tag": "Conservatism",
+      "school": "Strategic autonomy"
+    },
+    {
+      "id": "sushma",
+      "name": "Sushma Swaraj",
+      "role": "External Affairs Minister",
+      "years": "2014–2019",
+      "tag": "Conservatism",
+      "school": "BJP"
+    },
+    {
+      "id": "jaitley",
+      "name": "Arun Jaitley",
+      "role": "Union Finance Minister",
+      "years": "2014–2019",
+      "tag": "Conservatism",
+      "school": "BJP economic liberalism"
+    },
+    {
+      "id": "pawankalyan",
+      "name": "Pawan Kalyan",
+      "role": "Deputy Chief Minister of Andhra Pradesh; Telugu film star",
+      "years": "2024–",
+      "tag": "Conservatism",
+      "school": "Jana Sena"
+    },
+    {
+      "id": "patel",
+      "name": "Vallabhbhai Patel",
+      "role": "Deputy Prime Minister and Home Minister",
+      "years": "1947–1950",
+      "tag": "Conservatism",
+      "school": "Congress right"
+    },
+    {
+      "id": "uddhav",
+      "name": "Uddhav Thackeray",
+      "role": "Shiv Sena (UBT) president; former Chief Minister of Maharashtra",
+      "years": "2019–2022 (CM)",
+      "tag": "Conservatism",
+      "school": "Marathi regionalism"
+    },
+    {
+      "id": "morarji",
+      "name": "Morarji Desai",
+      "role": "Prime Minister of India",
+      "years": "1977–1979",
+      "tag": "Conservatism",
+      "school": "Janata"
+    },
+    {
+      "id": "sadhguru",
+      "name": "Sadhguru (Jaggi Vasudev)",
+      "role": "Founder of the Isha Foundation",
+      "years": "1992–",
+      "tag": "Conservatism",
+      "school": "Isha Foundation"
+    },
+    {
+      "id": "srisri",
+      "name": "Sri Sri Ravi Shankar",
+      "role": "Founder of the Art of Living",
+      "years": "1981–",
+      "tag": "Conservatism",
+      "school": "Art of Living"
     }
   ],
   "closestLeaders": [
@@ -203,6 +283,14 @@
       "similarity": 90
     },
     {
+      "name": "Nitin Gadkari",
+      "similarity": 88
+    },
+    {
+      "name": "N. R. Narayana Murthy",
+      "similarity": 88
+    },
+    {
       "name": "Friedrich Merz",
       "similarity": 87
     },
@@ -212,14 +300,6 @@
     },
     {
       "name": "Giorgia Meloni",
-      "similarity": 86
-    },
-    {
-      "name": "Keiko Fujimori",
-      "similarity": 86
-    },
-    {
-      "name": "Tarique Rahman",
       "similarity": 86
     }
   ],

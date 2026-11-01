@@ -155,6 +155,10 @@
       "similarity": 85
     },
     {
+      "name": "V. D. Savarkar",
+      "similarity": 85
+    },
+    {
       "name": "Charles de Gaulle",
       "similarity": 84
     },
@@ -168,10 +172,6 @@
     },
     {
       "name": "Recep Tayyip Erdoğan",
-      "similarity": 83
-    },
-    {
-      "name": "Mohammed bin Salman",
       "similarity": 83
     }
   ],

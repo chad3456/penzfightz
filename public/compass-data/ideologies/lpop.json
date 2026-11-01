@@ -117,20 +117,84 @@
       "school": "Chavismo"
     },
     {
-      "id": "indira",
-      "name": "Indira Gandhi",
-      "role": "Prime Minister of India",
-      "years": "1966–1977, 1980–1984",
-      "tag": "Left-wing populism",
-      "school": "Indira’s Congress socialism"
-    },
-    {
       "id": "chavez",
       "name": "Hugo Chávez",
       "role": "President of Venezuela",
       "years": "1999–2013",
       "tag": "Left-wing populism",
       "school": "Chavismo"
+    },
+    {
+      "id": "kejriwal",
+      "name": "Arvind Kejriwal",
+      "role": "AAP national convener; former Chief Minister of Delhi",
+      "years": "2015–2024 (CM)",
+      "tag": "Left-wing populism",
+      "school": "AAP welfare populism"
+    },
+    {
+      "id": "bhagwantmann",
+      "name": "Bhagwant Mann",
+      "role": "Chief Minister of Punjab",
+      "years": "2022–",
+      "tag": "Left-wing populism",
+      "school": "AAP"
+    },
+    {
+      "id": "atishi",
+      "name": "Atishi",
+      "role": "Former Chief Minister of Delhi",
+      "years": "Sept 2024–Feb 2025",
+      "tag": "Left-wing populism",
+      "school": "AAP"
+    },
+    {
+      "id": "harbhajan",
+      "name": "Harbhajan Singh",
+      "role": "AAP Rajya Sabha MP; former cricketer",
+      "years": "2022–",
+      "tag": "Left-wing populism",
+      "school": "AAP"
+    },
+    {
+      "id": "mamata",
+      "name": "Mamata Banerjee",
+      "role": "TMC chair; Chief Minister of West Bengal",
+      "years": "2011–2026 (CM)",
+      "tag": "Left-wing populism",
+      "school": "Trinamool populism"
+    },
+    {
+      "id": "yusufpathan",
+      "name": "Yusuf Pathan",
+      "role": "TMC MP for Baharampur; former cricketer",
+      "years": "2024–",
+      "tag": "Left-wing populism",
+      "school": "Trinamool"
+    },
+    {
+      "id": "jagan",
+      "name": "Y. S. Jagan Mohan Reddy",
+      "role": "YSRCP president; former Chief Minister of Andhra Pradesh",
+      "years": "2019–2024 (CM)",
+      "tag": "Left-wing populism",
+      "school": "YSRCP welfarism"
+    },
+    {
+      "id": "kcr",
+      "name": "K. Chandrashekar Rao",
+      "role": "BRS president; former Chief Minister of Telangana",
+      "years": "2014–2023 (CM)",
+      "tag": "Left-wing populism",
+      "school": "Telangana regionalism"
+    },
+    {
+      "id": "hemantsoren",
+      "name": "Hemant Soren",
+      "role": "Chief Minister of Jharkhand",
+      "years": "2019–",
+      "tag": "Left-wing populism",
+      "school": "Adivasi politics (JMM)"
     }
   ],
   "closestLeaders": [
@@ -139,32 +203,32 @@
       "similarity": 87
     },
     {
+      "name": "Kanshi Ram",
+      "similarity": 85
+    },
+    {
+      "name": "Lalu Prasad Yadav",
+      "similarity": 85
+    },
+    {
+      "name": "Tejashwi Yadav",
+      "similarity": 85
+    },
+    {
+      "name": "V. P. Singh",
+      "similarity": 85
+    },
+    {
       "name": "Salvador Allende",
       "similarity": 84
     },
     {
-      "name": "Lee Jae-myung",
-      "similarity": 81
+      "name": "Akhilesh Yadav",
+      "similarity": 84
     },
     {
-      "name": "Rahul Gandhi",
-      "similarity": 79
-    },
-    {
-      "name": "Julius Nyerere",
-      "similarity": 79
-    },
-    {
-      "name": "Gustavo Petro",
-      "similarity": 78
-    },
-    {
-      "name": "Luiz Inácio Lula da Silva",
-      "similarity": 77
-    },
-    {
-      "name": "Cyril Ramaphosa",
-      "similarity": 77
+      "name": "Mulayam Singh Yadav",
+      "similarity": 84
     }
   ],
   "closestCountries": [

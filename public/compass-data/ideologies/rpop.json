@@ -155,6 +155,14 @@
       "years": "2018–2022",
       "tag": "Right-wing populism",
       "school": "Islamic welfare populism (PTI)"
+    },
+    {
+      "id": "rajthackeray",
+      "name": "Raj Thackeray",
+      "role": "Founder of the Maharashtra Navnirman Sena",
+      "years": "2006–",
+      "tag": "Right-wing populism",
+      "school": "Marathi nativism"
     }
   ],
   "closestLeaders": [
@@ -163,32 +171,32 @@
       "similarity": 88
     },
     {
-      "name": "Narendra Modi",
-      "similarity": 86
+      "name": "S. Jaishankar",
+      "similarity": 88
     },
     {
-      "name": "Marine Le Pen",
-      "similarity": 86
+      "name": "Rajnath Singh",
+      "similarity": 87
     },
     {
-      "name": "Charles de Gaulle",
-      "similarity": 85
+      "name": "Devendra Fadnavis",
+      "similarity": 87
     },
     {
-      "name": "Juan Perón",
-      "similarity": 83
+      "name": "Smriti Irani",
+      "similarity": 87
     },
     {
-      "name": "Viktor Orbán",
-      "similarity": 82
+      "name": "Paresh Rawal",
+      "similarity": 87
     },
     {
-      "name": "Sanae Takaichi",
-      "similarity": 81
+      "name": "Anupam Kher",
+      "similarity": 87
     },
     {
-      "name": "Prabowo Subianto",
-      "similarity": 81
+      "name": "Vivek Agnihotri",
+      "similarity": 87
     }
   ],
   "closestCountries": [

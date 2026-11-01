@@ -133,20 +133,60 @@
       "school": "Reform communism"
     },
     {
-      "id": "nehru",
-      "name": "Jawaharlal Nehru",
-      "role": "Prime Minister of India",
-      "years": "1947–1964",
-      "tag": "Democratic socialism",
-      "school": "Nehruvian socialism"
-    },
-    {
       "id": "allende",
       "name": "Salvador Allende",
       "role": "President of Chile",
       "years": "1970–1973",
       "tag": "Democratic socialism",
       "school": "Chilean road to socialism"
+    },
+    {
+      "id": "kanhaiya",
+      "name": "Kanhaiya Kumar",
+      "role": "Congress leader",
+      "years": "2021–",
+      "tag": "Democratic socialism",
+      "school": "Student left"
+    },
+    {
+      "id": "pinarayi",
+      "name": "Pinarayi Vijayan",
+      "role": "CPI(M) leader; former Chief Minister of Kerala",
+      "years": "2016–2026 (CM)",
+      "tag": "Democratic socialism",
+      "school": "CPI(M)"
+    },
+    {
+      "id": "yechury",
+      "name": "Sitaram Yechury",
+      "role": "CPI(M) general secretary",
+      "years": "2015–2024",
+      "tag": "Democratic socialism",
+      "school": "CPI(M)"
+    },
+    {
+      "id": "jyotibasu",
+      "name": "Jyoti Basu",
+      "role": "Chief Minister of West Bengal",
+      "years": "1977–2000",
+      "tag": "Democratic socialism",
+      "school": "CPI(M)"
+    },
+    {
+      "id": "ems",
+      "name": "E. M. S. Namboodiripad",
+      "role": "Chief Minister of Kerala",
+      "years": "1957–1959, 1967–1969",
+      "tag": "Democratic socialism",
+      "school": "Communist (CPI, then CPI(M))"
+    },
+    {
+      "id": "arundhatiroy",
+      "name": "Arundhati Roy",
+      "role": "Novelist and essayist",
+      "years": "1997–",
+      "tag": "Democratic socialism",
+      "school": "Anti-capitalist left"
     }
   ],
   "closestLeaders": [
@@ -155,32 +195,32 @@
       "similarity": 92
     },
     {
+      "name": "Ravish Kumar",
+      "similarity": 88
+    },
+    {
       "name": "Gustavo Petro",
       "similarity": 87
     },
     {
+      "name": "Kanhaiya Kumar",
+      "similarity": 87
+    },
+    {
+      "name": "Shabana Azmi",
+      "similarity": 87
+    },
+    {
+      "name": "Swara Bhasker",
+      "similarity": 86
+    },
+    {
+      "name": "Prashant Bhushan",
+      "similarity": 86
+    },
+    {
       "name": "Luiz Inácio Lula da Silva",
       "similarity": 85
-    },
-    {
-      "name": "Greta Thunberg",
-      "similarity": 85
-    },
-    {
-      "name": "Lee Jae-myung",
-      "similarity": 84
-    },
-    {
-      "name": "Pedro Sánchez",
-      "similarity": 83
-    },
-    {
-      "name": "Joe Biden",
-      "similarity": 83
-    },
-    {
-      "name": "Rahul Gandhi",
-      "similarity": 82
     }
   ],
   "closestCountries": [

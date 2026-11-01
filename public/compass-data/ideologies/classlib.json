@@ -107,11 +107,35 @@
       "years": "2011–2024",
       "tag": "Classical liberalism",
       "school": "Liberal nationalism"
+    },
+    {
+      "id": "rajaji",
+      "name": "C. Rajagopalachari",
+      "role": "Founder of the Swatantra Party; last Governor-General",
+      "years": "1948–1972",
+      "tag": "Classical liberalism",
+      "school": "Swatantra Party"
+    },
+    {
+      "id": "narayanamurthy",
+      "name": "N. R. Narayana Murthy",
+      "role": "Co-founder of Infosys",
+      "years": "1981–",
+      "tag": "Classical liberalism",
+      "school": "Work-ethic capitalism"
     }
   ],
   "closestLeaders": [
     {
+      "name": "Raghuram Rajan",
+      "similarity": 86
+    },
+    {
       "name": "Alexei Navalny",
+      "similarity": 85
+    },
+    {
+      "name": "C. Rajagopalachari",
       "similarity": 85
     },
     {
@@ -123,24 +147,16 @@
       "similarity": 82
     },
     {
+      "name": "N. R. Narayana Murthy",
+      "similarity": 82
+    },
+    {
+      "name": "Nandan Nilekani",
+      "similarity": 82
+    },
+    {
       "name": "Donald Tusk",
       "similarity": 81
-    },
-    {
-      "name": "Friedrich Merz",
-      "similarity": 80
-    },
-    {
-      "name": "Péter Magyar",
-      "similarity": 80
-    },
-    {
-      "name": "Angela Merkel",
-      "similarity": 80
-    },
-    {
-      "name": "Anthony Albanese",
-      "similarity": 78
     }
   ],
   "closestCountries": [

@@ -101,14 +101,6 @@
   },
   "taggedLeaders": [
     {
-      "id": "modi",
-      "name": "Narendra Modi",
-      "role": "Prime Minister of India",
-      "years": "2014–",
-      "tag": "National conservatism",
-      "school": "Hindu nationalism"
-    },
-    {
       "id": "meloni",
       "name": "Giorgia Meloni",
       "role": "Prime Minister of Italy",
@@ -155,40 +147,80 @@
       "years": "1959–1969",
       "tag": "National conservatism",
       "school": "Gaullism"
+    },
+    {
+      "id": "anupamkher",
+      "name": "Anupam Kher",
+      "role": "Actor",
+      "years": "1984–",
+      "tag": "National conservatism",
+      "school": "Government supporter"
+    },
+    {
+      "id": "vivekagnihotri",
+      "name": "Vivek Agnihotri",
+      "role": "Film director",
+      "years": "2005–",
+      "tag": "National conservatism",
+      "school": "Nationalist cinema"
+    },
+    {
+      "id": "akshay",
+      "name": "Akshay Kumar",
+      "role": "Actor",
+      "years": "1991–",
+      "tag": "National conservatism",
+      "school": "Patriotic cinema"
+    },
+    {
+      "id": "ramdev",
+      "name": "Baba Ramdev",
+      "role": "Yoga guru; co-founder of Patanjali",
+      "years": "2006–",
+      "tag": "National conservatism",
+      "school": "Swadeshi"
+    },
+    {
+      "id": "arnab",
+      "name": "Arnab Goswami",
+      "role": "Editor-in-chief, Republic TV",
+      "years": "2017–",
+      "tag": "National conservatism",
+      "school": "Nationalist television"
     }
   ],
   "closestLeaders": [
+    {
+      "name": "Rajnath Singh",
+      "similarity": 91
+    },
+    {
+      "name": "K. Annamalai",
+      "similarity": 91
+    },
+    {
+      "name": "Syama Prasad Mookerjee",
+      "similarity": 91
+    },
+    {
+      "name": "Anupam Kher",
+      "similarity": 91
+    },
+    {
+      "name": "Vivek Agnihotri",
+      "similarity": 91
+    },
     {
       "name": "Narendra Modi",
       "similarity": 90
     },
     {
-      "name": "Charles de Gaulle",
-      "similarity": 87
+      "name": "Devendra Fadnavis",
+      "similarity": 90
     },
     {
-      "name": "Sanae Takaichi",
-      "similarity": 85
-    },
-    {
-      "name": "Shehbaz Sharif",
-      "similarity": 85
-    },
-    {
-      "name": "Donald Trump",
-      "similarity": 84
-    },
-    {
-      "name": "Viktor Orbán",
-      "similarity": 84
-    },
-    {
-      "name": "Giorgia Meloni",
-      "similarity": 83
-    },
-    {
-      "name": "Marine Le Pen",
-      "similarity": 83
+      "name": "L. K. Advani",
+      "similarity": 90
     }
   ],
   "closestCountries": [

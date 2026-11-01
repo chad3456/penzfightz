@@ -102,6 +102,11 @@
   },
   "nearestFamilies": [
     {
+      "id": "moderate",
+      "name": "Moderate",
+      "similarity": 91
+    },
+    {
       "id": "chrdem",
       "name": "Christian democracy",
       "similarity": 87
@@ -110,11 +115,6 @@
       "id": "conservative",
       "name": "Conservatism",
       "similarity": 84
-    },
-    {
-      "id": "centrist",
-      "name": "Centrism",
-      "similarity": 78
     }
   ],
   "laws": [

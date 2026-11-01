@@ -147,9 +147,113 @@
       "years": "2003–2011",
       "tag": "Centrism",
       "school": "Moderate Republicanism"
+    },
+    {
+      "id": "rajivgandhi",
+      "name": "Rajiv Gandhi",
+      "role": "Prime Minister of India",
+      "years": "1984–1989",
+      "tag": "Centrism",
+      "school": "Congress modernisation"
+    },
+    {
+      "id": "shatrughan",
+      "name": "Shatrughan Sinha",
+      "role": "TMC MP for Asansol; actor",
+      "years": "2022–",
+      "tag": "Centrism",
+      "school": "Trinamool"
+    },
+    {
+      "id": "prashantkishor",
+      "name": "Prashant Kishor",
+      "role": "Founder of Jan Suraaj",
+      "years": "2024–",
+      "tag": "Centrism",
+      "school": "Jan Suraaj"
+    },
+    {
+      "id": "pawar",
+      "name": "Sharad Pawar",
+      "role": "Founder of the Nationalist Congress Party",
+      "years": "1999–",
+      "tag": "Centrism",
+      "school": "NCP"
+    },
+    {
+      "id": "omar",
+      "name": "Omar Abdullah",
+      "role": "Chief Minister of Jammu and Kashmir",
+      "years": "2009–2015, 2024–",
+      "tag": "Centrism",
+      "school": "National Conference (autonomy)"
+    },
+    {
+      "id": "mehbooba",
+      "name": "Mehbooba Mufti",
+      "role": "PDP president; former Chief Minister of Jammu and Kashmir",
+      "years": "2016–2018 (CM)",
+      "tag": "Centrism",
+      "school": "PDP self-rule"
+    },
+    {
+      "id": "farooq",
+      "name": "Farooq Abdullah",
+      "role": "National Conference president",
+      "years": "1982–2002 (CM, three terms)",
+      "tag": "Centrism",
+      "school": "National Conference"
+    },
+    {
+      "id": "naveen",
+      "name": "Naveen Patnaik",
+      "role": "BJD president; former Chief Minister of Odisha",
+      "years": "2000–2024 (CM)",
+      "tag": "Centrism",
+      "school": "BJD"
+    },
+    {
+      "id": "amitabh",
+      "name": "Amitabh Bachchan",
+      "role": "Actor; former Congress MP",
+      "years": "1969–",
+      "tag": "Centrism",
+      "school": "Largely apolitical"
+    },
+    {
+      "id": "shahrukh",
+      "name": "Shah Rukh Khan",
+      "role": "Actor",
+      "years": "1992–",
+      "tag": "Centrism",
+      "school": "Largely apolitical"
+    },
+    {
+      "id": "nilekani",
+      "name": "Nandan Nilekani",
+      "role": "Co-founder of Infosys; architect of Aadhaar",
+      "years": "2009–",
+      "tag": "Centrism",
+      "school": "Digital public infrastructure"
+    },
+    {
+      "id": "ratantata",
+      "name": "Ratan Tata",
+      "role": "Chairman of the Tata group",
+      "years": "1991–2012",
+      "tag": "Centrism",
+      "school": "Philanthropic capitalism"
     }
   ],
   "closestLeaders": [
+    {
+      "name": "Raghuram Rajan",
+      "similarity": 92
+    },
+    {
+      "name": "Nandan Nilekani",
+      "similarity": 92
+    },
     {
       "name": "Mark Carney",
       "similarity": 90
@@ -159,28 +263,20 @@
       "similarity": 90
     },
     {
+      "name": "Shashi Tharoor",
+      "similarity": 90
+    },
+    {
+      "name": "P. Chidambaram",
+      "similarity": 90
+    },
+    {
       "name": "Anthony Albanese",
       "similarity": 89
     },
     {
-      "name": "Donald Tusk",
-      "similarity": 88
-    },
-    {
-      "name": "Keir Starmer",
-      "similarity": 88
-    },
-    {
-      "name": "Arnold Schwarzenegger",
-      "similarity": 88
-    },
-    {
-      "name": "Emmanuel Macron",
-      "similarity": 87
-    },
-    {
-      "name": "Ursula von der Leyen",
-      "similarity": 86
+      "name": "Manmohan Singh",
+      "similarity": 89
     }
   ],
   "closestCountries": [

@@ -107,14 +107,14 @@
       "similarity": 86
     },
     {
+      "id": "islamdem",
+      "name": "Muslim democracy",
+      "similarity": 83
+    },
+    {
       "id": "chrdem",
       "name": "Christian democracy",
       "similarity": 82
-    },
-    {
-      "id": "natcon",
-      "name": "National conservatism",
-      "similarity": 80
     }
   ],
   "laws": [

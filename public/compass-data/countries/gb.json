@@ -107,13 +107,13 @@
       "similarity": 85
     },
     {
-      "id": "socdem",
-      "name": "Social democracy",
-      "similarity": 82
+      "id": "moderate",
+      "name": "Moderate",
+      "similarity": 85
     },
     {
-      "id": "chrdem",
-      "name": "Christian democracy",
+      "id": "socdem",
+      "name": "Social democracy",
       "similarity": 82
     }
   ],

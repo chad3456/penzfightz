@@ -8,6 +8,8 @@ import { AXES, FAMILIES, similarity } from '../src/compass/model';
 import { LEADERS, CHECKED } from '../src/compass/leaders';
 import { COUNTRIES, COUNTRY_BY_NAME, SAMESEX_LABEL, DEATH_LABEL, CONSCRIPTION_LABEL, ABORTION_LABEL, WORLD_MILEX } from '../src/compass/countries';
 import { EV_AXES, evIdeology, project12 } from '../src/compass/eightvalues';
+import { INDIA_QUESTIONS, INDIA_TRIVIA } from '../src/compass/india';
+import { INDIA_PARTIES } from '../src/compass/india-people';
 import { INDICATORS, SOC_AXES, SOC_TOTAL, STANCES, STANCE_TOPICS, countryAxes, valueOf } from '../src/compass/social';
 
 const out = 'public/compass-data';
@@ -62,5 +64,13 @@ writeFileSync(`${out}/social-atlas.json`, JSON.stringify({ ...meta,
   leaderRecords: Object.fromEntries(Object.entries(STANCES).map(([id, st]) => [id, Object.fromEntries(STANCE_TOPICS.filter((t) => st[t.id]).map((t) => [t.name, { score: st[t.id]![0], evidence: st[t.id]![1] }]))])),
 }, null, 2));
 (index.files as Record<string, string>).socialAtlas = 'social-atlas.json';
+writeFileSync(`${out}/india-compass.json`, JSON.stringify({ ...meta,
+  method: 'Ten statements per axis, five pointing each way; answers −2 to +2; axis = 50 + 50 × mean(answer × direction) / 2.',
+  questions: INDIA_QUESTIONS.map((q) => ({ id: q.id, axis: AXES.find((a) => a.id === q.axis)!.name, direction: q.dir === 1 ? AXES.find((a) => a.id === q.axis)!.high : AXES.find((a) => a.id === q.axis)!.low, topic: q.topic, statement: q.text, context: q.cue, ifAgree: q.agree, ifDisagree: q.disagree })),
+  parties: INDIA_PARTIES.map((p) => ({ id: p.id, short: p.short, name: p.name, note: p.note, family: FAMILIES.find((f) => f.id === p.fam)!.name, axes: axes(p.v) })),
+  indianFigures: LEADERS.filter((l) => l.country === 'India').map((l) => l.id),
+  trivia: INDIA_TRIVIA,
+}, null, 2));
+(index.files as Record<string, string>).indiaCompass = 'india-compass.json';
 writeFileSync(`${out}/index.json`, JSON.stringify(index, null, 2));
 console.log('countries', COUNTRIES.length, 'ideologies', FAMILIES.length, 'leaders', LEADERS.length);

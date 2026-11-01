@@ -1,0 +1,2502 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Ten statements per axis, five pointing each way; answers −2 to +2; axis = 50 + 50 × mean(answer × direction) / 2.",
+  "questions": [
+    {
+      "id": "n15",
+      "axis": "Redistribution",
+      "direction": "Welfare",
+      "topic": "Mental health",
+      "statement": "Student suicides in coaching hubs like Kota show the state must provide free mental-health care in every school and college.",
+      "context": "The Mental Healthcare Act 2017 made mental-health care a right; Kota recorded more than two dozen student suicides in 2023.",
+      "ifAgree": "Counsellors, helplines and limits on coaching hours, as in the 2024 coaching guidelines.",
+      "ifDisagree": "Families and institutions, not the state, should carry this responsibility."
+    },
+    {
+      "id": "n86",
+      "axis": "Belonging",
+      "direction": "Cosmopolitan",
+      "topic": "Refugees",
+      "statement": "India should give shelter to anyone fleeing persecution, whatever their religion.",
+      "context": "India sheltered Tibetans from 1959 and Sri Lankan Tamils from the 1980s.",
+      "ifAgree": "India’s tradition is “atithi devo bhava” — the guest is God.",
+      "ifDisagree": "Compassion must not endanger national security."
+    },
+    {
+      "id": "n22",
+      "axis": "Trade",
+      "direction": "Protected",
+      "topic": "RCEP",
+      "statement": "India was right to stay out of the RCEP trade pact in 2019.",
+      "context": "India walked out of the 15-nation Asia-Pacific trade deal in November 2019, fearing a flood of Chinese imports.",
+      "ifAgree": "Farmers, dairy and small industry were protected.",
+      "ifDisagree": "India missed a chance to join Asian supply chains."
+    },
+    {
+      "id": "n4",
+      "axis": "Ownership",
+      "direction": "Market",
+      "topic": "Labour",
+      "statement": "It should be easier for companies to hire and fire workers.",
+      "context": "India merged 29 labour laws into four labour codes, passed in 2019–20.",
+      "ifAgree": "Employers argue rigid rules keep factories small and workers informal.",
+      "ifDisagree": "Unions say looser rules weaken job security and the right to strike."
+    },
+    {
+      "id": "n20",
+      "axis": "Redistribution",
+      "direction": "Self-reliance",
+      "topic": "Subsidies",
+      "statement": "Most subsidies on food, fertiliser and fuel should be phased out to cut the deficit.",
+      "context": "Food and fertiliser subsidies cost the centre several lakh crore rupees a year.",
+      "ifAgree": "Targeted cash or nothing, not open-ended subsidies.",
+      "ifDisagree": "Cutting fertiliser subsidies would hurt small farmers."
+    },
+    {
+      "id": "n92",
+      "axis": "Sovereignty",
+      "direction": "Sovereign",
+      "topic": "Kashmir and the world",
+      "statement": "Foreign governments and UN bodies have no business commenting on Kashmir or Manipur.",
+      "context": "India rejects third-party mediation on Kashmir under the 1972 Simla Agreement.",
+      "ifAgree": "These are internal matters.",
+      "ifDisagree": "Human rights are a universal concern."
+    },
+    {
+      "id": "n120",
+      "axis": "Planet",
+      "direction": "Growth",
+      "topic": "River links",
+      "statement": "Linking rivers is worth the ecological risk.",
+      "context": "The Ken–Betwa link, approved in 2021, will submerge part of the Panna Tiger Reserve.",
+      "ifAgree": "It would bring water to drought-hit Bundelkhand.",
+      "ifDisagree": "It destroys forests and tiger habitat."
+    },
+    {
+      "id": "n82",
+      "axis": "Belonging",
+      "direction": "National",
+      "topic": "Rohingya",
+      "statement": "Rohingya refugees should be deported, not sheltered.",
+      "context": "India has not signed the 1951 Refugee Convention; the Supreme Court allowed deportations in 2021.",
+      "ifAgree": "India must put its own security and people first, whatever the sympathy.",
+      "ifDisagree": "Sending refugees back to persecution in Myanmar is wrong."
+    },
+    {
+      "id": "n24",
+      "axis": "Trade",
+      "direction": "Protected",
+      "topic": "Tariffs",
+      "statement": "High import duties on electronics, cars and farm goods protect Indian jobs.",
+      "context": "India has some of the highest tariffs of any large economy, especially on cars and farm goods.",
+      "ifAgree": "Duties helped bring phone assembly to India.",
+      "ifDisagree": "Tariffs make goods dearer and Indian firms less competitive."
+    },
+    {
+      "id": "n79",
+      "axis": "Faith",
+      "direction": "Secular",
+      "topic": "Nameplates",
+      "statement": "Shops on pilgrimage routes should not be forced to display their owners’ names.",
+      "context": "Uttar Pradesh and Uttarakhand ordered nameplates on the Kanwar Yatra route in 2024; the Supreme Court stayed the orders.",
+      "ifAgree": "It invites boycotts of Muslim shopkeepers.",
+      "ifDisagree": "Pilgrims have a right to know where their food comes from."
+    },
+    {
+      "id": "n78",
+      "axis": "Faith",
+      "direction": "Secular",
+      "topic": "Religion in campaigns",
+      "statement": "Politicians should not use temples, mosques or religious symbols in election campaigns.",
+      "context": "The Supreme Court held in 2017 that appealing for votes on grounds of religion is a corrupt practice.",
+      "ifAgree": "Religion should stay out of the ballot box.",
+      "ifDisagree": "Faith is part of public life and voters’ identity."
+    },
+    {
+      "id": "n106",
+      "axis": "Force",
+      "direction": "Restraint",
+      "topic": "AFSPA",
+      "statement": "AFSPA, which shields soldiers from prosecution in “disturbed areas”, should be repealed.",
+      "context": "Repeal was demanded again after 14 civilians were killed by soldiers in Nagaland in December 2021.",
+      "ifAgree": "Irom Sharmila fasted for 16 years against it.",
+      "ifDisagree": "Troops need legal protection in insurgencies."
+    },
+    {
+      "id": "n98",
+      "axis": "Sovereignty",
+      "direction": "Multilateral",
+      "topic": "SAARC",
+      "statement": "India should revive regional cooperation through SAARC with all its neighbours.",
+      "context": "SAARC summits have stalled since India boycotted the 2016 Islamabad summit.",
+      "ifAgree": "South Asia is among the least integrated regions in the world.",
+      "ifDisagree": "No regional forum with Pakistan while it shelters terrorists."
+    },
+    {
+      "id": "n102",
+      "axis": "Force",
+      "direction": "Force",
+      "topic": "Indus Waters",
+      "statement": "Suspending the Indus Waters Treaty with Pakistan was justified.",
+      "context": "India put the 1960 treaty “in abeyance” in April 2025.",
+      "ifAgree": "“blood and water cannot flow together.”",
+      "ifDisagree": "Water should never be used as a weapon."
+    },
+    {
+      "id": "n38",
+      "axis": "Liberty",
+      "direction": "Liberty",
+      "topic": "OTT",
+      "statement": "Adults should be free to watch any film or series without state certification.",
+      "context": "OTT platforms were brought under a government code of ethics by the IT Rules of 2021.",
+      "ifAgree": "Adults can decide for themselves; age ratings are enough.",
+      "ifDisagree": "Shows like Tandav (2021) drew cases for hurting religious sentiments."
+    },
+    {
+      "id": "n32",
+      "axis": "Liberty",
+      "direction": "Order",
+      "topic": "Censorship",
+      "statement": "The censor board should cut scenes that hurt religious sentiments.",
+      "context": "The CBFC certifies every film for cinemas; Padmaavat (2018) was renamed and edited after protests.",
+      "ifAgree": "The cuts demanded in Padmaavat or PK.",
+      "ifDisagree": "The Supreme Court said in the Padmaavat case that states cannot ban a certified film."
+    },
+    {
+      "id": "n19",
+      "axis": "Redistribution",
+      "direction": "Self-reliance",
+      "topic": "Work hours",
+      "statement": "Young Indians should work 70 hours a week to build the country, as Narayana Murthy urged.",
+      "context": "The Infosys founder’s 2023 remark set off a national debate about work and burnout.",
+      "ifAgree": "China and Japan grew on punishing work hours.",
+      "ifDisagree": "Long hours harm health and productivity; labour law sets 48 hours a week."
+    },
+    {
+      "id": "n36",
+      "axis": "Liberty",
+      "direction": "Liberty",
+      "topic": "Sedition",
+      "statement": "Sedition-style laws should be scrapped completely, including the new provision on “endangering sovereignty”.",
+      "context": "The colonial sedition law was suspended by the Supreme Court in 2022; Section 152 of the 2023 penal code replaced it.",
+      "ifAgree": "Such laws have been used against students, journalists and protesters.",
+      "ifDisagree": "The state needs a law against those who incite secession."
+    },
+    {
+      "id": "n60",
+      "axis": "Centralism",
+      "direction": "Local",
+      "topic": "Local government",
+      "statement": "Panchayats and city councils should control their own budgets and services.",
+      "context": "The 73rd and 74th amendments of 1992 created local self-government, but most money is still controlled by states.",
+      "ifAgree": "Kerala’s “people’s plan” giving 35–40% of plan funds to local bodies.",
+      "ifDisagree": "Local bodies lack capacity and invite local capture."
+    },
+    {
+      "id": "n57",
+      "axis": "Centralism",
+      "direction": "Local",
+      "topic": "Governors",
+      "statement": "Governors should not be able to sit on bills passed by elected state assemblies.",
+      "context": "Tamil Nadu, Kerala and Punjab took their governors to the Supreme Court over long-delayed assent.",
+      "ifAgree": "An appointed governor should not block an elected assembly.",
+      "ifDisagree": "Governors are a constitutional check on states."
+    },
+    {
+      "id": "n109",
+      "axis": "Force",
+      "direction": "Restraint",
+      "topic": "Manipur",
+      "statement": "Manipur’s conflict needs political talks, not just more troops.",
+      "context": "Violence between Meitei and Kuki-Zo communities since May 2023 has killed more than 250 people; President’s Rule was imposed in 2025.",
+      "ifAgree": "Only a political settlement can end the conflict.",
+      "ifDisagree": "Order must be restored first."
+    },
+    {
+      "id": "n76",
+      "axis": "Faith",
+      "direction": "Secular",
+      "topic": "Places of worship",
+      "statement": "The Places of Worship Act, which freezes the religious character of sites as of 1947, must be enforced: no more temple–mosque suits.",
+      "context": "Suits over the Gyanvapi mosque in Varanasi and the Shahi Idgah in Mathura test the 1991 law.",
+      "ifAgree": "Reopening history invites endless conflict.",
+      "ifDisagree": "Hindus have a right to reclaim sites they say were destroyed."
+    },
+    {
+      "id": "n97",
+      "axis": "Sovereignty",
+      "direction": "Multilateral",
+      "topic": "Human rights scrutiny",
+      "statement": "India should accept international human-rights scrutiny like any democracy.",
+      "context": "India has rejected criticism from UN rapporteurs and foreign governments as interference.",
+      "ifAgree": "A confident democracy has nothing to hide.",
+      "ifDisagree": "Such criticism is often selective and political."
+    },
+    {
+      "id": "n23",
+      "axis": "Trade",
+      "direction": "Protected",
+      "topic": "Swadeshi",
+      "statement": "Indians should buy Indian goods even when they cost more — “vocal for local”.",
+      "context": "Modi launched the Atmanirbhar Bharat (self-reliant India) campaign in 2020.",
+      "ifAgree": "Patanjali’s swadeshi marketing or Khadi.",
+      "ifDisagree": "Consumers should buy what is best value, wherever it is made."
+    },
+    {
+      "id": "n18",
+      "axis": "Redistribution",
+      "direction": "Self-reliance",
+      "topic": "Family",
+      "statement": "People should rely on family and savings, not the government, in old age.",
+      "context": "Most elderly Indians depend on their children; only a minority have a pension.",
+      "ifAgree": "The joint family is India’s real safety net.",
+      "ifDisagree": "Universal old-age pensions are needed as families shrink and migrate."
+    },
+    {
+      "id": "n64",
+      "axis": "Morality",
+      "direction": "Traditional",
+      "topic": "On screen",
+      "statement": "Films and web series show too much sex and swearing and should tone it down.",
+      "context": "Shows like Sacred Games and Mirzapur drove complaints that led to the 2021 OTT rules.",
+      "ifAgree": "What families watch together should reflect Indian values.",
+      "ifDisagree": "Adults can choose; creators should not be policed for language."
+    },
+    {
+      "id": "n87",
+      "axis": "Belonging",
+      "direction": "Cosmopolitan",
+      "topic": "Pakistan artists",
+      "statement": "Indian and Pakistani artists and cricketers should be free to work together.",
+      "context": "Pakistani actors were effectively barred from Indian films after 2016; there has been no bilateral cricket series since 2012–13.",
+      "ifAgree": "Culture and sport build peace between peoples.",
+      "ifDisagree": "No normal ties while terror continues."
+    },
+    {
+      "id": "n94",
+      "axis": "Sovereignty",
+      "direction": "Sovereign",
+      "topic": "Climate targets",
+      "statement": "India should not accept international climate targets that limit its growth.",
+      "context": "At COP26 India pledged net zero by 2070 and pushed to “phase down” rather than “phase out” coal.",
+      "ifAgree": "Rich countries polluted first and should cut first.",
+      "ifDisagree": "India is among the most climate-vulnerable countries."
+    },
+    {
+      "id": "n84",
+      "axis": "Belonging",
+      "direction": "National",
+      "topic": "Textbooks",
+      "statement": "Textbooks should teach more about Indian achievements and less about the Mughals.",
+      "context": "NCERT removed a chapter on the Mughal courts from its Class 12 history book in 2023.",
+      "ifAgree": "Indian history should centre Indian kingdoms and heroes.",
+      "ifDisagree": "History should be taught whole, including uncomfortable parts."
+    },
+    {
+      "id": "n66",
+      "axis": "Morality",
+      "direction": "Progressive",
+      "topic": "Sabarimala",
+      "statement": "Women of all ages should be allowed into every temple, including Sabarimala.",
+      "context": "The Supreme Court lifted the ban on women aged 10–50 in 2018; review petitions went to a larger bench.",
+      "ifAgree": "Equal access is a constitutional right.",
+      "ifDisagree": "Devotees say the deity’s celibate form is a matter of faith."
+    },
+    {
+      "id": "n48",
+      "axis": "Power",
+      "direction": "Pluralist",
+      "topic": "Term limits",
+      "statement": "No prime minister should serve more than two terms.",
+      "context": "India has no term limits; Nehru served 17 years and Modi began a third term in 2024.",
+      "ifAgree": "Limits stop any leader dominating institutions.",
+      "ifDisagree": "Voters should decide how long a leader serves."
+    },
+    {
+      "id": "n5",
+      "axis": "Ownership",
+      "direction": "Market",
+      "topic": "Billionaires",
+      "statement": "India’s growing number of billionaires is a sign of success, not a problem.",
+      "context": "India has around 200 billionaires on the Forbes list, third only to the US and China.",
+      "ifAgree": "Wealth creators like Infosys or Reliance build jobs and tax revenue.",
+      "ifDisagree": "The World Inequality Lab says the top 1% hold about 40% of India’s wealth."
+    },
+    {
+      "id": "n114",
+      "axis": "Planet",
+      "direction": "Ecology",
+      "topic": "Himalayas",
+      "statement": "Mountain highways like the Char Dham road should be scaled back to protect the Himalayas.",
+      "context": "The 2023 Silkyara tunnel collapse on the project trapped 41 workers for 17 days; Joshimath was sinking the same year.",
+      "ifAgree": "The Himalayas are young, fragile mountains.",
+      "ifDisagree": "Hill states need roads for pilgrims, the army and jobs."
+    },
+    {
+      "id": "n11",
+      "axis": "Redistribution",
+      "direction": "Welfare",
+      "topic": "Free grain",
+      "statement": "Free grain for 80 crore people should continue as long as it is needed.",
+      "context": "Under the PM Garib Kalyan Anna Yojana, 5 kg of free grain a month was extended in 2024 for five years.",
+      "ifAgree": "Food security kept millions fed through the pandemic.",
+      "ifDisagree": "Critics ask why a fast-growing economy still needs free grain for most of its people."
+    },
+    {
+      "id": "n12",
+      "axis": "Redistribution",
+      "direction": "Welfare",
+      "topic": "MGNREGA",
+      "statement": "A legal guarantee of paid rural work, like MGNREGA’s 100 days, is essential.",
+      "context": "The 2005 law guaranteed up to 100 days of wage work a year to every rural household that asks.",
+      "ifAgree": "It was a lifeline when migrant workers walked home in the 2020 lockdown.",
+      "ifDisagree": "Critics call it a leaky make-work scheme that creates few lasting assets."
+    },
+    {
+      "id": "n28",
+      "axis": "Trade",
+      "direction": "Open",
+      "topic": "US tariffs",
+      "statement": "India should cut its own tariffs rather than retaliate against US tariffs.",
+      "context": "The US imposed tariffs of up to 50% on many Indian goods in August 2025, partly over India’s Russian oil purchases.",
+      "ifAgree": "Lower Indian tariffs could unlock a trade deal.",
+      "ifDisagree": "India should stand firm and protect farmers and dairy."
+    },
+    {
+      "id": "n31",
+      "axis": "Liberty",
+      "direction": "Order",
+      "topic": "UAPA",
+      "statement": "The anti-terror law UAPA is necessary, even if accused people stay in jail for years before trial.",
+      "context": "Bail is very hard to get under UAPA; several people arrested in the 2020 Delhi riots “conspiracy” case were held for years without trial.",
+      "ifAgree": "Terror cases need tough laws to protect national security.",
+      "ifDisagree": "“bail is the rule, jail the exception”, as the Supreme Court has said."
+    },
+    {
+      "id": "n113",
+      "axis": "Planet",
+      "direction": "Ecology",
+      "topic": "Coal",
+      "statement": "India should stop building new coal power plants.",
+      "context": "Coal still generates about three-quarters of India’s electricity.",
+      "ifAgree": "Solar is now cheaper than new coal.",
+      "ifDisagree": "Coal is reliable and employs millions."
+    },
+    {
+      "id": "n96",
+      "axis": "Sovereignty",
+      "direction": "Multilateral",
+      "topic": "UN",
+      "statement": "India should work through the UN and other global bodies, and win a permanent Security Council seat by building coalitions.",
+      "context": "India has sought a permanent seat for decades with the G4 (Brazil, Germany, Japan).",
+      "ifAgree": "Global rules protect a rising middle power.",
+      "ifDisagree": "The UN is outdated and India should act alone when needed."
+    },
+    {
+      "id": "n33",
+      "axis": "Liberty",
+      "direction": "Order",
+      "topic": "Shutdowns",
+      "statement": "Internet shutdowns are justified to stop riots and rumours.",
+      "context": "India orders more shutdowns than any other country; Kashmir’s began in August 2019 and 4G returned only in February 2021.",
+      "ifAgree": "Shutdowns stop rumours spreading on WhatsApp during riots.",
+      "ifDisagree": "The Supreme Court held in 2020 that indefinite shutdowns are unconstitutional."
+    },
+    {
+      "id": "n56",
+      "axis": "Centralism",
+      "direction": "Local",
+      "topic": "Tax share",
+      "statement": "States should get a bigger share of the taxes they raise.",
+      "context": "The Finance Commission gives states 41% of the divisible pool; southern states say they get back far less than they pay.",
+      "ifAgree": "Richer states fund the union but have little say over the money.",
+      "ifDisagree": "Redistribution to poorer states keeps the union fair."
+    },
+    {
+      "id": "n119",
+      "axis": "Planet",
+      "direction": "Growth",
+      "topic": "Fuel prices",
+      "statement": "Cheap petrol and diesel matter more than green taxes.",
+      "context": "Fuel taxes make up a large share of pump prices.",
+      "ifAgree": "Fuel prices drive inflation for the poor.",
+      "ifDisagree": "Green taxes fund clean transport."
+    },
+    {
+      "id": "n68",
+      "axis": "Morality",
+      "direction": "Progressive",
+      "topic": "Sex education",
+      "statement": "Sex education should be taught in every school.",
+      "context": "Several states halted the Adolescence Education Programme in 2007 after objections.",
+      "ifAgree": "It protects children from abuse and myths.",
+      "ifDisagree": "It is a matter for parents."
+    },
+    {
+      "id": "n108",
+      "axis": "Force",
+      "direction": "Restraint",
+      "topic": "No first use",
+      "statement": "India should keep its pledge never to use nuclear weapons first.",
+      "context": "India’s 2003 nuclear doctrine pledges no first use; the Defence Minister said in 2019 that this could change.",
+      "ifAgree": "It makes India a responsible nuclear power.",
+      "ifDisagree": "Ambiguity deters Pakistan better."
+    },
+    {
+      "id": "n9",
+      "axis": "Ownership",
+      "direction": "Planned",
+      "topic": "Wealth tax",
+      "statement": "The super-rich should pay a wealth or inheritance tax.",
+      "context": "India abolished estate duty in 1985 and the wealth tax in 2015.",
+      "ifAgree": "The World Inequality Lab’s 2024 proposal of a 2% tax on fortunes above ₹10 crore.",
+      "ifDisagree": "Sam Pitroda’s 2024 remark on inheritance tax drew a backlash and the Congress distanced itself."
+    },
+    {
+      "id": "n7",
+      "axis": "Ownership",
+      "direction": "Planned",
+      "topic": "Nationalisation",
+      "statement": "Banks, coal and other key sectors should stay in government hands.",
+      "context": "Indira Gandhi nationalised 14 banks in 1969 and the coal industry in 1971–73.",
+      "ifAgree": "Public banks like SBI lend to farmers and remote areas private banks ignore.",
+      "ifDisagree": "Public banks carried most of the bad loans uncovered after 2015."
+    },
+    {
+      "id": "n43",
+      "axis": "Power",
+      "direction": "Strongman",
+      "topic": "Emergency",
+      "statement": "The Emergency of 1975–77 brought discipline that India needed.",
+      "context": "Indira Gandhi suspended civil liberties and elections for 21 months; the press was censored and opponents jailed.",
+      "ifAgree": "Trains ran on time and strikes stopped, its defenders said.",
+      "ifDisagree": "Forced sterilisations, jailed opponents and a censored press."
+    },
+    {
+      "id": "n107",
+      "axis": "Force",
+      "direction": "Restraint",
+      "topic": "Talks with Pakistan",
+      "statement": "India should keep talking to Pakistan, even after terror attacks.",
+      "context": "Vajpayee took a bus to Lahore in 1999; Modi visited Lahore in 2015.",
+      "ifAgree": "Dialogue is the only lasting path to peace.",
+      "ifDisagree": "“terror and talks cannot go together.”"
+    },
+    {
+      "id": "n47",
+      "axis": "Power",
+      "direction": "Pluralist",
+      "topic": "Election Commission",
+      "statement": "Election commissioners should be chosen by a panel that includes the Chief Justice, not by the government alone.",
+      "context": "A 2023 law replaced the Chief Justice on the selection panel with a Union minister.",
+      "ifAgree": "A neutral referee needs independent appointment.",
+      "ifDisagree": "Appointments are an executive function in a parliamentary system."
+    },
+    {
+      "id": "n95",
+      "axis": "Sovereignty",
+      "direction": "Sovereign",
+      "topic": "Foreign funding",
+      "statement": "Foreign funding of NGOs should be tightly controlled.",
+      "context": "Amendments to the Foreign Contribution (Regulation) Act in 2020 tightened rules; thousands of NGOs have lost their licences.",
+      "ifAgree": "Foreign money should not shape Indian politics.",
+      "ifDisagree": "It chokes charities, research and rights groups."
+    },
+    {
+      "id": "n50",
+      "axis": "Power",
+      "direction": "Pluralist",
+      "topic": "Press",
+      "statement": "Journalists should be free to criticise the government without fear of raids or arrest.",
+      "context": "NewsClick’s founder was arrested under UAPA in 2023; India ranks in the bottom third of RSF’s press-freedom index.",
+      "ifAgree": "A free press is how voters learn what power is doing.",
+      "ifDisagree": "Some outlets spread propaganda and foreign-funded agendas."
+    },
+    {
+      "id": "n111",
+      "axis": "Planet",
+      "direction": "Ecology",
+      "topic": "Air pollution",
+      "statement": "Delhi’s air pollution is an emergency that justifies banning old vehicles and firecrackers.",
+      "context": "Delhi bars diesel vehicles over 10 years old and petrol over 15; the Supreme Court has repeatedly restricted firecrackers.",
+      "ifAgree": "Polluted air shortens millions of lives.",
+      "ifDisagree": "Bans fall hardest on the poor and on festivals."
+    },
+    {
+      "id": "n2",
+      "axis": "Ownership",
+      "direction": "Market",
+      "topic": "Farm laws",
+      "statement": "The 2020 farm laws, which let farmers sell outside government mandis, were good reform.",
+      "context": "Passed in September 2020, the laws were repealed in November 2021 after a year-long protest on Delhi’s borders.",
+      "ifAgree": "Economists who backed them said private buyers and contract farming would raise farmers’ incomes.",
+      "ifDisagree": "Farm unions feared the end of assured government procurement and corporate control of agriculture."
+    },
+    {
+      "id": "n16",
+      "axis": "Redistribution",
+      "direction": "Self-reliance",
+      "topic": "Freebies",
+      "statement": "Free electricity, water and bus rides promised before elections damage state finances.",
+      "context": "PM Modi criticised “revdi culture” in 2022; free power and bus travel became standard promises of many parties.",
+      "ifAgree": "Several states borrow heavily to fund subsidies.",
+      "ifDisagree": "Free power or bus travel is welfare for the poor, not a giveaway."
+    },
+    {
+      "id": "n37",
+      "axis": "Liberty",
+      "direction": "Liberty",
+      "topic": "Protests",
+      "statement": "Long sit-ins like Shaheen Bagh or the farmers’ protest are legitimate even if they block roads for months.",
+      "context": "The Supreme Court ruled in 2020 that public roads cannot be occupied indefinitely.",
+      "ifAgree": "Peaceful, sustained protest forced the repeal of the farm laws.",
+      "ifDisagree": "Commuters and businesses should not pay the price of protest."
+    },
+    {
+      "id": "n116",
+      "axis": "Planet",
+      "direction": "Growth",
+      "topic": "Clearances",
+      "statement": "Environmental clearances slow down development and should be faster.",
+      "context": "The 2023 Forest Conservation Amendment eased rules for projects near borders.",
+      "ifAgree": "Delays raise costs and stall jobs.",
+      "ifDisagree": "Rushed clearances lead to disasters."
+    },
+    {
+      "id": "n49",
+      "axis": "Power",
+      "direction": "Pluralist",
+      "topic": "Central agencies",
+      "statement": "Arrests of opposition leaders by central agencies before elections threaten democracy.",
+      "context": "Delhi CM Arvind Kejriwal and Jharkhand CM Hemant Soren were arrested by the ED in 2024; both later got bail.",
+      "ifAgree": "Opposition parties say the ED and CBI are used selectively.",
+      "ifDisagree": "No one is above the law, chief ministers included."
+    },
+    {
+      "id": "n69",
+      "axis": "Morality",
+      "direction": "Progressive",
+      "topic": "Transgender rights",
+      "statement": "Transgender people should have reservations in jobs and education.",
+      "context": "The Supreme Court recognised a third gender in 2014 (NALSA) and asked for reservations; Karnataka offers 1%.",
+      "ifAgree": "Trans people face exclusion from school and work.",
+      "ifDisagree": "Reservations should remain for caste-based disadvantage."
+    },
+    {
+      "id": "n112",
+      "axis": "Planet",
+      "direction": "Ecology",
+      "topic": "Great Nicobar",
+      "statement": "Big projects like the Great Nicobar port should stop if they destroy rainforest and tribal land.",
+      "context": "The ₹72,000 crore project would clear about 130 sq km of forest on an island home to the Shompen people.",
+      "ifAgree": "Some forests and peoples cannot be replaced.",
+      "ifDisagree": "India needs strategic ports and growth in the Indian Ocean."
+    },
+    {
+      "id": "n54",
+      "axis": "Centralism",
+      "direction": "Central",
+      "topic": "GST",
+      "statement": "One tax for the whole country, GST, was worth states giving up their own taxes.",
+      "context": "Launched in July 2017 and run jointly by the centre and states through the GST Council; rates were cut to mainly two slabs in 2025.",
+      "ifAgree": "One market, fewer checkpoints and less evasion.",
+      "ifDisagree": "States lost fiscal freedom and wait for compensation."
+    },
+    {
+      "id": "n62",
+      "axis": "Morality",
+      "direction": "Traditional",
+      "topic": "Live-in couples",
+      "statement": "Live-in couples should have to register with the authorities, as in Uttarakhand.",
+      "context": "Uttarakhand’s Uniform Civil Code, in force since January 2025, requires live-in relationships to be registered.",
+      "ifAgree": "Registration protects women and children in such relationships.",
+      "ifDisagree": "It intrudes on adults’ privacy."
+    },
+    {
+      "id": "n83",
+      "axis": "Belonging",
+      "direction": "National",
+      "topic": "Anti-national",
+      "statement": "Celebrities and students who criticise India abroad are anti-national.",
+      "context": "“Anti-national” became a common charge after the 2016 JNU sedition case.",
+      "ifAgree": "Dirty linen should not be washed in foreign media.",
+      "ifDisagree": "Criticising the government is not criticising India."
+    },
+    {
+      "id": "n44",
+      "axis": "Power",
+      "direction": "Strongman",
+      "topic": "Bulldozers",
+      "statement": "Demolishing the homes of people accused of rioting is fair and fast justice.",
+      "context": "The Supreme Court ruled in November 2024 that punitive demolitions without due process are unconstitutional.",
+      "ifAgree": "The “bulldozer” demolitions in Uttar Pradesh and Madhya Pradesh.",
+      "ifDisagree": "Punishment must follow trial, and families should not lose homes for an accusation."
+    },
+    {
+      "id": "n90",
+      "axis": "Belonging",
+      "direction": "Cosmopolitan",
+      "topic": "Propaganda films",
+      "statement": "Films made tax-free by governments, like The Kashmir Files, are propaganda.",
+      "context": "Several BJP-ruled states made The Kashmir Files (2022) tax-free; West Bengal banned The Kerala Story (2023) until the Supreme Court stayed the ban.",
+      "ifAgree": "Governments should not promote films with a political message.",
+      "ifDisagree": "These films tell stories of suffering that were long ignored."
+    },
+    {
+      "id": "n110",
+      "axis": "Force",
+      "direction": "Restraint",
+      "topic": "Death penalty",
+      "statement": "The death penalty should be abolished, even for terrorists.",
+      "context": "India hanged Ajmal Kasab (2012), Afzal Guru (2013), Yakub Memon (2015) and the Nirbhaya convicts (2020).",
+      "ifAgree": "The state should not kill; mistakes cannot be undone.",
+      "ifDisagree": "Some crimes are so terrible that only death is just."
+    },
+    {
+      "id": "n81",
+      "axis": "Belonging",
+      "direction": "National",
+      "topic": "NRC",
+      "statement": "Illegal immigrants should be identified and deported through a nationwide citizens’ register, as in Assam.",
+      "context": "Assam’s 2019 National Register of Citizens left out about 19 lakh people.",
+      "ifAgree": "No country can accept unlimited illegal migration.",
+      "ifDisagree": "Poor Indians without papers were left stateless."
+    },
+    {
+      "id": "n93",
+      "axis": "Sovereignty",
+      "direction": "Sovereign",
+      "topic": "Alliances",
+      "statement": "India should never join a formal military alliance, not even with the US.",
+      "context": "India is in the Quad with the US, Japan and Australia, which is not a defence pact.",
+      "ifAgree": "Strategic autonomy has served India since Nehru.",
+      "ifDisagree": "China’s rise requires firm allies."
+    },
+    {
+      "id": "n115",
+      "axis": "Planet",
+      "direction": "Ecology",
+      "topic": "Stubble burning",
+      "statement": "Farmers who burn crop stubble should be fined.",
+      "context": "Burning in Punjab and Haryana adds heavily to Delhi’s winter smog.",
+      "ifAgree": "Polluters must pay.",
+      "ifDisagree": "Farmers need machines and support, not penalties."
+    },
+    {
+      "id": "n27",
+      "axis": "Trade",
+      "direction": "Open",
+      "topic": "Foreign investment",
+      "statement": "Foreign companies should be welcomed to make goods in India, even if they compete with Indian firms.",
+      "context": "Apple’s suppliers made a fast-growing share of iPhones in India by 2025 under the production-linked incentive scheme.",
+      "ifAgree": "Foreign factories bring jobs, skills and exports.",
+      "ifDisagree": "Indian champions should get first claim on incentives."
+    },
+    {
+      "id": "n26",
+      "axis": "Trade",
+      "direction": "Open",
+      "topic": "Trade deals",
+      "statement": "Free-trade agreements like the 2025 India–UK deal are good for India.",
+      "context": "India and the UK signed a trade agreement in July 2025 cutting tariffs on most goods.",
+      "ifAgree": "Cheaper inputs and new markets for textiles, leather and services.",
+      "ifDisagree": "Deals expose Indian farmers and small firms to foreign competition."
+    },
+    {
+      "id": "n117",
+      "axis": "Planet",
+      "direction": "Growth",
+      "topic": "Right to grow",
+      "statement": "India has the right to burn coal to grow, as rich countries did.",
+      "context": "India’s emissions per person are less than half the world average.",
+      "ifAgree": "The West polluted first and must pay.",
+      "ifDisagree": "India suffers the worst heat waves and floods."
+    },
+    {
+      "id": "n118",
+      "axis": "Planet",
+      "direction": "Growth",
+      "topic": "Mining",
+      "statement": "Mining and industry in forests like Hasdeo should go ahead if they create jobs.",
+      "context": "Villagers have protested coal mining in Chhattisgarh’s Hasdeo Arand forest since 2022.",
+      "ifAgree": "Mines bring royalties and jobs to poor districts.",
+      "ifDisagree": "Adivasi land and ancient forests should be left alone."
+    },
+    {
+      "id": "n67",
+      "axis": "Morality",
+      "direction": "Progressive",
+      "topic": "Honour killings",
+      "statement": "Inter-caste and interfaith couples need state protection from their own families.",
+      "context": "In 2018 the Supreme Court ordered safe houses and police protection to prevent honour killings.",
+      "ifAgree": "The safe houses ordered in Shakti Vahini v. Union of India.",
+      "ifDisagree": "Such matters are for families and communities."
+    },
+    {
+      "id": "n80",
+      "axis": "Faith",
+      "direction": "Secular",
+      "topic": "State and religion",
+      "statement": "The state should neither fund pilgrimages nor run religious institutions of any faith.",
+      "context": "States fund events like the Kumbh Mela; the Haj subsidy ended in 2018.",
+      "ifAgree": "A secular state keeps equal distance from all religions.",
+      "ifDisagree": "Supporting festivals and pilgrims is part of serving the people."
+    },
+    {
+      "id": "n34",
+      "axis": "Liberty",
+      "direction": "Order",
+      "topic": "Comedy",
+      "statement": "Comedians who mock religion or leaders deserve police cases.",
+      "context": "Munawar Faruqui spent over a month in jail in 2021 over jokes police could not show he had told; Kunal Kamra faced cases in 2025.",
+      "ifAgree": "Insulting faith or leaders crosses a line and should be punished.",
+      "ifDisagree": "Satire is free speech; offence is not a crime."
+    },
+    {
+      "id": "n65",
+      "axis": "Morality",
+      "direction": "Traditional",
+      "topic": "Marriage choice",
+      "statement": "Parents should have the final say in whom their children marry.",
+      "context": "Most Indian marriages are arranged; surveys find only about 5% are inter-caste.",
+      "ifAgree": "Families know best and marriages unite families.",
+      "ifDisagree": "The Supreme Court has repeatedly upheld adults’ right to marry whom they choose."
+    },
+    {
+      "id": "n61",
+      "axis": "Morality",
+      "direction": "Traditional",
+      "topic": "Same-sex marriage",
+      "statement": "Same-sex marriage goes against Indian culture and should not be legal.",
+      "context": "The Supreme Court declined to legalise it in 2023, leaving it to Parliament.",
+      "ifAgree": "Marriage in Indian law is between a man and a woman.",
+      "ifDisagree": "Gay sex was decriminalised in 2018; couples want equal rights to inherit and adopt."
+    },
+    {
+      "id": "n21",
+      "axis": "Trade",
+      "direction": "Protected",
+      "topic": "China apps",
+      "statement": "Banning Chinese apps like TikTok after the Galwan clash was right.",
+      "context": "India banned 59 Chinese apps in June 2020 after 20 Indian soldiers were killed at Galwan.",
+      "ifAgree": "Security and data from Indian users mattered more than access.",
+      "ifDisagree": "Bans hurt Indian creators and users more than China."
+    },
+    {
+      "id": "n10",
+      "axis": "Ownership",
+      "direction": "Planned",
+      "topic": "Crony capitalism",
+      "statement": "Big business has too much influence over the government.",
+      "context": "The 2023 Hindenburg report on the Adani group, which the group denied, and the electoral-bond scheme fuelled this debate.",
+      "ifAgree": "The electoral-bond data released in 2024 showed large donations from companies.",
+      "ifDisagree": "Big Indian companies built ports, telecoms and airports the state could not."
+    },
+    {
+      "id": "n103",
+      "axis": "Force",
+      "direction": "Force",
+      "topic": "PoK",
+      "statement": "India should take back Pakistan-occupied Kashmir, by force if necessary.",
+      "context": "Parliament resolved in 1994 that PoK is part of India.",
+      "ifAgree": "The 1994 resolution should be fulfilled.",
+      "ifDisagree": "War would cost countless lives."
+    },
+    {
+      "id": "n105",
+      "axis": "Force",
+      "direction": "Force",
+      "topic": "Defence spending",
+      "statement": "India should spend much more on defence, even if it means less on welfare.",
+      "context": "India spends about 2% of GDP on defence.",
+      "ifAgree": "Two hostile neighbours demand a stronger military.",
+      "ifDisagree": "Schools and hospitals matter more."
+    },
+    {
+      "id": "n85",
+      "axis": "Belonging",
+      "direction": "National",
+      "topic": "Renaming",
+      "statement": "Cities named after invaders should be renamed, as Allahabad became Prayagraj.",
+      "context": "Allahabad was renamed in 2018; Aurangabad became Chhatrapati Sambhajinagar in 2023.",
+      "ifAgree": "Names should honour India’s own heritage.",
+      "ifDisagree": "Renaming erases shared history and costs money."
+    },
+    {
+      "id": "n75",
+      "axis": "Faith",
+      "direction": "Religious",
+      "topic": "CAA",
+      "statement": "The Citizenship Amendment Act rightly fast-tracks citizenship for persecuted non-Muslim minorities from Pakistan, Bangladesh and Afghanistan.",
+      "context": "Passed in 2019 with rules notified in 2024; it does not cover Muslims, including persecuted sects such as Ahmadis.",
+      "ifAgree": "India is the natural home of minorities persecuted in Islamic neighbours.",
+      "ifDisagree": "Making religion a test for citizenship breaks with a secular constitution."
+    },
+    {
+      "id": "n104",
+      "axis": "Force",
+      "direction": "Force",
+      "topic": "Naxalism",
+      "statement": "Maoist insurgents should be defeated militarily, not negotiated with.",
+      "context": "The government set March 2026 as its deadline to end Naxalism; the CPI (Maoist) chief Basavaraju was killed in May 2025.",
+      "ifAgree": "Armed groups that kill civilians and police must be crushed.",
+      "ifDisagree": "Talks and development address the Adivasi grievances behind the insurgency."
+    },
+    {
+      "id": "n52",
+      "axis": "Centralism",
+      "direction": "Central",
+      "topic": "One nation, one election",
+      "statement": "Lok Sabha and state elections should be held together, every five years.",
+      "context": "Bills for simultaneous elections were introduced in Parliament in December 2024.",
+      "ifAgree": "Less campaign spending and governments free to govern.",
+      "ifDisagree": "State issues would be drowned out by national ones."
+    },
+    {
+      "id": "n70",
+      "axis": "Morality",
+      "direction": "Progressive",
+      "topic": "Menstrual leave",
+      "statement": "Women should have a right to menstrual leave at work and college.",
+      "context": "Bihar has given government employees two days a month since 1992; Kerala gave it to university students in 2023.",
+      "ifAgree": "It recognises women’s health needs.",
+      "ifDisagree": "It may make employers less willing to hire women."
+    },
+    {
+      "id": "n74",
+      "axis": "Faith",
+      "direction": "Religious",
+      "topic": "Temple control",
+      "statement": "Hindu temples should be freed from state control and run by Hindu bodies.",
+      "context": "Tamil Nadu’s HR&CE department administers tens of thousands of temples; churches run their own affairs.",
+      "ifAgree": "Other communities run their institutions; Hindus should too.",
+      "ifDisagree": "State control curbed caste exclusion and misuse of temple funds."
+    },
+    {
+      "id": "n35",
+      "axis": "Liberty",
+      "direction": "Order",
+      "topic": "National anthem",
+      "statement": "The national anthem should be played before every film, with everyone standing.",
+      "context": "The Supreme Court made it mandatory in 2016 and optional in 2018.",
+      "ifAgree": "A daily reminder of national unity.",
+      "ifDisagree": "Patriotism cannot be compelled in a cinema hall."
+    },
+    {
+      "id": "n41",
+      "axis": "Power",
+      "direction": "Strongman",
+      "topic": "Strong leader",
+      "statement": "India needs one strong leader more than coalition governments.",
+      "context": "No party won a majority alone from 1989 to 2014; the BJP did in 2014 and 2019 but not in 2024.",
+      "ifAgree": "Decisive government delivered GST, Article 370 and big infrastructure.",
+      "ifDisagree": "Coalitions kept power in check and passed the 1991 reforms and RTI."
+    },
+    {
+      "id": "n14",
+      "axis": "Redistribution",
+      "direction": "Welfare",
+      "topic": "Reservations",
+      "statement": "Caste-based reservations in jobs and education should continue until caste discrimination ends.",
+      "context": "Reservations cover SCs, STs and OBCs within a 50% cap set by the Supreme Court in 1992, plus 10% for poorer “general” castes since 2019.",
+      "ifAgree": "Ambedkar argued representation was needed to undo centuries of exclusion.",
+      "ifDisagree": "Some argue reservations entrench caste identity and should end."
+    },
+    {
+      "id": "n91",
+      "axis": "Sovereignty",
+      "direction": "Sovereign",
+      "topic": "Russian oil",
+      "statement": "India should keep buying Russian oil whatever the US and Europe say.",
+      "context": "Russia became India’s top oil supplier after 2022; the US cited this when raising tariffs in 2025.",
+      "ifAgree": "India must buy energy where it is cheapest for its people.",
+      "ifDisagree": "It strains ties with India’s biggest trading partners."
+    },
+    {
+      "id": "n89",
+      "axis": "Belonging",
+      "direction": "Cosmopolitan",
+      "topic": "English",
+      "statement": "English should remain the main language of courts, science and higher education.",
+      "context": "The Supreme Court works in English; the government promotes medicine and engineering in Indian languages.",
+      "ifAgree": "English connects India to the world and between states.",
+      "ifDisagree": "English is a colonial legacy that excludes most Indians."
+    },
+    {
+      "id": "n99",
+      "axis": "Sovereignty",
+      "direction": "Multilateral",
+      "topic": "Refugee Convention",
+      "statement": "India should sign the 1951 UN Refugee Convention.",
+      "context": "India is one of the largest refugee-hosting countries that has not signed it.",
+      "ifAgree": "Clear rules would protect refugees and India alike.",
+      "ifDisagree": "It would limit India’s control of its borders."
+    },
+    {
+      "id": "n25",
+      "axis": "Trade",
+      "direction": "Protected",
+      "topic": "E-commerce",
+      "statement": "Amazon and Walmart’s Flipkart should not be allowed to sell their own stock to Indian shoppers, to protect kirana stores.",
+      "context": "Under FDI rules, foreign e-commerce firms may only run marketplaces, not sell inventory they own.",
+      "ifAgree": "Traders’ associations’ campaigns against “predatory pricing”.",
+      "ifDisagree": "Shoppers benefit from lower prices and faster delivery."
+    },
+    {
+      "id": "n30",
+      "axis": "Trade",
+      "direction": "Open",
+      "topic": "Farm trade",
+      "statement": "Opening Indian farming to world markets would help farmers more than protection.",
+      "context": "India keeps high duties on dairy and farm goods; dairy was a sticking point in trade talks with the US.",
+      "ifAgree": "Indian farmers could export more if markets opened both ways.",
+      "ifDisagree": "Small farmers cannot compete with subsidised Western agriculture."
+    },
+    {
+      "id": "n73",
+      "axis": "Faith",
+      "direction": "Religious",
+      "topic": "Conversion",
+      "statement": "Laws against “love jihad” and forced conversion protect Hindu women.",
+      "context": "Uttar Pradesh’s 2021 law requires 60 days’ notice to the district magistrate before converting for marriage.",
+      "ifAgree": "It stops deception and coercion.",
+      "ifDisagree": "It treats adult women as unable to choose and targets interfaith couples."
+    },
+    {
+      "id": "n6",
+      "axis": "Ownership",
+      "direction": "Planned",
+      "topic": "MSP",
+      "statement": "The government should guarantee a minimum support price (MSP) for all major crops by law.",
+      "context": "MSP is announced for 22 crops, but procurement is mostly wheat and rice; a legal guarantee was the farmers’ main demand in 2024.",
+      "ifAgree": "The farmer unions’ demand for a law covering every MSP crop.",
+      "ifDisagree": "Economists warn that guaranteed buying of every crop would strain public finances and distort planting."
+    },
+    {
+      "id": "n55",
+      "axis": "Centralism",
+      "direction": "Central",
+      "topic": "NEET",
+      "statement": "One national entrance exam, NEET, should decide medical admissions in every state.",
+      "context": "Tamil Nadu passed a law in 2021 to exempt itself; the 2024 paper leak deepened the dispute.",
+      "ifAgree": "One merit list stops capitation-fee admissions.",
+      "ifDisagree": "A single exam favours students who can afford coaching."
+    },
+    {
+      "id": "n53",
+      "axis": "Centralism",
+      "direction": "Central",
+      "topic": "Article 370",
+      "statement": "Ending Article 370 and splitting Jammu and Kashmir into union territories was right.",
+      "context": "Done in August 2019; upheld by the Supreme Court in December 2023.",
+      "ifAgree": "One constitution for all of India.",
+      "ifDisagree": "It was done without the consent of the state’s people, under a lockdown."
+    },
+    {
+      "id": "n29",
+      "axis": "Trade",
+      "direction": "Open",
+      "topic": "China investment",
+      "statement": "Chinese investment should be allowed back into Indian factories if it brings jobs.",
+      "context": "Since April 2020, investment from countries sharing a land border with India has needed government approval.",
+      "ifAgree": "Electronics makers say Chinese partners and parts are hard to replace.",
+      "ifDisagree": "China is a strategic rival and investment brings leverage."
+    },
+    {
+      "id": "n1",
+      "axis": "Ownership",
+      "direction": "Market",
+      "topic": "Privatisation",
+      "statement": "Selling Air India to the Tata group was right: governments should not run airlines.",
+      "context": "The state-owned airline was sold to Tata Sons in January 2022 after years of losses paid for by taxpayers.",
+      "ifAgree": "Supporters point to an end to bailouts and a revived airline placing record aircraft orders.",
+      "ifDisagree": "Critics say national assets should not be sold, and that the state can run services in the public interest."
+    },
+    {
+      "id": "n100",
+      "axis": "Sovereignty",
+      "direction": "Multilateral",
+      "topic": "Foreign universities",
+      "statement": "Foreign universities should be welcome to open campuses in India.",
+      "context": "UGC rules issued in 2023 allow foreign universities to set up campuses.",
+      "ifAgree": "Students could get a world-class education without leaving India.",
+      "ifDisagree": "It would deepen inequality and drain teachers from Indian universities."
+    },
+    {
+      "id": "n88",
+      "axis": "Belonging",
+      "direction": "Cosmopolitan",
+      "topic": "Constitutional patriotism",
+      "statement": "Being Indian is about the Constitution, not religion, language or ancestry.",
+      "context": "The Constitution’s preamble speaks of a sovereign, socialist, secular, democratic republic.",
+      "ifAgree": "India is a civic nation of many faiths and languages.",
+      "ifDisagree": "India is a civilisation rooted in Hindu culture."
+    },
+    {
+      "id": "n77",
+      "axis": "Faith",
+      "direction": "Secular",
+      "topic": "Discrimination",
+      "statement": "Muslims face real discrimination in housing and jobs, and the law should address it.",
+      "context": "The Sachar Committee (2006) found Muslims behind in education and jobs; Muslims are about 14% of the population.",
+      "ifAgree": "An anti-discrimination law covering private housing.",
+      "ifDisagree": "Special measures amount to “appeasement”."
+    },
+    {
+      "id": "n71",
+      "axis": "Faith",
+      "direction": "Religious",
+      "topic": "Ram temple",
+      "statement": "Building the Ram temple at Ayodhya was a national achievement.",
+      "context": "The Supreme Court awarded the site in 2019; the Prime Minister led the consecration in January 2024.",
+      "ifAgree": "It ended a centuries-old dispute and fulfilled a long-held faith.",
+      "ifDisagree": "The state should not lead a religious ceremony."
+    },
+    {
+      "id": "n51",
+      "axis": "Centralism",
+      "direction": "Central",
+      "topic": "Hindi",
+      "statement": "Hindi should be promoted as the link language across India.",
+      "context": "The 2020 education policy’s three-language formula is resisted by Tamil Nadu, which follows a two-language policy.",
+      "ifAgree": "A shared language binds a nation.",
+      "ifDisagree": "The 1965 anti-Hindi agitation in Tamil Nadu showed imposition divides India."
+    },
+    {
+      "id": "n46",
+      "axis": "Power",
+      "direction": "Pluralist",
+      "topic": "Electoral bonds",
+      "statement": "The Supreme Court was right to strike down electoral bonds as secret political funding.",
+      "context": "In February 2024 the court ended the scheme; the data showed the BJP received the largest share.",
+      "ifAgree": "Voters have a right to know who funds parties.",
+      "ifDisagree": "Bonds moved donations into the banking system."
+    },
+    {
+      "id": "n17",
+      "axis": "Redistribution",
+      "direction": "Self-reliance",
+      "topic": "Pensions",
+      "statement": "The Old Pension Scheme should not come back; guaranteed pensions for government staff are unaffordable.",
+      "context": "Several states returned to the Old Pension Scheme; the centre introduced the Unified Pension Scheme in 2024.",
+      "ifAgree": "Economists warn pension bills crowd out schools and roads.",
+      "ifDisagree": "Unions say employees deserve secure retirement income."
+    },
+    {
+      "id": "n8",
+      "axis": "Ownership",
+      "direction": "Planned",
+      "topic": "Price controls",
+      "statement": "The government should cap prices of essentials like onions and medicines when they rise sharply.",
+      "context": "India bans or limits onion exports when prices spike and caps prices of essential drugs under the Drugs Price Control Order.",
+      "ifAgree": "The price caps on cardiac stents and knee implants (2017).",
+      "ifDisagree": "Export bans hurt farmers just when prices are good for them."
+    },
+    {
+      "id": "n3",
+      "axis": "Ownership",
+      "direction": "Market",
+      "topic": "Public sector",
+      "statement": "Loss-making public companies such as BSNL should be privatised, not revived with public money.",
+      "context": "BSNL has received several government revival packages since 2019.",
+      "ifAgree": "The sale of Air India or the listing of LIC.",
+      "ifDisagree": "Keeping BSNL as a state carrier to serve remote areas."
+    },
+    {
+      "id": "n72",
+      "axis": "Faith",
+      "direction": "Religious",
+      "topic": "Cow slaughter",
+      "statement": "Cow slaughter should be banned in every state.",
+      "context": "Most states ban it; Kerala, West Bengal and several north-eastern states do not.",
+      "ifAgree": "The cow is sacred to many Hindus.",
+      "ifDisagree": "Diet is a personal choice; lynchings by cow vigilantes show the danger."
+    },
+    {
+      "id": "n101",
+      "axis": "Force",
+      "direction": "Force",
+      "topic": "Operation Sindoor",
+      "statement": "The strikes on Pakistan in Operation Sindoor were the right response to the Pahalgam attack.",
+      "context": "After 26 people were killed at Pahalgam in April 2025, India struck targets in Pakistan on 7 May; four days of fighting followed.",
+      "ifAgree": "Terror must carry a military cost.",
+      "ifDisagree": "Strikes risk a war between nuclear powers."
+    },
+    {
+      "id": "n45",
+      "axis": "Power",
+      "direction": "Strongman",
+      "topic": "Encounters",
+      "statement": "Police “encounter” killings of dreaded criminals are acceptable when courts are too slow.",
+      "context": "Uttar Pradesh police said in 2023 that 183 suspects had been killed in encounters since 2017.",
+      "ifAgree": "Gangsters feared the state and crime fell, supporters say.",
+      "ifDisagree": "Extrajudicial killing is murder by the state, whoever the victim."
+    },
+    {
+      "id": "n58",
+      "axis": "Centralism",
+      "direction": "Local",
+      "topic": "Kashmir statehood",
+      "statement": "Jammu and Kashmir’s full statehood should be restored now.",
+      "context": "Promised since 2019; Omar Abdullah’s elected government took office in 2024 with the limited powers of a union territory.",
+      "ifAgree": "An elected government should have the powers of a state.",
+      "ifDisagree": "Security conditions come first."
+    },
+    {
+      "id": "n40",
+      "axis": "Liberty",
+      "direction": "Liberty",
+      "topic": "Drugs",
+      "statement": "Drug use by adults, like the bhang sold legally in some states, should not be a crime.",
+      "context": "The NDPS Act punishes possession; Aryan Khan was arrested in 2021 and the case against him was dropped in 2022.",
+      "ifAgree": "Addiction is a health problem, and jail destroys lives.",
+      "ifDisagree": "Punjab’s drug crisis shows the need for tough laws."
+    },
+    {
+      "id": "n13",
+      "axis": "Redistribution",
+      "direction": "Welfare",
+      "topic": "Cash for women",
+      "statement": "Monthly cash for women, like Ladli Behna or Lakshmir Bhandar, is good policy, not a bribe for votes.",
+      "context": "Madhya Pradesh (2023), West Bengal (2021), Maharashtra (2024) and other states pay women ₹1,000–2,500 a month.",
+      "ifAgree": "It gives women money of their own and was copied by parties of every colour.",
+      "ifDisagree": "Critics say schemes announced before elections strain budgets."
+    },
+    {
+      "id": "n59",
+      "axis": "Centralism",
+      "direction": "Local",
+      "topic": "Delimitation",
+      "statement": "Redrawing Lok Sabha seats should not cut the share of southern states that slowed their population growth.",
+      "context": "Seat numbers have been frozen on 1971 census figures; the freeze ends after the first census taken after 2026.",
+      "ifAgree": "States should not be punished for successful family planning.",
+      "ifDisagree": "One person, one vote means seats should follow population."
+    },
+    {
+      "id": "n63",
+      "axis": "Morality",
+      "direction": "Traditional",
+      "topic": "Marital rape",
+      "statement": "Rape within marriage should not be a crime; the law would be misused and harm families.",
+      "context": "The 2023 penal code keeps an exception for husbands; challenges are pending in the Supreme Court.",
+      "ifAgree": "The central government told the Supreme Court in 2024 that criminalising it would be excessively harsh and is a social question.",
+      "ifDisagree": "Most countries now treat rape within marriage as a crime."
+    },
+    {
+      "id": "n39",
+      "axis": "Liberty",
+      "direction": "Liberty",
+      "topic": "Surveillance",
+      "statement": "Police should need a court warrant to tap phones, and spyware like Pegasus should be banned.",
+      "context": "A Supreme Court committee examined Pegasus spyware allegations in 2021–22.",
+      "ifAgree": "The Supreme Court recognised privacy as a fundamental right in 2017.",
+      "ifDisagree": "Security agencies need surveillance tools against terror."
+    },
+    {
+      "id": "n42",
+      "axis": "Power",
+      "direction": "Strongman",
+      "topic": "Demonetisation",
+      "statement": "Demonetisation showed decisive leadership, even if it caused hardship.",
+      "context": "On 8 November 2016 ₹500 and ₹1,000 notes were withdrawn overnight; the RBI later said 99.3% came back.",
+      "ifAgree": "It pushed digital payments like UPI and hit black money.",
+      "ifDisagree": "Queues, lost jobs in the informal economy and little black money caught."
+    }
+  ],
+  "parties": [
+    {
+      "id": "bjp",
+      "short": "BJP",
+      "name": "Bharatiya Janata Party",
+      "note": "Hindu nationalist party governing India since 2014.",
+      "family": "Hindu nationalism (Hindutva)",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 62
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 55
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 62
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 72
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 68
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 75
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 72
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 75
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 88
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 72
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 78
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 30
+        }
+      }
+    },
+    {
+      "id": "inc",
+      "short": "INC",
+      "name": "Indian National Congress",
+      "note": "The party of the freedom struggle; centre-left, secular and welfare-minded.",
+      "family": "Social democracy",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 45
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 72
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 45
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 40
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 38
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 55
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 38
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 25
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 48
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 40
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 40
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 55
+        }
+      }
+    },
+    {
+      "id": "aap",
+      "short": "AAP",
+      "name": "Aam Aadmi Party",
+      "note": "Anti-corruption party built on free public services; governs Punjab.",
+      "family": "Left-wing populism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 45
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 82
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 50
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 50
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 58
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 35
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 45
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 45
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 60
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 50
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 45
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 55
+        }
+      }
+    },
+    {
+      "id": "aitc",
+      "short": "TMC",
+      "name": "All India Trinamool Congress",
+      "note": "Mamata Banerjee’s Bengal-based party; lost the state in 2026.",
+      "family": "Left-wing populism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 35
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 80
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 58
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 58
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 70
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 20
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 45
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 40
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 55
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 50
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 40
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 50
+        }
+      }
+    },
+    {
+      "id": "sp",
+      "short": "SP",
+      "name": "Samajwadi Party",
+      "note": "Lohiaite socialist party of Uttar Pradesh’s backward castes and Muslims.",
+      "family": "Lohiaite socialism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 40
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 75
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 55
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 48
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 52
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 38
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 45
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 35
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 55
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 50
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 45
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 48
+        }
+      }
+    },
+    {
+      "id": "bsp",
+      "short": "BSP",
+      "name": "Bahujan Samaj Party",
+      "note": "Ambedkarite party of Dalits and the Bahujan.",
+      "family": "Ambedkarism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 40
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 80
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 50
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 52
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 68
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 45
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 32
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 25
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 48
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 50
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 48
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 42
+        }
+      }
+    },
+    {
+      "id": "cpim",
+      "short": "CPI(M)",
+      "name": "Communist Party of India (Marxist)",
+      "note": "India’s largest communist party; ruled Kerala until 2026.",
+      "family": "Democratic socialism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 18
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 85
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 65
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 45
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 45
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 40
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 28
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 8
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 38
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 58
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 28
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 55
+        }
+      }
+    },
+    {
+      "id": "dmk",
+      "short": "DMK",
+      "name": "Dravida Munnetra Kazhagam",
+      "note": "Dravidian party of social justice and state autonomy.",
+      "family": "Dravidian movement",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 40
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 82
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 50
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 40
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 45
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 12
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 30
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 12
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 48
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 48
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 35
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 50
+        }
+      }
+    },
+    {
+      "id": "tvk",
+      "short": "TVK",
+      "name": "Tamilaga Vettri Kazhagam",
+      "note": "Vijay’s party, governing Tamil Nadu since 2026; placement rests on its stated programme.",
+      "family": "Dravidian movement",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 42
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 78
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 50
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 40
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 45
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 25
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 35
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 30
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 55
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 50
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 40
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 50
+        }
+      }
+    },
+    {
+      "id": "ssubt",
+      "short": "SS (UBT)",
+      "name": "Shiv Sena (Uddhav Balasaheb Thackeray)",
+      "note": "Marathi regionalist party allied with the Congress since 2019.",
+      "family": "Conservatism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 50
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 62
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 55
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 60
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 55
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 45
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 60
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 60
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 78
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 60
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 60
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 45
+        }
+      }
+    },
+    {
+      "id": "aimim",
+      "short": "AIMIM",
+      "name": "All India Majlis-e-Ittehadul Muslimeen",
+      "note": "Hyderabad-based party of Muslim political representation.",
+      "family": "Muslim democracy",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 42
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 72
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 50
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 35
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 42
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 40
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 62
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 72
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 40
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 45
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 40
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 45
+        }
+      }
+    },
+    {
+      "id": "rjd",
+      "short": "RJD",
+      "name": "Rashtriya Janata Dal",
+      "note": "Lalu Prasad’s Mandal-era party of Bihar.",
+      "family": "Lohiaite socialism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 38
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 78
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 55
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 48
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 58
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 40
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 42
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 30
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 50
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 50
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 45
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 42
+        }
+      }
+    },
+    {
+      "id": "tdp",
+      "short": "TDP",
+      "name": "Telugu Desam Party",
+      "note": "Andhra Pradesh party of Chandrababu Naidu, a BJP ally since 2024.",
+      "family": "Neoliberalism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 65
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 62
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 42
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 55
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 50
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 35
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 50
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 45
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 55
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 42
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 45
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 42
+        }
+      }
+    },
+    {
+      "id": "jknc",
+      "short": "JKNC",
+      "name": "Jammu & Kashmir National Conference",
+      "note": "Kashmir’s oldest party, seeking autonomy and statehood.",
+      "family": "Centrism",
+      "axes": {
+        "econ": {
+          "name": "Ownership",
+          "low": "Planned",
+          "high": "Market",
+          "value": 48
+        },
+        "welfare": {
+          "name": "Redistribution",
+          "low": "Self-reliance",
+          "high": "Welfare",
+          "value": 65
+        },
+        "trade": {
+          "name": "Trade",
+          "low": "Open",
+          "high": "Protected",
+          "value": 45
+        },
+        "liberty": {
+          "name": "Liberty",
+          "low": "Liberty",
+          "high": "Order",
+          "value": 32
+        },
+        "power": {
+          "name": "Power",
+          "low": "Pluralist",
+          "high": "Strongman",
+          "value": 38
+        },
+        "center": {
+          "name": "Centralism",
+          "low": "Local",
+          "high": "Central",
+          "value": 10
+        },
+        "values": {
+          "name": "Morality",
+          "low": "Progressive",
+          "high": "Traditional",
+          "value": 45
+        },
+        "faith": {
+          "name": "Faith",
+          "low": "Secular",
+          "high": "Religious",
+          "value": 45
+        },
+        "nation": {
+          "name": "Belonging",
+          "low": "Cosmopolitan",
+          "high": "National",
+          "value": 35
+        },
+        "world": {
+          "name": "Sovereignty",
+          "low": "Multilateral",
+          "high": "Sovereign",
+          "value": 40
+        },
+        "force": {
+          "name": "Force",
+          "low": "Restraint",
+          "high": "Force",
+          "value": 25
+        },
+        "eco": {
+          "name": "Planet",
+          "low": "Growth",
+          "high": "Ecology",
+          "value": 50
+        }
+      }
+    }
+  ],
+  "indianFigures": [
+    "modi",
+    "rahul",
+    "gandhi",
+    "nehru",
+    "indira",
+    "vajpayee",
+    "amitshah",
+    "yogi",
+    "rajnath",
+    "gadkari",
+    "sitharaman",
+    "jaishankar",
+    "himanta",
+    "fadnavis",
+    "chouhan",
+    "advani",
+    "sushma",
+    "jaitley",
+    "mohanbhagwat",
+    "annamalai",
+    "tejasvisurya",
+    "shinde",
+    "pawankalyan",
+    "smriti",
+    "kangana",
+    "hemamalini",
+    "arungovil",
+    "sureshgopi",
+    "pareshrawal",
+    "gambhir",
+    "babita",
+    "manmohan",
+    "sonia",
+    "priyanka",
+    "kharge",
+    "tharoor",
+    "chidambaram",
+    "jairam",
+    "revanth",
+    "siddaramaiah",
+    "rajivgandhi",
+    "narasimharao",
+    "shastri",
+    "azad",
+    "patel",
+    "kejriwal",
+    "bhagwantmann",
+    "atishi",
+    "harbhajan",
+    "mamata",
+    "mahua",
+    "yusufpathan",
+    "shatrughan",
+    "akhilesh",
+    "mulayam",
+    "jayabachchan",
+    "mayawati",
+    "kanshiram",
+    "chandrashekhar",
+    "jignesh",
+    "lalu",
+    "tejashwi",
+    "nitish",
+    "prashantkishor",
+    "pawar",
+    "uddhav",
+    "rajthackeray",
+    "balthackeray",
+    "owaisi",
+    "omar",
+    "mehbooba",
+    "farooq",
+    "mkstalin",
+    "udhayanidhi",
+    "karunanidhi",
+    "annadurai",
+    "periyar",
+    "jayalalithaa",
+    "vijay",
+    "kamal",
+    "naveen",
+    "naidu",
+    "jagan",
+    "kcr",
+    "hemantsoren",
+    "vinesh",
+    "kanhaiya",
+    "pinarayi",
+    "yechury",
+    "jyotibasu",
+    "ems",
+    "ambedkar",
+    "bose",
+    "bhagatsingh",
+    "savarkar",
+    "hedgewar",
+    "golwalkar",
+    "mookerjee",
+    "deendayal",
+    "lohia",
+    "jp",
+    "rajaji",
+    "morarji",
+    "charansingh",
+    "vpsingh",
+    "anupamkher",
+    "vivekagnihotri",
+    "akshay",
+    "amitabh",
+    "shahrukh",
+    "aamir",
+    "deepika",
+    "swara",
+    "prakashraj",
+    "naseeruddin",
+    "javedakhtar",
+    "shabana",
+    "anuragkashyap",
+    "sakshi",
+    "arundhatiroy",
+    "medhapatkar",
+    "yogendrayadav",
+    "prashantbhushan",
+    "ramachandraguha",
+    "amartyasen",
+    "raghuramrajan",
+    "narayanamurthy",
+    "nilekani",
+    "ratantata",
+    "annahazare",
+    "sonamwangchuk",
+    "sadhguru",
+    "ramdev",
+    "srisri",
+    "arnab",
+    "ravishkumar",
+    "dhruvrathee",
+    "kunalkamra",
+    "virdas"
+  ],
+  "trivia": [
+    "India’s Constitution, which came into force on 26 January 1950, is the longest written national constitution in the world.",
+    "The 2024 general election had about 97 crore registered voters, the largest electorate ever.",
+    "The words “socialist” and “secular” were added to the preamble by the 42nd Amendment in 1976, during the Emergency.",
+    "Universal adult suffrage applied from India’s first general election in 1951–52.",
+    "The anti-defection law was added to the Constitution in 1985.",
+    "The Right to Information Act of 2005 lets any citizen demand government records within 30 days.",
+    "The Supreme Court’s Kesavananda Bharati judgement (1973) held that Parliament cannot change the Constitution’s basic structure.",
+    "The Mandal Commission’s OBC reservation was implemented in 1990 and upheld in 1992 with a 50% cap.",
+    "UPI processed more than 18 billion payments a month in 2025.",
+    "India’s Lok Sabha has 543 elected seats, frozen on the 1971 census until after the first census taken after 2026.",
+    "The Supreme Court decriminalised homosexuality in Navtej Singh Johar v. Union of India, 2018.",
+    "Privacy was declared a fundamental right in Justice K. S. Puttaswamy v. Union of India, 2017.",
+    "The 73rd Amendment (1992) reserved one-third of panchayat seats for women; many states now reserve half.",
+    "The first non-Congress government at the centre was the Janata Party’s, in 1977.",
+    "Tamil Nadu’s 69% reservation is protected by the Ninth Schedule of the Constitution.",
+    "The Emergency lasted 21 months, from June 1975 to March 1977."
+  ]
+}

@@ -107,14 +107,14 @@
       "similarity": 89
     },
     {
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
+      "similarity": 88
+    },
+    {
       "id": "authnat",
       "name": "Authoritarian nationalism",
       "similarity": 85
-    },
-    {
-      "id": "natcon",
-      "name": "National conservatism",
-      "similarity": 84
     }
   ],
   "laws": [

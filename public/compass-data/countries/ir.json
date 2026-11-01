@@ -107,14 +107,14 @@
       "similarity": 95
     },
     {
-      "id": "fascism",
-      "name": "Fascism",
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
       "similarity": 78
     },
     {
-      "id": "authnat",
-      "name": "Authoritarian nationalism",
-      "similarity": 76
+      "id": "fascism",
+      "name": "Fascism",
+      "similarity": 78
     }
   ],
   "laws": [

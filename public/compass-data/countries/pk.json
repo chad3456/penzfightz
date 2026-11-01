@@ -102,6 +102,11 @@
   },
   "nearestFamilies": [
     {
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
+      "similarity": 86
+    },
+    {
       "id": "natcon",
       "name": "National conservatism",
       "similarity": 83
@@ -109,11 +114,6 @@
     {
       "id": "develop",
       "name": "Developmental authoritarianism",
-      "similarity": 80
-    },
-    {
-      "id": "theocracy",
-      "name": "Theocracy",
       "similarity": 80
     }
   ],

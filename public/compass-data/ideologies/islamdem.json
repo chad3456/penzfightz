@@ -1,0 +1,180 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "islamdem",
+  "name": "Muslim democracy",
+  "description": "Religious values and minority rights pursued within a democratic constitution.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 45
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 65
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 50
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 45
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 38
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 45
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 75
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 88
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 42
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 55
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 40
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 45
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 59
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 54.3
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 58
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 27.3
+    },
+    "nearest8valuesIdeology": "Christian Democracy",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "owaisi",
+      "name": "Asaduddin Owaisi",
+      "role": "AIMIM president; MP for Hyderabad",
+      "years": "2004–",
+      "tag": "Muslim democracy",
+      "school": "AIMIM"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Asaduddin Owaisi",
+      "similarity": 90
+    },
+    {
+      "name": "Maulana Abul Kalam Azad",
+      "similarity": 85
+    },
+    {
+      "name": "Sri Sri Ravi Shankar",
+      "similarity": 85
+    },
+    {
+      "name": "Imran Khan",
+      "similarity": 84
+    },
+    {
+      "name": "Morarji Desai",
+      "similarity": 84
+    },
+    {
+      "name": "Ferdinand Marcos Jr.",
+      "similarity": 82
+    },
+    {
+      "name": "Tarique Rahman",
+      "similarity": 82
+    },
+    {
+      "name": "Pawan Kalyan",
+      "similarity": 82
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Philippines",
+      "similarity": 83
+    },
+    {
+      "name": "Indonesia",
+      "similarity": 81
+    },
+    {
+      "name": "Italy",
+      "similarity": 80
+    },
+    {
+      "name": "Bangladesh",
+      "similarity": 80
+    },
+    {
+      "name": "Brazil",
+      "similarity": 79
+    },
+    {
+      "name": "India",
+      "similarity": 78
+    },
+    {
+      "name": "Nigeria",
+      "similarity": 78
+    },
+    {
+      "name": "South Africa",
+      "similarity": 76
+    }
+  ]
+}

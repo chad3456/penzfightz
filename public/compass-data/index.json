@@ -316,6 +316,56 @@
       "file": "ideologies/anticol.json"
     },
     {
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
+      "file": "ideologies/hindutva.json"
+    },
+    {
+      "id": "nehruvian",
+      "name": "Nehruvian socialism",
+      "file": "ideologies/nehruvian.json"
+    },
+    {
+      "id": "ambedkarite",
+      "name": "Ambedkarism",
+      "file": "ideologies/ambedkarite.json"
+    },
+    {
+      "id": "dravidian",
+      "name": "Dravidian movement",
+      "file": "ideologies/dravidian.json"
+    },
+    {
+      "id": "gandhian",
+      "name": "Gandhism",
+      "file": "ideologies/gandhian.json"
+    },
+    {
+      "id": "lohiaite",
+      "name": "Lohiaite socialism",
+      "file": "ideologies/lohiaite.json"
+    },
+    {
+      "id": "maoism",
+      "name": "Maoism",
+      "file": "ideologies/maoism.json"
+    },
+    {
+      "id": "neoliberal",
+      "name": "Neoliberalism",
+      "file": "ideologies/neoliberal.json"
+    },
+    {
+      "id": "islamdem",
+      "name": "Muslim democracy",
+      "file": "ideologies/islamdem.json"
+    },
+    {
+      "id": "moderate",
+      "name": "Moderate",
+      "file": "ideologies/moderate.json"
+    },
+    {
       "id": "fascism",
       "name": "Fascism",
       "file": "ideologies/fascism.json"
@@ -323,6 +373,7 @@
   ],
   "files": {
     "leaders": "leaders.json",
-    "socialAtlas": "social-atlas.json"
+    "socialAtlas": "social-atlas.json",
+    "indiaCompass": "india-compass.json"
   }
 }

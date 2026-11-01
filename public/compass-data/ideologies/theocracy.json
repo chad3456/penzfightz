@@ -131,6 +131,10 @@
       "similarity": 85
     },
     {
+      "name": "Yogi Adityanath",
+      "similarity": 85
+    },
+    {
       "name": "Recep Tayyip Erdoğan",
       "similarity": 83
     },
@@ -139,16 +143,12 @@
       "similarity": 82
     },
     {
-      "name": "Benito Mussolini",
-      "similarity": 79
+      "name": "Amit Shah",
+      "similarity": 81
     },
     {
-      "name": "Mohammed bin Salman",
-      "similarity": 78
-    },
-    {
-      "name": "Abdel Fattah el-Sisi",
-      "similarity": 78
+      "name": "M. S. Golwalkar",
+      "similarity": 81
     }
   ],
   "closestCountries": [

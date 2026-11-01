@@ -187,9 +187,121 @@
       "years": "1969–1976, 1982–1986",
       "tag": "Social democracy",
       "school": "Swedish social democracy"
+    },
+    {
+      "id": "sonia",
+      "name": "Sonia Gandhi",
+      "role": "Congress president",
+      "years": "1998–2017, 2019–2022",
+      "tag": "Social democracy",
+      "school": "Congress welfarism"
+    },
+    {
+      "id": "priyanka",
+      "name": "Priyanka Gandhi Vadra",
+      "role": "Congress MP for Wayanad",
+      "years": "2024–",
+      "tag": "Social democracy",
+      "school": "Congress centre-left"
+    },
+    {
+      "id": "kharge",
+      "name": "Mallikarjun Kharge",
+      "role": "Congress president; Leader of the Opposition in the Rajya Sabha",
+      "years": "2022–",
+      "tag": "Social democracy",
+      "school": "Congress"
+    },
+    {
+      "id": "jairam",
+      "name": "Jairam Ramesh",
+      "role": "Congress general secretary (communications); former Environment Minister",
+      "years": "2009–2011 (minister)",
+      "tag": "Social democracy",
+      "school": "Congress environmentalism"
+    },
+    {
+      "id": "revanth",
+      "name": "Revanth Reddy",
+      "role": "Chief Minister of Telangana",
+      "years": "2023–",
+      "tag": "Social democracy",
+      "school": "Congress"
+    },
+    {
+      "id": "siddaramaiah",
+      "name": "Siddaramaiah",
+      "role": "Chief Minister of Karnataka",
+      "years": "2013–2018, 2023–",
+      "tag": "Social democracy",
+      "school": "AHINDA social justice"
+    },
+    {
+      "id": "vinesh",
+      "name": "Vinesh Phogat",
+      "role": "Congress MLA, Haryana; wrestler",
+      "years": "2024–",
+      "tag": "Social democracy",
+      "school": "Congress"
+    },
+    {
+      "id": "shabana",
+      "name": "Shabana Azmi",
+      "role": "Actor and activist",
+      "years": "1974–",
+      "tag": "Social democracy",
+      "school": "Left-liberal activism"
+    },
+    {
+      "id": "sakshi",
+      "name": "Sakshi Malik",
+      "role": "Wrestler",
+      "years": "2010–2023",
+      "tag": "Social democracy",
+      "school": "Wrestlers’ protest"
+    },
+    {
+      "id": "amartyasen",
+      "name": "Amartya Sen",
+      "role": "Economist",
+      "years": "1960s–",
+      "tag": "Social democracy",
+      "school": "Capability approach"
+    },
+    {
+      "id": "ravishkumar",
+      "name": "Ravish Kumar",
+      "role": "Journalist",
+      "years": "1996–",
+      "tag": "Social democracy",
+      "school": "Independent journalism"
     }
   ],
   "closestLeaders": [
+    {
+      "name": "Jairam Ramesh",
+      "similarity": 91
+    },
+    {
+      "name": "Aamir Khan",
+      "similarity": 91
+    },
+    {
+      "name": "Swara Bhasker",
+      "similarity": 91
+    },
+    {
+      "name": "Naseeruddin Shah",
+      "similarity": 91
+    },
+    {
+      "name": "Shabana Azmi",
+      "similarity": 91
+    },
+    {
+      "name": "Vir Das",
+      "similarity": 91
+    },
     {
       "name": "Lee Jae-myung",
       "similarity": 90
@@ -197,30 +309,6 @@
     {
       "name": "Anthony Albanese",
       "similarity": 90
-    },
-    {
-      "name": "Barack Obama",
-      "similarity": 90
-    },
-    {
-      "name": "Rahul Gandhi",
-      "similarity": 90
-    },
-    {
-      "name": "Luiz Inácio Lula da Silva",
-      "similarity": 89
-    },
-    {
-      "name": "Cyril Ramaphosa",
-      "similarity": 89
-    },
-    {
-      "name": "Joe Biden",
-      "similarity": 89
-    },
-    {
-      "name": "Nelson Mandela",
-      "similarity": 89
     }
   ],
   "closestCountries": [

@@ -106,32 +106,32 @@
       "similarity": 80
     },
     {
+      "name": "Arundhati Roy",
+      "similarity": 80
+    },
+    {
+      "name": "Medha Patkar",
+      "similarity": 79
+    },
+    {
+      "name": "Kunal Kamra",
+      "similarity": 77
+    },
+    {
+      "name": "Prashant Bhushan",
+      "similarity": 76
+    },
+    {
       "name": "Pedro Sánchez",
       "similarity": 75
     },
     {
-      "name": "Olof Palme",
-      "similarity": 71
+      "name": "Swara Bhasker",
+      "similarity": 75
     },
     {
-      "name": "Andy Burnham",
-      "similarity": 69
-    },
-    {
-      "name": "Bernie Sanders",
-      "similarity": 69
-    },
-    {
-      "name": "Nelson Mandela",
-      "similarity": 69
-    },
-    {
-      "name": "Rob Jetten",
-      "similarity": 68
-    },
-    {
-      "name": "Malala Yousafzai",
-      "similarity": 68
+      "name": "Amartya Sen",
+      "similarity": 75
     }
   ],
   "closestCountries": [

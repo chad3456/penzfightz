@@ -102,19 +102,19 @@
   },
   "nearestFamilies": [
     {
+      "id": "lohiaite",
+      "name": "Lohiaite socialism",
+      "similarity": 88
+    },
+    {
+      "id": "moderate",
+      "name": "Moderate",
+      "similarity": 86
+    },
+    {
       "id": "lpop",
       "name": "Left-wing populism",
       "similarity": 83
-    },
-    {
-      "id": "socdem",
-      "name": "Social democracy",
-      "similarity": 81
-    },
-    {
-      "id": "centrist",
-      "name": "Centrism",
-      "similarity": 77
     }
   ],
   "laws": [

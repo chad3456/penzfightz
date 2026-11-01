@@ -107,14 +107,14 @@
       "similarity": 79
     },
     {
+      "id": "dravidian",
+      "name": "Dravidian movement",
+      "similarity": 76
+    },
+    {
       "id": "soclib",
       "name": "Social liberalism",
       "similarity": 75
-    },
-    {
-      "id": "socdem",
-      "name": "Social democracy",
-      "similarity": 74
     }
   ],
   "laws": [

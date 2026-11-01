@@ -101,20 +101,28 @@
   },
   "taggedLeaders": [
     {
-      "id": "gandhi",
-      "name": "Mahatma Gandhi",
-      "role": "Leader of the Indian independence movement",
-      "years": "1915–1948",
-      "tag": "Green politics",
-      "school": "Gandhism: non-violence and village self-rule"
-    },
-    {
       "id": "thunberg",
       "name": "Greta Thunberg",
       "role": "Climate activist",
       "years": "2018–",
       "tag": "Green politics",
       "school": "Climate activism"
+    },
+    {
+      "id": "medhapatkar",
+      "name": "Medha Patkar",
+      "role": "Activist",
+      "years": "1985–",
+      "tag": "Green politics",
+      "school": "Narmada Bachao Andolan"
+    },
+    {
+      "id": "sonamwangchuk",
+      "name": "Sonam Wangchuk",
+      "role": "Educator and climate activist",
+      "years": "1988–",
+      "tag": "Green politics",
+      "school": "Ladakh autonomy"
     }
   ],
   "closestLeaders": [
@@ -127,28 +135,28 @@
       "similarity": 87
     },
     {
-      "name": "Jacinda Ardern",
-      "similarity": 81
+      "name": "Dhruv Rathee",
+      "similarity": 84
     },
     {
-      "name": "Malala Yousafzai",
-      "similarity": 80
+      "name": "Medha Patkar",
+      "similarity": 83
     },
     {
-      "name": "Rob Jetten",
-      "similarity": 79
+      "name": "Prashant Bhushan",
+      "similarity": 83
     },
     {
-      "name": "Gustavo Petro",
-      "similarity": 79
+      "name": "Ramachandra Guha",
+      "similarity": 83
     },
     {
-      "name": "Olof Palme",
-      "similarity": 79
+      "name": "Amartya Sen",
+      "similarity": 83
     },
     {
-      "name": "Andy Burnham",
-      "similarity": 78
+      "name": "Kunal Kamra",
+      "similarity": 83
     }
   ],
   "closestCountries": [

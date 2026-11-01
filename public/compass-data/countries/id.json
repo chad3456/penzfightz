@@ -107,14 +107,14 @@
       "similarity": 85
     },
     {
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
+      "similarity": 82
+    },
+    {
       "id": "rpop",
       "name": "Right-wing populism",
       "similarity": 81
-    },
-    {
-      "id": "conservative",
-      "name": "Conservatism",
-      "similarity": 80
     }
   ],
   "laws": [

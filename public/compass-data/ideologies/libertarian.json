@@ -111,6 +111,10 @@
   ],
   "closestLeaders": [
     {
+      "name": "C. Rajagopalachari",
+      "similarity": 74
+    },
+    {
       "name": "Alexei Navalny",
       "similarity": 73
     },
@@ -119,28 +123,24 @@
       "similarity": 72
     },
     {
+      "name": "Raghuram Rajan",
+      "similarity": 70
+    },
+    {
+      "name": "N. R. Narayana Murthy",
+      "similarity": 68
+    },
+    {
       "name": "Mark Carney",
+      "similarity": 67
+    },
+    {
+      "name": "Omar Abdullah",
       "similarity": 67
     },
     {
       "name": "Friedrich Merz",
       "similarity": 66
-    },
-    {
-      "name": "Elon Musk",
-      "similarity": 66
-    },
-    {
-      "name": "Arnold Schwarzenegger",
-      "similarity": 66
-    },
-    {
-      "name": "Péter Magyar",
-      "similarity": 65
-    },
-    {
-      "name": "Angela Merkel",
-      "similarity": 65
     }
   ],
   "closestCountries": [

@@ -107,14 +107,14 @@
       "similarity": 89
     },
     {
+      "id": "hindutva",
+      "name": "Hindu nationalism (Hindutva)",
+      "similarity": 86
+    },
+    {
       "id": "rpop",
       "name": "Right-wing populism",
       "similarity": 85
-    },
-    {
-      "id": "conservative",
-      "name": "Conservatism",
-      "similarity": 83
     }
   ],
   "laws": [
@@ -168,8 +168,8 @@
       "name": "Narendra Modi",
       "role": "Prime Minister of India",
       "years": "2014–",
-      "tag": "National conservatism",
-      "school": "Hindu nationalism"
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Hindutva (BJP)"
     },
     {
       "id": "rahul",
@@ -184,7 +184,7 @@
       "name": "Mahatma Gandhi",
       "role": "Leader of the Indian independence movement",
       "years": "1915–1948",
-      "tag": "Green politics",
+      "tag": "Gandhism",
       "school": "Gandhism: non-violence and village self-rule"
     },
     {
@@ -192,7 +192,7 @@
       "name": "Jawaharlal Nehru",
       "role": "Prime Minister of India",
       "years": "1947–1964",
-      "tag": "Democratic socialism",
+      "tag": "Nehruvian socialism",
       "school": "Nehruvian socialism"
     },
     {
@@ -200,7 +200,7 @@
       "name": "Indira Gandhi",
       "role": "Prime Minister of India",
       "years": "1966–1977, 1980–1984",
-      "tag": "Left-wing populism",
+      "tag": "Nehruvian socialism",
       "school": "Indira’s Congress socialism"
     },
     {
@@ -208,8 +208,1072 @@
       "name": "Atal Bihari Vajpayee",
       "role": "Prime Minister of India",
       "years": "1996, 1998–2004",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Moderate Hindutva (BJP)"
+    },
+    {
+      "id": "amitshah",
+      "name": "Amit Shah",
+      "role": "Union Home Minister",
+      "years": "2019–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Hindutva (BJP)"
+    },
+    {
+      "id": "yogi",
+      "name": "Yogi Adityanath",
+      "role": "Chief Minister of Uttar Pradesh",
+      "years": "2017–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Hindutva (Gorakhnath Math)"
+    },
+    {
+      "id": "rajnath",
+      "name": "Rajnath Singh",
+      "role": "Union Defence Minister",
+      "years": "2019–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "gadkari",
+      "name": "Nitin Gadkari",
+      "role": "Union Minister of Road Transport",
+      "years": "2014–",
       "tag": "Conservatism",
-      "school": "Moderate Hindu nationalism"
+      "school": "BJP pragmatism"
+    },
+    {
+      "id": "sitharaman",
+      "name": "Nirmala Sitharaman",
+      "role": "Union Finance Minister",
+      "years": "2019–",
+      "tag": "Conservatism",
+      "school": "BJP"
+    },
+    {
+      "id": "jaishankar",
+      "name": "S. Jaishankar",
+      "role": "Union External Affairs Minister",
+      "years": "2019–",
+      "tag": "Conservatism",
+      "school": "Strategic autonomy"
+    },
+    {
+      "id": "himanta",
+      "name": "Himanta Biswa Sarma",
+      "role": "Chief Minister of Assam",
+      "years": "2021–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Hindutva (BJP)"
+    },
+    {
+      "id": "fadnavis",
+      "name": "Devendra Fadnavis",
+      "role": "Chief Minister of Maharashtra",
+      "years": "2014–2019, 2024–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "chouhan",
+      "name": "Shivraj Singh Chouhan",
+      "role": "Union Minister of Agriculture; former Chief Minister of Madhya Pradesh",
+      "years": "2005–2023 (CM)",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP welfarism"
+    },
+    {
+      "id": "advani",
+      "name": "L. K. Advani",
+      "role": "Deputy Prime Minister",
+      "years": "2002–2004",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Ram Janmabhoomi movement"
+    },
+    {
+      "id": "sushma",
+      "name": "Sushma Swaraj",
+      "role": "External Affairs Minister",
+      "years": "2014–2019",
+      "tag": "Conservatism",
+      "school": "BJP"
+    },
+    {
+      "id": "jaitley",
+      "name": "Arun Jaitley",
+      "role": "Union Finance Minister",
+      "years": "2014–2019",
+      "tag": "Conservatism",
+      "school": "BJP economic liberalism"
+    },
+    {
+      "id": "mohanbhagwat",
+      "name": "Mohan Bhagwat",
+      "role": "Sarsanghchalak (chief) of the RSS",
+      "years": "2009–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "RSS"
+    },
+    {
+      "id": "annamalai",
+      "name": "K. Annamalai",
+      "role": "Tamil Nadu BJP president",
+      "years": "2021–2025",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "tejasvisurya",
+      "name": "Tejasvi Surya",
+      "role": "BJP MP for Bangalore South",
+      "years": "2019–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "shinde",
+      "name": "Eknath Shinde",
+      "role": "Deputy Chief Minister of Maharashtra",
+      "years": "2022–2024 (CM)",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Shiv Sena (Shinde)"
+    },
+    {
+      "id": "pawankalyan",
+      "name": "Pawan Kalyan",
+      "role": "Deputy Chief Minister of Andhra Pradesh; Telugu film star",
+      "years": "2024–",
+      "tag": "Conservatism",
+      "school": "Jana Sena"
+    },
+    {
+      "id": "smriti",
+      "name": "Smriti Irani",
+      "role": "Former Union Minister; former TV actor",
+      "years": "2014–2024",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "kangana",
+      "name": "Kangana Ranaut",
+      "role": "BJP MP for Mandi; actor",
+      "years": "2024–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "hemamalini",
+      "name": "Hema Malini",
+      "role": "BJP MP for Mathura; actor",
+      "years": "2014–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "arungovil",
+      "name": "Arun Govil",
+      "role": "BJP MP for Meerut; actor",
+      "years": "2024–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "sureshgopi",
+      "name": "Suresh Gopi",
+      "role": "Union Minister of State; Malayalam actor",
+      "years": "2024–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "pareshrawal",
+      "name": "Paresh Rawal",
+      "role": "Actor; former BJP MP",
+      "years": "2014–2019",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "gambhir",
+      "name": "Gautam Gambhir",
+      "role": "India cricket head coach; former BJP MP",
+      "years": "2019–2024 (MP)",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "babita",
+      "name": "Babita Phogat",
+      "role": "Wrestler; BJP politician",
+      "years": "2019–",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "BJP"
+    },
+    {
+      "id": "manmohan",
+      "name": "Manmohan Singh",
+      "role": "Prime Minister of India",
+      "years": "2004–2014",
+      "tag": "Social liberalism",
+      "school": "Liberalisation with welfare"
+    },
+    {
+      "id": "sonia",
+      "name": "Sonia Gandhi",
+      "role": "Congress president",
+      "years": "1998–2017, 2019–2022",
+      "tag": "Social democracy",
+      "school": "Congress welfarism"
+    },
+    {
+      "id": "priyanka",
+      "name": "Priyanka Gandhi Vadra",
+      "role": "Congress MP for Wayanad",
+      "years": "2024–",
+      "tag": "Social democracy",
+      "school": "Congress centre-left"
+    },
+    {
+      "id": "kharge",
+      "name": "Mallikarjun Kharge",
+      "role": "Congress president; Leader of the Opposition in the Rajya Sabha",
+      "years": "2022–",
+      "tag": "Social democracy",
+      "school": "Congress"
+    },
+    {
+      "id": "tharoor",
+      "name": "Shashi Tharoor",
+      "role": "Congress MP for Thiruvananthapuram",
+      "years": "2009–",
+      "tag": "Social liberalism",
+      "school": "Liberal Congress"
+    },
+    {
+      "id": "chidambaram",
+      "name": "P. Chidambaram",
+      "role": "Former Union Finance and Home Minister",
+      "years": "1996–2014",
+      "tag": "Social liberalism",
+      "school": "Congress liberalism"
+    },
+    {
+      "id": "jairam",
+      "name": "Jairam Ramesh",
+      "role": "Congress general secretary (communications); former Environment Minister",
+      "years": "2009–2011 (minister)",
+      "tag": "Social democracy",
+      "school": "Congress environmentalism"
+    },
+    {
+      "id": "revanth",
+      "name": "Revanth Reddy",
+      "role": "Chief Minister of Telangana",
+      "years": "2023–",
+      "tag": "Social democracy",
+      "school": "Congress"
+    },
+    {
+      "id": "siddaramaiah",
+      "name": "Siddaramaiah",
+      "role": "Chief Minister of Karnataka",
+      "years": "2013–2018, 2023–",
+      "tag": "Social democracy",
+      "school": "AHINDA social justice"
+    },
+    {
+      "id": "rajivgandhi",
+      "name": "Rajiv Gandhi",
+      "role": "Prime Minister of India",
+      "years": "1984–1989",
+      "tag": "Centrism",
+      "school": "Congress modernisation"
+    },
+    {
+      "id": "narasimharao",
+      "name": "P. V. Narasimha Rao",
+      "role": "Prime Minister of India",
+      "years": "1991–1996",
+      "tag": "Neoliberalism",
+      "school": "1991 liberalisation"
+    },
+    {
+      "id": "shastri",
+      "name": "Lal Bahadur Shastri",
+      "role": "Prime Minister of India",
+      "years": "1964–1966",
+      "tag": "Nehruvian socialism",
+      "school": "Congress"
+    },
+    {
+      "id": "azad",
+      "name": "Maulana Abul Kalam Azad",
+      "role": "Education Minister",
+      "years": "1947–1958",
+      "tag": "Nehruvian socialism",
+      "school": "Composite nationalism"
+    },
+    {
+      "id": "patel",
+      "name": "Vallabhbhai Patel",
+      "role": "Deputy Prime Minister and Home Minister",
+      "years": "1947–1950",
+      "tag": "Conservatism",
+      "school": "Congress right"
+    },
+    {
+      "id": "kejriwal",
+      "name": "Arvind Kejriwal",
+      "role": "AAP national convener; former Chief Minister of Delhi",
+      "years": "2015–2024 (CM)",
+      "tag": "Left-wing populism",
+      "school": "AAP welfare populism"
+    },
+    {
+      "id": "bhagwantmann",
+      "name": "Bhagwant Mann",
+      "role": "Chief Minister of Punjab",
+      "years": "2022–",
+      "tag": "Left-wing populism",
+      "school": "AAP"
+    },
+    {
+      "id": "atishi",
+      "name": "Atishi",
+      "role": "Former Chief Minister of Delhi",
+      "years": "Sept 2024–Feb 2025",
+      "tag": "Left-wing populism",
+      "school": "AAP"
+    },
+    {
+      "id": "harbhajan",
+      "name": "Harbhajan Singh",
+      "role": "AAP Rajya Sabha MP; former cricketer",
+      "years": "2022–",
+      "tag": "Left-wing populism",
+      "school": "AAP"
+    },
+    {
+      "id": "mamata",
+      "name": "Mamata Banerjee",
+      "role": "TMC chair; Chief Minister of West Bengal",
+      "years": "2011–2026 (CM)",
+      "tag": "Left-wing populism",
+      "school": "Trinamool populism"
+    },
+    {
+      "id": "mahua",
+      "name": "Mahua Moitra",
+      "role": "TMC MP for Krishnanagar",
+      "years": "2019–",
+      "tag": "Social liberalism",
+      "school": "Trinamool"
+    },
+    {
+      "id": "yusufpathan",
+      "name": "Yusuf Pathan",
+      "role": "TMC MP for Baharampur; former cricketer",
+      "years": "2024–",
+      "tag": "Left-wing populism",
+      "school": "Trinamool"
+    },
+    {
+      "id": "shatrughan",
+      "name": "Shatrughan Sinha",
+      "role": "TMC MP for Asansol; actor",
+      "years": "2022–",
+      "tag": "Centrism",
+      "school": "Trinamool"
+    },
+    {
+      "id": "akhilesh",
+      "name": "Akhilesh Yadav",
+      "role": "Samajwadi Party president",
+      "years": "2012–2017 (CM)",
+      "tag": "Lohiaite socialism",
+      "school": "Samajwadi"
+    },
+    {
+      "id": "mulayam",
+      "name": "Mulayam Singh Yadav",
+      "role": "Founder of the Samajwadi Party",
+      "years": "1989–2007 (CM, three terms)",
+      "tag": "Lohiaite socialism",
+      "school": "Samajwadi"
+    },
+    {
+      "id": "jayabachchan",
+      "name": "Jaya Bachchan",
+      "role": "Samajwadi Party Rajya Sabha MP; actor",
+      "years": "2004–",
+      "tag": "Lohiaite socialism",
+      "school": "Samajwadi"
+    },
+    {
+      "id": "mayawati",
+      "name": "Mayawati",
+      "role": "BSP president; four-time Chief Minister of Uttar Pradesh",
+      "years": "1995–2012 (CM)",
+      "tag": "Ambedkarism",
+      "school": "Bahujan politics"
+    },
+    {
+      "id": "kanshiram",
+      "name": "Kanshi Ram",
+      "role": "Founder of the Bahujan Samaj Party",
+      "years": "1984–2006",
+      "tag": "Ambedkarism",
+      "school": "Bahujan politics"
+    },
+    {
+      "id": "chandrashekhar",
+      "name": "Chandrashekhar Azad",
+      "role": "Aazad Samaj Party MP for Nagina",
+      "years": "2024–",
+      "tag": "Ambedkarism",
+      "school": "Bhim Army"
+    },
+    {
+      "id": "jignesh",
+      "name": "Jignesh Mevani",
+      "role": "Congress MLA, Gujarat; Dalit activist",
+      "years": "2017–",
+      "tag": "Ambedkarism",
+      "school": "Dalit rights"
+    },
+    {
+      "id": "lalu",
+      "name": "Lalu Prasad Yadav",
+      "role": "RJD president; former Chief Minister of Bihar",
+      "years": "1990–1997 (CM)",
+      "tag": "Lohiaite socialism",
+      "school": "Mandal politics (RJD)"
+    },
+    {
+      "id": "tejashwi",
+      "name": "Tejashwi Yadav",
+      "role": "RJD leader; former Deputy Chief Minister of Bihar",
+      "years": "2015–",
+      "tag": "Lohiaite socialism",
+      "school": "RJD"
+    },
+    {
+      "id": "nitish",
+      "name": "Nitish Kumar",
+      "role": "Chief Minister of Bihar",
+      "years": "2005–2014, 2015–",
+      "tag": "Lohiaite socialism",
+      "school": "JD(U) socialism"
+    },
+    {
+      "id": "prashantkishor",
+      "name": "Prashant Kishor",
+      "role": "Founder of Jan Suraaj",
+      "years": "2024–",
+      "tag": "Centrism",
+      "school": "Jan Suraaj"
+    },
+    {
+      "id": "pawar",
+      "name": "Sharad Pawar",
+      "role": "Founder of the Nationalist Congress Party",
+      "years": "1999–",
+      "tag": "Centrism",
+      "school": "NCP"
+    },
+    {
+      "id": "uddhav",
+      "name": "Uddhav Thackeray",
+      "role": "Shiv Sena (UBT) president; former Chief Minister of Maharashtra",
+      "years": "2019–2022 (CM)",
+      "tag": "Conservatism",
+      "school": "Marathi regionalism"
+    },
+    {
+      "id": "rajthackeray",
+      "name": "Raj Thackeray",
+      "role": "Founder of the Maharashtra Navnirman Sena",
+      "years": "2006–",
+      "tag": "Right-wing populism",
+      "school": "Marathi nativism"
+    },
+    {
+      "id": "balthackeray",
+      "name": "Bal Thackeray",
+      "role": "Founder of the Shiv Sena",
+      "years": "1966–2012",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Shiv Sena"
+    },
+    {
+      "id": "owaisi",
+      "name": "Asaduddin Owaisi",
+      "role": "AIMIM president; MP for Hyderabad",
+      "years": "2004–",
+      "tag": "Muslim democracy",
+      "school": "AIMIM"
+    },
+    {
+      "id": "omar",
+      "name": "Omar Abdullah",
+      "role": "Chief Minister of Jammu and Kashmir",
+      "years": "2009–2015, 2024–",
+      "tag": "Centrism",
+      "school": "National Conference (autonomy)"
+    },
+    {
+      "id": "mehbooba",
+      "name": "Mehbooba Mufti",
+      "role": "PDP president; former Chief Minister of Jammu and Kashmir",
+      "years": "2016–2018 (CM)",
+      "tag": "Centrism",
+      "school": "PDP self-rule"
+    },
+    {
+      "id": "farooq",
+      "name": "Farooq Abdullah",
+      "role": "National Conference president",
+      "years": "1982–2002 (CM, three terms)",
+      "tag": "Centrism",
+      "school": "National Conference"
+    },
+    {
+      "id": "mkstalin",
+      "name": "M. K. Stalin",
+      "role": "DMK president; former Chief Minister of Tamil Nadu",
+      "years": "2021–2026 (CM)",
+      "tag": "Dravidian movement",
+      "school": "DMK"
+    },
+    {
+      "id": "udhayanidhi",
+      "name": "Udhayanidhi Stalin",
+      "role": "DMK leader; former Deputy Chief Minister; actor-producer",
+      "years": "2024–2026 (Deputy CM)",
+      "tag": "Dravidian movement",
+      "school": "DMK"
+    },
+    {
+      "id": "karunanidhi",
+      "name": "M. Karunanidhi",
+      "role": "Five-time Chief Minister of Tamil Nadu",
+      "years": "1969–2011",
+      "tag": "Dravidian movement",
+      "school": "DMK"
+    },
+    {
+      "id": "annadurai",
+      "name": "C. N. Annadurai",
+      "role": "Chief Minister of Tamil Nadu",
+      "years": "1967–1969",
+      "tag": "Dravidian movement",
+      "school": "DMK"
+    },
+    {
+      "id": "periyar",
+      "name": "E. V. Ramasamy (Periyar)",
+      "role": "Founder of the Self-Respect Movement",
+      "years": "1925–1973",
+      "tag": "Dravidian movement",
+      "school": "Self-Respect Movement"
+    },
+    {
+      "id": "jayalalithaa",
+      "name": "J. Jayalalithaa",
+      "role": "Six-time Chief Minister of Tamil Nadu",
+      "years": "1991–2016",
+      "tag": "Dravidian movement",
+      "school": "AIADMK"
+    },
+    {
+      "id": "vijay",
+      "name": "Vijay",
+      "role": "Chief Minister of Tamil Nadu; TVK founder",
+      "years": "2026–",
+      "tag": "Dravidian movement",
+      "school": "TVK"
+    },
+    {
+      "id": "kamal",
+      "name": "Kamal Haasan",
+      "role": "Rajya Sabha MP; actor; MNM founder",
+      "years": "2018–",
+      "tag": "Social liberalism",
+      "school": "Makkal Needhi Maiam"
+    },
+    {
+      "id": "naveen",
+      "name": "Naveen Patnaik",
+      "role": "BJD president; former Chief Minister of Odisha",
+      "years": "2000–2024 (CM)",
+      "tag": "Centrism",
+      "school": "BJD"
+    },
+    {
+      "id": "naidu",
+      "name": "N. Chandrababu Naidu",
+      "role": "Chief Minister of Andhra Pradesh",
+      "years": "1995–2004, 2014–2019, 2024–",
+      "tag": "Neoliberalism",
+      "school": "TDP technocracy"
+    },
+    {
+      "id": "jagan",
+      "name": "Y. S. Jagan Mohan Reddy",
+      "role": "YSRCP president; former Chief Minister of Andhra Pradesh",
+      "years": "2019–2024 (CM)",
+      "tag": "Left-wing populism",
+      "school": "YSRCP welfarism"
+    },
+    {
+      "id": "kcr",
+      "name": "K. Chandrashekar Rao",
+      "role": "BRS president; former Chief Minister of Telangana",
+      "years": "2014–2023 (CM)",
+      "tag": "Left-wing populism",
+      "school": "Telangana regionalism"
+    },
+    {
+      "id": "hemantsoren",
+      "name": "Hemant Soren",
+      "role": "Chief Minister of Jharkhand",
+      "years": "2019–",
+      "tag": "Left-wing populism",
+      "school": "Adivasi politics (JMM)"
+    },
+    {
+      "id": "vinesh",
+      "name": "Vinesh Phogat",
+      "role": "Congress MLA, Haryana; wrestler",
+      "years": "2024–",
+      "tag": "Social democracy",
+      "school": "Congress"
+    },
+    {
+      "id": "kanhaiya",
+      "name": "Kanhaiya Kumar",
+      "role": "Congress leader",
+      "years": "2021–",
+      "tag": "Democratic socialism",
+      "school": "Student left"
+    },
+    {
+      "id": "pinarayi",
+      "name": "Pinarayi Vijayan",
+      "role": "CPI(M) leader; former Chief Minister of Kerala",
+      "years": "2016–2026 (CM)",
+      "tag": "Democratic socialism",
+      "school": "CPI(M)"
+    },
+    {
+      "id": "yechury",
+      "name": "Sitaram Yechury",
+      "role": "CPI(M) general secretary",
+      "years": "2015–2024",
+      "tag": "Democratic socialism",
+      "school": "CPI(M)"
+    },
+    {
+      "id": "jyotibasu",
+      "name": "Jyoti Basu",
+      "role": "Chief Minister of West Bengal",
+      "years": "1977–2000",
+      "tag": "Democratic socialism",
+      "school": "CPI(M)"
+    },
+    {
+      "id": "ems",
+      "name": "E. M. S. Namboodiripad",
+      "role": "Chief Minister of Kerala",
+      "years": "1957–1959, 1967–1969",
+      "tag": "Democratic socialism",
+      "school": "Communist (CPI, then CPI(M))"
+    },
+    {
+      "id": "ambedkar",
+      "name": "B. R. Ambedkar",
+      "role": "Chairman of the Constitution’s Drafting Committee; first Law Minister",
+      "years": "1947–1951",
+      "tag": "Ambedkarism",
+      "school": "Ambedkarism"
+    },
+    {
+      "id": "bose",
+      "name": "Subhas Chandra Bose",
+      "role": "Leader of the Indian National Army",
+      "years": "1943–1945",
+      "tag": "Anti-colonial socialism",
+      "school": "Forward Bloc"
+    },
+    {
+      "id": "bhagatsingh",
+      "name": "Bhagat Singh",
+      "role": "Revolutionary",
+      "years": "1926–1931",
+      "tag": "Anti-colonial socialism",
+      "school": "Revolutionary socialism"
+    },
+    {
+      "id": "savarkar",
+      "name": "V. D. Savarkar",
+      "role": "President of the Hindu Mahasabha",
+      "years": "1937–1943",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Savarkarite Hindutva"
+    },
+    {
+      "id": "hedgewar",
+      "name": "K. B. Hedgewar",
+      "role": "Founder of the RSS",
+      "years": "1925–1940",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "RSS"
+    },
+    {
+      "id": "golwalkar",
+      "name": "M. S. Golwalkar",
+      "role": "Sarsanghchalak of the RSS",
+      "years": "1940–1973",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "RSS"
+    },
+    {
+      "id": "mookerjee",
+      "name": "Syama Prasad Mookerjee",
+      "role": "Founder of the Bharatiya Jana Sangh",
+      "years": "1951–1953",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Jana Sangh"
+    },
+    {
+      "id": "deendayal",
+      "name": "Deendayal Upadhyaya",
+      "role": "Jana Sangh leader",
+      "years": "1951–1968",
+      "tag": "Hindu nationalism (Hindutva)",
+      "school": "Integral humanism"
+    },
+    {
+      "id": "lohia",
+      "name": "Ram Manohar Lohia",
+      "role": "Socialist leader",
+      "years": "1934–1967",
+      "tag": "Lohiaite socialism",
+      "school": "Lohiaite socialism"
+    },
+    {
+      "id": "jp",
+      "name": "Jayaprakash Narayan",
+      "role": "Leader of the 1974 movement",
+      "years": "1974–1979",
+      "tag": "Gandhism",
+      "school": "Total Revolution"
+    },
+    {
+      "id": "rajaji",
+      "name": "C. Rajagopalachari",
+      "role": "Founder of the Swatantra Party; last Governor-General",
+      "years": "1948–1972",
+      "tag": "Classical liberalism",
+      "school": "Swatantra Party"
+    },
+    {
+      "id": "morarji",
+      "name": "Morarji Desai",
+      "role": "Prime Minister of India",
+      "years": "1977–1979",
+      "tag": "Conservatism",
+      "school": "Janata"
+    },
+    {
+      "id": "charansingh",
+      "name": "Charan Singh",
+      "role": "Prime Minister of India",
+      "years": "1979–1980",
+      "tag": "Lohiaite socialism",
+      "school": "Peasant politics"
+    },
+    {
+      "id": "vpsingh",
+      "name": "V. P. Singh",
+      "role": "Prime Minister of India",
+      "years": "1989–1990",
+      "tag": "Lohiaite socialism",
+      "school": "Mandal politics"
+    },
+    {
+      "id": "anupamkher",
+      "name": "Anupam Kher",
+      "role": "Actor",
+      "years": "1984–",
+      "tag": "National conservatism",
+      "school": "Government supporter"
+    },
+    {
+      "id": "vivekagnihotri",
+      "name": "Vivek Agnihotri",
+      "role": "Film director",
+      "years": "2005–",
+      "tag": "National conservatism",
+      "school": "Nationalist cinema"
+    },
+    {
+      "id": "akshay",
+      "name": "Akshay Kumar",
+      "role": "Actor",
+      "years": "1991–",
+      "tag": "National conservatism",
+      "school": "Patriotic cinema"
+    },
+    {
+      "id": "amitabh",
+      "name": "Amitabh Bachchan",
+      "role": "Actor; former Congress MP",
+      "years": "1969–",
+      "tag": "Centrism",
+      "school": "Largely apolitical"
+    },
+    {
+      "id": "shahrukh",
+      "name": "Shah Rukh Khan",
+      "role": "Actor",
+      "years": "1992–",
+      "tag": "Centrism",
+      "school": "Largely apolitical"
+    },
+    {
+      "id": "aamir",
+      "name": "Aamir Khan",
+      "role": "Actor and producer",
+      "years": "1988–",
+      "tag": "Social liberalism",
+      "school": "Social reform"
+    },
+    {
+      "id": "deepika",
+      "name": "Deepika Padukone",
+      "role": "Actor",
+      "years": "2007–",
+      "tag": "Social liberalism",
+      "school": "Mental-health advocacy"
+    },
+    {
+      "id": "swara",
+      "name": "Swara Bhasker",
+      "role": "Actor",
+      "years": "2009–",
+      "tag": "Social liberalism",
+      "school": "Liberal activism"
+    },
+    {
+      "id": "prakashraj",
+      "name": "Prakash Raj",
+      "role": "Actor",
+      "years": "1988–",
+      "tag": "Social liberalism",
+      "school": "#JustAsking"
+    },
+    {
+      "id": "naseeruddin",
+      "name": "Naseeruddin Shah",
+      "role": "Actor",
+      "years": "1975–",
+      "tag": "Social liberalism",
+      "school": "Liberal secularism"
+    },
+    {
+      "id": "javedakhtar",
+      "name": "Javed Akhtar",
+      "role": "Lyricist and screenwriter",
+      "years": "1971–",
+      "tag": "Social liberalism",
+      "school": "Secular rationalism"
+    },
+    {
+      "id": "shabana",
+      "name": "Shabana Azmi",
+      "role": "Actor and activist",
+      "years": "1974–",
+      "tag": "Social democracy",
+      "school": "Left-liberal activism"
+    },
+    {
+      "id": "anuragkashyap",
+      "name": "Anurag Kashyap",
+      "role": "Film director",
+      "years": "2003–",
+      "tag": "Social liberalism",
+      "school": "Anti-censorship"
+    },
+    {
+      "id": "sakshi",
+      "name": "Sakshi Malik",
+      "role": "Wrestler",
+      "years": "2010–2023",
+      "tag": "Social democracy",
+      "school": "Wrestlers’ protest"
+    },
+    {
+      "id": "arundhatiroy",
+      "name": "Arundhati Roy",
+      "role": "Novelist and essayist",
+      "years": "1997–",
+      "tag": "Democratic socialism",
+      "school": "Anti-capitalist left"
+    },
+    {
+      "id": "medhapatkar",
+      "name": "Medha Patkar",
+      "role": "Activist",
+      "years": "1985–",
+      "tag": "Green politics",
+      "school": "Narmada Bachao Andolan"
+    },
+    {
+      "id": "yogendrayadav",
+      "name": "Yogendra Yadav",
+      "role": "Psephologist and activist",
+      "years": "2012–",
+      "tag": "Lohiaite socialism",
+      "school": "Swaraj India"
+    },
+    {
+      "id": "prashantbhushan",
+      "name": "Prashant Bhushan",
+      "role": "Lawyer",
+      "years": "1983–",
+      "tag": "Social liberalism",
+      "school": "Public-interest litigation"
+    },
+    {
+      "id": "ramachandraguha",
+      "name": "Ramachandra Guha",
+      "role": "Historian",
+      "years": "1989–",
+      "tag": "Social liberalism",
+      "school": "Liberal history"
+    },
+    {
+      "id": "amartyasen",
+      "name": "Amartya Sen",
+      "role": "Economist",
+      "years": "1960s–",
+      "tag": "Social democracy",
+      "school": "Capability approach"
+    },
+    {
+      "id": "raghuramrajan",
+      "name": "Raghuram Rajan",
+      "role": "Economist; former RBI Governor",
+      "years": "2013–2016 (RBI)",
+      "tag": "Social liberalism",
+      "school": "Liberal economics"
+    },
+    {
+      "id": "narayanamurthy",
+      "name": "N. R. Narayana Murthy",
+      "role": "Co-founder of Infosys",
+      "years": "1981–",
+      "tag": "Classical liberalism",
+      "school": "Work-ethic capitalism"
+    },
+    {
+      "id": "nilekani",
+      "name": "Nandan Nilekani",
+      "role": "Co-founder of Infosys; architect of Aadhaar",
+      "years": "2009–",
+      "tag": "Centrism",
+      "school": "Digital public infrastructure"
+    },
+    {
+      "id": "ratantata",
+      "name": "Ratan Tata",
+      "role": "Chairman of the Tata group",
+      "years": "1991–2012",
+      "tag": "Centrism",
+      "school": "Philanthropic capitalism"
+    },
+    {
+      "id": "annahazare",
+      "name": "Anna Hazare",
+      "role": "Gandhian activist",
+      "years": "1975–",
+      "tag": "Gandhism",
+      "school": "India Against Corruption"
+    },
+    {
+      "id": "sonamwangchuk",
+      "name": "Sonam Wangchuk",
+      "role": "Educator and climate activist",
+      "years": "1988–",
+      "tag": "Green politics",
+      "school": "Ladakh autonomy"
+    },
+    {
+      "id": "sadhguru",
+      "name": "Sadhguru (Jaggi Vasudev)",
+      "role": "Founder of the Isha Foundation",
+      "years": "1992–",
+      "tag": "Conservatism",
+      "school": "Isha Foundation"
+    },
+    {
+      "id": "ramdev",
+      "name": "Baba Ramdev",
+      "role": "Yoga guru; co-founder of Patanjali",
+      "years": "2006–",
+      "tag": "National conservatism",
+      "school": "Swadeshi"
+    },
+    {
+      "id": "srisri",
+      "name": "Sri Sri Ravi Shankar",
+      "role": "Founder of the Art of Living",
+      "years": "1981–",
+      "tag": "Conservatism",
+      "school": "Art of Living"
+    },
+    {
+      "id": "arnab",
+      "name": "Arnab Goswami",
+      "role": "Editor-in-chief, Republic TV",
+      "years": "2017–",
+      "tag": "National conservatism",
+      "school": "Nationalist television"
+    },
+    {
+      "id": "ravishkumar",
+      "name": "Ravish Kumar",
+      "role": "Journalist",
+      "years": "1996–",
+      "tag": "Social democracy",
+      "school": "Independent journalism"
+    },
+    {
+      "id": "dhruvrathee",
+      "name": "Dhruv Rathee",
+      "role": "YouTuber",
+      "years": "2014–",
+      "tag": "Social liberalism",
+      "school": "Liberal explainers"
+    },
+    {
+      "id": "kunalkamra",
+      "name": "Kunal Kamra",
+      "role": "Comedian",
+      "years": "2013–",
+      "tag": "Social liberalism",
+      "school": "Satire"
+    },
+    {
+      "id": "virdas",
+      "name": "Vir Das",
+      "role": "Comedian",
+      "years": "2010–",
+      "tag": "Social liberalism",
+      "school": "Satire"
     }
   ],
   "socialAtlas": {

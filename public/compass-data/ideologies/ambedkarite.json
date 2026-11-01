@@ -1,0 +1,212 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "ambedkarite",
+  "name": "Ambedkarism",
+  "description": "The annihilation of caste through constitutional rights, reservations, education and social democracy.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 35
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 82
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 50
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 30
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 20
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 55
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 12
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 10
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 38
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 40
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 30
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 45
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 71.2
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 64
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 70.5
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 74.3
+    },
+    "nearest8valuesIdeology": "Social Libertarianism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "mayawati",
+      "name": "Mayawati",
+      "role": "BSP president; four-time Chief Minister of Uttar Pradesh",
+      "years": "1995–2012 (CM)",
+      "tag": "Ambedkarism",
+      "school": "Bahujan politics"
+    },
+    {
+      "id": "kanshiram",
+      "name": "Kanshi Ram",
+      "role": "Founder of the Bahujan Samaj Party",
+      "years": "1984–2006",
+      "tag": "Ambedkarism",
+      "school": "Bahujan politics"
+    },
+    {
+      "id": "chandrashekhar",
+      "name": "Chandrashekhar Azad",
+      "role": "Aazad Samaj Party MP for Nagina",
+      "years": "2024–",
+      "tag": "Ambedkarism",
+      "school": "Bhim Army"
+    },
+    {
+      "id": "jignesh",
+      "name": "Jignesh Mevani",
+      "role": "Congress MLA, Gujarat; Dalit activist",
+      "years": "2017–",
+      "tag": "Ambedkarism",
+      "school": "Dalit rights"
+    },
+    {
+      "id": "ambedkar",
+      "name": "B. R. Ambedkar",
+      "role": "Chairman of the Constitution’s Drafting Committee; first Law Minister",
+      "years": "1947–1951",
+      "tag": "Ambedkarism",
+      "school": "Ambedkarism"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "B. R. Ambedkar",
+      "similarity": 97
+    },
+    {
+      "name": "Jignesh Mevani",
+      "similarity": 92
+    },
+    {
+      "name": "Shabana Azmi",
+      "similarity": 91
+    },
+    {
+      "name": "Kanhaiya Kumar",
+      "similarity": 90
+    },
+    {
+      "name": "Swara Bhasker",
+      "similarity": 90
+    },
+    {
+      "name": "Chandrashekhar Azad",
+      "similarity": 89
+    },
+    {
+      "name": "Prakash Raj",
+      "similarity": 89
+    },
+    {
+      "name": "Javed Akhtar",
+      "similarity": 89
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "South Africa",
+      "similarity": 82
+    },
+    {
+      "name": "Portugal",
+      "similarity": 82
+    },
+    {
+      "name": "Spain",
+      "similarity": 81
+    },
+    {
+      "name": "Norway",
+      "similarity": 81
+    },
+    {
+      "name": "Canada",
+      "similarity": 80
+    },
+    {
+      "name": "France",
+      "similarity": 78
+    },
+    {
+      "name": "Mexico",
+      "similarity": 78
+    },
+    {
+      "name": "Brazil",
+      "similarity": 77
+    }
+  ]
+}

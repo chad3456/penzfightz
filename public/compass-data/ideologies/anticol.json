@@ -123,6 +123,22 @@
       "years": "1983–1987",
       "tag": "Anti-colonial socialism",
       "school": "Sankarism"
+    },
+    {
+      "id": "bose",
+      "name": "Subhas Chandra Bose",
+      "role": "Leader of the Indian National Army",
+      "years": "1943–1945",
+      "tag": "Anti-colonial socialism",
+      "school": "Forward Bloc"
+    },
+    {
+      "id": "bhagatsingh",
+      "name": "Bhagat Singh",
+      "role": "Revolutionary",
+      "years": "1926–1931",
+      "tag": "Anti-colonial socialism",
+      "school": "Revolutionary socialism"
     }
   ],
   "closestLeaders": [
@@ -147,15 +163,15 @@
       "similarity": 83
     },
     {
+      "name": "Subhas Chandra Bose",
+      "similarity": 82
+    },
+    {
       "name": "Xi Jinping",
       "similarity": 81
     },
     {
       "name": "Juan Perón",
-      "similarity": 81
-    },
-    {
-      "name": "Ho Chi Minh",
       "similarity": 81
     }
   ],

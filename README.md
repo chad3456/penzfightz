@@ -2043,6 +2043,17 @@ included under its MIT licence.
   statements, scoring, label bands and 52 ideologies (MIT, © 2020 8values).
   `project12` maps any twelve-axis placement onto the four 8values axes, so
   leaders and countries can be compared with an 8values result.
+- **India Compass** (`india.ts`): 120 statements on Indian politics, ten per
+  axis and five pointing each way, each with context and what agreeing or
+  disagreeing looks like in India; India trivia; result codes start `n1`.
+- **Indian figures** (`india-people.ts`): 133 Indian politicians (past and
+  present) and public figures from film, sport, media, business and
+  activism, plus 14 parties, placed from their public record with a tag,
+  school and dated record; the six Indian leaders already in `leaders.ts`
+  bring the total to 139. Ten families were added for them and the main
+  test: Hindu nationalism, Nehruvian socialism, Ambedkarism, the Dravidian
+  movement, Gandhism, Lohiaite socialism, Maoism, neoliberalism, Muslim
+  democracy and a Moderate tag for answers near the middle.
 - **Leaders** (`leaders.ts`): 93 entries: current heads of government
   (offices checked 31 October 2026), recent and historical leaders, and public
   figures with a documented political record.

@@ -1,0 +1,196 @@
+{
+  "generated": "2026-11-01",
+  "officesChecked": "31 October 2026",
+  "method": "Placements are editorial judgements from laws and records on a 0–100 scale per axis. See the Method page of the Twelve-Point Compass.",
+  "id": "gandhian",
+  "name": "Gandhism",
+  "description": "Non-violence, village self-rule, swadeshi and a moral, religious but tolerant public life.",
+  "axes": {
+    "econ": {
+      "name": "Ownership",
+      "low": "Planned",
+      "high": "Market",
+      "value": 30
+    },
+    "welfare": {
+      "name": "Redistribution",
+      "low": "Self-reliance",
+      "high": "Welfare",
+      "value": 62
+    },
+    "trade": {
+      "name": "Trade",
+      "low": "Open",
+      "high": "Protected",
+      "value": 75
+    },
+    "liberty": {
+      "name": "Liberty",
+      "low": "Liberty",
+      "high": "Order",
+      "value": 25
+    },
+    "power": {
+      "name": "Power",
+      "low": "Pluralist",
+      "high": "Strongman",
+      "value": 15
+    },
+    "center": {
+      "name": "Centralism",
+      "low": "Local",
+      "high": "Central",
+      "value": 10
+    },
+    "values": {
+      "name": "Morality",
+      "low": "Progressive",
+      "high": "Traditional",
+      "value": 60
+    },
+    "faith": {
+      "name": "Faith",
+      "low": "Secular",
+      "high": "Religious",
+      "value": 70
+    },
+    "nation": {
+      "name": "Belonging",
+      "low": "Cosmopolitan",
+      "high": "National",
+      "value": 45
+    },
+    "world": {
+      "name": "Sovereignty",
+      "low": "Multilateral",
+      "high": "Sovereign",
+      "value": 30
+    },
+    "force": {
+      "name": "Force",
+      "low": "Restraint",
+      "high": "Force",
+      "value": 0
+    },
+    "eco": {
+      "name": "Planet",
+      "low": "Growth",
+      "high": "Ecology",
+      "value": 88
+    }
+  },
+  "eightvalues": {
+    "econ": {
+      "name": "Equality (vs Markets)",
+      "value": 66.9
+    },
+    "dipl": {
+      "name": "World (vs Nation)",
+      "value": 75
+    },
+    "govt": {
+      "name": "Liberty (vs Authority)",
+      "value": 81.5
+    },
+    "scty": {
+      "name": "Progress (vs Tradition)",
+      "value": 52.7
+    },
+    "nearest8valuesIdeology": "Social Libertarianism",
+    "note": "Projected from the twelve-axis placement"
+  },
+  "taggedLeaders": [
+    {
+      "id": "gandhi",
+      "name": "Mahatma Gandhi",
+      "role": "Leader of the Indian independence movement",
+      "years": "1915–1948",
+      "tag": "Gandhism",
+      "school": "Gandhism: non-violence and village self-rule"
+    },
+    {
+      "id": "jp",
+      "name": "Jayaprakash Narayan",
+      "role": "Leader of the 1974 movement",
+      "years": "1974–1979",
+      "tag": "Gandhism",
+      "school": "Total Revolution"
+    },
+    {
+      "id": "annahazare",
+      "name": "Anna Hazare",
+      "role": "Gandhian activist",
+      "years": "1975–",
+      "tag": "Gandhism",
+      "school": "India Against Corruption"
+    }
+  ],
+  "closestLeaders": [
+    {
+      "name": "Mahatma Gandhi",
+      "similarity": 92
+    },
+    {
+      "name": "Sonam Wangchuk",
+      "similarity": 80
+    },
+    {
+      "name": "Anna Hazare",
+      "similarity": 79
+    },
+    {
+      "name": "Mehbooba Mufti",
+      "similarity": 78
+    },
+    {
+      "name": "Jayaprakash Narayan",
+      "similarity": 78
+    },
+    {
+      "name": "Omar Abdullah",
+      "similarity": 75
+    },
+    {
+      "name": "Medha Patkar",
+      "similarity": 75
+    },
+    {
+      "name": "Malala Yousafzai",
+      "similarity": 74
+    }
+  ],
+  "closestCountries": [
+    {
+      "name": "Brazil",
+      "similarity": 74
+    },
+    {
+      "name": "South Africa",
+      "similarity": 70
+    },
+    {
+      "name": "Mexico",
+      "similarity": 67
+    },
+    {
+      "name": "Spain",
+      "similarity": 66
+    },
+    {
+      "name": "Germany",
+      "similarity": 64
+    },
+    {
+      "name": "Italy",
+      "similarity": 64
+    },
+    {
+      "name": "Switzerland",
+      "similarity": 64
+    },
+    {
+      "name": "Canada",
+      "similarity": 63
+    }
+  ]
+}

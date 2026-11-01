@@ -147,11 +147,175 @@
       "years": "2009–",
       "tag": "Social liberalism",
       "school": "Rights and education activism"
+    },
+    {
+      "id": "manmohan",
+      "name": "Manmohan Singh",
+      "role": "Prime Minister of India",
+      "years": "2004–2014",
+      "tag": "Social liberalism",
+      "school": "Liberalisation with welfare"
+    },
+    {
+      "id": "tharoor",
+      "name": "Shashi Tharoor",
+      "role": "Congress MP for Thiruvananthapuram",
+      "years": "2009–",
+      "tag": "Social liberalism",
+      "school": "Liberal Congress"
+    },
+    {
+      "id": "chidambaram",
+      "name": "P. Chidambaram",
+      "role": "Former Union Finance and Home Minister",
+      "years": "1996–2014",
+      "tag": "Social liberalism",
+      "school": "Congress liberalism"
+    },
+    {
+      "id": "mahua",
+      "name": "Mahua Moitra",
+      "role": "TMC MP for Krishnanagar",
+      "years": "2019–",
+      "tag": "Social liberalism",
+      "school": "Trinamool"
+    },
+    {
+      "id": "kamal",
+      "name": "Kamal Haasan",
+      "role": "Rajya Sabha MP; actor; MNM founder",
+      "years": "2018–",
+      "tag": "Social liberalism",
+      "school": "Makkal Needhi Maiam"
+    },
+    {
+      "id": "aamir",
+      "name": "Aamir Khan",
+      "role": "Actor and producer",
+      "years": "1988–",
+      "tag": "Social liberalism",
+      "school": "Social reform"
+    },
+    {
+      "id": "deepika",
+      "name": "Deepika Padukone",
+      "role": "Actor",
+      "years": "2007–",
+      "tag": "Social liberalism",
+      "school": "Mental-health advocacy"
+    },
+    {
+      "id": "swara",
+      "name": "Swara Bhasker",
+      "role": "Actor",
+      "years": "2009–",
+      "tag": "Social liberalism",
+      "school": "Liberal activism"
+    },
+    {
+      "id": "prakashraj",
+      "name": "Prakash Raj",
+      "role": "Actor",
+      "years": "1988–",
+      "tag": "Social liberalism",
+      "school": "#JustAsking"
+    },
+    {
+      "id": "naseeruddin",
+      "name": "Naseeruddin Shah",
+      "role": "Actor",
+      "years": "1975–",
+      "tag": "Social liberalism",
+      "school": "Liberal secularism"
+    },
+    {
+      "id": "javedakhtar",
+      "name": "Javed Akhtar",
+      "role": "Lyricist and screenwriter",
+      "years": "1971–",
+      "tag": "Social liberalism",
+      "school": "Secular rationalism"
+    },
+    {
+      "id": "anuragkashyap",
+      "name": "Anurag Kashyap",
+      "role": "Film director",
+      "years": "2003–",
+      "tag": "Social liberalism",
+      "school": "Anti-censorship"
+    },
+    {
+      "id": "prashantbhushan",
+      "name": "Prashant Bhushan",
+      "role": "Lawyer",
+      "years": "1983–",
+      "tag": "Social liberalism",
+      "school": "Public-interest litigation"
+    },
+    {
+      "id": "ramachandraguha",
+      "name": "Ramachandra Guha",
+      "role": "Historian",
+      "years": "1989–",
+      "tag": "Social liberalism",
+      "school": "Liberal history"
+    },
+    {
+      "id": "raghuramrajan",
+      "name": "Raghuram Rajan",
+      "role": "Economist; former RBI Governor",
+      "years": "2013–2016 (RBI)",
+      "tag": "Social liberalism",
+      "school": "Liberal economics"
+    },
+    {
+      "id": "dhruvrathee",
+      "name": "Dhruv Rathee",
+      "role": "YouTuber",
+      "years": "2014–",
+      "tag": "Social liberalism",
+      "school": "Liberal explainers"
+    },
+    {
+      "id": "kunalkamra",
+      "name": "Kunal Kamra",
+      "role": "Comedian",
+      "years": "2013–",
+      "tag": "Social liberalism",
+      "school": "Satire"
+    },
+    {
+      "id": "virdas",
+      "name": "Vir Das",
+      "role": "Comedian",
+      "years": "2010–",
+      "tag": "Social liberalism",
+      "school": "Satire"
     }
   ],
   "closestLeaders": [
     {
+      "name": "Shashi Tharoor",
+      "similarity": 92
+    },
+    {
       "name": "Rob Jetten",
+      "similarity": 90
+    },
+    {
+      "name": "Naseeruddin Shah",
+      "similarity": 90
+    },
+    {
+      "name": "Raghuram Rajan",
+      "similarity": 90
+    },
+    {
+      "name": "Dhruv Rathee",
+      "similarity": 90
+    },
+    {
+      "name": "Vir Das",
       "similarity": 90
     },
     {
@@ -159,28 +323,8 @@
       "similarity": 89
     },
     {
-      "name": "Anthony Albanese",
-      "similarity": 88
-    },
-    {
-      "name": "Nelson Mandela",
-      "similarity": 87
-    },
-    {
-      "name": "Pedro Sánchez",
-      "similarity": 86
-    },
-    {
-      "name": "Mark Carney",
-      "similarity": 85
-    },
-    {
-      "name": "Jacinda Ardern",
-      "similarity": 85
-    },
-    {
-      "name": "Arnold Schwarzenegger",
-      "similarity": 85
+      "name": "Ramachandra Guha",
+      "similarity": 89
     }
   ],
   "closestCountries": [

@@ -436,6 +436,16 @@ export const FAMILIES: Family[] = [
   { id: 'theocracy', name: 'Theocracy', note: 'Religious law and clerical authority over the state.', v: [35, 50, 70, 95, 92, 85, 95, 100, 65, 85, 75, 30] },
   { id: 'authnat', name: 'Authoritarian nationalism', note: 'A strong leader and a strong state built around the nation, with elections and courts kept weak.', v: [40, 55, 72, 88, 90, 90, 68, 45, 88, 78, 75, 25] },
   { id: 'anticol', name: 'Anti-colonial socialism', note: 'National liberation and self-reliance through a state-led economy, usually under one party.', v: [15, 72, 80, 72, 82, 78, 45, 20, 65, 60, 55, 55] },
+  { id: 'hindutva', name: 'Hindu nationalism (Hindutva)', note: 'India as a Hindu civilisational nation: cultural unity, a strong centre, a muscular state and suspicion of minority appeasement.', v: [58, 52, 62, 72, 68, 78, 75, 80, 92, 70, 78, 30] },
+  { id: 'nehruvian', name: 'Nehruvian socialism', note: 'A planned, state-led economy, secularism, a strong union and non-alignment abroad.', v: [25, 70, 75, 40, 35, 72, 35, 15, 45, 55, 30, 40] },
+  { id: 'ambedkarite', name: 'Ambedkarism', note: 'The annihilation of caste through constitutional rights, reservations, education and social democracy.', v: [35, 82, 50, 30, 20, 55, 12, 10, 38, 40, 30, 45] },
+  { id: 'dravidian', name: 'Dravidian movement', note: 'Self-respect, rationalism, social justice and state autonomy, opposed to caste hierarchy and Hindi imposition.', v: [40, 82, 50, 40, 42, 12, 28, 10, 50, 48, 35, 48] },
+  { id: 'gandhian', name: 'Gandhism', note: 'Non-violence, village self-rule, swadeshi and a moral, religious but tolerant public life.', v: [30, 62, 75, 25, 15, 10, 60, 70, 45, 30, 0, 88] },
+  { id: 'lohiaite', name: 'Lohiaite socialism', note: 'Socialism built on backward-caste empowerment, anti-Congressism and Indian languages.', v: [30, 78, 62, 42, 42, 40, 42, 28, 58, 55, 40, 48] },
+  { id: 'maoism', name: 'Maoism', note: 'Armed revolution by peasants against the state, landlords and capital.', v: [0, 75, 85, 85, 85, 60, 30, 0, 55, 80, 98, 55] },
+  { id: 'neoliberal', name: 'Neoliberalism', note: 'Privatisation, deregulation, low taxes and free trade, with a state that enables markets.', v: [85, 25, 10, 50, 30, 55, 48, 38, 45, 20, 55, 30] },
+  { id: 'islamdem', name: 'Muslim democracy', note: 'Religious values and minority rights pursued within a democratic constitution.', v: [45, 65, 50, 45, 38, 45, 75, 88, 42, 55, 40, 45] },
+  { id: 'moderate', name: 'Moderate', note: 'No strong lean on most questions: weighing each issue on its merits, close to the middle of every axis.', v: [52, 55, 50, 50, 42, 50, 50, 45, 55, 45, 45, 55] },
   { id: 'fascism', name: 'Fascism', note: 'Total state power fused with ethnic nationalism, militarism and the cult of a leader.', v: [35, 42, 88, 99, 99, 96, 88, 55, 99, 96, 97, 30] },
 ];
 

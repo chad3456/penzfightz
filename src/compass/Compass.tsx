@@ -11,9 +11,11 @@ import { EV_AXES, EV_CHOICES, EV_IDEOLOGIES, EV_QUESTIONS_LIST, evDecode, evEnco
 import { ALL_TRIVIA, TRIVIA } from './trivia';
 import Society, { CountrySocial, LeaderSocial } from './Society';
 import { SOC_AXES, SOC_VEC } from './social';
+import { INDIA_QUESTIONS, INDIA_TRIVIA, inDecode, inEncode, indiaScore, type IAnswers } from './india';
+import { INDIA_PARTIES } from './india-people';
 
 type View = 'home' | 'test' | 'results' | 'leaders' | 'leader' | 'countries' | 'country' | 'ideologies' | 'charts' | 'society' | 'compare' | 'axes' | 'method' | 'history';
-type TestId = 'c12' | 'ev';
+type TestId = 'c12' | 'ev' | 'in';
 type Saved = { at: number; code: string };
 
 const GROUP_HUE: Record<GroupId, string> = { economy: 'var(--tp-econ)', state: 'var(--tp-state)', society: 'var(--tp-society)', world: 'var(--tp-world)' };
@@ -33,12 +35,14 @@ const nearestFamilies = (v: (number | null)[]) => FAMILIES.map((f) => ({ f, s: s
 const familyOfCountry = (c: Country) => nearestFamilies(c.v)[0].f;
 
 /* ------------------------------------------------------------- entities */
-interface Ent { key: string; kind: 'you12' | 'you8' | 'leader' | 'country' | 'family' | 'ev'; name: string; sub: string; v12: (number | null)[] | null; v8: EVVec }
-function entities(you12: (number | null)[] | null, you8: EVVec | null): Ent[] {
+interface Ent { key: string; kind: 'you12' | 'you8' | 'youIn' | 'leader' | 'party' | 'country' | 'family' | 'ev'; name: string; sub: string; v12: (number | null)[] | null; v8: EVVec }
+function entities(you12: (number | null)[] | null, you8: EVVec | null, youIn: (number | null)[] | null): Ent[] {
   const out: Ent[] = [];
+  if (youIn) out.push({ key: 'youIn', kind: 'youIn', name: 'You (India Compass)', sub: 'Your India Compass result', v12: youIn, v8: project12(youIn) });
   if (you12) out.push({ key: 'you12', kind: 'you12', name: 'You (Compass)', sub: 'Your Twelve-Point Compass result', v12: you12, v8: project12(you12) });
   if (you8) out.push({ key: 'you8', kind: 'you8', name: 'You (8values)', sub: 'Your 8values result', v12: null, v8: you8 });
   for (const l of LEADERS) out.push({ key: `l:${l.id}`, kind: 'leader', name: l.name, sub: `${l.country} · ${l.years}`, v12: l.v, v8: project12(l.v) });
+  for (const p of INDIA_PARTIES) out.push({ key: `p:${p.id}`, kind: 'party', name: `${p.short} (${p.name})`, sub: 'Indian party', v12: p.v, v8: project12(p.v) });
   for (const c of COUNTRIES) out.push({ key: `c:${c.id}`, kind: 'country', name: c.name, sub: c.system, v12: c.v, v8: project12(c.v) });
   for (const f of FAMILIES) out.push({ key: `f:${f.id}`, kind: 'family', name: f.name, sub: 'Family of thought', v12: f.v, v8: project12(f.v) });
   for (const i of EV_IDEOLOGIES) out.push({ key: `e:${i.name}`, kind: 'ev', name: i.name, sub: '8values ideology', v12: null, v8: [i.stats.econ, i.stats.dipl, i.stats.govt, i.stats.scty] });
@@ -186,6 +190,9 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   const [history, setHistory] = useState<Saved[]>(() => store.get('tpc-history', [] as Saved[]));
   const [you, setYou] = useState<(number | null)[] | null>(() => { const h = store.get('tpc-history', [] as Saved[]).filter((x) => x.code.startsWith('c1')); return h.length ? decode(h[h.length - 1].code) : null; });
   const [you8, setYou8] = useState<EVVec | null>(() => { const h = store.get('tpc-history', [] as Saved[]).filter((x) => x.code.startsWith('e1')); return h.length ? evDecode(h[h.length - 1].code) : null; });
+  const [youIn, setYouIn] = useState<(number | null)[] | null>(() => { const h = store.get('tpc-history', [] as Saved[]).filter((x) => x.code.startsWith('n1')); return h.length ? inDecode(h[h.length - 1].code) : null; });
+  const [inAnswers, setInAnswers] = useState<IAnswers>(() => store.get('tpc-in-progress', { answers: {} as IAnswers, idx: 0 }).answers);
+  const [inIdx, setInIdx] = useState<number>(() => store.get('tpc-in-progress', { answers: {}, idx: 0 }).idx);
   const [resultOf, setResultOf] = useState<TestId>('c12');
   const [leaderId, setLeaderId] = useState('');
   const [countryId, setCountryId] = useState('');
@@ -202,21 +209,29 @@ export default function Compass({ onExit }: { onExit: () => void }) {
 
   useEffect(() => { store.set('tpc-progress', { answers, idx }); }, [answers, idx]);
   useEffect(() => { store.set('tpc-ev-progress', { answers: evAnswers, idx: evIdx }); }, [evAnswers, evIdx]);
+  useEffect(() => { store.set('tpc-in-progress', { answers: inAnswers, idx: inIdx }); }, [inAnswers, inIdx]);
   useEffect(() => { store.set('tpc-history', history); }, [history]);
   useEffect(() => { store.set('tpc-test', test); }, [test]);
   const toTop = () => root.current?.scrollTo({ top: 0 });
   useEffect(() => { toTop(); setMsg(''); }, [view, leaderId, countryId]);
 
-  const total = test === 'c12' ? QUESTIONS.length : EV_QUESTIONS_LIST.length;
-  const curIdx = test === 'c12' ? idx : evIdx;
-  const answered = test === 'c12' ? Object.keys(answers).length : Object.keys(evAnswers).length;
-  const ents = useMemo(() => entities(you, you8), [you, you8]);
+  const total = test === 'c12' ? QUESTIONS.length : test === 'in' ? INDIA_QUESTIONS.length : EV_QUESTIONS_LIST.length;
+  const curIdx = test === 'c12' ? idx : test === 'in' ? inIdx : evIdx;
+  const curAnswers: Record<string, unknown> = test === 'c12' ? answers : test === 'in' ? inAnswers : evAnswers;
+  const answered = Object.keys(curAnswers).length;
+  const ents = useMemo(() => entities(you, you8, youIn), [you, you8, youIn]);
   const entByKey = useMemo(() => Object.fromEntries(ents.map((e) => [e.key, e])), [ents]);
 
   const finish12 = useCallback((a: Answers) => {
     const v = toVec(score(a));
     setYou(v); setResultOf('c12');
     setHistory((h) => [...h, { at: Date.now(), code: encode(v) }].slice(-60));
+    setView('results');
+  }, []);
+  const finishIn = useCallback((a: IAnswers) => {
+    const v = toVec(indiaScore(a));
+    setYouIn(v); setResultOf('in');
+    setHistory((h) => [...h, { at: Date.now(), code: inEncode(v) }].slice(-60));
     setView('results');
   }, []);
   const finishEv = useCallback((a: EVAnswers) => {
@@ -232,6 +247,11 @@ export default function Compass({ onExit }: { onExit: () => void }) {
       const next = { ...answers, [qn.id]: value };
       setAnswers(next);
       if (idx + 1 >= QUESTIONS.length) finish12(next); else setIdx(idx + 1);
+    } else if (test === 'in') {
+      const qn = INDIA_QUESTIONS[inIdx];
+      const next = { ...inAnswers, [qn.id]: value };
+      setInAnswers(next);
+      if (inIdx + 1 >= INDIA_QUESTIONS.length) finishIn(next); else setInIdx(inIdx + 1);
     } else {
       const qn = EV_QUESTIONS_LIST[evIdx];
       const next = { ...evAnswers, [qn.id]: value ?? 0 };
@@ -239,14 +259,14 @@ export default function Compass({ onExit }: { onExit: () => void }) {
       if (evIdx + 1 >= EV_QUESTIONS_LIST.length) finishEv(next); else setEvIdx(evIdx + 1);
     }
     toTop();
-  }, [test, idx, evIdx, answers, evAnswers, finish12, finishEv]);
-  const back = () => (test === 'c12' ? setIdx((i) => Math.max(0, i - 1)) : setEvIdx((i) => Math.max(0, i - 1)));
+  }, [test, idx, evIdx, inIdx, answers, evAnswers, inAnswers, finish12, finishEv, finishIn]);
+  const back = () => (test === 'c12' ? setIdx((i) => Math.max(0, i - 1)) : test === 'in' ? setInIdx((i) => Math.max(0, i - 1)) : setEvIdx((i) => Math.max(0, i - 1)));
 
   useEffect(() => {
     if (view !== 'test') return;
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) return;
-      const map: Record<string, number | null> = test === 'c12' ? { '1': 2, '2': 1, '3': 0, '4': -1, '5': -2, '0': null } : { '1': 1, '2': 0.5, '3': 0, '4': -0.5, '5': -1 };
+      const map: Record<string, number | null> = test !== 'ev' ? { '1': 2, '2': 1, '3': 0, '4': -1, '5': -2, '0': null } : { '1': 1, '2': 0.5, '3': 0, '4': -0.5, '5': -1 };
       if (e.key in map) answer(map[e.key]);
       else if (e.key === 'Backspace' || e.key === 'ArrowLeft') back();
     };
@@ -256,7 +276,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
 
   const start = (t: TestId, fresh: boolean) => {
     setTest(t);
-    if (fresh) { if (t === 'c12') { setAnswers({}); setIdx(0); } else { setEvAnswers({}); setEvIdx(0); } }
+    if (fresh) { if (t === 'c12') { setAnswers({}); setIdx(0); } else if (t === 'in') { setInAnswers({}); setInIdx(0); } else { setEvAnswers({}); setEvIdx(0); } }
     setView('test');
   };
   const openLeader = (id: string) => { setLeaderId(id); setView('leader'); };
@@ -271,10 +291,11 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   if (view === 'home') {
     const inProg12 = Object.keys(answers).length > 0 && Object.keys(answers).length < QUESTIONS.length;
     const inProgEv = Object.keys(evAnswers).length > 0 && Object.keys(evAnswers).length < EV_QUESTIONS_LIST.length;
+    const inProgIn = Object.keys(inAnswers).length > 0 && Object.keys(inAnswers).length < INDIA_QUESTIONS.length;
     body = (
       <section className="tp-home">
         <div className="tp-hero">
-          <p className="tp-kicker">2 tests · {LEADERS.length} leaders and public figures · {COUNTRIES.length} countries · {FAMILIES.length} families of thought</p>
+          <p className="tp-kicker">3 tests · {LEADERS.length} leaders and public figures · {COUNTRIES.length} countries · {FAMILIES.length} families of thought</p>
           <h1 className="tp-title">Twelve-Point Compass</h1>
           <p className="tp-lede">Find where you stand, get a tag for your politics, and see which leaders and countries share it. Every question explains what it means and shows a real country on each side of it.</p>
         </div>
@@ -290,11 +311,22 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           </article>
           <article className="tp-testcard">
             <p className="tp-kicker">8values · 70 statements · 4 axes</p>
-            <h2>8values</h2>
+            <h2>The India Compass</h2>
+        <p>120 statements on Indian politics, society, economy and culture, ten on each of the same twelve axes, five pointing each way, scored exactly like the Compass. Each statement gives the context and what agreeing or disagreeing looks like in Indian law and politics. Results are matched to Indian politicians, public figures and parties. People are placed from their public record (offices, laws, campaigns and statements reported in the press), not from private data or automated analysis of social media; those with little political record are marked as such.</p>
+        <h2>8values</h2>
             <p>The classic open-source test: Equality vs Markets, Nation vs World, Liberty vs Authority, Tradition vs Progress, matched to 52 ideologies. Used under its MIT licence.</p>
             <div className="tp-actions">
               <button className="tp-btn tp-btn--ink" onClick={() => start('ev', !inProgEv)}>{inProgEv ? `Resume at ${evIdx + 1}` : 'Take this test'}</button>
               {inProgEv && <button className="tp-btn" onClick={() => start('ev', true)}>Start again</button>}
+            </div>
+          </article>
+          <article className="tp-testcard tp-testcard--india">
+            <p className="tp-kicker">India · 120 statements · 12 axes</p>
+            <h2>India Compass</h2>
+            <p>Protests, cinema and censorship, reservations, Article 370, the CAA, cow protection, marital rape, Operation Sindoor, Hindi, freebies and more. Matched to {LEADERS.filter((l) => l.country === 'India').length} Indian politicians and public figures and {INDIA_PARTIES.length} parties.</p>
+            <div className="tp-actions">
+              <button className="tp-btn tp-btn--ink" onClick={() => start('in', !inProgIn)}>{inProgIn ? `Resume at ${inIdx + 1}` : 'Take this test'}</button>
+              {inProgIn && <button className="tp-btn" onClick={() => start('in', true)}>Start again</button>}
             </div>
           </article>
         </div>
@@ -341,6 +373,34 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           <p className="tp-fine">Keys: 1 strongly agree … 5 strongly disagree, 0 skip, ← back. Examples show real laws for illustration; they are not endorsements.</p>
         </section>
       );
+    } else if (test === 'in') {
+      const qn = INDIA_QUESTIONS[Math.min(inIdx, INDIA_QUESTIONS.length - 1)];
+      const ax = AXIS[qn.axis], g = GROUPS.find((x) => x.id === ax.group)!;
+      const cur = inAnswers[qn.id];
+      body = (
+        <section className="tp-test">
+          <div className="tp-progress" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={curIdx}><i style={{ width: `${(curIdx / total) * 100}%` }} /></div>
+          <p className="tp-kicker" style={{ color: GROUP_HUE[ax.group] }}>India · {qn.topic} · {g.name}: {ax.name} · {inIdx + 1} of {INDIA_QUESTIONS.length}</p>
+          <h2 className="tp-statement">{qn.text}</h2>
+          <div className="tp-testgrid">
+            <div className="tp-choices">
+              {CHOICES.map((c, i) => <button key={c.v} className={`tp-choice${cur === c.v ? ' is-on' : ''}`} onClick={() => answer(c.v)}><kbd>{i + 1}</kbd>{c.label}</button>)}
+              <button className={`tp-choice tp-choice--skip${cur === null ? ' is-on' : ''}`} onClick={() => answer(null)}><kbd>0</kbd>Not sure / skip</button>
+              <div className="tp-actions">
+                <button className="tp-btn" disabled={inIdx === 0} onClick={back}>← Back</button>
+                {answered >= 36 && <button className="tp-btn" onClick={() => finishIn(inAnswers)}>See results so far</button>}
+              </div>
+            </div>
+            <aside className="tp-cues" aria-label="Context for this statement">
+              <div className="tp-cue"><p className="tp-kicker">Context</p><p>{qn.cue}</p></div>
+              <div className="tp-cue tp-cue--agree"><p className="tp-kicker">If you agree</p><p>{qn.agree}</p></div>
+              <div className="tp-cue tp-cue--disagree"><p className="tp-kicker">If you disagree</p><p>{qn.disagree}</p></div>
+              <div className="tp-cue tp-cue--trivia"><p className="tp-kicker">Did you know?</p><p>{INDIA_TRIVIA[inIdx % INDIA_TRIVIA.length]}</p></div>
+            </aside>
+          </div>
+          <p className="tp-fine">Keys: 1 strongly agree … 5 strongly disagree, 0 skip, ← back. Examples describe real laws, events and arguments; they are not endorsements.</p>
+        </section>
+      );
     } else {
       const qn = EV_QUESTIONS_LIST[Math.min(evIdx, EV_QUESTIONS_LIST.length - 1)];
       const cur = evAnswers[qn.id];
@@ -369,16 +429,75 @@ export default function Compass({ onExit }: { onExit: () => void }) {
     }
   /* ---------------- results ---------------- */
   } else if (view === 'results') {
-    const show = resultOf === 'ev' && you8 ? 'ev' : you ? 'c12' : you8 ? 'ev' : null;
+    const show = resultOf === 'in' && youIn ? 'in' : resultOf === 'ev' && you8 ? 'ev' : resultOf === 'c12' && you ? 'c12' : you ? 'c12' : you8 ? 'ev' : youIn ? 'in' : null;
     if (!show) body = <section className="tp-empty"><p>No result yet.</p><button className="tp-btn tp-btn--ink" onClick={() => start('c12', true)}>Take a test</button></section>;
     else {
-      const switcher = you && you8 && (
+      const switcher = [you, you8, youIn].filter(Boolean).length > 1 && (
         <div className="tp-chips" role="group" aria-label="Which result">
-          <button aria-pressed={show === 'c12'} onClick={() => setResultOf('c12')}>Compass result</button>
-          <button aria-pressed={show === 'ev'} onClick={() => setResultOf('ev')}>8values result</button>
+          {you && <button aria-pressed={show === 'c12'} onClick={() => setResultOf('c12')}>Compass result</button>}
+          {you8 && <button aria-pressed={show === 'ev'} onClick={() => setResultOf('ev')}>8values result</button>}
+          {youIn && <button aria-pressed={show === 'in'} onClick={() => setResultOf('in')}>India result</button>}
         </div>
       );
-      if (show === 'c12' && you) {
+      if (show === 'in' && youIn) {
+        const fams = nearestFamilies(youIn), tag = fams[0].f;
+        const indians = LEADERS.filter((l) => l.country === 'India');
+        const sharers = indians.filter((l) => l.fam === tag.id).map((l) => ({ l, s: similarity(youIn, l.v) })).sort((a, b) => b.s - a.s);
+        const ranked = indians.map((l) => ({ l, s: similarity(youIn, l.v) })).sort((a, b) => b.s - a.s);
+        const parties = INDIA_PARTIES.map((p) => ({ p, s: similarity(youIn, p.v) })).sort((a, b) => b.s - a.s);
+        body = (
+          <section className="tp-results">
+            {switcher}
+            <div className="tp-res-head">
+              <div>
+                <p className="tp-kicker">Your tag · India Compass</p>
+                <h1 className="tp-title tp-title--sm">{tag.name}</h1>
+                <p className="tp-lede">{tag.note}</p>
+                <p className="tp-fine">Also close: {fams[1].f.name} ({fams[1].s}%), {fams[2].f.name} ({fams[2].s}%). Closest party: <b>{parties[0].p.name}</b> ({parties[0].s}%).</p>
+              </div>
+              <Radar labels={AXES.map((a) => a.high)} series={[{ v: youIn, color: 'var(--tp-you)' }]} />
+            </div>
+            <h2 className="tp-h2">Parties closest to your answers</h2>
+            <HBars items={parties.map(({ p, s }) => ({ label: p.short, v: s, note: `${p.name}: ${p.note}`, color: 'var(--tp-them)' }))} unit="%" />
+            <div className="tp-share-with">
+              <h2 className="tp-h2">You share the “{tag.name}” tag with</h2>
+              {sharers.length ? <div className="tp-lgrid">{sharers.slice(0, 16).map(({ l }) => <LeaderCard key={l.id} l={l} you={youIn} onOpen={() => openLeader(l.id)} />)}</div>
+                : <p className="tp-fine">No Indian figure in the directory carries this tag. Your closest matches are below.</p>}
+            </div>
+            <div className="tp-axes-grid">
+              {GROUPS.map((g) => (
+                <div key={g.id} className="tp-axgroup">
+                  <h2 style={{ color: GROUP_HUE[g.id] }}>{g.name}</h2>
+                  {AXES.filter((a) => a.group === g.id).map((a) => {
+                    const v = youIn[AXES.indexOf(a)];
+                    return (
+                      <div key={a.id}>
+                        <AxisBar name={a.name} low={a.low} high={a.high} hue={GROUP_HUE[a.group]} marks={[{ v, label: 'You', color: 'var(--tp-you)' }]} />
+                        <p className="tp-band">{v == null ? 'Skipped' : `${band(v, a)} · ${v}`}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+            <h2 className="tp-h2">Closest Indian politicians and public figures</h2>
+            <div className="tp-lgrid">{ranked.slice(0, 12).map(({ l }) => <LeaderCard key={l.id} l={l} you={youIn} onOpen={() => openLeader(l.id)} />)}</div>
+            <h2 className="tp-h2">Furthest from you</h2>
+            <div className="tp-lgrid">{ranked.slice(-4).reverse().map(({ l }) => <LeaderCard key={l.id} l={l} you={youIn} onOpen={() => openLeader(l.id)} />)}</div>
+            <div className="tp-share">
+              <p className="tp-kicker">Your result code</p>
+              <code>{inEncode(youIn)}</code>
+              <div className="tp-actions">
+                <button className="tp-btn" onClick={() => copy(inEncode(youIn))}>Copy code</button>
+                <button className="tp-btn" onClick={() => { setCmpAxes('12'); compareWith(['youIn', `p:${parties[0].p.id}`, `l:${ranked[0].l.id}`]); }}>Compare</button>
+                <button className="tp-btn" onClick={() => { setLeaderId(''); setEra('indpol'); setView('leaders'); }}>All Indian figures</button>
+                <button className="tp-btn" onClick={() => start('in', true)}>Retake</button>
+              </div>
+              <p className="tp-fine" aria-live="polite">{msg || 'Placements of people are editorial, from their public record; see each profile for the events behind them.'}</p>
+            </div>
+          </section>
+        );
+      } else if (show === 'c12' && you) {
         const fams = nearestFamilies(you), tag = fams[0].f;
         const sharers = LEADERS.filter((l) => l.fam === tag.id).map((l) => ({ l, s: similarity(you, l.v) })).sort((a, b) => b.s - a.s);
         const ranked = LEADERS.map((l) => ({ l, s: similarity(you, l.v) })).sort((a, b) => b.s - a.s);
@@ -759,7 +878,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   } else if (view === 'compare') {
     const chosen = cmp.map((k) => entByKey[k]).filter(Boolean) as Ent[];
     const use12 = cmpAxes === '12' && chosen.every((e) => e.v12);
-    const groups: [string, Ent[]][] = [['You', ents.filter((e) => e.kind === 'you12' || e.kind === 'you8')], ['Leaders and public figures', ents.filter((e) => e.kind === 'leader')], ['Countries', ents.filter((e) => e.kind === 'country')], ['Families of thought', ents.filter((e) => e.kind === 'family')], ['8values ideologies', ents.filter((e) => e.kind === 'ev')]];
+    const groups: [string, Ent[]][] = [['You', ents.filter((e) => e.kind === 'you12' || e.kind === 'you8' || e.kind === 'youIn')], ['Leaders and public figures', ents.filter((e) => e.kind === 'leader' && LEADER_BY_ID[e.key.slice(2)]?.country !== 'India')], ['Indian politicians and public figures', ents.filter((e) => e.kind === 'leader' && LEADER_BY_ID[e.key.slice(2)]?.country === 'India')], ['Indian parties', ents.filter((e) => e.kind === 'party')], ['Countries', ents.filter((e) => e.kind === 'country')], ['Families of thought', ents.filter((e) => e.kind === 'family')], ['8values ideologies', ents.filter((e) => e.kind === 'ev')]];
     const setAt = (i: number, key: string) => setCmp((c) => { const n = c.slice(); if (key) n[i] = key; else n.splice(i, 1); return n.filter(Boolean); });
     const sim = (a: Ent, b: Ent) => (use12 ? similarity(a.v12!, b.v12!.map((x) => x ?? 50)) : evSimilarity(a.v8, b.v8));
     body = (
@@ -841,6 +960,8 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         <h1 className="tp-title tp-title--sm">Method</h1>
         <h2>The Twelve-Point Compass</h2>
         <p>72 statements, six on each axis, three pointing towards each pole, so agreeing with everything lands you in the middle. Answers count from −2 to +2; an axis scores 50 plus 50 times the average answer, flipped where a statement points to the first pole. Skipped statements are left out. Every statement has a plain-language explanation and a real country example for each answer. The examples illustrate what each side looks like in law; they are not endorsements.</p>
+        <h2>The India Compass</h2>
+        <p>120 statements on Indian politics, society, economy and culture, ten on each of the same twelve axes, five pointing each way, scored exactly like the Compass. Each statement gives the context and what agreeing or disagreeing looks like in Indian law and politics. Results are matched to Indian politicians, public figures and parties. People are placed from their public record (offices, laws, campaigns and statements reported in the press), not from private data or automated analysis of social media; those with little political record are marked as such.</p>
         <h2>8values</h2>
         <p>The 70 statements, the scoring (100 × (max + score) ÷ (2 × max) per axis), the label bands and the 52 ideologies with their matching weights are the original 8values test, used under its MIT licence. Copyright © 2020 8values.</p>
         <h2>Tags and sharing a tag</h2>
@@ -864,29 +985,30 @@ export default function Compass({ onExit }: { onExit: () => void }) {
     body = (
       <section className="tp-history">
         <h1 className="tp-title tp-title--sm">History</h1>
-        <p className="tp-lede">Results saved in this browser, newest first. Codes starting c1 are Compass results; e1 are 8values results.</p>
+        <p className="tp-lede">Results saved in this browser, newest first. Codes starting c1 are Compass results, n1 India Compass results and e1 8values results.</p>
         <div className="tp-filters">
-          <input id="tp-code" className="tp-input" placeholder="Paste a result code (c1… or e1…)" value={code} onChange={(e) => setCode(e.target.value)} aria-label="Result code" />
+          <input id="tp-code" className="tp-input" placeholder="Paste a result code (c1…, n1… or e1…)" value={code} onChange={(e) => setCode(e.target.value)} aria-label="Result code" />
           <button className="tp-btn" onClick={() => {
-            const c12 = decode(code), e8 = evDecode(code);
+            const c12 = decode(code), e8 = evDecode(code), i12 = inDecode(code);
             if (c12) { setYou(c12); setResultOf('c12'); setHistory((h) => [...h, { at: Date.now(), code: encode(c12) }]); setCode(''); setView('results'); }
+            else if (i12) { setYouIn(i12); setResultOf('in'); setHistory((h) => [...h, { at: Date.now(), code: inEncode(i12) }]); setCode(''); setView('results'); }
             else if (e8) { setYou8(e8); setResultOf('ev'); setHistory((h) => [...h, { at: Date.now(), code: evEncode(e8) }]); setCode(''); setView('results'); }
-            else setMsg('That code is not valid. Compass codes start with c1, 8values codes with e1.');
+            else setMsg('That code is not valid. Compass codes start with c1, India Compass codes with n1 and 8values codes with e1.');
           }}>Open code</button>
         </div>
         <p className="tp-fine" aria-live="polite">{msg}</p>
         {history.length === 0 ? <p className="tp-fine">No saved results yet.</p> : (
           <ol className="tp-hist">
             {history.slice().reverse().map((h) => {
-              const v = decode(h.code), e = evDecode(h.code);
+              const iv = inDecode(h.code), v = decode(h.code) ?? iv, e = evDecode(h.code);
               const label = v ? nearestFamilies(v)[0].f.name : e ? evIdeology(e).name : '—';
               return (
                 <li key={h.at}>
                   <span>{new Date(h.at).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-                  <b>{v ? 'Compass' : '8values'} · {label}</b>
+                  <b>{iv ? 'India Compass' : v ? 'Compass' : '8values'} · {label}</b>
                   {v ? <Strip v={v} /> : <span className="tp-fine">{e && EV_AXES.map((a, i) => `${a.high} ${e[i]}`).join(' · ')}</span>}
                   <span className="tp-actions">
-                    <button className="tp-btn" onClick={() => { if (v) { setYou(v); setResultOf('c12'); } else if (e) { setYou8(e); setResultOf('ev'); } setView('results'); }}>Open</button>
+                    <button className="tp-btn" onClick={() => { if (iv) { setYouIn(iv); setResultOf('in'); } else if (v) { setYou(v); setResultOf('c12'); } else if (e) { setYou8(e); setResultOf('ev'); } setView('results'); }}>Open</button>
                     <button className="tp-btn" onClick={() => setHistory((all) => all.filter((x) => x.at !== h.at))}>Delete</button>
                   </span>
                 </li>
@@ -906,7 +1028,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         <nav className="tp-nav" aria-label="Compass">
           {nav.map(([v, label]) => (
             <button key={v} aria-current={view === v || (view === 'leader' && v === 'leaders') || (view === 'country' && v === 'countries') ? 'page' : undefined}
-              onClick={() => (v === 'test' ? setView(Object.keys(test === 'c12' ? answers : evAnswers).length >= total ? 'home' : 'test') : setView(v))}>{label}</button>
+              onClick={() => (v === 'test' ? setView(answered >= total ? 'home' : 'test') : setView(v))}>{label}</button>
           ))}
         </nav>
       </header>
