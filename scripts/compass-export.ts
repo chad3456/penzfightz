@@ -8,6 +8,7 @@ import { AXES, FAMILIES, similarity } from '../src/compass/model';
 import { LEADERS, CHECKED } from '../src/compass/leaders';
 import { COUNTRIES, COUNTRY_BY_NAME, SAMESEX_LABEL, DEATH_LABEL, CONSCRIPTION_LABEL, ABORTION_LABEL, WORLD_MILEX } from '../src/compass/countries';
 import { EV_AXES, evIdeology, project12 } from '../src/compass/eightvalues';
+import { INDICATORS, SOC_AXES, SOC_TOTAL, STANCES, STANCE_TOPICS, countryAxes, valueOf } from '../src/compass/social';
 
 const out = 'public/compass-data';
 rmSync(out, { recursive: true, force: true });
@@ -33,6 +34,11 @@ for (const c of COUNTRIES) {
       religionAndState: c.facts.religion, nuclearWeapons: c.facts.nuclear, nato: c.facts.nato, eu: c.facts.eu, note: c.facts.note,
     },
     militarySpending: c.milex ?? null, onlineDating: c.dating ?? null, leaders,
+    socialAtlas: {
+      overall: SOC_TOTAL(c.id),
+      axes: Object.fromEntries(SOC_AXES.map((a) => { const s = countryAxes(c.id)[a.id]; return [a.name, { score: s.v, indicatorsKnown: s.known, indicatorsScored: s.total }]; })),
+      indicators: INDICATORS.map((i) => { const v = valueOf(i, c.id); return { id: i.id, axis: SOC_AXES.find((a) => a.id === i.axis)!.name, question: i.q, answer: v?.label ?? 'Unknown', score: v?.score ?? null, note: i.notes[c.id] ?? null, confidence: i.conf }; }),
+    },
   };
   writeFileSync(`${out}/countries/${c.id}.json`, JSON.stringify(doc, null, 2));
   index.countries.push({ id: c.id, name: c.name, file: `countries/${c.id}.json` });
@@ -48,5 +54,13 @@ for (const f of FAMILIES) {
 
 writeFileSync(`${out}/leaders.json`, JSON.stringify({ ...meta, leaders: LEADERS.map((l) => ({ ...leaderBrief(l), country: l.country, region: l.region, era: l.era, summary: l.summary, confidence: l.confidence, note: l.note, axes: axes(l.v), eightvalues: ev(l.v), record: l.record.map((r) => ({ year: r.y, event: r.t, axes: r.ax.map((x) => AXES.find((a) => a.id === x)!.name) })), wikipedia: `https://en.wikipedia.org/wiki/${l.wiki}` })) }, null, 2));
 writeFileSync(`${out}/military-reference.json`, JSON.stringify(WORLD_MILEX, null, 2));
+writeFileSync(`${out}/social-atlas.json`, JSON.stringify({ ...meta,
+  method: 'Each indicator answer scores 0 (most restrictive or punitive) to 100 (freest or best protected), or is shown as a fact (score null). An axis is the mean of its scored indicators known for that country. Unknown answers are left blank.',
+  axes: SOC_AXES.map((a) => ({ id: a.id, name: a.name, question: a.question, low: a.low, high: a.high })),
+  indicators: INDICATORS.map((i) => ({ id: i.id, axis: i.axis, name: i.name, question: i.q, basis: i.basis, confidence: i.conf, values: i.values, countries: Object.fromEntries(COUNTRIES.map((c) => [c.id, { answer: valueOf(i, c.id)?.label ?? 'Unknown', note: i.notes[c.id] ?? null }])) })),
+  scores: Object.fromEntries(COUNTRIES.map((c) => [c.id, { overall: SOC_TOTAL(c.id), ...Object.fromEntries(SOC_AXES.map((a) => [a.id, countryAxes(c.id)[a.id].v])) }])),
+  leaderRecords: Object.fromEntries(Object.entries(STANCES).map(([id, st]) => [id, Object.fromEntries(STANCE_TOPICS.filter((t) => st[t.id]).map((t) => [t.name, { score: st[t.id]![0], evidence: st[t.id]![1] }]))])),
+}, null, 2));
+(index.files as Record<string, string>).socialAtlas = 'social-atlas.json';
 writeFileSync(`${out}/index.json`, JSON.stringify(index, null, 2));
 console.log('countries', COUNTRIES.length, 'ideologies', FAMILIES.length, 'leaders', LEADERS.length);

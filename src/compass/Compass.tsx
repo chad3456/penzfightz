@@ -9,8 +9,10 @@ import { CHECKED, ERAS, LEADERS, type Era, type Leader, type Region } from './le
 import { ABORTION_LABEL, CONSCRIPTION_LABEL, COUNTRIES, COUNTRY_BY_NAME, DEATH_LABEL, SAMESEX_LABEL, WORLD_MILEX, type Country } from './countries';
 import { EV_AXES, EV_CHOICES, EV_IDEOLOGIES, EV_QUESTIONS_LIST, evDecode, evEncode, evIdeology, evLabel, evScore, evSimilarity, project12, type EVAnswers, type EVVec } from './eightvalues';
 import { ALL_TRIVIA, TRIVIA } from './trivia';
+import Society, { CountrySocial, LeaderSocial } from './Society';
+import { SOC_AXES, SOC_VEC } from './social';
 
-type View = 'home' | 'test' | 'results' | 'leaders' | 'leader' | 'countries' | 'country' | 'ideologies' | 'charts' | 'compare' | 'axes' | 'method' | 'history';
+type View = 'home' | 'test' | 'results' | 'leaders' | 'leader' | 'countries' | 'country' | 'ideologies' | 'charts' | 'society' | 'compare' | 'axes' | 'method' | 'history';
 type TestId = 'c12' | 'ev';
 type Saved = { at: number; code: string };
 
@@ -262,7 +264,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   const compareWith = (keys: string[]) => { setCmp(keys.slice(0, 4)); setView('compare'); };
   const copy = async (text: string) => { try { await navigator.clipboard.writeText(text); setMsg('Copied.'); } catch { setMsg('Copy the code above by hand.'); } };
 
-  const nav: [View, string][] = [['home', 'Start'], ['test', 'Test'], ['results', 'My result'], ['leaders', 'Leaders'], ['countries', 'Countries'], ['ideologies', 'Ideologies'], ['charts', 'Charts'], ['compare', 'Compare'], ['axes', 'Axes'], ['method', 'Method'], ['history', 'History']];
+  const nav: [View, string][] = [['home', 'Start'], ['test', 'Test'], ['results', 'My result'], ['leaders', 'Leaders'], ['countries', 'Countries'], ['ideologies', 'Ideologies'], ['society', 'Society'], ['charts', 'Charts'], ['compare', 'Compare'], ['axes', 'Axes'], ['method', 'Method'], ['history', 'History']];
 
   let body: ReactNode;
   /* ---------------- home ---------------- */
@@ -556,6 +558,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           </div>
           <h2 className="tp-h2">Record</h2>
           <ol className="tp-timeline">{sorted.map((r, k) => <li key={k}><b>{r.y}</b><span>{r.t}{r.ax.length > 0 && <em> · {r.ax.map((x) => AXIS[x].name).join(', ')}</em>}</span></li>)}</ol>
+          <LeaderSocial lid={l.id} />
           {sameTag.length > 0 && <><h2 className="tp-h2">Also tagged {FAMILY_BY_ID[l.fam]?.name}</h2><div className="tp-lgrid">{sameTag.map((x) => <LeaderCard key={x.id} l={x} you={you} onOpen={() => openLeader(x.id)} />)}</div></>}
         </section>
       );
@@ -615,6 +618,8 @@ export default function Compass({ onExit }: { onExit: () => void }) {
             </tbody>
           </table>
           {f.note && <p className="tp-fine">{f.note}</p>}
+          <CountrySocial cid={c.id} />
+          <h2 className="tp-h2">On the twelve Compass axes</h2>
           <div className="tp-axes-grid">
             {GROUPS.map((g) => (
               <div key={g.id} className="tp-axgroup">
@@ -663,15 +668,18 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         </div>
       </section>
     );
+  /* ---------------- society ---------------- */
+  } else if (view === 'society') {
+    body = <Society onCountry={openCountry} onLeader={openLeader} />;
   /* ---------------- charts ---------------- */
   } else if (view === 'charts') {
-    const axisOpts = [...AXES.map((a) => ({ id: a.id, name: `${a.name} (${a.low} → ${a.high})`, ends: [a.low, a.high] as [string, string] })), ...EV_AXES.map((a) => ({ id: `ev:${a.id}`, name: `8values ${a.name} (${a.high} → ${a.low})`, ends: [a.high, a.low] as [string, string] }))];
-    const getV = (v12: number[], id: string) => { if (id.startsWith('ev:')) { const i = EV_AXES.findIndex((a) => `ev:${a.id}` === id); return 100 - project12(v12)[i]; } return v12[AXES.findIndex((a) => a.id === id)]; };
+    const axisOpts = [...AXES.map((a) => ({ id: a.id, name: `${a.name} (${a.low} → ${a.high})`, ends: [a.low, a.high] as [string, string] })), ...EV_AXES.map((a) => ({ id: `ev:${a.id}`, name: `8values ${a.name} (${a.high} → ${a.low})`, ends: [a.high, a.low] as [string, string] })), ...SOC_AXES.map((a) => ({ id: `soc:${a.id}`, name: `Social: ${a.name} (${a.low} → ${a.high}), countries only`, ends: [a.low, a.high] as [string, string] }))];
+    const getV = (v12: number[], id: string, key = '') => { if (id.startsWith('soc:')) { const i = SOC_AXES.findIndex((a) => `soc:${a.id}` === id); return key.startsWith('c:') ? SOC_VEC[key.slice(2)][i] ?? 50 : NaN; } if (id.startsWith('ev:')) { const i = EV_AXES.findIndex((a) => `ev:${a.id}` === id); return 100 - project12(v12)[i]; } return v12[AXES.findIndex((a) => a.id === id)]; };
     const setPts = scSet === 'countries' ? COUNTRIES.map((c) => ({ key: `c:${c.id}`, label: c.name, short: c.id.toUpperCase(), v: c.v, color: `var(--tp-r-${c.region.replace(' ', '')})` }))
       : scSet === 'current' ? LEADERS.filter((l) => l.era === 'current').map((l) => ({ key: `l:${l.id}`, label: l.name, short: l.name.split(' ').slice(-1)[0], v: l.v, color: `var(--tp-r-${l.region.replace(' ', '')})` }))
       : FAMILIES.map((f) => ({ key: `f:${f.id}`, label: f.name, short: f.name.split(' ')[0], v: f.v, color: 'var(--ink)' }));
-    const pts = setPts.map((p) => ({ ...p, x: getV(p.v, scX), y: getV(p.v, scY) }));
-    if (you && scSet !== 'families') pts.push({ key: 'you12', label: 'You', short: 'YOU', v: you.map((x) => x ?? 50), color: 'var(--tp-you)', x: getV(you.map((x) => x ?? 50), scX), y: getV(you.map((x) => x ?? 50), scY) });
+    const pts = setPts.map((p) => ({ ...p, x: getV(p.v, scX, p.key), y: getV(p.v, scY, p.key) })).filter((p) => !Number.isNaN(p.x) && !Number.isNaN(p.y));
+    if (you && scSet !== 'families' && !scX.startsWith('soc:') && !scY.startsWith('soc:')) pts.push({ key: 'you12', label: 'You', short: 'YOU', v: you.map((x) => x ?? 50), color: 'var(--tp-you)', x: getV(you.map((x) => x ?? 50), scX), y: getV(you.map((x) => x ?? 50), scY) });
     const xo = axisOpts.find((a) => a.id === scX)!, yo = axisOpts.find((a) => a.id === scY)!;
     const milex = COUNTRIES.filter((c) => c.milex).sort((a, b) => b.milex!.v - a.milex!.v);
     const dating = COUNTRIES.filter((c) => c.dating);
@@ -843,6 +851,8 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         <p>Anything placed on the twelve axes can be shown on 8values’ four: Equality from ownership, redistribution and trade; World from belonging, sovereignty and force; Liberty from liberty, power and centralism; Progress from morality, faith and ecology. This is an approximation, labelled wherever it is used.</p>
         <h2>Figures and sources</h2>
         <p>Legal facts (same-sex couples, the death penalty, military service, abortion, nuclear weapons, alliances) reflect the law as checked in late 2026. Military spending is shown only where SIPRI’s figure was confirmed; online-dating shares come from the surveys used in The Dating Ledger. Offices were checked against news reports on {CHECKED}; Israel’s October 2026 election and Sweden’s government formation were unresolved then.</p>
+        <h2>Social Atlas</h2>
+        <p>A second set of twelve axes measures how each country’s laws treat private and social life: marriage, family, private life, sexual violence, LGBTQ+ people, women, religion, pluralism, speech, punishment, online dating and personal choices. Each axis averages legal indicators whose answers score from 0 (most restrictive or punitive) to 100 (freest or best protected); some indicators, such as the maximum penalty for rape or bans on communist or Nazi symbols, are shown as facts and not scored, because more punishment or more bans is not simply better or worse. Unknown answers are left blank and the number of known indicators is shown beside each score. Indicators marked “check” are ones where sources disagree or the law is changing. Laws affecting Muslims are listed as laws; the atlas does not label any country or person Islamophobic. Leaders’ records on social questions are given only where a documented act shows them.</p>
         <h2>Data</h2>
         <p>Every country and family of thought is published as JSON: <a href="/compass-data/index.json" target="_blank" rel="noopener noreferrer">/compass-data/index.json</a> lists the files.</p>
         <h2>Privacy</h2>

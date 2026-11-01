@@ -2055,8 +2055,17 @@ included under its MIT licence.
   ideologies, charts (any axis against any axis, military, nationalism,
   online dating, a law matrix), compare up to four, axes, method and history.
   The page is its own scroll container because the site's body does not scroll.
+- **Social Atlas** (`social.ts`, `Society.tsx`): twelve social axes for every
+  country (marriage, family, private life, sexual violence, LGBTQ+, women,
+  religion, pluralism, speech, punishment, online dating, personal choices)
+  from 74 legal indicators, 63 scored 0–100 and 11 shown as facts. Each
+  indicator lists countries per answer, with notes and a confidence flag;
+  unknowns stay `?`. Views: ranking heat map, compare three countries,
+  themes (marriage, online dating, rape law, LGBTQ+, laws on Muslim practice,
+  communism and fascism in law), an indicator explorer and leaders' documented
+  records on LGBTQ+, women, religious minorities and speech.
 - **JSON** (`public/compass-data/`): `index.json`, `leaders.json`,
-  `military-reference.json`, `countries/<id>.json` and
+  `military-reference.json`, `social-atlas.json`, `countries/<id>.json` (with its Social Atlas scores) and
   `ideologies/<family>.json`. Regenerate with
   `node_modules/.bin/rolldown scripts/compass-export.ts --platform node --format esm --file /tmp/compass-export.mjs && node /tmp/compass-export.mjs`.
 

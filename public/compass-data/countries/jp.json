@@ -184,5 +184,738 @@
       "tag": "Conservatism",
       "school": "LDP conservatism"
     }
-  ]
+  ],
+  "socialAtlas": {
+    "overall": 89,
+    "axes": {
+      "Marriage": {
+        "score": 100,
+        "indicatorsKnown": 6,
+        "indicatorsScored": 6
+      },
+      "Family": {
+        "score": 100,
+        "indicatorsKnown": 4,
+        "indicatorsScored": 4
+      },
+      "Private life": {
+        "score": 91,
+        "indicatorsKnown": 7,
+        "indicatorsScored": 7
+      },
+      "Sexual violence": {
+        "score": 100,
+        "indicatorsKnown": 4,
+        "indicatorsScored": 4
+      },
+      "LGBTQ+": {
+        "score": 44,
+        "indicatorsKnown": 8,
+        "indicatorsScored": 8
+      },
+      "Women": {
+        "score": 95,
+        "indicatorsKnown": 6,
+        "indicatorsScored": 6
+      },
+      "Religion": {
+        "score": 100,
+        "indicatorsKnown": 8,
+        "indicatorsScored": 8
+      },
+      "Pluralism": {
+        "score": 100,
+        "indicatorsKnown": 2,
+        "indicatorsScored": 2
+      },
+      "Speech": {
+        "score": 100,
+        "indicatorsKnown": 4,
+        "indicatorsScored": 4
+      },
+      "Punishment": {
+        "score": 64,
+        "indicatorsKnown": 5,
+        "indicatorsScored": 5
+      },
+      "Online dating": {
+        "score": 100,
+        "indicatorsKnown": 3,
+        "indicatorsScored": 4
+      },
+      "Personal choices": {
+        "score": 72,
+        "indicatorsKnown": 5,
+        "indicatorsScored": 5
+      }
+    },
+    "indicators": [
+      {
+        "id": "m_age",
+        "axis": "Marriage",
+        "question": "Is 18 the minimum age for marriage, with no exceptions?",
+        "answer": "18 or over, no exceptions",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "m_poly",
+        "axis": "Marriage",
+        "question": "May a man take more than one wife?",
+        "answer": "Banned",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "m_faith",
+        "axis": "Marriage",
+        "question": "Can two people of different religions marry in the country?",
+        "answer": "Yes, freely",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "m_civil",
+        "axis": "Marriage",
+        "question": "Can a couple marry without a religious ceremony or authority?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "m_wali",
+        "axis": "Marriage",
+        "question": "Does an adult woman need a male guardian’s consent to marry?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "m_equal",
+        "axis": "Marriage",
+        "question": "Is the minimum marriage age the same for women and men?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "f_divorce",
+        "axis": "Family",
+        "question": "Can both spouses divorce on equal terms?",
+        "answer": "Yes, equally",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "f_inherit",
+        "axis": "Family",
+        "question": "Do daughters inherit equally with sons?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "f_mat",
+        "axis": "Family",
+        "question": "Does the law give at least 14 weeks of paid maternity leave (the ILO standard)?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "f_smack",
+        "axis": "Family",
+        "question": "Is hitting children banned in all settings, including the home?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "p_adult",
+        "axis": "Private life",
+        "question": "Is adultery a crime?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "p_premar",
+        "axis": "Private life",
+        "question": "Is sex between unmarried adults a crime?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "p_cohab",
+        "axis": "Private life",
+        "question": "Is it a crime for an unmarried couple to live together?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "p_sexwork",
+        "axis": "Private life",
+        "question": "How does the law treat selling and buying sex between adults?",
+        "answer": "Selling legal, organising illegal",
+        "score": 70,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "p_porn",
+        "axis": "Private life",
+        "question": "Is pornography legal for adults?",
+        "answer": "Legal with mandatory age checks or censorship",
+        "score": 70,
+        "note": "Genitals must be pixelated by law.",
+        "confidence": "check"
+      },
+      {
+        "id": "p_dress",
+        "axis": "Private life",
+        "question": "Must women wear religious dress such as the hijab in public?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "p_police",
+        "axis": "Private life",
+        "question": "Is there a religious or morality police that can stop people in public?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "v_marital",
+        "axis": "Sexual violence",
+        "question": "Is rape within marriage a crime?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "v_consent",
+        "axis": "Sexual violence",
+        "question": "Does the law define rape as sex without consent, rather than requiring force?",
+        "answer": "Consent-based",
+        "score": 100,
+        "note": "The 2023 reform created the offence of non-consensual sexual intercourse.",
+        "confidence": "check"
+      },
+      {
+        "id": "v_marry",
+        "axis": "Sexual violence",
+        "question": "Can marrying the victim end a rape prosecution or sentence?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "v_max",
+        "axis": "Sexual violence",
+        "question": "What is the heaviest sentence the law allows for rape?",
+        "answer": "Life imprisonment",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "v_castr",
+        "axis": "Sexual violence",
+        "question": "Does the law allow chemical castration of sex offenders?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "v_harass",
+        "axis": "Sexual violence",
+        "question": "Is there a law against sexual harassment at work?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "l_legal",
+        "axis": "LGBTQ+",
+        "question": "Is sex between people of the same sex legal?",
+        "answer": "Legal",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "l_union",
+        "axis": "LGBTQ+",
+        "question": "Can same-sex couples marry or form a legal union?",
+        "answer": "No recognition",
+        "score": 30,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "l_adopt",
+        "axis": "LGBTQ+",
+        "question": "Can same-sex couples adopt jointly?",
+        "answer": "No",
+        "score": 0,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "l_work",
+        "axis": "LGBTQ+",
+        "question": "Does national law ban firing someone for their sexual orientation?",
+        "answer": "No",
+        "score": 0,
+        "note": "The 2023 LGBT understanding law has no binding ban.",
+        "confidence": "check"
+      },
+      {
+        "id": "l_hate",
+        "axis": "LGBTQ+",
+        "question": "Does hate-crime law cover sexual orientation?",
+        "answer": "No",
+        "score": 30,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "l_gender",
+        "axis": "LGBTQ+",
+        "question": "Can a trans person change their legal gender?",
+        "answer": "With medical or court requirements",
+        "score": 60,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "l_conv",
+        "axis": "LGBTQ+",
+        "question": "Are “conversion therapy” practices banned nationally?",
+        "answer": "No",
+        "score": 30,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "l_prop",
+        "axis": "LGBTQ+",
+        "question": "Does the law restrict LGBT content, groups or Pride events?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "w_permit",
+        "axis": "Women",
+        "question": "Does a married woman need her husband’s permission to travel abroad or to work?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "w_testify",
+        "axis": "Women",
+        "question": "Does a woman’s testimony count the same as a man’s in court?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "w_nation",
+        "axis": "Women",
+        "question": "Can a mother pass her citizenship to her children on the same terms as a father?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "w_dv",
+        "axis": "Women",
+        "question": "Is there a specific law against domestic violence?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "w_abort",
+        "axis": "Women",
+        "question": "When is abortion legal?",
+        "answer": "On broad grounds",
+        "score": 70,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "w_contra",
+        "axis": "Women",
+        "question": "Is contraception freely available?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "w_femicide",
+        "axis": "Women",
+        "question": "Is killing a woman because she is a woman a separate crime?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "w_quota",
+        "axis": "Women",
+        "question": "Does the law reserve seats or set candidate quotas for women?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "w_leader",
+        "axis": "Women",
+        "question": "Has a woman been head of government or elected head of state?",
+        "answer": "Yes",
+        "score": null,
+        "note": "Sanae Takaichi, from 2025.",
+        "confidence": "documented"
+      },
+      {
+        "id": "r_blas",
+        "axis": "Religion",
+        "question": "Is insulting religion a crime?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "r_apost",
+        "axis": "Religion",
+        "question": "Is there a penalty for leaving Islam or the state religion?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "r_veil",
+        "axis": "Religion",
+        "question": "Is wearing a face veil such as the niqab or burqa banned in public?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "r_scarf",
+        "axis": "Religion",
+        "question": "Are headscarves banned for students or public servants?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "r_mosque",
+        "axis": "Religion",
+        "question": "Does the law limit minarets or mosque architecture?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "r_slaughter",
+        "axis": "Religion",
+        "question": "Is slaughter without stunning, as in halal and kosher practice, banned?",
+        "answer": "Allowed",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "r_citizen",
+        "axis": "Religion",
+        "question": "Does citizenship or immigration law treat people differently by religion?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "r_ban",
+        "axis": "Religion",
+        "question": "Does the state ban or criminalise a religious group?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "pl_regime",
+        "axis": "Pluralism",
+        "question": "Can opposition parties compete for power?",
+        "answer": "Yes, competitive elections",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "pl_turnover",
+        "axis": "Pluralism",
+        "question": "Has an opposition party won power at a national election since 2000?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "pl_comrule",
+        "axis": "Pluralism",
+        "question": "Is the country ruled by a communist party?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "pl_comban",
+        "axis": "Pluralism",
+        "question": "Are communist parties or symbols banned?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "pl_nazban",
+        "axis": "Pluralism",
+        "question": "Are Nazi or fascist parties or symbols banned?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "pl_denial",
+        "axis": "Pluralism",
+        "question": "Is Holocaust denial a crime?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "s_insult",
+        "axis": "Speech",
+        "question": "Is insulting the head of state or ruler a crime?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "s_block",
+        "axis": "Speech",
+        "question": "Are major platforms such as Facebook, X, Instagram or YouTube blocked?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "s_fake",
+        "axis": "Speech",
+        "question": "Can spreading “false information” lead to prison?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "s_vpn",
+        "axis": "Speech",
+        "question": "Is using unapproved VPNs restricted?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "s_shutdown",
+        "axis": "Speech",
+        "question": "Has the government cut internet access in a region or nationwide since 2023?",
+        "answer": "No",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "j_death",
+        "axis": "Punishment",
+        "question": "Does the law still allow the death penalty?",
+        "answer": "Retained",
+        "score": 20,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "j_exec",
+        "axis": "Punishment",
+        "question": "Has the country carried out executions in 2024–26?",
+        "answer": "Yes",
+        "score": 0,
+        "note": "One execution, in June 2025.",
+        "confidence": "check"
+      },
+      {
+        "id": "j_flog",
+        "axis": "Punishment",
+        "question": "Does the law allow judicial flogging or caning?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "j_drugs",
+        "axis": "Punishment",
+        "question": "Can drug trafficking carry the death penalty?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "j_hudud",
+        "axis": "Punishment",
+        "question": "Can adultery, same-sex relations or apostasy carry the death penalty?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "d_apps",
+        "axis": "Online dating",
+        "question": "Are mainstream dating apps such as Tinder and Bumble available?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "d_gay",
+        "axis": "Online dating",
+        "question": "Are gay dating apps such as Grindr blocked or removed from app stores?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "d_image",
+        "axis": "Online dating",
+        "question": "Is sharing intimate images without consent (“revenge porn”) a crime?",
+        "answer": "Yes",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "d_deepfake",
+        "axis": "Online dating",
+        "question": "Is making or sharing sexual deepfakes of a real person a crime?",
+        "answer": "Unknown",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "d_entrap",
+        "axis": "Online dating",
+        "question": "Have security forces been documented using dating apps to arrest LGBT people?",
+        "answer": "Unknown",
+        "score": null,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "c_cannabis",
+        "axis": "Personal choices",
+        "question": "Is recreational cannabis legal?",
+        "answer": "A crime",
+        "score": 20,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "c_alcohol",
+        "axis": "Personal choices",
+        "question": "Is alcohol banned?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "c_dying",
+        "axis": "Personal choices",
+        "question": "Is assisted dying or euthanasia legal?",
+        "answer": "No",
+        "score": 40,
+        "note": null,
+        "confidence": "check"
+      },
+      {
+        "id": "c_service",
+        "axis": "Personal choices",
+        "question": "Is military service compulsory?",
+        "answer": "No conscription",
+        "score": 100,
+        "note": null,
+        "confidence": "documented"
+      },
+      {
+        "id": "c_suicide",
+        "axis": "Personal choices",
+        "question": "Is attempting suicide a crime?",
+        "answer": "No",
+        "score": 100,
+        "note": null,
+        "confidence": "check"
+      }
+    ]
+  }
 }

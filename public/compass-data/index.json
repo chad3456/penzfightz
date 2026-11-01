@@ -322,6 +322,7 @@
     }
   ],
   "files": {
-    "leaders": "leaders.json"
+    "leaders": "leaders.json",
+    "socialAtlas": "social-atlas.json"
   }
 }
