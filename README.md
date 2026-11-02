@@ -2075,8 +2075,17 @@ included under its MIT licence.
   themes (marriage, online dating, rape law, LGBTQ+, laws on Muslim practice,
   communism and fascism in law), an indicator explorer and leaders' documented
   records on LGBTQ+, women, religious minorities and speech.
+- **Through Their Eyes** (`authors.ts`, `Authors.tsx`): 52 authors and
+  philosophers (Orwell, Huxley, Atwood, Dostoevsky, Chanakya, Confucius,
+  Mill, Hobbes, Marx, Ambedkar, Tagore and more), each placed on the twelve
+  axes and given a lens built from their work: a weighted set of criteria,
+  each naming the data it reads (a Compass axis, a Social Atlas axis or a
+  legal indicator) and why. Countries are scored on every lens; leaders on
+  the twelve-axis criteria. Kinship shows whose politics are closest to each
+  author's. Country and leader profiles show their closest lenses and
+  authors; authors can be compared like anyone else.
 - **JSON** (`public/compass-data/`): `index.json`, `leaders.json`,
-  `military-reference.json`, `social-atlas.json`, `countries/<id>.json` (with its Social Atlas scores) and
+  `military-reference.json`, `social-atlas.json`, `india-compass.json`, `authors.json`, `countries/<id>.json` (with its Social Atlas scores) and
   `ideologies/<family>.json`. Regenerate with
   `node_modules/.bin/rolldown scripts/compass-export.ts --platform node --format esm --file /tmp/compass-export.mjs && node /tmp/compass-export.mjs`.
 

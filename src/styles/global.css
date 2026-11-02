@@ -11682,3 +11682,16 @@ input.tp-input { flex: 1 1 14rem; }
 .tp-pick { min-width: 0; max-width: 100%; }
 .tp-pick select { min-width: 0; width: 100%; text-overflow: ellipsis; }
 .tp-testcard--india { border-top: 4px solid #e07b39; }
+/* Through Their Eyes */
+.tp-authgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: .8rem; }
+.tp-authcard { border-top: 4px solid var(--tp-society); }
+.tp-authcard--nightmare { border-top-color: var(--tp-them); }
+.tp-lensduo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem 2rem; }
+.tp-lenscard { padding: 1rem 1.2rem; border-radius: 12px; border: 1px solid var(--tp-line); border-top: 5px solid var(--k); background: var(--tp-card); }
+.tp-lenscard h2 { margin: 0 0 .4rem; font-weight: 400; font-size: 1.5rem; color: var(--ink); }
+.tp-lenscard p { margin: .3rem 0; line-height: 1.45; }
+.tp-quote { margin: .6rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid var(--ink-soft); font-style: italic; font-size: 1.1rem; color: var(--ink); }
+.tp-heat--authors { min-width: 120rem; }
+.tp-heat--authors thead th { height: 9.5rem; vertical-align: bottom; }
+.tp-vert { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; font-family: var(--narrow); font-size: .72rem; text-decoration: none; }
+.tp-lensduo .tp-hbar__label, .tp-profile .tp-hbar__label { white-space: normal; overflow: visible; line-height: 1.2; }

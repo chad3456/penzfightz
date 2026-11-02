@@ -9,6 +9,7 @@ import { LEADERS, CHECKED } from '../src/compass/leaders';
 import { COUNTRIES, COUNTRY_BY_NAME, SAMESEX_LABEL, DEATH_LABEL, CONSCRIPTION_LABEL, ABORTION_LABEL, WORLD_MILEX } from '../src/compass/countries';
 import { EV_AXES, evIdeology, project12 } from '../src/compass/eightvalues';
 import { INDIA_QUESTIONS, INDIA_TRIVIA } from '../src/compass/india';
+import { AUTHORS, band, lensScore, srcLabel } from '../src/compass/authors';
 import { INDIA_PARTIES } from '../src/compass/india-people';
 import { INDICATORS, SOC_AXES, SOC_TOTAL, STANCES, STANCE_TOPICS, countryAxes, valueOf } from '../src/compass/social';
 
@@ -72,5 +73,15 @@ writeFileSync(`${out}/india-compass.json`, JSON.stringify({ ...meta,
   trivia: INDIA_TRIVIA,
 }, null, 2));
 (index.files as Record<string, string>).indiaCompass = 'india-compass.json';
+writeFileSync(`${out}/authors.json`, JSON.stringify({ ...meta,
+  method: 'Each lens is a weighted mean of 0–100 criteria; “lower adds” criteria use 100 minus the value. Leaders are scored on twelve-axis criteria only; scores need at least two criteria with data. Placements and lenses are editorial interpretations.',
+  authors: AUTHORS.map((a) => ({
+    id: a.id, name: a.name, years: a.years, from: a.from, works: a.works, idea: a.idea, quote: a.quote ?? null, axes: axes(a.v),
+    lens: { name: a.lens.name, kind: a.lens.kind, question: a.lens.question, top: a.lens.top, criteria: a.lens.criteria.map((c) => ({ why: c.why, data: srcLabel(c.src), direction: c.dir === 1 ? 'higher adds' : 'lower adds', weight: c.w })) },
+    countries: Object.fromEntries(COUNTRIES.map((c) => { const r = lensScore(a.lens, { v: c.v, cid: c.id }); return [c.id, r.v == null ? null : { score: r.v, band: band(r.v, a.lens.kind), criteriaKnown: r.used }]; })),
+    leaders: Object.fromEntries(LEADERS.map((l) => [l.id, lensScore(a.lens, { v: l.v }).v])),
+  })),
+}, null, 2));
+(index.files as Record<string, string>).authors = 'authors.json';
 writeFileSync(`${out}/index.json`, JSON.stringify(index, null, 2));
 console.log('countries', COUNTRIES.length, 'ideologies', FAMILIES.length, 'leaders', LEADERS.length);

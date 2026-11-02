@@ -13,8 +13,10 @@ import Society, { CountrySocial, LeaderSocial } from './Society';
 import { SOC_AXES, SOC_VEC } from './social';
 import { INDIA_QUESTIONS, INDIA_TRIVIA, inDecode, inEncode, indiaScore, type IAnswers } from './india';
 import { INDIA_PARTIES } from './india-people';
+import Authors, { CountryLenses, LeaderAuthors } from './Authors';
+import { AUTHORS } from './authors';
 
-type View = 'home' | 'test' | 'results' | 'leaders' | 'leader' | 'countries' | 'country' | 'ideologies' | 'charts' | 'society' | 'compare' | 'axes' | 'method' | 'history';
+type View = 'home' | 'test' | 'results' | 'leaders' | 'leader' | 'countries' | 'country' | 'ideologies' | 'charts' | 'society' | 'authors' | 'compare' | 'axes' | 'method' | 'history';
 type TestId = 'c12' | 'ev' | 'in';
 type Saved = { at: number; code: string };
 
@@ -35,7 +37,7 @@ const nearestFamilies = (v: (number | null)[]) => FAMILIES.map((f) => ({ f, s: s
 const familyOfCountry = (c: Country) => nearestFamilies(c.v)[0].f;
 
 /* ------------------------------------------------------------- entities */
-interface Ent { key: string; kind: 'you12' | 'you8' | 'youIn' | 'leader' | 'party' | 'country' | 'family' | 'ev'; name: string; sub: string; v12: (number | null)[] | null; v8: EVVec }
+interface Ent { key: string; kind: 'you12' | 'you8' | 'youIn' | 'leader' | 'party' | 'author' | 'country' | 'family' | 'ev'; name: string; sub: string; v12: (number | null)[] | null; v8: EVVec }
 function entities(you12: (number | null)[] | null, you8: EVVec | null, youIn: (number | null)[] | null): Ent[] {
   const out: Ent[] = [];
   if (youIn) out.push({ key: 'youIn', kind: 'youIn', name: 'You (India Compass)', sub: 'Your India Compass result', v12: youIn, v8: project12(youIn) });
@@ -43,6 +45,7 @@ function entities(you12: (number | null)[] | null, you8: EVVec | null, youIn: (n
   if (you8) out.push({ key: 'you8', kind: 'you8', name: 'You (8values)', sub: 'Your 8values result', v12: null, v8: you8 });
   for (const l of LEADERS) out.push({ key: `l:${l.id}`, kind: 'leader', name: l.name, sub: `${l.country} · ${l.years}`, v12: l.v, v8: project12(l.v) });
   for (const p of INDIA_PARTIES) out.push({ key: `p:${p.id}`, kind: 'party', name: `${p.short} (${p.name})`, sub: 'Indian party', v12: p.v, v8: project12(p.v) });
+  for (const a of AUTHORS) out.push({ key: `a:${a.id}`, kind: 'author', name: a.name, sub: a.works, v12: a.v, v8: project12(a.v) });
   for (const c of COUNTRIES) out.push({ key: `c:${c.id}`, kind: 'country', name: c.name, sub: c.system, v12: c.v, v8: project12(c.v) });
   for (const f of FAMILIES) out.push({ key: `f:${f.id}`, kind: 'family', name: f.name, sub: 'Family of thought', v12: f.v, v8: project12(f.v) });
   for (const i of EV_IDEOLOGIES) out.push({ key: `e:${i.name}`, kind: 'ev', name: i.name, sub: '8values ideology', v12: null, v8: [i.stats.econ, i.stats.dipl, i.stats.govt, i.stats.scty] });
@@ -196,6 +199,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   const [resultOf, setResultOf] = useState<TestId>('c12');
   const [leaderId, setLeaderId] = useState('');
   const [countryId, setCountryId] = useState('');
+  const [authorId, setAuthorId] = useState('');
   const [q, setQ] = useState('');
   const [region, setRegion] = useState<Region | ''>('');
   const [era, setEra] = useState<Era | ''>('');
@@ -213,7 +217,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   useEffect(() => { store.set('tpc-history', history); }, [history]);
   useEffect(() => { store.set('tpc-test', test); }, [test]);
   const toTop = () => root.current?.scrollTo({ top: 0 });
-  useEffect(() => { toTop(); setMsg(''); }, [view, leaderId, countryId]);
+  useEffect(() => { toTop(); setMsg(''); }, [view, leaderId, countryId, authorId]);
 
   const total = test === 'c12' ? QUESTIONS.length : test === 'in' ? INDIA_QUESTIONS.length : EV_QUESTIONS_LIST.length;
   const curIdx = test === 'c12' ? idx : test === 'in' ? inIdx : evIdx;
@@ -281,10 +285,11 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   };
   const openLeader = (id: string) => { setLeaderId(id); setView('leader'); };
   const openCountry = (id: string) => { setCountryId(id); setView('country'); };
+  const openAuthor = (id: string) => { setAuthorId(id); setView('authors'); };
   const compareWith = (keys: string[]) => { setCmp(keys.slice(0, 4)); setView('compare'); };
   const copy = async (text: string) => { try { await navigator.clipboard.writeText(text); setMsg('Copied.'); } catch { setMsg('Copy the code above by hand.'); } };
 
-  const nav: [View, string][] = [['home', 'Start'], ['test', 'Test'], ['results', 'My result'], ['leaders', 'Leaders'], ['countries', 'Countries'], ['ideologies', 'Ideologies'], ['society', 'Society'], ['charts', 'Charts'], ['compare', 'Compare'], ['axes', 'Axes'], ['method', 'Method'], ['history', 'History']];
+  const nav: [View, string][] = [['home', 'Start'], ['test', 'Test'], ['results', 'My result'], ['leaders', 'Leaders'], ['countries', 'Countries'], ['ideologies', 'Ideologies'], ['society', 'Society'], ['authors', 'Authors'], ['charts', 'Charts'], ['compare', 'Compare'], ['axes', 'Axes'], ['method', 'Method'], ['history', 'History']];
 
   let body: ReactNode;
   /* ---------------- home ---------------- */
@@ -678,6 +683,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           <h2 className="tp-h2">Record</h2>
           <ol className="tp-timeline">{sorted.map((r, k) => <li key={k}><b>{r.y}</b><span>{r.t}{r.ax.length > 0 && <em> · {r.ax.map((x) => AXIS[x].name).join(', ')}</em>}</span></li>)}</ol>
           <LeaderSocial lid={l.id} />
+          <LeaderAuthors l={l} onAuthor={openAuthor} />
           {sameTag.length > 0 && <><h2 className="tp-h2">Also tagged {FAMILY_BY_ID[l.fam]?.name}</h2><div className="tp-lgrid">{sameTag.map((x) => <LeaderCard key={x.id} l={x} you={you} onOpen={() => openLeader(x.id)} />)}</div></>}
         </section>
       );
@@ -738,6 +744,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           </table>
           {f.note && <p className="tp-fine">{f.note}</p>}
           <CountrySocial cid={c.id} />
+          <CountryLenses cid={c.id} onAuthor={openAuthor} />
           <h2 className="tp-h2">On the twelve Compass axes</h2>
           <div className="tp-axes-grid">
             {GROUPS.map((g) => (
@@ -788,6 +795,8 @@ export default function Compass({ onExit }: { onExit: () => void }) {
       </section>
     );
   /* ---------------- society ---------------- */
+  } else if (view === 'authors') {
+    body = <Authors authorId={authorId} setAuthorId={setAuthorId} you={you} onCountry={openCountry} onLeader={openLeader} />;
   } else if (view === 'society') {
     body = <Society onCountry={openCountry} onLeader={openLeader} />;
   /* ---------------- charts ---------------- */
@@ -878,7 +887,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   } else if (view === 'compare') {
     const chosen = cmp.map((k) => entByKey[k]).filter(Boolean) as Ent[];
     const use12 = cmpAxes === '12' && chosen.every((e) => e.v12);
-    const groups: [string, Ent[]][] = [['You', ents.filter((e) => e.kind === 'you12' || e.kind === 'you8' || e.kind === 'youIn')], ['Leaders and public figures', ents.filter((e) => e.kind === 'leader' && LEADER_BY_ID[e.key.slice(2)]?.country !== 'India')], ['Indian politicians and public figures', ents.filter((e) => e.kind === 'leader' && LEADER_BY_ID[e.key.slice(2)]?.country === 'India')], ['Indian parties', ents.filter((e) => e.kind === 'party')], ['Countries', ents.filter((e) => e.kind === 'country')], ['Families of thought', ents.filter((e) => e.kind === 'family')], ['8values ideologies', ents.filter((e) => e.kind === 'ev')]];
+    const groups: [string, Ent[]][] = [['You', ents.filter((e) => e.kind === 'you12' || e.kind === 'you8' || e.kind === 'youIn')], ['Leaders and public figures', ents.filter((e) => e.kind === 'leader' && LEADER_BY_ID[e.key.slice(2)]?.country !== 'India')], ['Indian politicians and public figures', ents.filter((e) => e.kind === 'leader' && LEADER_BY_ID[e.key.slice(2)]?.country === 'India')], ['Indian parties', ents.filter((e) => e.kind === 'party')], ['Authors and philosophers', ents.filter((e) => e.kind === 'author')], ['Countries', ents.filter((e) => e.kind === 'country')], ['Families of thought', ents.filter((e) => e.kind === 'family')], ['8values ideologies', ents.filter((e) => e.kind === 'ev')]];
     const setAt = (i: number, key: string) => setCmp((c) => { const n = c.slice(); if (key) n[i] = key; else n.splice(i, 1); return n.filter(Boolean); });
     const sim = (a: Ent, b: Ent) => (use12 ? similarity(a.v12!, b.v12!.map((x) => x ?? 50)) : evSimilarity(a.v8, b.v8));
     body = (
@@ -974,6 +983,8 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         <p>Legal facts (same-sex couples, the death penalty, military service, abortion, nuclear weapons, alliances) reflect the law as checked in late 2026. Military spending is shown only where SIPRI’s figure was confirmed; online-dating shares come from the surveys used in The Dating Ledger. Offices were checked against news reports on {CHECKED}; Israel’s October 2026 election and Sweden’s government formation were unresolved then.</p>
         <h2>Social Atlas</h2>
         <p>A second set of twelve axes measures how each country’s laws treat private and social life: marriage, family, private life, sexual violence, LGBTQ+ people, women, religion, pluralism, speech, punishment, online dating and personal choices. Each axis averages legal indicators whose answers score from 0 (most restrictive or punitive) to 100 (freest or best protected); some indicators, such as the maximum penalty for rape or bans on communist or Nazi symbols, are shown as facts and not scored, because more punishment or more bans is not simply better or worse. Unknown answers are left blank and the number of known indicators is shown beside each score. Indicators marked “check” are ones where sources disagree or the law is changing. Laws affecting Muslims are listed as laws; the atlas does not label any country or person Islamophobic. Leaders’ records on social questions are given only where a documented act shows them.</p>
+        <h2>Through Their Eyes</h2>
+        <p>Each of the 52 authors and philosophers is placed on the twelve axes from their writing and given a lens: a small set of criteria drawn from their work, each reading one value from this site’s data (a Compass axis, a Social Atlas axis or a legal indicator), with a weight and a direction. A lens score is the weighted mean of the criteria that have data, from 0 to 100; warnings (Orwell, Huxley, Atwood) measure closeness to the nightmare, ideals (Mill, Rawls, Gandhi) closeness to the ideal. Leaders are scored on the twelve-axis criteria only, and a score needs at least two criteria. These are interpretations of the books, set out so they can be checked and argued with.</p>
         <h2>Data</h2>
         <p>Every country and family of thought is published as JSON: <a href="/compass-data/index.json" target="_blank" rel="noopener noreferrer">/compass-data/index.json</a> lists the files.</p>
         <h2>Privacy</h2>
@@ -1028,7 +1039,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         <nav className="tp-nav" aria-label="Compass">
           {nav.map(([v, label]) => (
             <button key={v} aria-current={view === v || (view === 'leader' && v === 'leaders') || (view === 'country' && v === 'countries') ? 'page' : undefined}
-              onClick={() => (v === 'test' ? setView(answered >= total ? 'home' : 'test') : setView(v))}>{label}</button>
+              onClick={() => { if (v === 'authors') setAuthorId(''); if (v === 'test') setView(answered >= total ? 'home' : 'test'); else setView(v); }}>{label}</button>
           ))}
         </nav>
       </header>
