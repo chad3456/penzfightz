@@ -2083,7 +2083,12 @@ included under its MIT licence.
   legal indicator) and why. Countries are scored on every lens; leaders on
   the twelve-axis criteria. Kinship shows whose politics are closest to each
   author's. Country and leader profiles show their closest lenses and
-  authors; authors can be compared like anyone else.
+  authors; authors can be compared like anyone else. Each country also has a full
+  interactive report (`AuthorReport.tsx`): radars of the warnings and of the
+  ideals by tradition against the world average and a chosen peer, a
+  criterion-by-criterion deep dive with a written verdict and the country's
+  rank, all 52 lenses ranked, a scatter of any two lenses, kinship radars and
+  the country's leaders through the same lens.
 - **JSON** (`public/compass-data/`): `index.json`, `leaders.json`,
   `military-reference.json`, `social-atlas.json`, `india-compass.json`, `authors.json`, `countries/<id>.json` (with its Social Atlas scores) and
   `ideologies/<family>.json`. Regenerate with

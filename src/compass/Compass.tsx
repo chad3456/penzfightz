@@ -200,6 +200,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   const [leaderId, setLeaderId] = useState('');
   const [countryId, setCountryId] = useState('');
   const [authorId, setAuthorId] = useState('');
+  const [reportCid, setReportCid] = useState('');
   const [q, setQ] = useState('');
   const [region, setRegion] = useState<Region | ''>('');
   const [era, setEra] = useState<Era | ''>('');
@@ -217,7 +218,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   useEffect(() => { store.set('tpc-history', history); }, [history]);
   useEffect(() => { store.set('tpc-test', test); }, [test]);
   const toTop = () => root.current?.scrollTo({ top: 0 });
-  useEffect(() => { toTop(); setMsg(''); }, [view, leaderId, countryId, authorId]);
+  useEffect(() => { toTop(); setMsg(''); }, [view, leaderId, countryId, authorId, reportCid]);
 
   const total = test === 'c12' ? QUESTIONS.length : test === 'in' ? INDIA_QUESTIONS.length : EV_QUESTIONS_LIST.length;
   const curIdx = test === 'c12' ? idx : test === 'in' ? inIdx : evIdx;
@@ -285,7 +286,8 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   };
   const openLeader = (id: string) => { setLeaderId(id); setView('leader'); };
   const openCountry = (id: string) => { setCountryId(id); setView('country'); };
-  const openAuthor = (id: string) => { setAuthorId(id); setView('authors'); };
+  const openAuthor = (id: string) => { setReportCid(''); setAuthorId(id); setView('authors'); };
+  const openReport = (id: string) => { setAuthorId(''); setReportCid(id); setView('authors'); };
   const compareWith = (keys: string[]) => { setCmp(keys.slice(0, 4)); setView('compare'); };
   const copy = async (text: string) => { try { await navigator.clipboard.writeText(text); setMsg('Copied.'); } catch { setMsg('Copy the code above by hand.'); } };
 
@@ -744,7 +746,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           </table>
           {f.note && <p className="tp-fine">{f.note}</p>}
           <CountrySocial cid={c.id} />
-          <CountryLenses cid={c.id} onAuthor={openAuthor} />
+          <CountryLenses cid={c.id} onAuthor={openAuthor} onReport={openReport} />
           <h2 className="tp-h2">On the twelve Compass axes</h2>
           <div className="tp-axes-grid">
             {GROUPS.map((g) => (
@@ -796,7 +798,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
     );
   /* ---------------- society ---------------- */
   } else if (view === 'authors') {
-    body = <Authors authorId={authorId} setAuthorId={setAuthorId} you={you} onCountry={openCountry} onLeader={openLeader} />;
+    body = <Authors authorId={authorId} setAuthorId={(id) => { setReportCid(''); setAuthorId(id); }} you={you} onCountry={openCountry} onLeader={openLeader} reportCid={reportCid} setReportCid={setReportCid} />;
   } else if (view === 'society') {
     body = <Society onCountry={openCountry} onLeader={openLeader} />;
   /* ---------------- charts ---------------- */
@@ -1039,7 +1041,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
         <nav className="tp-nav" aria-label="Compass">
           {nav.map(([v, label]) => (
             <button key={v} aria-current={view === v || (view === 'leader' && v === 'leaders') || (view === 'country' && v === 'countries') ? 'page' : undefined}
-              onClick={() => { if (v === 'authors') setAuthorId(''); if (v === 'test') setView(answered >= total ? 'home' : 'test'); else setView(v); }}>{label}</button>
+              onClick={() => { if (v === 'authors') { setAuthorId(''); setReportCid(''); } if (v === 'test') setView(answered >= total ? 'home' : 'test'); else setView(v); }}>{label}</button>
           ))}
         </nav>
       </header>

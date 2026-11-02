@@ -4,6 +4,7 @@ import { AXES } from './model';
 import { COUNTRIES } from './countries';
 import { LEADERS, type Leader } from './leaders';
 import { AUTHORS, band, countryOnly, kinship, lensScore, srcLabel, type Author } from './authors';
+import AuthorReport from './AuthorReport';
 
 const COUNTRY_BY_ID = Object.fromEntries(COUNTRIES.map((c) => [c.id, c]));
 const AUTHOR_BY_ID = Object.fromEntries(AUTHORS.map((a) => [a.id, a]));
@@ -30,7 +31,7 @@ function Bars({ rows, kind, onPick }: { rows: { key: string; label: string; v: n
 }
 
 /** Small block for a country profile: the nightmares it most resembles and the ideals it most realises. */
-export function CountryLenses({ cid, onAuthor }: { cid: string; onAuthor: (id: string) => void }) {
+export function CountryLenses({ cid, onAuthor, onReport }: { cid: string; onAuthor: (id: string) => void; onReport: (id: string) => void }) {
   const c = COUNTRY_BY_ID[cid];
   const res = AUTHORS.map((a) => ({ a, r: lensScore(a.lens, { v: c.v, cid }) })).filter((x) => x.r.v != null);
   const night = res.filter((x) => x.a.lens.kind === 'nightmare').sort((x, y) => y.r.v! - x.r.v!).slice(0, 4);
@@ -38,6 +39,7 @@ export function CountryLenses({ cid, onAuthor }: { cid: string; onAuthor: (id: s
   return (
     <div className="tp-socblock">
       <h2 className="tp-h2">Through the authors’ eyes</h2>
+      <p className="tp-fine"><button className="tp-btn" onClick={() => onReport(cid)}>Open the full report on {c.name} through 52 authors →</button></p>
       <div className="tp-lensduo">
         <div><p className="tp-kicker">Nightmares it most resembles</p><Bars kind="nightmare" rows={night.map(({ a, r }) => ({ key: a.id, label: a.lens.name, v: r.v, note: `${a.name} · ${band(r.v!, 'nightmare')}` }))} onPick={onAuthor} /></div>
         <div><p className="tp-kicker">Ideals it comes closest to</p><Bars kind="ideal" rows={ideal.map(({ a, r }) => ({ key: a.id, label: a.lens.name, v: r.v, note: `${a.name} · ${band(r.v!, 'ideal')}` }))} onPick={onAuthor} /></div>
@@ -58,8 +60,9 @@ export function LeaderAuthors({ l, onAuthor }: { l: Leader; onAuthor: (id: strin
   );
 }
 
-export default function Authors({ authorId, setAuthorId, you, onCountry, onLeader }: { authorId: string; setAuthorId: (id: string) => void; you: (number | null)[] | null; onCountry: (id: string) => void; onLeader: (id: string) => void }) {
-  const [tab, setTab] = useState<'shelf' | 'matrix'>('shelf');
+export default function Authors({ authorId, setAuthorId, you, onCountry, onLeader, reportCid, setReportCid }: { authorId: string; setAuthorId: (id: string) => void; you: (number | null)[] | null; onCountry: (id: string) => void; onLeader: (id: string) => void; reportCid: string; setReportCid: (id: string) => void }) {
+  const [tab, setTabRaw] = useState<'shelf' | 'matrix'>('shelf');
+  const setTab = (t: 'shelf' | 'matrix' | 'report') => { if (t === 'report') setReportCid(reportCid || 'in'); else { setReportCid(''); setTabRaw(t); } };
   const [who, setWho] = useState<'current' | 'all' | 'india'>('current');
   const [kindF, setKindF] = useState<'all' | 'nightmare' | 'ideal'>('all');
   const matrix = useMemo(() => COUNTRIES.map((c) => ({ c, s: AUTHORS.map((a) => lensScore(a.lens, { v: c.v, cid: c.id }).v) })), []);
@@ -104,7 +107,8 @@ export default function Authors({ authorId, setAuthorId, you, onCountry, onLeade
         <p className="tp-fine">Each criterion reads a 0–100 value; “lower adds” uses 100 minus the value. The score is the weighted mean of the criteria with data.</p>
 
         <h2 className="tp-h2">Countries through {a.name.split(' (')[0]}’s eyes</h2>
-        <Bars kind={a.lens.kind} onPick={onCountry} rows={countries.map(({ c, r }) => ({ key: c.id, label: c.name, v: r.v, note: `${band(r.v!, a.lens.kind)}${r.used < r.total ? ` · ${r.used} of ${r.total} criteria known` : ''}` }))} />
+        <p className="tp-fine">Click a country for its full report through every author.</p>
+        <Bars kind={a.lens.kind} onPick={(id) => { setAuthorId(''); setReportCid(id); }} rows={countries.map(({ c, r }) => ({ key: c.id, label: c.name, v: r.v, note: `${band(r.v!, a.lens.kind)}${r.used < r.total ? ` · ${r.used} of ${r.total} criteria known` : ''}` }))} />
 
         <h2 className="tp-h2">Leaders through {a.name.split(' (')[0]}’s eyes</h2>
         <div className="tp-chips" role="group" aria-label="Which leaders">
@@ -131,6 +135,14 @@ export default function Authors({ authorId, setAuthorId, you, onCountry, onLeade
     );
   }
 
+  const tabs = (
+    <div className="tp-chips" role="tablist" aria-label="View">
+      <button role="tab" aria-selected={!reportCid && tab === 'shelf'} aria-pressed={!reportCid && tab === 'shelf'} onClick={() => setTab('shelf')}>Authors</button>
+      <button role="tab" aria-selected={!!reportCid} aria-pressed={!!reportCid} onClick={() => setTab('report')}>Country reports</button>
+      <button role="tab" aria-selected={!reportCid && tab === 'matrix'} aria-pressed={!reportCid && tab === 'matrix'} onClick={() => setTab('matrix')}>Every country, every lens</button>
+    </div>
+  );
+  if (reportCid) return <div className="tp-charts">{tabs}<AuthorReport cid={reportCid} setCid={setReportCid} onAuthor={setAuthorId} onLeader={onLeader} onCountry={onCountry} /></div>;
   const list = AUTHORS.filter((x) => kindF === 'all' || x.lens.kind === kindF);
   return (
     <section className="tp-charts">
@@ -139,10 +151,7 @@ export default function Authors({ authorId, setAuthorId, you, onCountry, onLeade
         <p className="tp-lede">{AUTHORS.length} authors and philosophers, from Chanakya and Confucius to Orwell and Atwood. Each one’s ideas become a lens — a Big Brother Index, a Gilead Index, Arthashastra statecraft — and every country and leader is scored through it. Each author is also placed on the twelve axes, so you can see whose politics are closest to theirs, and to yours.</p>
         <p className="tp-fine">These are interpretations. Every lens shows the criteria it uses, the data behind each one and why it follows from the work.</p>
       </div>
-      <div className="tp-chips" role="tablist" aria-label="View">
-        <button role="tab" aria-selected={tab === 'shelf'} aria-pressed={tab === 'shelf'} onClick={() => setTab('shelf')}>Authors</button>
-        <button role="tab" aria-selected={tab === 'matrix'} aria-pressed={tab === 'matrix'} onClick={() => setTab('matrix')}>Every country, every lens</button>
-      </div>
+      {tabs}
       {tab === 'shelf' ? (
         <>
           <div className="tp-chips" role="group" aria-label="Kind">
@@ -167,12 +176,12 @@ export default function Authors({ authorId, setAuthorId, you, onCountry, onLeade
         </>
       ) : (
         <article className="tp-chartcard">
-          <p className="tp-fine">Red columns are warnings (higher = closer to the nightmare); green columns are ideals (higher = closer to the ideal). Click a heading for the lens, a country for its profile.</p>
+          <p className="tp-fine">Red columns are warnings (higher = closer to the nightmare); green columns are ideals (higher = closer to the ideal). Click a heading for the lens, a country for its full report.</p>
           <div className="tp-tablebox">
             <table className="tp-heat tp-heat--authors">
               <thead><tr><th>Country</th>{AUTHORS.map((x) => <th key={x.id} title={`${x.name}: ${x.lens.name}`}><button className="tp-inline tp-vert" onClick={() => setAuthorId(x.id)}>{x.lens.name}</button></th>)}</tr></thead>
               <tbody>{matrix.map(({ c, s }) => (
-                <tr key={c.id}><th><button className="tp-inline" onClick={() => onCountry(c.id)}>{c.name}</button></th>{s.map((v, i) => <td key={i} style={{ background: heat(v, AUTHORS[i].lens.kind) }}>{v ?? '—'}</td>)}</tr>
+                <tr key={c.id}><th><button className="tp-inline" onClick={() => setReportCid(c.id)}>{c.name}</button></th>{s.map((v, i) => <td key={i} style={{ background: heat(v, AUTHORS[i].lens.kind) }}>{v ?? '—'}</td>)}</tr>
               ))}</tbody>
             </table>
           </div>
