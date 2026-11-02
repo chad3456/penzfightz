@@ -1,5 +1,13 @@
 # The Back Bench
 
+> **Current site:** the build opens straight into the **Twelve-Point Compass**
+> (`src/main.tsx` renders `src/compass/Compass.tsx` with `src/compass/compass.css`,
+> a neo-modern light and dark theme). The games and effects described below
+> are still in the repository but are not wired into the build for now; render
+> `<App />` from `src/App.tsx` in `main.tsx` and import `src/styles/global.css`
+> to bring them back.
+
+
 Six games from the last row of an Indian classroom, the bus home, and the
 pavement outside. Play the computer, or send someone a link and play them.
 

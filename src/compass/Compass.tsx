@@ -182,7 +182,7 @@ function HBars({ items, max = 100, unit = '', refLine }: { items: { label: strin
 }
 
 /* ------------------------------------------------------------------ page */
-export default function Compass({ onExit }: { onExit: () => void }) {
+export default function Compass({ onExit }: { onExit?: () => void }) {
   const root = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<View>('home');
   const [test, setTest] = useState<TestId>(() => store.get('tpc-test', 'c12' as TestId));
@@ -302,9 +302,22 @@ export default function Compass({ onExit }: { onExit: () => void }) {
     body = (
       <section className="tp-home">
         <div className="tp-hero">
-          <p className="tp-kicker">3 tests · {LEADERS.length} leaders and public figures · {COUNTRIES.length} countries · {FAMILIES.length} families of thought</p>
-          <h1 className="tp-title">Twelve-Point Compass</h1>
-          <p className="tp-lede">Find where you stand, get a tag for your politics, and see which leaders and countries share it. Every question explains what it means and shows a real country on each side of it.</p>
+          <p className="tp-kicker">Twelve-Point Compass · political values on twelve axes</p>
+          <h1 className="tp-title">Find where you stand.</h1>
+          <p className="tp-lede">Twelve questions about the economy, the state, society and the world, not just left and right. Get a tag for your politics, then see which leaders, countries and great thinkers stand with you. Every statement explains itself and shows a real country on each side.</p>
+          <div className="tp-actions">
+            <button className="tp-btn tp-btn--ink" onClick={() => start('c12', !inProg12)}>{inProg12 ? `Resume the Compass at ${idx + 1}` : 'Take the Compass'}</button>
+            <button className="tp-btn" onClick={() => start('in', !inProgIn)}>{inProgIn ? `Resume the India Compass at ${inIdx + 1}` : 'India Compass'}</button>
+            {(you || you8 || youIn) && <button className="tp-btn" onClick={() => setView('results')}>My result</button>}
+          </div>
+          <div className="tp-stats">
+            <div className="tp-stat"><b>12</b><span>axes</span></div>
+            <div className="tp-stat"><b>{QUESTIONS.length + INDIA_QUESTIONS.length + EV_QUESTIONS_LIST.length}</b><span>statements, 3 tests</span></div>
+            <div className="tp-stat"><b>{LEADERS.length}</b><span>leaders and figures</span></div>
+            <div className="tp-stat"><b>{COUNTRIES.length}</b><span>countries</span></div>
+            <div className="tp-stat"><b>{AUTHORS.length}</b><span>authors as lenses</span></div>
+            <div className="tp-stat"><b>{FAMILIES.length}</b><span>families of thought</span></div>
+          </div>
         </div>
         <div className="tp-tests">
           <article className="tp-testcard">
@@ -345,6 +358,17 @@ export default function Compass({ onExit }: { onExit: () => void }) {
               <ul>{AXES.filter((a) => a.group === g.id).map((a) => <li key={a.id}><b>{a.name}</b> {a.low} ↔ {a.high}</li>)}</ul>
             </div>
           ))}
+        </div>
+        <div>
+          <p className="tp-kicker">Explore</p>
+          <div className="tp-explore">
+            <button onClick={() => setView('leaders')}><b>Leaders</b><span>{LEADERS.length} leaders and public figures, each tagged and placed from their record.</span></button>
+            <button onClick={() => setView('countries')}><b>Countries</b><span>{COUNTRIES.length} countries placed from the laws they enforce.</span></button>
+            <button onClick={() => setView('society')}><b>Social Atlas</b><span>Marriage, rape law, LGBTQ+, religion and online dating, country by country.</span></button>
+            <button onClick={() => setView('authors')}><b>Through Their Eyes</b><span>Every country judged by Orwell, Chanakya, Mill and 49 more.</span></button>
+            <button onClick={() => setView('charts')}><b>Charts</b><span>Any axis against any other; military, nationalism and dating.</span></button>
+            <button onClick={() => setView('compare')}><b>Compare</b><span>Put up to four people, countries, authors or ideas side by side.</span></button>
+          </div>
         </div>
         <p className="tp-fine">Answers stay in this browser. Nothing is sent anywhere.</p>
       </section>
@@ -1036,7 +1060,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
   return (
     <div className="tp" ref={root}>
       <header className="tp-bar-top">
-        <button className="tp-link" onClick={onExit}>← Shelf</button>
+        {onExit && <button className="tp-link" onClick={onExit}>← Shelf</button>}
         <span className="tp-brand">Twelve-Point Compass</span>
         <nav className="tp-nav" aria-label="Compass">
           {nav.map(([v, label]) => (
@@ -1045,7 +1069,7 @@ export default function Compass({ onExit }: { onExit: () => void }) {
           ))}
         </nav>
       </header>
-      <main className="tp-main">{body}</main>
+      <main className="tp-main">{body}<footer className="tp-foot"><span>Twelve-Point Compass · placements are editorial and sourced on every profile</span><span>Data checked {CHECKED}</span></footer></main>
     </div>
   );
 }
