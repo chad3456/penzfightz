@@ -11,10 +11,11 @@
  */
 import { AXES, similarity, type AxisId, type Vec } from './model';
 import { INDICATORS, SOC_AXES, SOC_VEC, valueOf, type SocAxisId } from './social';
+import { ECON, giniScaled, redistScaled } from './economy';
 
 /** 'ax:<axis>' twelve-axis value · 'soc:<axis>' Social Atlas axis · 'ind:<id>' indicator score ·
  *  'near:<axis>:<target>' closeness to a value · 'calc:moderation' closeness to the middle of every axis. */
-export type Src = `ax:${AxisId}` | `soc:${SocAxisId}` | `ind:${string}` | `near:${AxisId}:${number}` | 'calc:moderation';
+export type Src = `ax:${AxisId}` | `soc:${SocAxisId}` | `ind:${string}` | `near:${AxisId}:${number}` | 'calc:moderation' | 'eco:gini' | 'eco:redist';
 export interface Criterion { src: Src; dir: 1 | -1; w: number; why: string }
 export interface Lens { name: string; kind: 'nightmare' | 'ideal'; question: string; top: string; criteria: Criterion[] }
 export interface Author {
@@ -103,6 +104,7 @@ export const AUTHORS: Author[] = [
     v: [35, 75, 40, 20, 15, 35, 30, 20, 30, 25, 5, 70],
     lens: { name: 'Handicapper General Index', kind: 'nightmare', top: 'Harrison Bergeron’s America', question: 'How far does this place enforce sameness from the centre?', criteria: [
       C('ax:welfare', 1, 1, 'Everyone is made equal by law.'),
+      C('eco:gini', -1, 1, 'Equality of outcome, as measured.'),
       C('ax:liberty', 1, 1, 'Agents enforce the handicaps.'),
       C('ax:center', 1, 1, 'The United States Handicapper General.'),
       C('ax:econ', -1, 1, 'Talent is levelled down by the state.'),
@@ -259,6 +261,7 @@ export const AUTHORS: Author[] = [
     lens: { name: 'Atlas Shrugged', kind: 'ideal', top: 'Galt’s Gulch', question: 'How close is this place to laissez-faire capitalism with no forced altruism?', criteria: [
       C('ax:econ', 1, 2, 'Laissez-faire capitalism.'),
       C('ax:welfare', -1, 2, 'No one may be forced to serve others’ needs.'),
+      C('eco:redist', -1, 1, 'Forced redistribution, as actually measured.'),
       C('ax:faith', -1, 1, 'Reason, not faith.'),
       C('ax:liberty', -1, 1, 'Individual rights against force.'),
       C('ax:trade', -1, 1, 'Free trade.'),
@@ -268,6 +271,7 @@ export const AUTHORS: Author[] = [
     v: [92, 10, 10, 10, 10, 15, 40, 35, 35, 40, 40, 30],
     lens: { name: 'Minimal State', kind: 'ideal', top: 'The night-watchman state', question: 'How close is this place to a state that only protects rights?', criteria: [
       C('ax:welfare', -1, 2, 'Taxing earnings is on a par with forced labour.'),
+      C('eco:redist', -1, 1, 'How much the state redistributes in practice.'),
       C('ax:econ', 1, 1, 'Free exchange is just.'),
       C('ax:liberty', -1, 1, 'Rights as side constraints.'),
       C('soc:choices', 1, 1, 'A framework for voluntary utopias.'),
@@ -278,6 +282,7 @@ export const AUTHORS: Author[] = [
     v: [40, 80, 35, 25, 15, 45, 25, 20, 30, 30, 35, 55],
     lens: { name: 'Veil of Ignorance', kind: 'ideal', top: 'Justice as fairness', question: 'Would you choose to be born here not knowing your sex, faith, sexuality or wealth?', criteria: [
       C('ax:welfare', 1, 2, 'Inequalities must benefit the worst off.'),
+      C('eco:gini', -1, 2, 'Measured inequality: would you accept it not knowing where you’d land?'),
       C('soc:women', 1, 1, 'Equal basic liberties for all.'),
       C('soc:lgbt', 1, 1, 'Equal basic liberties for all.'),
       C('soc:religion', 1, 1, 'Liberty of conscience.'),
@@ -349,6 +354,7 @@ export const AUTHORS: Author[] = [
     lens: { name: 'General Will', kind: 'ideal', top: 'Rousseau’s republic', question: 'Does the people rule directly, as equals, in a small and frugal republic?', criteria: [
       C('ax:center', -1, 1, 'Sovereignty cannot be represented; small republics.'),
       C('ax:welfare', 1, 1, 'No citizen rich enough to buy another, none so poor as to sell himself.'),
+      C('eco:gini', -1, 1, 'No one rich enough to buy another: measured inequality.'),
       C('soc:pluralism', 1, 1, 'Sovereignty of the people.'),
       C('ax:eco', 1, 1, 'Distrust of luxury and commerce.'),
       C('ax:nation', 1, 1, 'Civic patriotism and a civil religion.'),
@@ -361,6 +367,7 @@ export const AUTHORS: Author[] = [
       C('ax:liberty', 1, 1, 'Guardians keep order.'),
       C('soc:speech', -1, 1, 'Poets are censored.'),
       C('ax:econ', -1, 1, 'Guardians own no property.'),
+      C('eco:gini', -1, 1, 'In the Laws, no citizen may own more than four times the poorest citizen’s holding.'),
       C('soc:pluralism', -1, 1, 'Democracy degenerates into tyranny.'),
     ] } },
   { id: 'aristotle', name: 'Aristotle', years: '384–322 BCE', from: 'Macedonia, Athens', era: 'Ancient', works: 'Politics, Nicomachean Ethics',
@@ -370,6 +377,7 @@ export const AUTHORS: Author[] = [
       C('calc:moderation', 1, 2, 'Virtue lies in the mean between extremes.'),
       C('soc:pluralism', 1, 1, 'Rule of law and a mixed constitution.'),
       C('near:welfare:55', 1, 1, 'A large middle class makes a stable state.'),
+      C('eco:gini', -1, 1, 'Neither very rich nor very poor: measured inequality.'),
     ] } },
 
   /* ------------------------------------------------------------ socialist and anarchist */
@@ -379,6 +387,7 @@ export const AUTHORS: Author[] = [
     lens: { name: 'Communist Manifesto', kind: 'ideal', top: 'Communism', question: 'How close is this economy and society to the Manifesto’s aims?', criteria: [
       C('ax:econ', -1, 2, 'Abolition of private ownership of the means of production.'),
       C('ax:welfare', 1, 2, 'From each according to his ability, to each according to his needs.'),
+      C('eco:gini', -1, 1, 'A classless society: income inequality as it is actually measured.'),
       C('ax:faith', -1, 1, 'Religion as “the opium of the people”.'),
       C('ax:nation', -1, 1, 'The working men have no country.'),
     ] } },
@@ -389,6 +398,7 @@ export const AUTHORS: Author[] = [
       C('ax:center', -1, 2, 'Free federations of communes.'),
       C('ax:power', -1, 1, 'No rulers.'),
       C('ax:welfare', 1, 1, 'Bread for all.'),
+      C('eco:gini', -1, 1, 'Wealth held in common: measured inequality.'),
       C('ax:liberty', -1, 1, 'No coercive state.'),
       C('soc:justice', 1, 1, 'He wanted prisons abolished.'),
     ] } },
@@ -397,6 +407,7 @@ export const AUTHORS: Author[] = [
     v: [30, 85, 50, 30, 20, 40, 40, 35, 35, 35, 30, 70],
     lens: { name: 'Grapes of Wrath', kind: 'ideal', top: 'Dignity for the Joads', question: 'Would the Joads find dignity here?', criteria: [
       C('ax:welfare', 1, 2, 'Dignity and support for migrant workers.'),
+      C('eco:gini', -1, 1, 'The gap between landowners and the dispossessed.'),
       C('ax:nation', -1, 1, '“Okies” were treated as foreigners in their own land.'),
       C('ax:eco', 1, 1, 'The Dust Bowl came from over-farming.'),
       C('ax:econ', -1, 1, 'Against banks and landowners squeezing tenants.'),
@@ -406,6 +417,7 @@ export const AUTHORS: Author[] = [
     v: [45, 75, 45, 40, 30, 45, 55, 55, 50, 40, 40, 50],
     lens: { name: 'Hard Times Test', kind: 'ideal', top: 'A society that cares for Oliver', question: 'Does this place protect the poor and children?', criteria: [
       C('ax:welfare', 1, 2, 'Against workhouses and child labour.'),
+      C('eco:redist', 1, 1, 'Does the state actually lift the poor? Measured redistribution.'),
       C('ind:f_smack', 1, 1, 'Against cruel schoolmasters like Squeers in Nicholas Nickleby.'),
       C('soc:family', 1, 1, 'Children and families protected.'),
       C('soc:justice', 1, 1, 'Against debtors’ prisons and harsh courts.'),
@@ -417,6 +429,7 @@ export const AUTHORS: Author[] = [
       C('soc:justice', 1, 2, 'Against harsh punishment.'),
       C('ind:j_death', 1, 1, 'He campaigned to abolish the death penalty.'),
       C('ax:welfare', 1, 1, 'Poverty breeds crime.'),
+      C('eco:redist', 1, 1, 'Relief for the poor, as actually delivered.'),
     ] } },
   { id: 'fanon', name: 'Frantz Fanon', years: '1925–1961', from: 'Martinique, Algeria', era: 'Contemporary', works: 'The Wretched of the Earth (1961), Black Skin, White Masks (1952)',
     idea: 'Psychiatrist of colonialism who argued for full decolonisation, and warned against a new national elite replacing the old one.',
@@ -473,6 +486,7 @@ export const AUTHORS: Author[] = [
       C('soc:women', 1, 1, 'The Hindu Code Bill for women’s rights.'),
       C('soc:religion', 1, 1, 'Freedom of conscience; he left Hinduism for Buddhism.'),
       C('ax:welfare', 1, 1, 'State socialism for economic democracy.'),
+      C('eco:gini', -1, 1, 'Economic democracy: measured inequality.'),
       C('soc:pluralism', 1, 1, 'Constitutional democracy.'),
       C('ind:m_faith', 1, 1, 'Inter-marriage as the real remedy for caste.'),
       C('ax:values', -1, 1, 'Against hierarchy sanctioned by tradition.'),
@@ -524,6 +538,7 @@ export const AUTHORS: Author[] = [
     v: [40, 75, 50, 55, 35, 55, 80, 55, 60, 50, 25, 65],
     lens: { name: 'Benevolent Government', kind: 'ideal', top: 'The mandate of Heaven', question: 'Does the ruler feed the people, tax lightly and accept that a tyrant may be removed?', criteria: [
       C('ax:welfare', 1, 2, 'Rulers must ensure the people have land and food.'),
+      C('eco:redist', 1, 1, 'The ruler shares the granaries with the people.'),
       C('soc:pluralism', 1, 1, 'Heaven sees as the people see; a tyrant may be removed.'),
       C('soc:justice', 1, 1, 'Light punishments.'),
       C('ax:force', -1, 1, 'Against wars of conquest.'),
@@ -568,6 +583,8 @@ function read(src: Src, t: Target): number | null {
   if (kind === 'ax') return t.v[AX_I[id]] ?? null;
   if (kind === 'near') { const x = t.v[AX_I[id]]; return x == null ? null : Math.max(0, 100 - 2 * Math.abs(x - Number(target))); }
   if (!t.cid) return null;
+  if (src === 'eco:gini') { const g = ECON[t.cid]?.gini?.v; return g == null ? null : giniScaled(g); }
+  if (src === 'eco:redist') { const x = ECON[t.cid]?.redist?.v; return x == null ? null : redistScaled(x); }
   if (kind === 'soc') return SOC_VEC[t.cid]?.[SOC_I[id]] ?? null;
   if (kind === 'ind') { const ind = IND[id]; const s = ind ? valueOf(ind, t.cid)?.score : null; return s ?? null; }
   return null;
@@ -597,10 +614,12 @@ export const kinship = (a: Author, v: (number | null)[]) => similarity(v, a.v);
 /** Describe a criterion's data source for display. */
 export function srcLabel(src: Src): string {
   if (src === 'calc:moderation') return 'Closeness to the middle of all twelve Compass axes';
+  if (src === 'eco:gini') return 'Measured inequality: Gini after taxes and transfers (SWIID)';
+  if (src === 'eco:redist') return 'Measured redistribution: how much taxes and transfers cut inequality (SWIID)';
   const [kind, id, target] = src.split(':');
   if (kind === 'ax') { const a = AXES[AX_I[id]]; return `Compass axis ${a.name} (${a.low} → ${a.high})`; }
   if (kind === 'near') { const a = AXES[AX_I[id]]; return `Closeness to ${target} on ${a.name}`; }
   if (kind === 'soc') return `Social Atlas: ${SOC_AXES[SOC_I[id]].name}`;
   return `Law: ${IND[id]?.name ?? id}`;
 }
-export const countryOnly = (src: Src) => src.startsWith('soc:') || src.startsWith('ind:');
+export const countryOnly = (src: Src) => src.startsWith('soc:') || src.startsWith('ind:') || src.startsWith('eco:');

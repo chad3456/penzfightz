@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-02",
+  "generated": "2026-11-03",
   "officesChecked": "31 October 2026",
   "method": "Each lens is a weighted mean of 0–100 criteria; “lower adds” criteria use 100 minus the value. Leaders are scored on twelve-axis criteria only; scores need at least two criteria with data. Placements and lenses are editorial interpretations.",
   "authors": [
@@ -84,6 +84,30 @@
           "high": "Ecology",
           "value": 50
         }
+      },
+      "context": {
+        "world": "Nineteen Eighty-Four is set in London, chief city of Airstrip One in the superstate Oceania, permanently at war with Eurasia or Eastasia. The Party, led by the never-seen Big Brother, watches everyone through telescreens, rewrites the past at the Ministry of Truth and shrinks the language so that dissent cannot be thought. Winston Smith, a clerk who falsifies records, begins a forbidden diary and love affair, and is broken in Room 101.",
+        "context": "Written in 1947–48 on the Scottish island of Jura as Orwell was dying of tuberculosis. He drew on Stalin’s purges and show trials, Nazi propaganda, wartime censorship he saw at the BBC, and his experience of communist suppression of the left in the Spanish Civil War.",
+        "concepts": [
+          [
+            "Newspeak",
+            "A language engineered to make rebellious thought impossible by removing the words for it."
+          ],
+          [
+            "Doublethink",
+            "Holding two contradictory beliefs at once and accepting both."
+          ],
+          [
+            "Thoughtcrime",
+            "The crime of thinking against the Party, detected by the Thought Police."
+          ],
+          [
+            "Memory hole",
+            "The chute where inconvenient records are destroyed so the past can be rewritten."
+          ]
+        ],
+        "legacy": "“Big Brother”, “Orwellian” and “doublethink” entered everyday language. The book is invoked in debates on surveillance, propaganda and “fake news” laws on every side of politics.",
+        "read": "Read the Big Brother Index as a measure of how many of Oceania’s tools a state actually uses: one-party rule, control of information, surveillance, a leader cult and perpetual war."
       },
       "lens": {
         "name": "Big Brother Index",
@@ -686,6 +710,26 @@
           "value": 70
         }
       },
+      "context": {
+        "world": "Brave New World is set in AD 2540 (632 “After Ford”). Babies are grown in hatcheries and conditioned into castes from Alphas to Epsilons. Everyone is kept content with consumer goods, casual sex and the drug soma; family, religion, art and solitude have been abolished. John “the Savage”, raised outside the system, finds he cannot live in it.",
+        "context": "Written in 1931, as mass production (Henry Ford), advertising, behaviourist psychology and eugenics were reshaping ideas of society. Huxley wrote to warn that control by pleasure might be more effective than control by fear.",
+        "concepts": [
+          [
+            "Soma",
+            "A legal drug with “all the advantages of Christianity and alcohol; none of their defects”, handed out to keep people calm."
+          ],
+          [
+            "Conditioning",
+            "Shaping people from birth so that they love their place."
+          ],
+          [
+            "Community, Identity, Stability",
+            "The World State’s motto."
+          ]
+        ],
+        "legacy": "Often paired with Nineteen Eighty-Four: Orwell feared we would be ruined by what we hate, Huxley by what we love. Cited in debates on consumerism, genetic engineering and digital distraction.",
+        "read": "The Brave New World Index measures comfortable control: permissive private life and legal drugs combined with stability, centralised rule and no real politics."
+      },
       "lens": {
         "name": "Brave New World Index",
         "kind": "nightmare",
@@ -1269,6 +1313,26 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "In Fahrenheit 451 firemen do not put out fires; they burn books, which are banned. People live in front of wall-sized screens and speed along highways. Fireman Guy Montag begins to read, flees, and joins exiles who each memorise a book to preserve it.",
+        "context": "Written in 1953 during the McCarthy era, the rise of television and memories of Nazi book burnings. Bradbury later said the book was as much about people choosing to stop reading as about state censorship.",
+        "concepts": [
+          [
+            "451°F",
+            "The temperature at which, the title says, book paper catches fire."
+          ],
+          [
+            "Firemen",
+            "Officials whose job is to burn books."
+          ],
+          [
+            "Book people",
+            "Exiles who keep literature alive by memorising it."
+          ]
+        ],
+        "legacy": "The standard reference point for book banning and censorship debates, including recent school-library removals.",
+        "read": "The Fahrenheit 451 Index weighs speech and press freedom most heavily, with blasphemy, “false information” and insult laws as the modern equivalents of burning books."
+      },
       "lens": {
         "name": "Fahrenheit 451 Index",
         "kind": "nightmare",
@@ -1839,6 +1903,26 @@
           "high": "Ecology",
           "value": 85
         }
+      },
+      "context": {
+        "world": "In The Handmaid’s Tale a theocratic coup turns the United States into the Republic of Gilead. Falling birth rates lead the regime to assign fertile women as Handmaids to bear children for the elite. Women may not read, work or own property; dissidents and gay people are hanged on the Wall.",
+        "context": "Written in 1984 in West Berlin, near the Iron Curtain. Atwood has said she included nothing that had not already happened somewhere in history, drawing on Puritan New England, the Romanian ban on abortion, and the rise of the religious right in the US.",
+        "concepts": [
+          [
+            "Handmaid",
+            "A fertile woman assigned to bear children for a Commander’s household."
+          ],
+          [
+            "Unwomen",
+            "Women who do not fit Gilead’s roles, sent to clean toxic waste in the Colonies."
+          ],
+          [
+            "The Ceremony",
+            "The ritualised monthly rape at the centre of the system."
+          ]
+        ],
+        "legacy": "The red cloak and white bonnet became a protest costume at demonstrations on abortion rights worldwide. A 2017 TV series and a 2019 sequel, The Testaments (Booker Prize).",
+        "read": "The Gilead Index looks at abortion law, women’s legal equality, compulsory religious dress, punishment of adultery and same-sex relations, and religion in law."
       },
       "lens": {
         "name": "Gilead Index",
@@ -2429,6 +2513,26 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "We is the diary of D-503, an engineer in the One State a thousand years in the future. Citizens are “Numbers”, live in glass apartments, follow the Table of Hours and are permitted sex on scheduled “personal days”. The Benefactor is re-elected unanimously each year. D-503 falls for the rebel I-330, and the state responds with an operation that removes imagination.",
+        "context": "Written in 1920–21 after the Russian Revolution, by a Bolshevik who had turned against Bolshevism. It was the first book banned by the Soviet censorship board; it was first published in English in 1924, and Zamyatin was allowed to emigrate in 1931.",
+        "concepts": [
+          [
+            "Numbers",
+            "Citizens, identified by letters and numbers instead of names."
+          ],
+          [
+            "Table of Hours",
+            "The timetable that governs every citizen’s day."
+          ],
+          [
+            "The Green Wall",
+            "The barrier sealing the city from nature."
+          ]
+        ],
+        "legacy": "A direct influence on Nineteen Eighty-Four (Orwell reviewed it in 1946) and probably on Brave New World.",
+        "read": "The One State Index measures total planning and uniformity: central control of the economy and daily life, unanimous elections and policed private life."
+      },
       "lens": {
         "name": "One State Index",
         "kind": "nightmare",
@@ -3005,6 +3109,26 @@
           "high": "Ecology",
           "value": 50
         }
+      },
+      "context": {
+        "world": "In The Trial, Josef K. is arrested one morning without being told the charge. He spends a year trying to understand a court that meets in attics and answers to no one, and is executed “like a dog”. In The Castle, a land surveyor can never reach the officials who supposedly summoned him.",
+        "context": "Written in 1914–15 in Prague, then part of Austria-Hungary, by an insurance-company lawyer who knew bureaucracy from inside. Kafka asked his friend Max Brod to burn his manuscripts; Brod published them instead after Kafka’s death in 1924.",
+        "concepts": [
+          [
+            "Kafkaesque",
+            "A nightmare of senseless, unaccountable bureaucracy."
+          ],
+          [
+            "Before the Law",
+            "The parable of a man who waits his whole life at a door to the law meant only for him."
+          ],
+          [
+            "The Court",
+            "An authority everyone obeys but no one can see."
+          ]
+        ],
+        "legacy": "“Kafkaesque” is used for opaque bureaucracies, secret courts and detention without charge.",
+        "read": "The Kafka Index measures unaccountable authority: no right to know or contest what the state does, insult laws, harsh punishment and centralised, unchecked power."
       },
       "lens": {
         "name": "Kafka Index",
@@ -3583,6 +3707,22 @@
           "value": 70
         }
       },
+      "context": {
+        "world": "In the short story Harrison Bergeron, set in 2081, every American is equal by law. The Handicapper General forces the strong to wear weights, the beautiful to wear masks and the intelligent to wear earpieces that scramble their thoughts. Fourteen-year-old Harrison rebels on live television and is shot.",
+        "context": "Published in 1961 in a magazine during the Cold War, when Americans debated communism and conformity. Vonnegut, a humanist and socialist, satirised enforced sameness rather than equality as such; critics still argue over the story’s target.",
+        "concepts": [
+          [
+            "Handicapper General",
+            "The official who enforces equality by handicapping the gifted."
+          ],
+          [
+            "Handicaps",
+            "Weights, masks and noise transmitters that level people down."
+          ]
+        ],
+        "legacy": "A staple of school curricula and of arguments about equality of outcome versus equality of opportunity.",
+        "read": "The Handicapper General Index measures enforced, centralised equality of outcome: high redistribution and measured equality combined with order and central control."
+      },
       "lens": {
         "name": "Handicapper General Index",
         "kind": "nightmare",
@@ -3593,6 +3733,12 @@
             "why": "Everyone is made equal by law.",
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
+            "weight": 1
+          },
+          {
+            "why": "Equality of outcome, as measured.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
             "weight": 1
           },
           {
@@ -3617,179 +3763,179 @@
       },
       "countries": {
         "us": {
-          "score": 38,
-          "band": "Traces of it",
-          "criteriaKnown": 4
-        },
-        "cn": {
-          "score": 76,
-          "band": "Largely there",
-          "criteriaKnown": 4
-        },
-        "in": {
-          "score": 55,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "ru": {
-          "score": 71,
-          "band": "Largely there",
-          "criteriaKnown": 4
-        },
-        "gb": {
-          "score": 52,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "fr": {
-          "score": 64,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "de": {
-          "score": 48,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "jp": {
-          "score": 53,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "br": {
-          "score": 54,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "ca": {
           "score": 42,
           "band": "Traces of it",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
-        "it": {
+        "cn": {
+          "score": 71,
+          "band": "Largely there",
+          "criteriaKnown": 5
+        },
+        "in": {
           "score": 52,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "ru": {
+          "score": 72,
+          "band": "Largely there",
+          "criteriaKnown": 5
+        },
+        "gb": {
+          "score": 57,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "fr": {
+          "score": 66,
+          "band": "Largely there",
+          "criteriaKnown": 5
+        },
+        "de": {
+          "score": 53,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "jp": {
+          "score": 57,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "br": {
+          "score": 52,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "ca": {
+          "score": 49,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "it": {
+          "score": 56,
+          "band": "Partly there",
+          "criteriaKnown": 5
         },
         "es": {
-          "score": 46,
+          "score": 52,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "au": {
-          "score": 46,
+          "score": 51,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "kr": {
-          "score": 50,
+          "score": 55,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "mx": {
           "score": 56,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "id": {
-          "score": 60,
+          "score": 57,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "tr": {
-          "score": 68,
+          "score": 65,
           "band": "Largely there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "sa": {
-          "score": 75,
+          "score": 68,
           "band": "Largely there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "za": {
-          "score": 53,
-          "band": "Partly there",
-          "criteriaKnown": 4
+          "score": 44,
+          "band": "Traces of it",
+          "criteriaKnown": 5
         },
         "ng": {
-          "score": 47,
+          "score": 49,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "eg": {
           "score": 73,
           "band": "Largely there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ar": {
-          "score": 30,
+          "score": 36,
           "band": "Traces of it",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "il": {
-          "score": 57,
+          "score": 59,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ir": {
-          "score": 78,
+          "score": 75,
           "band": "Largely there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ua": {
-          "score": 53,
+          "score": 59,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pl": {
-          "score": 53,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "se": {
-          "score": 48,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "nl": {
-          "score": 43,
-          "band": "Traces of it",
-          "criteriaKnown": 4
-        },
-        "ch": {
-          "score": 34,
-          "band": "Traces of it",
-          "criteriaKnown": 4
-        },
-        "sg": {
-          "score": 61,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "pk": {
           "score": 58,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
-        "hu": {
+        "se": {
+          "score": 54,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "nl": {
+          "score": 51,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "ch": {
+          "score": 42,
+          "band": "Traces of it",
+          "criteriaKnown": 5
+        },
+        "sg": {
+          "score": 62,
+          "band": "Partly there",
+          "criteriaKnown": 5
+        },
+        "pk": {
           "score": 60,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "hu": {
+          "score": 65,
+          "band": "Largely there",
+          "criteriaKnown": 5
         },
         "cl": {
           "score": 47,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "co": {
-          "score": 51,
+          "score": 47,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ph": {
-          "score": 53,
+          "score": 55,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "kp": {
           "score": 85,
@@ -3797,44 +3943,44 @@
           "criteriaKnown": 4
         },
         "no": {
-          "score": 49,
+          "score": 56,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pt": {
-          "score": 49,
+          "score": 54,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "dk": {
-          "score": 49,
+          "score": 55,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "vn": {
-          "score": 75,
+          "score": 73,
           "band": "Largely there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "th": {
-          "score": 58,
-          "band": "Partly there",
-          "criteriaKnown": 4
-        },
-        "ve": {
-          "score": 81,
-          "band": "Fully realised",
-          "criteriaKnown": 4
-        },
-        "bd": {
           "score": 59,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
-        "et": {
+        "ve": {
+          "score": 78,
+          "band": "Largely there",
+          "criteriaKnown": 5
+        },
+        "bd": {
           "score": 61,
           "band": "Partly there",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "et": {
+          "score": 63,
+          "band": "Partly there",
+          "criteriaKnown": 5
         }
       },
       "leaders": {
@@ -4147,6 +4293,26 @@
           "high": "Ecology",
           "value": 40
         }
+      },
+      "context": {
+        "world": "In The Brothers Karamazov, Ivan tells his brother Alyosha a poem: Christ returns to Seville during the Inquisition and is arrested. The Grand Inquisitor tells him the Church has corrected his work by taking away the burden of freedom and giving people “miracle, mystery and authority” and bread instead. Christ answers only with a kiss.",
+        "context": "Published in 1879–80, a year before Dostoevsky died. He had been sentenced to death in 1849 for revolutionary circles, reprieved at the last moment and sent to a Siberian labour camp, and became a fierce Orthodox critic of socialism and atheist radicals, whom he satirised in Demons.",
+        "concepts": [
+          [
+            "The Grand Inquisitor",
+            "A ruler who takes away freedom out of supposed love, because people cannot bear it."
+          ],
+          [
+            "Miracle, mystery and authority",
+            "The three forces the Inquisitor says hold people captive."
+          ],
+          [
+            "Underground man",
+            "From Notes from Underground: a person who rebels against reason itself to prove he is free."
+          ]
+        ],
+        "legacy": "Read by Nietzsche, Freud, Camus and Solzhenitsyn; the Grand Inquisitor is a classic text on paternalism and religious authority.",
+        "read": "The Grand Inquisitor Index measures a state that offers bread, faith and authority in exchange for freedom: welfare, official religion, strong rule and little choice."
       },
       "lens": {
         "name": "Grand Inquisitor Index",
@@ -4725,6 +4891,26 @@
           "value": 85
         }
       },
+      "context": {
+        "world": "In The Kingdom of God Is Within You Tolstoy argues that Jesus’ command not to resist evil by force rules out armies, police, courts and prisons. In Resurrection a nobleman follows a woman he wronged to Siberia and discovers the cruelty of the penal system.",
+        "context": "After the success of War and Peace and Anna Karenina, Tolstoy went through a religious crisis in the late 1870s and became a Christian anarchist and pacifist. He was excommunicated by the Russian Orthodox Church in 1901.",
+        "concepts": [
+          [
+            "Non-resistance",
+            "Refusing to answer violence with violence."
+          ],
+          [
+            "The state as violence",
+            "Governments rest on the threat of force."
+          ],
+          [
+            "Simple living",
+            "Manual work on the land; Tolstoy gave up meat and alcohol and renounced copyright in his later works."
+          ]
+        ],
+        "legacy": "His correspondence with the young Gandhi shaped Gandhi’s non-violence; Tolstoyan communes spread across Europe.",
+        "read": "Tolstoyan Non-violence rewards restraint in war, abolition of executions and harsh punishment, no conscription and weak, local government."
+      },
       "lens": {
         "name": "Tolstoyan Non-violence",
         "kind": "ideal",
@@ -5301,6 +5487,26 @@
           "high": "Ecology",
           "value": 65
         }
+      },
+      "context": {
+        "world": "The Gulag Archipelago is a three-volume history of the Soviet labour-camp system, built from Solzhenitsyn’s own eight years in camps and the testimony of 227 former prisoners: arrests, interrogations, transport, forced labour and death.",
+        "context": "Written in secret from 1958 to 1968; the KGB seized a copy in 1973, so it was published in Paris that December. He was stripped of citizenship and deported in 1974, and returned to Russia in 1994.",
+        "concepts": [
+          [
+            "Gulag",
+            "The Soviet agency running the labour camps; now the name for the whole system."
+          ],
+          [
+            "Article 58",
+            "The criminal code article on “counter-revolutionary activity” used against millions."
+          ],
+          [
+            "Live not by lies",
+            "His 1974 appeal to refuse to repeat official falsehoods."
+          ]
+        ],
+        "legacy": "It shattered the reputation of Soviet communism among many Western intellectuals; he won the Nobel Prize in 1970. Later he became a Russian nationalist and Orthodox traditionalist critic of the West.",
+        "read": "The Gulag Test measures one-party rule, persecution of believers, laws against “agitation” or false information, executions and silenced speech."
       },
       "lens": {
         "name": "Gulag Test",
@@ -5879,6 +6085,26 @@
           "value": 65
         }
       },
+      "context": {
+        "world": "The Power of the Powerless asks why a greengrocer places the sign “Workers of the world, unite!” in his window. Not because he believes it, but because everyone does. The regime survives on such small lies; when ordinary people start “living in truth”, it loses its power.",
+        "context": "Written in 1978 in communist Czechoslovakia after Havel co-founded Charter 77, a human-rights petition. He was jailed for nearly four years, led the 1989 Velvet Revolution and became president of Czechoslovakia and then the Czech Republic.",
+        "concepts": [
+          [
+            "Living in truth",
+            "Refusing to perform the rituals of a lie."
+          ],
+          [
+            "Post-totalitarian system",
+            "A regime that rules less by terror than by everyday conformity."
+          ],
+          [
+            "Parallel polis",
+            "Independent culture and civil society outside the state."
+          ]
+        ],
+        "legacy": "Copied and smuggled across the Soviet bloc, it inspired Solidarity in Poland and dissidents from Belarus to Hong Kong.",
+        "read": "Living in Truth rewards free speech, competitive politics, the right to mock power and civil society."
+      },
       "lens": {
         "name": "Living in Truth",
         "kind": "ideal",
@@ -6449,6 +6675,26 @@
           "high": "Ecology",
           "value": 50
         }
+      },
+      "context": {
+        "world": "The Origins of Totalitarianism traces Nazism and Stalinism to antisemitism, imperialism and the collapse of the nation-state, and describes a new form of rule: a mass movement, an ideology claiming to know the laws of history, and terror. Eichmann in Jerusalem argues that great evil can be done by ordinary officials who do not think.",
+        "context": "Arendt, a German Jew, fled the Nazis in 1933, was briefly interned in France and reached the US in 1941. She published Origins in 1951 and reported on Adolf Eichmann’s trial in Jerusalem in 1961.",
+        "concepts": [
+          [
+            "The banality of evil",
+            "Evil committed by people who are thoughtless functionaries rather than monsters."
+          ],
+          [
+            "Totalitarianism",
+            "Total domination through ideology, terror and the destruction of private life."
+          ],
+          [
+            "The right to have rights",
+            "Without citizenship, a person loses every other right."
+          ]
+        ],
+        "legacy": "A standard text on totalitarianism, statelessness and refugees, and on how democracies decay.",
+        "read": "Totalitarian Elements counts one-movement rule, persecution of a group, executions, propaganda replacing reality, a leader principle, tribal nationalism and isolation from the world."
       },
       "lens": {
         "name": "Totalitarian Elements",
@@ -7033,6 +7279,26 @@
           "value": 50
         }
       },
+      "context": {
+        "world": "The Open Society and Its Enemies attacks Plato, Hegel and Marx for believing history has a destination that justifies remaking society by force. Popper defends the open society, in which policies are treated as experiments, criticism is welcome and rulers can be removed without bloodshed.",
+        "context": "Written in exile in New Zealand during the Second World War, by a Viennese philosopher of Jewish descent, as his “war effort”. Published in 1945.",
+        "concepts": [
+          [
+            "Open society",
+            "A society that allows criticism and peaceful change of government."
+          ],
+          [
+            "Piecemeal engineering",
+            "Reforming step by step and correcting mistakes, instead of utopian blueprints."
+          ],
+          [
+            "Paradox of tolerance",
+            "Unlimited tolerance can destroy tolerance itself."
+          ]
+        ],
+        "legacy": "George Soros named his Open Society Foundations after the book; the paradox of tolerance is widely cited in debates on hate speech.",
+        "read": "The Open Society lens rewards peaceful changes of government, free criticism, pluralism and institutions over strongmen."
+      },
       "lens": {
         "name": "Open Society",
         "kind": "ideal",
@@ -7603,6 +7869,26 @@
           "high": "Ecology",
           "value": 45
         }
+      },
+      "context": {
+        "world": "In Two Concepts of Liberty, Berlin distinguishes negative liberty, the area in which a person is left alone, from positive liberty, being one’s own master. He warns that positive liberty can be twisted into forcing people to be “free” according to what the state says their true self wants.",
+        "context": "Delivered as a lecture at Oxford in 1958 during the Cold War, by a Riga-born philosopher whose family had fled the Russian Revolution.",
+        "concepts": [
+          [
+            "Negative liberty",
+            "Freedom from interference by others."
+          ],
+          [
+            "Positive liberty",
+            "Freedom to be one’s own master, which can turn coercive."
+          ],
+          [
+            "Value pluralism",
+            "Genuine values, like liberty and equality, can conflict with no single right answer."
+          ]
+        ],
+        "legacy": "One of the most cited essays in political philosophy; the basis of much liberal thinking on rights.",
+        "read": "The Negative Liberty lens measures how large the area of non-interference is: private life, personal choices, speech and freedom of belief."
       },
       "lens": {
         "name": "Negative Liberty",
@@ -8175,6 +8461,26 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "On Liberty argues that society may restrict a person only to prevent harm to others, never for their own good. Silencing an opinion is wrong even if it is false, because truth is sharpened by challenge. The Subjection of Women argues for full legal equality of the sexes.",
+        "context": "Written with his wife Harriet Taylor Mill and published in 1859, the year after her death. Mill, an MP from 1865, proposed votes for women in Parliament in 1867.",
+        "concepts": [
+          [
+            "Harm principle",
+            "The only justification for coercion is to prevent harm to others."
+          ],
+          [
+            "Tyranny of the majority",
+            "Social pressure can oppress as much as law."
+          ],
+          [
+            "Experiments in living",
+            "People should be free to live in unconventional ways."
+          ]
+        ],
+        "legacy": "The founding text of liberal arguments about free speech, drugs, sexuality and paternalism.",
+        "read": "The Harm Principle lens weighs freedom in private life and speech most, then personal choices, LGBTQ+ equality and women’s rights."
+      },
       "lens": {
         "name": "Harm Principle",
         "kind": "ideal",
@@ -8745,6 +9051,26 @@
           "high": "Ecology",
           "value": 40
         }
+      },
+      "context": {
+        "world": "In the Second Treatise of Government, people in a state of nature have rights to life, liberty and property. They form governments by consent to protect those rights; a government that violates them may be resisted and replaced. The Letter Concerning Toleration argues the state should not force belief.",
+        "context": "Written in the 1680s amid conflict over a Catholic heir to the English throne, and published in 1689 after the Glorious Revolution.",
+        "concepts": [
+          [
+            "Consent of the governed",
+            "Legitimate government rests on the agreement of the people."
+          ],
+          [
+            "Natural rights",
+            "Life, liberty and estate, which exist before government."
+          ],
+          [
+            "Right of revolution",
+            "A people may replace a government that betrays its trust."
+          ]
+        ],
+        "legacy": "Echoed in the US Declaration of Independence; foundational for liberal constitutionalism.",
+        "read": "The Lockean Rights lens rewards government by consent, property rights, religious toleration and limited power."
       },
       "lens": {
         "name": "Lockean Rights",
@@ -9317,6 +9643,26 @@
           "value": 50
         }
       },
+      "context": {
+        "world": "The Spirit of the Laws compares governments across history and argues that liberty survives only where legislative, executive and judicial power are held by different hands so that “power checks power”. Laws should fit a people’s climate, customs and commerce, and punishments should be moderate.",
+        "context": "Published in 1748 in absolutist France, by a magistrate who admired the English constitution. It was placed on the Catholic Church’s Index of banned books in 1751.",
+        "concepts": [
+          [
+            "Separation of powers",
+            "Dividing legislative, executive and judicial power."
+          ],
+          [
+            "Moderate government",
+            "Rule that avoids despotism through checks and intermediate bodies."
+          ],
+          [
+            "Doux commerce",
+            "The idea that trade softens manners and makes peace more likely."
+          ]
+        ],
+        "legacy": "The single most cited author by the framers of the US Constitution.",
+        "read": "The Separation of Powers lens rewards checked, dispersed power, pluralism and moderate punishment."
+      },
       "lens": {
         "name": "Separation of Powers",
         "kind": "ideal",
@@ -9881,6 +10227,26 @@
           "high": "Ecology",
           "value": 45
         }
+      },
+      "context": {
+        "world": "In Candide a naive young man is told that all is for the best in the best of all possible worlds, then suffers war, earthquake, the Inquisition and slavery. He ends by saying “we must cultivate our garden”. The Treatise on Tolerance was written after Jean Calas, a Protestant, was tortured and executed on a false charge.",
+        "context": "Voltaire was jailed in the Bastille and exiled for his writing. He spent years in campaigns against judicial cruelty, including the Calas case of 1762.",
+        "concepts": [
+          [
+            "Écrasez l’infâme",
+            "“Crush the infamous thing”: his slogan against fanaticism and clerical power."
+          ],
+          [
+            "Tolerance",
+            "No one should be persecuted for their beliefs."
+          ],
+          [
+            "Cultivate our garden",
+            "Practical work over grand theories."
+          ]
+        ],
+        "legacy": "A symbol of free expression and secularism; laïcité in France owes much to his campaigns.",
+        "read": "The Tolerance lens rewards religious freedom, no blasphemy laws, free speech, secular government and humane justice."
       },
       "lens": {
         "name": "Tolerance",
@@ -10453,6 +10819,26 @@
           "value": 50
         }
       },
+      "context": {
+        "world": "Democracy in America describes the young United States, where “equality of conditions” shapes everything. Tocqueville praises township self-government, voluntary associations, a free press and religion as habits of the heart that keep democracy free. He warns of a soft despotism in which a tutelary state takes over people’s lives, and of the tyranny of the majority.",
+        "context": "A French aristocrat, he travelled through the US in 1831–32, officially to study prisons, and published two volumes in 1835 and 1840.",
+        "concepts": [
+          [
+            "Tyranny of the majority",
+            "Democratic majorities can crush dissent."
+          ],
+          [
+            "Soft despotism",
+            "A gentle, all-providing state that makes citizens passive."
+          ],
+          [
+            "Art of association",
+            "Citizens joining voluntary groups to solve problems themselves."
+          ]
+        ],
+        "legacy": "Still a reference for the study of civil society, localism and American politics.",
+        "read": "The Democracy in America lens rewards local self-government, pluralism, religious freedom and a free press."
+      },
       "lens": {
         "name": "Democracy in America",
         "kind": "ideal",
@@ -11018,6 +11404,26 @@
           "value": 40
         }
       },
+      "context": {
+        "world": "The Wealth of Nations explains how the division of labour and free exchange create wealth. Individuals pursuing their own gain are led “as by an invisible hand” to benefit society. Smith attacks mercantilism, monopolies and merchants who conspire to raise prices. The Theory of Moral Sentiments grounds morality in sympathy.",
+        "context": "Published in 1776, the year of American independence, by a Scottish moral philosopher of the Enlightenment.",
+        "concepts": [
+          [
+            "Invisible hand",
+            "Self-interest in markets producing outcomes no one intended."
+          ],
+          [
+            "Division of labour",
+            "Specialisation multiplies productivity, as in his pin factory."
+          ],
+          [
+            "Mercantilism",
+            "The policy of hoarding gold and restricting imports, which he rejected."
+          ]
+        ],
+        "legacy": "The founding text of economics. Free-traders and critics of crony capitalism both claim him.",
+        "read": "The Wealth of Nations lens rewards open trade, markets, secure justice and independence from collusion between business and rulers."
+      },
       "lens": {
         "name": "Wealth of Nations",
         "kind": "ideal",
@@ -11582,6 +11988,26 @@
           "high": "Ecology",
           "value": 30
         }
+      },
+      "context": {
+        "world": "The Road to Serfdom argues that central economic planning cannot work without concentrating power. Because planners must override millions of individual choices, planning leads step by step to political tyranny, and “the worst get on top”.",
+        "context": "Written in Britain during the Second World War by an Austrian economist, and published in 1944. A condensed version in Reader’s Digest made it a bestseller in the US.",
+        "concepts": [
+          [
+            "Spontaneous order",
+            "Order that emerges from many individual decisions, like prices."
+          ],
+          [
+            "Knowledge problem",
+            "No planner can know what millions of people know."
+          ],
+          [
+            "Rule of law",
+            "General rules known in advance, not discretionary commands."
+          ]
+        ],
+        "legacy": "Won the Nobel Prize in economics in 1974; a key influence on Margaret Thatcher and Ronald Reagan.",
+        "read": "The Road to Serfdom measures how far a state has gone down the road: planned economy, centralisation, trade controls, weak pluralism and order over liberty."
       },
       "lens": {
         "name": "Road to Serfdom",
@@ -12154,6 +12580,26 @@
           "value": 10
         }
       },
+      "context": {
+        "world": "In Atlas Shrugged the most productive industrialists, inventors and artists go on strike against a collectivist state and vanish to a hidden valley, Galt’s Gulch, while the economy collapses without them. Rand’s philosophy, Objectivism, holds that rational self-interest is the moral purpose of life.",
+        "context": "Born in St Petersburg, Rand saw her father’s pharmacy seized after the Russian Revolution and emigrated to the US in 1926. Atlas Shrugged was published in 1957.",
+        "concepts": [
+          [
+            "Objectivism",
+            "Reality is objective, reason is our means of knowing it, and self-interest is moral."
+          ],
+          [
+            "The virtue of selfishness",
+            "Altruism as self-sacrifice is immoral."
+          ],
+          [
+            "Laissez-faire",
+            "Complete separation of state and economy."
+          ]
+        ],
+        "legacy": "Hugely influential on American libertarians and some tech founders; critics see it as a defence of greed.",
+        "read": "The Atlas Shrugged lens rewards laissez-faire markets, low welfare and redistribution, secular reason and free trade."
+      },
       "lens": {
         "name": "Atlas Shrugged",
         "kind": "ideal",
@@ -12171,6 +12617,12 @@
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "lower adds",
             "weight": 2
+          },
+          {
+            "why": "Forced redistribution, as actually measured.",
+            "data": "Measured redistribution: how much taxes and transfers cut inequality (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
           },
           {
             "why": "Reason, not faith.",
@@ -12194,79 +12646,79 @@
       },
       "countries": {
         "us": {
-          "score": 53,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "cn": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 5
+          "score": 46,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "in": {
-          "score": 45,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ru": {
           "score": 39,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "gb": {
-          "score": 52,
+          "score": 48,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "fr": {
-          "score": 49,
+          "score": 45,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "de": {
-          "score": 52,
+          "score": 48,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "jp": {
-          "score": 54,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "br": {
-          "score": 41,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ca": {
-          "score": 57,
+          "score": 54,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "it": {
-          "score": 49,
+          "score": 46,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "es": {
-          "score": 53,
+          "score": 50,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "au": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "kr": {
           "score": 56,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "kr": {
+          "score": 58,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "mx": {
-          "score": 44,
-          "band": "Weak",
-          "criteriaKnown": 5
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "id": {
           "score": 41,
@@ -12274,9 +12726,9 @@
           "criteriaKnown": 5
         },
         "tr": {
-          "score": 41,
-          "band": "Weak",
-          "criteriaKnown": 5
+          "score": 45,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "sa": {
           "score": 35,
@@ -12284,9 +12736,9 @@
           "criteriaKnown": 5
         },
         "za": {
-          "score": 46,
+          "score": 50,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ng": {
           "score": 52,
@@ -12299,19 +12751,19 @@
           "criteriaKnown": 5
         },
         "ar": {
-          "score": 73,
+          "score": 75,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "il": {
-          "score": 51,
+          "score": 50,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ir": {
-          "score": 26,
+          "score": 33,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ua": {
           "score": 53,
@@ -12319,29 +12771,29 @@
           "criteriaKnown": 5
         },
         "pl": {
-          "score": 48,
+          "score": 45,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "se": {
-          "score": 59,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "nl": {
-          "score": 63,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ch": {
-          "score": 61,
+          "score": 59,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "sg": {
-          "score": 65,
+          "score": 66,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "pk": {
           "score": 42,
@@ -12349,19 +12801,19 @@
           "criteriaKnown": 5
         },
         "hu": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 42,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "cl": {
-          "score": 64,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "co": {
-          "score": 54,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ph": {
           "score": 48,
@@ -12374,24 +12826,24 @@
           "criteriaKnown": 5
         },
         "no": {
-          "score": 51,
+          "score": 46,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "pt": {
-          "score": 56,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "dk": {
-          "score": 53,
+          "score": 48,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "vn": {
-          "score": 47,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "th": {
           "score": 49,
@@ -12399,9 +12851,9 @@
           "criteriaKnown": 5
         },
         "ve": {
-          "score": 29,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "bd": {
           "score": 44,
@@ -12725,6 +13177,26 @@
           "value": 30
         }
       },
+      "context": {
+        "world": "Anarchy, State, and Utopia argues that only a minimal “night-watchman” state, limited to protecting people from force, theft and fraud and enforcing contracts, can be justified. Any just distribution of wealth comes from just acquisition and voluntary transfer.",
+        "context": "Published in 1974 by a Harvard philosopher, partly as a reply to his colleague John Rawls’s A Theory of Justice.",
+        "concepts": [
+          [
+            "Minimal state",
+            "A state limited to protection and contracts."
+          ],
+          [
+            "Entitlement theory",
+            "Holdings are just if acquired and transferred justly, whatever the pattern."
+          ],
+          [
+            "Wilt Chamberlain argument",
+            "Free exchanges upset any imposed pattern of equality."
+          ]
+        ],
+        "legacy": "The leading philosophical case for libertarianism.",
+        "read": "The Minimal State lens rewards low welfare spending and redistribution, free markets, individual rights and decentralisation."
+      },
       "lens": {
         "name": "Minimal State",
         "kind": "ideal",
@@ -12736,6 +13208,12 @@
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "lower adds",
             "weight": 2
+          },
+          {
+            "why": "How much the state redistributes in practice.",
+            "data": "Measured redistribution: how much taxes and transfers cut inequality (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
           },
           {
             "why": "Free exchange is just.",
@@ -12765,79 +13243,79 @@
       },
       "countries": {
         "us": {
-          "score": 67,
-          "band": "Strong",
-          "criteriaKnown": 5
+          "score": 64,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "cn": {
-          "score": 36,
+          "score": 41,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "in": {
-          "score": 49,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "ru": {
-          "score": 39,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "gb": {
-          "score": 52,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "fr": {
-          "score": 42,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "de": {
-          "score": 57,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "jp": {
-          "score": 51,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "br": {
-          "score": 48,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "ca": {
-          "score": 62,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "it": {
-          "score": 52,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "es": {
           "score": 56,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
-        "au": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 5
+        "ru": {
+          "score": 40,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
-        "kr": {
-          "score": 51,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "mx": {
+        "gb": {
           "score": 47,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "fr": {
+          "score": 38,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "de": {
+          "score": 51,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "jp": {
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "br": {
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "ca": {
+          "score": 57,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "it": {
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "es": {
+          "score": 52,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "au": {
+          "score": 55,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "kr": {
+          "score": 54,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "mx": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "id": {
           "score": 46,
@@ -12845,9 +13323,9 @@
           "criteriaKnown": 5
         },
         "tr": {
-          "score": 39,
+          "score": 44,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "sa": {
           "score": 31,
@@ -12855,9 +13333,9 @@
           "criteriaKnown": 5
         },
         "za": {
-          "score": 50,
+          "score": 54,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ng": {
           "score": 55,
@@ -12870,19 +13348,19 @@
           "criteriaKnown": 5
         },
         "ar": {
-          "score": 73,
+          "score": 76,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "il": {
-          "score": 48,
+          "score": 47,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ir": {
-          "score": 27,
+          "score": 36,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ua": {
           "score": 49,
@@ -12890,29 +13368,29 @@
           "criteriaKnown": 5
         },
         "pl": {
-          "score": 49,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "se": {
-          "score": 49,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "nl": {
-          "score": 60,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "ch": {
-          "score": 65,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "sg": {
           "score": 46,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "se": {
+          "score": 44,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "nl": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "ch": {
+          "score": 61,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "sg": {
+          "score": 50,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "pk": {
           "score": 47,
@@ -12920,19 +13398,19 @@
           "criteriaKnown": 5
         },
         "hu": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 42,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "cl": {
-          "score": 58,
+          "score": 61,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "co": {
-          "score": 53,
+          "score": 58,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ph": {
           "score": 53,
@@ -12945,24 +13423,24 @@
           "criteriaKnown": 5
         },
         "no": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 41,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "pt": {
-          "score": 54,
+          "score": 50,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "dk": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 42,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "vn": {
-          "score": 35,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "th": {
           "score": 48,
@@ -12970,9 +13448,9 @@
           "criteriaKnown": 5
         },
         "ve": {
-          "score": 30,
+          "score": 39,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "bd": {
           "score": 44,
@@ -13296,6 +13774,26 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "A Theory of Justice asks what principles we would choose behind a “veil of ignorance”, not knowing our sex, class, race, religion or talents. Rawls answers: equal basic liberties for all, and economic inequalities allowed only if they benefit the least advantaged.",
+        "context": "Published in 1971 by a Harvard philosopher shaped by service in the Second World War and the civil-rights era.",
+        "concepts": [
+          [
+            "Veil of ignorance",
+            "Choosing rules without knowing who you will be."
+          ],
+          [
+            "Difference principle",
+            "Inequalities must work to the benefit of the worst off."
+          ],
+          [
+            "Original position",
+            "The imagined meeting where fair principles are chosen."
+          ]
+        ],
+        "legacy": "The most influential work of political philosophy in the twentieth century; the basis of modern egalitarian liberalism.",
+        "read": "The Veil of Ignorance lens asks whether you would choose to be born here at random: measured inequality, welfare, and equal rights for women, LGBTQ+ people and believers."
+      },
       "lens": {
         "name": "Veil of Ignorance",
         "kind": "ideal",
@@ -13306,6 +13804,12 @@
             "why": "Inequalities must benefit the worst off.",
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
+            "weight": 2
+          },
+          {
+            "why": "Measured inequality: would you accept it not knowing where you’d land?",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
             "weight": 2
           },
           {
@@ -13342,179 +13846,179 @@
       },
       "countries": {
         "us": {
-          "score": 78,
-          "band": "Strong",
-          "criteriaKnown": 6
-        },
-        "cn": {
-          "score": 45,
-          "band": "Partial",
-          "criteriaKnown": 6
-        },
-        "in": {
           "score": 74,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "cn": {
+          "score": 47,
+          "band": "Partial",
+          "criteriaKnown": 7
+        },
+        "in": {
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ru": {
-          "score": 42,
-          "band": "Weak",
-          "criteriaKnown": 6
+          "score": 50,
+          "band": "Partial",
+          "criteriaKnown": 7
         },
         "gb": {
-          "score": 86,
+          "score": 84,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "fr": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "de": {
           "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "de": {
+          "score": 84,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
         },
         "jp": {
           "score": 78,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "br": {
-          "score": 88,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ca": {
-          "score": 88,
+          "score": 85,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "it": {
-          "score": 79,
+          "score": 77,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "es": {
-          "score": 88,
+          "score": 85,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "au": {
-          "score": 86,
+          "score": 83,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "kr": {
-          "score": 79,
+          "score": 78,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "mx": {
-          "score": 90,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "id": {
-          "score": 67,
-          "band": "Strong",
-          "criteriaKnown": 6
-        },
-        "tr": {
-          "score": 57,
-          "band": "Partial",
-          "criteriaKnown": 6
-        },
-        "sa": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 6
-        },
-        "za": {
           "score": 82,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "id": {
+          "score": 62,
+          "band": "Partial",
+          "criteriaKnown": 7
+        },
+        "tr": {
+          "score": 56,
+          "band": "Partial",
+          "criteriaKnown": 7
+        },
+        "sa": {
+          "score": 42,
+          "band": "Weak",
+          "criteriaKnown": 7
+        },
+        "za": {
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ng": {
           "score": 58,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "eg": {
-          "score": 47,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ar": {
-          "score": 79,
+          "score": 74,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "il": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ir": {
-          "score": 34,
+          "score": 41,
           "band": "Weak",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ua": {
-          "score": 76,
+          "score": 78,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "pl": {
           "score": 77,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "se": {
-          "score": 91,
+          "score": 89,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "nl": {
           "score": 87,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ch": {
-          "score": 83,
+          "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "sg": {
-          "score": 55,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "pk": {
-          "score": 49,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "hu": {
-          "score": 73,
+          "score": 76,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "cl": {
-          "score": 80,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "score": 73,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "co": {
-          "score": 86,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "score": 74,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ph": {
-          "score": 71,
+          "score": 69,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "kp": {
           "score": 39,
@@ -13522,44 +14026,44 @@
           "criteriaKnown": 6
         },
         "no": {
-          "score": 93,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "pt": {
-          "score": 90,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "dk": {
           "score": 92,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "pt": {
+          "score": 86,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "dk": {
+          "score": 89,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
         },
         "vn": {
-          "score": 55,
-          "band": "Partial",
-          "criteriaKnown": 6
-        },
-        "th": {
-          "score": 69,
-          "band": "Strong",
-          "criteriaKnown": 6
-        },
-        "ve": {
           "score": 58,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "th": {
+          "score": 68,
+          "band": "Strong",
+          "criteriaKnown": 7
+        },
+        "ve": {
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 7
         },
         "bd": {
-          "score": 61,
+          "score": 63,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "et": {
-          "score": 53,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         }
       },
       "leaders": {
@@ -13872,6 +14376,26 @@
           "high": "Ecology",
           "value": 45
         }
+      },
+      "context": {
+        "world": "The General Theory argues that economies can be stuck in mass unemployment for years because demand is too low, and that governments should spend and cut interest rates to restore it. The Economic Consequences of the Peace warned that harsh reparations on Germany would breed disaster.",
+        "context": "Written during the Great Depression and published in 1936. Keynes later helped design the Bretton Woods system, the IMF and the World Bank in 1944.",
+        "concepts": [
+          [
+            "Aggregate demand",
+            "Total spending in an economy, which drives output and jobs."
+          ],
+          [
+            "The multiplier",
+            "Public spending can raise output by more than its cost."
+          ],
+          [
+            "Animal spirits",
+            "Confidence and mood that drive investment."
+          ]
+        ],
+        "legacy": "Postwar economic policy across the West; his ideas returned in the 2008 crisis and the 2020 pandemic.",
+        "read": "The Managed Capitalism lens rewards a middle-of-the-road mixed economy with public spending, open trade and global institutions."
       },
       "lens": {
         "name": "Managed Capitalism",
@@ -14437,6 +14961,26 @@
           "high": "Ecology",
           "value": 50
         }
+      },
+      "context": {
+        "world": "A Vindication of the Rights of Woman argues that women appear inferior only because they are denied education. Women are rational beings who should be educated, work, own property and be companions rather than ornaments in marriage.",
+        "context": "Published in 1792 in response to the French Revolution and to a French proposal that girls receive only domestic education. Wollstonecraft died in 1797 after giving birth to Mary Shelley.",
+        "concepts": [
+          [
+            "Rational equality",
+            "Women share the same capacity for reason as men."
+          ],
+          [
+            "Education",
+            "The cause of, and cure for, women’s apparent inferiority."
+          ],
+          [
+            "Marriage as friendship",
+            "Partnership between equals instead of dependency."
+          ]
+        ],
+        "legacy": "A founding text of feminism.",
+        "read": "The Rights of Woman lens rewards women’s legal equality, marriage law, a minimum marriage age, equal testimony and equal inheritance."
       },
       "lens": {
         "name": "Rights of Woman",
@@ -15009,6 +15553,26 @@
           "value": 50
         }
       },
+      "context": {
+        "world": "The Second Sex argues that women have been defined as “the Other” in relation to men, and that womanhood is made by society rather than born. Freedom requires economic independence, access to contraception and abortion, and escaping roles imposed by marriage and motherhood.",
+        "context": "Published in 1949 in France, and placed on the Vatican’s Index of banned books. In 1971 Beauvoir was the best-known signatory of the Manifesto of the 343, women who declared they had had illegal abortions.",
+        "concepts": [
+          [
+            "The Other",
+            "Woman defined only in relation to man."
+          ],
+          [
+            "Becoming a woman",
+            "Gender as a social situation, not destiny."
+          ],
+          [
+            "Bad faith",
+            "From existentialism: denying one’s own freedom."
+          ]
+        ],
+        "legacy": "A foundation of second-wave feminism; France legalised abortion in 1975.",
+        "read": "The Second Sex lens rewards women’s legal equality, abortion rights, sexual freedom, equal marriage and secular law."
+      },
       "lens": {
         "name": "The Second Sex",
         "kind": "ideal",
@@ -15580,6 +16144,26 @@
           "value": 35
         }
       },
+      "context": {
+        "world": "Leviathan imagines life without government: a “war of every man against every man”, in which life is “solitary, poor, nasty, brutish, and short”. People escape by handing power to an absolute sovereign — the Leviathan — who keeps the peace.",
+        "context": "Written in exile in Paris and published in 1651, just after the English Civil War and the execution of Charles I.",
+        "concepts": [
+          [
+            "State of nature",
+            "Life with no government, which Hobbes saw as war."
+          ],
+          [
+            "Social contract",
+            "People agree to surrender their liberty to a sovereign for security."
+          ],
+          [
+            "Leviathan",
+            "The sovereign as a giant “artificial man” made of the people."
+          ]
+        ],
+        "legacy": "The founding work of modern political philosophy; realists in international relations draw on it.",
+        "read": "The Leviathan lens measures how strong, central and undivided the sovereign is, and how far security comes before liberty."
+      },
       "lens": {
         "name": "Leviathan",
         "kind": "ideal",
@@ -16138,6 +16722,26 @@
           "high": "Ecology",
           "value": 30
         }
+      },
+      "context": {
+        "world": "The Prince is advice for a ruler who wants to gain and keep power. It argues that a prince must be willing to deceive, use cruelty well and quickly, rely on his own troops, and be feared rather than loved if he cannot be both. His Discourses on Livy praise republics and citizen armies.",
+        "context": "Written in 1513 after the Medici returned to Florence, dismissed Machiavelli from office and had him tortured. Published in 1532, five years after his death.",
+        "concepts": [
+          [
+            "Virtù",
+            "The skill and boldness a ruler needs to master events."
+          ],
+          [
+            "Fortuna",
+            "Chance, which virtù can resist but not abolish."
+          ],
+          [
+            "Reason of state",
+            "The state’s survival can justify acts private morality forbids."
+          ]
+        ],
+        "legacy": "“Machiavellian” means cunning and amoral, but scholars read him as the founder of realist political science.",
+        "read": "The Prince lens measures fear-based, militarily self-reliant, security-first statecraft."
       },
       "lens": {
         "name": "The Prince",
@@ -16710,6 +17314,26 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "Reflections on the Revolution in France argues that the revolutionaries, by tearing down inherited institutions to rebuild society on abstract reason, would produce terror and military despotism. Society is a partnership of the dead, the living and the unborn; change should be gradual reform, not revolution.",
+        "context": "Published in 1790 by an Irish-born Whig MP who had supported the American colonists. He predicted the Terror of 1793–94 and the rise of a military strongman.",
+        "concepts": [
+          [
+            "Little platoons",
+            "Local and family attachments as the root of public affection."
+          ],
+          [
+            "Prejudice",
+            "Inherited wisdom, not irrational bias."
+          ],
+          [
+            "Prescription",
+            "Institutions earn legitimacy by lasting."
+          ]
+        ],
+        "legacy": "Regarded as the founder of modern conservatism.",
+        "read": "The Burkean Tradition lens rewards tradition and faith within constitutional, limited government that is neither revolutionary nor centralised."
+      },
       "lens": {
         "name": "Burkean Tradition",
         "kind": "ideal",
@@ -17281,6 +17905,26 @@
           "value": 70
         }
       },
+      "context": {
+        "world": "The Social Contract asks how people can live under laws and remain free. Rousseau’s answer is that the people as a whole must be sovereign and make laws according to the general will, the common good, in a small republic of rough equality with a civil religion. The Discourse on Inequality blames private property for inequality and corruption.",
+        "context": "Published in 1762 in Amsterdam and banned in Geneva and Paris. Rousseau fled arrest. His ideas inspired the French revolutionaries.",
+        "concepts": [
+          [
+            "General will",
+            "The collective will directed at the common good."
+          ],
+          [
+            "Forced to be free",
+            "His controversial line that those who refuse the general will must be compelled."
+          ],
+          [
+            "Noble savage",
+            "A phrase often wrongly attributed to him; he did argue civilisation corrupts."
+          ]
+        ],
+        "legacy": "Claimed by democrats, socialists and critics of totalitarianism alike.",
+        "read": "The General Will lens rewards direct, local, egalitarian popular sovereignty, frugality and civic patriotism."
+      },
       "lens": {
         "name": "General Will",
         "kind": "ideal",
@@ -17297,6 +17941,12 @@
             "why": "No citizen rich enough to buy another, none so poor as to sell himself.",
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
+            "weight": 1
+          },
+          {
+            "why": "No one rich enough to buy another: measured inequality.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
             "weight": 1
           },
           {
@@ -17323,177 +17973,177 @@
         "us": {
           "score": 60,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "cn": {
-          "score": 38,
+          "score": 40,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "in": {
-          "score": 60,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ru": {
-          "score": 35,
+          "score": 42,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "gb": {
-          "score": 69,
+          "score": 70,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "fr": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "de": {
-          "score": 71,
+          "score": 72,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "jp": {
-          "score": 64,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "br": {
-          "score": 66,
-          "band": "Strong",
-          "criteriaKnown": 5
+          "score": 62,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "ca": {
-          "score": 66,
+          "score": 68,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "it": {
-          "score": 67,
+          "score": 68,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "es": {
-          "score": 71,
+          "score": 72,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "au": {
-          "score": 64,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "kr": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "mx": {
-          "score": 64,
+          "score": 63,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "id": {
-          "score": 57,
+          "score": 55,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "tr": {
-          "score": 38,
+          "score": 41,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "sa": {
-          "score": 32,
+          "score": 33,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "za": {
-          "score": 54,
+          "score": 46,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ng": {
-          "score": 52,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "eg": {
-          "score": 36,
+          "score": 42,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ar": {
-          "score": 49,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "il": {
-          "score": 60,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "ir": {
-          "score": 36,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "ua": {
-          "score": 57,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "pl": {
-          "score": 62,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "se": {
-          "score": 73,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "nl": {
-          "score": 71,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "ch": {
-          "score": 73,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "sg": {
-          "score": 34,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "pk": {
           "score": 51,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
-        "hu": {
-          "score": 58,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "cl": {
-          "score": 58,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "co": {
+        "il": {
           "score": 62,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "ir": {
+          "score": 41,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "ua": {
+          "score": 62,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "pl": {
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "se": {
+          "score": 75,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "nl": {
+          "score": 73,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "ch": {
+          "score": 74,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "sg": {
+          "score": 39,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "pk": {
+          "score": 54,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "hu": {
+          "score": 63,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "cl": {
+          "score": 57,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "co": {
+          "score": 57,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "ph": {
-          "score": 56,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "kp": {
           "score": 34,
@@ -17501,44 +18151,44 @@
           "criteriaKnown": 5
         },
         "no": {
-          "score": 73,
+          "score": 75,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "pt": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 5
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "dk": {
           "score": 80,
           "band": "Close to the ideal",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "vn": {
-          "score": 34,
+          "score": 40,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "th": {
-          "score": 48,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ve": {
-          "score": 34,
+          "score": 39,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "bd": {
-          "score": 50,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "et": {
-          "score": 42,
-          "band": "Weak",
-          "criteriaKnown": 5
+          "score": 46,
+          "band": "Partial",
+          "criteriaKnown": 6
         }
       },
       "leaders": {
@@ -17852,6 +18502,26 @@
           "value": 50
         }
       },
+      "context": {
+        "world": "In The Republic, Socrates designs a just city, Kallipolis, ruled by philosopher-kings trained for decades. The guardian class owns no property and shares families; poets who tell false stories about the gods are censored. Democracy, he argues, decays into tyranny. In the Laws, a later and more practical city limits wealth to four times the poorest citizen’s holding.",
+        "context": "Written around 375 BCE in Athens, after the city put his teacher Socrates to death in 399 BCE by democratic vote.",
+        "concepts": [
+          [
+            "Philosopher-king",
+            "A ruler who knows the Good."
+          ],
+          [
+            "The noble lie",
+            "A myth told to make citizens accept their place."
+          ],
+          [
+            "Allegory of the cave",
+            "People mistake shadows for reality until led into the light."
+          ]
+        ],
+        "legacy": "The foundation of Western political philosophy; Popper called him the first enemy of the open society.",
+        "read": "The Kallipolis lens measures rule by a guardian elite: strong power and order, censored arts, limited wealth and little democracy."
+      },
       "lens": {
         "name": "Kallipolis",
         "kind": "ideal",
@@ -17883,6 +18553,12 @@
             "weight": 1
           },
           {
+            "why": "In the Laws, no citizen may own more than four times the poorest citizen’s holding.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
+          },
+          {
             "why": "Democracy degenerates into tyranny.",
             "data": "Social Atlas: Pluralism",
             "direction": "lower adds",
@@ -17892,179 +18568,179 @@
       },
       "countries": {
         "us": {
-          "score": 26,
+          "score": 31,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "cn": {
-          "score": 89,
+          "score": 83,
           "band": "Close to the ideal",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "in": {
-          "score": 32,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "ru": {
-          "score": 82,
-          "band": "Close to the ideal",
-          "criteriaKnown": 5
-        },
-        "gb": {
-          "score": 25,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "fr": {
-          "score": 29,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "de": {
-          "score": 26,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "jp": {
-          "score": 26,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "br": {
-          "score": 29,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "ca": {
-          "score": 20,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "it": {
-          "score": 30,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "es": {
-          "score": 27,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "au": {
-          "score": 22,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "kr": {
-          "score": 24,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "mx": {
           "score": 33,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
-        "id": {
-          "score": 42,
+        "ru": {
+          "score": 81,
+          "band": "Close to the ideal",
+          "criteriaKnown": 6
+        },
+        "gb": {
+          "score": 34,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
-        "tr": {
-          "score": 70,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "sa": {
-          "score": 77,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "za": {
-          "score": 35,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "ng": {
+        "fr": {
           "score": 37,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "de": {
+          "score": 34,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "jp": {
+          "score": 34,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "br": {
+          "score": 32,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "ca": {
+          "score": 30,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "it": {
+          "score": 37,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "es": {
+          "score": 35,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "au": {
+          "score": 31,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "kr": {
+          "score": 32,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "mx": {
+          "score": 36,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "id": {
+          "score": 43,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "tr": {
+          "score": 68,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "sa": {
+          "score": 71,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "za": {
+          "score": 31,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "ng": {
+          "score": 41,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "eg": {
           "score": 73,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ar": {
-          "score": 21,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 27,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "il": {
-          "score": 29,
+          "score": 36,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ir": {
-          "score": 85,
+          "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ua": {
-          "score": 37,
-          "band": "Weak",
-          "criteriaKnown": 5
+          "score": 45,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "pl": {
-          "score": 30,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "se": {
-          "score": 18,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "nl": {
-          "score": 17,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "ch": {
-          "score": 16,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "sg": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "pk": {
-          "score": 57,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "hu": {
           "score": 38,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
-        "cl": {
-          "score": 22,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "co": {
+        "se": {
           "score": 28,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "nl": {
+          "score": 28,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "ch": {
+          "score": 26,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "sg": {
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "pk": {
+          "score": 59,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "hu": {
+          "score": 46,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "cl": {
+          "score": 27,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "co": {
+          "score": 29,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "ph": {
-          "score": 32,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "kp": {
           "score": 96,
@@ -18072,44 +18748,44 @@
           "criteriaKnown": 5
         },
         "no": {
-          "score": 17,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 29,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "pt": {
-          "score": 20,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 29,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "dk": {
-          "score": 18,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 28,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "vn": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 5
+          "score": 79,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "th": {
-          "score": 49,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ve": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 5
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 6
         },
         "bd": {
-          "score": 46,
+          "score": 50,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "et": {
-          "score": 66,
+          "score": 67,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         }
       },
       "leaders": {
@@ -18423,6 +19099,26 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "Politics classifies constitutions by who rules (one, few or many) and whether they rule for the common good. The best practical constitution is a “polity”, mixing democracy and oligarchy and resting on a large middle class, because the middle are least prone to faction.",
+        "context": "Written in the 330s–320s BCE in Athens after studying 158 Greek constitutions, by Plato’s student and tutor to Alexander the Great.",
+        "concepts": [
+          [
+            "Polity",
+            "A mixed constitution of the many, ruling by law."
+          ],
+          [
+            "The mean",
+            "Virtue lies between extremes."
+          ],
+          [
+            "Political animal",
+            "Humans fulfil themselves in a community."
+          ]
+        ],
+        "legacy": "Shaped medieval Islamic, Jewish and Christian political thought and modern ideas of the middle class.",
+        "read": "The Polity of the Mean lens rewards moderation across all twelve axes, the rule of law and low measured inequality."
+      },
       "lens": {
         "name": "Polity of the Mean",
         "kind": "ideal",
@@ -18446,184 +19142,190 @@
             "data": "Closeness to 55 on Redistribution",
             "direction": "higher adds",
             "weight": 1
+          },
+          {
+            "why": "Neither very rich nor very poor: measured inequality.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
           }
         ]
       },
       "countries": {
         "us": {
-          "score": 70,
+          "score": 68,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "cn": {
-          "score": 50,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "in": {
-          "score": 85,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 76,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ru": {
-          "score": 44,
-          "band": "Weak",
-          "criteriaKnown": 3
+          "score": 50,
+          "band": "Partial",
+          "criteriaKnown": 4
         },
         "gb": {
-          "score": 83,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "fr": {
-          "score": 75,
-          "band": "Strong",
-          "criteriaKnown": 3
-        },
-        "de": {
-          "score": 78,
-          "band": "Strong",
-          "criteriaKnown": 3
-        },
-        "jp": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "br": {
           "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
-        "ca": {
-          "score": 79,
+        "fr": {
+          "score": 76,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
-        "it": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "es": {
-          "score": 71,
+        "de": {
+          "score": 77,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
-        "au": {
-          "score": 87,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "kr": {
+        "jp": {
           "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
+        },
+        "br": {
+          "score": 74,
+          "band": "Strong",
+          "criteriaKnown": 4
+        },
+        "ca": {
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 4
+        },
+        "it": {
+          "score": 86,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
+        },
+        "es": {
+          "score": 72,
+          "band": "Strong",
+          "criteriaKnown": 4
+        },
+        "au": {
+          "score": 84,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
+        },
+        "kr": {
+          "score": 84,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
         },
         "mx": {
-          "score": 83,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "id": {
-          "score": 85,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 77,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "tr": {
           "score": 57,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "sa": {
-          "score": 46,
+          "score": 45,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "za": {
-          "score": 69,
-          "band": "Strong",
-          "criteriaKnown": 3
+          "score": 57,
+          "band": "Partial",
+          "criteriaKnown": 4
         },
         "ng": {
-          "score": 73,
-          "band": "Strong",
-          "criteriaKnown": 3
-        },
-        "eg": {
-          "score": 54,
-          "band": "Partial",
-          "criteriaKnown": 3
-        },
-        "ar": {
           "score": 70,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
+        },
+        "eg": {
+          "score": 57,
+          "band": "Partial",
+          "criteriaKnown": 4
+        },
+        "ar": {
+          "score": 68,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "il": {
-          "score": 84,
+          "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "ir": {
-          "score": 48,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "ua": {
-          "score": 78,
-          "band": "Strong",
-          "criteriaKnown": 3
+          "score": 80,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
         },
         "pl": {
           "score": 83,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "se": {
-          "score": 66,
+          "score": 69,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "nl": {
-          "score": 72,
+          "score": 75,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "ch": {
-          "score": 82,
+          "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "sg": {
-          "score": 49,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "pk": {
           "score": 71,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "hu": {
           "score": 84,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "cl": {
-          "score": 79,
+          "score": 73,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "co": {
-          "score": 91,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 79,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ph": {
-          "score": 84,
+          "score": 80,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "kp": {
           "score": 29,
@@ -18631,44 +19333,44 @@
           "criteriaKnown": 3
         },
         "no": {
-          "score": 65,
+          "score": 70,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "pt": {
           "score": 71,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "dk": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 3
+          "score": 67,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "vn": {
-          "score": 51,
+          "score": 54,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "th": {
-          "score": 74,
+          "score": 72,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "ve": {
-          "score": 56,
+          "score": 58,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "bd": {
-          "score": 74,
+          "score": 73,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "et": {
-          "score": 62,
+          "score": 64,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         }
       },
       "leaders": {
@@ -18982,6 +19684,26 @@
           "value": 45
         }
       },
+      "context": {
+        "world": "The Communist Manifesto, written with Friedrich Engels, opens: “A spectre is haunting Europe”. It argues history is a story of class struggle and that capitalism creates a working class that will overthrow it, abolishing private ownership of the means of production. Capital analyses how profit comes from unpaid labour.",
+        "context": "The Manifesto was published in February 1848, just before revolutions swept Europe. Marx, exiled from Germany, France and Belgium, spent the rest of his life in London.",
+        "concepts": [
+          [
+            "Class struggle",
+            "History driven by conflict between owners and workers."
+          ],
+          [
+            "Surplus value",
+            "The value workers create beyond what they are paid."
+          ],
+          [
+            "Dictatorship of the proletariat",
+            "Rule by the working class during the transition to communism."
+          ]
+        ],
+        "legacy": "Inspired social democracy, Leninism, Maoism and much of modern sociology; regimes in his name killed millions.",
+        "read": "The Communist Manifesto lens rewards public ownership, welfare, low measured inequality, secularism and internationalism."
+      },
       "lens": {
         "name": "Communist Manifesto",
         "kind": "ideal",
@@ -19001,6 +19723,12 @@
             "weight": 2
           },
           {
+            "why": "A classless society: income inequality as it is actually measured.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
+          },
+          {
             "why": "Religion as “the opium of the people”.",
             "data": "Compass axis Faith (Secular → Religious)",
             "direction": "lower adds",
@@ -19016,179 +19744,179 @@
       },
       "countries": {
         "us": {
-          "score": 34,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "cn": {
-          "score": 59,
+          "score": 58,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "in": {
           "score": 39,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ru": {
-          "score": 42,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 47,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "gb": {
-          "score": 53,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "fr": {
-          "score": 64,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "de": {
           "score": 56,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "fr": {
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 5
+        },
+        "de": {
+          "score": 59,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "jp": {
-          "score": 44,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "br": {
-          "score": 63,
+          "score": 60,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ca": {
-          "score": 58,
+          "score": 60,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "it": {
-          "score": 48,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "es": {
-          "score": 65,
+          "score": 67,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "au": {
-          "score": 50,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "kr": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 48,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "mx": {
-          "score": 64,
+          "score": 62,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "id": {
           "score": 44,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "tr": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "sa": {
-          "score": 40,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "za": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "ng": {
-          "score": 33,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "eg": {
           "score": 45,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "sa": {
+          "score": 39,
+          "band": "Weak",
+          "criteriaKnown": 5
+        },
+        "za": {
+          "score": 52,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "ng": {
+          "score": 36,
+          "band": "Weak",
+          "criteriaKnown": 5
+        },
+        "eg": {
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "ar": {
-          "score": 30,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "il": {
-          "score": 39,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "ir": {
-          "score": 46,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "ua": {
-          "score": 48,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "pl": {
-          "score": 48,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "se": {
-          "score": 61,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "nl": {
-          "score": 56,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "ch": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "sg": {
-          "score": 40,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "pk": {
-          "score": 39,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "hu": {
-          "score": 41,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "cl": {
           "score": 34,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "il": {
+          "score": 43,
+          "band": "Weak",
+          "criteriaKnown": 5
+        },
+        "ir": {
+          "score": 49,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "ua": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "pl": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "se": {
+          "score": 64,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "nl": {
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "ch": {
+          "score": 51,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "sg": {
+          "score": 44,
+          "band": "Weak",
+          "criteriaKnown": 5
+        },
+        "pk": {
+          "score": 43,
+          "band": "Weak",
+          "criteriaKnown": 5
+        },
+        "hu": {
+          "score": 47,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "cl": {
+          "score": 36,
+          "band": "Weak",
+          "criteriaKnown": 5
         },
         "co": {
-          "score": 50,
+          "score": 47,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ph": {
-          "score": 40,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "kp": {
           "score": 63,
@@ -19196,44 +19924,44 @@
           "criteriaKnown": 4
         },
         "no": {
-          "score": 66,
+          "score": 69,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pt": {
-          "score": 62,
+          "score": 64,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "dk": {
-          "score": 56,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "vn": {
           "score": 60,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "vn": {
+          "score": 61,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "th": {
-          "score": 39,
+          "score": 42,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ve": {
           "score": 64,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "bd": {
-          "score": 38,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "et": {
-          "score": 44,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 48,
+          "band": "Partial",
+          "criteriaKnown": 5
         }
       },
       "leaders": {
@@ -19547,6 +20275,26 @@
           "value": 80
         }
       },
+      "context": {
+        "world": "Mutual Aid argues against social Darwinism that cooperation, not competition, is the main factor in evolution, from animal herds to medieval guilds. The Conquest of Bread sketches a society of free communes where goods are shared according to need.",
+        "context": "A Russian prince who renounced his title, Kropotkin was jailed in Russia and France, escaped, and lived in exile in Britain. Mutual Aid was published in 1902.",
+        "concepts": [
+          [
+            "Mutual aid",
+            "Cooperation as a force of evolution."
+          ],
+          [
+            "Anarcho-communism",
+            "No state, and goods held in common."
+          ],
+          [
+            "Free federation",
+            "Communes cooperating voluntarily."
+          ]
+        ],
+        "legacy": "A founder of anarchist thought; read again today in ecology and evolutionary biology.",
+        "read": "The Mutual Aid lens rewards local, cooperative, uncoerced life with low inequality and no prisons."
+      },
       "lens": {
         "name": "Mutual Aid",
         "kind": "ideal",
@@ -19572,6 +20320,12 @@
             "weight": 1
           },
           {
+            "why": "Wealth held in common: measured inequality.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
+          },
+          {
             "why": "No coercive state.",
             "data": "Compass axis Liberty (Liberty → Order)",
             "direction": "lower adds",
@@ -19589,177 +20343,177 @@
         "us": {
           "score": 58,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "cn": {
-          "score": 21,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 26,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "in": {
-          "score": 44,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ru": {
-          "score": 29,
+          "score": 35,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "gb": {
-          "score": 65,
+          "score": 66,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "fr": {
-          "score": 56,
+          "score": 59,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "de": {
           "score": 73,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "jp": {
-          "score": 50,
+          "score": 53,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "br": {
-          "score": 69,
+          "score": 65,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ca": {
           "score": 75,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "it": {
-          "score": 62,
+          "score": 63,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "es": {
           "score": 76,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "au": {
-          "score": 66,
+          "score": 67,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "kr": {
-          "score": 57,
+          "score": 59,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "mx": {
-          "score": 64,
+          "score": 63,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "id": {
           "score": 41,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "tr": {
-          "score": 35,
+          "score": 38,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "sa": {
-          "score": 13,
+          "score": 16,
           "band": "Far from it",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "za": {
-          "score": 68,
-          "band": "Strong",
-          "criteriaKnown": 5
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "ng": {
-          "score": 41,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "eg": {
-          "score": 22,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 29,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "ar": {
           "score": 60,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "il": {
-          "score": 48,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "ir": {
-          "score": 15,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "ua": {
-          "score": 57,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "pl": {
-          "score": 62,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "se": {
-          "score": 74,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "nl": {
-          "score": 74,
-          "band": "Strong",
-          "criteriaKnown": 5
-        },
-        "ch": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 5
-        },
-        "sg": {
-          "score": 17,
-          "band": "Far from it",
-          "criteriaKnown": 5
-        },
-        "pk": {
-          "score": 34,
-          "band": "Weak",
-          "criteriaKnown": 5
-        },
-        "hu": {
-          "score": 45,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "cl": {
-          "score": 53,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "co": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 5
-        },
-        "ph": {
           "score": 51,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
+        },
+        "ir": {
+          "score": 22,
+          "band": "Far from it",
+          "criteriaKnown": 6
+        },
+        "ua": {
+          "score": 61,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "pl": {
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "se": {
+          "score": 75,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "nl": {
+          "score": 76,
+          "band": "Strong",
+          "criteriaKnown": 6
+        },
+        "ch": {
+          "score": 80,
+          "band": "Close to the ideal",
+          "criteriaKnown": 6
+        },
+        "sg": {
+          "score": 24,
+          "band": "Far from it",
+          "criteriaKnown": 6
+        },
+        "pk": {
+          "score": 39,
+          "band": "Weak",
+          "criteriaKnown": 6
+        },
+        "hu": {
+          "score": 51,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "cl": {
+          "score": 52,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "co": {
+          "score": 55,
+          "band": "Partial",
+          "criteriaKnown": 6
+        },
+        "ph": {
+          "score": 52,
+          "band": "Partial",
+          "criteriaKnown": 6
         },
         "kp": {
           "score": 14,
@@ -19767,44 +20521,44 @@
           "criteriaKnown": 5
         },
         "no": {
-          "score": 79,
-          "band": "Strong",
-          "criteriaKnown": 5
+          "score": 80,
+          "band": "Close to the ideal",
+          "criteriaKnown": 6
         },
         "pt": {
-          "score": 70,
+          "score": 71,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "dk": {
           "score": 77,
           "band": "Strong",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "vn": {
-          "score": 22,
-          "band": "Far from it",
-          "criteriaKnown": 5
+          "score": 29,
+          "band": "Weak",
+          "criteriaKnown": 6
         },
         "th": {
-          "score": 35,
+          "score": 39,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "ve": {
-          "score": 33,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "bd": {
-          "score": 38,
+          "score": 42,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "et": {
-          "score": 38,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         }
       },
       "leaders": {
@@ -20118,6 +20872,26 @@
           "value": 70
         }
       },
+      "context": {
+        "world": "The Grapes of Wrath follows the Joad family, Oklahoma tenant farmers driven off their land by the Dust Bowl and the banks, on Route 66 to California, where they find low wages, hunger and police violence against migrant workers.",
+        "context": "Published in 1939 after Steinbeck reported on migrant camps for a San Francisco newspaper. It was banned and burned in some California counties and won the Pulitzer Prize.",
+        "concepts": [
+          [
+            "Okies",
+            "The slur for migrants from the Dust Bowl."
+          ],
+          [
+            "The bank as monster",
+            "The impersonal system that evicts families."
+          ],
+          [
+            "Solidarity",
+            "Ma Joad’s belief that people must stand together."
+          ]
+        ],
+        "legacy": "Helped build support for New Deal labour reforms; Steinbeck won the Nobel Prize in 1962.",
+        "read": "The Grapes of Wrath lens rewards welfare, low inequality, decent treatment of migrants and care for the land."
+      },
       "lens": {
         "name": "Grapes of Wrath",
         "kind": "ideal",
@@ -20129,6 +20903,12 @@
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
             "weight": 2
+          },
+          {
+            "why": "The gap between landowners and the dispossessed.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
           },
           {
             "why": "“Okies” were treated as foreigners in their own land.",
@@ -20152,179 +20932,179 @@
       },
       "countries": {
         "us": {
-          "score": 30,
+          "score": 34,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "cn": {
-          "score": 48,
+          "score": 49,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "in": {
           "score": 41,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ru": {
-          "score": 35,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "gb": {
-          "score": 56,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "fr": {
-          "score": 61,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "de": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "jp": {
           "score": 42,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "gb": {
+          "score": 59,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "fr": {
+          "score": 64,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "de": {
+          "score": 62,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "jp": {
+          "score": 47,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "br": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "ca": {
-          "score": 56,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "it": {
-          "score": 49,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "es": {
-          "score": 66,
-          "band": "Strong",
-          "criteriaKnown": 4
-        },
-        "au": {
-          "score": 48,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "kr": {
-          "score": 40,
-          "band": "Weak",
-          "criteriaKnown": 4
-        },
-        "mx": {
           "score": 60,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "ca": {
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "it": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "es": {
+          "score": 67,
+          "band": "Strong",
+          "criteriaKnown": 5
+        },
+        "au": {
+          "score": 52,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "kr": {
+          "score": 46,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "mx": {
+          "score": 59,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "id": {
           "score": 44,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "tr": {
-          "score": 41,
+          "score": 44,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "sa": {
           "score": 39,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "za": {
-          "score": 56,
+          "score": 48,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ng": {
-          "score": 33,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "eg": {
-          "score": 42,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 47,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "ar": {
-          "score": 25,
+          "score": 31,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "il": {
-          "score": 41,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 45,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "ir": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "ua": {
-          "score": 47,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "pl": {
-          "score": 49,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "se": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "nl": {
-          "score": 57,
-          "band": "Partial",
-          "criteriaKnown": 4
-        },
-        "ch": {
           "score": 50,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "ua": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "pl": {
+          "score": 54,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "se": {
+          "score": 66,
+          "band": "Strong",
+          "criteriaKnown": 5
+        },
+        "nl": {
+          "score": 62,
+          "band": "Partial",
+          "criteriaKnown": 5
+        },
+        "ch": {
+          "score": 54,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "sg": {
-          "score": 39,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pk": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 47,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "hu": {
-          "score": 40,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 48,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "cl": {
-          "score": 35,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "co": {
-          "score": 49,
+          "score": 46,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ph": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 46,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "kp": {
           "score": 42,
@@ -20332,44 +21112,44 @@
           "criteriaKnown": 4
         },
         "no": {
-          "score": 67,
+          "score": 70,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pt": {
-          "score": 63,
-          "band": "Partial",
-          "criteriaKnown": 4
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "dk": {
-          "score": 62,
-          "band": "Partial",
-          "criteriaKnown": 4
+          "score": 65,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "vn": {
-          "score": 48,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "th": {
-          "score": 41,
+          "score": 44,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ve": {
-          "score": 52,
+          "score": 54,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "bd": {
-          "score": 43,
-          "band": "Weak",
-          "criteriaKnown": 4
+          "score": 48,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "et": {
-          "score": 47,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         }
       },
       "leaders": {
@@ -20683,6 +21463,26 @@
           "value": 50
         }
       },
+      "context": {
+        "world": "Oliver Twist begins in a workhouse where a hungry orphan asks for more; Hard Times satirises a mill town and a school that teaches only facts; Bleak House exposes an endless court case that ruins everyone it touches.",
+        "context": "Dickens worked in a blacking factory at 12 while his father was in a debtors’ prison. He wrote in the 1830s–60s against the 1834 Poor Law and child labour.",
+        "concepts": [
+          [
+            "Workhouse",
+            "Institution where the poor were made to work in return for food and shelter."
+          ],
+          [
+            "Gradgrind",
+            "A character who reduces people to facts and figures."
+          ],
+          [
+            "Chancery",
+            "The slow court in Bleak House."
+          ]
+        ],
+        "legacy": "“Dickensian” means squalid poverty; his novels shaped Victorian reform.",
+        "read": "The Hard Times Test rewards welfare, real redistribution, protection of children and humane justice."
+      },
       "lens": {
         "name": "Hard Times Test",
         "kind": "ideal",
@@ -20694,6 +21494,12 @@
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
             "weight": 2
+          },
+          {
+            "why": "Does the state actually lift the poor? Measured redistribution.",
+            "data": "Measured redistribution: how much taxes and transfers cut inequality (SWIID)",
+            "direction": "higher adds",
+            "weight": 1
           },
           {
             "why": "Against cruel schoolmasters like Squeers in Nicholas Nickleby.",
@@ -20717,79 +21523,79 @@
       },
       "countries": {
         "us": {
-          "score": 46,
+          "score": 47,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "cn": {
-          "score": 51,
+          "score": 47,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "in": {
-          "score": 51,
-          "band": "Partial",
-          "criteriaKnown": 4
+          "score": 43,
+          "band": "Weak",
+          "criteriaKnown": 5
         },
         "ru": {
           "score": 58,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "gb": {
           "score": 75,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "fr": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
-        },
-        "de": {
-          "score": 87,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
-        },
-        "jp": {
-          "score": 75,
-          "band": "Strong",
-          "criteriaKnown": 4
-        },
-        "br": {
           "score": 88,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "de": {
+          "score": 86,
+          "band": "Close to the ideal",
+          "criteriaKnown": 5
+        },
+        "jp": {
+          "score": 73,
+          "band": "Strong",
+          "criteriaKnown": 5
+        },
+        "br": {
+          "score": 81,
+          "band": "Close to the ideal",
+          "criteriaKnown": 5
         },
         "ca": {
-          "score": 67,
+          "score": 68,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "it": {
-          "score": 67,
+          "score": 68,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "es": {
-          "score": 89,
+          "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "au": {
           "score": 65,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "kr": {
-          "score": 75,
+          "score": 68,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "mx": {
-          "score": 85,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "score": 73,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "id": {
           "score": 46,
@@ -20797,9 +21603,9 @@
           "criteriaKnown": 4
         },
         "tr": {
-          "score": 63,
+          "score": 57,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "sa": {
           "score": 35,
@@ -20807,9 +21613,9 @@
           "criteriaKnown": 4
         },
         "za": {
-          "score": 85,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 73,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ng": {
           "score": 36,
@@ -20822,19 +21628,19 @@
           "criteriaKnown": 4
         },
         "ar": {
-          "score": 67,
-          "band": "Strong",
-          "criteriaKnown": 4
+          "score": 57,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "il": {
-          "score": 78,
+          "score": 75,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ir": {
-          "score": 38,
+          "score": 34,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ua": {
           "score": 81,
@@ -20842,29 +21648,29 @@
           "criteriaKnown": 4
         },
         "pl": {
-          "score": 85,
+          "score": 83,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "se": {
-          "score": 90,
+          "score": 89,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "nl": {
           "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ch": {
-          "score": 78,
+          "score": 74,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "sg": {
-          "score": 37,
+          "score": 36,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pk": {
           "score": 37,
@@ -20872,19 +21678,19 @@
           "criteriaKnown": 4
         },
         "hu": {
-          "score": 79,
-          "band": "Strong",
-          "criteriaKnown": 4
+          "score": 81,
+          "band": "Close to the ideal",
+          "criteriaKnown": 5
         },
         "cl": {
-          "score": 69,
-          "band": "Strong",
-          "criteriaKnown": 3
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 4
         },
         "co": {
-          "score": 82,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "score": 71,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "ph": {
           "score": 54,
@@ -20897,24 +21703,24 @@
           "criteriaKnown": 3
         },
         "no": {
-          "score": 93,
+          "score": 92,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pt": {
-          "score": 89,
+          "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "dk": {
-          "score": 93,
+          "score": 91,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "vn": {
-          "score": 51,
+          "score": 45,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "th": {
           "score": 53,
@@ -20922,9 +21728,9 @@
           "criteriaKnown": 4
         },
         "ve": {
-          "score": 82,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "score": 69,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "bd": {
           "score": 46,
@@ -21248,6 +22054,22 @@
           "value": 55
         }
       },
+      "context": {
+        "world": "In Les Misérables, Jean Valjean serves 19 years in prison for stealing bread, is shown mercy by a bishop and becomes a good man, while Inspector Javert pursues him with the letter of the law. The Last Day of a Condemned Man is the inner monologue of a man awaiting the guillotine.",
+        "context": "Published in 1862 while Hugo was in exile on Guernsey after opposing Napoleon III. He campaigned against the death penalty all his life.",
+        "concepts": [
+          [
+            "Mercy and law",
+            "Valjean’s grace against Javert’s rigid justice."
+          ],
+          [
+            "Les misérables",
+            "The wretched poor whom society creates and then punishes."
+          ]
+        ],
+        "legacy": "The musical made it one of the world’s best-known stories; France abolished the death penalty in 1981.",
+        "read": "The Les Misérables Test rewards humane justice, abolition of the death penalty, welfare and real redistribution."
+      },
       "lens": {
         "name": "Les Misérables Test",
         "kind": "ideal",
@@ -21271,84 +22093,90 @@
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
             "weight": 1
+          },
+          {
+            "why": "Relief for the poor, as actually delivered.",
+            "data": "Measured redistribution: how much taxes and transfers cut inequality (SWIID)",
+            "direction": "higher adds",
+            "weight": 1
           }
         ]
       },
       "countries": {
         "us": {
-          "score": 46,
+          "score": 47,
           "band": "Partial",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "cn": {
-          "score": 40,
+          "score": 37,
           "band": "Weak",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "in": {
-          "score": 50,
-          "band": "Partial",
-          "criteriaKnown": 3
+          "score": 40,
+          "band": "Weak",
+          "criteriaKnown": 4
         },
         "ru": {
-          "score": 73,
+          "score": 70,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "gb": {
-          "score": 91,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "fr": {
-          "score": 93,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "de": {
-          "score": 92,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "jp": {
-          "score": 51,
-          "band": "Partial",
-          "criteriaKnown": 3
-        },
-        "br": {
           "score": 88,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
+        },
+        "fr": {
+          "score": 91,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
+        },
+        "de": {
+          "score": 90,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
+        },
+        "jp": {
+          "score": 53,
+          "band": "Partial",
+          "criteriaKnown": 4
+        },
+        "br": {
+          "score": 79,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ca": {
-          "score": 91,
+          "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "it": {
-          "score": 91,
+          "score": 87,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "es": {
-          "score": 93,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
-        },
-        "au": {
           "score": 89,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
+        },
+        "au": {
+          "score": 84,
+          "band": "Close to the ideal",
+          "criteriaKnown": 4
         },
         "kr": {
-          "score": 74,
+          "score": 65,
           "band": "Strong",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "mx": {
-          "score": 93,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 77,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "id": {
           "score": 45,
@@ -21356,9 +22184,9 @@
           "criteriaKnown": 3
         },
         "tr": {
-          "score": 88,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 76,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "sa": {
           "score": 21,
@@ -21366,9 +22194,9 @@
           "criteriaKnown": 3
         },
         "za": {
-          "score": 93,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 79,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ng": {
           "score": 34,
@@ -21381,19 +22209,19 @@
           "criteriaKnown": 3
         },
         "ar": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 67,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "il": {
-          "score": 84,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ir": {
-          "score": 21,
+          "score": 20,
           "band": "Far from it",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "ua": {
           "score": 88,
@@ -21401,29 +22229,29 @@
           "criteriaKnown": 3
         },
         "pl": {
-          "score": 91,
+          "score": 87,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "se": {
-          "score": 94,
+          "score": 92,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "nl": {
-          "score": 91,
+          "score": 90,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "ch": {
-          "score": 89,
+          "score": 83,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "sg": {
           "score": 26,
           "band": "Weak",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "pk": {
           "score": 33,
@@ -21431,19 +22259,19 @@
           "criteriaKnown": 3
         },
         "hu": {
-          "score": 87,
+          "score": 88,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "cl": {
-          "score": 80,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 68,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "co": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 74,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "ph": {
           "score": 86,
@@ -21456,24 +22284,24 @@
           "criteriaKnown": 3
         },
         "no": {
-          "score": 96,
+          "score": 95,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "pt": {
-          "score": 93,
+          "score": 89,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "dk": {
-          "score": 96,
+          "score": 93,
           "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "vn": {
-          "score": 40,
+          "score": 34,
           "band": "Weak",
-          "criteriaKnown": 3
+          "criteriaKnown": 4
         },
         "th": {
           "score": 48,
@@ -21481,9 +22309,9 @@
           "criteriaKnown": 3
         },
         "ve": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 3
+          "score": 72,
+          "band": "Strong",
+          "criteriaKnown": 4
         },
         "bd": {
           "score": 48,
@@ -21806,6 +22634,26 @@
           "high": "Ecology",
           "value": 45
         }
+      },
+      "context": {
+        "world": "The Wretched of the Earth argues that colonialism is maintained by violence and that the colonised must liberate themselves, psychologically and politically. It warns that a new national middle class may simply replace the colonisers and betray the peasants.",
+        "context": "A psychiatrist from Martinique who joined the Algerian independence struggle against France. The book was published in 1961, the year he died of leukaemia at 36.",
+        "concepts": [
+          [
+            "Decolonisation",
+            "Undoing colonial rule in politics, economy and mind."
+          ],
+          [
+            "Pitfalls of national consciousness",
+            "Elites capturing independence for themselves."
+          ],
+          [
+            "Black Skin, White Masks",
+            "His earlier study of the psychology of racism."
+          ]
+        ],
+        "legacy": "A key text for anti-colonial movements, the Black Panthers and postcolonial studies.",
+        "read": "The Decolonisation lens rewards sovereignty, public control of the economy, welfare and economic self-reliance."
       },
       "lens": {
         "name": "Decolonisation",
@@ -22372,6 +23220,26 @@
           "value": 95
         }
       },
+      "context": {
+        "world": "In Walden Thoreau lives for two years in a cabin he built by Walden Pond to live simply and deliberately. In Civil Disobedience he explains why he refused to pay taxes to a government that supported slavery and the Mexican War, and why a just person belongs in jail under an unjust government.",
+        "context": "He spent one night in jail in 1846 for not paying his poll tax. Civil Disobedience was published in 1849 and Walden in 1854.",
+        "concepts": [
+          [
+            "Civil disobedience",
+            "Peacefully breaking unjust laws and accepting the penalty."
+          ],
+          [
+            "Simplicity",
+            "Owning less to live more deliberately."
+          ],
+          [
+            "Wildness",
+            "Nature as necessary to human freedom."
+          ]
+        ],
+        "legacy": "Read by Gandhi, Martin Luther King Jr. and the environmental movement.",
+        "read": "The Walden lens rewards ecology, minimal government, peace and conscience."
+      },
       "lens": {
         "name": "Walden",
         "kind": "ideal",
@@ -22937,6 +23805,22 @@
           "value": 100
         }
       },
+      "context": {
+        "world": "Silent Spring documents how synthetic pesticides like DDT poison birds, fish and people, imagining a town where spring comes and no birds sing.",
+        "context": "Published in 1962 by a marine biologist despite attacks from the chemical industry. Carson was already ill with cancer and died in 1964.",
+        "concepts": [
+          [
+            "Bioaccumulation",
+            "Poisons concentrating as they move up the food chain."
+          ],
+          [
+            "The balance of nature",
+            "Ecosystems as interdependent wholes."
+          ]
+        ],
+        "legacy": "Led to the US ban on DDT for farm use in 1972 and the creation of the Environmental Protection Agency in 1970.",
+        "read": "The Silent Spring lens weighs ecology most, with international cooperation."
+      },
       "lens": {
         "name": "Silent Spring",
         "kind": "ideal",
@@ -23489,6 +24373,26 @@
           "high": "Ecology",
           "value": 85
         }
+      },
+      "context": {
+        "world": "In Nationalism, lectures given in Japan and the US in 1916–17, Tagore warns that the nation-state organises a people’s selfishness for power and profit, and urges a cooperative humanism. In The Home and the World, the swadeshi movement turns a peaceful household towards violence.",
+        "context": "Tagore won the Nobel Prize in 1913. He renounced his British knighthood after the Jallianwala Bagh massacre in 1919, and founded Visva-Bharati at Santiniketan.",
+        "concepts": [
+          [
+            "Universal humanism",
+            "Loyalty to humanity above the nation."
+          ],
+          [
+            "Where the mind is without fear",
+            "His poem’s vision of a free country."
+          ],
+          [
+            "Santiniketan",
+            "His school in nature, without walls."
+          ]
+        ],
+        "legacy": "He wrote the national anthems of India and Bangladesh; his warnings about nationalism are often quoted.",
+        "read": "The lens rewards a cosmopolitan, multilateral, peaceful country where the mind is free."
       },
       "lens": {
         "name": "Where the Mind Is Without Fear",
@@ -24060,6 +24964,30 @@
           "high": "Ecology",
           "value": 88
         }
+      },
+      "context": {
+        "world": "In Hind Swaraj, written as a dialogue, Gandhi argues that India’s freedom means not just expelling the British but rejecting modern industrial civilisation for village self-rule, swadeshi production, and satyagraha: non-violent resistance grounded in truth.",
+        "context": "Written in 1909 aboard a ship from London to South Africa, where Gandhi was leading Indians’ resistance to discriminatory laws. Banned by the British in India.",
+        "concepts": [
+          [
+            "Satyagraha",
+            "Holding firmly to truth through non-violent resistance."
+          ],
+          [
+            "Ahimsa",
+            "Non-violence."
+          ],
+          [
+            "Swaraj",
+            "Self-rule: of the nation and of oneself."
+          ],
+          [
+            "Swadeshi",
+            "Self-reliance and local production."
+          ]
+        ],
+        "legacy": "Non-violent resistance spread from India to the US civil-rights movement and South Africa.",
+        "read": "The Hind Swaraj lens rewards non-violence, village self-rule, swadeshi, simple living, interfaith respect and humane justice."
       },
       "lens": {
         "name": "Hind Swaraj",
@@ -24638,6 +25566,26 @@
           "value": 45
         }
       },
+      "context": {
+        "world": "Annihilation of Caste argues that caste is a division of labourers, not of labour, sanctioned by Hindu scripture, and cannot be reformed: it must be destroyed, by inter-caste marriage and by rejecting the scriptures that justify it.",
+        "context": "Written in 1936 as a speech for a Hindu reform conference in Lahore that withdrew its invitation over his text; he published it himself. Ambedkar later chaired the drafting of India’s Constitution and converted to Buddhism in 1956.",
+        "concepts": [
+          [
+            "Graded inequality",
+            "Caste as a hierarchy where each group looks down on another."
+          ],
+          [
+            "Constitutional morality",
+            "Respect for constitutional norms over majority passion."
+          ],
+          [
+            "Liberty, equality, fraternity",
+            "His three pillars of social democracy."
+          ]
+        ],
+        "legacy": "The founding text of the anti-caste movement; Ambedkar is revered across India.",
+        "read": "The Annihilation of Caste lens rewards women’s rights, freedom of conscience, welfare, constitutional democracy, freedom to marry across lines and low inequality."
+      },
       "lens": {
         "name": "Annihilation of Caste",
         "kind": "ideal",
@@ -24663,6 +25611,12 @@
             "weight": 1
           },
           {
+            "why": "Economic democracy: measured inequality.",
+            "data": "Measured inequality: Gini after taxes and transfers (SWIID)",
+            "direction": "lower adds",
+            "weight": 1
+          },
+          {
             "why": "Constitutional democracy.",
             "data": "Social Atlas: Pluralism",
             "direction": "higher adds",
@@ -24684,179 +25638,179 @@
       },
       "countries": {
         "us": {
-          "score": 79,
-          "band": "Strong",
-          "criteriaKnown": 6
-        },
-        "cn": {
-          "score": 59,
-          "band": "Partial",
-          "criteriaKnown": 6
-        },
-        "in": {
           "score": 76,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "cn": {
+          "score": 58,
+          "band": "Partial",
+          "criteriaKnown": 7
+        },
+        "in": {
+          "score": 70,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ru": {
-          "score": 55,
+          "score": 58,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "gb": {
-          "score": 87,
+          "score": 85,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "fr": {
-          "score": 88,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "de": {
-          "score": 87,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "jp": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "br": {
-          "score": 84,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "ca": {
-          "score": 89,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "it": {
-          "score": 81,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "es": {
-          "score": 91,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "au": {
-          "score": 88,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "kr": {
-          "score": 82,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "mx": {
           "score": 86,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "de": {
+          "score": 85,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "jp": {
+          "score": 80,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "br": {
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 7
+        },
+        "ca": {
+          "score": 87,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "it": {
+          "score": 80,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "es": {
+          "score": 89,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "au": {
+          "score": 85,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "kr": {
+          "score": 81,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
+        },
+        "mx": {
+          "score": 82,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
         },
         "id": {
-          "score": 62,
+          "score": 59,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "tr": {
-          "score": 64,
+          "score": 63,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "sa": {
           "score": 35,
           "band": "Weak",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "za": {
-          "score": 80,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "score": 70,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "ng": {
           "score": 62,
           "band": "Partial",
-          "criteriaKnown": 5
+          "criteriaKnown": 6
         },
         "eg": {
-          "score": 42,
-          "band": "Weak",
-          "criteriaKnown": 6
+          "score": 46,
+          "band": "Partial",
+          "criteriaKnown": 7
         },
         "ar": {
-          "score": 78,
+          "score": 76,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "il": {
           "score": 68,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ir": {
-          "score": 31,
+          "score": 36,
           "band": "Weak",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ua": {
-          "score": 78,
+          "score": 79,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "pl": {
           "score": 80,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "se": {
-          "score": 93,
+          "score": 91,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "nl": {
-          "score": 92,
+          "score": 91,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ch": {
-          "score": 82,
+          "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "sg": {
           "score": 62,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "pk": {
-          "score": 49,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "hu": {
-          "score": 77,
+          "score": 79,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "cl": {
-          "score": 78,
-          "band": "Strong",
-          "criteriaKnown": 6
-        },
-        "co": {
-          "score": 86,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "ph": {
           "score": 73,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "co": {
+          "score": 78,
+          "band": "Strong",
+          "criteriaKnown": 7
+        },
+        "ph": {
+          "score": 72,
+          "band": "Strong",
+          "criteriaKnown": 7
         },
         "kp": {
           "score": 50,
@@ -24864,44 +25818,44 @@
           "criteriaKnown": 6
         },
         "no": {
-          "score": 93,
-          "band": "Close to the ideal",
-          "criteriaKnown": 6
-        },
-        "pt": {
           "score": 92,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
+        },
+        "pt": {
+          "score": 89,
+          "band": "Close to the ideal",
+          "criteriaKnown": 7
         },
         "dk": {
-          "score": 91,
+          "score": 89,
           "band": "Close to the ideal",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "vn": {
           "score": 65,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "th": {
-          "score": 74,
+          "score": 72,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "ve": {
-          "score": 68,
+          "score": 67,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "bd": {
-          "score": 57,
+          "score": 59,
           "band": "Partial",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         },
         "et": {
           "score": 65,
           "band": "Strong",
-          "criteriaKnown": 6
+          "criteriaKnown": 7
         }
       },
       "leaders": {
@@ -25214,6 +26168,26 @@
           "high": "Ecology",
           "value": 50
         }
+      },
+      "context": {
+        "world": "The Arthashastra, attributed to Kautilya, is a manual of statecraft: how a king should fill the treasury, run ministries, set taxes and prices, use spies, punish crime and handle neighbours. Its mandala theory treats a neighbour as a natural enemy and the neighbour’s neighbour as a friend.",
+        "context": "Tradition credits Chanakya, adviser to Chandragupta Maurya in the fourth century BCE. Scholars think the text was compiled and revised over several centuries. It was rediscovered in 1905 and translated by R. Shamasastry.",
+        "concepts": [
+          [
+            "Mandala",
+            "Circles of allies and enemies around a kingdom."
+          ],
+          [
+            "Sama, dana, bheda, danda",
+            "Conciliation, gifts, division and force: the four methods."
+          ],
+          [
+            "Yogakshema",
+            "The welfare and security of subjects as the king’s duty."
+          ]
+        ],
+        "legacy": "Often compared with Machiavelli; cited in Indian strategic thinking.",
+        "read": "The Arthashastra Statecraft lens measures a strong centre, intelligence and order, realist force, self-interest abroad and the welfare of subjects."
       },
       "lens": {
         "name": "Arthashastra Statecraft",
@@ -25786,6 +26760,26 @@
           "value": 60
         }
       },
+      "context": {
+        "world": "The Thirukkural is a Tamil work of 1,330 couplets in three books: virtue, wealth and love. The book on wealth describes the just king who protects his people, rules by a straight sceptre, takes advice and accepts criticism, and warns that a cruel sceptre brings ruin.",
+        "context": "Dated variously between the first century BCE and the fifth century CE. Little is known about its author.",
+        "concepts": [
+          [
+            "Sengol",
+            "The sceptre of just rule."
+          ],
+          [
+            "Kodungol",
+            "The cruel sceptre."
+          ],
+          [
+            "Aram, porul, inbam",
+            "Virtue, wealth and love: the three books."
+          ]
+        ],
+        "legacy": "Translated into more than 40 languages; a central text of Tamil culture.",
+        "read": "The Just Sceptre lens rewards protective, merciful rule that listens to counsel and tolerates criticism."
+      },
       "lens": {
         "name": "The Just Sceptre",
         "kind": "ideal",
@@ -26350,6 +27344,30 @@
           "high": "Ecology",
           "value": 55
         }
+      },
+      "context": {
+        "world": "The Analects, his sayings compiled by followers, teach that society is ordered when each person fulfils their role — ruler and subject, father and son — through ritual (li), humaneness (ren) and filial piety. A ruler should govern by moral example, not by punishments.",
+        "context": "Confucius lived in the state of Lu during a period of breakdown in the Zhou order, and failed to find a ruler willing to employ him.",
+        "concepts": [
+          [
+            "Ren",
+            "Humaneness, benevolence."
+          ],
+          [
+            "Li",
+            "Ritual and propriety."
+          ],
+          [
+            "Junzi",
+            "The exemplary person."
+          ],
+          [
+            "Rectification of names",
+            "Things must be what they are called."
+          ]
+        ],
+        "legacy": "The official philosophy of imperial China for two millennia; still shapes East Asian ideas of family and government.",
+        "read": "The Confucian Order lens rewards family hierarchy and tradition, social harmony, rule by virtue rather than punishment, restraint and care for the people."
       },
       "lens": {
         "name": "Confucian Order",
@@ -26921,6 +27939,26 @@
           "high": "Ecology",
           "value": 95
         }
+      },
+      "context": {
+        "world": "The Tao Te Ching, 81 short chapters, teaches wu wei: acting without forcing. The best ruler is barely known; the more laws and prohibitions there are, the poorer and more lawless the people become. Weapons are instruments of ill omen.",
+        "context": "Traditionally attributed to Laozi, an archivist of the Zhou court in the sixth century BCE; scholars think the text was compiled over time, perhaps by the fourth century BCE.",
+        "concepts": [
+          [
+            "Tao",
+            "The Way: the source and pattern of all things."
+          ],
+          [
+            "Wu wei",
+            "Effortless action, non-interference."
+          ],
+          [
+            "The uncarved block",
+            "Simplicity before society shapes us."
+          ]
+        ],
+        "legacy": "One of the most translated books in the world; a source of Taoism and an inspiration to libertarians and ecologists.",
+        "read": "The Wu Wei lens rewards government that acts little: local, unforced, peaceful, with few harsh laws, in harmony with nature."
       },
       "lens": {
         "name": "Wu Wei",
@@ -27499,6 +28537,26 @@
           "value": 65
         }
       },
+      "context": {
+        "world": "Mencius teaches that human nature is good, and that benevolent government ensures people have land and food so they can live decently. When a ruler becomes a tyrant he has lost the Mandate of Heaven and may rightly be overthrown: “Heaven sees as my people see”.",
+        "context": "Mencius travelled between warring states in the fourth century BCE, advising kings who mostly ignored him.",
+        "concepts": [
+          [
+            "Human nature is good",
+            "Everyone has the sprouts of virtue."
+          ],
+          [
+            "Mandate of Heaven",
+            "The right to rule, lost through tyranny."
+          ],
+          [
+            "Well-field system",
+            "An ideal of shared land."
+          ]
+        ],
+        "legacy": "Second only to Confucius in the Confucian tradition; cited by reformers as a right of resistance.",
+        "read": "The Benevolent Government lens rewards welfare and real redistribution, accountability, light punishment and peace."
+      },
       "lens": {
         "name": "Benevolent Government",
         "kind": "ideal",
@@ -27510,6 +28568,12 @@
             "data": "Compass axis Redistribution (Self-reliance → Welfare)",
             "direction": "higher adds",
             "weight": 2
+          },
+          {
+            "why": "The ruler shares the granaries with the people.",
+            "data": "Measured redistribution: how much taxes and transfers cut inequality (SWIID)",
+            "direction": "higher adds",
+            "weight": 1
           },
           {
             "why": "Heaven sees as the people see; a tyrant may be removed.",
@@ -27535,77 +28599,77 @@
         "us": {
           "score": 52,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "cn": {
-          "score": 35,
+          "score": 34,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "in": {
-          "score": 61,
+          "score": 51,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ru": {
-          "score": 40,
+          "score": 43,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "gb": {
-          "score": 73,
+          "score": 74,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "fr": {
-          "score": 77,
+          "score": 78,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "de": {
-          "score": 76,
+          "score": 77,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "jp": {
           "score": 66,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "br": {
-          "score": 82,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
-        },
-        "ca": {
           "score": 76,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
+        },
+        "ca": {
+          "score": 75,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "it": {
           "score": 75,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "es": {
-          "score": 83,
+          "score": 81,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "au": {
-          "score": 71,
+          "score": 70,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "kr": {
-          "score": 66,
-          "band": "Strong",
-          "criteriaKnown": 4
+          "score": 60,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "mx": {
-          "score": 84,
-          "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "score": 72,
+          "band": "Strong",
+          "criteriaKnown": 5
         },
         "id": {
           "score": 62,
@@ -27613,9 +28677,9 @@
           "criteriaKnown": 4
         },
         "tr": {
-          "score": 50,
+          "score": 46,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "sa": {
           "score": 28,
@@ -27623,9 +28687,9 @@
           "criteriaKnown": 4
         },
         "za": {
-          "score": 73,
+          "score": 65,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ng": {
           "score": 49,
@@ -27638,19 +28702,19 @@
           "criteriaKnown": 4
         },
         "ar": {
-          "score": 61,
+          "score": 52,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "il": {
-          "score": 63,
+          "score": 62,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ir": {
-          "score": 31,
+          "score": 28,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ua": {
           "score": 56,
@@ -27658,29 +28722,29 @@
           "criteriaKnown": 4
         },
         "pl": {
-          "score": 68,
+          "score": 69,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "se": {
-          "score": 78,
+          "score": 79,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "nl": {
-          "score": 76,
+          "score": 77,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "ch": {
-          "score": 74,
+          "score": 72,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "sg": {
-          "score": 31,
+          "score": 30,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pk": {
           "score": 44,
@@ -27688,19 +28752,19 @@
           "criteriaKnown": 4
         },
         "hu": {
-          "score": 71,
+          "score": 74,
           "band": "Strong",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "cl": {
-          "score": 65,
-          "band": "Strong",
-          "criteriaKnown": 4
+          "score": 58,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "co": {
-          "score": 68,
-          "band": "Strong",
-          "criteriaKnown": 4
+          "score": 59,
+          "band": "Partial",
+          "criteriaKnown": 5
         },
         "ph": {
           "score": 67,
@@ -27713,24 +28777,24 @@
           "criteriaKnown": 4
         },
         "no": {
-          "score": 82,
+          "score": 83,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "pt": {
-          "score": 82,
+          "score": 80,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "dk": {
-          "score": 81,
+          "score": 82,
           "band": "Close to the ideal",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "vn": {
-          "score": 36,
+          "score": 32,
           "band": "Weak",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "th": {
           "score": 52,
@@ -27738,9 +28802,9 @@
           "criteriaKnown": 4
         },
         "ve": {
-          "score": 54,
+          "score": 46,
           "band": "Partial",
-          "criteriaKnown": 4
+          "criteriaKnown": 5
         },
         "bd": {
           "score": 57,
@@ -28063,6 +29127,30 @@
           "high": "Ecology",
           "value": 30
         }
+      },
+      "context": {
+        "world": "Han Feizi argues that people are self-interested and can only be governed by clear laws (fa), heavy rewards and punishments, and techniques (shu) by which the ruler controls ministers and trusts no one.",
+        "context": "A prince of the state of Han in the third century BCE. His ideas guided the Qin state, which unified China in 221 BCE; he was forced to take poison in a Qin prison in 233 BCE.",
+        "concepts": [
+          [
+            "Fa",
+            "Law, published and applied equally."
+          ],
+          [
+            "Shu",
+            "The ruler’s techniques of control."
+          ],
+          [
+            "Shi",
+            "Positional power."
+          ],
+          [
+            "Two handles",
+            "Reward and punishment."
+          ]
+        ],
+        "legacy": "Legalism made the Qin empire and is often compared with modern authoritarian governance.",
+        "read": "The Legalist State lens measures harsh punishment, central and personal power and order over individual will."
       },
       "lens": {
         "name": "Legalist State",
@@ -28629,6 +29717,26 @@
           "value": 70
         }
       },
+      "context": {
+        "world": "Mozi teaches jian ai, impartial care: caring for others’ families and states as for one’s own. He condemns offensive war as theft on a grand scale, and wasteful luxuries, music and elaborate funerals.",
+        "context": "A craftsman-philosopher of the fifth century BCE whose followers became experts in defensive warfare, helping besieged cities.",
+        "concepts": [
+          [
+            "Jian ai",
+            "Impartial, universal care."
+          ],
+          [
+            "Against offensive war",
+            "Aggression as the greatest crime."
+          ],
+          [
+            "Frugality",
+            "Against waste by rulers."
+          ]
+        ],
+        "legacy": "A rival to Confucianism in ancient China; rediscovered in the twentieth century.",
+        "read": "The Universal Care lens rewards peace, welfare and frugality."
+      },
       "lens": {
         "name": "Universal Care",
         "kind": "ideal",
@@ -29187,6 +30295,26 @@
           "high": "Ecology",
           "value": 45
         }
+      },
+      "context": {
+        "world": "The Muqaddimah introduces a world history and explains how dynasties rise on asabiyyah, the solidarity of a group, often from the desert, and decline over three or four generations into luxury, heavy taxation and absolute rule. It also observes that low tax rates can bring higher revenue.",
+        "context": "Written in 1377 in a fortress in present-day Algeria by a statesman and judge who had served courts across North Africa and Spain.",
+        "concepts": [
+          [
+            "Asabiyyah",
+            "Group feeling, social solidarity."
+          ],
+          [
+            "Dynastic cycle",
+            "Rise, luxury and fall in about 120 years."
+          ],
+          [
+            "Taxation and revenue",
+            "High taxes discourage enterprise and shrink revenue."
+          ]
+        ],
+        "legacy": "Called a founder of sociology and historiography; Arnold Toynbee praised the Muqaddimah.",
+        "read": "The Asabiyyah lens measures group solidarity from nation and faith, light taxation and wariness of absolute rule."
       },
       "lens": {
         "name": "Asabiyyah",

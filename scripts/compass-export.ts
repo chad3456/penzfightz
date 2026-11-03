@@ -10,6 +10,8 @@ import { COUNTRIES, COUNTRY_BY_NAME, SAMESEX_LABEL, DEATH_LABEL, CONSCRIPTION_LA
 import { EV_AXES, evIdeology, project12 } from '../src/compass/eightvalues';
 import { INDIA_QUESTIONS, INDIA_TRIVIA } from '../src/compass/india';
 import { AUTHORS, band, lensScore, srcLabel } from '../src/compass/authors';
+import { AUTHOR_CONTEXT } from '../src/compass/author-context';
+import { ECON, SWIID_CITE, WB_CITE } from '../src/compass/economy';
 import { INDIA_PARTIES } from '../src/compass/india-people';
 import { INDICATORS, SOC_AXES, SOC_TOTAL, STANCES, STANCE_TOPICS, countryAxes, valueOf } from '../src/compass/social';
 
@@ -37,6 +39,7 @@ for (const c of COUNTRIES) {
       religionAndState: c.facts.religion, nuclearWeapons: c.facts.nuclear, nato: c.facts.nato, eu: c.facts.eu, note: c.facts.note,
     },
     militarySpending: c.milex ?? null, onlineDating: c.dating ?? null, leaders,
+    economy: ECON[c.id] ? { ...ECON[c.id], sources: [SWIID_CITE, WB_CITE] } : null,
     socialAtlas: {
       overall: SOC_TOTAL(c.id),
       axes: Object.fromEntries(SOC_AXES.map((a) => { const s = countryAxes(c.id)[a.id]; return [a.name, { score: s.v, indicatorsKnown: s.known, indicatorsScored: s.total }]; })),
@@ -77,11 +80,14 @@ writeFileSync(`${out}/authors.json`, JSON.stringify({ ...meta,
   method: 'Each lens is a weighted mean of 0–100 criteria; “lower adds” criteria use 100 minus the value. Leaders are scored on twelve-axis criteria only; scores need at least two criteria with data. Placements and lenses are editorial interpretations.',
   authors: AUTHORS.map((a) => ({
     id: a.id, name: a.name, years: a.years, from: a.from, works: a.works, idea: a.idea, quote: a.quote ?? null, axes: axes(a.v),
+    context: AUTHOR_CONTEXT[a.id] ?? null,
     lens: { name: a.lens.name, kind: a.lens.kind, question: a.lens.question, top: a.lens.top, criteria: a.lens.criteria.map((c) => ({ why: c.why, data: srcLabel(c.src), direction: c.dir === 1 ? 'higher adds' : 'lower adds', weight: c.w })) },
     countries: Object.fromEntries(COUNTRIES.map((c) => { const r = lensScore(a.lens, { v: c.v, cid: c.id }); return [c.id, r.v == null ? null : { score: r.v, band: band(r.v, a.lens.kind), criteriaKnown: r.used }]; })),
     leaders: Object.fromEntries(LEADERS.map((l) => [l.id, lensScore(a.lens, { v: l.v }).v])),
   })),
 }, null, 2));
 (index.files as Record<string, string>).authors = 'authors.json';
+writeFileSync(`${out}/economy.json`, JSON.stringify({ ...meta, sources: [SWIID_CITE, WB_CITE], note: 'Gini 0–100 of disposable (after taxes and transfers) and market income; relative redistribution in %; GDP per person in current US$. North Korea is not covered.', countries: ECON }, null, 2));
+(index.files as Record<string, string>).economy = 'economy.json';
 writeFileSync(`${out}/index.json`, JSON.stringify(index, null, 2));
 console.log('countries', COUNTRIES.length, 'ideologies', FAMILIES.length, 'leaders', LEADERS.length);

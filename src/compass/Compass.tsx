@@ -15,6 +15,8 @@ import { INDIA_QUESTIONS, INDIA_TRIVIA, inDecode, inEncode, indiaScore, type IAn
 import { INDIA_PARTIES } from './india-people';
 import Authors, { CountryLenses, LeaderAuthors } from './Authors';
 import { AUTHORS } from './authors';
+import { CountryEconomy, EconomyCharts } from './Economy';
+import { ECON, corr, giniScaled } from './economy';
 
 type View = 'home' | 'test' | 'results' | 'leaders' | 'leader' | 'countries' | 'country' | 'ideologies' | 'charts' | 'society' | 'authors' | 'compare' | 'axes' | 'method' | 'history';
 type TestId = 'c12' | 'ev' | 'in';
@@ -127,6 +129,37 @@ function CountryCard({ c, you, onOpen }: { c: Country; you: (number | null)[] | 
       <span className="tp-tag">Closest: {f.name}</span>
       <Strip v={c.v} />
     </button>
+  );
+}
+
+const ord = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
+
+/** Every country on each of the twelve axes, with one highlighted. */
+function AxisStrips({ cid, onPick }: { cid: string; onPick: (id: string) => void }) {
+  const [hover, setHover] = useState<{ i: number; id: string } | null>(null);
+  const me = COUNTRY_BY_ID[cid];
+  return (
+    <article className="tp-chartcard">
+      <h2>Where {me.name} stands among {COUNTRIES.length} countries</h2>
+      <p className="tp-fine">Each row is one Compass axis; every dot is a country. {me.name} is the large dot. Hover a dot to see which country it is; click to open it.</p>
+      <div className="tp-axstrips">
+        {AXES.map((a, i) => {
+          const sorted = COUNTRIES.slice().sort((x, y) => y.v[i] - x.v[i]);
+          const rank = sorted.findIndex((x) => x.id === cid) + 1;
+          const h = hover && hover.i === i ? COUNTRY_BY_ID[hover.id] : null;
+          return (
+            <div key={a.id} className="tp-axstrip">
+              <span className="tp-axstrip__name" style={{ color: GROUP_HUE[a.group] }}>{a.name}</span>
+              <span className="tp-axstrip__track">
+                <i className="tp-axstrip__mid" />
+                {COUNTRIES.map((x) => <button key={x.id} className={`tp-axstrip__dot${x.id === cid ? ' is-me' : ''}`} style={{ left: `${x.v[i]}%`, ['--c' as string]: x.id === cid ? 'var(--tp-them)' : GROUP_HUE[a.group] }} onMouseEnter={() => setHover({ i, id: x.id })} onMouseLeave={() => setHover(null)} onClick={() => x.id !== cid && onPick(x.id)} aria-label={`${x.name}: ${a.name} ${x.v[i]}`} />)}
+              </span>
+              <span className="tp-axstrip__ends"><span>{a.low}</span><span>{h ? `${h.name} ${h.v[i]}` : `${me.v[i]} · ${rank === 1 ? 'furthest' : `${ord(rank)} furthest`} towards ${a.high.toLowerCase()}`}</span><span>{a.high}</span></span>
+            </div>
+          );
+        })}
+      </div>
+    </article>
   );
 }
 
@@ -755,6 +788,9 @@ export default function Compass({ onExit }: { onExit?: () => void }) {
             </div>
             <Radar labels={AXES.map((a) => a.high)} series={[...(you ? [{ v: you, color: 'var(--tp-you)' }] : []), { v: c.v, color: 'var(--tp-them)', dashed: true }]} />
           </div>
+          <AxisStrips cid={c.id} onPick={openCountry} />
+          <CountryEconomy cid={c.id} />
+          <h2 className="tp-h2">Laws at a glance</h2>
           <table className="tp-facts">
             <tbody>
               <tr><th>Same-sex couples</th><td>{SAMESEX_LABEL[f.samesex]}{f.samesexYear ? ` (${f.samesexYear})` : ''}</td></tr>
@@ -827,13 +863,13 @@ export default function Compass({ onExit }: { onExit?: () => void }) {
     body = <Society onCountry={openCountry} onLeader={openLeader} />;
   /* ---------------- charts ---------------- */
   } else if (view === 'charts') {
-    const axisOpts = [...AXES.map((a) => ({ id: a.id, name: `${a.name} (${a.low} → ${a.high})`, ends: [a.low, a.high] as [string, string] })), ...EV_AXES.map((a) => ({ id: `ev:${a.id}`, name: `8values ${a.name} (${a.high} → ${a.low})`, ends: [a.high, a.low] as [string, string] })), ...SOC_AXES.map((a) => ({ id: `soc:${a.id}`, name: `Social: ${a.name} (${a.low} → ${a.high}), countries only`, ends: [a.low, a.high] as [string, string] }))];
-    const getV = (v12: number[], id: string, key = '') => { if (id.startsWith('soc:')) { const i = SOC_AXES.findIndex((a) => `soc:${a.id}` === id); return key.startsWith('c:') ? SOC_VEC[key.slice(2)][i] ?? 50 : NaN; } if (id.startsWith('ev:')) { const i = EV_AXES.findIndex((a) => `ev:${a.id}` === id); return 100 - project12(v12)[i]; } return v12[AXES.findIndex((a) => a.id === id)]; };
+    const axisOpts = [...AXES.map((a) => ({ id: a.id, name: `${a.name} (${a.low} → ${a.high})`, ends: [a.low, a.high] as [string, string] })), ...EV_AXES.map((a) => ({ id: `ev:${a.id}`, name: `8values ${a.name} (${a.high} → ${a.low})`, ends: [a.high, a.low] as [string, string] })), ...SOC_AXES.map((a) => ({ id: `soc:${a.id}`, name: `Social: ${a.name} (${a.low} → ${a.high}), countries only`, ends: [a.low, a.high] as [string, string] })), { id: 'eco:gini', name: 'Economy: income inequality after taxes (Gini 20 → 65), countries only', ends: ['More equal', 'More unequal'] as [string, string] }, { id: 'eco:redist', name: 'Economy: measured redistribution (0% → 50%), countries only', ends: ['Little', 'Much'] as [string, string] }, { id: 'eco:gdppc', name: 'Economy: GDP per person ($500 → $100k, log), countries only', ends: ['Poorer', 'Richer'] as [string, string] }];
+    const getV = (v12: number[], id: string, key = '') => { if (id.startsWith('eco:')) { if (!key.startsWith('c:')) return NaN; const e = ECON[key.slice(2)]; if (id === 'eco:gini') return e?.gini ? giniScaled(e.gini.v) : NaN; if (id === 'eco:redist') return e?.redist ? Math.max(0, Math.min(100, e.redist.v * 2)) : NaN; return e?.gdppc ? Math.max(0, Math.min(100, ((Math.log10(e.gdppc.v) - Math.log10(500)) / (Math.log10(100000) - Math.log10(500))) * 100)) : NaN; } if (id.startsWith('soc:')) { const i = SOC_AXES.findIndex((a) => `soc:${a.id}` === id); return key.startsWith('c:') ? SOC_VEC[key.slice(2)][i] ?? 50 : NaN; } if (id.startsWith('ev:')) { const i = EV_AXES.findIndex((a) => `ev:${a.id}` === id); return 100 - project12(v12)[i]; } return v12[AXES.findIndex((a) => a.id === id)]; };
     const setPts = scSet === 'countries' ? COUNTRIES.map((c) => ({ key: `c:${c.id}`, label: c.name, short: c.id.toUpperCase(), v: c.v, color: `var(--tp-r-${c.region.replace(' ', '')})` }))
       : scSet === 'current' ? LEADERS.filter((l) => l.era === 'current').map((l) => ({ key: `l:${l.id}`, label: l.name, short: l.name.split(' ').slice(-1)[0], v: l.v, color: `var(--tp-r-${l.region.replace(' ', '')})` }))
       : FAMILIES.map((f) => ({ key: `f:${f.id}`, label: f.name, short: f.name.split(' ')[0], v: f.v, color: 'var(--ink)' }));
     const pts = setPts.map((p) => ({ ...p, x: getV(p.v, scX, p.key), y: getV(p.v, scY, p.key) })).filter((p) => !Number.isNaN(p.x) && !Number.isNaN(p.y));
-    if (you && scSet !== 'families' && !scX.startsWith('soc:') && !scY.startsWith('soc:')) pts.push({ key: 'you12', label: 'You', short: 'YOU', v: you.map((x) => x ?? 50), color: 'var(--tp-you)', x: getV(you.map((x) => x ?? 50), scX), y: getV(you.map((x) => x ?? 50), scY) });
+    if (you && scSet !== 'families' && !/^(soc|eco):/.test(scX) && !/^(soc|eco):/.test(scY)) pts.push({ key: 'you12', label: 'You', short: 'YOU', v: you.map((x) => x ?? 50), color: 'var(--tp-you)', x: getV(you.map((x) => x ?? 50), scX), y: getV(you.map((x) => x ?? 50), scY) });
     const xo = axisOpts.find((a) => a.id === scX)!, yo = axisOpts.find((a) => a.id === scY)!;
     const milex = COUNTRIES.filter((c) => c.milex).sort((a, b) => b.milex!.v - a.milex!.v);
     const dating = COUNTRIES.filter((c) => c.dating);
@@ -854,7 +890,21 @@ export default function Compass({ onExit }: { onExit?: () => void }) {
           </div>
           <Scatter points={pts} xLabel={xo.ends} yLabel={yo.ends} onPick={(k) => { if (k.startsWith('c:')) openCountry(k.slice(2)); else if (k.startsWith('l:')) openLeader(k.slice(2)); }} />
           <p className="tp-legend">{REGIONS.map((r) => <span key={r} className="tp-legend__item"><span className="tp-dot" style={{ ['--c' as string]: `var(--tp-r-${r.replace(' ', '')})` }} />{r}</span>)}{you && <span className="tp-legend__item"><span className="tp-dot" style={{ ['--c' as string]: 'var(--tp-you)' }} />You</span>}</p>
+          {(() => {
+            const real = pts.filter((p) => p.key !== 'you12');
+            const rr = corr(real.map((p) => p.x), real.map((p) => p.y));
+            const far = real.slice().sort((a, b) => (b.x + b.y) - (a.x + a.y));
+            const quad = (fx: (x: number) => boolean, fy: (y: number) => boolean) => real.filter((p) => fx(p.x) && fy(p.y)).length;
+            return (
+              <div className="tp-insight">
+                <p><b>How to read it.</b> Across: {xo.ends[0]} on the left, {xo.ends[1]} on the right. Up: {yo.ends[0]} at the bottom, {yo.ends[1]} at the top. The dashed lines mark the middle of each scale.</p>
+                {real.length > 2 && <p><b>What stands out.</b> {rr != null ? `The two measures are ${Math.abs(rr) < 0.2 ? 'almost unrelated' : `${Math.abs(rr) < 0.5 ? 'loosely' : 'closely'} ${rr > 0 ? 'linked: high on one tends to mean high on the other' : 'opposed: high on one tends to mean low on the other'}`} (r = ${rr.toFixed(2)}). ` : ''}Top right: {quad((x) => x > 50, (y) => y > 50)}, top left: {quad((x) => x <= 50, (y) => y > 50)}, bottom left: {quad((x) => x <= 50, (y) => y <= 50)}, bottom right: {quad((x) => x > 50, (y) => y <= 50)}. Furthest towards {xo.ends[1].toLowerCase()} and {yo.ends[1].toLowerCase()}: {far.slice(0, 3).map((p) => p.label).join(', ')}.</p>}
+              </div>
+            );
+          })()}
         </article>
+
+        <EconomyCharts onPick={openCountry} />
 
         <article className="tp-chartcard">
           <h2>Military: spending, service and weapons</h2>
@@ -862,12 +912,20 @@ export default function Compass({ onExit }: { onExit?: () => void }) {
           <HBars items={milex.map((c) => ({ label: c.name, v: c.milex!.v, color: c.milex!.status === 'Confirmed in source' ? 'var(--tp-them)' : 'var(--ink-soft)', note: c.milex!.status, href: c.milex!.url }))} max={35} unit="%" refLine={{ v: WORLD_MILEX.v, label: 'World, share of world GDP (SIPRI)' }} />
           <p className="tp-fine">Placement on the Force axis (restraint → force), every country:</p>
           <HBars items={force.map((c) => ({ label: c.name, v: c.v[10], color: 'var(--tp-world)', note: ['Conscription: ' + CONSCRIPTION_LABEL[c.facts.conscription].toLowerCase(), c.facts.nuclear !== 'no' ? 'nuclear' : '', c.facts.nato ? 'NATO' : ''].filter(Boolean).join(' · ') }))} />
+          <div className="tp-insight">
+            <p><b>What stands out.</b> {COUNTRIES.filter((c) => c.facts.nuclear !== 'no').length} of these countries have or are believed to have nuclear weapons; {COUNTRIES.filter((c) => c.facts.conscription === 'compulsory').length} keep compulsory military service. Most force-ready placements: {force.slice(0, 3).map((c) => c.name).join(', ')}. Most restrained: {force.slice(-3).reverse().map((c) => c.name).join(', ')}.</p>
+            <p><b>Context.</b> Military spending reflects war and threat as much as ideology: Ukraine’s share is a wartime budget. The Force axis comes from doctrine and record — wars fought, alliances, nuclear posture — not from spending alone.</p>
+          </div>
         </article>
 
         <article className="tp-chartcard">
           <h2>Nationalism: who belongs</h2>
           <p className="tp-fine">Placement on the Belonging axis (cosmopolitan → national), from immigration, citizenship and integration law. Hover a name for the laws on its country page.</p>
           <HBars items={nat.map((c) => ({ label: c.name, v: c.v[8], color: 'var(--tp-society)', note: c.laws.filter((l) => l.ax.includes('nation')).map((l) => `${l.y}: ${l.t}`)[0] }))} />
+          <div className="tp-insight">
+            <p><b>What stands out.</b> Most national: {nat.slice(0, 3).map((c) => `${c.name} (${c.v[8]})`).join(', ')}. Most cosmopolitan: {nat.slice(-3).reverse().map((c) => `${c.name} (${c.v[8]})`).join(', ')}. Belonging and Sovereignty often move together: {(() => { const rr = corr(COUNTRIES.map((c) => c.v[8]), COUNTRIES.map((c) => c.v[9])); return rr == null ? '' : `r = ${rr.toFixed(2)} across all ${COUNTRIES.length}`; })()}.</p>
+            <p><b>Context.</b> The Belonging axis reads citizenship, immigration and integration law — who can become a citizen, and on what terms — not how patriotic people feel.</p>
+          </div>
         </article>
 
         <article className="tp-chartcard">

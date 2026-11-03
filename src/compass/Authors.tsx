@@ -5,6 +5,116 @@ import { COUNTRIES } from './countries';
 import { LEADERS, type Leader } from './leaders';
 import { AUTHORS, band, countryOnly, kinship, lensScore, srcLabel, type Author } from './authors';
 import AuthorReport from './AuthorReport';
+import { AUTHOR_CONTEXT } from './author-context';
+import { AXES as AX12, band as axBand } from './model';
+
+const REGION_ROWS = ['Americas', 'Europe', 'Asia', 'Middle East', 'Africa', 'Oceania'] as const;
+
+/** Background on the author and the world of the book. */
+function ContextBlock({ a }: { a: Author }) {
+  const ctx = AUTHOR_CONTEXT[a.id];
+  const [open, setOpen] = useState<number | null>(0);
+  if (!ctx) return null;
+  return (
+    <div className="tp-ctx">
+      <article className="tp-chartcard tp-ctx__world"><p className="tp-kicker">{a.lens.kind === 'nightmare' ? 'The world of the book' : 'The core argument'}</p><p className="tp-ctx__lead">{ctx.world}</p></article>
+      <article className="tp-chartcard"><p className="tp-kicker">When and why it was written</p><p>{ctx.context}</p></article>
+      <article className="tp-chartcard">
+        <p className="tp-kicker">Key ideas</p>
+        <div className="tp-terms">
+          {ctx.concepts.map(([t, d], i) => (
+            <div key={t} className={`tp-term${open === i ? ' is-open' : ''}`}>
+              <button aria-expanded={open === i} onClick={() => setOpen(open === i ? null : i)}><b>{t}</b><span aria-hidden="true">{open === i ? '−' : '+'}</span></button>
+              {open === i && <p>{d}</p>}
+            </div>
+          ))}
+        </div>
+      </article>
+      <article className="tp-chartcard"><p className="tp-kicker">Legacy</p><p>{ctx.legacy}</p><p className="tp-kicker" style={{ marginTop: '1rem' }}>How to read this lens</p><p>{ctx.read}</p></article>
+    </div>
+  );
+}
+
+function MiniRadar({ a, b, an, bn }: { a: (number | null)[]; b: (number | null)[]; an: string; bn: string }) {
+  const n = 12, R = 95, cx = 150, cy = 130;
+  const pt = (i: number, r: number) => [cx + Math.sin((i / n) * 2 * Math.PI) * r, cy - Math.cos((i / n) * 2 * Math.PI) * r];
+  const poly = (v: (number | null)[]) => v.map((x, i) => pt(i, R * ((x ?? 50) / 100)).join(',')).join(' ');
+  return (
+    <svg className="tp-radar" viewBox="-40 0 380 265" role="img" aria-label={`${an} and ${bn} on the twelve axes`}>
+      {[0.25, 0.5, 0.75, 1].map((k) => <polygon key={k} points={AX12.map((_, i) => pt(i, R * k).join(',')).join(' ')} className="tp-radar__ring" />)}
+      {AX12.map((x, i) => { const [lx, ly] = pt(i, R + 16); return <text key={x.id} x={lx} y={ly + 4} textAnchor={Math.abs(lx - cx) < 8 ? 'middle' : lx > cx ? 'start' : 'end'} className="tp-radar__label">{x.high}</text>; })}
+      <polygon points={poly(b)} style={{ fill: 'color-mix(in srgb, var(--tp-them) 12%, transparent)', stroke: 'var(--tp-them)' }} strokeWidth={2} />
+      <polygon points={poly(a)} style={{ fill: 'none', stroke: 'var(--accent)' }} strokeWidth={2} strokeDasharray="5 4" />
+    </svg>
+  );
+}
+
+/** Pick a country and see exactly how this lens scores it. */
+function TryLens({ a, onReport }: { a: Author; onReport: (cid: string) => void }) {
+  const ranked = COUNTRIES.map((c) => ({ c, r: lensScore(a.lens, { v: c.v, cid: c.id }) })).filter((x) => x.r.v != null).sort((x, y) => y.r.v! - x.r.v!);
+  const [cid, setCid] = useState(ranked[0]?.c.id ?? 'us');
+  const c = COUNTRY_BY_ID[cid];
+  const r = lensScore(a.lens, { v: c.v, cid });
+  const rank = ranked.findIndex((x) => x.c.id === cid) + 1;
+  const col = a.lens.kind === 'nightmare' ? 'var(--tp-them)' : 'var(--tp-society)';
+  return (
+    <article className="tp-chartcard">
+      <div className="tp-report__bar">
+        <h2>Try the lens on a country</h2>
+        <select id="tp-try" className="tp-input" value={cid} onChange={(e) => setCid(e.target.value)} aria-label="Country">{COUNTRIES.slice().sort((x, y) => x.name.localeCompare(y.name)).map((x) => <option key={x.id} value={x.id}>{x.name}</option>)}</select>
+      </div>
+      <div className="tp-try">
+        <div>
+          <p className="tp-try__score" style={{ color: col }}>{r.v ?? '—'}<span>/100</span></p>
+          <p className="tp-fine">{r.v != null ? `${band(r.v, a.lens.kind)} · rank ${rank} of ${ranked.length}` : 'Not enough data'}{r.used < r.total ? ` · ${r.used} of ${r.total} criteria known` : ''}</p>
+          <div className="tp-crit">
+            {r.parts.map((p, i) => (
+              <div key={i} className="tp-crit__row">
+                <span className="tp-crit__why">{p.c.why}<em> {srcLabel(p.c.src)}</em></span>
+                <span className="tp-crit__bar"><i style={{ width: `${p.x ?? 0}%`, background: col }} /></span>
+                <b className="tp-crit__v">{p.x ?? '—'}</b>
+              </div>
+            ))}
+          </div>
+          <button className="tp-btn" onClick={() => onReport(cid)}>Full report on {c.name} →</button>
+        </div>
+        <div>
+          <MiniRadar a={a.v} b={c.v} an={a.name} bn={c.name} />
+          <p className="tp-legend"><span className="tp-legend__item"><span className="tp-swatch tp-swatch--dash" style={{ ['--c' as string]: 'var(--accent)' }} />{a.name}’s own politics</span><span className="tp-legend__item"><span className="tp-swatch" style={{ ['--c' as string]: 'var(--tp-them)' }} />{c.name}’s laws</span></p>
+          <p className="tp-fine">{kinship(a, c.v)}% kinship on the twelve axes. Biggest gaps: {AX12.map((x, i) => ({ x, d: Math.abs((c.v[i] ?? 50) - a.v[i]), i })).sort((p, q) => q.d - p.d).slice(0, 3).map(({ x, i }) => `${x.name} (${a.name.split(' ').slice(-1)[0]} ${axBand(a.v[i], x).toLowerCase()}, ${c.name} ${axBand(c.v[i] ?? 50, x).toLowerCase()})`).join('; ')}.</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/** Every country on the lens, one row per region. */
+function RegionDots({ a, onPick }: { a: Author; onPick: (cid: string) => void }) {
+  const [hover, setHover] = useState<string | null>(null);
+  const pts = COUNTRIES.map((c) => ({ c, v: lensScore(a.lens, { v: c.v, cid: c.id }).v })).filter((p) => p.v != null) as { c: (typeof COUNTRIES)[number]; v: number }[];
+  const col = a.lens.kind === 'nightmare' ? 'var(--tp-them)' : 'var(--tp-society)';
+  const h = pts.find((p) => p.c.id === hover);
+  return (
+    <article className="tp-chartcard">
+      <h2>The lens across the world</h2>
+      <p className="tp-fine">Each dot is a country, by region. Hover to see it; click to open its report.</p>
+      <div className="tp-regdots">
+        {REGION_ROWS.filter((rg) => pts.some((p) => p.c.region === rg)).map((rg) => (
+          <div key={rg} className="tp-regdots__row">
+            <span className="tp-regdots__label">{rg}</span>
+            <span className="tp-regdots__track">
+              {pts.filter((p) => p.c.region === rg).map((p) => (
+                <button key={p.c.id} className={`tp-regdots__dot${hover === p.c.id ? ' is-on' : ''}`} style={{ left: `${p.v}%`, ['--c' as string]: col }} onMouseEnter={() => setHover(p.c.id)} onFocus={() => setHover(p.c.id)} onMouseLeave={() => setHover(null)} onClick={() => onPick(p.c.id)} aria-label={`${p.c.name}: ${p.v}`} />
+              ))}
+            </span>
+          </div>
+        ))}
+        <div className="tp-strip1d__ends"><span>0 · {a.lens.kind === 'nightmare' ? 'nothing like it' : 'its opposite'}</span><span>{h ? `${h.c.name}: ${h.v} · ${band(h.v, a.lens.kind)}` : 'Hover a dot'}</span><span>100 · {a.lens.top}</span></div>
+      </div>
+    </article>
+  );
+}
+
 
 const COUNTRY_BY_ID = Object.fromEntries(COUNTRIES.map((c) => [c.id, c]));
 const AUTHOR_BY_ID = Object.fromEntries(AUTHORS.map((a) => [a.id, a]));
@@ -94,6 +204,10 @@ export default function Authors({ authorId, setAuthorId, you, onCountry, onLeade
             <p className="tp-fine">100 = {a.lens.top}. 0 = {a.lens.kind === 'nightmare' ? 'nothing like it' : 'its opposite'}.</p>
           </div>
         </div>
+
+        <ContextBlock a={a} />
+        <TryLens a={a} onReport={(id) => { setAuthorId(''); setReportCid(id); }} />
+        <RegionDots a={a} onPick={(id) => { setAuthorId(''); setReportCid(id); }} />
 
         <h2 className="tp-h2">How the lens is built</h2>
         <div className="tp-tablebox">

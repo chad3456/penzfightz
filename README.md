@@ -2097,8 +2097,25 @@ included under its MIT licence.
   criterion-by-criterion deep dive with a written verdict and the country's
   rank, all 52 lenses ranked, a scatter of any two lenses, kinship radars and
   the country's leaders through the same lens.
+- **Economy and inequality** (`economy.ts`, `Economy.tsx`, generated
+  `economy-data.ts`): Gini of disposable and market income, relative
+  redistribution and their trends since 1980 from SWIID 9.92 (Solt 2020,
+  Social Science Quarterly 101(3); fsolt.org/swiid), and GDP per person and
+  population from World Bank WDI (CC BY 4.0, via github.com/datasets). North
+  Korea has no figures in either. Regenerate with
+  `python3 -I scripts/build_econ.py <dir with swiid, gdp, population clones> /tmp/econ.json`
+  and rebuild `economy-data.ts` from the JSON. Country profiles show key
+  figures, written context and interactive trend charts; Charts adds a
+  before/after-tax dumbbell, Gini trends, GDP vs inequality and a check of the
+  Redistribution placements against measured redistribution. Fourteen author
+  lenses (Rawls, Marx, Plato, Rand, Nozick and others) now read measured
+  inequality or redistribution.
+- **Author context** (`author-context.ts`): for each of the 52 authors, the
+  world of the book or core argument, when and why it was written, key ideas,
+  legacy and how to read the lens; author pages also let you try the lens on
+  any country and show it across the world by region.
 - **JSON** (`public/compass-data/`): `index.json`, `leaders.json`,
-  `military-reference.json`, `social-atlas.json`, `india-compass.json`, `authors.json`, `countries/<id>.json` (with its Social Atlas scores) and
+  `military-reference.json`, `social-atlas.json`, `india-compass.json`, `authors.json`, `economy.json`, `countries/<id>.json` (with its Social Atlas scores) and
   `ideologies/<family>.json`. Regenerate with
   `node_modules/.bin/rolldown scripts/compass-export.ts --platform node --format esm --file /tmp/compass-export.mjs && node /tmp/compass-export.mjs`.
 

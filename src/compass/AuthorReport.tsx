@@ -8,6 +8,7 @@ import { AXES, band as axisBand } from './model';
 import { COUNTRIES } from './countries';
 import { LEADERS } from './leaders';
 import { INDICATORS, SOC_AXES, SOC_VEC, valueOf } from './social';
+import { ECON } from './economy';
 import { AUTHORS, band, countryOnly, kinship, lensScore, srcLabel, type Author, type Criterion } from './authors';
 
 const COUNTRY_BY_ID = Object.fromEntries(COUNTRIES.map((c) => [c.id, c]));
@@ -116,6 +117,8 @@ function describe(c: Criterion, cid: string): string {
   const country = COUNTRY_BY_ID[cid];
   if (kind === 'ind') { const ind = IND[id]; const v = ind ? valueOf(ind, cid) : undefined; return `${ind?.name ?? id}: ${v?.label ?? 'unknown'}`; }
   if (kind === 'soc') { const i = SOC_AXES.findIndex((a) => a.id === id); return `${SOC_AXES[i].name} (Social Atlas) ${SOC_VEC[cid][i] ?? '—'}/100`; }
+  if (c.src === 'eco:gini') { const g = ECON[cid]?.gini; return g ? `Gini after taxes ${g.v} (${g.year})` : 'Gini: no data'; }
+  if (c.src === 'eco:redist') { const g = ECON[cid]?.redist; return g ? `Taxes and transfers cut inequality by ${g.v}% (${g.year})` : 'Redistribution: no data'; }
   if (kind === 'ax' || kind === 'near') { const i = AXES.findIndex((a) => a.id === id); const v = country.v[i]; return `${AXES[i].name}: ${axisBand(v, AXES[i])} (${v})`; }
   if (c.src === 'calc:moderation') return 'Average distance from the middle of the twelve axes';
   return srcLabel(c.src);
