@@ -1,11 +1,13 @@
 # The Back Bench
 
-> **Current site:** the build opens straight into the **Twelve-Point Compass**
-> (`src/main.tsx` renders `src/compass/Compass.tsx` with `src/compass/compass.css`,
-> a neo-modern light and dark theme). The games and effects described below
-> are still in the repository but are not wired into the build for now; render
-> `<App />` from `src/App.tsx` in `main.tsx` and import `src/styles/global.css`
-> to bring them back.
+> **Current site:** the build opens straight into the **Ramayana scroll**
+> (`src/main.tsx` renders `src/saga/Saga.tsx` with `src/saga/saga.css`): an
+> anime-styled, scroll-driven descent through seven chapters, each with one
+> interaction (break the bow, unmask the deer, charge the leap, float the
+> stones, find the navel, release lanterns). Nothing else was removed: render
+> `<Compass />` (`src/compass/Compass.tsx` + `compass.css`) or `<App />`
+> (`src/App.tsx` + `src/styles/global.css`) from `main.tsx` to bring the
+> Twelve-Point Compass or the games and effects back.
 
 
 Six games from the last row of an Indian classroom, the bus home, and the

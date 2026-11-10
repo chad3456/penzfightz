@@ -1,16 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import Compass from './compass/Compass';
-import './compass/compass.css';
+import Saga from './saga/Saga';
 
-// The site is the Twelve-Point Compass for now. The games and effects that used
-// to live on the shelf are still in the repository (src/App.tsx and its imports)
-// and can be brought back by rendering <App /> here again.
+// The site currently shows only the Ramayana scroll (src/saga). Nothing was
+// removed: to bring back the Twelve-Point Compass render <Compass /> from
+// './compass/Compass' with './compass/compass.css'; for the games and effects
+// render <App /> from './App' with './styles/global.css'.
 const root = document.getElementById('root');
 if (!root) throw new Error('missing #root');
 
 createRoot(root).render(
   <StrictMode>
-    <Compass />
+    <Saga />
   </StrictMode>,
 );
